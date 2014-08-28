@@ -2,7 +2,7 @@
 // URI:       extension/ezwebin/design/ezwebin/templates/page_header_languages.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/page_header_languages.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_e4ec0973354d78fe46f7e39d62665276 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_7c5d73f22732dff077703f4f3a968855 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -243,52 +243,52 @@ unset( $if_cond );
 $text .= '    ';
 // foreach begins
 $skipDelimiter = true;
-if ( !isset( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_3 ) ) $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_3 = array();
-$fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_3[] = compact( 'fe_array_65eab94fa08f961243669b6b2d7bf636_3', 'fe_array_keys_65eab94fa08f961243669b6b2d7bf636_3', 'fe_n_items_65eab94fa08f961243669b6b2d7bf636_3', 'fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_3', 'fe_i_65eab94fa08f961243669b6b2d7bf636_3', 'fe_key_65eab94fa08f961243669b6b2d7bf636_3', 'fe_val_65eab94fa08f961243669b6b2d7bf636_3', 'fe_offset_65eab94fa08f961243669b6b2d7bf636_3', 'fe_max_65eab94fa08f961243669b6b2d7bf636_3', 'fe_reverse_65eab94fa08f961243669b6b2d7bf636_3', 'fe_first_val_65eab94fa08f961243669b6b2d7bf636_3', 'fe_last_val_65eab94fa08f961243669b6b2d7bf636_3' );
-unset( $fe_array_65eab94fa08f961243669b6b2d7bf636_3 );
-unset( $fe_array_65eab94fa08f961243669b6b2d7bf636_3 );
-$fe_array_65eab94fa08f961243669b6b2d7bf636_3 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'avail_translation', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['avail_translation'] : null;
-if (! isset( $fe_array_65eab94fa08f961243669b6b2d7bf636_3 ) ) $fe_array_65eab94fa08f961243669b6b2d7bf636_3 = NULL;
-while ( is_object( $fe_array_65eab94fa08f961243669b6b2d7bf636_3 ) and method_exists( $fe_array_65eab94fa08f961243669b6b2d7bf636_3, 'templateValue' ) )
-    $fe_array_65eab94fa08f961243669b6b2d7bf636_3 = $fe_array_65eab94fa08f961243669b6b2d7bf636_3->templateValue();
+if ( !isset( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_6 ) ) $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_6 = array();
+$fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_6[] = compact( 'fe_array_65eab94fa08f961243669b6b2d7bf636_6', 'fe_array_keys_65eab94fa08f961243669b6b2d7bf636_6', 'fe_n_items_65eab94fa08f961243669b6b2d7bf636_6', 'fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_6', 'fe_i_65eab94fa08f961243669b6b2d7bf636_6', 'fe_key_65eab94fa08f961243669b6b2d7bf636_6', 'fe_val_65eab94fa08f961243669b6b2d7bf636_6', 'fe_offset_65eab94fa08f961243669b6b2d7bf636_6', 'fe_max_65eab94fa08f961243669b6b2d7bf636_6', 'fe_reverse_65eab94fa08f961243669b6b2d7bf636_6', 'fe_first_val_65eab94fa08f961243669b6b2d7bf636_6', 'fe_last_val_65eab94fa08f961243669b6b2d7bf636_6' );
+unset( $fe_array_65eab94fa08f961243669b6b2d7bf636_6 );
+unset( $fe_array_65eab94fa08f961243669b6b2d7bf636_6 );
+$fe_array_65eab94fa08f961243669b6b2d7bf636_6 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'avail_translation', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['avail_translation'] : null;
+if (! isset( $fe_array_65eab94fa08f961243669b6b2d7bf636_6 ) ) $fe_array_65eab94fa08f961243669b6b2d7bf636_6 = NULL;
+while ( is_object( $fe_array_65eab94fa08f961243669b6b2d7bf636_6 ) and method_exists( $fe_array_65eab94fa08f961243669b6b2d7bf636_6, 'templateValue' ) )
+    $fe_array_65eab94fa08f961243669b6b2d7bf636_6 = $fe_array_65eab94fa08f961243669b6b2d7bf636_6->templateValue();
 
-$fe_array_keys_65eab94fa08f961243669b6b2d7bf636_3 = is_array( $fe_array_65eab94fa08f961243669b6b2d7bf636_3 ) ? array_keys( $fe_array_65eab94fa08f961243669b6b2d7bf636_3 ) : array();
-$fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 = count( $fe_array_keys_65eab94fa08f961243669b6b2d7bf636_3 );
-$fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_3 = 0;
-$fe_offset_65eab94fa08f961243669b6b2d7bf636_3 = 0;
-$fe_max_65eab94fa08f961243669b6b2d7bf636_3 = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 - $fe_offset_65eab94fa08f961243669b6b2d7bf636_3;
-$fe_reverse_65eab94fa08f961243669b6b2d7bf636_3 = false;
-if ( $fe_offset_65eab94fa08f961243669b6b2d7bf636_3 < 0 || $fe_offset_65eab94fa08f961243669b6b2d7bf636_3 >= $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 )
+$fe_array_keys_65eab94fa08f961243669b6b2d7bf636_6 = is_array( $fe_array_65eab94fa08f961243669b6b2d7bf636_6 ) ? array_keys( $fe_array_65eab94fa08f961243669b6b2d7bf636_6 ) : array();
+$fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 = count( $fe_array_keys_65eab94fa08f961243669b6b2d7bf636_6 );
+$fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_6 = 0;
+$fe_offset_65eab94fa08f961243669b6b2d7bf636_6 = 0;
+$fe_max_65eab94fa08f961243669b6b2d7bf636_6 = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 - $fe_offset_65eab94fa08f961243669b6b2d7bf636_6;
+$fe_reverse_65eab94fa08f961243669b6b2d7bf636_6 = false;
+if ( $fe_offset_65eab94fa08f961243669b6b2d7bf636_6 < 0 || $fe_offset_65eab94fa08f961243669b6b2d7bf636_6 >= $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 )
 {
-    $fe_offset_65eab94fa08f961243669b6b2d7bf636_3 = ( $fe_offset_65eab94fa08f961243669b6b2d7bf636_3 < 0 ) ? 0 : $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3;
-    if ( $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 || $fe_offset_65eab94fa08f961243669b6b2d7bf636_3 < 0 )
+    $fe_offset_65eab94fa08f961243669b6b2d7bf636_6 = ( $fe_offset_65eab94fa08f961243669b6b2d7bf636_6 < 0 ) ? 0 : $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6;
+    if ( $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 || $fe_offset_65eab94fa08f961243669b6b2d7bf636_6 < 0 )
  {
-        eZDebug::writeWarning("Invalid 'offset' parameter specified: '$fe_offset_65eab94fa08f961243669b6b2d7bf636_3'. Array count: $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3");   
+        eZDebug::writeWarning("Invalid 'offset' parameter specified: '$fe_offset_65eab94fa08f961243669b6b2d7bf636_6'. Array count: $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6");   
 }
 }
-if ( $fe_max_65eab94fa08f961243669b6b2d7bf636_3 < 0 || $fe_offset_65eab94fa08f961243669b6b2d7bf636_3 + $fe_max_65eab94fa08f961243669b6b2d7bf636_3 > $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 )
+if ( $fe_max_65eab94fa08f961243669b6b2d7bf636_6 < 0 || $fe_offset_65eab94fa08f961243669b6b2d7bf636_6 + $fe_max_65eab94fa08f961243669b6b2d7bf636_6 > $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 )
 {
-    if ( $fe_max_65eab94fa08f961243669b6b2d7bf636_3 < 0 )
- eZDebug::writeWarning("Invalid 'max' parameter specified: $fe_max_65eab94fa08f961243669b6b2d7bf636_3");
-    $fe_max_65eab94fa08f961243669b6b2d7bf636_3 = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 - $fe_offset_65eab94fa08f961243669b6b2d7bf636_3;
+    if ( $fe_max_65eab94fa08f961243669b6b2d7bf636_6 < 0 )
+ eZDebug::writeWarning("Invalid 'max' parameter specified: $fe_max_65eab94fa08f961243669b6b2d7bf636_6");
+    $fe_max_65eab94fa08f961243669b6b2d7bf636_6 = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 - $fe_offset_65eab94fa08f961243669b6b2d7bf636_6;
 }
-if ( $fe_reverse_65eab94fa08f961243669b6b2d7bf636_3 )
+if ( $fe_reverse_65eab94fa08f961243669b6b2d7bf636_6 )
 {
-    $fe_first_val_65eab94fa08f961243669b6b2d7bf636_3 = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 - 1 - $fe_offset_65eab94fa08f961243669b6b2d7bf636_3;
-    $fe_last_val_65eab94fa08f961243669b6b2d7bf636_3  = 0;
+    $fe_first_val_65eab94fa08f961243669b6b2d7bf636_6 = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 - 1 - $fe_offset_65eab94fa08f961243669b6b2d7bf636_6;
+    $fe_last_val_65eab94fa08f961243669b6b2d7bf636_6  = 0;
 }
 else
 {
-    $fe_first_val_65eab94fa08f961243669b6b2d7bf636_3 = $fe_offset_65eab94fa08f961243669b6b2d7bf636_3;
-    $fe_last_val_65eab94fa08f961243669b6b2d7bf636_3  = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 - 1;
+    $fe_first_val_65eab94fa08f961243669b6b2d7bf636_6 = $fe_offset_65eab94fa08f961243669b6b2d7bf636_6;
+    $fe_last_val_65eab94fa08f961243669b6b2d7bf636_6  = $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 - 1;
 }
 // foreach
-for ( $fe_i_65eab94fa08f961243669b6b2d7bf636_3 = $fe_first_val_65eab94fa08f961243669b6b2d7bf636_3; $fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_3 < $fe_max_65eab94fa08f961243669b6b2d7bf636_3 && ( $fe_reverse_65eab94fa08f961243669b6b2d7bf636_3 ? $fe_i_65eab94fa08f961243669b6b2d7bf636_3 >= $fe_last_val_65eab94fa08f961243669b6b2d7bf636_3 : $fe_i_65eab94fa08f961243669b6b2d7bf636_3 <= $fe_last_val_65eab94fa08f961243669b6b2d7bf636_3 ); $fe_reverse_65eab94fa08f961243669b6b2d7bf636_3 ? $fe_i_65eab94fa08f961243669b6b2d7bf636_3-- : $fe_i_65eab94fa08f961243669b6b2d7bf636_3++ )
+for ( $fe_i_65eab94fa08f961243669b6b2d7bf636_6 = $fe_first_val_65eab94fa08f961243669b6b2d7bf636_6; $fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_6 < $fe_max_65eab94fa08f961243669b6b2d7bf636_6 && ( $fe_reverse_65eab94fa08f961243669b6b2d7bf636_6 ? $fe_i_65eab94fa08f961243669b6b2d7bf636_6 >= $fe_last_val_65eab94fa08f961243669b6b2d7bf636_6 : $fe_i_65eab94fa08f961243669b6b2d7bf636_6 <= $fe_last_val_65eab94fa08f961243669b6b2d7bf636_6 ); $fe_reverse_65eab94fa08f961243669b6b2d7bf636_6 ? $fe_i_65eab94fa08f961243669b6b2d7bf636_6-- : $fe_i_65eab94fa08f961243669b6b2d7bf636_6++ )
 {
-$fe_key_65eab94fa08f961243669b6b2d7bf636_3 = $fe_array_keys_65eab94fa08f961243669b6b2d7bf636_3[$fe_i_65eab94fa08f961243669b6b2d7bf636_3];
-$fe_val_65eab94fa08f961243669b6b2d7bf636_3 = $fe_array_65eab94fa08f961243669b6b2d7bf636_3[$fe_key_65eab94fa08f961243669b6b2d7bf636_3];
-$vars[$rootNamespace]['lang'] = $fe_val_65eab94fa08f961243669b6b2d7bf636_3;
-$vars[$rootNamespace]['siteaccess'] = $fe_key_65eab94fa08f961243669b6b2d7bf636_3;
+$fe_key_65eab94fa08f961243669b6b2d7bf636_6 = $fe_array_keys_65eab94fa08f961243669b6b2d7bf636_6[$fe_i_65eab94fa08f961243669b6b2d7bf636_6];
+$fe_val_65eab94fa08f961243669b6b2d7bf636_6 = $fe_array_65eab94fa08f961243669b6b2d7bf636_6[$fe_key_65eab94fa08f961243669b6b2d7bf636_6];
+$vars[$rootNamespace]['lang'] = $fe_val_65eab94fa08f961243669b6b2d7bf636_6;
+$vars[$rootNamespace]['siteaccess'] = $fe_key_65eab94fa08f961243669b6b2d7bf636_6;
 $text .= '        <li';
 // if begins
 unset( $if_cond );
@@ -367,39 +367,39 @@ unset( $var );
 
 $text .= '</a></li>
     ';
-$fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_3++;
+$fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_6++;
 } // foreach
 $skipDelimiter = false;
-if ( count( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_3 ) ) extract( array_pop( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_3 ) );
+if ( count( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_6 ) ) extract( array_pop( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_6 ) );
 
 else
 {
 
-unset( $fe_array_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_array_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_array_keys_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_array_keys_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_n_items_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_n_items_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_n_items_processed_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_i_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_i_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_key_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_key_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_val_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_val_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_offset_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_offset_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_max_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_max_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_reverse_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_reverse_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_first_val_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_first_val_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_last_val_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_last_val_65eab94fa08f961243669b6b2d7bf636_6 );
 
-unset( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_3 );
+unset( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_6 );
 
 }
 
@@ -407,6 +407,6 @@ unset( $fe_variable_stack_65eab94fa08f961243669b6b2d7bf636_3 );
 $text .= '    </ul>
 </div>';
 
-$setArray = $oldSetArray_e4ec0973354d78fe46f7e39d62665276;
+$setArray = $oldSetArray_7c5d73f22732dff077703f4f3a968855;
 $tpl->Level--;
 ?>

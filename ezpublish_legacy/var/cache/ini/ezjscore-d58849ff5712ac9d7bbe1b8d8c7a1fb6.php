@@ -1,8 +1,8 @@
 <?php
-// This is a auto generated ini cache file, time created:Thu, 28 Aug 14 13:26:38 -0500
+// This is a auto generated ini cache file, time created:Thu, 28 Aug 14 13:35:59 -0500
 $data = array(
 'rev' => 2,
-'created' => '2014-08-28T13:26:38-05:00',
+'created' => '2014-08-28T13:35:59-05:00',
 'charset' => "utf-8",
 'files' => array (0 => 'extension/ezwt/settings/ezjscore.ini.append.php',1 => 'extension/ezoe/settings/ezjscore.ini.append.php',2 => 'extension/ezstarrating/settings/ezjscore.ini.append.php',3 => 'extension/ezautosave/settings/ezjscore.ini.append.php',4 => 'extension/ezjscore/settings/ezjscore.ini',5 => 'extension/ezecosystem/settings/ezjscore.ini.append.php',
 ),

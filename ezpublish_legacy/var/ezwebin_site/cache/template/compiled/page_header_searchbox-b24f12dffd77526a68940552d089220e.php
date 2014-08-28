@@ -2,7 +2,7 @@
 // URI:       extension/ezwebin/design/ezwebin/templates/page_header_searchbox.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/page_header_searchbox.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_8baf1f4bb59c1cea4af3256f4e51d7e9 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_775ef8b317c21c28407beff062d238d6 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -72,6 +72,6 @@ $text .= '  </div>
   </form>
 </div>';
 
-$setArray = $oldSetArray_8baf1f4bb59c1cea4af3256f4e51d7e9;
+$setArray = $oldSetArray_775ef8b317c21c28407beff062d238d6;
 $tpl->Level--;
 ?>

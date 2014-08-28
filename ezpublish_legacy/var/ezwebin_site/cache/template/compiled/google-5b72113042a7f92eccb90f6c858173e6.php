@@ -2,7 +2,7 @@
 // URI:       extension/ezecosystem/design/eze/templates/navigator/google.tpl
 // Filename:  extension/ezecosystem/design/eze/templates/navigator/google.tpl
 // Timestamp: 1333579213 (Wed Apr 4 17:40:13 CDT 2012)
-$oldSetArray_0f8ecb5b553e09981e2f73acc4acbcd4 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_112149848d5f1c49d628deeb82ff2c27 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -1658,6 +1658,6 @@ unset( $vars[$currentNamespace]['right_max'] );
 $text .= '
 ';
 
-$setArray = $oldSetArray_0f8ecb5b553e09981e2f73acc4acbcd4;
+$setArray = $oldSetArray_112149848d5f1c49d628deeb82ff2c27;
 $tpl->Level--;
 ?>

@@ -2,7 +2,7 @@
 // URI:       design:parts/path.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/parts/path.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_4853258eac389f7fca616e46852b4c40 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_aa1a71555502e23cdefe65451a1107d5 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -19,54 +19,54 @@ $text .= '  <!-- Path content: START -->
   ';
 // foreach begins
 $skipDelimiter = true;
-if ( !isset( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_5 ) ) $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_5 = array();
-$fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_5[] = compact( 'fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_key_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_val_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_5', 'fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_5' );
-unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 );
-unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 );
-$fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'pagedata', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['pagedata'] : null;
-$fe_array_b50649c10be3d4cc07b8449c4f3d33ea_51 = compiledFetchAttribute( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5, 'path_array' );
-unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 );
-$fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_51;
-if (! isset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 ) ) $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 = NULL;
-while ( is_object( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 ) and method_exists( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5, 'templateValue' ) )
-    $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5->templateValue();
+if ( !isset( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_8 ) ) $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_8 = array();
+$fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_8[] = compact( 'fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_key_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_val_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_8', 'fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_8' );
+unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 );
+unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 );
+$fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'pagedata', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['pagedata'] : null;
+$fe_array_b50649c10be3d4cc07b8449c4f3d33ea_81 = compiledFetchAttribute( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8, 'path_array' );
+unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 );
+$fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_81;
+if (! isset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 ) ) $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 = NULL;
+while ( is_object( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 ) and method_exists( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8, 'templateValue' ) )
+    $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8->templateValue();
 
-$fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_5 = is_array( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 ) ? array_keys( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 ) : array();
-$fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 = count( $fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_5 );
-$fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_5 = 0;
-$fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 = 0;
-$fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 - $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5;
-$fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_5 = false;
-if ( $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 < 0 || $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 >= $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 )
+$fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_8 = is_array( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 ) ? array_keys( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 ) : array();
+$fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 = count( $fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_8 );
+$fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_8 = 0;
+$fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 = 0;
+$fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 - $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8;
+$fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_8 = false;
+if ( $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 < 0 || $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 >= $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 )
 {
-    $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 = ( $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 < 0 ) ? 0 : $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5;
-    if ( $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 || $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 < 0 )
+    $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 = ( $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 < 0 ) ? 0 : $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8;
+    if ( $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 || $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 < 0 )
  {
-        eZDebug::writeWarning("Invalid 'offset' parameter specified: '$fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5'. Array count: $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5");   
+        eZDebug::writeWarning("Invalid 'offset' parameter specified: '$fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8'. Array count: $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8");   
 }
 }
-if ( $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5 < 0 || $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 + $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5 > $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 )
+if ( $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8 < 0 || $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 + $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8 > $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 )
 {
-    if ( $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5 < 0 )
- eZDebug::writeWarning("Invalid 'max' parameter specified: $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5");
-    $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 - $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5;
+    if ( $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8 < 0 )
+ eZDebug::writeWarning("Invalid 'max' parameter specified: $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8");
+    $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 - $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8;
 }
-if ( $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_5 )
+if ( $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_8 )
 {
-    $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 - 1 - $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5;
-    $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_5  = 0;
+    $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 - 1 - $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8;
+    $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_8  = 0;
 }
 else
 {
-    $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5;
-    $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_5  = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 - 1;
+    $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8;
+    $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_8  = $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 - 1;
 }
 // foreach
-for ( $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_5; $fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_5 < $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5 && ( $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_5 ? $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5 >= $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_5 : $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5 <= $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_5 ); $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_5 ? $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5-- : $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5++ )
+for ( $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_8; $fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_8 < $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8 && ( $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_8 ? $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8 >= $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_8 : $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8 <= $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_8 ); $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_8 ? $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8-- : $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8++ )
 {
-$fe_key_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_5[$fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5];
-$fe_val_b50649c10be3d4cc07b8449c4f3d33ea_5 = $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5[$fe_key_b50649c10be3d4cc07b8449c4f3d33ea_5];
-$vars[$rootNamespace]['path'] = $fe_val_b50649c10be3d4cc07b8449c4f3d33ea_5;
+$fe_key_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_8[$fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8];
+$fe_val_b50649c10be3d4cc07b8449c4f3d33ea_8 = $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8[$fe_key_b50649c10be3d4cc07b8449c4f3d33ea_8];
+$vars[$rootNamespace]['path'] = $fe_val_b50649c10be3d4cc07b8449c4f3d33ea_8;
 if ( $skipDelimiter )
     $skipDelimiter = false;
 else
@@ -208,39 +208,39 @@ unset( $if_cond );
 // if ends
 
 $text .= '    ';
-$fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_5++;
+$fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_8++;
 } // foreach
 $skipDelimiter = false;
-if ( count( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_5 ) ) extract( array_pop( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_5 ) );
+if ( count( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_8 ) ) extract( array_pop( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_8 ) );
 
 else
 {
 
-unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_array_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_array_keys_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_n_items_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_n_items_processed_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_i_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_key_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_key_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_val_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_val_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_offset_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_max_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_reverse_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_first_val_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_last_val_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
-unset( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_5 );
+unset( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_8 );
 
 }
 
@@ -248,6 +248,6 @@ unset( $fe_variable_stack_b50649c10be3d4cc07b8449c4f3d33ea_5 );
 $text .= '  </p>
   <!-- Path content: END -->';
 
-$setArray = $oldSetArray_4853258eac389f7fca616e46852b4c40;
+$setArray = $oldSetArray_aa1a71555502e23cdefe65451a1107d5;
 $tpl->Level--;
 ?>

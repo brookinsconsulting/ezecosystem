@@ -2,7 +2,7 @@
 // URI:       extension/ezwebin/design/ezwebin/templates/canonical_link.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/canonical_link.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_8c912fdefb95d5b5335992860e118173 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_10df871e221d07f3011663fe65750853 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -14,15 +14,15 @@ $eZTemplateCompilerCodeDate = 1074699607;
 if ( !defined( 'EZ_TEMPLATE_COMPILER_COMMON_CODE' ) )
 include_once( 'var/ezwebin_site/cache/template/compiled/common.php' );
 
-unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 );
-unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 );
-$elseif_cond_5bab29054a21c33ef681c0073adb318a_9 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'pagedata', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['pagedata'] : null;
-$elseif_cond_5bab29054a21c33ef681c0073adb318a_91 = compiledFetchAttribute( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9, 'canonical_language_url' );
-unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 );
-$elseif_cond_5bab29054a21c33ef681c0073adb318a_9 = $elseif_cond_5bab29054a21c33ef681c0073adb318a_91;
-if (! isset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 ) ) $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 = NULL;
-while ( is_object( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 ) and method_exists( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9, 'templateValue' ) )
-    $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 = $elseif_cond_5bab29054a21c33ef681c0073adb318a_9->templateValue();
+unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 );
+unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 );
+$elseif_cond_5bab29054a21c33ef681c0073adb318a_34 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'pagedata', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['pagedata'] : null;
+$elseif_cond_5bab29054a21c33ef681c0073adb318a_341 = compiledFetchAttribute( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34, 'canonical_language_url' );
+unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 );
+$elseif_cond_5bab29054a21c33ef681c0073adb318a_34 = $elseif_cond_5bab29054a21c33ef681c0073adb318a_341;
+if (! isset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 ) ) $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 = NULL;
+while ( is_object( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 ) and method_exists( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34, 'templateValue' ) )
+    $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 = $elseif_cond_5bab29054a21c33ef681c0073adb318a_34->templateValue();
 
 // if begins
 unset( $if_cond );
@@ -63,7 +63,7 @@ unset( $var );
 
 $text .= '" />';
 }
-elseif ( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 )
+elseif ( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 )
 {
 $text .= '    
     <link rel="canonical" href="';
@@ -92,9 +92,9 @@ $text .= '" />';
 unset( $if_cond );
 // if ends
 
-unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_9 );
+unset( $elseif_cond_5bab29054a21c33ef681c0073adb318a_34 );
 
 
-$setArray = $oldSetArray_8c912fdefb95d5b5335992860e118173;
+$setArray = $oldSetArray_10df871e221d07f3011663fe65750853;
 $tpl->Level--;
 ?>

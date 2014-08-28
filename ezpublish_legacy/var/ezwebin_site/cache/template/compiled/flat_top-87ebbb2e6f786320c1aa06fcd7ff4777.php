@@ -2,7 +2,7 @@
 // URI:       design:menu/flat_top.tpl
 // Filename:  extension/ezecosystem/design/eze/templates/menu/flat_top.tpl
 // Timestamp: 1333771480 (Fri Apr 6 23:04:40 CDT 2012)
-$oldSetArray_9789b672f1e7282032a374f291440d16 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_e8dddcde4f86964b5ce344f659279dc6 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -302,52 +302,52 @@ $text .= '
        ';
 // foreach begins
 $skipDelimiter = true;
-if ( !isset( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_4 ) ) $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_4 = array();
-$fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_4[] = compact( 'fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_key_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_val_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_4', 'fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_4' );
-unset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 );
-unset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 );
-$fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'top_menu_items', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['top_menu_items'] : null;
-if (! isset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 ) ) $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 = NULL;
-while ( is_object( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 ) and method_exists( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4, 'templateValue' ) )
-    $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4->templateValue();
+if ( !isset( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_7 ) ) $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_7 = array();
+$fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_7[] = compact( 'fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_key_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_val_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_7', 'fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_7' );
+unset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 );
+unset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 );
+$fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'top_menu_items', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['top_menu_items'] : null;
+if (! isset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 ) ) $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 = NULL;
+while ( is_object( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 ) and method_exists( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7, 'templateValue' ) )
+    $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7->templateValue();
 
-$fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_4 = is_array( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 ) ? array_keys( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 ) : array();
-$fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 = count( $fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_4 );
-$fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_4 = 0;
-$fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 = 0;
-$fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 - $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4;
-$fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_4 = false;
-if ( $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 < 0 || $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 >= $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 )
+$fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_7 = is_array( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 ) ? array_keys( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 ) : array();
+$fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 = count( $fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_7 );
+$fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_7 = 0;
+$fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 = 0;
+$fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 - $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7;
+$fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_7 = false;
+if ( $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 < 0 || $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 >= $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 )
 {
-    $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 = ( $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 < 0 ) ? 0 : $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4;
-    if ( $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 || $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 < 0 )
+    $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 = ( $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 < 0 ) ? 0 : $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7;
+    if ( $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 || $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 < 0 )
  {
-        eZDebug::writeWarning("Invalid 'offset' parameter specified: '$fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4'. Array count: $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4");   
+        eZDebug::writeWarning("Invalid 'offset' parameter specified: '$fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7'. Array count: $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7");   
 }
 }
-if ( $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4 < 0 || $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 + $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4 > $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 )
+if ( $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7 < 0 || $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 + $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7 > $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 )
 {
-    if ( $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4 < 0 )
- eZDebug::writeWarning("Invalid 'max' parameter specified: $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4");
-    $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 - $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4;
+    if ( $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7 < 0 )
+ eZDebug::writeWarning("Invalid 'max' parameter specified: $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7");
+    $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 - $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7;
 }
-if ( $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_4 )
+if ( $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_7 )
 {
-    $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 - 1 - $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4;
-    $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_4  = 0;
+    $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 - 1 - $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7;
+    $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_7  = 0;
 }
 else
 {
-    $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4;
-    $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_4  = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 - 1;
+    $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7;
+    $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_7  = $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 - 1;
 }
 // foreach
-for ( $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_4; $fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_4 < $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4 && ( $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_4 ? $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4 >= $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_4 : $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4 <= $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_4 ); $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_4 ? $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4-- : $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4++ )
+for ( $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_7; $fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_7 < $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7 && ( $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_7 ? $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7 >= $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_7 : $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7 <= $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_7 ); $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_7 ? $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7-- : $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7++ )
 {
-$fe_key_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_4[$fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4];
-$fe_val_ee9901d596b24fdae69e8bfd2beb30a3_4 = $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4[$fe_key_ee9901d596b24fdae69e8bfd2beb30a3_4];
-$vars[$rootNamespace]['item'] = $fe_val_ee9901d596b24fdae69e8bfd2beb30a3_4;
-$vars[$rootNamespace]['key'] = $fe_key_ee9901d596b24fdae69e8bfd2beb30a3_4;
+$fe_key_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_7[$fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7];
+$fe_val_ee9901d596b24fdae69e8bfd2beb30a3_7 = $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7[$fe_key_ee9901d596b24fdae69e8bfd2beb30a3_7];
+$vars[$rootNamespace]['item'] = $fe_val_ee9901d596b24fdae69e8bfd2beb30a3_7;
+$vars[$rootNamespace]['key'] = $fe_key_ee9901d596b24fdae69e8bfd2beb30a3_7;
 $text .= '
 
             
@@ -1104,39 +1104,39 @@ unset( $if_cond );
 // if ends
 
 $text .= '          ';
-$fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_4++;
+$fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_7++;
 } // foreach
 $skipDelimiter = false;
-if ( count( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_4 ) ) extract( array_pop( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_4 ) );
+if ( count( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_7 ) ) extract( array_pop( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_7 ) );
 
 else
 {
 
-unset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_array_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_array_keys_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_n_items_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_n_items_processed_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_i_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_key_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_key_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_val_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_val_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_offset_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_max_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_reverse_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_first_val_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_last_val_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
-unset( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_4 );
+unset( $fe_variable_stack_ee9901d596b24fdae69e8bfd2beb30a3_7 );
 
 }
 
@@ -1166,6 +1166,6 @@ $text .= '    </ul>
     <!-- Top menu content: END -->
 </div>';
 
-$setArray = $oldSetArray_9789b672f1e7282032a374f291440d16;
+$setArray = $oldSetArray_e8dddcde4f86964b5ce344f659279dc6;
 $tpl->Level--;
 ?>

@@ -2,7 +2,7 @@
 // URI:       extension/ezwebin/design/ezwebin/templates/page_header_links.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/page_header_links.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_78a637c8819b138a18795946a93eea75 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_482c398a971ec4a3194f9a4400660fbf = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -1074,6 +1074,6 @@ unset( $if_cond );
 $text .= '    </ul>
 </div>';
 
-$setArray = $oldSetArray_78a637c8819b138a18795946a93eea75;
+$setArray = $oldSetArray_482c398a971ec4a3194f9a4400660fbf;
 $tpl->Level--;
 ?>

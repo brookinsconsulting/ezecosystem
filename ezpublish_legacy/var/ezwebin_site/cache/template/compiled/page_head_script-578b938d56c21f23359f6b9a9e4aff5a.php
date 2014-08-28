@@ -2,7 +2,7 @@
 // URI:       extension/ezwebin/design/ezwebin/templates/page_head_script.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/page_head_script.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_8942a3e4f6839a735d9616a6fa794141 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_8c072d49891ff3c91a96cac77bc2b859 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -124,6 +124,6 @@ $text .= ( is_object( $var ) ? compiledFetchText( $tpl, $rootNamespace, $current
 unset( $var );
 
 
-$setArray = $oldSetArray_8942a3e4f6839a735d9616a6fa794141;
+$setArray = $oldSetArray_8c072d49891ff3c91a96cac77bc2b859;
 $tpl->Level--;
 ?>
