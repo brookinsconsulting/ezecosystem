@@ -1,0 +1,34 @@
+
+  <!-- Top menu area: START -->
+        <div id="topmenu-position">
+  <div id="topmenu" class="float-break">
+    <div class="topmenu-design">
+    <!-- Top menu content: START -->
+    <ul id="topmenu-firstlevel">
+                </ul>
+    <!-- Top menu content: END -->
+</div>  </div>
+  </div>    <!-- Top menu area: END -->
+
+  <!-- Path area: START -->
+        <div id="path">
+      <!-- Path content: START -->
+  <p>
+        <a href="/">eZ Ecosystem</a>
+      <span class="path-separator">/</span>      <a href="/Mirror">Mirror</a>
+      <span class="path-separator">/</span>      <a href="/Mirror/Share.ez.no-Blogs">Share.ez.no Blogs</a>
+      <span class="path-separator">/</span>      <span class="path-text">eZ Publish and Symfony: boarding NOW - my presentation at the AFUP Lyon Conference on June 12th</span>
+        </p>
+  <!-- Path content: END -->  </div>    <!-- Path area: END -->
+
+  <!-- Toolbar area: START -->
+    <!-- Toolbar area: END -->
+
+  <!-- Columns area: START -->
+  <div id="columns-position">
+  <div id="columns" class="float-break">
+
+    <!-- Side menu area: START -->
+        <!-- Side menu area: END -->
+
+  

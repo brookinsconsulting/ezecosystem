@@ -1,0 +1,686 @@
+a:10:{s:7:"content";s:48039:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/faites-le-buzz-autour-de-fedora-18" title="Faites le buzz autour de Fedora 18">Faites le buzz autour de Fedora 18</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p><a title="Releases/18/Schedule" hreflang="en" href="https://fedoraproject.org/wiki/Releases/18/Schedule">Fedora 18</a> arrive ! Il
+est temps d'afficher le compteur sur nos blogs et sites. Pour cela, comme
+chaque années, le <a title="Le projet Fedora" hreflang="en" href="http://fedoraproject.org">Fedora Project</a> met à disposition un <a title="Compteur à rebours avant la sortie de la prochaine version de Fedora" hreflang="fr" href="http://fedoraproject.org/fr/counter">compteur officiel</a>
+:</p>
+<pre>
+&lt;script id=&quot;fedora-banner&quot; type=&quot;text/javascript&quot; src=&quot;http://fedoraproject.org/static/js/release-counter-ext.js?lang=fr&amp;width=200px&quot;&gt;&lt;/script&gt;
+</pre>    <p><img title="Fedora 18 J - 11" style="margin: 0 auto; display: block;" alt="Fedora 18 J - 11" src="http://www.llaumgui.com/public/images/fedora/fedora_18/fedora18_j-11.png" /></p>
+<p>Ou alors, pour ceux qui comme moi carbure à <a hreflang="en" href="http://headjs.com/">headjs</a> :</p>
+<pre id="line1">
+<span>&lt;<span class="start-tag">script</span> <span class="attribute-name">id</span>=&quot;<a class="attribute-value">fedora-banner</a>&quot; <span class="attribute-name">type</span>=&quot;<a class="attribute-value">text/javascript</a>&quot;&gt;</span><span>head.js(&quot;//fedoraproject.org/static/js/release-counter-ext.js?lang=fr&amp;amp;width=200px&quot;);</span><span>&lt;/<span class="end-tag">script</span>&gt;</span>
+</pre>
+    </div>
+
+    <div class="attribute-url">
+	<span>12/29/2012 03:21 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Faites-le-buzz-autour-de-Fedora-18">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/faites-le-buzz-autour-de-fedora-18">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/llaumguicom-fait-peau-neuve" title="llaumgui.com fait peau neuve">llaumgui.com fait peau neuve</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Après presque 4 ans de bons et loyaux services, le thème <a hreflang="fr" href="http://www.llaumgui.com/pages/a-propos">dcEmplode</a> cède sa place au
+thème <a hreflang="fr" href="http://www.llaumgui.com/pages/credits-mentions-legales">Boldy</a>. Quelques
+motivations à ce changement :</p>
+<ul>
+<li>Le thème précédent commençait à me lasser.</li>
+<li>Bien que je l'avais migré d'xHTML 1.0 vers HTML5, le thème dcEmplode
+n'était qu'une migration vers HTML5. J'avais envie de faire un thème HTML 5
+<em>from scratch</em>.</li>
+<li>Le thème passé rencontrait des problèmes de connexion avec les réseaux
+sociaux que je n'avais pas pris le temps de corriger (c'est chose faite sur le
+nouveau thème).</li>
+</ul>    <p><a title="Boldy RWD" href="http://www.llaumgui.com/public/images/geek/boldy_rwd.png"><img title="Boldy RWD" style="margin: 0 auto; display: block;" alt="Boldy RWD" src="http://www.llaumgui.com/public/images/geek/.boldy_rwd_s.jpg" /></a></p>
+<p>Sur le plan technique il subsiste quelques changements :</p>
+<ul>
+<li>J'avais envie d'explorer de nouveaux outils comme <a title="HeadJS, the only script in your head" hreflang="en" href="http://headjs.com/">headjs</a>.</li>
+<li>Je voulais également avoir une thème <em><a hreflang="fr" href="http://fr.wikipedia.org/wiki/Responsive_Web_Design">Responsive Web
+Design</a></em>, c'est chose faite avec 3 niveaux : large (&gt;1270px), normal
+et mobile.</li>
+<li>Bien que le <a title="What is the Google Hosted Libraries?" hreflang="en" href="https://developers.google.com/speed/libraries/">CDN de Google</a> me
+donnait entière satisfaction, avec l’implémentation de headjs, je voulais un
+CDN réunissant à la fois headjs et <a title="jQuery jQuery is a new kind of JavaScript Library." hreflang="en" href="http://jquery.com/">jQuery</a>. C'est pour cette raison que j'ai migré vers le
+<a title="CDNJS, the missing CDN" hreflang="en" href="http://cdnjs.com/">CDN de
+CloudFlare</a>.</li>
+</ul>
+<p>Bref, le blog n'est pas encore exempte de bugs, je les corrige au fur et à
+mesure.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>12/28/2012 05:32 pm</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/llaumgui.com-fait-peau-neuve">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/llaumguicom-fait-peau-neuve">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/raspbmc%3A-xbmc-sur-raspberry-pi" title="RaspBMC: XBMC sur RaspBerry PI">RaspBMC: XBMC sur RaspBerry PI</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Après près de 8 semaines d'attentes, j'ai enfin reçu mon <a title="Raspberry Pi | An ARM GNU/Linux box for $25. Take a byte!" hreflang="en" href="http://www.raspberrypi.org/">Raspberry Pi</a> ! J'ai donc pu mettre en œuvre
+mon média center.</p>
+<p><a title="Raspberry PI" href="http://www.llaumgui.com/public/images/raspberrypi/raspberry_pi.jpg"><img title="Raspberry PI" style="margin: 0 auto; display: block;" alt="Raspberry PI" src="http://www.llaumgui.com/public/images/raspberrypi/.raspberry_pi_m.jpg" /></a></p>
+<p>Pour la partie logicielle, pas de doute, je voulais un <a hreflang="en" href="http://xbmc.org/">XBMC</a>. Pour la partie distribution Linux, après
+avoir vite fait le deuil de <a title="Communauté Francophone de la distribution Linux Fedora" hreflang="fr" href="http://www.fedora-fr.org/">Fedora</a>, <a title="XBMC on Raspberry Pi" hreflang="en" href="http://wiki.xbmc.org/index.php?title=Raspberry_Pi">plusieurs solutions
+s’offraient à moi</a>. J'ai finalement opté pour <a hreflang="en" href="http://www.raspbmc.com/">RaspBMC</a> surtout pour son côté
+<em>out-of-the-box</em>. La solution souffre cependant de quelques
+inconvénients tout à fait acceptables :</p>    <ul>
+<li>Petite équipe de 1 gus...</li>
+<li>Bien qu'à base de <a title="Le système d'exploitation universel" hreflang="fr" href="http://www.llaumgui.com/Le%20syst%C3%A8me%20d%27exploitation%20universel">Debian</a>
+(<a title="aspbian is a free operating system based on Debian optimized for the Raspberry Pi hardware" hreflang="en" href="http://www.raspbian.org/">Raspbian</a> en fait),
+l'<code>apt-get upgrade</code> est dévastateur.</li>
+</ul>
+<p>Les trucs qui déchirent :</p>
+<ul>
+<li>C'est 100% libre !</li>
+<li>Youtube et AlloCiné sur ma TV !</li>
+<li>Le résumé des films, histoire de se rappeler ce qu'on a sur son disque
+dur.</li>
+<li>Le <em>look and feel</em>...</li>
+</ul>
+<p><a title="XBMC sur Raspberry Pi" href="http://www.llaumgui.com/public/images/raspberrypi/xbmc_sur_raspberry_pi.jpg"><img title="XBMC sur Raspberry Pi" style="margin: 0 auto; display: block;" alt="XBMC sur Raspberry Pi" src="http://www.llaumgui.com/public/images/raspberrypi/.xbmc_sur_raspberry_pi_m.jpg" /></a></p>
+<p>Ce que je pourrais faire si <a title="Samsung LE32S86BD" hreflang="fr" href="http://www.lcd-compare.com/televiseur-SAMLE32S86BD-SAMSUNG-LE32S86BD.htm">j'avais
+une télé plus récente</a> :</p>
+<ul>
+<li>Brancher et alimenter le Pi directement sur l'USB de ma TV... Mais la
+mienne n'a pas de port USB.</li>
+<li>Contrôler mon Pi directement depuis la télécommande de ma TV... Mais ma TV
+ne gère pas le <a title="Consumer Electronics Control (CEC) : contrôle « inter-éléments »" hreflang="fr" href="http://fr.wikipedia.org/wiki/High-Definition_Multimedia_Interface#Consumer_Electronics_Control_.28CEC.29_:_contr.C3.B4le_.C2.AB_inter-.C3.A9l.C3.A9ments_.C2.BB">
+HDMI CEC</a>. Je vais donc m'acheter une télécommande infra-rouge...</li>
+</ul>
+<p>Quelques know issues :</p>
+<ul>
+<li><a title="Official XBMC Remote" hreflang="fr" href="https://play.google.com/store/apps/details?id=org.xbmc.android.remote&amp;hl=fr">
+La télécommande Android</a> ne fonctionne pas pour cause d'API dépréciée avec
+XBMC 12. La solution, <a hreflang="en" href="https://github.com/tombriden/android-xbmcremote/downloads">se servir sur
+GitHub</a>.</li>
+<li>Certains DivX tournent au ralenti, la solution étant de <a title="SD playback issue as of today" hreflang="en" href="http://forum.stmlabs.com/showthread.php?tid=5224&amp;pid=43103#pid43103">mettre
+à jour XBMC sur le build du jour</a> ce qui devrait également résoudre le
+problème de charge CPU.</li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>12/24/2012 07:05 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/RaspBMC-XBMC-sur-RaspBerry-PI">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/raspbmc%3A-xbmc-sur-raspberry-pi">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/fedora-18-aka-spherical-cow-c-est-bon-mangez-en" title="Fedora 18 (a.k.a Spherical cow) c'est bon mangez en !">Fedora 18 (a.k.a Spherical cow) c'est bon mangez en !</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+          <p>Cela va faire maintenant 7 versions que j'<em>upgrade</em> <a title="Communauté Francophone Fedora" hreflang="fr" href="http://www.fedora-fr.org/">ma distribution fétiche</a> à grand coup de
+<code>yum upgrade</code> (il y a longtemps) ou de <code>preupgrade</code>. Bref
+ce qui aujourd'hui est une Fedora 17 était avant une Fedora 10. Je me suis donc
+dit qu'il était grand temps de faire une installation propre !</p>
+<p><a title="bureau.png" href="http://www.llaumgui.com/public/images/fedora/fedora_18/bureau.png"><img style="margin: 0 auto; display: block;" alt="bureau.png" src="http://www.llaumgui.com/public/images/fedora/fedora_18/.bureau_m.jpg" /></a></p>
+<p>Et là, je dois dire que <a title="Essayez la prochaine version de Fedora" hreflang="fr" href="http://fedoraproject.org/fr/get-prerelease">cet opus 18 de
+Fedora</a> est un grand crus :</p>
+<ul>
+<li>Pléthore d'outils biens conçus pour configurer son poste sans passer par la
+case terminal.</li>
+<li><a title="2.2.2. Nouvelle interface utilisateur de l'installateur" hreflang="fr" href="http://fedorapeople.org/groups/docs/release-notes/fr-FR/sect-Release_Notes-Changes_for_Sysadmin.html#idp2926256">
+Nouvel Anaconda</a>.</li>
+<li>Configuration du firewall très poussée mais tout en restant facile à
+utiliser.</li>
+<li>J'ai enfin laissé <a title="SELinux" hreflang="fr" href="http://doc.fedora-fr.org/wiki/SELinux">SELinux</a> installé ! Il est enfin
+(<em>AMHA</em>) utilisable simplement !</li>
+<li>GNOME 3.6 qui devient de mieux en mieux (sur mon portable).</li>
+</ul>
+<p>Bref, je suis tellement séduit que je pense fortement à migrer également mon
+poste de travail sous F17 (toujours en installation propre).</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>12/13/2012 05:49 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Fedora-18-a.k.a-Spherical-cow-c-est-bon-mangez-en">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/fedora-18-aka-spherical-cow-c-est-bon-mangez-en">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/status-only-icon-compatible-gnome-36" title="Status only icon compatible GNOME 3.6">Status only icon compatible GNOME 3.6</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+          <p>Comme le laissait présager <a title="GNOME 3.6, GNOME Shell, Looking Glass &amp; l'onglet erreurs" hreflang="fr" href="http://www.llaumgui.com/post/gnome-36-gnome-shell-looking-glass-onglet-erreurs">mon précédent billet</a>, mon <a title="GNOME Shell Extensions" hreflang="en" href="https://extensions.gnome.org/">extensions GNOME Shell</a>, <a title="gnome-shell-status-only-icon" hreflang="en" href="https://projects.llaumgui.com/p/gnome-shell-status-only-icon/">Status only icon</a>, est à présent compatible avec <a title="GNOME 3.6 Released!" hreflang="en" href="http://www.gnome.org/news/2012/09/gnome-3-6-released/">GNOME 3.6</a>.</p>
+<p>Cette extension est faite pour ceux qui, comme moi, ont un nom à rallonge et le connaissent suffisamment pour ne plus avoir besoin de le voir prendre de précieux pixels sur la barre de GNOME Shell. La <a title="gnome-shell-status-only-icon" hreflang="en" href="https://extensions.gnome.org/extension/40/status-only-icon/">meilleure solution pour l'installer est de la télécharger à partir du site officiel</a> ou de le <a title="Installed Extensions" hreflang="en" href="https://extensions.gnome.org/local/">mettre à jour depuis l'interface dédiée</a>. Vous pouvez aussi consulter <a title="gnome-shell-status-only-icon" hreflang="en" href="https://projects.llaumgui.com/p/gnome-shell-status-only-icon/">le site officiel</a> ou me <a hreflang="en" href="https://github.com/llaumgui/gnome-shell-status-only-icon"><em>forker</em> sur Github</a>.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>10/07/2012 12:58 pm</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Status-only-icon-compatible-GNOME-3.6">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/status-only-icon-compatible-gnome-36">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/gnome-36-gnome-shell-looking-glass-onglet-erreurs" title="GNOME 3.6, GNOME Shell, Looking Glass &amp; l'onglet erreurs">GNOME 3.6, GNOME Shell, Looking Glass &amp; l'onglet erreurs</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+          <p>Depuis <a title="GNOME 3.6 Released!" hreflang="en" href="http://www.gnome.org/news/2012/09/gnome-3-6-released/">la version 3.6 de GNOME</a>, l’outil <a title="Looking Glass is GNOME Shell's integrated debugger and inspector tool. It aims to be the Firebug of GNOME Shell. It is not related to the older project Sun Looking Glass. " hreflang="en" href="https://live.gnome.org/GnomeShell/LookingGlass">Looking Glass</a> s'est vu amputer de son onglet erreur. Bilan : mon extension <a title="gnome-shell-status-only-icon" hreflang="en" href="https://projects.llaumgui.com/p/gnome-shell-status-only-icon/">gnome-shell-status-only-icon</a> ne fonctionnait plus mais je ne savais pas pourquoi. Dorénavant pour accéder au
+contenu de l'ancien onglet erreur de Looking Glass il faudra passer par
+un <a title="tail (Unix)" hreflang="fr" href="http://fr.wikipedia.org/wiki/Tail_%28Unix%29">tail</a> du fichier <strong>~/.cache/gdm/session.log</strong>.</p>
+<p>Au final <a title="Commit: b3a18a7f25b29ae21ba32c17ef6fd78dc817097c" hreflang="en" href="https://projects.llaumgui.com/p/gnome-shell-status-only-icon/source/commit/b3a18a7f25b29ae21ba32c17ef6fd78dc817097c/#diff-b2d4bc4bf119152472f42e805c558b31">le changement est vraiment minime</a>, mais <a href="https://projects.llaumgui.com/p/gnome-shell-status-only-icon/source/commit/b3a18a7f25b29ae21ba32c17ef6fd78dc817097c/#diff-b2d4bc4bf119152472f42e805c558b31" hreflang="en">suffisamment pour casser la compatibilité avec les versions 3.2 &amp; 3.4</a>.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>10/03/2012 06:43 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/GNOME-3.6-GNOME-Shell-Looking-Glass-l-onglet-erreurs">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/gnome-36-gnome-shell-looking-glass-onglet-erreurs">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/fedora-18-alpha-gnome-36-bof" title="Fedora 18 alpha &amp; GNOME 3.6, bof...">Fedora 18 alpha &amp; GNOME 3.6, bof...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Pour ceux qui ne le savent peut-être pas encore, le <a title="Fedora 18 Alpha est disponible" hreflang="fr" href="http://forums.fedora-fr.org/viewtopic.php?id=58037">18ème opus de Fedora vient de sortir en version alpha</a>. Fedora reste de loin, pour moi, la meilleure distribution Linux de part son côté novateur et &quot;<em><a title="Qu'est-ce que Fedora &amp; Pourquoi Fedora est-il différent ?" hreflang="fr" href="http://fedoraproject.org/fr/about-fedora">upstrime first</a></em>&quot; ! Cependant je dois avouer que Fedora 18 en live CD <em>out-of-the-box</em> me déçoit sur quelques points :</p>
+<ul><li>Le thème part défaut de Fedora est celui de GNOME. Certes on reste dans l'<em>upstrime first</em>
+mais j'avoue avoir de plus en plus de mal à saisir la différence entre
+le thème GNOME par défaut et le thème pour déficients visuel à fort
+contraste. Trop de noir et de blanc à mon goût, il faudrait peut-être
+revenir <a title="Tango Icon Theme Guidelines" hreflang="en" href="http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines">au fondamentaux</a>.</li>
+<li><a title="Features/firewalld-default" hreflang="en" href="http://fedoraproject.org/wiki/Features/firewalld-default">L'arrivée du pare-feu Firewalld</a> est l'une des <a title=" Fedora 18 Accepted Features " hreflang="en" href="http://fedoraproject.org/wiki/Releases/18/FeatureList">nouveautés de Fedora
+18</a>, mais pourquoi ne pas proposer aussi sur le live CD le <a title="Graphical user interface" hreflang="fr" href="http://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a> pour le
+configurer ?</li>
+<li><em>system-config-printer</em> fait maintenant doublon avec la partie &quot;Imprimante&quot; des paramètres système. Pourquoi ne pas le retirer du live ?</li>
+<li><em>system-config-date </em>fait à présent doublon avec la partie &quot;Date &amp; heure&quot; des paramètres système. Pourquoi ne pas le retirer du live ?</li>
+</ul>    <p><a title="system-config-printer" href="http://www.llaumgui.com/public/images/fedora/fedora_18/system-config-printer.png"><img style="margin: 0 auto; display: block;" alt="system-config-printer" src="http://www.llaumgui.com/public/images/fedora/fedora_18/.system-config-printer_m.jpg" /></a></p>
+<h2>GNOME 3.6</h2>
+<p><a title="GNOME" hreflang="en" href="http://www.gnome.org">GNOME</a> 3.6 est la 6ème version de GNOME 3 et de son <a title="GNOME Shell" hreflang="en" href="https://live.gnome.org/GnomeShell">GNOME Shell</a> et je dois avouer que c'est de pire en pire. D'un côté j'étais fan lors des premières bêtas pour le côté innovant, maintenant j'en viens à me demander si GNOME Shell n'est pas contre performant pour un profil comme le mien qui switch en permanence entre plusieurs fenêtres. La nouvelle interface très belle de l'écran de verrouillage va dans ce sens, c'est très beau, l'effet slide est rigolo 2 secondes mais après on se rend compte qu'on est sur un PC et non une tablette !</p>
+<p><a title="system-config-date" href="http://www.llaumgui.com/public/images/fedora/fedora_18/system-config-date.png"><img style="margin: 0 auto; display: block;" alt="system-config-date" src="http://www.llaumgui.com/public/images/fedora/fedora_18/.system-config-date_m.jpg" /></a></p>
+<p>De plus la nouvelle version de <a title="This is Nautilus, the file manager for the GNOME desktop. " hreflang="en" href="https://live.gnome.org/Nautilus">Nautilus</a> avec le maximisé-que-tu-peux-plus-fermer fini d'enfoncer le clou, on comprend mieux le <a title="Introducing Nemo" hreflang="en" href="http://cinnamon.linuxmint.com/?p=198">fork de mint </a>ou alors le fait qu'<a hreflang="en" href="http://www.ubuntu.com/">Ubuntu</a> n’intégrera <a title="Ubuntu 12.10 May Ship With Older, But More Featured, Nautilus" hreflang="en" href="http://www.omgubuntu.co.uk/2012/08/ubuntu-12-10-may-ship-with-older-but-more-featured-nautilus">pas la version 3.6 mais 3.4 de Nautilus dans leur prochaine version</a>. AMHA GNOME Shell va vers quelque chose de bien avec une sorte de global menu à la MacOS mais pour le moment on à l'impression d'être à une croisée des chemins, le cul entre 2 chaises avec quelque chose de fini mais de pas utilisable !</p>
+<p><a title="Nautilus 3.6" href="http://www.llaumgui.com/public/images/fedora/fedora_18/nautilus.png"><img style="margin: 0 auto; display: block;" alt="Nautilus 3.6" src="http://www.llaumgui.com/public/images/fedora/fedora_18/.nautilus_m.jpg" /></a></p>
+<p>Un autre exemple probant de l'esprit de GNOME Shell : le nouveau bouton dans le <em>dash</em>, c'est bien mais cette nouveauté est imposée et il n'est pas possible de configurer une option pour rester comme avant.</p>
+<p>Bref, je ne pense pas qu'un retour en arrière comme <a title="The traditional desktop environment" hreflang="en" href="http://mate-desktop.org/">MATE</a> (<a title="Features/MATE-Desktop" hreflang="en" href="http://fedoraproject.org/wiki/Features/MATE-Desktop">aussi l'une des features de Fedora 18</a>), soit une bonne chose, mais je commence à penser plus que fortement à <a title="Love your Linux, Feel at Home, Get things Done!" hreflang="en" href="http://cinnamon.linuxmint.com/">Cinnamon</a> et <a title="A sleek and fast GTK3 file manager." hreflang="en" href="https://launchpad.net/marlin">Marlin</a>.</p>
+<p><strong>Pour finir, heureusement que Fedora est complètement paramétrable (propose plein d'environnements différents)  est redevient le top, là je parlais de la version live CD tirée de la boite.</strong></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/23/2012 03:49 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Fedora-18-alpha-GNOME-3.6-bof">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/fedora-18-alpha-gnome-36-bof">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/owncloud-%3A-mon-cloud-a-moi-dropbox-like-killer" title="ownCloud : mon cloud à moi (Dropbox like &amp; killer !)">ownCloud : mon cloud à moi (Dropbox like &amp; killer !)</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Cela fait maintenant un certain temps que je me sers de <a title="Simplifiez-vous la vie" hreflang="fr" href="http://db.tt/Q0EpbzJ">Dropbox</a> pour
+synchroniser les données de mes différents postes mais également pour
+pouvoir accéder à ces informations de partout. Bref pour mettre mes données
+<a title="Cloud computing" hreflang="fr" href="http://fr.wikipedia.org/wiki/Cloud_computing">dans les nuages</a>.</p>
+<p>Le problème de Dropbox c'est qu'une fois mes 10Go passés, la solution
+devient payante (normale me direz-vous c'est un service qu'on
+consomme il est normal de la payer). L'autre problème, plus grave, est que les
+données ne sont pas cryptées et c'est plutôt dérangeant <a title="Dropbox admet un piratage et renforce sa sécurité" hreflang="fr" href="http://www.clubic.com/antivirus-securite-informatique/actualite-504076-dropbox-renforce-securite-admet-hack.html">lorsqu'un
+problème survient</a>.</p>
+<p>Donc j'ai un peu regardé ce qui s'offrait à moi comme <em>Dropbox like</em> et <em>DropBox killer</em>.</p>    <h2>Les concurrents : Box, Drive, SkyDrive et Hubic
+</h2>
+<p><a title="Enfin. Tout votre contenu mobile à un seul emplacement." hreflang="fr" href="https://www.box.com/home/">Box</a>, <a hreflang="fr" href="https://drive.google.com/">Drive</a> et <a hreflang="fr" href="https://skydrive.live.com">SkyDrive</a> ont des prix équivalents à DropBox. <a title="  hubiC, c'est votre hub dans le Cloud" hreflang="fr" href="http://www.ovh.fr/hubiC/">hubiC</a> quant à lui offre plusieurs avantages :</p>
+<ul><li>Français : mes données restent donc en France et sont donc soumises aux lois françaises,</li>
+<li>Prix compétitifs,</li>
+<li><a title="Backup rsync encfs webdav (Hubic)" hreflang="fr" href="http://forums.fedora-fr.org/viewtopic.php?pid=504317">Possibilité de monter du WebDAV et de faire des cryptages avec encfs</a>. Après il faut juste s'accrocher.</li>
+</ul>
+<p>J'ai un peu testé hubiC mais le client mal intégré à l'OS et les performances d'un montage WebDAV m'ont vite découragé.</p>
+<h2>Mon cloud à moi : ownCloud</h2>
+<p>Comme je possède un serveur, je me suis donc dit que je pouvais héberger mon cloud à moi :</p>
+<ul><li><a title="Self hosted, instant, secure file synchronisation" hreflang="en" href="http://sparkleshare.org/">SparkleShare</a> : très prometteur, mais <a title="Git est un logiciel de gestion de versions décentralisé" hreflang="fr" href="http://fr.wikipedia.org/wiki/Git">GIT</a> est-il un moteur de stockage adéquate pour des fichiers binaires (MP3, photos, etc.) ? <a title="A mon humble avis" hreflang="fr" href="http://fr.wikipedia.org/wiki/AMHA">AMHA</a>, la réponse est non !</li>
+<li><a title="Syncany is an open-source cloud storage and filesharing application" hreflang="en" href="http://www.syncany.org/">Syncany</a> : prometteur sur le papier, mais je ne bosse pas sur le papier ;-).</li>
+</ul>
+<p>Bref, je me suis alors tourné vers <a title="Your Cloud, Your Data, Your Way!" hreflang="en" href="http://owncloud.org/">OwnCloud</a> qui est une sorte de DropBox mais hébergé chez soit :</p>
+<ul><li>Client Linux / Mac / Windows,</li>
+<li>Interface web,</li>
+<li>WebDAV,</li>
+<li>Cryptage,</li>
+<li>Versioning,</li>
+<li>Partage,</li>
+<li>etc.</li>
+</ul>
+<p>Cependant, l'outil n'est pas encore exempte de problèmes. Par exemple, l'interface web est très lente, des améliorations devraient arriver avec la version 4.5 et un système de cron.</p>
+<p>L’outil possède <a hreflang="en" title="ownCloud Roadmap" href="http://owncloud.org/dev/roadmap/">une feuille de route claire</a>, la <a title="ownCloud Releases Beta of Latest Community Edition" hreflang="en" href="https://owncloud.com/blog/owncloud-releases-beta-of-latest-community-edition">version 4.5 est actuellement en beta</a>, les fonctionnalités à venir sont alléchantes : </p>
+<ul><li><a title="Features/OwnCloud" hreflang="en" href="http://fedoraproject.org/wiki/Features/OwnCloud">Intégration au sein de Fedora 18,</a></li>
+<li>Synchronisation de vos bookmarks Firefox,</li>
+<li>Montage Dropbox et Drive</li>
+<li>etc.</li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/06/2012 01:54 pm</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/ownCloud-mon-cloud-a-moi-Dropbox-like-killer-!">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/owncloud-%3A-mon-cloud-a-moi-dropbox-like-killer">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/ezplanet-100" title="eZPlanet 1.0.0">eZPlanet 1.0.0</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+          <p>Cela fait <a title=" Fedora-Fr v5, étude de cas d'un site sous eZ Publish &amp; eZ Flow" hreflang="fr" href="http://www.llaumgui.com/post/fedora-fr-v5-etude-de-cas-d-un-site-sous-ez-publish-ez-flow">déjà plusieurs années</a> que nous nous servons d'<a title="eZ Systems Enterprise Content Management System | Enterprise Web CMS Open-Source" hreflang="en" href="http://ez.no/">eZ Publish</a> sur <a title="Communauté francophone Fedora - Linux" hreflang="fr" href="http://www.fedora-fr.org/">Fedora-Fr</a> pour gérer notre <a title="Un Planet est un site Web dynamique qui agrège le plus souvent sur une seule page, le contenu de notes, d'articles ou de billets publiés sur des blogs ou sites Web afin d'accentuer leur visibilité et de faire ressortir des contenus pertinents aux multiples formats (texte, audio, vidéo, Podcast...)." hreflang="fr" href="http://fr.wikipedia.org/wiki/Planet">planet</a>. Le code de <a title="eZPlanet provide a planet system for eZ Publish:" hreflang="en" href="https://projects.llaumgui.com/p/ezplanet/">l'extension utilisée était même déjà disponible</a> mais je n'avais pas encore pris le temps de faire une <a hreflang="en" href="https://projects.llaumgui.com/p/ezplanet/downloads/75/">première release officielle</a>. C'est donc maintenant chose faite !</p>
+<p>Mais que fait eZPlanet ? eZPlanet permet de gérer à partir d'eZ Publish un planet. Le cronjob <a hreflang="en" href="https://projects.llaumgui.com/p/ezplanet/source/tree/master/cronjobs/planet_import.php">planet-import.php</a> est donc un <a title="Un fork, ou embranchement ou fourche1, est un nouveau logiciel créé à partir du code source d'un logiciel existant" hreflang="fr" href="http://fr.wikipedia.org/wiki/Fork_%28d%C3%A9veloppement_logiciel%29">fork</a> du cron <a hreflang="en" href="https://github.com/ezsystems/ezpublish/blob/master/cronjobs/rssimport.php">rssimport.php</a> d'eZ Publish mais prenant les informations dans les comptes utilisateurs plutôt que dans le module <a title="ez.no / documentation / ez publish / technical manual / 4.x / reference / modules / rss " hreflang="en" href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/rss">RSS</a>. Comme je n'ai pas la main sur le code HTML saisie par les contributeurs du planet, les billets passent par l'un de mes autres modules (<a title="A complete solution of tools for cleaning with Tidy the HTML code generated by eZ Publish." hreflang="en" href="https://projects.llaumgui.com/p/eztidy/">eZTidy</a>) avant d'être stockés en base.</p>
+<p>
+Comme d'habitude c'est téléchargeable un peu partout :</p>
+<ul><li><a hreflang="en" href="https://projects.llaumgui.com/p/ezplanet">Site officiel</a>.</li>
+<li><a hreflang="en" title="eZ Projects" href="http://projects.ez.no/ezplanet">Projet eZPlanet</a> sur la forge d'eZ Systems.</li>
+<li><a hreflang="en" href="https://github.com/llaumgui/ezplanet">Fork me on gitHub !</a></li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/15/2012 04:47 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/eZPlanet-1.0.0">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/ezplanet-100">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/lezrss-100-enfin" title="leZRSS 1.0.0, enfin !">leZRSS 1.0.0, enfin !</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+          <p>Après plus de 2 années <a title="Initial commit" hreflang="en" href="https://projects.llaumgui.com/p/lezrss/source/commit/0315e89abe97c3deb00fb822a3e8ecb1c633d6ff/">à incuber</a> et après avoir rejoint la <a title="leZRSS on eZ Systems" hreflang="en" href="http://projects.ez.no/lezrss">forge d'eZ System</a>, j'ai enfin décidé de publier une première version stable de <a title="leZRSS on llaumgui's project" hreflang="en" href="https://projects.llaumgui.com/p/lezrss/">leZRSS</a>.</p>
+<p>Cette extension pour <a title="eZ Systems Enterprise Content Management System | Enterprise Web CMS Open-Source" hreflang="en" href="http://ez.no">eZ Publish</a> apporte les fonctionnalités suivantes :</p>
+<ul><li>Ajout d'une <a title="Fetch all RSS defined" hreflang="en" href="https://projects.llaumgui.com/p/lezrss/page/FetchRssList/">fonction de type <em>&quot;fetch&quot;</em> permettant de récupérer la liste des flux RSS</a>. Cette liste peut être filtrée à partir d'une arborescence.</li>
+<li>Module <a title="How to use the rss2/feed module instead of rss/feed" hreflang="en" href="https://projects.llaumgui.com/p/lezrss/page/UseModueRss2/">rss2</a> qui est un fork du module <a title="Provides views for managing RSS imports and exports. " hreflang="en" href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/rss">rss</a> d'eZ, mais dont le flux RSS est généré à partir de template (idéal pour faire des modifications comme sur <a title="Flux RSS du planet de Fedora-FR" hreflang="fr" href="http://planet.fedora-fr.org/rss2/feed">le flux RSS</a> du <a title="Planet de Fedora-FR" hreflang="fr" href="http://planet.fedora-fr.org">planet</a> de <a title="Participez à la communauté Fedora-FR" hreflang="fr" href="http://www.fedora-fr.org">Fedora-Fr</a>.</li>
+</ul>
+<p>
+Comme d'habitude c'est téléchargeable un peu partout :</p>
+<ul><li><a hreflang="en" href="https://projects.llaumgui.com/p/lezrss">Site officiel</a>.</li>
+<li><a hreflang="en" title="eZ Projects" href="http://projects.ez.no/lezrss">Projet leZRSS</a> sur la forge d'eZ Systems.</li>
+<li><a hreflang="en" href="https://github.com/llaumgui/lezrss">Fork me on gitHub !</a></li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/11/2012 09:06 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/leZRSS-1.0.0-enfin">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/lezrss-100-enfin">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/Guillaume-Kulakowski/(offset)/30"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/Mirror/Guillaume-Kulakowski/(offset)/50"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+                      <span class="other"><a href="/Mirror/Guillaume-Kulakowski">1</a></span>
+                              <span class="other"><a href="/Mirror/Guillaume-Kulakowski/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/Guillaume-Kulakowski/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/Guillaume-Kulakowski/(offset)/30">4</a></span>
+            
+        <span class="current">5</span>
+
+                      <span class="other"><a href="/Mirror/Guillaume-Kulakowski/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/Guillaume-Kulakowski/(offset)/60">7</a></span>
+                              <span class="other"><a href="/Mirror/Guillaume-Kulakowski/(offset)/70">8</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/2/(year)/2011" title="">February 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2011" title="">January 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Guillaume-Kulakowski/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Guillaume-Kulakowski/(day)/15/(month)/8/(year)/2014">15</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Guillaume-Kulakowski/(day)/16/(month)/8/(year)/2014">16</a></em>
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            <em><a href="/Mirror/Guillaume-Kulakowski/(day)/24/(month)/8/(year)/2014">24</a></em>
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class="currentselected today">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:2:"40";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:20:"Guillaume Kulakowski";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1756";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:20:"Guillaume Kulakowski";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1756";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1756";s:7:"node_id";s:4:"1756";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"2ec82a88f40667f13475567bbf2b4370";s:14:"node_remote_id";s:32:"b2e11d35c046edf6259a59540c4d3c9c";s:6:"offset";i:40;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:27:"Mirror/Guillaume-Kulakowski";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1756";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

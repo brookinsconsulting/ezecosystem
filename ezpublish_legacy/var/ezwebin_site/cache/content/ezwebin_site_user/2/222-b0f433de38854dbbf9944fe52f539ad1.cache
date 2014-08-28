@@ -1,0 +1,324 @@
+a:10:{s:7:"content";s:26190:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Systems-Blog">eZ Systems Blog</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Blog/eZ-Publish-5.1-Platform-at-a-glance-Release-Notes" title="eZ Publish 5.1 Platform at a glance - Release Notes">eZ Publish 5.1 Platform at a glance - Release Notes</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>As with the preceding 5.0 version, 5.1 is also based on the dual kernel approach. In this approach the legacy kernel, shipped with 5.1, is used for the editorial and administrator user interfaces (covered by the &quot;Administration Interface&quot; and the &quot;eZ Toolbar&quot; also known as eZ Website Interface), the content repository and all the power of the full featured CMS (content management system); while the new kernel adds on top a complete set of APIs (REST and PHP) as well as a brand new web framework based on Symfony2 (full stack).</p><p>User Interfaces and full-CMS features are still relying on the legacy kernel. These will be redeveloped based on the new kernel in further releases, still maintaining the legacy kernel as long as we can for the current user base.</p><div class="separator"><span></span></div><a name="eztoc362142_1" id="eztoc362142_1"></a><h2>Highlights of the release</h2><p>This release brings not less than 15 new features, 18 improvements and more than 193 bug fixes. The most important changes are summarized below:</p><a name="eztoc362142_1_1" id="eztoc362142_1_1"></a><h3>Clustering support in 5.x for use with legacy DFS</h3><p>This release brings the missing DFS clustering support in 5.x kernel allowing REST/Public API to be used in combination with clustered installation.</p>
+<ul>
+
+<li>Doc: <a href="http://doc.ez.no/eZ-Publish/Technical-manual/5.x/Features/Clustering" target="_self">http://doc.ez.no/eZ-Publish/Technical-manual/5.x/Features/Clustering</a></li>
+
+</ul>
+<a name="eztoc362142_1_2" id="eztoc362142_1_2"></a><h3>Persistence DB cache in 5.x API using Stash</h3><p>This feature enhances performance and clustering scalability by sitting between the API and the database storage engine and, in default setup, caches everything but search queries lowering load of backend considerably.</p>
+<ul>
+
+<li>Doc: <u><a href="https://confluence.ez.no/display/EZP/Persistence+cache" title="Documentation page for eZ Publish 5.1 Platform Persistence DB cache in 5.x API using Stash" target="_blank">https</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">://</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">confluence</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">.</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">ez</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">.</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">no</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">/</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">display</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">/</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">EZP</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">/</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">Persistence</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">+</a><a href="https://confluence.ez.no/display/EZP/Persistence+cache" target="_self">cache</a></u></li>
+
+</ul>
+<a name="eztoc362142_1_3" id="eztoc362142_1_3"></a><h3>
+<a name="h.63psaboyq3wj" id="h.63psaboyq3wj"></a>eZPage (ezflow) FieldType read-only support</h3><p>One of the steps done in this release that makes it possible to use 5.x stack fully for content rendering with standard fieldtypes without having to use legacy fallback as was the case in 5.0.</p>
+<ul>
+
+<li>Doc: <u><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">Page</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">FieldType</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">information</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" title="eZ Publish 5.1 Platform Documentation for eZPage (ezflow) FieldType read-only support" target="_blank">and</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">usage</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/The+Page+FieldType" target="_self">documentation</a></u></li>
+
+</ul>
+<p>and also some other “small but important” improvements in the 5.x stack:</p><a name="eztoc362142_1_3_1" id="eztoc362142_1_3_1"></a><h4>
+<a name="h.i5rqaj43gst2" id="h.i5rqaj43gst2"></a>Small but big improvements in 5.x stack:</h4>
+<ul>
+
+<li>Multisite with single content repository [<a href="https://github.com/ezsystems/ezpublish-kernel/pull/289" target="_blank"><u>PR</u></a>]</li>
+
+<li>REST support for session authentication with CSRF token support [<a href="https://confluence.ez.no/display/EZP51/REST+API+Authentication" target="_blank"><u>Doc</u></a>]</li>
+
+<li>Varnish support in the 5.x HTTP Cache <a href="https://confluence.ez.no/display/EZP/Purge" target="_blank"><u>Purge</u></a> system [<a href="https://confluence.ez.no/display/EZP/Using+Varnish" target="_blank"><u>Doc</u></a>]</li>
+
+<li>Twig Helper (ezpublish &amp; ezpublish.legacy global variable) [<a href="https://confluence.ez.no/display/EZP/Twig+Helper" target="_blank"><u>Doc</u></a>]</li>
+
+<li>eZDate &amp; eZTime FieldType support [<a href="https://github.com/ezsystems/ezpublish-kernel/pull/256" target="_blank"><u>PR</u></a>]</li>
+
+<li>Symfony Locale integration [<a href="https://confluence.ez.no/display/EZP/Configuration#Configuration-Customlocaleconfiguration(5.1+)" target="_blank"><u>Doc</u></a>]</li>
+
+<li>Integrate Symfony2 CSRF protection with ezformtoken [<a href="https://github.com/ezsystems/ezpublish-kernel/pull/211" target="_blank"><u>PR</u></a>, <a href="https://confluence.ez.no/display/EZP51/Legacy+configuration+injection#Legacyconfigurationinjection-eZFormToken(CSRF)integration" target="_blank"><u>Doc</u></a>]</li>
+
+<li>Legacy cronjobs &amp; scripts launchable from Symfony CLI [<u><a href="https://github.com/ezsystems/ezpublish-kernel/pull/229" target="_blank">PR</a><a href="https://github.com/ezsystems/ezpublish-kernel/pull/229" target="_self">1</a></u>, <u><a href="https://github.com/ezsystems/ezpublish-legacy/pull/558" target="_blank">PR</a><a href="https://github.com/ezsystems/ezpublish-legacy/pull/558" target="_self">2</a></u>, <a href="https://confluence.ez.no/display/EZP51/Legacy+code+and+features#Legacycodeandfeatures-Runninglegacyscriptsandcronjobs" target="_blank"><u>Doc</u></a>]</li>
+
+<li>GraphicsMagick support [<a href="https://github.com/ezsystems/ezpublish-kernel/commit/4bb197421097f0bc400452b96f61533ae756e1ea" target="_blank"><u>PR</u></a>]</li>
+
+<li>Content type identifier criterion [<a href="https://github.com/ezsystems/ezpublish-kernel/pull/203" target="_blank"><u>PR</u></a>, <a href="https://confluence.ez.no/display/EZP51/2.+Browsing%2C+finding%2C+viewing#id-2.Browsing,finding,viewing-Usingin()insteadofOR" target="_blank"><u>Doc</u></a>]</li>
+
+<li>Siteaccess compound matcher to be able to do host &amp; url matching [<u><a href="https://github.com/ezsystems/ezpublish-kernel/pull/223" target="_blank">PR</a><a href="https://github.com/ezsystems/ezpublish-kernel/pull/223" target="_self">1</a></u>, <u><a href="https://github.com/ezsystems/ezpublish-kernel/pull/281" target="_blank">PR</a><a href="https://github.com/ezsystems/ezpublish-kernel/pull/281" target="_self">2</a></u>, <a href="https://confluence.ez.no/display/EZP51/Siteaccess+Matching#SiteaccessMatching-Compoundsiteaccessmatcher" target="_blank"><u>Doc</u></a>]</li>
+
+<li>Update to Symfony 2.2 [<a href="https://github.com/ezsystems/ezpublish-kernel/pull/210" target="_blank"><u>PR</u></a>, <a href="http://symfony.com/doc/2.2/book/index.html" target="_blank"><u>Doc</u></a>, <u><a href="http://symfony.com/blog/symfony-2-2-0" target="_blank">Blog</a><a href="http://symfony.com/blog/symfony-2-2-0" target="_self">&nbsp;</a><a href="http://symfony.com/blog/symfony-2-2-0" target="_self">Post</a></u>]</li>
+
+<li>Default layout for legacy content fallback configurable by SiteAccess [<a href="https://github.com/ezsystems/ezpublish-kernel/pull/277" target="_blank"><u>PR</u></a>, <a href="https://confluence.ez.no/display/EZP51/Legacy+template+fallback#Legacytemplatefallback-Baselayoutforlegacyfallback" target="_blank"><u>Doc</u></a>]</li>
+
+<li>Add option to allow Twig template to override rendering of legacy requests [<u><a href="https://github.com/ezsystems/ezpublish-kernel/pull/264" target="_blank">PR</a><a href="https://github.com/ezsystems/ezpublish-kernel/pull/264" target="_self">1</a></u>]</li>
+
+<li>Completed support for permissions in 5.x stack [<u><a href="https://github.com/ezsystems/ezpublish-kernel/pull/164" target="_blank">PR</a><a href="https://github.com/ezsystems/ezpublish-kernel/pull/164" target="_self">1</a></u>, <u><a href="https://github.com/ezsystems/ezpublish-kernel/pull/292" target="_blank">PR</a><a href="https://github.com/ezsystems/ezpublish-kernel/pull/292" target="_self">2</a></u>]</li>
+
+</ul>
+<p>For a full detailed list of the bug fixes, improvements and new features, please visit the <u><a href="https://confluence.ez.no/display/EZP51/5.1+changelog" title="eZ Publish 5.1 Platform full changelog" target="_blank">changelog</a><a href="https://confluence.ez.no/display/EZP51/5.1+changelog" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/5.1+changelog" target="_self">on</a><a href="https://confluence.ez.no/display/EZP51/5.1+changelog" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/5.1+changelog" target="_self">the</a><a href="https://confluence.ez.no/display/EZP51/5.1+changelog" target="_self">&nbsp;5.1 </a><a href="https://confluence.ez.no/display/EZP51/5.1+changelog" target="_self">documentation</a></u>.</p><p>Beyond the code base, it is also important to note a few change in our software lifecycle and support policy.</p><div class="separator"><span></span></div><a name="eztoc362142_1_4" id="eztoc362142_1_4"></a><h3>
+<a name="h.9sgxfyn6ta26" id="h.9sgxfyn6ta26"></a>Tick-tock release cycle with now a yearly long term support release:</h3><p>To provide a always more sustainable solution, eZ also changed the way releases are supported. While continuing to bring 2 releases per year (one in May and one in November), eZ decided to have a long term support (LTS) release once a year, on the spring release. These are &quot;Tick&quot; releases. 5.1 is such a release and come then with 3 year vendor support guarantee. The pace on long term service release has been introduced based on customer feedback and in order to better serve them. &nbsp;&nbsp;</p><div class="separator"><span></span></div><a name="eztoc362142_1_5" id="eztoc362142_1_5"></a><h3>
+<a name="h.npzy5pye9iwp" id="h.npzy5pye9iwp"></a>Changes in the supported platform</h3><p>With 5.1, we introduced a couple of changes of importance:</p>
+<ul>
+
+<li>eZ DFS has become the main cluster handler for the platform. As a result, eZ DB and eZ FS2 have been removed from the stack.</li>
+
+<li>The underlying Symfony framework has been upgraded to Symfony 2.2</li>
+
+<li>Oracle database is not anymore a supported option for both new and old kernel.</li>
+
+<li>MySQL 5.5 is now a supported database</li>
+
+</ul>
+<p>For more detailed information on the supported platform please visit the <u><a href="https://confluence.ez.no/display/EZP51/Requirements" target="_self">5.1 </a><a href="https://confluence.ez.no/display/EZP51/Requirements" title="eZ Publish 5.1 Supported Platform and Requirements" target="_blank">requirement</a><a href="https://confluence.ez.no/display/EZP51/Requirements" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/Requirements" target="_self">documentation</a><a href="https://confluence.ez.no/display/EZP51/Requirements" target="_self">&nbsp;</a><a href="https://confluence.ez.no/display/EZP51/Requirements" target="_self">page</a></u>.</p><p>Our next summit will be Aconcagua, and will be the release 5.2. We are looking to it and are already at work on it. In the meantime we welcome any comment and feedback on this new version 5.1. Please feel free to <a href="http://share.ez.no/ezpublish-5.1-platform" title="eZ Publish 5.1 Platform Discussion on the community portal" target="_blank">join the discussion on share.ez.no</a> or to report issues or request on our <u><a href="http://jira.ez.no/browse/EZP" title="eZ Publish Bug Tracker" target="_blank">bug</a><a href="http://jira.ez.no/browse/EZP" target="_self">&nbsp;</a><a href="http://jira.ez.no/browse/EZP" target="_self">tracking</a><a href="http://jira.ez.no/browse/EZP" target="_self">&nbsp;</a><a href="http://jira.ez.no/browse/EZP" target="_self">system</a></u> (use your share.ez.no account to sign-in).</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/28/2013 05:58 am</span> &nbsp; <a href="http://ez.no/About-eZ/Blog">ez.no/About-eZ/Blog</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Systems-Blog/eZ-Publish-5.1-Platform-at-a-glance-Release-Notes">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Blog/eZ-Publish-5.1-Platform-at-a-glance-Release-Notes">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2013" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2013" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>May&nbsp;2013</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                                        <td class="  right">
+            5
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                                        <td class="  right">
+            12
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                                        <td class="  right">
+            19
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                                        <td class="  right">
+            26
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            27
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(day)/28/(month)/5/(year)/2013">28</a></em>
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2013";s:5:"month";s:1:"5";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"222";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"222";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"220";s:7:"node_id";s:3:"222";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"ae28f8b18d3a07d8a33282f880a66b18";s:14:"node_remote_id";s:32:"b1fd4c81985a35b4412645b300f2fee8";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"222";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

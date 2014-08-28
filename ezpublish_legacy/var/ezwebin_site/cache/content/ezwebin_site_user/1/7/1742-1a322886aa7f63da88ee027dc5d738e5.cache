@@ -1,0 +1,1152 @@
+a:10:{s:7:"content";s:98468:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/New-eZ-Publish-Platform-5.3-Easier-to-Build-a-Solid-Content-Business" title="New eZ Publish Platform 5.3: Easier to Build a Solid Content Business">New eZ Publish Platform 5.3: Easier to Build a Solid Content Business</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p><i>Skien, Norway, May 27th, 2014</i></p><p><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-5.3-easier-to-build-a-solid-content-business/407051-2-eng-GB/eZ-Publish-Platform-5.3-easier-to-build-a-Solid-Content-Business.png" alt="eZ Publish Platform 5.3: easier to build a Solid Content Business" /></p><a name="eztoc407019_1" id="eztoc407019_1"></a><h2>A Long Term Supported Release</h2><p>eZ Publish Platform 5.3 is the fourth release in the 5 series and is a Long Term Supported release (LTS). This means it will be supported up to end of May 2019 with extended support, you have time to plan further upgrade! (see <a href="http://support.ez.no/Public/Service-Life" title="eZ Publish Platform Support Service-Life description" target="_blank">http://support.ez.no/Public/Service-Life</a> for details on the supported period). It is a technical release that provides new features and opportunities for developers to build great things, more solidity and ease-of-use. It mostly offers a continuous improvement of the &quot;Platform stack&quot; introduced with eZ Publish Platform 5 (previously referred to as &quot;New Stack&quot;, based on Symfony2) in terms of features, usability and performance.</p><a name="eztoc407019_2" id="eztoc407019_2"></a><h2>Making it Easier For Developers to Understand And Learn</h2>
+<div class="object-right"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/symfony-framework-at-the-heart-of-ez-publish-platform-5.3/407183-1-eng-GB/Symfony-Framework-at-the-heart-of-eZ-Publish-Platform-5.3_large.png" alt="Symfony Framework at the heart of eZ Publish Platform 5.3" /></div><p>We heard our community, eZ Publish Platform was a big step forward in terms of technology, but we might have focused too much on the capabilities, without making sure it can be easily grasped by newcomers to the platform or to the Symfony framework. With 5.3, we have placed a lot of energy in an improved documentation in many other features that will make it easier to anyone to get started.</p><a name="eztoc407019_3" id="eztoc407019_3"></a><h2>Making it Easier For Developers to Develop And Deploy</h2><p>One of the main line of 5.3 release has been to drastically improve the integration of the Symfony environment, the capability to easily build websites relying on the &quot;eZ Platform&quot; stack (&quot;New Stack&quot;) and continuously remove dependencies on the legacy stack (4.x). With 5.3, while it is still possible to use the legacy stack and templating system (with the dual-kernel architecture), the main way to go is to use the new platform and the Symfony framework. There is also another major change that will make developers and operation people’s life way easier: eZ Publish Platform 5.3 relies now entirely on Composer -- the now standard deployment and dependency manager tool for PHP. We moved from our previous proprietary deployment tool in eZ Network to fully embrace Composer as a system to deliver updates, making it very standard, very easy and very efficient!</p><a name="eztoc407019_4" id="eztoc407019_4"></a><h2>Updated Demo Site With More Ready-to-use Features Like Places</h2><p>The Demo Site has been improved to progressively become the reference for developers to see how features of the platform can be used to build great Websites. Among many improvements to the previous demo site, we added a ready-to-use feature called Places that shows how to best deal with geolocation and how to search on geolocated data thanks to the latest improvement in the eZ Publish API and in SolR. In short, the Places feature show you how you can quickly create your own listing of places and display them efficiently, whether you want to show the many locations of your company or build your own Yelp guide.</p><div class="separator"><span></span></div>
+<div class="object-center"><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.3" target="_self" title="Book an Discover eZ Publish Platform 5.3 Demo"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/book-an-ez-publish-platform-5.3-demo/407179-1-eng-GB/Book-an-eZ-Publish-Platform-5.3-demo.png" alt="Book an eZ Publish Platform 5.3 demo" /></a></div><div class="separator"><span></span></div><a name="eztoc407019_5" id="eztoc407019_5"></a><h2>Feature List - What's New in 5.3?</h2><p>eZ Publish Platform 5.3 comes with 59 new features and more than 233 bug fixes and 69 improvements to the core platform. Here’s what you can expect:</p><div class="separator"><span></span></div><a name="eztoc407019_5_1" id="eztoc407019_5_1"></a><h3>Use of Doctrine DBAL / DoctrineBundle</h3>
+<div class="object-right"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/doctrine-at-the-heart-of-ez-publish-platform-5.3/407094-1-eng-GB/Doctrine-at-the-heart-of-eZ-Publish-Platform-5.3.jpg" alt="Doctrine at the heart of eZ Publish Platform 5.3" /></div><p>eZ Publish 5.3 now uses Doctrine DBAL instead of Zeta Components Database, this allows users to reuse database connection and settings with other pure-Symfony2 bundles which use Doctrine ORM (default choice in Symfony2 documentation and code generators). Your benefits:</p>
+<ul>
+
+<li>Well-known/standard way of using databases from a Symfony2 application,</li>
+
+<li>Better performance by potentially reducing the amount of open database connections,</li>
+
+<li>Full access on DB-level debug info, right from the Symfony Web debug toolbar.</li>
+
+</ul>
+<div class="separator"><span></span></div><a name="eztoc407019_5_2" id="eztoc407019_5_2"></a><h3>User Authentication Using Symfony Security Component</h3>
+<div class="object-left"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/user-authentication-using-symfony-security-component/407098-1-eng-GB/User-Authentication-Using-Symfony-Security-Component_listitem.jpg" alt="User Authentication Using Symfony Security Component" /></div><p>New login / logout functionality that uses Symfony's authentication system, this enables any kind of login handler or SSO handler made for Symfony to also work with eZ Publish 5, including handlers for LDAP. Your benefits:</p>
+<ul>
+
+<li>Well-known/standard way of managing authentication in a Symfony2 application,</li>
+
+<li>Allows to use various login or SSO handlers available in the Symfony community,</li>
+
+<li>Extensible, to match any custom authentication requirement,</li>
+
+<li>Authentication system considered as more secure.</li>
+
+</ul>
+<div class="separator"><span></span></div><a name="eztoc407019_5_3" id="eztoc407019_5_3"></a><h3>Twig &amp; Tpl Template and DB-level debug in Symfony Web debug Toolbar</h3>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/twig-tpl-template-and-db-level-debug-in-symfony-web-debug-toolbar/407102-1-eng-GB/Twig-Tpl-Template-and-DB-level-debug-in-Symfony-Web-debug-Toolbar_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/twig-tpl-template-and-db-level-debug-in-symfony-web-debug-toolbar/407102-1-eng-GB/Twig-Tpl-Template-and-DB-level-debug-in-Symfony-Web-debug-Toolbar_gallerythumbnail.png" width="70" height="100" style="border: 0px solid ;" alt="Twig &amp; Tpl Template and DB-level debug in Symfony Web debug Toolbar" title="Twig &amp; Tpl Template and DB-level debug in Symfony Web debug Toolbar" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Developer feature known from legacy which allows you to see which templates are used on a page, how many times and how much time they spend being executed. On top, the integration of Doctrine DBAL as database-access layer brings full insight on what happened at DB-level during a given request. Your benefits:</p>
+<ul>
+
+<li>Integration of eZ Publish debug information in the standard Symfony2 debug mechanism,</li>
+
+<li>Speeds up front-end integrators' work by pointing them to the right templates,</li>
+
+<li>Easier to grasp all details of what is happening at DB-level (optimization, performance).</li>
+
+</ul>
+<div class="separator"><span></span></div><a name="eztoc407019_5_4" id="eztoc407019_5_4"></a><h3>Language Switcher and Cross-Siteaccess linker</h3>
+<div class="object-left"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/language-switcher-and-cross-siteaccess-linker/407106-1-eng-GB/Language-Switcher-and-Cross-Siteaccess-linker_articleimage.jpg" alt="Language Switcher and Cross-Siteaccess linker" /></div><p>The language switcher is built on the Symfony stack and is improved for a simpler usage. This feature supports deployment of multilingual websites by making it easy to build, from Twig and Symfony2, a widget for visitors to switch language during navigation. This comes in a continuity of the <a href="http://ez.no/5.2" title="eZ Publish Platform 5.2 release" target="_self">5.2 release</a> improvements that increased the amount of usable languages from 30 to 62. A by-product of this is the ability to easily create links from one siteaccess to the other (including across language siteacesses). Your benefits:</p>
+<ul>
+
+<li>Support of multi-language/international deployments,</li>
+
+<li>Clean, supported way of linking across siteaccess,</li>
+
+<li>Twig integration!</li>
+
+</ul>
+<div class="separator"><span></span></div><a name="eztoc407019_5_5" id="eztoc407019_5_5"></a><h3>Website Toolbar</h3>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/website-toolbar-in-new-stack-symfony-in-ez-publish-platform-5.3/407151-1-eng-GB/Website-Toolbar-in-New-Stack-Symfony-in-eZ-Publish-Platform-5.3_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/website-toolbar-in-new-stack-symfony-in-ez-publish-platform-5.3/407151-1-eng-GB/Website-Toolbar-in-New-Stack-Symfony-in-eZ-Publish-Platform-5.3_articleimage.png" width="170" height="115" style="border: 0px solid ;" alt="Website Toolbar in New Stack (Symfony) in eZ Publish Platform 5.3" title="Website Toolbar in New Stack (Symfony) in eZ Publish Platform 5.3" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Not to be mixed with the Web Debug Toolbar provided by Symfony and extended by eZ Publish, this feature is about allowing &quot;ezwt&quot; (Website Toolbar) extension to also work in DemoBundle to provide the front-end editing functionality that you know from 4.x. Your benefits:</p>
+<ul>
+
+<li>The Website Toolbar integrates into your front-end site design useful functions to edit, move, delete, copy and add new content,</li>
+
+<li>In-context content edition (front-end)</li>
+
+</ul>
+<div class="separator"><span></span></div><a name="eztoc407019_5_6" id="eztoc407019_5_6"></a><h3>Comment Moderation Tab in Administration Interface, Tied to Content</h3>
+<div class="object-left"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/comment-moderation-tab-in-administration-interface-tied-to-content-in-ez-publish-platform5-.3/407155-1-eng-GB/Comment-moderation-tab-in-administration-interface-tied-to-content-in-eZ-Publish-Platform5-.3_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/comment-moderation-tab-in-administration-interface-tied-to-content-in-ez-publish-platform5-.3/407155-1-eng-GB/Comment-moderation-tab-in-administration-interface-tied-to-content-in-eZ-Publish-Platform5-.3_mainstory_2011_grid_8.png" width="300" height="141" style="border: 0px solid ;" alt="Comment moderation tab in administration interface, tied to content, in eZ Publish Platform5 .3" title="Comment moderation tab in administration interface, tied to content, in eZ Publish Platform5 .3" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>In the continuity of the brand new commenting system <a href="http://ez.no/5.2" title="eZ Publish Platform 5.2" target="_self">introduced in 5.2</a> (Comment bundle that can rely on external commenting systems such as Disqus or Facebook), a comment moderation interface is now fully integrated in the administration interface, for each piece of content, under a new tab. Your benefits:</p>
+<ul>
+
+<li>Immediate access to reactions on content for editors, from content edition interface,</li>
+
+<li>Thorough integration of external comment services,</li>
+
+<li>A great example of how to ship hybrid (New Stack &amp; Legacy).</li>
+
+</ul>
+<div class="separator"><span></span></div><a name="eztoc407019_5_7" id="eztoc407019_5_7"></a><h3>Updated Demo Site, New <i>Places</i> Feature</h3>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/updated-demo-site-in-ez-publish-platform-5.3-new-places-feature/407159-1-eng-GB/Updated-Demo-Site-in-eZ-Publish-Platform-5.3-New-Places-Feature_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/updated-demo-site-in-ez-publish-platform-5.3-new-places-feature/407159-1-eng-GB/Updated-Demo-Site-in-eZ-Publish-Platform-5.3-New-Places-Feature_articleimage.png" width="170" height="153" style="border: 0px solid ;" alt="Updated Demo Site in eZ Publish Platform 5.3, New Places Feature" title="Updated Demo Site in eZ Publish Platform 5.3, New Places Feature" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Search API is now able to search for content with geolocation making it possible to do geolocation range searches and sorting by distance from a point. Taking advantage of the MapLocation feature, a new feature is exposed in the Demo Site showing how to implement listing and map views of content (restaurants-close-to-you) using the MapLocation field. Your benefits:</p>
+<ul>
+
+<li>Geolocalize your content, and create your Yelp-like app,</li>
+
+<li>Content search based on geolocation of content,</li>
+
+<li>A way to create even more targeted and more relevant online experiences, leading to better conversion.</li>
+
+</ul>
+<div class="separator"><span></span></div><a name="eztoc407019_5_8" id="eztoc407019_5_8"></a><h3>Extended Stack Support</h3>
+<div class="object-right"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/extended-stack-support-for-ez-publish-platform-5.3/407207-1-eng-GB/Extended-Stack-Support-for-eZ-Publish-Platform-5.3_large.png" alt="Extended Stack Support for eZ Publish Platform 5.3" /></div><p>eZ Publish Platform 5.3 runs smoothly with:</p>
+<ul>
+
+<li>Ubuntu 14.04, LTS,</li>
+
+<li>PHP 5.5,&nbsp;</li>
+
+<li>MySQL 5.6,</li>
+
+<li>MariaDB 5.5,</li>
+
+<li>Nginx 1.4.</li>
+
+</ul>
+<p>Your benefits:</p>
+<ul>
+
+<li>Increased Performances,</li>
+
+<li>Support for very popular stack.</li>
+
+</ul>
+<div class="separator"><span></span></div>
+<div class="object-center"><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.3" target="_self" title="Download the eZ Publish Platform 5.3 Brochure"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/download-the-ez-publish-platform-5.3-brochure/407203-1-eng-GB/Download-the-eZ-Publish-Platform-5.3-Brochure.png" alt="Download the eZ Publish Platform 5.3 Brochure" /></a></div><div class="separator"><span></span></div><a name="eztoc407019_6" id="eztoc407019_6"></a><h2>Roadmap</h2><p>5.3 is an ideal tool to build future-proof websites on top of what will become the &quot;eZ Platform&quot; stack. What's more, upgrading from a 4.x-based site to 5.3 will also guarantee support for the next 3 years (+ 2 additional years with Support Extension). 5.3 installations will be easily upgradable to the 5.4 version, as they will share the same legacy kernel (and extensions). 5.4's support period will match 5.3's, and will bring additional features in the &quot;eZ Platform&quot; stack (&quot;New Stack&quot;).</p><p>Below, find our plans for the next releases.</p>
+<div class="object-center"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-roadmap/407199-1-eng-GB/eZ-Publish-Platform-roadmap_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-roadmap/407199-1-eng-GB/eZ-Publish-Platform-roadmap_mainstory.jpg" width="460" height="227" style="border: 0px solid ;" alt="eZ Publish Platform roadmap" title="eZ Publish Platform roadmap" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><a name="eztoc407019_7" id="eztoc407019_7"></a><h2>Technical Release Notes</h2><p>The full technical release notes are available here:&nbsp;<a href="https://doc.ez.no/display/EZP/5.3+Release+Notes" title="eZ Publish Platform 5.3 release notes" target="_blank">https://doc.ez.no/display/EZP/5.3+Release+Notes</a></p><a name="eztoc407019_8" id="eztoc407019_8"></a><h2>Availability</h2><p>eZ Publish Platform 5.3 is available immediately. For more information on eZ Publish Platform 5.3, feel free to&nbsp;<a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.3" title="Get in touch to Discover eZ Publish Platform 5.3" target="_self"><i>get in touch with us</i></a>.</p><a name="eztoc407019_9" id="eztoc407019_9"></a><h2>
+<a name="eztoc362365_6" id="eztoc362365_6"></a><b>About eZ</b></h2><p>eZ Systems is the globally recognised commercial open source software provider. Our leading and innovative approach takes your enterprise platform beyond content management (CMS) into creating a true digital experience with systematic optimization capabilities. The eZ Publish platform sets new standards for digital lifecycle management, including recommendations and smart web analytics functionality, coupled with an application market place of certified extensions. Thousands of organizations worldwide benefit from optimized and intelligent multi-channel communications solutions. eZ's client base includes small, medium and large enterprises across all industries such as media, publishing and broadcasting, financial services, telecoms, retail, government, manufacturing, logistics, and education.</p><a name="eztoc407019_10" id="eztoc407019_10"></a><h2>
+<a name="eztoc362365_7" id="eztoc362365_7"></a><b>Contact information</b></h2><p>Please get in touch at communications@ez.no</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/27/2014 03:26 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/New-eZ-Publish-Platform-5.3-Easier-to-Build-a-Solid-Content-Business">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/New-eZ-Publish-Platform-5.3-Easier-to-Build-a-Solid-Content-Business">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/eZ-Systems-is-expanding-with-a-new-office-in-Poland" title="eZ Systems is expanding with a new office in Poland">eZ Systems is expanding with a new office in Poland</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>
+Our experience working with Polish computer scientists has been great, so we are confident we have made the best decision.<br />
+For the new office, the position of General Manager of eZ Systems Polska Sp. z o.o. has been offered to and accepted by Mr Łukasz Serwatka, an experienced developer and product manager who has long been part of eZ. Mr Serwatka describes his plans for the future: “The Polish branch of eZ Systems will continue to develop the eZ product portfolio, with a focus on front-end and innovative user interfaces. For that we are planning to build a new project team, with at least six members before year end. We are currently looking for candidates for the positions of Junior &amp; Senior UI Developers.”<br />After Skien (NO), Lyon (FR), Oslo, Paris, Cologne (DE), Tokyo and New York, the Katowice branch is another step in our global development. The new team will work closely with the rest of the engineering team in Lyon and the product team in Brooklyn, New York, and will help us develop new features and improve our products and services. If you live in Poland and have the skills and experience we are looking for, you should contact us at one of the links below. We’d love to have you on our team!</p><p>
+<a href="http://ez.no/About-eZ/Careers/Senior-UI-Developer-Poland" target="_self">http://ez.no/About-eZ/Careers/Senior-UI-Developer-Poland</a><br /><a href="http://ez.no/About-eZ/Careers/Junior-UI-Developer-Poland" target="_self">http://ez.no/About-eZ/Careers/Junior-UI-Developer-Poland</a></p><p>
+<sub><i>Authors:&nbsp;</i></sub><br />
+<sub><i>Łukasz Serwatka, General Manager at eZ Systems Polska,</i></sub><br /><sub><i>André Rømcke VP Engineering at eZ Systems&nbsp;</i></sub></p><p><i>&nbsp;</i></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>03/05/2014 08:07 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/eZ-Systems-is-expanding-with-a-new-office-in-Poland">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/eZ-Systems-is-expanding-with-a-new-office-in-Poland">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/eZ-Publish-Platform-5.2-Faster-Stronger-For-Your-Content-Business" title="eZ Publish Platform 5.2: Faster &amp; Stronger For Your Content Business">eZ Publish Platform 5.2: Faster &amp; Stronger For Your Content Business</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p><i>Skien, Norway, Nov 19th, 2013</i></p><p><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-5.2-aconcagua-release/390456-2-eng-GB/eZ-Publish-Platform-5.2-Aconcagua-Release.jpg" alt="eZ Publish Platform 5.2 - Aconcagua Release" /></p><div class="separator"><span></span></div><a name="eztoc390420_1" id="eztoc390420_1"></a><h2><b>Dear Marketer: Create, Deliver &amp; Optimize, More Than Ever</b></h2><a name="eztoc390420_1_1" id="eztoc390420_1_1"></a><h3>A Radically Faster and More Flexible Experience on Your Digital Touch-points</h3>
+<div class="object-left"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/graphic2/390163-1-eng-GB/graphic_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/graphic2/390163-1-eng-GB/graphic_articleimage.png" width="170" height="87" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>If reducing the page load-time of your online apps by 400% sounds like a good idea, the radically&nbsp;<a href="#DownloadBrochure" target="_self">improved caching system</a>&nbsp;in eZ Publish Platform 5.2 will become your best friend (figure of comparison to 4.x series). Unmatched, blazing fast experience for your audience, even in highly personalized navigation contexts, is now standard, out of the box. That is: when a logged-in customer enjoys a tailored online experience with your brand, he no longer drops out after two pages per visit because of a deceptively slow journey, thus allowing for more chances for conversion.</p><p>eZ Publish Platform 5.2, aka Aconcagua, has also been crafted to fit snugly in your digital marketing/CRM information system, relying on a&nbsp;<a href="#DownloadBrochure" target="_self">solid, highly flexible &amp; extensible framework</a>&nbsp;that makes it a breeze to &quot;connect the dots&quot; of your online experience elements: (big) data sources, analytics and more. The creation of such a unified, seamless experience is also supported by the core Digital Marketing and Customer Experience capabilities: eZ Marketing Automation, Smart Analytics (eZ LiveViewer + eZ odoscope) and eZ Recommendation Service. Learn more on these&nbsp;<a href="http://ez.no/Products/Digital-Marketing-Customer-Experience" title="Digital Marketing &amp; Customer Experience with eZ Publish Platform" target="_self">CXM capabilities here</a>.</p><a name="eztoc390420_1_2" id="eztoc390420_1_2"></a><h3>Rapid Incremental Online Presence Deployment</h3>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/multiple-languages-at-the-heart-of-ez-publish-platform-5.2/390444-1-eng-GB/Multiple-languages-at-the-heart-of-eZ-Publish-Platform-5.2_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/multiple-languages-at-the-heart-of-ez-publish-platform-5.2/390444-1-eng-GB/Multiple-languages-at-the-heart-of-eZ-Publish-Platform-5.2_articleimage.png" width="170" height="106" style="border: 0px solid ;" alt="Multiple languages at the heart of eZ Publish Platform 5.2" title="Multiple languages at the heart of eZ Publish Platform 5.2" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Incremental improvements of online equity (as opposed to a launch from scratch) are often hampered by &quot;technology practicalities&quot;, slowed-down beyond any reasonable time-to-market. This is what we want to minimize with eZ Publish Platform 5.2 by strengthening the multi-site capabilities and language coverage: one platform for your brands. Deployment of a new touch-point for your brand, or even a new brand, is very quick: the&nbsp;<a href="#DownloadBrochure" target="_self">native multi-site support in 5.2</a>&nbsp;allows a high level of freedom in defining your information/content architecture, with a low technology set-up overhead once the first site is up and running. Starting business in a new region? Up to&nbsp;<a href="#DownloadBrochure" target="_self">62 languages are now covered</a>&nbsp;with eZ Publish Platform 5.2, with integrated content translation capabilities for your in-house or external translation teams. Just go for it; we cover you.</p><a name="eztoc390420_1_3" id="eztoc390420_1_3"></a><h3>The 5.2 Tips To Engage Your Audience</h3>
+<div class="object-left"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/new-commenting-experience-in-ez-publish-platform-5.2/390448-1-eng-GB/New-Commenting-Experience-in-eZ-Publish-Platform-5.2_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/new-commenting-experience-in-ez-publish-platform-5.2/390448-1-eng-GB/New-Commenting-Experience-in-eZ-Publish-Platform-5.2_articleimage.png" width="170" height="103" style="border: 0px solid ;" alt="New Commenting Experience in eZ Publish Platform 5.2" title="New Commenting Experience in eZ Publish Platform 5.2" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Conversational channels (social media, UGC) are prominent spaces of public exchange that foster your online community and unquestionably contribute to your brand equity. eZ Publish Platform 5.2 brings a totally&nbsp;<a href="#DownloadBrochure" target="_self">new commenting experience</a>&nbsp;for users, thanks to tight integration of third-party commenting services (Facebook, Disqus, and more), plugged in at the heart of your invaluable content. The latter, certainly one of the main building blocks of your online strategy, needs to be able to be read, shared, updated, created or deleted from any channel (tablets, smartphones, desktop, TVs, apps, third-party applications, etc). This is made possible by a&nbsp;<a href="#DownloadBrochure" target="_self">REST interface</a>&nbsp;in 5.2 that lets you rise to the omnichannel/multichannel challenge, with an extensible, built-in content exposure system. Finally, the&nbsp;<a href="#DownloadBrochure" target="_self">improved demo Site for the New Stack</a>&nbsp;shipped in eZ Publish Platform 5.2 can be seen as a box with built-in, easily reusable Online Marketing 101 elements: responsive design, landing pages with forms, feedback forms, etc: &quot;Ready-made, simple marketing&quot;.</p><div class="separator"><span></span></div><p><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.2" title="Call me about eZ Publish Platform 5.2" target="_self"><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.2" target="_self" title="Call me about eZ Publish Platform 5.2"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/call-me-about-ez-publish-platform-5.2-demo/390476-1-eng-GB/Call-me-about-eZ-Publish-Platform-5.2-Demo.png" alt="Call me about eZ Publish Platform 5.2 Demo" /></a></a></p><div class="separator"><span></span></div><a name="eztoc390420_2" id="eztoc390420_2"></a><h2><b>Dear Technologist: Embrace Rapid, More Cost-effective Industrialization of Your Online Applications</b></h2><a name="eztoc390420_2_4" id="eztoc390420_2_4"></a><h3>Focus On Operational Efficiency</h3>
+<div class="object-left"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-5.2-new-demo-site/390460-1-eng-GB/eZ-Publish-Platform-5.2-New-Demo-Site_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-5.2-new-demo-site/390460-1-eng-GB/eZ-Publish-Platform-5.2-New-Demo-Site_listitem.png" width="130" height="99" style="border: 0px solid ;" alt="eZ Publish Platform 5.2 - New Demo Site" title="eZ Publish Platform 5.2 - New Demo Site" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Cut infrastructure and hosting costs, quickly train your development teams on the technology, streamline development collaboration: the thirst for operational efficiency is never quenched, and we know this. eZ Publish Platform 5.2 brings nuggets to help you noticeably with this. The&nbsp;<a href="#DownloadBrochure" target="_self">Improved Caching System</a> allows for&nbsp;<a href="http://ez.no/About-eZ/Blog/High-performance-one-of-the-many-very-good-reason-s-to-move-to-eZ-Publish-5.x" title="High performance, one (of the many) very good reason(s) to move to eZ Publish 5.x" target="_self">400% more pages per second</a>&nbsp;than the 4.x series, relying on the Symfony2-based New Stack: this means native cost-killing on hosting infrastructure, and the ability to build much more exciting digital experiences. Similarly, thanks to the&nbsp;<a href="#DownloadBrochure" target="_self">native support of Composer</a>,&nbsp;you can take full control over the organization of your projects' development, now tightly integrable with eZ Publish Platform, out of the box. This goes hand in hand with an improved Demo Site for the New Stack, which becomes a showcase of examples and best practices of development on the New Stack: a solid learning base for developers.</p><a name="eztoc390420_2_5" id="eztoc390420_2_5"></a><h3>5.2: A More Scalable, More Flexible, More Stable Platform</h3>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/symfony-2.3-lts-in-ez-publish-platform-5.2/390464-1-eng-GB/Symfony-2.3-LTS-in-eZ-Publish-Platform-5.2_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/symfony-2.3-lts-in-ez-publish-platform-5.2/390464-1-eng-GB/Symfony-2.3-LTS-in-eZ-Publish-Platform-5.2_articleimage.png" width="170" height="143" style="border: 0px solid ;" alt="Symfony 2.3 LTS in eZ Publish Platform 5.2" title="Symfony 2.3 LTS in eZ Publish Platform 5.2" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Stability and dependability + extensibility and flexibility is not an impossible marriage. We decided to prove this by increasing both in eZ Publish Platform 5.2. The underlying Symfony2 Full Stack has been upgraded to its&nbsp;<a href="#DownloadBrochure" target="_self">improved 2.3 Long Term Support</a>&nbsp;version, embedding a high stability application development framework at the heart of your Content Management Framework. On a side note, this opens an even wider opportunity to tap into a large base of talented developers for your projects, from the eZ Publish and Symfony communities.</p>
+<div class="object-left"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/multi-repository-storage-and-cache-system2/390468-1-eng-GB/Multi-repository-Storage-and-Cache-System_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/multi-repository-storage-and-cache-system2/390468-1-eng-GB/Multi-repository-Storage-and-Cache-System_articleimage.png" width="170" height="114" style="border: 0px solid ;" alt="Multi-repository Storage and Cache System" title="Multi-repository Storage and Cache System" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Rapidly changing business requirements being a standard of the digital industry, the technological choices made must respond quickly to constraints. A scalable platform, with integrated multi-site support at the heart of the system, is a way to ensure that deploying a new site is an incremental project from a technology set-up perspective; a lightweight task compared with setting up a new instance of the product. This is now enabled, in eZ Publish Platform 5.2, by a reinforced&nbsp;<a href="#DownloadBrochure" target="_self">multi-repository Storage and Cache system</a>&nbsp;allowing full flexibility in content sharing and reuse across multiple sites, on a single installation architecture.</p><p>In a similar vein of cost-efficient response to changing business requirements, we augmented multi-lingual capabilities by raising the bar of 30 supported languages in version 5.1, <a href="#DownloadBrochure" target="_self">to 62 in version 5.2</a>,&nbsp;Aconcagua, for one single installation. This allows your technology to support international business as well as international organizations, as content translation and collaboration capabilities are shipped in the stock version.</p><a name="eztoc390420_2_6" id="eztoc390420_2_6"></a><h3>New Ready-Made Key Components</h3><p>While managing comments in the previous version 5.1 was achieved via a simple yet solid solution, the story is totally different with eZ Publish Platform 5.2. A brand&nbsp;<a href="#DownloadBrochure" target="_self">new commenting system</a>&nbsp;now enables reliance on built-in Facebook or Disqus external User Generated Comments management; alternatively you can integrate your preferred UGC solution, quickly and painlessly (via semantic configuration).</p><p>eZ Publish Platform 5.1 placed an advanced set of APIs into the hands of developers: PHP and REST, removing any barriers to the creation of innovative solutions based on content manipulation of all sorts. These APIs are backwards compatible for several years, securing your developments in time (add-ons to eZ Publish Platform, extensions). The big novelty: with 5.2, we ship a Javascript-based client to speed up the creation of your client-side apps (mobile, rich client, web), assisting you on both sides of the multi-channel story: back-end and client-side. On top of this, both the PHP &amp; REST APIs were consolidated, repositioning them as high-standard tools for thorough content manipulation.</p><div class="separator"><span></span></div><p><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.2" title="Book an eZ Publish Platform 5.2 Demo" target="_self"><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.2" target="_self" title="Book an eZ Publish Platform 5.2 Demo"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/book-an-ez-publish-platform-5.2-demo/390472-1-eng-GB/Book-an-eZ-Publish-Platform-5.2-Demo.png" alt="Book an eZ Publish Platform 5.2 Demo" /></a></a></p><div class="separator"><span></span></div><a name="eztoc390420_2_7" id="eztoc390420_2_7"></a><h3>Consolidating eZ Publish Platform 5 “New Stack”, Symfony first!&nbsp;</h3>
+<div class="object-left"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-5.2-dual-kernel/390480-1-eng-GB/eZ-Publish-Platform-5.2-Dual-Kernel_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-platform-5.2-dual-kernel/390480-1-eng-GB/eZ-Publish-Platform-5.2-Dual-Kernel_articleimage.png" width="170" height="109" style="border: 0px solid ;" alt="eZ Publish Platform 5.2 - Dual Kernel" title="eZ Publish Platform 5.2 - Dual Kernel" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>As with all 5.x versions, this release relies on a dual kernel architecture. This means that the new eZ Publish 5 architecture, which relies on strong APIs and Symfony Web Framework “Full Stack”, coexists in the same software with our Legacy architecture, making eZ Publish Platform 5 unlike any other CMS - powerful, modern, scalable, and fully extensible.&nbsp;&nbsp;</p><p>
+This dual kernel architecture has been designed and developed to facilitate both the upgrade from earlier versions and the adoption of eZ Publish Platform 5 series to existing users of eZ Publish Platform. All development done on eZ Publish Platform 4 versions can easily be transferred, and all knowledge and skills in eZ Publish Platform 4.x can still be leveraged without any gaps.&nbsp;<br />
+
+<a name="DownloadBrochure" id="DownloadBrochure"></a><br />With 5.2, the coverage of the new kernel (aka New Stack) has been significantly extended and consolidated. This makes it the version where the New Stack should, most often, be the preferred choice when developing new sites.&nbsp;</p><div class="separator"><span></span></div><a name="eztoc390420_3" id="eztoc390420_3"></a><h2><b>Full Feature List:&nbsp;What’s new in the eZ Publish Platform 5.2?</b></h2><p>Fifteen new features and more than 129 bug fixes and improvements to the core platform.</p><p>eZ Publish Platform version 5.2 is a significant step forward for the core platform, with numerous improvements and bug fixes, both in the new Symfony-based framework and in the public and REST API. We call it the New Stack. To find out what you can expect, download the feature description brochure here:&nbsp;</p><p><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.2" title="Download the eZ Publish Platform 5.2 feature-list Brochure" target="_self"><a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.2" target="_self" title="Download the eZ Publish Platform 5.2 feature-list Brochure"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/download-the-ez-publish-platform-5.2-feature-list-brochure/390517-1-eng-GB/Download-the-eZ-Publish-Platform-5.2-feature-list-Brochure.png" alt="Download the eZ Publish Platform 5.2 feature-list Brochure" /></a></a></p><div class="separator"><span></span></div><a name="eztoc390420_4" id="eztoc390420_4"></a><h2><b>Technical Release Notes</b></h2><p>The full technical release notes are available here: <a href="https://confluence.ez.no/display/EZP/5.2+Release+Notes" target="_self">https://confluence.ez.no/display/EZP/5.2+Release+Notes</a></p><div class="separator"><span></span></div><a name="eztoc390420_5" id="eztoc390420_5"></a><h2>Availability</h2><p>eZ Publish Platform 5.2 is available immediately. For more information on eZ Publish Platform 5.2, feel free to <a href="http://ez.no/Forms/HTML-forms/Discover-eZ-Publish-Platform-5.2" title="Discover eZ Publish Platform 5.2" target="_self">get in touch with us</a>.</p><a name="eztoc390420_6" id="eztoc390420_6"></a><h2>
+<a name="eztoc362365_6" id="eztoc362365_6"></a><b>About eZ</b></h2><p>eZ Systems is the globally recognised commercial open source software provider. Our leading and innovative approach takes your enterprise platform beyond content management (CMS) into creating a true digital experience with systematic optimization capabilities. The eZ Publish platform sets new standards for digital lifecycle management, including recommendations and smart web analytics functionality, coupled with an application market place of certified extensions. Thousands of organizations worldwide benefit from optimized and intelligent multi-channel communications solutions. eZ's client base includes small, medium and large enterprises across all industries such as media, publishing and broadcasting, financial services, telecoms, retail, government, manufacturing, logistics, and education.</p><a name="eztoc390420_7" id="eztoc390420_7"></a><h2>
+<a name="eztoc362365_7" id="eztoc362365_7"></a><b>Contact information</b></h2><p>Please get in touch at communications@ez.no</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>11/19/2013 09:43 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/eZ-Publish-Platform-5.2-Faster-Stronger-For-Your-Content-Business">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/eZ-Publish-Platform-5.2-Faster-Stronger-For-Your-Content-Business">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/App-Web-new-multichannel-delivery-extension" title="New multichannel delivery extension App&amp;Web for eZ Publish Platform">New multichannel delivery extension App&amp;Web for eZ Publish Platform</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>It works seamlessly&nbsp;with many components of eZ Publish, like&nbsp;<a href="http://ez.no/Products/eZ-Market/Explore-the-eZ-Market/eZ-Recommendation-Service" title="eZ Recommendation Service link" target="_blank">eZ Recommendation Service</a>, enabling&nbsp;the delivery of personalized content direct to your apps;&nbsp;<a href="http://ez.no/Products/eZ-Market/Explore-the-eZ-Market/eZ-odoscope" title="odoscope link in eZ MA" target="_blank">eZ odoscope</a>&nbsp;or&nbsp;<a href="http://ez.no/Products/eZ-Market/Explore-the-eZ-Market/eZ-Live-Viewer-2" title="eZ Live Viewer link" target="_blank">eZ Live Viewer</a>, helping&nbsp;you to measure and optimize your users' activities in a unified view across both web and app channels.&nbsp;</p><p>Building your App remains as easy as publishing in eZ Publish itself -&nbsp;the perfect mix of optimized web content and native app functions creates a fantastic experience on all devices and operating systems for both the editorial team and your customers.</p><table class="default" border="0" cellpadding="2" cellspacing="0" width="100%" style="width: 100%" summary="10"><tr><td valign="top" style="vertical-align: top">  
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/app-web-overview-mobile/375827-1-eng-GB/app-web-overview-mobile_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/app-web-overview-mobile/375827-1-eng-GB/app-web-overview-mobile_small.png" width="219" height="140" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/app-web-overview-smarttv/375831-1-eng-GB/app-web-overview-smarttv_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/app-web-overview-smarttv/375831-1-eng-GB/app-web-overview-smarttv_small.png" width="219" height="111" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div>
+  </td>
+</tr><tr class="bglight"><td valign="top" style="vertical-align: top">  <i>Out of the box iPhone templates</i>
+  </td>
+<td valign="top" style="vertical-align: top">  <i>Out of the box smartTV templates</i>
+  </td>
+</tr><tr class="bgdark"><td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+</tr>
+</table>
+<p class=" text-justify">With App&amp;Web you can create your content once and publish it realtime to your website and to your native Smartphone, Tablet and Smart TV apps. Again the eZ Publish Platform demonstrates here it is the best fit to implement COPE (Create Once Publish Everywhere).&nbsp;The&nbsp;native app functions create a perfect unified user experience and individual designs &amp; customization can be completed by editors not programmers.&nbsp;</p><table class="default" border="0" cellpadding="2" cellspacing="0" width="100%" style="width: 100%" summary="100"><tr><td valign="top" style="vertical-align: top">  
+<div class="object-center"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/app6web-color-editing/378475-1-eng-GB/app6web-color-editing_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/app6web-color-editing/378475-1-eng-GB/app6web-color-editing_small.png" width="219" height="238" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/app6web-editor-interface/378479-1-eng-GB/app6web-editor-interface_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/app6web-editor-interface/378479-1-eng-GB/app6web-editor-interface_small.png" width="219" height="204" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div>
+  </td>
+</tr><tr class="bglight"><td valign="top" style="vertical-align: top">  <i>App&amp;Web Color Configuration</i>
+  </td>
+<td valign="top" style="vertical-align: top">  App&amp;Web Editor Interface
+  </td>
+</tr><tr class="bgdark"><td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+</tr>
+</table>
+<p>Other interesting features on App&amp;Web to highlight are: paywall and user authentication options, Facebook and Twitter integration; offline availability of stored content;&nbsp;geolocation and mapping integrated with device hardware, image and video galleries, PDF documents and more.&nbsp;</p><p>You will find all the details <a href="http://ez.no/Products/eZ-Market/Explore-the-eZ-Market/App-Web" target="_self">here</a>.</p><p>The webinar on App&amp;Web has been recorded and is available:</p>
+<div class="object-center"><a href="http://ez.no/Resources/Recorded-webinars" target="_blank" title="App&amp;amp;Web Webinar"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/watch-it-now2/380360-1-eng-GB/Watch-it-NOW.png" alt="" /></a></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2013 08:04 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/New-multichannel-delivery-extension-App-Web-for-eZ-Publish-Platform">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/App-Web-new-multichannel-delivery-extension">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/Press-Release-eZ-Publish-Platform-5.1-Released" title="Press Release: eZ Publish Platform 5.1 Released">Press Release: eZ Publish Platform 5.1 Released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p><i>Skien, Norway, May 28th, 2013</i></p><p>eZ Systems, the maker of the eZ Publish Platform, announced today the immediate availability of eZ Publish Platform 5.1. With this version, the second so far in the new 5.x series, eZ has consolidated the strategic direction of its product and service initiated in 2012. Developers will benefit from increased stability, performance and maturity whilst a range of new additions will add value for marketers and business users expanding from a pure content management need to digital experience management. The eZ Publish Platform offers an increasingly integrated set of solutions for organizations of all types to build compelling content-driven digital experiences to cover the whole Create Deliver Optimize content lifecycle management vision that eZ has set out to offer the market.</p><div class="separator"><span></span></div><a name="eztoc362365_1" id="eztoc362365_1"></a><h2>Combining the eZ Publish concept with a cutting edge web stack and full featured REST API for more agility, performance and interoperability.</h2>
+<div class="object-left"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-5.1-platform-evolution2/362586-1-eng-GB/eZ-Publish-5.1-Platform-Evolution_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-5.1-platform-evolution2/362586-1-eng-GB/eZ-Publish-5.1-Platform-Evolution_listitem.png" width="130" height="80" style="border: 0px solid ;" alt="eZ Publish 5.1 Platform - Evolution" title="eZ Publish 5.1 Platform - Evolution" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>eZ Publish Platform 5.0 generated a lot of enthusiasm and interest. With this new release, it takes the discussion to the next phase. While engineers worked on 5.1 they focused on making the software platform more solid, more mature, more scalable and much faster.</p><p>As with the preceding 5.0 version, 5.1 is also based on the dual kernel approach whereby the legacy system is used for the editorial user interfaces, the content repository and all the power of the full featured content management system; while the new stack adds on top a complete set of APIs (REST and PHP) as well as a brand new web framework based on Symfony2.</p><p>The highlights of the new benefits for developers are:</p>
+<ul>
+
+<li>The fastest eZ version ever thanks to the Symfony web framework and the improvements of Symfony 2.2</li>
+
+</ul>
+
+<ul>
+
+<li>A redesigned cluster support for high traffic websites, which now makes it possible to run with the new kernel of the platform in a cluster setup as much as with the legacy version.</li>
+
+<li>Improvement of the eZ Publish 5 REST API with new support for sessions and XSRF</li>
+
+<li>A new data cache system that enables you to multiply performance of website when operating in dynamic mode</li>
+
+<li>Full support for the multi-site management feature in the new web framework</li>
+
+<li>The support in the new kernel for new field types including the rendering of eZ Flow landing pages</li>
+
+<li>New completed demo sites, a cookbook, improved documentation and tutorials.</li>
+
+</ul>
+<p>For more information, a full list of the improvements, bug fixes and new features brought to the eZ Publish core platform is available in the <a href="http://ez.no/About-eZ/Blog/eZ-Publish-5.1-Platform-at-a-glance-Release-Notes" title="eZ Publish 5.1 Platform at a glance - Release Notes" target="_self">technical release notes</a>.</p><p>“eZ Publish version 5.0 represented a bold new direction for the platform that has brought a lot of great new abilities while still maintaining backward compatibility. Release 5.1 continues this by quickly maturing the new platform architecture and enabling even more Symfony-based eZ Publish projects.” said &nbsp;<a href="http://share.ez.no/community/profile/9901" title="Joe Kepley member of the eZ Publish Community" target="_blank">Joe Kepley</a> - <a href="http://ez.no/Partners/Find-a-Partner/Blend-Interactive" title="Blend Interactive" target="_self">Partner at Blend Interactive</a> , a USA eZ Systems partner.</p><div class="separator"><span></span></div><a name="eztoc362365_2" id="eztoc362365_2"></a><h2>A more integrated platform approach for business to build digital experience</h2><p>eZ has also been working on the components related to the customer experience management (CXM) side of the platform. Here, the focus is to provide a much more integrated platform, making it easy to combine the different pieces of the Digital Experience - the content and its platform at the core.</p>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-5.1-platform-the-platform-approach/362601-2-eng-GB/eZ-Publish-5.1-Platform-The-platform-approach_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-5.1-platform-the-platform-approach/362601-2-eng-GB/eZ-Publish-5.1-Platform-The-platform-approach_listitem.png" width="130" height="80" style="border: 0px solid ;" alt="eZ Publish 5.1 Platform - The platform approach" title="eZ Publish 5.1 Platform - The platform approach" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>This way, 5.1 brings a few significant steps forward:</p>
+<ul>
+
+<li>eZ Marketing Automation is improved, offering more integration to bridge content management and marketing automation such as advanced use of online marketing forms within the CMS, ability to run web nurturing campaigns or simply improved management of landing pages.</li>
+
+<li>eZ Recommendation service has been significantly enhanced, facilitating the way web developers can configure the extension in their website and providing more accurate tracking capabilities.</li>
+
+<li>eZ Liveviewer 2, the real-time analytics solution, was significantly updated with a new front page monitoring feature able to recommend editors which content to more efficiently promote. It has also been re-implemented fully in HTML5 and is now tablet compliant meaning you can monitor your live traffic and content trends on the go.</li>
+
+</ul>
+<p>eZ odoscope has also been fine tuned with tighter integration and performance enhancements.</p><a name="eztoc362365_3" id="eztoc362365_3"></a><h2>eZ Publish Cloud for better time to market and total cost of ownership</h2><p>With 5.1, the cloud deployment service is now integrated as a core component of the platform subscription itself. When a customer subscribes to the eZ Publish Platform today, they also get access to a cloud environment, ready for deployment as part of the service. Charges are then only incurred for the usage of the infrastructure. This is the eZ elastic way!</p><p>Not only will developers like it for the ease of use, but more importantly, their bosses and business owners will appreciate the combination of the radically reduced time to market for new projects to reach production, the reduced infrastructure cost and the pay-only-for-what-you-use model that puts them in greater power.</p><a name="eztoc362365_4" id="eztoc362365_4"></a><h2>eZ Publish dual kernel for smoother migration path and better sustainability</h2><p>While eZ Publish 5 includes a brand new architecture with many benefits, it also fully supports and relies on the old architecture which we call the “Legacy System”. The Legacy System remains a core component of the 5.x series. Existing eZ Publish users can benefit from version 5.1 at very low cost, and can be sure the “old way” of doing things is still possible. For instance, using the old templating system or older extensions. It is important to recognise that the adoption of the new components in eZ 5.x is not mandatory from day one, it can be a progressive build into the new technology.</p><p>“<i>As a software company we have to invest as much effort in developing new features as servicing our existing customer base and offering them true reliability and sustainability</i>” says Aleksander Farstad, CEO of eZ Systems.</p><p>“<i>While people often remember only new features, a lot of the success for our customers comes with our attention to remain predictable and to offer a sustainable development path. That is what we offer with 5.1: a very smooth and flexible migration path, a long term support plan and full backward compatibility with content and existing data.</i>”</p><p>To further demonstrate the commitment to sustainability, eZ Systems provides a full roadmap for the coming years, and welcomes contributions and feedback on the innovation process with an open development process. The goal is to ensure that existing users can understand, evaluate and decide upon their own project’s roadmap and even influence eZ’s software development roadmap itself!</p><a name="eztoc362365_5" id="eztoc362365_5"></a><h2>Availability</h2><p>eZ Publish 5.1 is available immediately, under a hybrid delivery model (in the cloud and for download as part of the same package). For more information on eZ Publish 5.1, eZ Publish roadmap and all related information please visit&nbsp;<a href="http://ez.no/Products/Introducing-eZ-Publish-Platform-5.1" target="_self">http://ez.no/Products/Introducing-eZ-Publish-Platform-5.1</a>.</p><a name="eztoc362365_6" id="eztoc362365_6"></a><h2>About eZ</h2><p>eZ Systems is the globally recognised commercial open source software provider. Our leading and innovative approach takes your enterprise platform beyond content management (CMS) into creating a true digital experience with systematic optimization capabilities. The eZ Publish platform sets new standards for digital lifecycle management, including recommendations and smart web analytics functionality, coupled with an application market place of certified extensions. Thousands of organizations worldwide benefit from optimized and intelligent multi-channel communications solutions. eZ's client base includes small, medium and large enterprises across all industries such as media, publishing and broadcasting, financial services, telecoms, retail, government, manufacturing, logistics, and education.</p><a name="eztoc362365_7" id="eztoc362365_7"></a><h2>Contact information</h2><p>Please get in touch at communications@ez.no</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/28/2013 06:29 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/Press-Release-eZ-Publish-Platform-5.1-Released">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/Press-Release-eZ-Publish-Platform-5.1-Released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/eZ-Brightcove-Video-Cloud-extension-for-eZ-Publish" title="eZ Brightcove Video Cloud extension for eZ Publish">eZ Brightcove Video Cloud extension for eZ Publish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>While eZ Publish is&nbsp;totally&nbsp;well fitted to store and deliver great video experiences, there are cases where you might want to do more than what the eZ Platform can offer. There are cases where you might want to benefit from cutting edge digital video capabilities without the hassle of operating it on your eZ Publish installation. In this cases, the only way to go is to integrate with a cloud video platform such as the Brightcove platform. eZ Publish Platform being open and extensible by design, Kaliop was able to design an extension that is very seamlessly integrated in eZ Publish and very simple to use.</p>
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/edit_with_video-copy/360849-1-eng-GB/edit_with_video-copy_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/edit_with_video-copy/360849-1-eng-GB/edit_with_video-copy_medium.jpg" width="462" height="456" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>The eZ Brightcove Video Cloud extension will offer you additional benefits such as advanced video analytics, in-video ad integration, social integration including with the Youtube platform. It also comes with all the transcoding capabilities as well as players that fits nicely with all the modern range of devices, from laptop to the latest smartphone on the market... and all this still keeping the advantages of managing the content and its metadata within eZ Publish!</p><p>For more information visit the <a href="http://ez.no/Products/eZ-Market/Explore-the-eZ-Market/eZ-Brightcove-Video-Cloud" target="_blank">eZ Brightcove Video Cloud</a>&nbsp;page to know more, <a href="http://ez.no/Products/eZ-Market/How-to-Buy/eZ-Market-Extensions-Trial" target="_blank">ask for a trial</a> or <a href="mailto:info.market@ez.no" target="_self">contact us</a>!</p><a name="eztoc360821_0_1" id="eztoc360821_0_1"></a><h3>About Brightcove</h3><p><a href="http://www.brightcove.com/" target="_blank">Brightcove Inc.</a>, a leading global provider of cloud content services, offers a family of products used to publish and distribute the world's professional digital media.&nbsp;The company's products include the following:&nbsp;Video Cloud,&nbsp;Zencoder,&nbsp;HTML5 video player&nbsp;Brightcove has more than 6,350 customers in over 60 countries that rely on Brightcove cloud content services to build and operate media experiences across PCs, smartphones, tablets and connected TVs.</p><a name="eztoc360821_0_2" id="eztoc360821_0_2"></a><h3>About Kaliop</h3><p><a href="http://ez.no/Partners/Find-a-Partner/KALIOP-Interactive-Media-fr" target="_blank">Kaliop</a> is a Digital Solution Provider that enables its clients to successfully implement their business critical digital communication strategies through multi-channel content management solutions. From consulting through to hosting and ongoing support, Kaliop offers a range of professional services covering the full lifecycle of digital projects.</p><p><b>About eZ</b></p><p>eZ Systems is the globally recognised commercial open source software provider. Our leading and innovative approach takes your enterprise platform beyond content management (CMS) into creating a true digital experience with systematic optimization capabilities. The eZ Publish platform sets new standards for digital lifecycle management, including recommendations and smart web analytics functionality, coupled with an application market place of certified extensions. Thousands of organizations worldwide benefit from optimized and intelligent multi-channel communications solutions. eZ's client base includes small, medium and large enterprises across all industries such as media, publishing and broadcasting, financial services, telecoms, retail, government, manufacturing, logistics, and education.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/08/2013 09:44 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/eZ-Brightcove-Video-Cloud-extension-for-eZ-Publish">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/eZ-Brightcove-Video-Cloud-extension-for-eZ-Publish">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/eZ-Live-Viewer-2-unveils-new-simple-to-use-real-time-web-analytics-solution-for-content-rich-websites" title="eZ Live Viewer 2 unveils new simple to use real-time web analytics solution for content rich websites">eZ Live Viewer 2 unveils new simple to use real-time web analytics ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>While version 1.0 of eZ Live Viewer focused on providing a real-time content trending solution, this new version offers many new features to benefit organizations dealing with large volumes of content and with high levels of web traffic.</p><p>The vision behind eZ Live Viewer is to create an analytics tool that is so easy to use and interpret that non-technical staff can work on it straight away. Intuitive insights via a unique infographic visualization has been the driver to enable a large range of users to work with this analytics solution straight away. Additionally today’s analytics tools must focus on real-time analysis, as very few businesses can afford the luxury of waiting for the data to be captured, processed, analyzed and digested.</p><p>“Ultimately, the tool should release you from needing to hire a data scientist to understand a lot of what is going on on your website and be able to react quickly. Getting easy to use analytics into the hands of content managers and editors is a major efficiency driver,” says Roland Benedetti, VP Product Services.</p><p>“It is very exciting to reach now a stage where we are able to provide predictive analytics that are understandable and concrete when it comes to improving the performance of websites” says Christof Zahneissen, Chief Product Officer at eZ Systems. “For instance, we are able to recommend changes to front pages, and predict a measurable gain on the recommendation, like ‘your conversion rate will be improved by 12.5%’”. &nbsp;This is a new step forward in the direction of providing a global experience management platform.</p>
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/front-page-monitor2/358441-1-eng-GB/Front-page-monitor_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/front-page-monitor2/358441-1-eng-GB/Front-page-monitor_imagelarge.png" width="550" height="255" style="border: 0px solid ;" alt="The front page monitor" title="The front page monitor" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p><i>The Front Page Monitor</i></p><a name="eztoc358413_0_1" id="eztoc358413_0_1"></a><h3>Front Page Monitoring and Optimization</h3><p>Among the new features provided by eZ Live Viewer 2, the front-page monitoring is certainly the most important one. It continuously measures the performance of your front-page and recommends changes that will directly improve your conversion and engagement rate. For marketing and commerce oriented sites this can be measured in direct revenue gains; for publishers it increases traffic, boosts reader engagement and advertising revenue, for service related sites it improves content relevance and efficiency. This tool is not about simply measuring page views but really about analyzing in detail how the front-page and the content being pushed on it behaves and delivers.</p>
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/front-page-rearrangement-suggestions2/358445-1-eng-GB/Front-page-rearrangement-suggestions_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/front-page-rearrangement-suggestions2/358445-1-eng-GB/Front-page-rearrangement-suggestions_imagelarge.png" width="550" height="255" style="border: 0px solid ;" alt="The front page recommendation" title="The front page recommendation" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p><i>And the front page recommendation</i></p><a name="eztoc358413_0_2" id="eztoc358413_0_2"></a><h3>Made for tablets as much as for large screen</h3><p>Because it’s developed with HTML5 technology and responsive design, eZ Live Viewer 2 has been designed to be used on tablets as much as on wide TV screens with the same unique user experience. From the CEO on the go on his iPad to the editor in the newsroom via TV screen or the marketeer directly on his computer, eZ Live Viewer provides the immediate and detailed pulse of what is going on on your website on all devices.</p><a name="eztoc358413_0_3" id="eztoc358413_0_3"></a><h3>Unique visualization concept for Content trending</h3><p>One of the major strengths of the initial eZ Live Viewer version was the visualization concept of traffic analysis and its graphic representation. eZ Live Viewer has been further improved in version 2.0 offering at a glance a sharp understanding of the activity on your website, from where the visitors come from to how they leave, and of course most importantly how they consume content whilst on your site.</p><a name="eztoc358413_0_4" id="eztoc358413_0_4"></a><h3>Availability</h3><p>Made for sites with big content and large traffic, eZ Live Viewer 2 is available as part of the eZ Publish Platform, integrated in the back office editorial suite, and can also be used as a standalone solution. It is delivered only as a service and is immediately available for existing and new customers.</p><p>Organizations interested in the solution and willing to try it are invited to register for a trial access on their site.</p><p>For more information, visit <a href="http://www.ez.no/market/ezliveviewer" target="_self">www.ez.no/market/ezliveviewer</a></p><a name="eztoc358413_0_5" id="eztoc358413_0_5"></a><h3>About eZ</h3><p>eZ Systems is the globally recognised commercial open source software provider. Our leading and innovative approach takes your enterprise platform beyond content management (CMS) into creating a true digital experience with systematic optimization capabilities. The eZ Publish platform sets new standards for digital lifecycle management, including recommendations and smart web analytics functionality, coupled with an application market place of certified extensions. Thousands of organizations worldwide benefit from optimized and intelligent multi-channel communications solutions. eZ's client base includes small, medium and large enterprises across all industries such as media, publishing and broadcasting, financial services, telecoms, retail, government, manufacturing, logistics, and education.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>04/16/2013 03:36 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/eZ-Live-Viewer-2-unveils-new-simple-to-use-real-time-web-analytics-solution-for-content-rich-websites">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/eZ-Live-Viewer-2-unveils-new-simple-to-use-real-time-web-analytics-solution-for-content-rich-websites">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/eZ-Live-Viewer-2-A-real-time-web-analytics-solution-for-websites" title="eZ Live Viewer 2 A real-time web analytics solution for  websites">eZ Live Viewer 2 A real-time web analytics solution for  websites</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>While version 1.0 of eZ Live Viewer focused on providing a real-time content trending solution, this new version offers many new features to benefit organizations dealing with large volumes of content and with high levels of web traffic.</p><p>The vision behind eZ Live Viewer is to create an analytics tool that is so easy to use and interpret that non-technical staff can work on it straight away. Intuitive insights via a unique infographic visualization has been the driver to enable a large range of users to work with this analytics solution straight away. Additionally today’s analytics tools must focus on real-time analysis, as very few businesses can afford the luxury of waiting for the data to be captured, processed, analyzed and digested.</p><p>“Ultimately, the tool should release you from needing to hire a data scientist to understand a lot of what is going on on your website and be able to react quickly. Getting easy to use analytics into the hands of content managers and editors is a major efficiency driver,” says Roland Benedetti, VP Product Services.</p><p>“It is very exciting to reach now a stage where we are able to provide predictive analytics that are understandable and concrete when it comes to improving the performance of websites” says Christof Zahneissen, Chief Product Officer at eZ Systems. “For instance, we are able to recommend changes to front pages, and predict a measurable gain on the recommendation, like ‘your conversion rate will be improved by 12.5%’”. &nbsp;This is a new step forward in the direction of providing a global experience management platform.</p><div class="">
+            
+<div class="content-view-embed">
+	<div class="class-image ">
+		<div class="attribute-image">
+
+
+
+							
+	
+				
+		
+		
+																								
+													
+													
+			
+						
+		
+
+							<img 	src="http://ez.no/var/ezflow_site/storage/images/media/images/front-page-monitor2/358441-1-eng-GB/Front-page-monitor_imagelarge.png" 
+						width="550" 
+						height="255"
+												 
+						style="border: 0px solid ;" 
+						alt="The front page monitor" 
+						title="The front page monitor" />
+						
+					
+		
+		
+						</div>
+			</div>
+</div>
+</div><p><i>The Front Page Monitor</i></p><a name="eztoc358413_0_1" id="eztoc358413_0_1"></a><h3>Front Page Monitoring and Optimization</h3><p>Among the new features provided by eZ Live Viewer 2, the front-page monitoring is certainly the most important one. It continuously measures the performance of your front-page and recommends changes that will directly improve your conversion and engagement rate. For marketing and commerce oriented sites this can be measured in direct revenue gains; for publishers it increases traffic, boosts reader engagement and advertising revenue, for service related sites it improves content relevance and efficiency. This tool is not about simply measuring page views but really about analyzing in detail how the front-page and the content being pushed on it behaves and delivers.</p><div class="">
+            
+<div class="content-view-embed">
+	<div class="class-image ">
+		<div class="attribute-image">
+
+
+
+							
+	
+				
+		
+		
+																								
+													
+													
+			
+						
+		
+
+							<img 	src="http://ez.no/var/ezflow_site/storage/images/media/images/front-page-rearrangement-suggestions2/358445-1-eng-GB/Front-page-rearrangement-suggestions_imagelarge.png" 
+						width="550" 
+						height="255"
+												 
+						style="border: 0px solid ;" 
+						alt="The front page recommendation" 
+						title="The front page recommendation" />
+						
+					
+		
+		
+						</div>
+			</div>
+</div>
+</div><p><i>And the front page recommendation</i></p><a name="eztoc358413_0_2" id="eztoc358413_0_2"></a><h3>Made for tablets as much as for large screen</h3><p>Because it’s developed with HTML5 technology and responsive design, eZ Live Viewer 2 has been designed to be used on tablets as much as on wide TV screens with the same unique user experience. From the CEO on the go on his iPad to the editor in the newsroom via TV screen or the marketeer directly on his computer, eZ Live Viewer provides the immediate and detailed pulse of what is going on on your website on all devices.</p><a name="eztoc358413_0_3" id="eztoc358413_0_3"></a><h3>Unique visualization concept for Content trending</h3><p>One of the major strengths of the initial eZ Live Viewer version was the visualization concept of traffic analysis and its graphic representation. eZ Live Viewer has been further improved in version 2.0 offering at a glance a sharp understanding of the activity on your website, from where the visitors come from to how they leave, and of course most importantly how they consume content whilst on your site.</p><a name="eztoc358413_0_4" id="eztoc358413_0_4"></a><h3>Availability</h3><p>Made for sites with big content and large traffic, eZ Live Viewer 2 is available as part of the eZ Publish Platform, integrated in the back office editorial suite, and can also be used as a standalone solution. It is delivered only as a service and is immediately available for existing and new customers.</p><p>Organizations interested in the solution and willing to try it are invited to register for a trial access on their site.</p><p>For more information, visit <a href="http://www.ez.no/market/ezliveviewer" target="_self">www.ez.no/market/ezliveviewer</a></p><a name="eztoc358413_0_5" id="eztoc358413_0_5"></a><h3>About eZ</h3><p>eZ Systems is the globally recognised commercial open source software provider. Our leading and innovative approach takes your enterprise platform beyond content management (CMS) into creating a true digital experience with systematic optimization capabilities. The eZ Publish platform sets new standards for digital lifecycle management, including recommendations and smart web analytics functionality, coupled with an application market place of certified extensions. Thousands of organizations worldwide benefit from optimized and intelligent multi-channel communications solutions. eZ's client base includes small, medium and large enterprises across all industries such as media, publishing and broadcasting, financial services, telecoms, retail, government, manufacturing, logistics, and education.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>04/16/2013 03:36 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/eZ-Live-Viewer-2-A-real-time-web-analytics-solution-for-websites">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/eZ-Live-Viewer-2-A-real-time-web-analytics-solution-for-websites">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/eZ-Systems-announces-management-change" title="eZ Systems announces management change">eZ Systems announces management change</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Ms Viebach held the position of CEO from 2010. During her tenure, the firm’s software product, eZ Publish, has evolved from a popular open source website publishing software to becoming a global contender in the emerging sector of &quot;CXM&quot; (customer experience management) software suites. The platform today allows interoperability across IT infrastructure and integrates several digital technologies in order to streamline, build and optimize digital businesses and enable next generation digital needs.</p><p>Under Viebach, eZ Systems further matured towards an enterprise grade organization and the services offerings were further evolved. The offering to customers as well as System Implementation partners across the globe was sharpened, resulting into a significant growth of eZ´s subscription-based business. A stronger network of over 350 system integrator- and Media Agency partners across the globe attracted this offering. Gabriele now leaves eZ Systems to apply herself to a new task.</p><p>Aleksander Farstad, co-founder of eZ Systems, was CEO until 2008. Since that time he continued to serve as an active Board member. He looks forward to continuing to build on the dynamic business that eZ Systems has become today, which serves the digital development needs of several of the most innovative companies and public sector organizations in the world today.</p><div class="separator"><span></span></div><p><b>Contact:</b></p><p>
+Stuart Wilkinson<br />
+VP Marketing<br />eZ Systems</p><p><a href="mailto:stuart.wilkinson@ez.no" target="_self">stuart.wilkinson@ez.no</a></p><div class="separator"><span></span></div><p><b>About eZ</b></p><p>eZ Systems is the globally recognised commercial open source software provider. Our leading and innovative approach takes your enterprise platform beyond content management (CMS) into creating a true digital experience with systematic optimization capabilities. The eZ Publish platform sets new standards for digital lifecycle management, including recommendations and smart web analytics functionality, coupled with an application market place of certified extensions. Thousands of organizations worldwide benefit from optimized and intelligent multi-channel communications solutions. eZ's client base includes enterprises across all industries such as media, publishing and broadcasting, financial services, telecoms, retail, government, manufacturing, logistics, and education</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>04/12/2013 04:04 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/eZ-Systems-announces-management-change">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/eZ-Systems-announces-management-change">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-News">eZ Systems News</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Events-News/News/Roadshow-eZ-Publish-meets-Symfony" title="Roadshow: eZ Publish meets Symfony">Roadshow: eZ Publish meets Symfony</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <a name="eztoc336358_0_0_1" id="eztoc336358_0_0_1"></a><h4><i>Köln|Hamburg|Berlin|München</i></h4><p>In the coming weeks, in four German cities we will have an eZ Publish Meets Symfony series of events.</p><p>We would like to present the information on the cooperation between eZ Systems and SensioLabs Germany.</p><p>For further information visit:<a href="http://ez.no/de/Ueber-eZ/Veranstaltungen-Neuigkeiten/Neuigkeiten/Roadshow-eZ-Publish-meets-Symfony" target="_self">German site access&nbsp;</a></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>03/25/2013 10:35 am</span> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News">eZ Systems News</a> &nbsp; <a href="/Mirror/eZ-Systems-News/Roadshow-eZ-Publish-meets-Symfony">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Events-News/News/Roadshow-eZ-Publish-meets-Symfony">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+            
+            <span class="next"><a href="/Mirror/eZ-Systems-News/(offset)/10"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+    
+        <span class="current">1</span>
+
+                      <span class="other"><a href="/Mirror/eZ-Systems-News/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/eZ-Systems-News/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/eZ-Systems-News/(offset)/30">4</a></span>
+                              <span class="other"><a href="/Mirror/eZ-Systems-News/(offset)/40">5</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-News/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/eZ-Systems-News/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/eZ-Systems-News/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class="currentselected today">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems News";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1742";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:15:"eZ Systems News";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1742";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1742";s:7:"node_id";s:4:"1742";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"5ea26dbe9d1ce2816ec4afbdbd80442b";s:14:"node_remote_id";s:32:"25a77421bb98ff78bc187a04b817d3b3";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:22:"Mirror/eZ-Systems-News";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1742";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

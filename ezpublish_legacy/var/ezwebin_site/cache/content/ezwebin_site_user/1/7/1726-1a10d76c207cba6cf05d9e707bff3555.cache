@@ -1,0 +1,500 @@
+a:10:{s:7:"content";s:32286:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/managing-prs-for-php-mongo.html" title="Managing Pull Requests for the MongoDB PHP driver">Managing Pull Requests for the MongoDB PHP driver</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="managing_pull_requests_for_the_mongodb_php_driver"/>Managing Pull Requests for the MongoDB PHP driver</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Monday, October 29th 2012, 09:22 GMT</div>
+      </div>
+      <p>The <a href="http://mongodb.org">MongoDB</a> PHP Driver is hosted as an Open Source project through <a href="http://github.com">GitHub</a>. Everybody can check-out the repository and provide patches to this. In order to make things easier to manage, even Hannes, Jeremy and me, the maintainers of the extension will only merge code into it through patches.</p>
+      <p>To streamline the managing of those patches we are using GitHub's Pull Request (PR) system. Any time we fix a bug, or add a feature, we create a branch of our personal <a href="http://github.com/derickr/mongo-php-driver">fork</a> and when we are done, we submit a pull request to the master repository at <a href="http://github.com/mongodb/mongo-php-driver">http://github.com/mongodb/mongo-php-driver</a>. Before this pull request gets merged, a few things happen. First of all, we make sure that there is a related issue in JIRA. If there is no issue, then one as to be created. Also we verify the patch against our <a href="https://github.com/derickr/mongo-php-driver/blob/master/CONTRIBUTING.md">contributing guidelines</a> - including whether the patch can actually automatically be applied to the branch.</p>
+      <p>Once the pull request is deemed okay, we review the code and the test cases that are required to be submitted as part of the pull request. In our case, I usually review Hannes' patches, and Hannes reviews mine. GitHub's PR system allows us to easily add comments to bits of the patch which is mighty useful. Of course, as part of the review process we need to be able to compile the code and run the test cases as well. For this purpose I have written a small bash function to help me out:</p>
+      <pre>function mongoprfetch()
+{
+  git checkout master
+  git fetch origin pull/$1/head:pr/$1
+  git checkout pr/$1
+  git rebase master
+}
+
+</pre>
+      <p>This function is run on the command line (in the checkout of mongodb/mongo-php-driver) with as arguments its Pull Request number:</p>
+      <pre>mongoprfetch 206
+
+</pre>
+      <p>The script will checkout master, fetch the PR as it was a branch from GitHub and rebases it against master. This allows us to test whether the PR cleanly applies to the latest code in master. Without the rebasing, the commit history would also look really complex as this figure shows:</p>
+      <img src="http://derickrethans.nl/images/content/git-branch-mess.png" alt="git-branch-mess.png"/>
+      <p>When all review comments are resolved, the code compiles and the test cases succeed, it is time to merge the patch. For this, I am using another small bash function to help me out:</p>
+      <pre>function mongoprmerge()
+{
+  git checkout master
+  git merge --no-ff -m "Merged pull request #$1" pr/$1
+  git branch -D pr/$1
+  git push
+}
+
+</pre>
+      <p>Because we already have rebased against the latest master branch when running <code>mongoprfetch 206</code>, a merge would mean that we lose the ability to see which commits belonged to the PR - as Git would simply use "fast forward":</p>
+      <img src="http://derickrethans.nl/images/content/git-branch-flat.png" alt="git-branch-flat.png"/>
+      <p>We find this undesirable and hence we specify the <code>--no-ff</code> option to <code>git merge</code> as you can see in the <code>mongoprmerge</code> function. This produces histories that look like:</p>
+      <img src="http://derickrethans.nl/images/content/git-branch-rebase-no-ff.png" alt="git-branch-rebase-no-ff.png"/>
+      <p>The only thing that we have not automated as part of merging pull requests is closing the associated Jira tickets as well.</p>
+      <p>Right now we have no specific scripts to handle also the stable branch (<code>v1.2</code>) as we have been working hard to reimplement the connection handling stuff in the PHP driver. I will write more about the changes in the driver, as well as managing a merging to/from a stable branch in future blog posts.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>10/29/2012 04:22 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Managing-Pull-Requests-for-the-MongoDB-PHP-driver">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/managing-prs-for-php-mongo.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/osm-display-mongo.html" title="Displaying OpenStreetMap data from MongoDB">Displaying OpenStreetMap data from MongoDB</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="displaying_openstreetmap_data_from_mongodb"/>Displaying OpenStreetMap data from MongoDB</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> Mainz, Germany</div>
+        <div class="date">Tuesday, October 16th 2012, 11:12 CEST</div>
+      </div>
+      <p>In an earlier <a href="http://derickrethans.nl/indexing-free-tags.html">article</a> I have already written about several different ways on how you could store <a href="http://openstreetmap.org">OpenStreetmap</a> data in <a href="http://mongodb.org">MongoDB</a>.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>10/16/2012 04:12 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Displaying-OpenStreetMap-data-from-MongoDB">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/osm-display-mongo.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/presentations.html" title="Presentations">Presentations</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="presentations"/>Presentations</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Tuesday, October 9th 2012, 09:43 BST</div>
+      </div>
+      <p>In the past 10 years I have given plenty of <a href="http://derickrethans.nl/talks.html">presentations</a>. Since I started, I've always used the same presentation format. Because I am getting more and more questions about this, here is some information on what I use.</p>
+      <p>The presentation tool that I use is called "pres2". Or rather, it is simply the name derived from its oroginal directory name. It is an evolution of Rasmus' original "pres" tool that he used to give PHP related presentations with. It has been used in the past by many other people as well, but as far as I know, it is now only used by <a href="http://toys.lerdorf.com/">Rasmus</a> and me.</p>
+      <p>The "pres2" software is also what powers <a href="http://talks.php.net">http://talks.php.net</a>. It uses XML files stored in PHP's GIT at <a href="http://git.php.net/?p=presentations.git;a=tree">http://git.php.net/?p=presentations.git;a=tree</a>. The software itself is at <a href="http://git.php.net/?p=web/pres2.git;a=tree">http://git.php.net/?p=web/pres2.git;a=tree</a>. I have however written my own renderer that uses Zeta Components' <a href="https://github.com/zetacomponents/Template">Template</a> component in order to make it easier for me to do something a little bit more exciting with the content (such as some effects). Sadly, this makes the slides on <a href="http://talks.php.net">http://talks.php.net</a> not render properly anymore. My version of the renderer is available through the "dericks-renderer" branch of the pres2 GIT repository: <a href="http://git.php.net/?p=web/pres2.git;a=tree;h=refs/heads/dericks-renderer;hb=refs/heads/dericks-renderer">http://git.php.net/?p=web/pres2.git;a=tree;h=refs/heads/dericks-renderer;hb=refs/heads/dericks-renderer</a></p>
+      <p>You can obtain the software and presentations by running:</p>
+      <pre>git clone https://git.php.net/repository/web/pres2
+cd pres2
+git checkout dericks-renderer
+git clone https://git.php.net/repository/presentations
+
+</pre>
+      <p>I have used this tool for all my 259 presentations, so I have invested a large amount of time into creating all the XML files. I mostly like it because:</p>
+      <ul>
+        <li>
+          <p>It is simple</p>
+        </li>
+        <li>
+          <p>I don't need to click around to make presentations</p>
+        </li>
+        <li>
+          <p>I can version the presentations and slides through GIT/SVN</p>
+        </li>
+        <li>
+          <p>I can run PHP examples directly in the slides</p>
+        </li>
+      </ul>
+      <p>And because of this, there is very little reason for me to switch to anything else.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>10/09/2012 03:43 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Presentations">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/presentations.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/mongodb-tour-wrapup.html" title="Derick's MongoDB Tour Wrap-up">Derick's MongoDB Tour Wrap-up</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="derick_s_mongodb_tour_wrap-up"/>Derick's MongoDB Tour Wrap-up</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Monday, October 1st 2012, 14:00 BST</div>
+      </div>
+      <p>Over the past two weeks I have been on a whirlwind tour to talk about Profiling PHP Applications (at <a href="http://pfcongres.com/">PFCongres</a>), but mostly about <a href="http://mongodb.org">MongoDB</a> at various (PHP) user groups in the South West of the US. <a href="http://10gen.com">10gen</a> (the makers of <a href="http://mongodb.org">MongoDB</a> and my employers) covered my time and flight, and provided me with some beer money.</p>
+      <img src="http://derickrethans.nl/images/content/mongodb-logo.png" class="left" alt="mongodb-logo.png"/>
+      <p>The tour concept started a few months ago when <a href="http://www.khankennels.com/blog/">Ligaya Turmelle</a> suggested that I should come and talk at the <a href="http://www.meetup.com/JaxPHP-JaxWeb/">JaxPHP/JaxWeb</a>, the PHP and web developers usergroup in Jacksonville, Florida. And while I was there, why not visit a few other user groups too? So after my short trip to the Netherlands to speak at PFCongres, I flew to Miami for the first stop of the MongoDB Tour.</p>
+      <p>To fight off jetlag I landed a day early and together with Adam Culp from <a href="http://www.soflophp.org/events/71930042/">SoFloPHP</a> we saw some of the sights there. Mostly, some wetlands and the beach. Sadly, no alligators were spotted but it was a nice quiet day before the storm.</p>
+      <p>The user group meeting attracted over a dozen attendees and afterwards we had a drink with a few of us. I was slightly surprised that not (almost) all of the attendees joined us. However, it was good to catch up with Pablo from <a href="http://servergrove.com">ServerGrove</a>, even though I had met him in Utrecht the weekend before.</p>
+      <p>Adam then drove me to Orlando for the hand-off with David Rogers at the Florida Mall. After doing some work, we also did the <a href="http://www.meetup.com/OrlandoPHP/events/73968932/">Orlando PHP</a> user group meeting at the mall, in the Microsoft Store (conveniently located next to the Apple Store). Speaking in a store, with shopping public around was quiet a unique experience. But I am not sure if I would repeat that. Also, they don't know what a "loo" is there :-).</p>
+      <p>David then drove me to Saint Augustine for the hand-off with Ligaya. After an afternoon of sight-seeing in the <a href="http://en.wikipedia.org/wiki/St._Augustine,_Florida">oldest city</a> of the country, Lig and I headed to the usergroup venue in the Adecco offices. The venue was a bit hard to find, and sadly we lost some attendees because of that. However, the venue was nice and besides the PHP users of <a href="http://www.meetup.com/JaxPHP-JaxWeb/">JaxPHP/JaxWeb</a>, there were also a lot of developers using alternative languages. My presentation was therefore language-agnostic.  This was probably the group with the most questions asked!</p>
+      <p>Ligaya didn't want to make the 6-hour drive to Atlanta, so instead she put me on a plane. After negotiating MARTA, Kevin Roberts picked me up from the station and after a lunch and some work in the afternoon we headed to the user group venue at Strongbox. The <a href="http://meetup.atlantaphp.org/events/73155922">Atlanta PHP</a> group is traditionally quite a bit larger but the turn-out (compared to Meet-Up RSVPs) was a bit poor. Perhaps this was because the meeting was on a Friday evening though. This talk was recorded (both video and as screen capture).</p>
+      <p>On Saturday Kevin and Chris Spruck joined me on my travels to Nashville. Along the way we did some sightseeing (Ruby Falls and Jack Daniel's distilery) and I had my first encounter with Waffle House. A small party was planned for us in the evening by Jacques to visit some of the Honky Tonks in town. I remember being given many different Bourbons to taste. Cal was hosting me and together with Kathy we ended up relaxing and having lunch at Loveless' Café. In the evening Cal had rounded up a bunch of locals (Jason Myers, Luke Stokes, Jacques Woodcock, Ben Ramsey) to have some drinks and record "<a href="http://voicesoftheelephpant.com/">Voices of the Elephpant</a> - It's the Booze Talking".  The general discussion resolved around community (and user groups).  We iterated over quite a few things that Kevin, Chris and I discussed on the way from Atlanta, but also lots of other things (it was the booze talking afterall). The total recording time stands at two and a half hours, so let's see what Cal comes up with editting wise.</p>
+      <img src="http://derickrethans.nl/images/content/d35_0468b.jpg" class="right" alt="d35_0468b.jpg"/>
+      <p>Cal left for Code Works 2012 on Monday moring so I was being chaperoned by Luke to the <a href="http://www.nashvillephp.org/events/67112052/">Nashville PHP</a> meeting. With free beer and pizza, the place was rather full, although about the same percentage of RSVPs actually showed up (~66%) as in Atlanta. And again, we were only four in the pub/bar afterwards to have a little more banter. This concluded the end of the tour, and I left on holiday to Seattle on Tuesday morning.</p>
+      <p>
+        <strong>Some Observations</strong>
+      </p>
+      <p>All the usergroups used Meet-Up to track attendence, and without failure, only 50-66% of RSVPs showed up at the usergroups. Probably one of the reasons is that the meetings were on non-standard dates and in some cases in non-standard locations. I have always found that keeping the same day of the month and location does wonders for keeping attendence levels. In some cases, attendees did not show up because Meet-Up showed that the meeting was full (were of course in fact, there was still about 50% space left). This is a tricky thing. In some venues you have a hard cap on the amount of people, but if people just RSVP and then not show up, they clog up places that other people could have used. At least in one occasion that meant that the attendee simply did not show up. For <a href="http://phplondon.org">PHP London</a> we also have an RSVP system on Meet-Up with a cap of (about 130 people). Even though this indicates that the meeting might be full, the idea is that you can still show up anyway on a first-come, first-served base. I do not quite like this, as it often shows that the meet-up is full, and I feel (a bit) unwelcome. I think that user groups should call out to attendees who RSVP, but then not show up in the cases where this could be a problem.</p>
+      <p>Another observation that I made is that dynamics of the user groups in the US are rather different then for example the UK.  In the US, almost everybody drives to the meetings, and hence there is no possibility of having a social drink before and after the meeting.  This compared to London, where this is a huge part. In my opinion, socializing is almost the most important thing of a usergroup meeting.</p>
+      <p>
+        <strong>End</strong>
+      </p>
+      <p>All the slides are on the <a href="http://derickrethans.nl/talks.html">talks</a> page and as soon as I have it, I will make available the recording from <a href="http://meetup.atlantaphp.org/events/73155922">Atlanta PHP</a> as well. Photos from the trip are on <a href="http://www.flickr.com/photos/derickrethans/sets/72157631576287910/">flickr</a>.  With this I conclude my wrap-up. I had an amazing time and made lots of new friends.  I might be tempted to this again.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>10/01/2012 08:00 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Derick-s-MongoDB-Tour-Wrap-up">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/mongodb-tour-wrapup.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                        
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2012" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>October&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                    <td class="currentselected  left">
+            <em><a href="/Mirror/Derick-Rethans/(day)/1/(month)/10/(year)/2012">1</a></em>
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                                        <td class="  right">
+            7
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            8
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/9/(month)/10/(year)/2012">9</a></em>
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                                        <td class="  right">
+            14
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            15
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/16/(month)/10/(year)/2012">16</a></em>
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                                        <td class="  right">
+            21
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                                        <td class="  right">
+            28
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/Mirror/Derick-Rethans/(day)/29/(month)/10/(year)/2012">29</a></em>
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2012";s:5:"month";s:2:"10";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1726";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1726";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1726";s:7:"node_id";s:4:"1726";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";s:14:"node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1726";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

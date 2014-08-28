@@ -1,0 +1,433 @@
+a:10:{s:7:"content";s:19972:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/aggregation-cursor.html" title="Cursors and the Aggregation Framework">Cursors and the Aggregation Framework</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="cursors_and_the_aggregation_framework"/>Cursors and the Aggregation Framework</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Wednesday, April 9th 2014, 09:29 BST</div>
+      </div>
+      <p>With MongoDB 2.6 about to be released, the PHP driver for MongoDB has also seen many updates to support the features in the new MongoDB release. In this series of articles, I will illustrate some of those.</p>
+      <p>In this article, I will introduce command cursors and demonstrate how they can be applied to aggregations. I previously wrote about the <a href="http://derickrethans.nl/aggregation-framework.html">Aggregation Framework</a> last year, but since then it has received a lot of updates and improvements. One of those improvements relates to how the Aggregation Framework (A/F) returns results. Before MongoDB 2.6, the A/F could only return <em>one</em> document, with all the results stored under the <code>results</code> key:</p>
+      <pre><?php
+$m = new MongoClient;
+$c = $m->demo->cities;
+
+$pipeline = [
+     [ '$group' => [
+          '_id' => '$country_code',
+          'timezones' => [ '$addToSet' => '$timezone' ]
+     ] ],
+     [ '$sort' => [ '_id' => 1 ] ],
+];
+
+$r = $c->aggregate( $pipeline );
+var_dump( $r['result'] );
+?>
+
+</pre>
+      <p>This code would output something like:</p>
+      <pre>array(242) {
+  [0] =>
+  array(2) {
+     '_id' => string(2) "AD"
+     'timezones' => array(1) { [0] => string(14) "Europe/Andorra" }
+  }
+  [1] =>
+  array(2) {
+     '_id' => string(2) "AE"
+     'timezones' => array(1) { [0] => string(10) "Asia/Dubai" }
+  }
+  [2] =>
+  array(2) {
+     '_id' => string(2) "AF"
+     'timezones' => array(1) { [0] => string(10) "Asia/Kabul" }
+  }
+  …
+
+</pre>
+      <p><a href="http://php.net/mongocollection.aggregate">MongoCollection::aggregate()</a> is implemented under the hood as a database command. The method in the PHP driver merely wraps this, but you can also call A/F through the <a href="http://php.net/mongodb.command">MongoDB::command()</a> method:</p>
+      <pre><?php
+$m = new MongoClient;
+$d = $m->demo;
+
+$pipeline = [
+     [ '$group' => [
+          '_id' => '$country_code',
+          'timezones' => [ '$addToSet' => '$timezone' ]
+     ] ],
+     [ '$sort' => [ '_id' => 1 ] ],
+];
+
+$r = $d->command( [
+     'aggregate' => 'cities',
+     'pipeline' => $pipeline,
+] );
+var_dump( $r['result'] );
+?>
+
+</pre>
+      <p>Because a database command only returns <em>one</em> document, the result is limited to a maximum of 16MB. This is not a problem for my example, but it can can certainly be a limiting factor for other A/F queries.</p>
+      <p>MongoDB 2.6 adds support for returning a cursor for an aggregation command. With the raw command interface, you simply add the extra <code>cursor</code> element:</p>
+      <pre>$r = $d->command( [
+     'aggregate' => 'cities',
+     'pipeline' => $pipeline,
+     'cursor' => [ 'batchSize' => 1 ],
+] );
+var_dump( $r );
+
+</pre>
+      <p>Instead of a document with all results inline, you get a cursor definition back:</p>
+      <pre>array(2) {
+  'cursor' =>
+  array(3) {
+     'id' => class MongoInt64#5 (1) {
+          public $value => string(12) "392201189815"
+     }
+     'ns' => string(11) "demo.cities"
+     'firstBatch' => array(1) {
+       [0] =>
+       array(2) {
+          '_id' => string(2) "AD"
+          'timezones' => array(1) { [0] => string(14) "Europe/Andorra" }
+       }
+     }
+  }
+  'ok' => double(1)
+}
+
+</pre>
+      <p>The cursor definition contains the cursor ID (in <code>id</code>), the namespace (<code>ns</code>), and whether the command succeeded (in <code>ok</code>). The definition also a portion of the results. The number of items in <code>firstBatch</code> is configured by the value given to <code>batchSize</code> in the command.</p>
+      <p>To create a cursor that you can iterate over in PHP, you need to convert this cursor definition to a <a href="http://php.net/mongocommandcursor">MongoCommandCursor</a> object. You can do that with the <a href="http://php.net/mongocommandcursor.createfromdocument">MongoCommandCursor::createFromDocument()</a> factory method. This factory method takes three arguments: the <code>MongoClient</code> object (<code>$m</code> in my example), the <em>connection hash</em>, and the cursor definition that was returned. The hash is required so that we can fetch new results from the same connection that executed the original command.</p>
+      <p>To obtain the connection hash, we need to include a by-ref variable as the third argument to <code>MongoCollection::command()</code>:</p>
+      <pre><?php
+$m = new MongoClient;
+$d = $m->demo;
+
+$pipeline = [
+     [ '$group' => [
+          '_id' => '$country_code',
+          'timezones' => [ '$addToSet' => '$timezone' ]
+     ] ],
+     [ '$sort' => [ '_id' => 1 ] ],
+];
+
+$r = $d->command(
+     [
+          'aggregate' => 'cities',
+          'pipeline' => $pipeline,
+          'cursor' => [ 'batchSize' => 1 ],
+     ],
+     null,
+     $hash
+);
+var_dump( $hash );
+
+</pre>
+      <p>The hash looks like <code>localhost:27017;-;.;26415</code>. Together with the result, you can now construct a <code>MongoCommandCursor</code>:</p>
+      <pre>$cursor = MongoCommandCursor::createFromDocument( $m, $hash, $r );
+
+</pre>
+      <p>And iterate over it:</p>
+      <pre>foreach ( $cursor as $result )
+{
+     echo $result['_id'], ': ', join( ', ', $result['timezones'] ), "\n";
+}
+?>
+
+</pre>
+      <p>As this is all a bit cumbersome, we have also added a helper method for this: <a href="http://php.net/mongocollection.aggregatecursor">MongoCollection::aggregateCursor</a>. This internally does the whole <a href="http://php.net/mongocommandcursor">MongoCommandCursor</a> creation dance, and simplifies the previous example to:</p>
+      <pre><?php
+$m = new MongoClient;
+$c = $m->demo->cities;
+
+$pipeline = [
+     [ '$group' => [
+          '_id' => '$country_code',
+          'timezones' => [ '$addToSet' => '$timezone' ]
+     ] ],
+     [ '$sort' => [ '_id' => 1 ] ],
+];
+
+$r = $c->aggregateCursor( $pipeline );
+
+foreach ( $r as $result )
+{
+     echo $result['_id'], ': ', join( ', ', $result['timezones'] ), "\n";
+}
+?>
+
+</pre>
+      <p>This helper also automatically sets the initial batch size to 101. You can change the batchSize for subsequent batches by using the <a href="http://php.net/mongocommandcursor.batchsize">MongoCommandCursor::batchSize()</a> method, and for the initial batch by specifying an option to <code>MongoCollection::aggregateCursor</code>:</p>
+      <pre>$options = [ 'cursor' => [ 'batchSize' => 5 ] ];
+
+$r = $d->cities->aggregateCursor( $pipeline, $options );
+$r->batchSize( 25 );
+
+</pre>
+      <p>In general, you probably should not change the default batch sizes.</p>
+      <p>The Aggregation Framework has some other new features in MongoDB 2.6 as well. Please refer to the <a href="http://docs.mongodb.org/master/release-notes/2.6/#aggregation-enhancements">release notes</a> for more information. I might write another post on some of those features later, too.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>04/09/2014 03:29 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Cursors-and-the-Aggregation-Framework">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/aggregation-cursor.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                     
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>April&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/1/(month)/4/(year)/2014">1</a></em>
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                                        <td class="  right">
+            6
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class="currentselected ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/9/(month)/4/(year)/2014">9</a></em>
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                                        <td class="  right">
+            13
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/17/(month)/4/(year)/2014">17</a></em>
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                                        <td class="  right">
+            20
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/23/(month)/4/(year)/2014">23</a></em>
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                                        <td class="  right">
+            27
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/30/(month)/4/(year)/2014">30</a></em>
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2014";s:5:"month";s:1:"4";s:3:"day";s:1:"9";s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1726";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1726";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1726";s:7:"node_id";s:4:"1726";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";s:14:"node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1726";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,490 @@
+a:10:{s:7:"content";s:31433:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/ez-publish-rest-curl" title="Using the eZ Publish REST API v2 with cURL">Using the eZ Publish REST API v2 with cURL</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/ez%20publish" title="ez publish">ez publish</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p>Lately, I've been testing and fixing several issues with the eZ Publish REST API
+v2. To manually test it, I use <a href="http://curl.haxx.se/">cURL</a> (<a href="http://pwet.fr/man/linux/commandes/curl">man
+curl</a>) because it's widely available,
+well documented, and like any other command line tool, you can use it together
+with others text processing tools
+(<a href="http://pwet.fr/man/linux/commandes/grep">grep</a>,
+<a href="http://pwet.fr/man/linux/commandes/xmllint">xmllint</a>,
+<a href="http://pwet.fr/man/linux/commandes/xsltproc">xsltproc</a>, ...). I'm writing this
+post as a memo for me but I'm sure some people will find it useful as well.</p>
+<p>The whole REST API v2 is specified in <a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/rest/REST-API-V2.rst">the ezpublish-kernel git
+repository</a>.
+Yes, that's a huge document, because the REST API is huge :-) <a href="https://confluence.ez.no/display/EZP/REST+API">A shorter
+introduction/documentation is also available in the eZ Publish
+documentation</a>.</p>
+<p><em>Note: to keep this post short and readable, the command results are not in the
+post itself but the whole command line session is available <a href="http://damien.pobel.fr/page/ez-publish-rest-v2-calls-outputs">on this
+page</a></em></p>
+<h2>Basic GET requests</h2>
+<p>Let's start with a simple GET request on the root of the API:</p>
+<pre><code>curl -u "admin:ezpublish" -i http://ezpublish5.loc/api/ezp/v2/</code></pre>
+<ul>
+<li><code>-u "admin:ezpublish"</code> allows to authenticate on the website with the Basic Auth
+which is the default authentication method.</li>
+<li><code>-i</code> tells the cURL to display the HTTP response headers</li>
+</ul>
+<p>By default, the response is formatted in XML. If you prefer to get the result as
+JSON, you have to specify it by setting the <code>Accept</code> header with the <code>-H</code> parameter:</p>
+<pre><code>curl -u "admin:ezpublish" -i -H "Accept: application/json" \
+http://ezpublish5.loc/api/ezp/v2/</code></pre>
+<p>Of course, it's possible to retrieve more useful data with the REST API, for instance
+to read the metadata of the <em>/Media</em> folder (id 41):</p>
+<pre><code>curl -u "admin:ezpublish" -i \
+-H "Accept: application/vnd.ez.api.ContentInfo+json" \
+http://ezpublish5.loc/api/ezp/v2/content/objects/41</code></pre>
+<p>If you want to get the whole Content with its attributes:</p>
+<pre><code>curl -u "admin:ezpublish" -i \
+-H "Accept: application/vnd.ez.api.Content+json" \
+http://ezpublish5.loc/api/ezp/v2/content/objects/41</code></pre>
+<p>The only difference between the last two calls is the <code>Accept</code> header which
+allows to tell to the system what data I want.</p>
+<p>The GET requests allow to read pretty much everything in the content repository.
+That's cool but we can do cooler tasks provided we enrich our HTTP vocabulary
+:-)</p>
+<h2>Publish an image</h2>
+<p>To publish a content, we have to first create a draft and then to actually
+publish it.</p>
+<h3>Create the image draft</h3>
+<p>The creation of the draft is done with a POST request on
+<code>/api/ezp/v2/content/objects</code> with a body containing the
+required and structured data. As for the response, it's possible to use either
+JSON or XML in input. In the following examples, I use the JSON way:</p>
+<pre><code>curl -u "admin:ezpublish" -i -H "Accept: application/json" \
+-H "Content-Type: application/vnd.ez.api.ContentCreate+json" \
+-H "Expect:" -X POST -d @createimage.json \
+http://ezpublish5.loc/api/ezp/v2/content/objects</code></pre>
+<ul>
+<li><code>-X POST</code> tells cURL to do a POST request</li>
+<li><code>-d @createimage.json</code> tells cURL to put the content of <a href="http://damien.pobel.fr/files/createimage.json">the file
+<code>createimage.json</code></a> in the request body. Without the
+<code>@</code>, the value right after the <code>-d</code> switch is put in the request body.</li>
+<li><code>-H "Content-Type: application/vnd.ez.api.ContentCreate+json"</code> indicates that the
+body of the request is a content create struct in JSON.</li>
+</ul>
+<p>The <code>-H "Expect:"</code> might sound a bit weird. Actually, this is to prevent cURL
+from automatically filling this header in a request with a body which is not
+really useful in the context of a REST API. If you want to learn more on this
+header, take a look at <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.20">the RFC 2616 which defines HTTP
+1.1</a></p>
+<h3>Publish the draft</h3>
+<p>Our draft is now created, we just have to publish it, this is done by issuing a
+PUBLISH request on the resources corresponding to the newly created draft (The
+content id is taken from the response of the draft creation request).</p>
+<pre><code>curl -u "admin:ezpublish" -i -X PUBLISH \
+http://ezpublish5.loc/api/ezp/v2/content/objects/135/versions/1</code></pre>
+<p><code>PUBLISH</code> is a custom HTTP verb, depending on various configuration details,
+this kind of request may not be accepted. In such case, it's possible to emulate
+it with a POST request having the custom header <code>X-HTTP-Method-Override</code>
+set to PUBLISH:</p>
+<pre><code>curl -u "admin:ezpublish" -i -X POST \
+-H "X-HTTP-Method-Override: PUBLISH" \
+http://ezpublish5.loc/api/ezp/v2/content/objects/135/versions/1</code></pre>
+<p>Both requests do exactly the same. After one of these commands, you should see a
+new image under the <em>/Media/Images/</em> called <em>eZ Systems logo created with the
+REST API</em>.</p>
+<figure class="object-center"><img
+src="http://damien.pobel.fr/images/image-content-created-with-the-rest-api.png" alt="Screenshot of the
+admin interface showing the image created with the REST
+API" style="border: 1px solid #aaa"></figure>
+
+<h2>And then ?</h2>
+<p>Going over all available operations would be a tad long and useless. In any
+case, the basics remain the same: with an HTTP request on a given resource
+eventually with a structured body, you can do all operations on the content
+repository. That's just awesome!</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>04/18/2013 04:08 pm</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Using-the-eZ-Publish-REST-API-v2-with-cURL">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/ez-publish-rest-curl">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://localhost:5000/post/ez-publish-rest-curl" title="Using the eZ Publish REST API v2 with cURL">Using the eZ Publish REST API v2 with cURL</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/ez%20publish" title="ez publish">ez publish</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p>Lately, I've been testing and fixing several issues with the eZ Publish REST API
+v2. To manually test it, I use <a href="http://curl.haxx.se/">cURL</a> (<a href="http://pwet.fr/man/linux/commandes/curl">man
+curl</a>) because it's widely available,
+well documented, and like any other command line tool, you can use it together
+with others text processing tools
+(<a href="http://pwet.fr/man/linux/commandes/grep">grep</a>,
+<a href="http://pwet.fr/man/linux/commandes/xmllint">xmllint</a>,
+<a href="http://pwet.fr/man/linux/commandes/xsltproc">xsltproc</a>, …). I‘m writing this
+post as a memo for me but I’m sure some people will find it useful as well.</p>
+<p>The whole REST API v2 is specified in <a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/rest/REST-API-V2.rst">the ezpublish-kernel git
+repository</a>.
+Yes, that's a huge document, because the REST API is huge :-) <a href="https://confluence.ez.no/display/EZP/REST+API">A shorter
+introduction/documentation is also available in the eZ Publish
+documentation</a>.</p>
+<p><em>Note: to keep this post short and readable, the command results are not in the
+post itself but the whole command line session is available <a href="http://localhost:5000/page/ez-publish-rest-v2-calls-outputs">on this
+page</a></em></p>
+<h2>Basic GET requests</h2>
+<p>Let's start with a simple GET request on the root of the API:</p>
+<pre><code>curl -u "admin:ezpublish" -i http://ezpublish5.loc/api/ezp/v2/</code></pre>
+<ul>
+<li><code>-u "admin:ezpublish"</code> allows to authenticate on the website with the Basic Auth
+which is the default authentication method.</li>
+<li><code>-i</code> tells the cURL to display the HTTP response headers</li>
+</ul>
+<p>By default, the response is formatted in XML. If you prefer to get the result as
+JSON, you have to specify it by setting the <code>Accept</code> header with the <code>-H</code> parameter:</p>
+<pre><code>curl -u "admin:ezpublish" -i -H "Accept: application/json" \
+http://ezpublish5.loc/api/ezp/v2/</code></pre>
+<p>Of course, it's possible to retrieve more useful data with the REST API, for instance
+to read the metadata of the <em>/Media</em> folder (id 41):</p>
+<pre><code>curl -u "admin:ezpublish" -i \
+-H "Accept: application/vnd.ez.api.ContentInfo+json" \
+http://ezpublish5.loc/api/ezp/v2/content/objects/41</code></pre>
+<p>If you want to get the whole Content with its attributes:</p>
+<pre><code>curl -u "admin:ezpublish" -i \
+-H "Accept: application/vnd.ez.api.Content+json" \
+http://ezpublish5.loc/api/ezp/v2/content/objects/41</code></pre>
+<p>The only difference between the last two calls is the <code>Accept</code> header which
+allows to tell to the system what data I want.</p>
+<p>The GET requests allow to read pretty much everything in the content repository.
+That's cool but we can do cooler tasks provided we enrich our HTTP vocabulary
+:-)</p>
+<h2>Publish an image</h2>
+<p>To publish a content, we have to first create a draft and then to actually
+publish it.</p>
+<h3>Create the image draft</h3>
+<p>The creation of the draft is done with a POST request on
+<code>/api/ezp/v2/content/objects</code> with a body containing the
+required and structured data. As for the response, it's possible to use either
+JSON or XML in input. In the following examples, I use the JSON way:</p>
+<pre><code>curl -u "admin:ezpublish" -i -H "Accept: application/json" \
+-H "Content-Type: application/vnd.ez.api.ContentCreate+json" \
+-H "Expect:" -X POST -d @createimage.json \
+http://ezpublish5.loc/api/ezp/v2/content/objects</code></pre>
+<ul>
+<li><code>-X POST</code> tells cURL to do a POST request</li>
+<li><code>-d @createimage.json</code> tells cURL to put the content of <a href="http://localhost:5000/files/createimage.json">the file
+<code>createimage.json</code></a> in the request body. Without the
+<code>@</code>, the value right after the <code>-d</code> switch is put in the request body.</li>
+<li><code>-H "Content-Type: application/vnd.ez.api.ContentCreate+json"</code> indicates that the
+body of the request is a content create struct in JSON.</li>
+</ul>
+<p>The <code>-H "Expect:"</code> might sound a bit weird. Actually, this is to prevent cURL
+from automatically filling this header in a request with a body which is not
+really useful in the context of a REST API. If you want to learn more on this
+header, take a look at <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.20">the RFC 2616 which defines HTTP
+1.1</a></p>
+<h3>Publish the draft</h3>
+<p>Our draft is now created, we just have to publish it, this is done by issuing a
+PUBLISH request on the resources corresponding to the newly created draft (The
+content id is taken from the response of the draft creation request).</p>
+<pre><code>curl -u "admin:ezpublish" -i -X PUBLISH \
+http://ezpublish5.loc/api/ezp/v2/content/objects/135/versions/1</code></pre>
+<p><code>PUBLISH</code> is a custom HTTP verb, depending on various configuration details,
+this kind of request may not be accepted. In such case, it's possible to emulate
+it with a POST request having the custom header <code>X-HTTP-Method-Override</code>
+set to PUBLISH:</p>
+<pre><code>curl -u "admin:ezpublish" -i -X POST \
+-H "X-HTTP-Method-Override: PUBLISH" \
+http://ezpublish5.loc/api/ezp/v2/content/objects/135/versions/1</code></pre>
+<p>Both requests do exactly the same. After one of these commands, you should see a
+new image under the <em>/Media/Images/</em> called <em>eZ Systems logo created with the
+REST API</em>.</p>
+<figure class="object-center"><img
+src="http://localhost:5000/images/image-content-created-with-the-rest-api.png" alt="Screenshot of the
+admin interface showing the image created with the REST
+API" style="border: 1px solid #aaa"></figure>
+
+<h2>And then ?</h2>
+<p>Going over all available operations would be a tad long and useless. In any
+case, the basics remain the same: with an HTTP request on a given resource
+eventually with a structured body, you can do all operations on the content
+repository. That's just awesome!</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>04/18/2013 04:08 pm</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Using-the-eZ-Publish-REST-API-v2-with-cURL2">View mirror of item</a> &nbsp; <a href="http://localhost:5000/post/ez-publish-rest-curl">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                     
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            <a href="/content/keyword/adsl" style="font-size: 100%" title="1 objects tagged with 'adsl'">adsl</a> <a href="/content/keyword/affiche" style="font-size: 100%" title="1 objects tagged with 'affiche'">affiche</a> <a href="/content/keyword/afup" style="font-size: 110%" title="2 objects tagged with 'afup'">afup</a> <a href="/content/keyword/Ain" style="font-size: 110%" title="2 objects tagged with 'Ain'">Ain</a> <a href="/content/keyword/ain" style="font-size: 200%" title="11 objects tagged with 'ain'">ain</a> <a href="/content/keyword/apache" style="font-size: 100%" title="1 objects tagged with 'apache'">apache</a> <a href="/content/keyword/araign%C3%A9e" style="font-size: 100%" title="1 objects tagged with 'araignée'">araignée</a> <a href="/content/keyword/blog" style="font-size: 110%" title="2 objects tagged with 'blog'">blog</a> <a href="/content/keyword/bol" style="font-size: 100%" title="1 objects tagged with 'bol'">bol</a> <a href="/content/keyword/Bourg-en-Bresse" style="font-size: 100%" title="1 objects tagged with 'Bourg-en-Bresse'">Bourg-en-Bresse</a> <a href="/content/keyword/browser" style="font-size: 100%" title="1 objects tagged with 'browser'">browser</a> <a href="/content/keyword/Conference" style="font-size: 100%" title="1 objects tagged with 'Conference'">Conference</a> <a href="/content/keyword/conference" style="font-size: 110%" title="2 objects tagged with 'conference'">conference</a> <a href="/content/keyword/css" style="font-size: 100%" title="1 objects tagged with 'css'">css</a> <a href="/content/keyword/css3" style="font-size: 100%" title="1 objects tagged with 'css3'">css3</a> <a href="/content/keyword/ergonomie" style="font-size: 110%" title="2 objects tagged with 'ergonomie'">ergonomie</a> <a href="/content/keyword/Extension" style="font-size: 100%" title="1 objects tagged with 'Extension'">Extension</a> <a href="/content/keyword/extension" style="font-size: 110%" title="2 objects tagged with 'extension'">extension</a> <a href="/content/keyword/ez%20find" style="font-size: 100%" title="1 objects tagged with 'ez find'">ez find</a> <a href="/content/keyword/eZ%20Publish" style="font-size: 140%" title="5 objects tagged with 'eZ Publish'">eZ Publish</a> <a href="/content/keyword/ez%20publish" style="font-size: 190%" title="10 objects tagged with 'ez publish'">ez publish</a> <a href="/content/keyword/frontend" style="font-size: 110%" title="2 objects tagged with 'frontend'">frontend</a> <a href="/content/keyword/gnome" style="font-size: 110%" title="2 objects tagged with 'gnome'">gnome</a> <a href="/content/keyword/gr%C3%A8ve" style="font-size: 100%" title="1 objects tagged with 'grève'">grève</a> <a href="/content/keyword/humeur" style="font-size: 140%" title="5 objects tagged with 'humeur'">humeur</a> <a href="/content/keyword/humour" style="font-size: 100%" title="1 objects tagged with 'humour'">humour</a> <a href="/content/keyword/javascript" style="font-size: 120%" title="3 objects tagged with 'javascript'">javascript</a> <a href="/content/keyword/linux" style="font-size: 110%" title="2 objects tagged with 'linux'">linux</a> <a href="/content/keyword/macro" style="font-size: 100%" title="1 objects tagged with 'macro'">macro</a> <a href="/content/keyword/Responsive%20design" style="font-size: 100%" title="1 objects tagged with 'Responsive design'">Responsive design</a> <a href="/content/keyword/Symfony%202" style="font-size: 100%" title="1 objects tagged with 'Symfony 2'">Symfony 2</a> 
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/adsl" title="adsl">adsl (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/affiche" title="affiche">affiche (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/afup" title="afup">afup (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Ain" title="Ain">Ain (13)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/apache" title="apache">apache (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/araign%C3%A9e" title="araignée">araignée (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/blog" title="blog">blog (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/bol" title="bol">bol (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Bourg-en-Bresse" title="Bourg-en-Bresse">Bourg-en-Bresse (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/browser" title="browser">browser (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Conference" title="Conference">Conference (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css" title="css">css (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css3" title="css3">css3 (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ergonomie" title="ergonomie">ergonomie (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Extension" title="Extension">Extension (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ez%20find" title="ez find">ez find (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/eZ%20Publish" title="eZ Publish">eZ Publish (15)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/frontend" title="frontend">frontend (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gnome" title="gnome">gnome (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gr%C3%A8ve" title="grève">grève (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humeur" title="humeur">humeur (5)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humour" title="humour">humour (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/javascript" title="javascript">javascript (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/linux" title="linux">linux (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/macro" title="macro">macro (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Responsive%20design" title="Responsive design">Responsive design (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Symfony%202" title="Symfony 2">Symfony 2 (1)</a></li>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2013" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2013" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>April&nbsp;2013</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                    <td class="  left">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                                        <td class="  right">
+            <em><a href="/Mirror/Damien-Pobel/(day)/7/(month)/4/(year)/2013">7</a></em>
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Damien-Pobel/(day)/11/(month)/4/(year)/2013">11</a></em>
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                                        <td class="  right">
+            14
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class="currentselected ">
+            <em><a href="/Mirror/Damien-Pobel/(day)/18/(month)/4/(year)/2013">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                                        <td class="  right">
+            21
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                                        <td class="  right">
+            28
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2013";s:5:"month";s:1:"4";s:3:"day";s:2:"18";s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:12:"Damien Pobel";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"229";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:12:"Damien Pobel";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"229";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"227";s:7:"node_id";s:3:"229";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"e6f81f2637ec547e52c3518bf0f11e88";s:14:"node_remote_id";s:32:"f888e9dfe7f87b8c8240f892bc4f47c9";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:19:"Mirror/Damien-Pobel";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"229";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,296 @@
+a:10:{s:7:"content";s:18712:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Crowd-serfing</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://derickrethans.nl/google-map-maker.html">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">04/12/2013 03:27 am</p>
+                                    <p class="author"></p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="crowd-serfing"/>Crowd-serfing</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Friday, April 12th 2013, 09:27 BST</div>
+      </div>
+      <p>Yesterday, Google <a href="http://google-latlong.blogspot.co.uk/2013/04/welcoming-united-kingdom-to-google-map.html">announced</a> that they have made Google Map Maker available in the United Kingdom. Like <a href="http://openstreetmap.org">OpenStreetMap</a> it allows everybody to update and add things to the map. But there is one big difference: With MapMaker you don't get access to the data.</p>
+      <p>Fellow OpenStreetMapper, <a href="http://systemed.net/">Richard Fairhurst</a>, describes this as Crowd-serfing:</p>
+      <blockquote>
+        <p>Crowd-serfing, n.: when a large corp uses crowd-sourced volunteering for its own financial gain, without giving back. See: @googlemapmaker.</p>
+      </blockquote>
+      <p>I will never understand why people do work for a commercial company without getting any real benefit back: <a href="http://www.bbc.co.uk/news/business-21226623">http://www.bbc.co.uk/news/business-21226623</a></p>
+      <p>Unfortunately, today's BBC <a href="http://www.bbc.co.uk/news/technology-22099960">coverage</a> on the availability of Google MapMaker in the UK read more like a manual on MapMaker than a nicely unbiased piece on crowd-sourced maps. Only after one of the OpenStreetMappers reached out to the journalist that wrote the piece, they added some background on <a href="http://openstreetmap.org">OpenStreetMap</a>:</p>
+      <blockquote>
+        <p>"The biggest problem with Google Map Maker is that anything people contribute may appear on Google's map, but only Google can get at the underlying data to be able to do anything else with it," said <a href="http://chris-osm.blogspot.co.uk/">Chris Hill</a>.</p>
+        <p>"If someone includes a Google map on their web site to show where their business is they may also be showing where their competitors are and they can't change that."</p>
+      </blockquote>
+      <p>Sure, it's nice to have some roads on the Google Map, but you will never even have full access back to your data, unlike OpenStreetMap where you can download and work with all the <a href="http://planet.openstreetmap.org/">data</a>. Even nicer is that often, OpenStreetMap still has better maps than GoogleMaps - for example, have a look at this in North Korea: <a href="http://tools.geofabrik.de/mc/?mt0=mapnik&mt1=googlemap&lon=125.74677&lat=39.01863&zoom=14">http://tools.geofabrik.de/mc/?mt0=mapnik&mt1=googlemap&lon=125.74677&lat=39.01863&zoom=14</a> . And closer to home in the United Kingdom, compare some of the hiking trails in the Peak District: <a href="http://tools.geofabrik.de/mc/?mt0=mapnik&mt1=googlemap&lon=-1.99876&lat=53.17827&zoom=15">http://tools.geofabrik.de/mc/?mt0=mapnik&mt1=googlemap&lon=-1.99876&lat=53.17827&zoom=15</a> . Even in places like London, the accuracy of the locations of addresses and points-of-interest (POIs) is often a lot better, as OpenStreetMap doesn't use web site scraping and post-code-centroid locations to place POIs: <a href="http://tools.geofabrik.de/mc/?mt0=mapnik&mt1=googlemap&lon=-0.12405&lat=51.50862&zoom=18">http://tools.geofabrik.de/mc/?mt0=mapnik&mt1=googlemap&lon=-0.12405&lat=51.50862&zoom=18</a> . OpenStreetMap mostly relies on surveys, done by individuals (like you!) to verify things are actually there, aided a little by the availability of <a href="http://www.bing.com/maps/">Bing Maps</a> as background imagery.</p>
+      <p>One of the things that most people forget, is the terms and conditions that commercial entities state. An except from MapMaker's reads:</p>
+      <blockquote>
+        <p>"You give Google a perpetual, irrevocable, worldwide, royalty-free, and non-exclusive licence to reproduce, adapt, modify, translate, publish, publicly perform, publicly display, distribute, and create derivative works of the user submission."</p>
+      </blockquote>
+      <p>Note that it never mentions that you can do anything with the data yourself…</p>
+      <img src="http://derickrethans.nl/images/content/stamen-hydepark.jpg" class="left" alt="stamen-hydepark.jpg"/>
+      <p>If you are contributing time and knowledge, why not allow yourself to benefit from it as well? I realise that OpenStreetMap might not be as accessible, and the map-tiles on their web site aren't the prettiest, but the real benefit is in the access to the raw data that makes up the images in the map. The OpenStreetMap wiki also has an <a href="http://wiki.openstreetmap.org/wiki/Google_Map_Maker">article</a> on this.</p>
+      <p>Access to the data allows you to do so many more things. From creating your own fancy <a href="http://maps.stamen.com/#watercolor/13/51.5068/-0.1055">map-styles</a>, creating <em>"washable, wearable, all-weather maps designed for the real outdoors"</em> such as <a href="http://www.splashmaps.net/">SplashMaps</a>, to powering web-sites that show <a href="http://wheelmap.org/">accessibility</a>. If you don't like the way map data is rendered, you can produce something in your own style, just like Nike did with this <a href="http://blog.oobrien.com/2010/04/nike-grid/">campaign</a>.</p>
+      <p>Also, there is nothing better if some of your <a href="http://osm.org/go/ZUfFRnGPx-">handiwork</a> shows up in a <a href="http://bestofosm.org/poster/">"best of OSM" poster</a> :-) I would never spend my time adding data to Google's Maps. Instead, I prefer to contribute to OpenStreetMap and <a href="https://vimeo.com/56374742">do awesome things</a> with the data. In the meanwhile, OpenStreetMap continues to support humanitarian relief efforts in <a href="https://vimeo.com/61282773">Mali</a> and many other <a href="http://hot.openstreetmap.org/">places</a>.</p>
+      <p>If you're near London, come and join us this <a href="http://wiki.openstreetmap.org/wiki/London/Summer_2013_events">summer</a>! (Other places will also run mapping parties).</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://derickrethans.nl/google-map-maker.html">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                        
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/8/(month)/8/(year)/2014">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class="currentselected today">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";s:23:"/content/view/full/1726";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:7:"node_id";s:4:"1726";}i:3;a:4:{s:4:"text";s:13:"Crowd-serfing";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"7403";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";s:23:"/content/view/full/1726";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:7:"node_id";s:4:"1726";}i:3;a:3:{s:4:"text";s:13:"Crowd-serfing";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"7403";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"7404";s:7:"node_id";s:4:"7403";s:14:"parent_node_id";s:4:"1726";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_26_ab388352ffe9cc39a3b64802043e5b74";s:14:"node_remote_id";s:32:"071da04cedcd3e4b4cf1568dfe1b4c11";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:35:"Mirror/Derick-Rethans/Crowd-serfing";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"7403";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:23:"parent_object_remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

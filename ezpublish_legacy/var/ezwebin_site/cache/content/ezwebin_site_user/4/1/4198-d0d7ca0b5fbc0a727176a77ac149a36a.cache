@@ -1,0 +1,1046 @@
+a:10:{s:7:"content";s:124782:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23273" title="Eduardo Fernandes updated the Description of       EZP-23273 - Documentation: ezpm documentation is missing and incomplete
+  ">Eduardo Fernandes updated the Description of       EZP-23273 - Doc ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="user-content">
+  <p><a class="external-link" href="https://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Miscellaneous/ezpm.php" rel="nofollow">ezpm.php documentation page</a> is missing for specific eZPublish versions like 4.7.</p>
+
+<p>Besides, the existent documentation page is incomplete with no examples and no options and parameters. Somebody added a comment with a link to eZPedia:<br>
+<a class="external-link" href="http://www.ezpedia.org/en/ez/command_line_package_manager" rel="nofollow">http://www.ezpedia.org/en/ez/command_line_package_manager</a></p>
+
+<p>Specifically, the script documentation should explain for what the commands should be used:</p>
+<ul class="alternate">
+	<li>install
+	<li>Import
+</ul> </div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:53 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Eduardo-Fernandes-updated-the-Description-of-EZP-23273-Documentation-ezpm-documentation-is-missing-and-incomplete5">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23273">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23273" title="Eduardo Fernandes created       EZP-23273 - Documentation: ezpm documentation is missing and incomplete
+  ">Eduardo Fernandes created       EZP-23273 - Documentation: ezpm do ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="user-content">
+  <p><a class="external-link" href="https://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Miscellaneous/ezpm.php ezpm.php documentation page" rel="nofollow">https://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Miscellaneous/ezpm.php ezpm.php documentation page</a> is missing for specific eZPublish versions like 4.7.</p>
+
+<p>Besides, the existent documentation page is incomplete with no examples and no options and parameters. Somebody added a comment with a link to eZPedia:<br>
+<a class="external-link" href="http://www.ezpedia.org/en/ez/command_line_package_manager" rel="nofollow">http://www.ezpedia.org/en/ez/command_line_package_manager</a></p>
+
+<p>Specifically, the script documentation should explain for what the commands should be used:</p>
+<ul class="alternate">
+	<li>install
+	<li>Import
+</ul> </div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:52 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Eduardo-Fernandes-created-EZP-23273-Documentation-ezpm-documentation-is-missing-and-incomplete">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23273">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23271" title="Piotr Nalepa updated the Description of       EZP-23271 - eZ Publish admin panel crashes when user is trying to view a draft
+  ">Piotr Nalepa updated the Description of       EZP-23271 - eZ Publi ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="user-content">
+  <p>Steps to reproduce the issue:</p>
+<ol>
+	<li>Log into eZ Publish admin dashboard,
+	<li>Create a new draft,
+	<li>When you finish filling the form, click on <b>Store draft and exit</b>,
+	<li>Go to dashboard view,
+	<li>Click on a draft you've just created,
+	<li>The error occurs.
+</ol>
+
+
+<div class="panel" style="border-width: 1.0px;"><div class="panelHeader" style="border-bottom-width: 1.0px;"><b>&quot;Stack trace&quot;</b></div><div class="panelContent">
+<div class="preformatted panel" style="border-width: 1.0px;"><div class="preformattedContent panelContent">
+<pre>[1] Symfony\Component\HttpKernel\Exception\NotFoundHttpException: Could not find 'Content' with identifier 'array (
+  'id' =&gt; 132,
+  'languages' =&gt; 
+  array (
+    0 =&gt; 'eng-US',
+  ),
+  'versionNo' =&gt; 1,
+)'
+    at n/a
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 141
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;viewLocation(null, 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/demobundle/EzSystems/DemoBundle/Controller/DemoController.php line 94
+
+    at EzSystems\DemoBundle\Controller\DemoController-&gt;showArticleAction(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in  line 
+
+    at call_user_func_array(array(object(DemoController), 'showArticleAction'), array(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true)))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '2', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/PreviewController.php line 92
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController-&gt;previewContentAction('132', '1', 'eng-GB', 'eng')
+        in  line 
+
+    at call_user_func_array(array(object(PreviewController), 'previewContentAction'), array('132', '1', 'eng-GB', 'eng'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '1')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php line 187
+
+    at Symfony\Component\HttpKernel\Kernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Bundle/EzPublishCoreBundle/Kernel.php line 67
+
+    at eZ\Bundle\EzPublishCoreBundle\Kernel-&gt;handle(object(Request))
+        in /Users/piotrnalepa/Sites/ezpublish-community/web/index.php line 77
+
+[2] eZ\Publish\Core\Base\Exceptions\NotFoundException: Could not find 'Content' with identifier 'array (
+  'id' =&gt; 132,
+  'languages' =&gt; 
+  array (
+    0 =&gt; 'eng-US',
+  ),
+  'versionNo' =&gt; 1,
+)'
+    at n/a
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 383
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;internalLoadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 325
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 287
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/SignalSlot/ContentService.php line 157
+
+    at eZ\Publish\Core\SignalSlot\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/View/Manager.php line 276
+
+    at eZ\Publish\Core\MVC\Symfony\View\Manager-&gt;renderLocation(object(Location), 'full', array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true, 'noLayout' =&gt; false))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 407
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;renderLocation(object(Location), 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 130
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;viewLocation(null, 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/demobundle/EzSystems/DemoBundle/Controller/DemoController.php line 94
+
+    at EzSystems\DemoBundle\Controller\DemoController-&gt;showArticleAction(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in  line 
+
+    at call_user_func_array(array(object(DemoController), 'showArticleAction'), array(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true)))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '2', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/PreviewController.php line 92
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController-&gt;previewContentAction('132', '1', 'eng-GB', 'eng')
+        in  line 
+
+    at call_user_func_array(array(object(PreviewController), 'previewContentAction'), array('132', '1', 'eng-GB', 'eng'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '1')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php line 187
+
+    at Symfony\Component\HttpKernel\Kernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Bundle/EzPublishCoreBundle/Kernel.php line 67
+
+    at eZ\Bundle\EzPublishCoreBundle\Kernel-&gt;handle(object(Request))
+        in /Users/piotrnalepa/Sites/ezpublish-community/web/index.php line 77
+
+[3] eZ\Publish\Core\Base\Exceptions\NotFoundException: Could not find 'content' with identifier 'contentId: 132, versionNo: 1'
+    at n/a
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Persistence/Legacy/Content/Handler.php line 324
+
+    at eZ\Publish\Core\Persistence\Legacy\Content\Handler-&gt;load('132', '1', array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/ezpublish/cache/dev/ezpublishDevDebugProjectContainer.php line 31220
+
+    at eZPublishCorePersistenceLegacyContentHandler_000000002b657d780000000049ff4df7-&gt;load('132', '1', array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Persistence/Cache/ContentHandler.php line 69
+
+    at eZ\Publish\Core\Persistence\Cache\ContentHandler-&gt;load('132', '1', array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 379
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;internalLoadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 325
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 287
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/SignalSlot/ContentService.php line 157
+
+    at eZ\Publish\Core\SignalSlot\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/View/Manager.php line 276
+
+    at eZ\Publish\Core\MVC\Symfony\View\Manager-&gt;renderLocation(object(Location), 'full', array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true, 'noLayout' =&gt; false))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 407
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;renderLocation(object(Location), 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 130
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;viewLocation(null, 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/demobundle/EzSystems/DemoBundle/Controller/DemoController.php line 94
+
+    at EzSystems\DemoBundle\Controller\DemoController-&gt;showArticleAction(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in  line 
+
+    at call_user_func_array(array(object(DemoController), 'showArticleAction'), array(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true)))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '2', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/PreviewController.php line 92
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController-&gt;previewContentAction('132', '1', 'eng-GB', 'eng')
+        in  line 
+
+    at call_user_func_array(array(object(PreviewController), 'previewContentAction'), array('132', '1', 'eng-GB', 'eng'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '1')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php line 187
+
+    at Symfony\Component\HttpKernel\Kernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Bundle/EzPublishCoreBundle/Kernel.php line 67
+
+    at eZ\Bundle\EzPublishCoreBundle\Kernel-&gt;handle(object(Request))
+        in /Users/piotrnalepa/Sites/ezpublish-community/web/index.php line 77
+</pre>
+</div></div>
+</div></div> </div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:28 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Piotr-Nalepa-updated-the-Description-of-EZP-23271-eZ-Publish-admin-panel-crashes-when-user-is-trying-to-view-a-draft">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23271">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23271" title="Piotr Nalepa changed the Link to 'This issue discovered while testing EZS-14' on       EZP-23271 - eZ Publish admin panel crashes when user is trying to view a draft
+  ">Piotr Nalepa changed the Link to 'This issue discovered while test ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:28 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Piotr-Nalepa-changed-the-Link-to-This-issue-discovered-while-testing-EZS-14-on-EZP-23271-eZ-Publish-admin-panel-crashes-when-user-is-trying-to-view-a-draft">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23271">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23271" title="Piotr Nalepa updated the Description of       EZP-23271 - eZ Publish admin panel crashes when user is trying to view a draft
+  ">Piotr Nalepa updated the Description of       EZP-23271 - eZ Publi ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="user-content">
+  <p>The issue was found while working on EZS-14.</p>
+
+<p>Steps to reproduce the issue:</p>
+<ol>
+	<li>Log into eZ Publish admin dashboard,
+	<li>Create a new draft,
+	<li>When you finish filling the form, click on <b>Store draft and exit</b>,
+	<li>Go to dashboard view,
+	<li>Click on a draft you've just created,
+	<li>The error occurs.
+</ol>
+
+
+<div class="panel" style="border-width: 1.0px;"><div class="panelHeader" style="border-bottom-width: 1.0px;"><b>&quot;Stack trace&quot;</b></div><div class="panelContent">
+<div class="preformatted panel" style="border-width: 1.0px;"><div class="preformattedContent panelContent">
+<pre>[1] Symfony\Component\HttpKernel\Exception\NotFoundHttpException: Could not find 'Content' with identifier 'array (
+  'id' =&gt; 132,
+  'languages' =&gt; 
+  array (
+    0 =&gt; 'eng-US',
+  ),
+  'versionNo' =&gt; 1,
+)'
+    at n/a
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 141
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;viewLocation(null, 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/demobundle/EzSystems/DemoBundle/Controller/DemoController.php line 94
+
+    at EzSystems\DemoBundle\Controller\DemoController-&gt;showArticleAction(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in  line 
+
+    at call_user_func_array(array(object(DemoController), 'showArticleAction'), array(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true)))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '2', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/PreviewController.php line 92
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController-&gt;previewContentAction('132', '1', 'eng-GB', 'eng')
+        in  line 
+
+    at call_user_func_array(array(object(PreviewController), 'previewContentAction'), array('132', '1', 'eng-GB', 'eng'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '1')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php line 187
+
+    at Symfony\Component\HttpKernel\Kernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Bundle/EzPublishCoreBundle/Kernel.php line 67
+
+    at eZ\Bundle\EzPublishCoreBundle\Kernel-&gt;handle(object(Request))
+        in /Users/piotrnalepa/Sites/ezpublish-community/web/index.php line 77
+
+[2] eZ\Publish\Core\Base\Exceptions\NotFoundException: Could not find 'Content' with identifier 'array (
+  'id' =&gt; 132,
+  'languages' =&gt; 
+  array (
+    0 =&gt; 'eng-US',
+  ),
+  'versionNo' =&gt; 1,
+)'
+    at n/a
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 383
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;internalLoadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 325
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 287
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/SignalSlot/ContentService.php line 157
+
+    at eZ\Publish\Core\SignalSlot\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/View/Manager.php line 276
+
+    at eZ\Publish\Core\MVC\Symfony\View\Manager-&gt;renderLocation(object(Location), 'full', array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true, 'noLayout' =&gt; false))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 407
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;renderLocation(object(Location), 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 130
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;viewLocation(null, 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/demobundle/EzSystems/DemoBundle/Controller/DemoController.php line 94
+
+    at EzSystems\DemoBundle\Controller\DemoController-&gt;showArticleAction(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in  line 
+
+    at call_user_func_array(array(object(DemoController), 'showArticleAction'), array(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true)))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '2', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/PreviewController.php line 92
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController-&gt;previewContentAction('132', '1', 'eng-GB', 'eng')
+        in  line 
+
+    at call_user_func_array(array(object(PreviewController), 'previewContentAction'), array('132', '1', 'eng-GB', 'eng'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '1')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php line 187
+
+    at Symfony\Component\HttpKernel\Kernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Bundle/EzPublishCoreBundle/Kernel.php line 67
+
+    at eZ\Bundle\EzPublishCoreBundle\Kernel-&gt;handle(object(Request))
+        in /Users/piotrnalepa/Sites/ezpublish-community/web/index.php line 77
+
+[3] eZ\Publish\Core\Base\Exceptions\NotFoundException: Could not find 'content' with identifier 'contentId: 132, versionNo: 1'
+    at n/a
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Persistence/Legacy/Content/Handler.php line 324
+
+    at eZ\Publish\Core\Persistence\Legacy\Content\Handler-&gt;load('132', '1', array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/ezpublish/cache/dev/ezpublishDevDebugProjectContainer.php line 31220
+
+    at eZPublishCorePersistenceLegacyContentHandler_000000002b657d780000000049ff4df7-&gt;load('132', '1', array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Persistence/Cache/ContentHandler.php line 69
+
+    at eZ\Publish\Core\Persistence\Cache\ContentHandler-&gt;load('132', '1', array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 379
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;internalLoadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 325
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContent('132', array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/Repository/ContentService.php line 287
+
+    at eZ\Publish\Core\Repository\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'), null)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/SignalSlot/ContentService.php line 157
+
+    at eZ\Publish\Core\SignalSlot\ContentService-&gt;loadContentByContentInfo(object(ContentInfo), array('eng-US'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/View/Manager.php line 276
+
+    at eZ\Publish\Core\MVC\Symfony\View\Manager-&gt;renderLocation(object(Location), 'full', array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true, 'noLayout' =&gt; false))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 407
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;renderLocation(object(Location), 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php line 130
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController-&gt;viewLocation(null, 'full', true, array('showSummary' =&gt; true, 'showImage' =&gt; true, 'content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/demobundle/EzSystems/DemoBundle/Controller/DemoController.php line 94
+
+    at EzSystems\DemoBundle\Controller\DemoController-&gt;showArticleAction(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true))
+        in  line 
+
+    at call_user_func_array(array(object(DemoController), 'showArticleAction'), array(null, 'full', true, array('content' =&gt; object(Content), 'location' =&gt; object(Location), 'isPreview' =&gt; true)))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '2', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '2')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Publish/Core/MVC/Symfony/Controller/Content/PreviewController.php line 92
+
+    at eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController-&gt;previewContentAction('132', '1', 'eng-GB', 'eng')
+        in  line 
+
+    at call_user_func_array(array(object(PreviewController), 'previewContentAction'), array('132', '1', 'eng-GB', 'eng'))
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 117
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw(object(Request), '1')
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php line 61
+
+    at Symfony\Component\HttpKernel\HttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php line 62
+
+    at Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php line 187
+
+    at Symfony\Component\HttpKernel\Kernel-&gt;handle(object(Request), '1', true)
+        in /Users/piotrnalepa/Sites/ezpublish-community/vendor/ezsystems/ezpublish-kernel/eZ/Bundle/EzPublishCoreBundle/Kernel.php line 67
+
+    at eZ\Bundle\EzPublishCoreBundle\Kernel-&gt;handle(object(Request))
+        in /Users/piotrnalepa/Sites/ezpublish-community/web/index.php line 77
+</pre>
+</div></div>
+</div></div> </div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:27 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Piotr-Nalepa-updated-the-Description-of-EZP-23271-eZ-Publish-admin-panel-crashes-when-user-is-trying-to-view-a-draft2">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23271">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23272" title="Joao Inacio changed the status to Confirmed on       EZP-23272 - Exception in UrlAlias generation after old parent is removed (prod)
+  ">Joao Inacio changed the status to Confirmed on       EZP-23272 - E ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:20 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Joao-Inacio-changed-the-status-to-Confirmed-on-EZP-23272-Exception-in-UrlAlias-generation-after-old-parent-is-removed-prod">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23272">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23272" title="Joao Inacio updated the Description of       EZP-23272 - Exception in UrlAlias generation after old parent is removed (prod)
+  ">Joao Inacio updated the Description of       EZP-23272 - Exception ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="user-content">
+  <p>When an content object is moved to a new location, and the original parent is removed, attempting to generate it's alias/route will result in an exception.</p>
+
+<p>The problem only occurs in prod environment, which indicates a SPI cache issue.</p>
+
+<h5><a name="Stepstoreproduce"></a>Steps to reproduce</h5>
+<ol>
+	<li>Create folder &quot;A &quot;
+	<li>Create content object &quot;Test&quot; under folder &quot;A&quot;
+	<li>Run the test command with --env=prod
+	<li>Move &quot;Test&quot; content to root location &quot;Home&quot;.
+	<li>Remove folder &quot;A&quot;
+	<li>Run the test command once more in prod.
+</ol>
+
+
+<h5><a></a>Test Command:</h5>
+<div class="code panel" style="border-width: 1.0px;"><div class="codeContent panelContent">
+<pre class="code-java">
+    <span class="code-keyword">protected</span> function configure()
+    {
+        $<span class="code-keyword">this</span>-&gt;setName( 'test:urlalias' )
+            -&gt;addArgument( 'locationId', InputArgument::REQUIRED, 'location Id.' );
+    }
+
+    /**
+     * @param InputInterface $input Predefined parameter <span class="code-keyword">for</span> commands
+     * @param OutputInterface $output Predefined parameter <span class="code-keyword">for</span> commands
+     */
+    <span class="code-keyword">protected</span> function execute( InputInterface $input, OutputInterface $output )
+    {
+        $repository = $<span class="code-keyword">this</span>-&gt;getContainer()-&gt;get( 'ezpublish.api.repository' );
+
+        <span class="code-comment">// login admin user
+</span>        $repository-&gt;setCurrentUser( $repository-&gt;getUserService()-&gt;loadUser( 14 ) );
+
+        $locationId = $input-&gt;getArgument( 'locationId' );
+
+        <span class="code-comment">// Test using urlAliasService:
+</span>        $locationService = $repository-&gt;getLocationService();
+        $urlAliasService = $repository-&gt;getUrlAliasService();
+        $location = $locationService-&gt;loadLocation( $locationId );
+        print_r( $urlAliasService-&gt;reverseLookup( $location ) );
+
+/*
+        <span class="code-comment">// Alternative, using router: 
+</span>        $router = $<span class="code-keyword">this</span>-&gt;getContainer()-&gt;get( 'router' );
+        print_r( $router-&gt;generate( 'ez_urlalias', array( 'locationId' =&gt; $locationId ) ) );
+*/
+    }
+
+</pre>
+</div></div> </div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:20 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Joao-Inacio-updated-the-Description-of-EZP-23272-Exception-in-UrlAlias-generation-after-old-parent-is-removed-prod">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23272">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23271" title="Yannick Roger added the Fix Version 'Engineering tracked issues' to       EZP-23271 - eZ Publish admin panel crashes when user is trying to view a draft
+  ">Yannick Roger added the Fix Version 'Engineering tracked issues' t ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:18 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Yannick-Roger-added-the-Fix-Version-Engineering-tracked-issues-to-EZP-23271-eZ-Publish-admin-panel-crashes-when-user-is-trying-to-view-a-draft">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23271">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23271" title="Yannick Roger updated the Affects Version of       EZP-23271 - eZ Publish admin panel crashes when user is trying to view a draft
+  ">Yannick Roger updated the Affects Version of       EZP-23271 - eZ  ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <ul class="updates activity-list">
+  <li>Added the Affects Version '<a href="https://jira.ez.no/browse/EZP/fixforversion/13481">2014.07</a>'
+  <li>Added the Affects Version '<a href="https://jira.ez.no/browse/EZP/fixforversion/13485">5.4-dev</a>'
+</ul>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:18 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Yannick-Roger-updated-the-Affects-Version-of-EZP-23271-eZ-Publish-admin-panel-crashes-when-user-is-trying-to-view-a-draft">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23271">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23272" title="Joao Inacio created       EZP-23272 - Exception in UrlAlias generation after old parent is removed (prod)
+  ">Joao Inacio created       EZP-23272 - Exception in UrlAlias genera ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="user-content">
+  <p>When an content object is moved to a new location, and the original parent is removed, attempting to generate it's alias/route will result in an exception.</p>
+
+<p>The problem only occurs in prod environment, which indicates a SPI cache issue.</p>
+
+<h5><a name="Stepstoreproduce"></a>Steps to reproduce</h5>
+<ol>
+	<li>Create folder &quot;A &quot;
+	<li>Create content object &quot;Test&quot; under folder &quot;A&quot;
+	<li>Run the test command with --env=prod
+	<li>Move &quot;Test&quot; content to root location &quot;Home&quot;.
+	<li>Remove folder &quot;A&quot;
+	<li>Run the test command once more in prod.
+</ol>
+
+
+<h5><a></a>Test Command:</h5>
+<div class="code panel" style="border-width: 1.0px;"><div class="codeContent panelContent">
+<pre class="code-java">
+    <span class="code-keyword">protected</span> function configure()
+    {
+        $<span class="code-keyword">this</span>-&gt;setName( 'test:urlalias' )
+            -&gt;addArgument( 'locationId', InputArgument::REQUIRED, 'location Id.' );
+    }
+
+    /**
+     * @param InputInterface $input Predefined parameter <span class="code-keyword">for</span> commands
+     * @param OutputInterface $output Predefined parameter <span class="code-keyword">for</span> commands
+     */
+    <span class="code-keyword">protected</span> function execute( InputInterface $input, OutputInterface $output )
+    {
+        $repository = $<span class="code-keyword">this</span>-&gt;getContainer()-&gt;get( 'ezpublish.api.repository' );
+        $locationService = $repository-&gt;getLocationService();
+
+        <span class="code-comment">// login admin user
+</span>        $repository-&gt;setCurrentUser( $repository-&gt;getUserService()-&gt;loadUser( 14 ) );
+
+        $locationId = $input-&gt;getArgument( 'locationId' )
+
+        $location = $locationService-&gt;loadLocation( $locationId );
+        print_r( $urlAliasService-&gt;reverseLookup( $location ) );
+
+/*        alternative, using router: 
+        $router = $<span class="code-keyword">this</span>-&gt;getContainer()-&gt;get( 'router' );
+        print_r( $router-&gt;generate( 'ez_urlalias', array( 'locationId' =&gt; $locationId ) ) );
+*/
+    }
+
+</pre>
+</div></div> </div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/19/2014 07:17 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Joao-Inacio-created-EZP-23272-Exception-in-UrlAlias-generation-after-old-parent-is-removed-prod">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23272">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                     
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/eZ-Publish-Issues/(offset)/30/(year)/2014/(month)/8/(day)/19"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/Mirror/eZ-Publish-Issues/(offset)/50/(year)/2014/(month)/8/(day)/19"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+                      <span class="other"><a href="/Mirror/eZ-Publish-Issues/(year)/2014/(month)/8/(day)/19">1</a></span>
+                              <span class="other"><a href="/Mirror/eZ-Publish-Issues/(offset)/10/(year)/2014/(month)/8/(day)/19">2</a></span>
+                              <span class="other"><a href="/Mirror/eZ-Publish-Issues/(offset)/20/(year)/2014/(month)/8/(day)/19">3</a></span>
+                              <span class="other"><a href="/Mirror/eZ-Publish-Issues/(offset)/30/(year)/2014/(month)/8/(day)/19">4</a></span>
+            
+        <span class="current">5</span>
+
+                      <span class="other"><a href="/Mirror/eZ-Publish-Issues/(offset)/50/(year)/2014/(month)/8/(day)/19">6</a></span>
+                              <span class="other"><a href="/Mirror/eZ-Publish-Issues/(offset)/60/(year)/2014/(month)/8/(day)/19">7</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Publish-Issues/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/eZ-Publish-Issues/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/eZ-Publish-Issues/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/6/(month)/8/(year)/2014">6</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/7/(month)/8/(year)/2014">7</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/8/(month)/8/(year)/2014">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/10/(month)/8/(year)/2014">10</a></em>
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/11/(month)/8/(year)/2014">11</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/12/(month)/8/(year)/2014">12</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/13/(month)/8/(year)/2014">13</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/14/(month)/8/(year)/2014">14</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/15/(month)/8/(year)/2014">15</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/16/(month)/8/(year)/2014">16</a></em>
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/18/(month)/8/(year)/2014">18</a></em>
+        </td>
+                            <td class="currentselected ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/19/(month)/8/(year)/2014">19</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/20/(month)/8/(year)/2014">20</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/22/(month)/8/(year)/2014">22</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/23/(month)/8/(year)/2014">23</a></em>
+        </td>
+                                        <td class="  right">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/24/(month)/8/(year)/2014">24</a></em>
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/25/(month)/8/(year)/2014">25</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/26/(month)/8/(year)/2014">26</a></em>
+        </td>
+                            <td class=" today">
+            <em><a href="/Mirror/eZ-Publish-Issues/(day)/27/(month)/8/(year)/2014">27</a></em>
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:2:"40";s:4:"year";s:4:"2014";s:5:"month";s:1:"8";s:3:"day";s:2:"19";s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:17:"eZ Publish Issues";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4198";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:17:"eZ Publish Issues";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4198";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4198";s:7:"node_id";s:4:"4198";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"5dd3054e1d1f0615538219e40ccb9c22";s:14:"node_remote_id";s:32:"8b3105ac9e820dbdc5764859b6f67fc7";s:6:"offset";i:40;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:24:"Mirror/eZ-Publish-Issues";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4198";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

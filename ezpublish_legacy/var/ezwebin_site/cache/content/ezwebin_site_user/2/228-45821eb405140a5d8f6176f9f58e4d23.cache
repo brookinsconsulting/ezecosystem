@@ -1,0 +1,400 @@
+a:10:{s:7:"content";s:61347:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS" title="Interview with André Rømcke, Lead Engineer for eZ Publish CMS">Interview with André Rømcke, Lead Engineer for eZ Publish CMS</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In the second interview here on Netgen Blog our guest is&nbsp;<b>André Rømcke</b>. He is the&nbsp;Lead Engineer for eZ Publish CMS and one of the main people behind the new verison 5. By the was you can check the first interview with Aleksandar Farstad <a href="http://www.netgen.hr/eng/Blog/Interview-with-Aleksander-Farstad-founder-of-eZ-Systems-and-eZ-Publish-open-source-CMS" target="_self">here</a>.</p><p><b>NG:&nbsp;Hello André&nbsp;and welcome to our blog. Lets start with the time when you first joined eZ Systems. How did you end up in eZ and what was your first role?</b></p><p>AR: I joined eZ Systems as a consultant in the summer of 2006 after having used eZ Publish for a year for several websites related to my student union and some private freelance projects. I did not have much prior experience with PHP, but I had plenty with html, css, javascript (and ASP[.Net]), which was a combination eZ did not have that many fluent people in.</p><p><b>NG: From your short bio we can see that you are a bachelor in economics. What brought you to finish economics and work in IT? Do you think the combination gives you some edge?</b></p><p>
+AR: Since the age of 14-15 I have always had an deep interest in web technologies, back then checking out the source code of for instance 3dfx website to steal some of their "dhtml"* effects for my own private websites. Over some years I lost interest, but before and during my studies this hobby was taking more and more of my spare time and interest again, leading me to start my own individual enterprise and eventually to stop studying after 3 years and come work for eZ.<br />
+I think the combination can be very interesting, as it makes it possible to see both technical, business and market needs. These needs map to what is referred to as the technology, business and customer perspective in classic software project management teachings, which is IMHO just as important today with Agile development methodologies like Scrum and Kanban, the two variants we have deployed internally.<br />(* fast forward to 2006 and this was referred to as "ajax")</p><p><b>NG: You are currently the Lead Engineer for eZ Publish. How do you fit in the eZ Engineering team and what are your responsibilities?</b></p><p>AR: I fit in the sense that I have, in the past, been highly involved in certain key aspects of eZ Publish like Online Editor, eZXML, eZINI, ezjscore, (..), pushed the envelope on performance and been involved in Public API efforts since the beginning in early 2011. In my consulting background I was also doing project management which is now the case with my role as Scrum/Kanban master & technical project / release manager within Engineering. And on top of that my background has made me usually quite pragmatic, preferring KISS solutions, witch sometimes simplifies problems solving in the team a bit. But as am I luckily working with quite a lot of skilled co workers, I have over the years learnt a lot surrounding OOP and design patterns leading me to prefer de coupled object oriented clean code. So for me KISS does not mean cutting corners and write bad code, it simply means fully understanding out what the problem is without over complicating it, then solving just that problem and nothing more.</p><p><b>NG: Your community profile on&nbsp;<a href="http://share.ez.no/" target="_blank">share.ez.no</a>&nbsp;shows quite a lot of engagement. How do you find time for helping people on forums, etc? Do you feel it is part of your job or you do it completely in your free time?</b></p><p>AR: For quite a while I did both, I felt it was somewhat part of my job, and did it as well as quite some development in my spare time. Nowadays I'm not as active, there are several reasons for that. Those worth mentioning are: #1 being that I think I can contribute much more in my role by making sure our 5.x product is as rock solid and documented as possible, #2 change our innovation process to become transparent and open. And #3 I was about to go crazy because of lack of a proper FAQ in the community :) These are some of the things we are currently working on, so within the next months I hope we can open up JIRA and Confluence for a fully open innovation process that includes everyone and allows everyone to contribute in every step of the process. But it involves lots of changes, so it has taken quite some time and will continue to take even more before everything is in place.</p><p><b>NG: As an economics bachelor how do you see the dual nature of eZ Ecosystem: from eZ Systems as a company to eZ community and the open source model?</b></p><p>
+AR: I see it as a symbiosis where both sides benefit from the other, if done right. In my view the API should be exactly the same so that extensions written for community project work on the enterprise edition as well as the other way around, this implies a common API versioning. Both variants can then bundle different set of extensions/bundles which makes them differ in branding and feature set. This was not possible with 4.x as there was no single public api, just a whole lot of different low level api's spread all over the kernel as well as in extensions.<br />IMHO if both sides agree that enterprise level features belong to the enterprise edition, then both sides will win. eZ Systems in that they can have a model that is proven, a large talent and potential customer pool in a vibrant community, and noticeable market presence thanks to the community version. Community benefits in that they continue to have a company which puts considerable efforts into moving the project forward and wanting to improve it in all aspects, and a company that creates a market for them to do business in, both as consulting as well as eZ Market solutions. This is already the case, but with 5.x it is now technically possible for eZ Systems to offer advance scalability solutions and for instance Oracle driver as enterprise feature, without affecting the extensions and websites written on top of the cms. &nbsp;Such solutions can also be written by partners and be placed on eZ Market, providing interesting features not offered by eZ.</p><p><b>NG: eZ Publish 5 will be released by the end of the year. How are things going in that respect? What are your current priorities regarding the release?</b></p><p>AR:&nbsp;Things are going good, we have clear aims now in what we would like to deliver, and I think it is feasible. First up is an Alpha at the end of August, it will contain a first look at eZ Publish 5.x with a snapshot of our current progress on getting demo design working on top of Public API and Symfony stack. Hopefully with confluence containing some initial documentation on how to extend the system and build FieldTypes. &nbsp;The Alpha should also contain most of the "legacy fallback" features we have talked about in the past, making it possible to run existing 4.x site smoothly on 5.x. A month later we will release a Beta, and it should be future complete, which means all field types (data types) needed by demo design should work, and so should REST API v2 which is the other main priority of 5.0. By this time we would have hopefully finished our internal projects needed to make JIRA and Confluence fully open, which would then mark the introduction of an open innovation process.</p><p><b>NG:&nbsp;Recently eZ announced that eZ Publish 5 will rely a lot on Symfony 2 PHP framework. Can you tell us a bit more on what were the main reasons to go in that direction? What parts of the Symfony framework will be heavily used by the new kernel?</b></p><p>AR: The discussions about using other frameworks have always been present, but after eZ Components was moved to Apache, and lost it's pace there, it opened the door in a much bigger degree to instead take a best of breed approach. And after selecting Twig for template engine back in February, it became much more easy to also take Symfony for it's controller, view, routing and form handling instead of spending efforts on making something from scratch or updating ezcMVCTools to be able to natively handle hierarchical views. Hierarchical views being one of the many things we wanted in the new stack to reduce code duplication. You can think of it as a system native version of eZ Publish 4.x's {node_view_gui()}.So as mentioned, Symfony is currently used as the web stack, the model is provided by Public API.&nbsp;We might end up using some of it in Public API as well, for instance ServiceContainer, but from my perspective I want to avoid deep coupling as much as possible and unfortunately use of the Symfony2 ServiceContainer currently encourages exactly that. Deep coupling is wrong for several reasons, two reasons for making sure we abstract dependencies being: #1 it makes testing harder as it will depend on the external project, and #2 I see Public API as having a longer life span then what Symfony2[/<Insert any framework>] will most likely have.</p><p><b>NG: The version 5 release will bring the new major release, but it will not replace the old version fully (old version will be bundled in for backwards compatibility anyway). When do you think &nbsp;version 5 will have almost all features that version 4 has now?</b></p><p>AR: eZ Publish 4.x is maybe the open source CMS out there with most features, so we might never have the same feature set in the core of 5.x as it represents a slight change of focus from quantity to quality. One the same page, my views on the open innovation process is that it should be unified for all features being developed for eZ Publish 5.x, hence that we in the future can make sure all new features go through a process of requirements collection-, design- and implementation-phase that everyone can contribute on. This in turn will increase quality in what we deliver, and for those features we don't prioritize to deliver, there is, as before, a golden chance for community or eZ Market partners to fill the gap with extensions.</p><p><b>NG: Where do you see the eZ Ecosystem (eZ Systems, eZ Publish, eZ Community) in 5 years? Do you see yourself as an important part of it?</b></p><p>AR:&nbsp;Difficult question, but I think if we manage to all agree on a vision for eZ Publish 5.x and get everyone on board of a unified open innovation process, which includes everyone, then I think we can potentially accelerate the interest in eZ Publish, both in the open source realm and the enterprise realm a lot. For me 5.x is _the_ possibility to undo mistakes of the past, unlock the potential that many of us feel live in the concept of the eZ Publish content model and gear up for a architecture that can serve us for the next 5-10 years and potentially beyond, if properly maintained and kept up to date with technologies and trends.</p><p><b>NG: How do you spend your time when not dealing with eZ*?</b></p><p>AR: I think I kind of always deal with eZ things, if it is on the top of Huayna Picchu on Machu Picchu, on the beach in Paje, Zanzibar, at the gym, with my folks or out with friends in Oslo or Cologne. I always end up stopping up once in a while and writing down ideas, answering mails or somehow communicating with co workers. It's the pitfall of choosing a carrier within something which also happens to be your personal interest. But indirectly, I think I managed to answer the question there, even if not too verbose ;)</p><p><b>NG: Thank you for your time!</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/17/2012 03:27 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS" title="Interview with André Rømcke, Lead Engineer for eZ Publish CMS">Interview with André Rømcke, Lead Engineer for eZ Publish CMS</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In the second interview here on Netgen Blog our guest is&nbsp;<b>André Rømcke</b>. He is the&nbsp;Lead Engineer for eZ Publish CMS and one of the main people behind the new verison 5. By the way check the first interview with Aleksandar Farstad <a href="http://www.netgenlabs.com/Blog/Interview-with-Aleksander-Farstad-founder-of-eZ-Systems-and-eZ-Publish-open-source-CMS" target="_self">here</a>.</p><p><b>NG:&nbsp;Hello André&nbsp;and welcome to our blog. Lets start with the time when you first joined eZ Systems. How did you end up in eZ and what was your first role?</b></p><p>AR: I joined eZ Systems as a consultant in the summer of 2006 after having used eZ Publish for a year for several websites related to my student union and some private freelance projects. I did not have much prior experience with PHP, but I had plenty with html, css, javascript (and ASP[.Net]), which was a combination eZ did not have that many fluent people in.</p><p><b>NG: From your short bio we can see that you are a bachelor in economics. What brought you to finish economics and work in IT? Do you think the combination gives you some edge?</b></p><p>
+AR: Since the age of 14-15 I have always had an deep interest in web technologies, back then checking out the source code of for instance 3dfx website to steal some of their "dhtml"* effects for my own private websites. Over some years I lost interest, but before and during my studies this hobby was taking more and more of my spare time and interest again, leading me to start my own individual enterprise and eventually to stop studying after 3 years and come work for eZ.<br />
+I think the combination can be very interesting, as it makes it possible to see both technical, business and market needs. These needs map to what is referred to as the technology, business and customer perspective in classic software project management teachings, which is IMHO just as important today with Agile development methodologies like Scrum and Kanban, the two variants we have deployed internally.<br />(* fast forward to 2006 and this was referred to as "ajax")</p><p><b>NG: You are currently the Lead Engineer for eZ Publish. How do you fit in the eZ Engineering team and what are your responsibilities?</b></p><p>AR: I fit in the sense that I have, in the past, been highly involved in certain key aspects of eZ Publish like Online Editor, eZXML, eZINI, ezjscore, (..), pushed the envelope on performance and been involved in Public API efforts since the beginning in early 2011. In my consulting background I was also doing project management which is now the case with my role as Scrum/Kanban master & technical project / release manager within Engineering. And on top of that my background has made me usually quite pragmatic, preferring KISS solutions, witch sometimes simplifies problems solving in the team a bit. But as am I luckily working with quite a lot of skilled co workers, I have over the years learnt a lot surrounding OOP and design patterns leading me to prefer de coupled object oriented clean code. So for me KISS does not mean cutting corners and write bad code, it simply means fully understanding out what the problem is without over complicating it, then solving just that problem and nothing more.</p><p><b>NG: Your community profile on&nbsp;<a href="http://share.ez.no/" target="_blank">share.ez.no</a>&nbsp;shows quite a lot of engagement. How do you find time for helping people on forums, etc? Do you feel it is part of your job or you do it completely in your free time?</b></p><p>AR: For quite a while I did both, I felt it was somewhat part of my job, and did it as well as quite some development in my spare time. Nowadays I'm not as active, there are several reasons for that. Those worth mentioning are: #1 being that I think I can contribute much more in my role by making sure our 5.x product is as rock solid and documented as possible, #2 change our innovation process to become transparent and open. And #3 I was about to go crazy because of lack of a proper FAQ in the community :) These are some of the things we are currently working on, so within the next months I hope we can open up JIRA and Confluence for a fully open innovation process that includes everyone and allows everyone to contribute in every step of the process. But it involves lots of changes, so it has taken quite some time and will continue to take even more before everything is in place.</p><p><b>NG: As an economics bachelor how do you see the dual nature of eZ Ecosystem: from eZ Systems as a company to eZ community and the open source model?</b></p><p>
+AR: I see it as a symbiosis where both sides benefit from the other, if done right. In my view the API should be exactly the same so that extensions written for community project work on the enterprise edition as well as the other way around, this implies a common API versioning. Both variants can then bundle different set of extensions/bundles which makes them differ in branding and feature set. This was not possible with 4.x as there was no single public api, just a whole lot of different low level api's spread all over the kernel as well as in extensions.<br />IMHO if both sides agree that enterprise level features belong to the enterprise edition, then both sides will win. eZ Systems in that they can have a model that is proven, a large talent and potential customer pool in a vibrant community, and noticeable market presence thanks to the community version. Community benefits in that they continue to have a company which puts considerable efforts into moving the project forward and wanting to improve it in all aspects, and a company that creates a market for them to do business in, both as consulting as well as eZ Market solutions. This is already the case, but with 5.x it is now technically possible for eZ Systems to offer advance scalability solutions and for instance Oracle driver as enterprise feature, without affecting the extensions and websites written on top of the cms. &nbsp;Such solutions can also be written by partners and be placed on eZ Market, providing interesting features not offered by eZ.</p><p><b>NG: eZ Publish 5 will be released by the end of the year. How are things going in that respect? What are your current priorities regarding the release?</b></p><p>AR:&nbsp;Things are going good, we have clear aims now in what we would like to deliver, and I think it is feasible. First up is an Alpha at the end of August, it will contain a first look at eZ Publish 5.x with a snapshot of our current progress on getting demo design working on top of Public API and Symfony stack. Hopefully with confluence containing some initial documentation on how to extend the system and build FieldTypes. &nbsp;The Alpha should also contain most of the "legacy fallback" features we have talked about in the past, making it possible to run existing 4.x site smoothly on 5.x. A month later we will release a Beta, and it should be future complete, which means all field types (data types) needed by demo design should work, and so should REST API v2 which is the other main priority of 5.0. By this time we would have hopefully finished our internal projects needed to make JIRA and Confluence fully open, which would then mark the introduction of an open innovation process.</p><p><b>NG:&nbsp;Recently eZ announced that eZ Publish 5 will rely a lot on Symfony 2 PHP framework. Can you tell us a bit more on what were the main reasons to go in that direction? What parts of the Symfony framework will be heavily used by the new kernel?</b></p><p>AR: The discussions about using other frameworks have always been present, but after eZ Components was moved to Apache, and lost it's pace there, it opened the door in a much bigger degree to instead take a best of breed approach. And after selecting Twig for template engine back in February, it became much more easy to also take Symfony for it's controller, view, routing and form handling instead of spending efforts on making something from scratch or updating ezcMVCTools to be able to natively handle hierarchical views. Hierarchical views being one of the many things we wanted in the new stack to reduce code duplication. You can think of it as a system native version of eZ Publish 4.x's {node_view_gui()}.So as mentioned, Symfony is currently used as the web stack, the model is provided by Public API.&nbsp;We might end up using some of it in Public API as well, for instance ServiceContainer, but from my perspective I want to avoid deep coupling as much as possible and unfortunately use of the Symfony2 ServiceContainer currently encourages exactly that. Deep coupling is wrong for several reasons, two reasons for making sure we abstract dependencies being: #1 it makes testing harder as it will depend on the external project, and #2 I see Public API as having a longer life span then what Symfony2[/<Insert any framework>] will most likely have.</p><p><b>NG: The version 5 release will bring the new major release, but it will not replace the old version fully (old version will be bundled in for backwards compatibility anyway). When do you think &nbsp;version 5 will have almost all features that version 4 has now?</b></p><p>AR: eZ Publish 4.x is maybe the open source CMS out there with most features, so we might never have the same feature set in the core of 5.x as it represents a slight change of focus from quantity to quality. One the same page, my views on the open innovation process is that it should be unified for all features being developed for eZ Publish 5.x, hence that we in the future can make sure all new features go through a process of requirements collection-, design- and implementation-phase that everyone can contribute on. This in turn will increase quality in what we deliver, and for those features we don't prioritize to deliver, there is, as before, a golden chance for community or eZ Market partners to fill the gap with extensions.</p><p><b>NG: Where do you see the eZ Ecosystem (eZ Systems, eZ Publish, eZ Community) in 5 years? Do you see yourself as an important part of it?</b></p><p>AR:&nbsp;Difficult question, but I think if we manage to all agree on a vision for eZ Publish 5.x and get everyone on board of a unified open innovation process, which includes everyone, then I think we can potentially accelerate the interest in eZ Publish, both in the open source realm and the enterprise realm a lot. For me 5.x is _the_ possibility to undo mistakes of the past, unlock the potential that many of us feel live in the concept of the eZ Publish content model and gear up for a architecture that can serve us for the next 5-10 years and potentially beyond, if properly maintained and kept up to date with technologies and trends.</p><p><b>NG: How do you spend your time when not dealing with eZ*?</b></p><p>AR: I think I kind of always deal with eZ things, if it is on the top of Huayna Picchu on Machu Picchu, on the beach in Paje, Zanzibar, at the gym, with my folks or out with friends in Oslo or Cologne. I always end up stopping up once in a while and writing down ideas, answering mails or somehow communicating with co workers. It's the pitfall of choosing a carrier within something which also happens to be your personal interest. But indirectly, I think I managed to answer the question there, even if not too verbose ;)</p><p><b>NG: Thank you for your time!</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/17/2012 03:27 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Setting-up-eZ-Publish-host_uri-matching-properly" title="Setting up eZ Publish host_uri matching properly">Setting up eZ Publish host_uri matching properly</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>As we all know, eZ Publish is very powerful, so much that there are probably some settings you didn’t even know existed and when you do find them, you feel like a luckiest man/woman alive. But, so much power can sometimes bring lots of headaches :)</p><p>One, relatively recent, headache I was having was when setting up host_uri siteaccess matching on one fairly large multilanguage & multisite eZ Publish installation. The installation has couple of databases and domains and many languages.</p><a name="eztoc8449_1" id="eztoc8449_1"></a><h2>What is (host_uri) siteaccess matching anyway?</h2><p>Every time you request a page from eZ Publish, it needs to decide what siteaccess to load based on your request. This process is called siteaccess matching. Most of the times, various parts of the request URI are used to decide which siteaccess to load. host_uri matching specifically allows you to match a combination of request host and first part of the request URI to one specific siteaccess. For example: <i>http://www.example.com/fr/A-propos-de-nous</i> will use <i>www.example.com</i> host and <i>fr</i> part of the URI to find the correct siteaccess to use. This rule would be defined in <i>site.ini/[SiteAccessSettings]/HostUriMatchMapItems</i> config array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;french</span></span></pre><p>which says: When the host is <i>www.example.com</i> and the URI starts with <i>fr</i>, load the siteaccess called <i>french</i>.</p><p>The other variant of the rule looks like this (notice that the second part of the value is empty):</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;english</span></span></pre><p>which says: If no other rules for <i>www.example.com</i> domain match the first part of the URI, load the siteaccess called <i>english</i>. Basically, this is a fallback rule.</p><a name="eztoc8449_2" id="eztoc8449_2"></a><h2>The problem</h2><p>On large multisite/multilanguage installations, host_uri matching array can quickly grow to 20+ lines of rules. The problem I was having was that no matter what I did, one of the rules did not function: <b>Module “en” not found.</b> The following is an excerpt from the rules:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren</span></span></pre><p>There were no syntax errors in the settings so I was losing my head over this for hours. Random reordering or array did nothing, apart giving the same <b>Module not found</b> error, but with different siteaccess. Left with nothing else to do, I went digging through <i>kernel/classes/ezsiteaccess.php</i>, which is responsible for matching.</p><a name="eztoc8449_3" id="eztoc8449_3"></a><h2>The solution</h2><p>After 2+ hours of digging, the solution was found. It turns out that order of array items does matter, but in very specific way. In every group of config values which have the same domain in <i>HostUriMatchMapItems</i> array, if there’s a config value with the empty second part, that specific config value needs to be the last one in that particular group of values. So, the solution to finally get the whole set of rules working was to reorder the mentioned array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en <strong># Moved to the end of group of values for www.example.com domain</strong></span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren <strong># Moved to the end of group of values for www.otherexample.com domain</strong></span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren <strong># Already at the end of group of values for otherexample.com domain</strong></span></span></pre><p>Later, I found exactly this solution in the last sentence of eZ Publish 4.4 release notes describing host_uri matching, which annoyed me even more because of the time lost which could’ve been used for more productive work. With this I hope at least some of you will be spared the headache I was having.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/16/2012 09:36 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Setting-up-eZ-Publish-host_uri-matching-properly">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Setting-up-eZ-Publish-host_uri-matching-properly">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Setting-up-eZ-Publish-host_uri-matching-properly" title="Setting up eZ Publish host_uri matching properly">Setting up eZ Publish host_uri matching properly</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>As we all know, eZ Publish is very powerful, so much that there are probably some settings you didn’t even know existed and when you do find them, you feel like a luckiest man/woman alive. But, so much power can sometimes bring lots of headaches :)</p><p>One, relatively recent, headache I was having was when setting up host_uri siteaccess matching on one fairly large multilanguage & multisite eZ Publish installation. The installation has couple of databases and domains and many languages.</p><a name="eztoc8449_1" id="eztoc8449_1"></a><h2>What is (host_uri) siteaccess matching anyway?</h2><p>Every time you request a page from eZ Publish, it needs to decide what siteaccess to load based on your request. This process is called siteaccess matching. Most of the times, various parts of the request URI are used to decide which siteaccess to load. host_uri matching specifically allows you to match a combination of request host and first part of the request URI to one specific siteaccess. For example: <i>http://www.example.com/fr/A-propos-de-nous</i> will use <i>www.example.com</i> host and <i>fr</i> part of the URI to find the correct siteaccess to use. This rule would be defined in <i>site.ini/[SiteAccessSettings]/HostUriMatchMapItems</i> config array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;french</span></span></pre><p>which says: When the host is <i>www.example.com</i> and the URI starts with <i>fr</i>, load the siteaccess called <i>french</i>.</p><p>The other variant of the rule looks like this (notice that the second part of the value is empty):</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;english</span></span></pre><p>which says: If no other rules for <i>www.example.com</i> domain match the first part of the URI, load the siteaccess called <i>english</i>. Basically, this is a fallback rule.</p><a name="eztoc8449_2" id="eztoc8449_2"></a><h2>The problem</h2><p>On large multisite/multilanguage installations, host_uri matching array can quickly grow to 20+ lines of rules. The problem I was having was that no matter what I did, one of the rules did not function: <b>Module “en” not found.</b> The following is an excerpt from the rules:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren</span></span></pre><p>There were no syntax errors in the settings so I was losing my head over this for hours. Random reordering or array did nothing, apart giving the same <b>Module not found</b> error, but with different siteaccess. Left with nothing else to do, I went digging through <i>kernel/classes/ezsiteaccess.php</i>, which is responsible for matching.</p><a name="eztoc8449_3" id="eztoc8449_3"></a><h2>The solution</h2><p>After 2+ hours of digging, the solution was found. It turns out that order of array items does matter, but in very specific way. In every group of config values which have the same domain in <i>HostUriMatchMapItems</i> array, if there’s a config value with the empty second part, that specific config value needs to be the last one in that particular group of values. So, the solution to finally get the whole set of rules working was to reorder the mentioned array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #666666; font-style: italic;"># Next rule is now moved to the end of group of values for www.example.com domain</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #666666; font-style: italic;"># Next rule is now moved to the end of group of values for www.otherexample.com domain</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #666666; font-style: italic;"># Next rule is already at the end of group of values for otherexample.com domain</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren</span></span></pre><p>Later, I found exactly this solution in the last sentence of eZ Publish 4.4 release notes describing host_uri matching, which annoyed me even more because of the time lost which could’ve been used for more productive work. With this I hope at least some of you will be spared the headache I was having.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/16/2012 09:36 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Setting-up-eZ-Publish-host_uri-matching-properly2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Setting-up-eZ-Publish-host_uri-matching-properly">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                                        <td class="  right">
+            5
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                                        <td class="  right">
+            12
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/16/(month)/8/(year)/2012">16</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/17/(month)/8/(year)/2012">17</a></em>
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                                        <td class="  right">
+            19
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class="currentselected today">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                                        <td class="  right">
+            26
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2012";s:5:"month";s:1:"8";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"228";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"228";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"226";s:7:"node_id";s:3:"228";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";s:14:"node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:13:"Mirror/Netgen";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"228";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,330 @@
+a:10:{s:7:"content";s:17382:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/YMC">YMC</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.ymc.ch/weblog/trimediales_kinderportal_zambo_startet_in_web_tv_und_radio" title="Trimediales Kinderportal - Zambo startet in Web, TV und Radio">Trimediales Kinderportal - Zambo startet in Web, TV und Radio</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Die drei Vektoren der SRG (Schweizer Fernsehen, Radio und die dazugehörigen Onlineangebote) weisen medientypische Stärken auf: 
+</p>
+
+<ul>
+
+<li>Das Radio hat kurze Produktionswege und somit hohe Aktualität.</li>
+
+<li>Das Fernsehen hat mit Abstand die grösste Reichweite.</li>
+
+<li>Das Internet besticht durch neue Interaktionsmöglichkeiten.</li>
+
+</ul>
+
+<p>
+<a href="http://www.zambo.ch/"  target="_blank"  >http://www.zambo.ch</a> markiert nun den Auftakt der <a href="/weblog/cross_media_auf_dem_vormarsch"  >Konvergenzstrategie</a>. Das <b>trimediale Gemeinschaftsprojekt</b> von Schweizer Fernsehen und Schweizer Radio DRS realisiert erstmals das Konzept einer vollständig konvergenten Redaktion. Hinter den fünf Moderatoren steht eine integrierte TV-, Radio- und Onlineredaktion, die das medienübergreifende Kinderprogramm aus einem eigens gebauten Studio heraus betreut. 
+</p>
+
+<p>
+Neu war auch die Projektstrategie: Erstmals war nicht das Online-Konzept aus bestehenden Sendeformaten zu entwickeln, sondern umgekehrt: Corporate Identity und Studiodesign folgten der Online-Gestaltung. Die drei Medienformen sollten zu einer einheitlichen Welt verschmelzen.
+</p>
+
+<p>
+Projektstart war im Dezember 2009. Zur konzeptionellen Beratung, Gestaltung, sowie zur Umsetzung von HTML, CSS und vor allem Flash wurde die Berliner Agentur <a href="http://www.gosub.de"  target="_blank"  >Gosub</a> ausgewählt. Gosub brachte erhebliche konzeptionelle Erfahrung mit Kinderwebsites mit und gab dem &quot;<b>Weltenkonzept</b>&quot; sein Gesicht.
+</p>
+
+<p>
+Die Zeitvorgabe war fixiert: Launch der Plattform am 16. August, Sendestart am 30. August 2010. Auf diese Termine waren auch der Studiobau und die Neustrukturierung der Redaktion abgestimmt, eine Verschiebung somit ausgeschlossen. 
+</p>
+
+<p>
+<b>Projektmethodik: </b>Für Softwareprojekte mit <b>fixem Termin</b> und erst noch zu erarbeitender Ausgestaltung empfiehlt sich ein iteratives, agiles Vorgehen. <i><b>Scrum </b></i>ist ein Vorgehensmodell zur Produktentwicklung nach den Prinzipien der <i>lean production</i>. Es basiert auf der Erkenntnis, dass von der relevanten Information zu Projektbeginn nur minimale Ausschnitte verfügbar sind. Das Projektteam lernt also kontinuierlich hinzu.
+</p>
+
+<p>
+Scrum integriert diesen <b>Lernprozess </b>über Anforderungen, Rahmenbedingungen und technische Machbarkeiten in die Produktentwicklung. Es zielt auf ein maximales Verhältnis zwischen dem Wert des Endprodukts und den investierten Ressourcen. Deshalb ist in Scrum alles verboten, was die Produktivität hemmt. Dies gilt insbesondere für schriftliche Gesamtspezifikationen, deren Nutzen offensichtlich begrenzt ist, weil bekanntlich kaum ein Projekt am Ende so aussieht, wie zu Beginn vorgesehen.
+</p>
+
+<p>
+Das Team soll in der Lage sein, auf die sich wandelnde Sachlage stets so flexibel wie möglich, eben &quot;agil&quot; reagieren zu können. Es erhält hierfür von der Geschäftsleitung als Vorgabe nur eine schriftliche Vision des Vorhabens, die ihm erklärt, zu welchem Zweck das Produkt entwickelt werden soll. Soweit bereits einzelne Funktionen favorisiert sind, erfolgt das Briefing in Form von <a href="http://de.wikipedia.org/wiki/User_Story"  target="_blank"  >Userstories</a>. 
+</p>
+
+<p>
+Deren konkrete Ausgestaltung, insbesondere der technischen Aspekte, erarbeitet das Team schrittweise selbst, und setzt sie anschliessend sofort um. So entsteht früh ein <b>testbarer Prototyp</b>. Spätere Teilspezifikationen greifen auf Projekterfahrung mit allen Arbeitsschritten, vom Wireframe bis zum Deployment zurück, was bei Fixpreisprojekten im Wasserfallmodell nicht möglich ist. Ein weiterer Vorteil liegt in der Kostenkontrolle: Die Gesamtfunktionalität kann in gleich aufwändige Pakete unteteilt werden. Nur das erste wird beauftragt. So hat das Management Gelegenheit, die Auftragsformulierung für den nächsten sogenannten &quot;Sprint&quot; anhand eines bereits funktionalen Prototypen zu überprüfen.
+</p>
+
+<p>
+Die Scrum-Philosophie wurde von YMC auf die organisationalen Gegebenheiten angepasst. Ein erfahrener Projektleiter des Kunden übernahm die Rolle des Product Owners. YMC stellte den Scrum Master. Das Projektteam wurde aus Vertretern von Fernsehen, Radio, interner Gestaltung, interner IT sowie den ausführenden Mitarbeitern der Lieferanten gebildet. Zwar mussten sich die Beteiligten zunächst an das ungewohnte Vorgehen gewöhnen, Unsicherheiten überwinden, und im Team eine gemeinsame <b>Arbeitskultur</b> entwickeln. Schon bald aber empfanden sie den intensiven persönlichen Austausch zwischen publizistischer, gestalterischer und technischer Perspektive einhellig als sehr fruchtbar.
+</p>
+
+<p>
+Tatsächlich hatte das Team am <b>16.8. </b>ein ausgereiftes Portal realisiert, welches fristgerecht in Produktion ging. Die in den ersten Tagen aufgedeckten Bugs waren so minim, dass bis zum Ende des Folgesprints, also zwei Wochen später, auf <b>Deployments</b> verzichtet werden konnte. Die Redaktion begann zu arbeiten, und das technische Team konnte sich auf das zweite Release konzentrieren. 
+</p>
+
+<p>
+Die mit Zambo auslaufende Radio-Community <a href="http://www.pirando.ch/"  target="_blank"  >www.pirando.ch</a> war bereits kommunikativ auf den Umzug vorbereitet. Per Klick migrierten in den ersten Tagen über 300 Kinder ihre Blogs von Pirando zu Zambo. Neues Gefäss bildet ein gemeinsames Blog, der Treff. Dessen Beiträge, aber auch jede redaktionelle Seite können die Kinder kommentieren. Ein eigenes Wissensangebot (Zambothek), spielerische Anwendungen sowie das Streaming-Archiv vergangener Fernseh- und Radiosendungen runden das Angebot ab.
+</p>
+
+<p>
+Programmatisch umfasst Zambo: Kinder-Alltagsthemen, Hörspiele, fiktionale Geschichten (Zambox), Quizzes wie Song oder Gong? oder Zambooster, ein kindgerechtes Magazin für gesellschaftliche und politische Themen (Zamboskop) und ein Musikmagazin, das von den Kindern massgeblich selbst gestaltet wird (ZamboCharts). Als besondere Identifikationsfigur begleitet der Berner Freestyle-Wortakrobat <a href="http://www.knackeboul.com/"  target="_blank"  >Knackeboul</a> das Programm. Auch er ist nicht einfach nur &quot;auf Sendung&quot;: Knackeboul reiht sich in den <b>Dialog zwischen Redaktion und Publikum</b> ein, indem er über Themen rappt, welche die Kinder ihm vorgeben.
+</p>
+
+<p>
+Die <b>Rückkanäle </b>Internet und Telefon werden weitreichend genutzt. Zu Programmzeiten chatten die Kinder in der Plauderbox mit den Redaktoren und nehmen so Einfluss auf das Programm. Gleichzeitig startete die erste Schweizer Kinderserie, Best Friends&quot;, deren Online-Auftritt in Zambo integriert ist. 
+</p>
+
+<p>
+Die sensible Zielgruppe erforderte ein besonderes Sicherheitskonzept: Neue Benutzer werden von der Redaktion telefonisch verifiziert. Auch die Eltern müssen zustimmen, sie erhalten einen Leitfaden für Betreuung ihrer Kinder bei der Internetnutzung.
+</p>
+
+<p>
+Auf dem Portal selbst bleiben die Kinder anonym. Sie werden auch nicht mit Foto dargestellt, sondern mit einem von Gosub liebevoll gestalteten, von den Kindern veränderbaren Flash-Avartar. Die Redaktion moderiert und kontrolliert die Community. Das <b>Sicherheitskonzept </b>wurde in Zusammenarbeit mit der Schweizerischen Kriminalprävention der kantonalen Polizeibehörden (SKPPS) entwickelt.
+</p>
+<div class="object-center">
+<div class="content-view-embeddedmedia" style="margin-bottom: 1em;">
+<div class="class-image">
+
+<div class="attribute-image">                  
+    
+                
+            <a title="Die Zambo-Avartare schützen die Identität der Kinder und bieten Anreiz zur spielerischen Auseinandersetzung mit dem eigenen Selbstbild." href="/var/storage/images/supplynet/companies/ymc/eigene_objekte/medien/bilder/zambo_3_avartare/4167906-1-ger-DE/zambo_3_avartare.jpg"
+       rel="lightbox"                      >
+        <img class="no-png-fix" src="/var/storage/images/supplynet/companies/ymc/eigene_objekte/medien/bilder/zambo_3_avartare/4167906-1-ger-DE/zambo_3_avartare_large.jpg" width="360" height="252" alt="Die Zambo-Avartare schützen die Identität der Kinder und bieten Anreiz zur spielerischen Auseinandersetzung mit dem eigenen Selbstbild." title="Die Zambo-Avartare schützen die Identität der Kinder und bieten Anreiz zur spielerischen Auseinandersetzung mit dem eigenen Selbstbild."
+                 style="border: 0px; " />
+        </a>
+  
+  </div>
+<div class="attribute-caption object-center" style="text-align: left; width: 360px">
+    
+Die Zambo-Avartare schützen die Identität der Kinder und bieten Anreiz zur spielerischen Auseinandersetzung mit dem eigenen Selbstbild.</div></div>
+</div>
+
+</div>
+
+<p>
+<b>eZ Publish</b> bildet die Schnittstelle zwischen den drei Medien. Es ist Frontend für Live-Streaming und Videoarchiv, liefert Audio-Podcasts aus und verwaltet Content, Benutzerprofile und Avartar-Konfigurationen. Im Backend stehen ein massgeschneiderte Publikationsworkflow und ein CRM-Tool für den Telefonsupport zur Verfügung. Eine 3D-Engine im Fernsehstudio wird mit der Avartar-Konfiguration beliefert, so dass die von den Kindern in der Avartar-Werkstatt gestalteten Figuren regelmässig animiniert im Fernsehen auftreten.
+</p>
+
+<p>
+Das Team hat den Sprintzyklus beibehalten, launcht also alle zwei Wochen neue Funktionalität. Inzwischen bearbeitet es Userstories im Bereich Social Networking. Hierbei geht es um eine kindgerechte Vereinfachung, und um eine positive und lehrreiche Medienerfahrung. 
+</p>
+
+<p>
+<i>Zambo wird auf SF zwei und DRS 1 gesendet und ist als</i><a href="http://itunes.apple.com/ch/podcast/zambo/id389205321"  target="_blank"  ><i> iTunes-Podcast</i></a><i> erhältlich. </i>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>09/01/2010 03:00 pm</span> &nbsp; <a href="http://www.ymc.ch/weblog/(tag)/eZ%20Publish">http://www.ymc.ch/weblog/(tag)/eZ Publish</a> &nbsp; <a href="/Mirror/YMC/Trimediales-Kinderportal-Zambo-startet-in-Web-TV-und-Radio">View mirror of item</a> &nbsp; <a href="http://www.ymc.ch/weblog/trimediales_kinderportal_zambo_startet_in_web_tv_und_radio">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/YMC/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/7/(year)/2010" title="">July 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/5/(year)/2010" title="">May 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/9/(year)/2009" title="">September 2009</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/7/(year)/2009" title="">July 2009</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/YMC/(month)/8/(year)/2010" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/YMC/(month)/10/(year)/2010" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>September&nbsp;2010</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            <em><a href="/Mirror/YMC/(day)/1/(month)/9/(year)/2010">1</a></em>
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                                        <td class="  right">
+            5
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                                        <td class="  right">
+            12
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                                        <td class="  right">
+            19
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                                        <td class="  right">
+            26
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2010";s:5:"month";s:1:"9";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:3:"YMC";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"236";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:3:"YMC";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"236";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"234";s:7:"node_id";s:3:"236";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"be64d5ebfca7cb008f3c25ad4498083c";s:14:"node_remote_id";s:32:"ef49a1bf614a25d88c1d72e867b38fcc";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:10:"Mirror/YMC";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"236";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

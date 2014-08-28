@@ -1,0 +1,621 @@
+a:10:{s:7:"content";s:32000:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/e14f409488d42423f8cf4716248f02f1b67b785f" title="http://projects.ez.no/simpleforum/source/e14f409488d42423f8cf4716248f02f1b67b785f">http://projects.ez.no/simpleforum/source/e14f409488d42423f8cf47162 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m design/admin2/templates/response/view/list.tpl
+m design/admin2/templates/topic/view/line.tpl
+m design/admin2/templates/topic/view/list.tpl
+m modules/response/new.php
+m modules/topic/new.php
+m modules/topic/view.php
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>add htmlentities</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-e14f409488d42423f8cf4716248f02f1b67b785f">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/e14f409488d42423f8cf4716248f02f1b67b785f">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/e82def1f3a3ef940aa7d59caf60281e6f07ff6b6" title="http://projects.ez.no/simpleforum/source/e82def1f3a3ef940aa7d59caf60281e6f07ff6b6">http://projects.ez.no/simpleforum/source/e82def1f3a3ef940aa7d59caf ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m sql/mysql/schema.sql
++ sql/oracle/schema.sql
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>add oracle database schema</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-e82def1f3a3ef940aa7d59caf60281e6f07ff6b6">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/e82def1f3a3ef940aa7d59caf60281e6f07ff6b6">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/f8395bdae8b3c60b70bf1450103a1a14e6341620" title="http://projects.ez.no/simpleforum/source/f8395bdae8b3c60b70bf1450103a1a14e6341620">http://projects.ez.no/simpleforum/source/f8395bdae8b3c60b70bf14501 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m bin/php/simpleforumupdatesearchindex.php
+m classes/simpleforumtopic.php
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>index differential forum data according to the date of the last
+indexation</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-f8395bdae8b3c60b70bf1450103a1a14e6341620">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/f8395bdae8b3c60b70bf1450103a1a14e6341620">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/9f63be4845740d7dc7385944a9661567ad59fea3" title="http://projects.ez.no/simpleforum/source/9f63be4845740d7dc7385944a9661567ad59fea3">http://projects.ez.no/simpleforum/source/9f63be4845740d7dc7385944a ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m README
++ extension.xml
+m settings/content.ini.append.php
+- settings/content.ini.append.php.back
+m settings/contentstructuremenu.ini.append.php
+- settings/contentstructuremenu.ini.append.php.back
+m settings/menu.ini.append.php
+- settings/menu.ini.append.php.back
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>prepare for first delivery</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-9f63be4845740d7dc7385944a9661567ad59fea3">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/9f63be4845740d7dc7385944a9661567ad59fea3">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/e02bcf1a50b86b48f4b39980ff77133dff7586c3" title="http://projects.ez.no/simpleforum/source/e02bcf1a50b86b48f4b39980ff77133dff7586c3">http://projects.ez.no/simpleforum/source/e02bcf1a50b86b48f4b39980f ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m modules/response/delete.php
+m modules/response/new.php
+m modules/response/rate.php
+m modules/response/state.php
+m modules/topic/delete.php
+m modules/topic/list.php
+m modules/topic/new.php
+m modules/topic/state.php
+m modules/topic/view.php
+m settings/site.ini.append.php
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>allow enabling/disabling simple forum custom cache settings</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-e02bcf1a50b86b48f4b39980ff77133dff7586c3">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/e02bcf1a50b86b48f4b39980ff77133dff7586c3">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/a096bcc200ce3cb77f1d3817c7aa28d8bcd63b0e" title="http://projects.ez.no/simpleforum/source/a096bcc200ce3cb77f1d3817c7aa28d8bcd63b0e">http://projects.ez.no/simpleforum/source/a096bcc200ce3cb77f1d3817c ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m modules/topic/delete.php
+m modules/topic/list.php
+m modules/topic/new.php
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>clear topic list cache when acting on topic items</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-a096bcc200ce3cb77f1d3817c7aa28d8bcd63b0e">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/a096bcc200ce3cb77f1d3817c7aa28d8bcd63b0e">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/8783eb00b01064d50be88a91cb792c689c6f8c96" title="http://projects.ez.no/simpleforum/source/8783eb00b01064d50be88a91cb792c689c6f8c96">http://projects.ez.no/simpleforum/source/8783eb00b01064d50be88a91c ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m modules/response/delete.php
+m modules/response/new.php
+m modules/response/rate.php
+m modules/response/state.php
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>clear topic view cache when acting on response</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-8783eb00b01064d50be88a91cb792c689c6f8c96">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/8783eb00b01064d50be88a91cb792c689c6f8c96">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/simpleforum/source/6c1034604705fab9ad383285ab9b988b2fb10439" title="http://projects.ez.no/simpleforum/source/6c1034604705fab9ad383285ab9b988b2fb10439">http://projects.ez.no/simpleforum/source/6c1034604705fab9ad383285a ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m classes/simpleforumcachemanager.php
+m design/admin2/javascript/forum.js
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>purge cache in forum</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2012 01:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-simpleforum-source-6c1034604705fab9ad383285ab9b988b2fb10439">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/simpleforum/source/6c1034604705fab9ad383285ab9b988b2fb10439">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezperformancelogger/subversion/053d3b77cbd5c326f5ea9dcbe4b6ff1cbe382d76" title="http://projects.ez.no/ezperformancelogger/subversion/053d3b77cbd5c326f5ea9dcbe4b6ff1cbe382d76">http://projects.ez.no/ezperformancelogger/subversion/053d3b77cbd5c ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m bin/php/rotateperflogs.php
+m bin/php/updateperfstats.php
+m classes/ezperflogger.php
++ classes/ezperfloggerlogmanager.php
+m classes/ezxhproflogger.php
+m cronjobs/rotateperflogs.php
+m cronjobs/updateperfstats.php
+m modules/xhprof/view.php
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Cleanup: split off log file management in a dedicated class</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/29/2012 12:20 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-ezperformancelogger-subversion-053d3b77cbd5c326f5ea9dcbe4b6ff1cbe382d76">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezperformancelogger/subversion/053d3b77cbd5c326f5ea9dcbe4b6ff1cbe382d76">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezperformancelogger/subversion/b0f5725e55a6c1527228c4ebd059c9d6cd10acdb" title="http://projects.ez.no/ezperformancelogger/subversion/b0f5725e55a6c1527228c4ebd059c9d6cd10acdb">http://projects.ez.no/ezperformancelogger/subversion/b0f5725e55a6c ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m bin/php/muninplugin.php
+m doc/todo.txt
+m settings/ezperformancelogger.ini
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Allow munin graphs to be grouped under different names (useful for monitoring different ez installs on one host)</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/29/2012 12:20 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-ezperformancelogger-subversion-b0f5725e55a6c1527228c4ebd059c9d6cd10acdb">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezperformancelogger/subversion/b0f5725e55a6c1527228c4ebd059c9d6cd10acdb">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/Projects-Commits/(offset)/2100"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/Mirror/Projects-Commits/(offset)/2120"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages"><a href="/Mirror/Projects-Commits">1</a> ... 
+                      <span class="other"><a href="/Mirror/Projects-Commits/(offset)/1930">194</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/1940">195</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/1950">196</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/1960">197</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/1970">198</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/1980">199</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/1990">200</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2000">201</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2010">202</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2020">203</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2030">204</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2040">205</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2050">206</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2060">207</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2070">208</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2080">209</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2090">210</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2100">211</a></span>
+            
+        <span class="current">212</span>
+
+                      <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2120">213</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2130">214</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2140">215</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2150">216</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2160">217</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2170">218</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2180">219</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2190">220</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2200">221</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2210">222</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2220">223</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2230">224</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2240">225</a></span>
+                              <span class="other"><a href="/Mirror/Projects-Commits/(offset)/2250">226</a></span>
+            <span class="other"> ... </span><span class="other"><a href="/Mirror/Projects-Commits/(offset)/2500">251</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-Commits/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Projects-Commits/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Projects-Commits/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/7/(month)/8/(year)/2014">7</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/8/(month)/8/(year)/2014">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/12/(month)/8/(year)/2014">12</a></em>
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/14/(month)/8/(year)/2014">14</a></em>
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/19/(month)/8/(year)/2014">19</a></em>
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/22/(month)/8/(year)/2014">22</a></em>
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/Mirror/Projects-Commits/(day)/25/(month)/8/(year)/2014">25</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/26/(month)/8/(year)/2014">26</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Projects-Commits/(day)/27/(month)/8/(year)/2014">27</a></em>
+        </td>
+                            <td class="currentselected today">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:4:"2110";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:16:"Projects Commits";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4258";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:16:"Projects Commits";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4258";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4258";s:7:"node_id";s:4:"4258";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"151f48ad5587f2e90291773e6481f04b";s:14:"node_remote_id";s:32:"f1aa145c42a42ab3ed8a947dd4f37e8f";s:6:"offset";i:2110;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:23:"Mirror/Projects-Commits";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4258";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

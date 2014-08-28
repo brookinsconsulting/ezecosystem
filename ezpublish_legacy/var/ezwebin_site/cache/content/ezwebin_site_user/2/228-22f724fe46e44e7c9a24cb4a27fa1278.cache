@@ -1,0 +1,494 @@
+a:10:{s:7:"content";s:42648:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Let-s-enjoy-the-Symfony" title="Let’s enjoy the Symfony">Let’s enjoy the Symfony</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>
+One of the news that shook the eZ Community this month is the announcement of eZ Publish 5 being developed with Symfony framework. Initial blog post (check it out at <a href="http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces" target="_self">http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces</a>, do not skip comments, there are some juicy elements there) got a lot of attention, with the sentiment by far being positive, but with some well put concerns regarding the business side of the decision. <br />Taking these into account, we still think the positive repercussions of this decision greatly out weight the possibly problematic ones, and here is why:</p><a name="eztoc8435_1" id="eztoc8435_1"></a><h2>Focus</h2><p>By leaving out the parts of the system that are not related to it’s core business to the quality framework such as Symfony, eZ can focus even more to CMS features that need to be engineered and developed. Netgen is actively involved in development of the next version of eZ Publish (some of our crew are working intensively on the new <a href="https://github.com/ezsystems/ezp-next" target="_self">Public API &nbsp;</a>&nbsp;and the new REST API implementation), and we know from first hand how much work is there to be done to fulfill the vision of the new eZ Publish stack. All this work takes time (and money!) and every engineer hour not being wasted on yet another MVC implementation can be put into making eZ the best CMS solution it can be. And there <b>IS</b> work to be done, as can be seen on the image depicting the difference between the old and the new eZ Publish stack:</p>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/ez-publish-5-architechture/8445-1-cro-HR/ez-publish-5-architechture_reference.png" width="620" height="422"  style="border: 0px solid ;" alt="ez-publish-5-architechture" title="ez-publish-5-architechture" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>eZ Publish 5 architecture, <a href="http://en.wikipedia.org/wiki/Spaghetti_code#Lasagna_code" target="_self">lasagne</a> style!</p> </div>
+         </div>
+</div>
+</div><a name="eztoc8435_2" id="eztoc8435_2"></a><h2>&nbsp;</h2><a name="eztoc8435_3" id="eztoc8435_3"></a><h2>The wheel is invented</h2><p>Symfony is a great and extensively used framework, and it provides a great number of infrastructure that eZ needs. As it is a modular framework, only the components eZ engineering needs (and do not want to waste time on developing) can be used, like HMVC, templating engine, etc. While there were earlier attempts to develop all this in-house (eZ Components), I think that it just wastes too much resources that can be put to a better usage.</p><a name="eztoc8435_4" id="eztoc8435_4"></a><h2>The more the merrier</h2><p>One of the issues any web development company focused on eZ Publish encounters is a shortage of eZ developers available. eZ is a great product, and it is the cornerstone of our technical expertise here at Netgen, but if there is one thing I could mention as a possible problem for anyone trying it out for the first time, it is its rather steep learning curve. With so many big players in the CMS arena one can choose from, eZ needs to be as competitive on this field as on others. By using a well known and popular framework such as Symfony more new developers can be attracted to eZ and become productive in shorter period of time. Also, potential clients could be more willing to embrace the CMS if it is, even partially, based on a technology that they are already using or they are aware of.</p><a name="eztoc8435_5" id="eztoc8435_5"></a><h2>Tricky parts</h2><p>Of course, as any change, this one also brings some issues. For one, there will be a lot of new things to learn, and some very specific skills in eZ development could become obsolete. But anyone working in web business should be already accustomed to this, as if there is anything constant in web development world it is change itself. The other thing often mentioned is the problem with existing clients, and their willing to pay for the re-implementation of their sites. eZ Systems seems to be determined to support the 4.x versions of eZ Publish for years to come, and the 4.x kernel will be fully integrated in the first version of eZ 5 (as a legacy bundle), with gradual transition to the new technology stack. Also, as the database schema remains the same, the transition to eZ Publish 5 could be made a part of usual 2-3 years re-design cycle which most of the sites need to follow anyhow.</p><a name="eztoc8435_6" id="eztoc8435_6"></a><h2>Conclusion</h2><p>The CMS market is advancing even faster, and eZ needs to keep up the pace of changes. With its focus retained on solving core business issues and by providing added value in CMS and CXM field, eZ will be able to keep it’s position as a technology leader in the field.</p><p>And we all want exactly that, so let’s enjoy the Symfony.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2012 05:27 pm</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Let-s-enjoy-the-Symfony">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Let-s-enjoy-the-Symfony">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Let-s-enjoy-the-Symfony" title="Let’s enjoy the Symfony">Let’s enjoy the Symfony</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>
+One of the news that shook the eZ Community this month is the announcement of eZ Publish 5 being developed with Symfony framework.The initial blog post (check it out at <a href="http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces" target="_self">http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces</a>, do not skip the comments, there are some juicy elements there) got a lot of attention, with the sentiment by far being positive, but with some well put concerns regarding the business side of the decision. <br />Taking these into account, we still think the positive repercussions of this decision greatly out weight the possibly problematic ones, and here is why:</p><a name="eztoc8435_1" id="eztoc8435_1"></a><h2>Focus</h2><p>By leaving out the parts of the system that are not related to it’s core business to a quality framework such as Symfony, eZ can focus even more on the CMS features that need to be engineered and developed. Netgen is actively involved in the development of the next version of eZ Publish (part of our crew is working intensively on the new <a href="https://github.com/ezsystems/ezp-next" target="_self">Public API</a>&nbsp;and the new REST API implementation), and we know from the first hand how much work is there to be done to fulfill the vision of the new eZ Publish stack. All this work takes time (and money!) and every engineer hour not being wasted on yet another MVC implementation can be put into making eZ the best CMS solution it can be. And there <b>IS</b> work to be done, as can be seen on the image depicting the difference between the old and the new eZ Publish stack:</p>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/ez-publish-5-architechture/8445-1-cro-HR/ez-publish-5-architechture_reference.png" width="620" height="422"  style="border: 0px solid ;" alt="ez-publish-5-architechture" title="ez-publish-5-architechture" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>eZ Publish 5 architecture, <a href="http://en.wikipedia.org/wiki/Spaghetti_code#Lasagna_code" target="_self">lasagne</a> style!</p> </div>
+         </div>
+</div>
+</div><a name="eztoc8435_2" id="eztoc8435_2"></a><h2>&nbsp;</h2><a name="eztoc8435_3" id="eztoc8435_3"></a><h2>The wheel is invented</h2><p>Symfony is a great and extensively used framework, and it provides a great number of infrastructure that eZ needs. As it is a modular framework, only the components eZ engineering needs (and do not want to waste time on developing) can be used, like HMVC, templating engine, etc. While there were earlier attempts to develop all this in-house (eZ Components), I think that this approach just wastes too much resources that can be put to a better usage.</p><a name="eztoc8435_4" id="eztoc8435_4"></a><h2>The more the merrier</h2><p>One of the issues any web development company focused on eZ Publish encounters is a shortage of eZ developers available. eZ is a great product, and it is the cornerstone of our technical expertise here at Netgen, but if there is one thing I could mention as a possible problem for anyone trying it out for the first time, it is its rather steep learning curve. With so many big players in the CMS arena one can choose from, eZ needs to be as competitive on this field as on others. By using a well known and popular framework such as Symfony more new developers can be attracted to eZ and become productive in shorter period of time. Also, potential clients could be more willing to embrace the CMS if it is, even partially, based on a technology that they are already using or they are aware of.</p><a name="eztoc8435_5" id="eztoc8435_5"></a><h2>Tricky parts</h2><p>Of course, as any change, this one also brings some issues. For one, there will be a lot of new things to learn, and some very specific skills in eZ development could become obsolete. But anyone working in the web business should be already accustomed to this, as if there is anything constant in the web development world it is the change itself. The other thing often mentioned is the problem with the existing clients, and their willingness to pay for the re-implementation of their sites. eZ Systems seems to be determined to support the 4.x versions of eZ Publish for years to come, and the 4.x kernel will be fully integrated in the first version of eZ 5 (as a legacy bundle), with gradual transition to the new technology stack. Also, as the database schema remains the same, the transition to eZ Publish 5 could be made a part of usual 2-3 years re-design cycle which most of the sites need to follow anyhow.</p><a name="eztoc8435_6" id="eztoc8435_6"></a><h2>Conclusion</h2><p>The CMS market is advancing even faster, and eZ needs to keep up the pace of changes. With its focus retained on solving the core business issues and by providing added value in CMS and CXM field, eZ will be able to keep it’s position as a technology leader in the field.</p><p>And we all want exactly that, so let’s enjoy the Symfony.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2012 05:27 pm</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Let-s-enjoy-the-Symfony2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Let-s-enjoy-the-Symfony">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/About-the-eZ-Product-Innovation-Board" title="About the eZ Product Innovation Board">About the eZ Product Innovation Board</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>As <a href="http://www.netgen.hr/eng/Netgen/News/Netgen-has-a-representative-in-the-eZ-Product-Innovation-Board" target="_self">reported few months back</a>&nbsp;I was called to join the<b>&nbsp;eZ Product Innovation Board</b>. We had 2 meetings so far and I guess it is now a good time to cover the topic on our blog.</p><a name="eztoc8416_1" id="eztoc8416_1"></a><h2>The Board</h2><p>To be as much diverse as possible the Board has various eZ Ecosystem stakeholders: <b>partners, clients, employees, analysts</b>, etc. All in all roughly 20 people are involved in the initiative for 18 months or 6 meetings, 2 have already been held in London and Rome. The Board's tasks is to discuss possible improvements and new features which are most needed in the eZ Publish CMS and to suggest the best options to eZ Publish product management.&nbsp;</p><p>Chairman of the board is <a href="http://twitter.com/bardfarstad" target="_self">Bård Farstad</a> and he wrote few blog post after the initiative was announced: <a href="http://ez.no/About-eZ/Blog/Better-Faster-Stronger-Innovation-at-eZ" target="_self">ez.no/About-eZ/Blog/Better-Faster-Stronger-Innovation-at-eZ</a>&nbsp;and&nbsp;<a href="http://ez.no/About-eZ/Blog/Product-Innovation-at-eZ-First-Steps" target="_self">ez.no/About-eZ/Blog/Product-Innovation-at-eZ-First-Steps</a>.</p><p>The main idea behind the board is to have an all day meeting every 3 months to discuss use cases from all possible angles and then voting to see which use cases are more interesting than other. After the meeting the most interesting ones are sent to eZ Product management. So the board acts like a prioritized filter: processing the queue of use cases and outputting them sorted by priority.</p><a name="eztoc8416_2" id="eztoc8416_2"></a><h2>UX</h2>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/ez-pib-in-london/8426-1-cro-HR/eZ-PIB-in-London_large.jpg" width="360" height="267"  style="border: 0px solid ;" alt="Some member of the board in London (taken by Stewart Wilkinson)" title="Some member of the board in London (taken by Stewart Wilkinson)" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 360px">
+                
+<p>Some member of the board in London (taken by Stewart Wilkinson)</p> </div>
+         </div>
+</div>
+</div><p>On the first meeting in <b>London</b> the main topic was<b>&nbsp;user experience</b>. It is not a coincidence that UX was the first topic. It is obvious for quite some time now that eZ needs better experience for users and editors. At that point the demo web site installed by default was really outdated technically. It was not up to date with HTML standards and not showing off some new possibilities like responsive design, etc. &nbsp;In the meanwhile this was corrected (some more info here:&nbsp;<a href="http://ez.no/About-eZ/Blog/Automatic-Mobile-Strategy-Responsive-Design" target="_self">ez.no/About-eZ/Blog/Automatic-Mobile-Strategy-Responsive-Design</a>) as the problem was straightforward, so it was not topic for the Innovation Board.</p><p>But the situation was not that simple with the interface for editors. Currently we have:</p>
+<ul>
+
+<li>an administration interface. It implements all possible features: content management, user management, configuration, etc. The interface itself, although improved every now and then (with one bigger visual change and increased AJAX usage), is almost 10 years old. Conceptually. It is also highly technically oriented and not adapted for wider editorial staff</li>
+
+<li>a web site interface. It can be used in some cases but it is not really user friendly and has only few features and, although more simple, it can still be confusing to not-so-skilled editor</li>
+
+<li>several community efforts (like eZ Multitasking One or eZ Exceed) which probably do some things better as they are probably built to fit some real use cases but the general problem with those is that they are not “official”. I personally didn’t use it much so I can’t claim if they are better or not and in what cases.</li>
+
+</ul>
+<p>So one of the main tasks for eZ Systems in short-term is to <b>build a new editorial interface</b> and that was discussed in London meeting. Dozen user scenarios were processed and the general conclusion was that:</p>
+<ol>
+
+<li>the new editorial interface should be build from scratch (and not replacing the existing admin interface)</li>
+
+<li>it should be an overlay on the website but much more user friendly and easier to use (so a power editor and a casual editor could use the same interface) than the existing web site interface</li>
+
+<li>it should focus on the content management, other features should be left to the existing admin interface</li>
+
+<li>the new interface should work on touch devices</li>
+
+</ol>
+<p>I really hope that we gave a lot of useful input for the eZ Product team and the new UX team. In last 2 months we have seen a great progress in that direction and it would be even better to have something usable in October.</p><a name="eztoc8416_3" id="eztoc8416_3"></a><h2>e-Commerce</h2><p>On the second meeting in <b>Rome</b> the main topic was <b>e-commerce</b>. Currently in eZ Publish we have a shop module which is usable in some simple cases, but the facts are:</p>
+<ul>
+
+<li>it can’t compete with some specialized solutions (e.g. Magento)</li>
+
+<li>it doesn’t have customizable checkout workflow</li>
+
+<li>it is not being developed for some time now (except fixing bugs)</li>
+
+<li>it has even been removed from the admin interface &nbsp;(it is on its way to become extracted from kernel and put in separate extension)</li>
+
+</ul>
+<p>There are many partner and community efforts (like Xrow commerce extensions and Silver Solutions connectors to SAP, to name a few) which enrich the core features. Netgen too has few extension for connecting Croatian payment gateways (used in several projects). But the fact remains we need a better platform so several scenarios were discussed in the Board meeting. Not just the shop but also campaign management and other similar features that can be used for e-commerce.</p><p>The main discussions were on should eZ try to build the new shop that could compete with Magento, the importance of customizable workflows and how to handle campaigning. IMO the most important conclusion was that competing directly with Magento does not make much sense. Of course, community extension could go in that direction, but what eZ should do is to leverage the content stored in its own database. That basically means that <b>eZ should focus more on how to monetize content</b> (or selling virtual goods). That field is still very hot and without not ultimate solution. The importance of customizable workflows rise when we speak about virtual goods (e.g. a customer could only read 3 articles in a certain time period, etc.). And campaigning is also important but could be either solved by integrating with existing best of breed products or encourage community to innovate.</p><p>At the end it is important to note that possible real implementation of e-commerce scenarios are scheduled for 5.1 release next year. &nbsp;&nbsp;&nbsp;&nbsp;</p><a name="eztoc8416_4" id="eztoc8416_4"></a><h2>Conclusion</h2><p>The most important remark is that the Board work is not something that will replace any other effort in the ecosystem. IMO the community site is still the main hub for releasing ideas and initiatives. I see the Board as a focused add-on to the ecosystem. <b>A lot of ideas and experience can be shared when you bring people with different roles, jobs and backgrounds in a room for a day with not much interference.</b>&nbsp;</p><p>So the initiative can only bring some good stuff but will highly depend on board members engagement. That would be the board’s only possible weakness. &nbsp;</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/18/2012 06:55 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/About-the-eZ-Product-Innovation-Board">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/About-the-eZ-Product-Innovation-Board">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/About-the-eZ-Product-Innovation-Board" title="About the eZ Product Innovation Board">About the eZ Product Innovation Board</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>As <a href="http://www.netgenlabs.com/Netgen/News/Netgen-has-a-representative-in-the-eZ-Product-Innovation-Board" target="_self">reported few months back</a>&nbsp;I was called to join the<b>&nbsp;eZ Product Innovation Board</b>. We had 2 meetings so far and I guess it is now a good time to cover the topic on our blog.</p><a name="eztoc8416_1" id="eztoc8416_1"></a><h2>The Board</h2><p>To be as much diverse as possible the Board has various eZ Ecosystem stakeholders: <b>partners, clients, employees, analysts</b>, etc. All in all roughly 20 people are involved in the initiative for 18 months or 6 meetings, 2 have already been held in London and Rome. The Board's tasks is to discuss possible improvements and new features which are most needed in the eZ Publish CMS and to suggest the best options to eZ Publish product management.&nbsp;</p><p>Chairman of the board is <a href="http://twitter.com/bardfarstad" target="_self">Bård Farstad</a> and he wrote few blog post after the initiative was announced: <a href="http://ez.no/About-eZ/Blog/Better-Faster-Stronger-Innovation-at-eZ" target="_self">ez.no/About-eZ/Blog/Better-Faster-Stronger-Innovation-at-eZ</a>&nbsp;and&nbsp;<a href="http://ez.no/About-eZ/Blog/Product-Innovation-at-eZ-First-Steps" target="_self">ez.no/About-eZ/Blog/Product-Innovation-at-eZ-First-Steps</a>.</p><p>The main idea behind the board is to have an all day meeting every 3 months to discuss use cases from all possible angles and then voting to see which use cases are more interesting than other. After the meeting the most interesting ones are sent to eZ Product management. So the board acts like a prioritized filter: processing the queue of use cases and outputting them sorted by priority.</p><a name="eztoc8416_2" id="eztoc8416_2"></a><h2>UX</h2>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/ez-pib-in-london/8426-1-cro-HR/eZ-PIB-in-London_large.jpg" width="360" height="267"  style="border: 0px solid ;" alt="Some member of the board in London (taken by Stewart Wilkinson)" title="Some member of the board in London (taken by Stewart Wilkinson)" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 360px">
+                
+<p>Some members of the Innovation Board in London (photo taken by Stuart Wilkinson)</p> </div>
+         </div>
+</div>
+</div><p>On the first meeting in <b>London</b> the main topic was<b>&nbsp;user experience</b>. It is not a coincidence that UX was the first topic. It is obvious for quite some time now that eZ needs better experience for users and editors. At that point the demo web site installed by default was really outdated technically. It was not up to date with HTML standards and not showing off some new possibilities like responsive design, etc. &nbsp;In the meanwhile this was corrected (some more info here:&nbsp;<a href="http://ez.no/About-eZ/Blog/Automatic-Mobile-Strategy-Responsive-Design" target="_self">ez.no/About-eZ/Blog/Automatic-Mobile-Strategy-Responsive-Design</a>) as the problem was straightforward, so it was not topic for the Innovation Board.</p><p>But the situation was not that simple with the interface for editors. Currently we have:</p>
+<ul>
+
+<li>an administration interface. It implements all possible features: content management, user management, configuration, etc. The interface itself, although improved every now and then (with one bigger visual change and increased AJAX usage), is almost 10 years old. Conceptually. It is also highly technically oriented and not adapted for wider editorial staff</li>
+
+<li>a web site interface. It can be used in some cases but it is not really user friendly and has only few features and, although more simple, it can still be confusing to not-so-skilled editor</li>
+
+<li>several community efforts (like eZ Multitasking One or eZ Exceed) which probably do some things better as they are probably built to fit some real use cases but the general problem with those is that they are not “official”. I personally didn’t use it much so I can’t claim if they are better or not and in what cases.</li>
+
+</ul>
+<p>So one of the main tasks for eZ Systems in short-term is to <b>build a new editorial interface</b> and that was discussed in London meeting. Dozen user scenarios were processed and the general conclusion was that:</p>
+<ol>
+
+<li>the new editorial interface should be build from scratch (and not replacing the existing admin interface)</li>
+
+<li>it should be an overlay on the website but much more user friendly and easier to use (so a power editor and a casual editor could use the same interface) than the existing web site interface</li>
+
+<li>it should focus on the content management, other features should be left to the existing admin interface</li>
+
+<li>the new interface should work on touch devices</li>
+
+</ol>
+<p>I really hope that we gave a lot of useful input for the eZ Product team and the new UX team. In last 2 months we have seen a great progress in that direction and it would be even better to have something usable in October.</p><a name="eztoc8416_3" id="eztoc8416_3"></a><h2>e-Commerce</h2><p>On the second meeting in <b>Rome</b> the main topic was <b>e-commerce</b>. Currently in eZ Publish we have a shop module which is usable in some simple cases, but the facts are:</p>
+<ul>
+
+<li>it can’t compete with some specialized solutions (e.g. Magento)</li>
+
+<li>it doesn’t have customizable checkout workflow</li>
+
+<li>it is not being developed for some time now (except fixing bugs)</li>
+
+<li>it has even been removed from the admin interface &nbsp;(it is on its way to become extracted from kernel and put in separate extension)</li>
+
+</ul>
+<p>There are many partner and community efforts (like Xrow commerce extensions and Silver Solutions connectors to SAP, to name a few) which enrich the core features. Netgen too has few extension for connecting Croatian payment gateways (used in several projects). But the fact remains we need a better platform so several scenarios were discussed in the Board meeting. Not just the shop but also campaign management and other similar features that can be used for e-commerce.</p><p>The main discussions were on should eZ try to build the new shop that could compete with Magento, the importance of customizable workflows and how to handle campaigning. IMO the most important conclusion was that competing directly with Magento does not make much sense. Of course, community extension could go in that direction, but what eZ should do is to leverage the content stored in its own database. That basically means that <b>eZ should focus more on how to monetize content</b> (or selling virtual goods). That field is still very hot globally and without a good integrated solution. The importance of customizable workflows rise when we speak about virtual goods (e.g. a customer could only read 3 articles in a certain time period, etc.). And campaigning is also important but could be either solved by integrating with existing best of breed products or encourage community to innovate.</p><p>At the end it is important to note that possible real implementation of e-commerce scenarios are scheduled for 5.1 release next year. &nbsp;&nbsp;&nbsp;&nbsp;</p><a name="eztoc8416_4" id="eztoc8416_4"></a><h2>Conclusion</h2><p>The most important remark is that the Board work is not something that will replace any other effort in the ecosystem. IMO the community site is still the main hub for releasing ideas and initiatives. I see the Board as a focused add-on to the ecosystem. <b>A lot of ideas and experience can be shared when you bring people with different roles, jobs and backgrounds in a room for a day with not much interference.</b>&nbsp;</p><p>So the initiative can only bring some good stuff but will highly depend on board members engagement. That would be the board’s only possible weakness. &nbsp;</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/18/2012 06:55 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/About-the-eZ-Product-Innovation-Board2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/About-the-eZ-Product-Innovation-Board">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>July&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="right">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                                        <td class="  right">
+            8
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                                        <td class="  right">
+            15
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/18/(month)/7/(year)/2012">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                                        <td class="  right">
+            22
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            23
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/24/(month)/7/(year)/2012">24</a></em>
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                                        <td class="  right">
+            29
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2012";s:5:"month";s:1:"7";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"228";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"228";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"226";s:7:"node_id";s:3:"228";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";s:14:"node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:13:"Mirror/Netgen";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"228";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

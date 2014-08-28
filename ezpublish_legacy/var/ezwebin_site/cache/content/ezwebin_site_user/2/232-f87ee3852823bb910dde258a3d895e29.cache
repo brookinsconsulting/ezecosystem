@@ -1,0 +1,361 @@
+a:10:{s:7:"content";s:16040:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/lab/variable_cache_layer_var_block_wouldn_t_that_be_something" title="Variable cache layer... Var-block - wouldn't that be something?">Variable cache layer... Var-block - wouldn't that be something?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+It took me fairly long time to figure out what particular tool available from PHP in my custom software and website implementations was missing from eZ Publish... but I finally got it. It's the ability to dynamically, flexibly cache variables, understood as operation or logic results, stored in a reusable form. Naturally, there is no significant need of caching simple variables defined directly within the pagelayout, just like these:
+</p>
+<div class="code">
+
+<p>
+
+{def $my_var=345}<br />{def $my_other_var=hash( 'a', '4023' )}
+</p>
+
+</div>
+
+<p>
+However, it gets worse not being able to cheaply store an array of ten values, whose fetching/generating cost was over fifty or one hundred SQL queries, several files accessed in the file system, etc.
+</p>
+<h5>Problem</h5>
+<p>
+The problem seems quite straightforward - out of many caching techniques and layers in eZ Publish, only two are universally useful: the viewcache and the cache-blocks. Unfortunately, both of them store presentation layer results rather than data, and both are quite independent. As a result:
+</p>
+
+<ol>
+
+<li>Whenever you crave for variables that will be used by several cache-blocks in the pagelayout, they must be placed outside of cache-blocks themselves. <b>Don't get fooled</b> by the top cache-block apparently holding the variables used further on - it's a coincidence. This may only work if all expiry times are equal for all the blocks <b>and</b> no subtree expiry is ever used (or you've used bugged eZ 4.0.0 for half-a-year, where subtree expiry is simply broken and it's easy to take it as the default behavior), provided that the blocks never got desynchronized. <b>The point is: variables must be kept outside cache-blocks and they will not be cached.</b></li>
+
+<li>The module result gets generated before the pagelayout, so there's little reusability between their vars.</li>
+
+</ol>
+<h5>So what's missing?</h5>
+<p>
+My idea is <b>a cache layer halfway between logic/data and the presentation layer</b>. It could be a variable-dedicated cache-block equivalent (maybe a var-block?). 
+</p>
+
+<p>
+<b>Example:</b> Imagine a website that for each of its node views should be able to access both current node data (data map) as well as root node data in order to make some decisions, calculations, etc. Further, the data could be required by at least three of its cache blocks (with different expiry times, expiry rules and "uncomfortable" locations within the pagelayout). Today that sort of combination requires a substantial...
+</p>
+
+<p>
+The var-block as I imagine it would have expiry settings similar to cache-blocks: subtree expiry, expiry ignore, expiry time and a flexible key management. In order to prevent frequent file system access, var-block could serialize variable collections rather than just singles. An additional "collection name" parameter could help organize the blocks within the pagelayout.
+</p>
+
+<p>
+<b>Please let me know what you think.</b>
+</p>
+
+<p>
+
+Here's the prototype:<br /><a href="http://ez.no/developer/contribs/template_plugins/self_var_cache" title="SELF Var Cache" target="_blank">http://ez.no/developer/contribs/template_plugins/self_var_cache</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>04/22/2008 12:49 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Variable-cache-layer-Var-block-wouldn-t-that-be-something">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/lab/variable_cache_layer_var_block_wouldn_t_that_be_something">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/extendable_cache_definition_list_for_easy_extension_cache_management" title="Extendable cache definition list for easy extension cache management">Extendable cache definition list for easy extension cache management</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Back after a longer while... wasn't on holiday, though ;)
+</p>
+
+<p>
+About a week ago, while developing my fifth or tenth extension with its own, custom caching layer, I caught myself trying to clear that cache with eZ standard "Clear cache" button. To none of my surprise, it never worked, but after few attempts I decided to see why ;)
+</p>
+
+<p>
+
+The Fine-grained cache control in the administration interface turned out to be a definition-type of array - easy enough to be made extensible with some effort. Why should a developer be in need of creating custom tools then? Let's hope the team picks up the idea soon:<br /><a href="http://issues.ez.no/IssueView.php?Id=12860&activeItem=3" title="Extendable cache definition list for easy extension cache management" target="_blank">http://issues.ez.no/IssueView.php?Id=12860&activeItem=3</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>04/22/2008 08:13 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Extendable-cache-definition-list-for-easy-extension-cache-management">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/extendable_cache_definition_list_for_easy_extension_cache_management">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/events/ez_developer_day_first_one_in_poland_warsaw_15th_april_2008" title="eZ Developer Day - first one in Poland (Warsaw, 15th April 2008)">eZ Developer Day - first one in Poland (Warsaw, 15th April 2008)</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Polish eZ community has met during the first official eZ Developer Day held in the country. Up to thirty people showed up, representing eZ partners, independent developers as well as users, both experienced and potential. Many of the participants were active <a href="http://ez-publish.pl/" title="Polish eZ Community" target="_blank">Polish eZ Community</a> members. eZ Systems was represented by Bård Farstad, co-funder and CTO (Chief Technical Officer) and our native system developer Łukasz Serwatka.
+</p>
+
+<p>
+The meeting, which was held in the heart of capital city of Poland, included the introduction to eZ Systems and their flag products, including eZ Flow (both functional and technical demos), the discussion on eZ Publish roadmap and its future releases.
+</p>
+
+<p>
+The community had a chance to present their recent implementations as well as share and discuss their problems or requests (I hope we didn't kill Łukasz during this part, as we tried to clear up issues that had been awaiting "closure" for quite some time).
+</p>
+
+<p>
+Bård attempted to provoke some community commitment, so that it grows stronger and bigger, but I'm not sure how much response that would get. It got little while there, but there might be some follow-up. Seems like the active will remain active in their ways anyways.
+</p>
+
+<p>
+Personally, I am very glad that we had this meeting. Maybe there was too little technical/developer detail, but everyone had an opportunity to bring things up... Maybe it lacked some social part, during which the community would get to know each other little better and discuss things in a more informal, open way. One suggestion though: make that a weekend event because socializing for most people in Poland hardly ever works during the weekdays! ;)
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>04/17/2008 12:17 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/eZ-Developer-Day-first-one-in-Poland-Warsaw-15th-April-2008">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/events/ez_developer_day_first_one_in_poland_warsaw_15th_april_2008">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/6/(year)/2008" title="">June 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/5/(year)/2008" title="">May 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/4/(year)/2008" title="">April 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/2/(year)/2008" title="">February 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/1/(year)/2008" title="">January 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/12/(year)/2007" title="">December 2007</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                        
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Nabil-Alimi/(month)/3/(year)/2008" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Nabil-Alimi/(month)/5/(year)/2008" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>April&nbsp;2008</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                                        <td class="  right">
+            6
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                                        <td class="  right">
+            13
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Nabil-Alimi/(day)/17/(month)/4/(year)/2008">17</a></em>
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                                        <td class="  right">
+            20
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            21
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Nabil-Alimi/(day)/22/(month)/4/(year)/2008">22</a></em>
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                                        <td class="  right">
+            27
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2008";s:5:"month";s:1:"4";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:11:"Nabil Alimi";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"232";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:11:"Nabil Alimi";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"232";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"230";s:7:"node_id";s:3:"232";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"eb3ec397bd26e4854a462950ecee1c9d";s:14:"node_remote_id";s:32:"8f726b195ee3331aefd32c363f97ace6";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:18:"Mirror/Nabil-Alimi";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"232";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

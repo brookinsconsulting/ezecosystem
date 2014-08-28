@@ -1,0 +1,296 @@
+a:10:{s:7:"content";s:13775:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/YMC">YMC</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.ymc.ch/weblog/ez_conference_2010_what_s_new" title="eZ Conference 2010 - What's new?">eZ Conference 2010 - What's new?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+This year's meet up of the eZ ecosystem took place in the wonderful city of Berlin. Three days full of sharing experiences, learning about the future of <a href="http://www.ez.no/"  target="_blank"  >eZ Publish</a> and discussing new features and implementations. The talks were held on the three different tracks of Digital Media, Web Content Management and Community. Here I would like to briefly summarise the most important announcements.
+</p>
+
+<p>
+
+<b>eZ Find as a content engine</b><br /><a href="http://ez.no/ezfind"  target="_blank"  >eZ Find</a> is a search plugin based on <a href="http://lucene.apache.org/java/docs/index.html"  target="_blank"  >Lucene</a>/<a href="http://lucene.apache.org/solr/"  target="_blank"  >Solr</a>. Some use cases were shown on real-life examples and there were very interesting talks about ways of optimisation. eZ Find moves into the centre of attention as it gets more and more widespread. When asked, only a minority of the attending developers could imagine working without eZ Find on projects. This shows clearly how popular eZ Find has become. What was new in contrary to the previous year was the usage of eZ Find as a content engine, which is getting done more often. Also, the longed-for feature archiving was announced to be released in near future. Objects which do not need to be edited anymore can be archived, this means they are removed from the database and stored in the Solr-Index only. In an additional step the reversed process, retrieving archived objects, will be realised. This brings large performance improvements and shows that eZ Find can work very well as a content engine. 
+</p>
+
+<p>
+
+<b>Better API Calls and a REST Interface</b><br />The outlook on the eZ Publish API also enjoyed great popularity. On the one hand, improvements will be made to the eZ core classes, which is the PHP API. The new API calls are more precise and require less parameters than before and look therefore a lot cleaner. On the other hand, eZ Publish will get its own REST interface. This interface will provide complete access to all available data. The possibilities this opens up and the way eZ wants to provide this interface are great and receive a huge echo from community and developers, for example <a href="http://twitter.com/tonywood"  target="_blank"  >@tonywood</a> tweeted:
+</p>
+<blockquote>
+      <div class="quote-design">
+      <div class="quote-begin"><span class="hide">"</span></div>
+      
+<p>
+Yes yes yes yes yes we need the REST interface by default in eZ NOW!!.. It will be nice not to have to create our own on projects <a href="http://twitter.com/#search?q=%23ezconf"  target="_blank"  >#ezconf</a>
+</p>
+
+      <div class="quote-end"><span class="hide">"</span></div>
+      </div>
+</blockquote>
+
+<p>
+
+<b>eZ goes Git</b><br />Prior to the eZ Conference, eZ announced to move away from Subversion and use <a href="http://git-scm.com/"  target="_blank"  >Git</a> for revision control. Two weeks ago eZ stealthily migrated from pubsvn to github. But why did eZ decide to switch? There are many reasons behind this. Many blogposts cover the advantages of Git versus Subversion so I won't go into that but, for example, patches from the community shall be easier to implement. A developer can now simply contribute by creating a new branch and merging it back in, which is more comfortable for everyone involved. But why Git? Git offers a offline usage, is fast and encourages to fork. eZ is now available on <a href="http://github.com/ezsystems/ezpublish"  target="_blank"  >github</a>.
+</p>
+
+<p>
+Thomas Koch from YMC already held a talk about the advantages of eZ Publish using Git at the <a href="http://www.ymc.ch/weblog/ez_developer_day_2009"  >eZ Developer Day 2009</a> and made <a href="http://www.koch.ro/blog/index.php?/archives/109-Community-GIT-repository-for-eZ-Publish.html"  target="_blank"  >suggestions</a> how to do this based on a <a href="http://koch.ro/blog/index.php?/archives/104-GIT-for-the-eZ-Ecosystem-Survey-results.html"  target="_blank"  >survey</a> and how we could benefit from it (see the slides: <a href="http://www.ymc.ch/content/download/519729/3482001/file/gitforez.pdf"  >GIT for eZ</a>). We are glad that things turned this way. 
+</p>
+
+<p>
+
+<b>Two branches: Community and Enterprise</b><br />Also a visionary change is that eZ Publish will be available in two different editions: community and enterprise. The one available on github is the community edition and open for everyone. The enterprise edition will have a strong focus on stability whereas the community edition will be more bleeding edge although not unstable. The community edition will have contributions from the eZ ecosystem. These contributions must be approved by a steering committee which is yet to be occupied. From time to time features from the community edition will be implemented in the enterprise edition. The enterprise edition will be provided with eZ Publish Premium. The fundamental idea is <i>Community influences Enterprise influences Community</i>.
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2010 08:45 am</span> &nbsp; <a href="http://www.ymc.ch/weblog/(tag)/eZ%20Publish">http://www.ymc.ch/weblog/(tag)/eZ Publish</a> &nbsp; <a href="/Mirror/YMC/eZ-Conference-2010-What-s-new">View mirror of item</a> &nbsp; <a href="http://www.ymc.ch/weblog/ez_conference_2010_what_s_new">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/YMC">YMC</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.ymc.ch/weblog/frischfilm_gewinnt_den_grimme_online_award_2010" title="Frischfilm gewinnt den Grimme Online Award 2010">Frischfilm gewinnt den Grimme Online Award 2010</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Mehr zur Entscheidung der Jury kann <a href="http://www.grimme-institut.de/html/index.php?id=33"  target="_blank"  >hier</a> nachgelesen werden. 
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>07/02/2010 04:16 am</span> &nbsp; <a href="http://www.ymc.ch/weblog/(tag)/eZ%20Publish">http://www.ymc.ch/weblog/(tag)/eZ Publish</a> &nbsp; <a href="/Mirror/YMC/Frischfilm-gewinnt-den-Grimme-Online-Award-2010">View mirror of item</a> &nbsp; <a href="http://www.ymc.ch/weblog/frischfilm_gewinnt_den_grimme_online_award_2010">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/YMC/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/7/(year)/2010" title="">July 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/5/(year)/2010" title="">May 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/9/(year)/2009" title="">September 2009</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/7/(year)/2009" title="">July 2009</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/YMC/(month)/6/(year)/2010" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/YMC/(month)/8/(year)/2010" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>July&nbsp;2010</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/YMC/(day)/2/(month)/7/(year)/2010">2</a></em>
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                                        <td class="  right">
+            4
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                                        <td class="  right">
+            11
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                                        <td class="  right">
+            18
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                                        <td class="  right">
+            25
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2010";s:5:"month";s:1:"7";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:3:"YMC";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"236";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:3:"YMC";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"236";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"234";s:7:"node_id";s:3:"236";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"be64d5ebfca7cb008f3c25ad4498083c";s:14:"node_remote_id";s:32:"ef49a1bf614a25d88c1d72e867b38fcc";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:10:"Mirror/YMC";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"236";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

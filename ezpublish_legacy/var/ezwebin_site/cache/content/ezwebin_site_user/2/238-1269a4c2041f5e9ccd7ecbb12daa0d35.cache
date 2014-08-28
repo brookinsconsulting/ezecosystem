@@ -1,0 +1,275 @@
+a:10:{s:7:"content";s:15366:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Frederic-David">Frédéric David</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.frefred.fr/blog/ez-publish/gestion-des-sites-multilingues-host_uri" title="Gestion des sites multilingues - host_uri">Gestion des sites multilingues - host_uri</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Au Luxembourg, 99% des sites sont multilingues ( Français, Allemand, Anglais ). L'utilisateur doit pouvoir y accéder via différentes urls propres, à la fois en mode host, comme en mode uri. <a href="/blog/ez-publish">eZ publish</a>
+ fournit plusieurs fonctionnalités pour gérer les redirections de façon propre, à savoir le module switchlanguage, et le mode "host_uri" apparu à la 4.4.</p><a name="eztoc1995_1" id="eztoc1995_1"></a><h2>Module switchlanguage</h2><p>Le module switchlanguage possède une unique vue "to". Cette vue permet de gérer toutes les redirections selon la configuration d'eZ publish et par siteaccess. Elle prend comme paramètre 2 variables :</p>
+<ul>
+
+<li><b>siteaccess : </b>cette variable est obligatoire. C'est le nom du siteaccess vers lequel vous voulez être redirigé ( ex : website_en pour voir la version anglaise ).</li>
+
+<li><b>url :</b> cette variable est optionnelle. C'est l'url de votre objet courant. ( ex : contact ). Par défaut, si cette valeur n'est pas fournie, la page d'accueil sera affichée.</li>
+
+</ul>
+<p>switchlanguage fonctionne de manière différente selon le paramètre MatchOrder, défini dans le site.ini Selon la valeur de MathOrder, on aura les fonctionnements suivants :</p>
+<ul>
+
+<li><b>uri :</b> MatchOrder est définit à uri. switchlanguage va faire une simple redirection, avec l'adresse du serveur et le nom du siteaccess à la suite ( ex : www.example.com/website_en )</li>
+
+<li><b>les autres :</b> Si MatchOrder est définit avec n'importe quelle autre valeur possible ( host, port, host_uri ), switchlanguage va récupérer la valeur de SiteSettings/SiteURL définit dans site.ini pour le siteaccess demandé. ( ex : redirection vers en.example.com )</li>
+
+</ul>
+<p>Cela permet d'avoir des redirections propres, sans avoir à définir un tableau des noms de domaine à côté. Il suffit d'écrire dans son template 1 à N liens selon le nombre de langue :</p>	<pre class="eztemplate" style="font-family:monospace;"><a href=<span style="color: #66cc66;">{</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/strings/concat"><span style="color: #0600FF;">concat</span></a><span style="color: #66cc66;">(</span> <span style="color: #dd0000;">'switchlanguage/to/website_en/'</span>, <span style="color: #0000bb;">$requested_uri_string</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/urls/ezurl"><span style="color: #0600FF;">ezurl</span></a><span style="color: #66cc66;">}</span>>English</a></pre><a name="eztoc1995_2" id="eztoc1995_2"></a><h2>Mode host_uri</h2><p>eZ publish permet de gérer la redirection des siteaccess via différents modes tel que uri,host,port. Dans le cas ou pour un site, on doit avoir les 2 tel que uri, et host. Le module switchlanguge va prendre par défaut le mode uri, ce qui convient pas trop. Depuis eZ publish 4.4, on trouve un nouveau mode qui est host_uri.</p><p>Le mapping du mode host_uri se fait via le tableau HostUriMatchMapItems qu'on retrouve dans Site.ini/SiteAccessSettings</p><p>Le mode host_uri prend 3 paramètres par ligne :</p>
+<ul>
+
+<li><b>hostname :</b> le nom de domaine ( ex : en.example.com )</li>
+
+<li><b>uri :</b> la partie à prendre en compte après le / final</li>
+
+<li><b>siteaccess :</b> le nom du siteaccess à prendre</li>
+
+<li><b>method : </b> cette parti permet de spécifier le type à prendre ( start/end/part/strict ) Par défaut, c'est strict qui est pris. La valeur par défaut peut être modifiable via SiteAccessSettings/HostUriMatchMethodDefault dans le fichier site.ini</li>
+
+</ul>
+<p>On retrouvera dans site.ini des valeurs de type :</p>	<pre class="ezini" style="font-family:monospace;"># SiteAccessSettings
+<span style="color: #000099;">MatchOrder</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">en.example.com;;website_en</span></span></pre><p>Il permet de traiter tous les cas de figure qu'on peut retrouver pour un site ( multilingue, multi-site, etc. )</p><a name="eztoc1995_3" id="eztoc1995_3"></a><h2>Exemple de configuration</h2><p>Pour fournir un exemple concret, on va prendre un site qui a comme caractéristiques :</p>
+<ul>
+
+<li>site multilingue ( Français, Anglais )</li>
+
+<li>multi site ( site institutionnel, site événementiel )</li>
+
+<li>splash page permettant de renvoyer vers le site institutionnel, ou le site événementiel</li>
+
+</ul>
+<p>Par rapport à ces conditions, on peut déterminer l'obligation d'avoir comme siteaccess www_fr et www_en ( pour gérer la splash page ), web_fr et web_en ( pour gérer le site institutionnel ), event_fr et event_en ( pour gérer le site évenementiel )</p><p>Pour gérer ce genre de cas , on retrouvera dans le fichier de surcharge site.ini :</p>	<pre class="ezini" style="font-family:monospace;"># SiteAccessSettings
+<span style="color: #000099;">MatchOrder</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">example.com;fr;www_fr;end</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">example.com;en;www_en;end</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">fr.example.com;;web_fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">en.example.com;;web_en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">fr.news.example.com;;news_fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">en.news.example.com;;news_en</span></span></pre><p>On retrouvera les urls des sites que l'on veut dans les fichiers ini des siteaccess. Par exemple, on retrouve dans le site.ini du siteaccess web_fr</p>	<pre class="ezini" style="font-family:monospace;"># SiteSettings
+<span style="color: #000099;">SiteURL</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">fr.example.com</span></pre><p>En utilisant le module switchlanguage, l'utilisateur sera renvoyer correctement vers le bon site., à savoir switchlanguage/to/web_fr renverra automatiquement vers fr.example.com</p><p>Cela permet d'avoir différentes configurations selon l'environnement ( développement, recette, production ).</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>03/08/2011 03:08 am</span> &nbsp; <a href="http://www.frefred.fr/blog">www.frefred.fr/blog</a> &nbsp; <a href="/Mirror/Frederic-David/Gestion-des-sites-multilingues-host_uri">View mirror of item</a> &nbsp; <a href="http://www.frefred.fr/blog/ez-publish/gestion-des-sites-multilingues-host_uri">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                     
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/11/(year)/2009" title="">November 2009</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/8/(year)/2009" title="">August 2009</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/5/(year)/2008" title="">May 2008</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Frederic-David/(month)/2/(year)/2011" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Frederic-David/(month)/4/(year)/2011" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>March&nbsp;2011</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                                        <td class="  right">
+            6
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            7
+        </td>
+                            <td class="currentselected ">
+            <em><a href="/Mirror/Frederic-David/(day)/8/(month)/3/(year)/2011">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                                        <td class="  right">
+            13
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                                        <td class="  right">
+            20
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                                        <td class="  right">
+            27
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2011";s:5:"month";s:1:"3";s:3:"day";s:1:"8";s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:16:"Frédéric David";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"238";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:16:"Frédéric David";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"238";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"236";s:7:"node_id";s:3:"238";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"1886dbb21ac2158355f6c11a6cebe9d9";s:14:"node_remote_id";s:32:"07bfd73edf3833e5a3b8999cd77489c8";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:21:"Mirror/Frederic-David";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"238";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

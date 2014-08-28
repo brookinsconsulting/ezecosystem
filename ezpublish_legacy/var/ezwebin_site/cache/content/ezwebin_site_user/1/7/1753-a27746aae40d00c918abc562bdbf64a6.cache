@@ -1,0 +1,89 @@
+a:10:{s:7:"content";s:7061:"
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+    <div class="content-view-full">
+        <div class="class-article">
+
+        <div class="attribute-header">
+            <h1>About eZ Publish</h1>
+        </div>
+
+	
+
+                                    <div class="attribute-image">
+                    
+
+    
+        
+    
+                                                                                                                                            <img src="/var/ezwebin_site/storage/images/about-ez-publish/14690-15-eng-US/About-eZ-Publish_medium.png" width="105" height="127"  style="border: 0px  ;" alt="eZ Publish" title="eZ Publish" />
+            
+    
+    
+    
+                                    </div>
+                    
+                                    <div class="attribute-short">
+                    
+<p>eZ Publish is an award-winning, enterprise-grade Open Source Content Management System and development framework with functionality for web publishing, media portals, intranets, e-commerce and extranets. eZ Publish helps all kinds of organizations – including multinational corporations, humanitarian organizations and educational institutions – succeed at sharing their information.</p><p>eZ Publish has a flexible content engine that serves as the core for dynamic and personalized websites. eZ Publish comes with much functionality out-of-the-box, but its power lies in its award-winning customization capabilities. User interaction and user-generated content is made easy with eZ Publish, enabling you to quickly build powerful, customized Web 2.0 websites. These strengths, along with a flexible cost model, are what attract tens of thousands of organizations, including the leading media groups in the world, to choose eZ Publish as their digital platform.</p><p>Our flagship Open Source software is eZ Publish, which is freely downloadable and supported by forums, documentation and books. eZ Publish Premium a support and maintenance solution for eZ Publish, from the makers of the software.</p>                </div>
+                    
+                    <div class="attribute-long">
+                
+<a name="eztoc14688_1" id="eztoc14688_1"></a><h2>Demo</h2><p>Checkout the <a href="http://ez.no/Products/Demos-Videos" target="_self">demos available</a>, get started with the <a href="http://ez.no/Products/Demos-Videos/eZ-Publish-Basic-Editing-Video-Tutorial" target="_self">editing demo</a></p><a name="eztoc14688_2" id="eztoc14688_2"></a><h2>Feature list</h2>
+<ul>
+
+<li>Content model: eZ Publish is centered around a flexible and customizable content model. The content model enables you to define a content structure that is instantly available for publishing.</li>
+
+<li>Website Interface: Editors browsing the front-end of the website have access to a content management toolbar, making it quick and easy to edit content. To start editing and adding content, you only need to know how to browse a website and how basic word processing functions work.</li>
+
+<li>Administration Interface: The powerful back-end interface enables you to edit site content and settings.<img src="/var/ezwebin_site/storage/images/media/images/screenshot-ez-publish-admin-content-structure/14698-1-eng-US/Screenshot-eZ-Publish-Admin-Content-Structure_large.png" alt="" /></li>
+
+<li>Online Editor: The Online Editor is a WYSIWYG editor integrated into the website (no HTML coding required), providing formatting functions similar to word processing applications.</li>
+
+</ul>
+<p><img src="/var/ezwebin_site/storage/images/media/images/screenshot-ez-publish-admin-edit-article/14702-1-eng-US/Screenshot-eZ-Publish-Admin-Edit-Article_large.png" alt="" /></p>
+<ul>
+
+<li>
+Web 2.0 features: User interaction and user-generated content is made easy with eZ Publish, enabling you to quickly build powerful, customized Web 2.0 websites. Tagging, blogs, forums and p<br />
+olls are all built-in eZ Publish features.<br />Content syndication: Content can be published in multiple formats, such as PDF, RSS, print, email.</li>
+
+<li>E-commerce: The fully-featured Webshop enables you to sell products and services online, where customers can add products to a virtual shopping basket.</li>
+
+<li>Search engine optimization: eZ Publish makes it easy for you to create content that will be effectively indexed by search engines. Sitemaps, friendly URLs, and easy management of key XHTML tags are all built-in features.</li>
+
+<li>Scalability and performance: eZ Publish is cluster-ready and has a four-tier cache system, making it capable of running enterprise-size websites.</li>
+
+<li>Microsoft Word and OpenOffice.org import / export: This feature enables you to create or edit site content in your favorite word processor when you are offline. Afterwards, you can upload the document through either a WebDAV client or the front-end of your site to generate or update articles, documentation pages and so on.</li>
+
+<li>WebDAV import / export: This feature enables you to import and export batches of site content with a WebDAV client.</li>
+
+<li>Multi-language management: All content in eZ Publish can be translated to multiple languages. Having only one website to administer is efficient and makes it easier to maintain a consistent brand across languages and countries.</li>
+
+<li>Version management: Having access to older versions of content enables supervisors or editors-in-chief to check for inconsistency or errors in the content. eZ Publish automatically keeps track of which content changes were made by which users at what time, and provides the option to revert content to a previous version.</li>
+
+<li>Cross publishing: Using the cross publishing feature, you can re-use content throughout the site while avoiding inconsistent duplicates of content that are hard to maintain. If content appears at multiple locations, you only have to edit the object once - the changes will be reflected at all locations.</li>
+
+<li>Audit trails: Change notifications and detailed activity logs provide the necessary functions for sites where information integrity is crucial.</li>
+
+<li>Security: With a multi-level, role-based user system, you can control which user and user group accounts can view, create and update particular sections of your site. SSL support and SSL zones secure an eZ Publish site by providing protection against third parties listening in on traffic.</li>
+
+<li>External integration: LDAP support, ERP integration and the extension system enable sites to interface with external systems.</li>
+
+<li>Web accessibility: eZ Publish is W3C WAI and Section 508 compliant, ensuring that your website is accessible for people with disabilities</li>
+
+</ul>
+            </div>
+        	
+        
+                        
+                
+        </div>
+    </div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:16:"About eZ Publish";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1753";}}s:10:"title_path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:3:{s:4:"text";s:16:"About eZ Publish";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1753";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1753";s:7:"node_id";s:4:"1753";s:14:"parent_node_id";s:1:"2";s:8:"class_id";s:2:"16";s:16:"class_identifier";s:7:"article";s:9:"remote_id";s:32:"ec7715de388af099928f9705063a31d3";s:14:"node_remote_id";s:32:"880da3a0a12fbfef62676158a21edd20";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"2";s:9:"url_alias";s:16:"About-eZ-Publish";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1753";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";b:0;s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"23";s:23:"parent_class_identifier";s:9:"frontpage";s:21:"parent_node_remote_id";s:32:"f3e90596361e31d496d4026eb624c983";s:23:"parent_object_remote_id";s:32:"8a9c9c761004866fb458d89910f52bee";}s:13:"template_list";a:12:{i:0;s:68:"extension/ezecosystem/design/eze/override/templates/full/article.tpl";i:1;s:59:"design/standard/templates/content/datatype/view/ezimage.tpl";i:2;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:3;s:88:"extension/ezwebin/design/ezwebin/templates/content/datatype/view/ezxmltags/paragraph.tpl";i:7;s:68:"design/standard/templates/content/datatype/view/ezxmltags/header.tpl";i:8;s:66:"design/standard/templates/content/datatype/view/ezxmltags/link.tpl";i:12;s:64:"design/standard/templates/content/datatype/view/ezxmltags/li.tpl";i:14;s:74:"design/standard/templates/content/datatype/view/ezxmltags/embed-inline.tpl";i:15;s:74:"extension/ezwebin/design/ezwebin/override/templates/embed-inline/image.tpl";i:18;s:64:"design/standard/templates/content/datatype/view/ezxmltags/ul.tpl";i:22;s:66:"design/standard/templates/content/datatype/view/ezxmltags/line.tpl";i:38;s:68:"extension/ezwebin/design/ezwebin/templates/parts/related_content.tpl";}s:9:"cache_ttl";i:-1;}

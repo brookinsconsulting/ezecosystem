@@ -1,0 +1,49 @@
+a:10:{s:7:"content";s:1956:"
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-feedback-form">
+
+        <div class="attribute-header">
+            <h1>Contact Us</h1>
+        </div>
+
+            
+        <div class="attribute-short">
+                
+<p>Feel free to send a message any comments or suggestions concerning eZ Ecosystem or if you would like to have your feed added.</p>        </div>
+        <form method="post" action="/layout/set/print/content/action">
+
+        <h4>Sender name</h4>
+        <div class="attribute-sender-name">
+                <input class="box" type="text" size="70" name="ContentObjectAttribute_ezstring_data_text_7379" value="" />        </div>
+
+        <h4>Email</h4>
+        <div class="attribute-email">
+                <input class="box" type="text" size="20" name="ContentObjectAttribute_data_text_7382" value="" />        </div>
+
+        <h4>Subject</h4>
+        <div class="attribute-subject">
+                <input class="box" type="text" size="70" name="ContentObjectAttribute_ezstring_data_text_7380" value="" />        </div>
+
+        <h4>Message</h4>
+        <div class="attribute-message">
+                <textarea class="box" name="ContentObjectAttribute_data_text_7381" cols="70" rows="10"></textarea>        </div>
+
+        <div class="content-action">
+            <input type="submit" class="defaultbutton" name="ActionCollectInformation" value="Send form" />
+            <input type="hidden" name="ContentNodeID" value="984" />
+            <input type="hidden" name="ContentObjectID" value="983" />
+            <input type="hidden" name="ViewMode" value="full" />
+        </div>
+        </form>
+
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:10:"Contact Us";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"984";}}s:10:"title_path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:3:{s:4:"text";s:10:"Contact Us";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"984";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"983";s:7:"node_id";s:3:"984";s:14:"parent_node_id";s:1:"2";s:8:"class_id";s:2:"22";s:16:"class_identifier";s:13:"feedback_form";s:9:"remote_id";s:32:"a9c7da11432f54354461ea674c591f0c";s:14:"node_remote_id";s:32:"875a78ee765e2a41b629c10b02c6dbba";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"2";s:9:"url_alias";s:10:"Contact-Us";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"984";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";b:0;s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"23";s:23:"parent_class_identifier";s:9:"frontpage";s:21:"parent_node_remote_id";s:32:"f3e90596361e31d496d4026eb624c983";s:23:"parent_object_remote_id";s:32:"8a9c9c761004866fb458d89910f52bee";}s:13:"template_list";a:7:{i:0;s:74:"extension/ezwebin/design/ezwebin/override/templates/full/feedback_form.tpl";i:1;s:62:"design/standard/templates/content/collectedinfo_validation.tpl";i:2;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:3;s:88:"extension/ezwebin/design/ezwebin/templates/content/datatype/view/ezxmltags/paragraph.tpl";i:4;s:63:"design/standard/templates/content/datatype/collect/ezstring.tpl";i:5;s:62:"design/standard/templates/content/datatype/collect/ezemail.tpl";i:7;s:61:"design/standard/templates/content/datatype/collect/eztext.tpl";}s:9:"cache_ttl";i:-1;}

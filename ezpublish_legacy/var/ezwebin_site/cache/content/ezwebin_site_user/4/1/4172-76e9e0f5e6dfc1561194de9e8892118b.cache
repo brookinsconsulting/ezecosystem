@@ -1,0 +1,450 @@
+a:10:{s:7:"content";s:26441:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>eZpedia - Suggestions</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://ezpedia.org/project/ezpedia_suggestions">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">08/23/2009 02:05 am</p>
+                                    <p class="author"></p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p>
+Please add your own suggestions! Append your entries to the end of each grouping :)<br />Please file issue reports (bugs, negative features, failures) on the <a href="/project/ezpedia_issues" target="_self">issues</a> node instead of this node.</p><a name="eztoc820_1" id="eztoc820_1"></a><h2>Content</h2>
+<ol>
+
+<li>Article: squid proxy server(s) setup (as a front end cache/loader) in front of the eZ publish installation to cache static content (binary, anonymous cached templates, etc)</li>
+
+<li>Article: Drafts Explained! From Default Internals to a number of supported alternate configuration</li>
+
+<li>Article: Creating an extension (From design choices to implementation, aka Designing portable eZ solutions within extensions)</li>
+
+<li>Article: <a href="/learning/learning_how_to_create_a_design_extension" target="_self">Creating a design extension</a> </li>
+
+<li>Article: eZ publish extensions, designs and template override order</li>
+
+</ol>
+<a name="eztoc820_2" id="eztoc820_2"></a><h2>Design</h2>
+<ol>
+
+<li><b>Add:</b> Minimal, Small, Unobtrusive + report a problem (css/float/dynamic position as user scrolls the pagelayout) link within pagelayout template</li>
+
+<li><b>Add:</b> Client Script (Javascript) to support floating left side menus during scroll down very long documents (which these will become). This allows the user to edit a page very quickly and avoid scrolling back to the top of the screen to use the control menus. Client script must be ie/moz compatible.</li>
+
+<li><b>Add:</b> Powered By eZ * Badge / Image into pagelayout.tpl in navigation / layout or .. an article node</li>
+
+<li><b>Add:</b> Help sidebar (like current users) with link to editors guidelines and general help (displayed to authenticated users only)</li>
+
+<li><b>Add:</b> What&amp;apos;s changed since my last visit functionality (like ez.no)</li>
+
+<li><b>Add:</b> node breadcrumbs and back-links</li>
+
+<li><i>Revise:</i> CSS Style Colors for Source Code Language Highlighting (Ugly default colors, use eZ colors (blue, orange, black, white, ..)</li>
+
+<li><b>Add:</b> Email this page Icon into pagelayout</li>
+
+<li><b>Add:</b> PDF of this page Icon into pagelayout.</li>
+
+<li><b>Add:</b> PDF download of entire site (re-factored for real printing)</li>
+
+<li><b>Add:</b> Page / Node Ranking (Anonymous vs Authenticated, 1 - 7 stars)</li>
+
+<li><b>Add</b>: Discussion page for each page</li>
+
+<li><b>Modify:</b> Templates to use/link to the &amp;apos;content/history&amp;apos; view instead of deprecated (eZ 3.9) &amp;apos;content/diff&amp;apos; view (example: <a href="/../../../../../content/history/213" target="_self">this-&gt;node();</a> )</li>
+
+<li><b>Add:</b> icon to external links, see <a href="http://www.maxdesign.com.au/presentation/external/" target="_self">Simple, accessible external links</a> </li>
+
+<li><b>Add:</b> CSS classes for unordered lists to show file system structures (very useful to explain where specific extension files should be places), proposed classes: ul.filesystem, li.file (ul.filesystem li is implicitly recognized as a directory). Display filesystem-like icons in these lists instead of the regular list item icon.</li>
+
+<li><b>Fix:</b> The Ezpedia site's hompage appearance is broken when viewing with IE6 - main content of pages only starts at a vertical position below the end of the left-hand navigation. This means the site's main content appears non-existent unless the user scrolls down the page to find the content. Perhaps this is a problem with DIV settings because the homepage uses columns in the main content area, but other pages do not.</li>
+
+</ol>
+<a name="eztoc820_3" id="eztoc820_3"></a><h2>User Settings</h2>
+<ol>
+
+<li><i>Extend:</i> role/group permissions over user created content (self, settings)</li>
+
+</ol>
+<a name="eztoc820_4" id="eztoc820_4"></a><h2>Content Markup</h2>
+<ol>
+
+<li>None at this time</li>
+
+</ol>
+<a name="eztoc820_5" id="eztoc820_5"></a><h2>Content Editing</h2>
+<ol>
+
+<li><b>Add:</b> Moderator Group with <a href="http://zev.ez.no/svn/extensions/ezapprove2/" target="_self">ezapprove2</a> to moderate protected node (add protected node flag in into node class)</li>
+
+<li><b>Add:</b> Minor Edit (Boolean, into node class) during node edit</li>
+
+<li><b>Add:</b> &amp;apos;people&amp;apos; namespace related image for person (re: images in wiki missing feature)</li>
+
+</ol>
+<a name="eztoc820_6" id="eztoc820_6"></a><h2>History</h2>
+<ol>
+
+<li><b>Add:</b> replacement for usage of content/history with custom module view which accepts view parameters and displays last possible diff by default.</li>
+
+</ol>
+<a name="eztoc820_7" id="eztoc820_7"></a><h2>Search</h2>
+<ol>
+
+<li><b>Add:</b> wiki_article template layout adjustment to include 'related' and or 'tag' <a href="http://dev-tips.com/featured/php-tip-add-custom-google-search-results-to-your-site-with-php" target="_self">search</a> results from one or many (jquery box with tabs) within right side of article (adding container divs to layout for side by side presentation that is helpful not intrusive).</li>
+
+<li><b>Add:</b> User to set a setting to the affect the number of search results by default for their session (Example, I would use the larger increments to maximize searching time to one page of reading instead of 15 clicks and page loads)</li>
+
+</ol>
+<a name="eztoc820_8" id="eztoc820_8"></a><h2>Notifications</h2>
+<ol>
+
+<li>None at the moment.</li>
+
+</ol>
+<a name="eztoc820_9" id="eztoc820_9"></a><h2>General</h2>
+<ol>
+
+<li><b>Add:</b> Display nodes by owner (consider search by owner)</li>
+
+<li><b>Add:</b> Google Translate (new extension) to enable members of translate group or automated cronjob to provide auto-translation of en_GB contentobjects from en_GB to known, documented, supported languages (sets).</li>
+
+<li><b>Add:</b> Tree Browser (outliner, light weight, performance enhanced, descriptive text content toggle in navigation)</li>
+
+<li><b><i>Suggest:</i></b> Notion of tagging (adding weight to dynamic object relations or categorization) (or will 3.9.x object relations help in this kind of effort)</li>
+
+<li><b><i>Suggest:</i></b> Wiki custom extension (name, &amp;apos;soapTagThreadMessage&amp;apos;). Which provides a pre-configured ssl web service api to authenticate, register, logout, tagCurrentURL (which stores url and scraped thread messages (print view) for storage). UI Component implemented in client side script to hover within layout via (greasemonkey style / ui embedding) with controls to fulfill &amp;apos;serviceTag&amp;apos; feature set (without requiring redirect of current page). Notion Requires moderator of input content to move tagged urls from &amp;apos;submitted&amp;apos; into &amp;apos;categorized&amp;apos; (node). Allows forum users or moderators on ez.no flag threads on ez.no forums or resources for a corresponding documentation (stub) entry should be created for later categorization.</li>
+
+</ol>
+<a name="eztoc820_10" id="eztoc820_10"></a><h2>Extended Documentation</h2>
+<ol>
+
+<li><b>Add:</b> Audio Documentation (OGG, MP3) - Tutorials, Training, Demos, Sales, News, Conversations, Comments</li>
+
+<li><b>Add:</b> Video Documentation (Flash, OGG) - Tutorials, Training, Demos, Presentations, Events</li>
+
+</ol>
+<a name="eztoc820_11" id="eztoc820_11"></a><h2>Install</h2><p>Installation (pending) list of requested extensions, design or other ezpkg.</p>
+<ol>
+
+<li><b>Install: </b><a href="http://zev.ez.no/svn/extensions/ezapprove2/" target="_self">ezapprove2</a> extension</li>
+
+<li><b>Install: </b><a href="http://pubsvn.ez.no/community/trunk/extension/ezsvn/" target="_self">ezsvn</a> extension</li>
+
+</ol>
+<a name="eztoc820_12" id="eztoc820_12"></a><h2>Upgrades</h2>
+<ol>
+
+<li>Upgrade: eZ Publish 4.1</li>
+
+<li>Upgrade: eZ Online Editor 5</li>
+
+</ol>
+<a name="eztoc820_13" id="eztoc820_13"></a><h2>Disable</h2>
+<ol>
+
+<li>None at the moment.</li>
+
+</ol>
+<a name="eztoc820_14" id="eztoc820_14"></a><h2>Implemented</h2>
+<ul>
+
+<li><strike>Add: Printable page link within anonymous pagelayout template header menu. Only added menu link to registered users template for testing and further refinement.</strike></li>
+
+<li><strike>Patch: <a href="/solution/spell_checking_content_using_ez_publish_online_editor_and_firefox" target="_self">OE to support default disable of right-click menu</a>, enable with additional OE toolbar button! The reason to do this is to allow for firefox2 to use the spellcheck features without having to disable the online editor. I have a patch for this --kracker. gb@2009/08/21, Implemented suggestion to improve spelling content before migrating to ezoe5.</strike></li>
+
+<li><strike>Add: Global Namespace History View - To see all node activity and history not just the current page.</strike></li>
+
+<li><strike>Add: Email notifications Sent should include a simple patch style diff to see the scope of the changes rather than require an editor to review and diff the history by hand. Email should also contain a direct link to diff the changed version with the previous version. This is kinda important. Direct link has been requested in <a href="http://issues.ez.no/9585" target="_self">#9585</a>.</strike></li>
+
+<li><strike>Add: User notifications also include diff in email with history link to revision + previous revision (prolly dup entry from above)</strike></li>
+
+<li><strike>Add: RSS Feeds (Site wide recently modified entries from each namespace)</strike></li>
+
+<li><strike>Add: Sitemap link in design</strike></li>
+
+<li><strike>Add: User draft display. Currently users can not see their own unpublished drafts to resume editing!</strike></li>
+
+<li><strike>Add: Increase search result number of items per page, to 15 (simple temporary improvement until user control is implemented). gb@2009/08/21, A while ago I added some improvements to this template.</strike></li>
+
+<li><strike>Add: User control of search result number of items per page, including large number of items example, 100. Increments: 14, 25, 50, 75, 100. See <a href="/ez/search_view" target="_self">search (view)</a> page for implementation details. gb@2009/08/21, This was added recently to the template.</strike></li>
+
+<li><strike>User Authentication - Forget password functionality. Added a heading, description and clearly link to the <a href="http://ezpedia.org/wiki/en/user/forgotpassword" target="_self">user forget password functionality</a> on the user templates (example: the user login view template)</strike></li>
+
+<li><strike>Install: google sitemap extension. I did not enable this specific extension but did enable a cronjob to generate sitemap and submitted it to google.</strike></li>
+
+<li><strike>Add: User preference : Add user preference to support creation or modification only in user&amp;apos;s chosen language (setting). Which would prevent endless draft language confirmation choices. Default users chosen language &amp;apos;en_GB&amp;apos; on account creation. Related <a href="http://ez.no/community/forum/developer/skip_language_selection" target="_self">thread not implementation</a>. Implementation may contain an override template for the template view which can accept the default language to use, within this template you would include a template operator call to a function which would fetch a user&amp;apos;s default language selection (en_GB, none / false) and output the control code needed to prevent repative confirmations of a default language preference per editor / user. This may also require a per user (editable) setting of content default langauge.</strike></li>
+
+<li><strike>Add: OpenSearch auto-discovery on each page and buttons to add plugins on search page</strike></li>
+
+<li><strike>Add: Search in content/browse (Note: This seems to be added ... yet the search in any view does not work or return results. This is a bug.)</strike></li>
+
+<li><strike>Create: Firefox Search Engine plugin for pubsvn.ez.no/wiki (using ez search)</strike></li>
+
+<li><strike>Create: Firefox Search Engine plugin for pubsvn.ez.no/wiki (using google)</strike></li>
+
+<li><strike>Add: User Settings Modification (Pagelayout Link)</strike></li>
+
+<li><strike>Add: user navigation (header) titled &amp;apos;setting&amp;apos; (link to &amp;apos;/wiki/en/user/settings&amp;apos; url redirection) which links to the user edit view (link ez.no)</strike></li>
+
+<li><strike>Upgrade: eZ (to 3.9.x upon confirmed stable)</strike></li>
+
+<li><strike>Upgrade: OE 4.2 (to latest confirmed stable)</strike></li>
+
+<li><strike>Add: Disclaimer link &amp;apos;license&amp;apos; in footer to node &amp;apos;about/disclaimer&amp;apos; saying &amp;apos;All content licensed under GFDL&amp;apos; and extended description.</strike></li>
+
+<li><strike>Add: Editor Guideline: Please only ezobject:// to reference specific content objects.</strike></li>
+
+<li><strike># Add: search results and advanced search override templates customized to maximize use in large database (google navigator etc) - Example #1</strike></li>
+
+<li><strike>Disable: (Global) Redirection Debug - Editing is for users which should have overrideable settings. Disabling this by default will improve performance greatly for non-authenticated user-agents.</strike></li>
+
+<li><strike>Add: custom tag for content markup formatting style &amp;apos;strike-through&amp;apos;. To be able to strike items in formatting before removal.</strike></li>
+
+<li><strike>Add: User preference : Disable/Enable Redirection Debug and or debug output - Might prevent endless clicking to confirm redirection attempts, which is essential if draft storage fails.</strike></li>
+
+<li><strike>Add: Design Header Logo Images : &amp;apos;eZ publish community documentation&amp;apos; (header) and &amp;apos;eZ box icon&amp;apos; (sidebar nav)</strike></li>
+
+<li><strike>Add: DNS A records for (pubsvn, community) brands. Can this be requested is this possible or desired? I suggest the following entries in order of preference 1. http://ezpedia.org 2. http://edit.ezpedia.org 3. http://doc.community.ez.no 4. http://doc.com.ez.no 5. http://ezpedia.ez.no 6. http://doc.pub.svn.ez.no 7. http://doc.pubsvn.ez.no 1. Also make an another dns entry for alternate content (replace pubsvn static html homepage, rebrand as community &amp;apos;projects&amp;apos; + repository / svn tools) 1. http://community.ez.no 2. http://com.svn.ez.no 3. http://pub.svn.ez.no 2. Also an entry for sitewide rss agregator (svn tools + wiki) 1. http://rss.community.ez.no 2. http://rss.com.svn.ez.no 3. http://rss.pub.svn.ez.no </strike></li>
+
+<li><strike>Add: Stub Flag (boolean, into node class) during node edit</strike></li>
+
+</ul>
+
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://ezpedia.org/project/ezpedia_suggestions">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/2/(year)/2011" title="">February 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/12/(year)/2010" title="">December 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/10/(year)/2010" title="">October 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/7/(year)/2010" title="">July 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/6/(year)/2010" title="">June 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/4/(year)/2010" title="">April 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/3/(year)/2010" title="">March 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/2/(year)/2010" title="">February 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/1/(year)/2010" title="">January 2010</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/10/(year)/2009" title="">October 2009</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/9/(year)/2009" title="">September 2009</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZpedia/(month)/8/(year)/2009" title="">August 2009</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/layout/set/print/Mirror/eZpedia/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/layout/set/print/Mirror/eZpedia/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/layout/set/print/Mirror/eZpedia/(day)/25/(month)/8/(year)/2014">25</a></em>
+        </td>
+                            <td class="currentselected today">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:7:"eZpedia";s:3:"url";s:23:"/content/view/full/4097";s:9:"url_alias";s:14:"Mirror/eZpedia";s:7:"node_id";s:4:"4097";}i:3;a:4:{s:4:"text";s:21:"eZpedia - Suggestions";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4172";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:7:"eZpedia";s:3:"url";s:23:"/content/view/full/4097";s:9:"url_alias";s:14:"Mirror/eZpedia";s:7:"node_id";s:4:"4097";}i:3;a:3:{s:4:"text";s:21:"eZpedia - Suggestions";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4172";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4172";s:7:"node_id";s:4:"4172";s:14:"parent_node_id";s:4:"4097";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_33_c5c0ed1285b462977407ca68b6d4d569";s:14:"node_remote_id";s:32:"c804c3a0baaacb58a27598e0b495babc";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:34:"Mirror/eZpedia/eZpedia-Suggestions";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4172";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"74c5292acdfb48976337839eeecba1f4";s:23:"parent_object_remote_id";s:32:"7f157eb63e066aeee67e1105e9005afe";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

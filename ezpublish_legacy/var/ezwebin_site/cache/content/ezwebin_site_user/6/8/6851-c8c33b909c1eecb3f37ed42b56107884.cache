@@ -1,0 +1,339 @@
+a:10:{s:7:"content";s:41157:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Confessions of an apprentice: Custom actions and restrictions on content browsing in eZ Publish</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgenlabs.com/Blog/Confessions-of-an-apprentice-Custom-actions-and-restrictions-on-content-browsing-in-eZ-Publish">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">01/02/2013 06:01 am</p>
+                                    <p class="author">info@netgen.hr (Tomislav Buljević)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p>It’s that time of the year; time for festivities and good will towards people. In that spirit, I have decided to divulge a piece of knowledge for all the young eZ Publish apprentices as a sort of holiday present for all of you.</p><p>Everyone who follows this blog and especially this line of articles will wonder: Why now? Why didn’t I write an article about this sooner? Well, the answer is simple: I didn’t have the time. You see, things are buzzing with work here at Netgen and because of that we hardly have any time for anything else but work. But right now, I have some extra time for a new article and I told myself I’d better write it or else. What is or else, you may wonder? Well, I don’t know either, but it’s probably something nasty.</p><p>All joking aside, however, in this article we will cover not one, but two topics which will actually be wrapped in a nice little functionality which you can use. I told you I had a present for you all. So, we will cover the custom actions of eZ Publish, and the restrictions on content browsing.</p><a name="eztoc9085_1" id="eztoc9085_1"></a><h2>What are custom actions, exactly?</h2><p>The built-in content module of eZ Publish is great because it handles not only the views on which the whole content system for eZ Publish relies on, but also the actions connected to that content. Using the content actions you can create new nodes and objects, move or edit existing ones, swap nodes, delete existing objects, etc. But sometimes, the existing actions just aren’t enough for you, and that is when you need to rely on custom content actions.</p><p>Simply put, a custom action is the extended functionality for the content actions. This means that, if you don’t want to be bothered with creating a new module and views for some minor thing you want to achieve with eZ Publish, you can rely on custom actions to make your life a whole lot easier.</p><a name="eztoc9085_2" id="eztoc9085_2"></a><h2>Restrictions on content browsing in eZ Publish</h2><p>Content browsing in eZ Publish is a powerful tool which is often a bit underrated because it’s so cleverly integrated into the whole system that it pretty much goes unnoticed most of the time. You probably use content browsing on a regular basis, but don’t give it much thought.</p><p>For example, you have just created a content class which has an Object Relation attribute in it. When you create a new object of that class, and click on the Add existing objects in the Add objects in the relations section of the Object relation datatype, you actually get redirected to the content browse view which lets you pick and choose one of the objects you want to put into the relation. Additionally, the Object relations datatype even goes a step further and has a restriction for a content class or classes which you can put into the relation. As I said, this is something people rarely ever think about. This system just works and why change it?</p><p>But, as with any work you start in eZ Publish, sometimes you just need to create a custom feature which will work for your website only.</p><a name="eztoc9085_3" id="eztoc9085_3"></a><h2>How does this all add up, then?</h2><p>You’re probably wondering at this point how this all adds up. Why did I start writing about content actions and then restrictions on content browsing without even a line of code? Well, as with every other article so far, we are going to include a very specific functionality which will allow you to move a content object of a certain class, but only under a single type content class, and we will create a functionality which will restrict that move to start at a specific node inside the content tree of your website.</p><p>This will come in very handy if you have a bunch of users on your site, and for example, they are only allowed to move certain content objects into certain places or inside a certain content tree. It will all be much clearer in a second.</p><a name="eztoc9085_4" id="eztoc9085_4"></a><h2>Prepare your ground</h2><p>Of course, you’re probably eager to see the code for this cool feature. Well, before you do the actual coding part, you need to prepare the turf, as they say. So, in your extension, the <b>mypage</b> extension, go to <b>settings</b>, and then open the <b>content.ini.append.php</b> file. If there isn’t one, create it. In it, just put the following lines of code:</p>	<pre class="ezini" style="font-family:monospace;"><span><span style="">[</span></span>ActionSettings<span style="">]</span>
+<span style="color: #000099;">ExtensionDirectories</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">mypage</span>
+&nbsp;</pre><p>With these two lines of code, you have basically told eZ Publish that you want <b>mypage</b> to be the extension which will add some content actions to the existing ones.</p><p>After that, go up one level, and create a folder named actions in your extension. In it, create a PHP file which will be named content_actionhandler.php. This is effectively a look-for-code-here sign for eZ Publish. And then, when you open it up, just put in these few lines of code:</p>	<pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;"><?php</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> mypage_ContentActionHandler<span style="color: #009900;">(</span> <span style="color: #000088;">$module</span><span style="color: #339933;">,</span> <span style="color: #000088;">$http</span><span style="color: #339933;">,</span> <span style="color: #000088;">$objectID</span> <span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+    <span style="color: #666666; font-style: italic;">/* insert some code here */</span>
+<span style="color: #009900;">}</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?></span></pre><a name="eztoc9085_5" id="eztoc9085_5"></a><h2>On to the code!</h2><p>You need to enable your user to move an object. So, first off, go into the administration, choose the group of User you wish to be able to move, and create a content move policy for them. You probably know this by now. Also, open the template for the actual content class for the objects you wish to move. Let’s say it’s the <b>extension/mypage/design/mydesign/override/templates/full/myclass.tpl</b>. Now, insert the following code into the template:</p>	<pre class="eztemplate" style="font-family:monospace;">/* Changing the basic move form */
+<form method="post" action=<span style="color: #66cc66;">{</span><span style="color: #dd0000;">"/content/action"</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/urls/ezurl"><span style="color: #0600FF;">ezurl</span></a><span style="color: #66cc66;">(</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">}</span> id="move">
+<input type="hidden" name="ContentNodeID" value="<span style="color: #66cc66;">{</span><span style="color: #0000bb;">$node.node_id</span><span style="color: #66cc66;">}</span>" />
+<input type="hidden" name="ContentObjectID" value="<span style="color: #66cc66;">{</span><span style="color: #0000bb;">$node.object.id</span><span style="color: #66cc66;">}</span>" />
+<input type="hidden" name="ContentObjectLanguageCode" value="<span style="color: #66cc66;">{</span><span style="color: #0000bb;">$node.object.current_language</span><span style="color: #66cc66;">}</span>" />
+/* The bottom submit is usually named MoveButton, but for our new action we need a different name. */
+<input type="submit" name="MyMoveAction" value="Move" />
+</form></pre><p>Now, open <b>content_actionhandler.php</b> again, and insert the following code inside the function we created earlier:</p>	<pre class="php" style="font-family:monospace;"><span style="color: #b1b100;">if</span><span style="color: #009900;">(</span> <span style="color: #000088;">$http</span><span style="color: #339933;">-></span><span style="color: #004000;">hasPostVariable</span><span style="color: #009900;">(</span><span style="color: #0000ff;">"MyMoveAction"</span><span style="color: #009900;">)</span> <span style="color: #009900;">)</span> 
+<span style="color: #009900;">{</span> 
+    <span style="color: #000088;">$module</span><span style="color: #339933;">-></span><span style="color: #004000;">setCurrentAction</span><span style="color: #009900;">(</span><span style="color: #0000ff;">"MyMoveAction"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span>
+&nbsp;
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span> <span style="color: #000088;">$module</span><span style="color: #339933;">-></span><span style="color: #004000;">isCurrentAction</span><span style="color: #009900;">(</span><span style="color: #0000ff;">"MyMoveAction"</span><span style="color: #009900;">)</span> <span style="color: #009900;">)</span>
+<span style="color: #009900;">{</span>
+    <span style="color: #000088;">$viewMode</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'full'</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$languageCode</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$http</span><span style="color: #339933;">-></span><span style="color: #004000;">postVariable</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'ContentObjectLanguageCode'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$nodeID</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$http</span><span style="color: #339933;">-></span><span style="color: #004000;">postVariable</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'ContentNodeID'</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$node</span> <span style="color: #339933;">=</span> eZContentObjectTreeNode<span style="color: #339933;">::</span><span style="color: #004000;">fetch</span><span style="color: #009900;">(</span> <span style="color: #000088;">$nodeID</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$object</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$node</span><span style="color: #339933;">-></span><span style="color: #004000;">object</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$objectID</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$object</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'id'</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$class</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$object</span><span style="color: #339933;">-></span><span style="color: #004000;">contentClass</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$ignoreNodesSelect</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$ignoreNodesSelectSubtree</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$ignoreNodesClick</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000088;">$publishedAssigned</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$object</span><span style="color: #339933;">-></span><span style="color: #004000;">assignedNodes</span><span style="color: #009900;">(</span> <span style="color: #009900; font-weight: bold;">false</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">(</span> <span style="color: #000088;">$publishedAssigned</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$element</span> <span style="color: #009900;">)</span>
+    <span style="color: #009900;">{</span>
+        <span style="color: #000088;">$ignoreNodesSelect</span><span style="color: #009900;">[</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$element</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'node_id'</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+        <span style="color: #000088;">$ignoreNodesSelectSubtree</span><span style="color: #009900;">[</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$element</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'node_id'</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+        <span style="color: #000088;">$ignoreNodesClick</span><span style="color: #009900;">[</span><span style="color: #009900;">]</span>  <span style="color: #339933;">=</span> <span style="color: #000088;">$element</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'node_id'</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+        <span style="color: #000088;">$ignoreNodesSelect</span><span style="color: #009900;">[</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$element</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'parent_node_id'</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">}</span>
+&nbsp;
+    <span style="color: #000088;">$ignoreNodesSelect</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array_unique"><span style="color: #990000;">array_unique</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$ignoreNodesSelect</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$ignoreNodesSelectSubtree</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array_unique"><span style="color: #990000;">array_unique</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$ignoreNodesSelectSubtree</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$ignoreNodesClick</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array_unique"><span style="color: #990000;">array_unique</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$ignoreNodesClick</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    eZContentBrowse<span style="color: #339933;">::</span><span style="color: #004000;">browse</span><span style="color: #009900;">(</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'action_name'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$module</span><span style="color: #339933;">-></span><span style="color: #004000;">currentAction</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'description_template'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'design:content/browse_move_node.tpl'</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'keys'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'class'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$class</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'id'</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'class_id'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$class</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'identifier'</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'classgroup'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$class</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'ingroup_id_list'</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'section'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$object</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'section_id'</span> <span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'ignore_nodes_select'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$ignoreNodesSelect</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'ignore_nodes_select_subtree'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$ignoreNodesSelectSubtree</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'ignore_nodes_click'</span>  <span style="color: #339933;">=></span> <span style="color: #000088;">$ignoreNodesClick</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'persistent_data'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'ContentNodeID'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$nodeID</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'ViewMode'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$viewMode</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #0000ff;">'ContentObjectLanguageCode'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$languageCode</span><span style="color: #339933;">,</span>
+                                                     <span style="color: #000088;">$module</span><span style="color: #339933;">-></span><span style="color: #004000;">currentAction</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'1'</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                            <span style="color: #0000ff;">'permission'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'access'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'create'</span><span style="color: #339933;">,</span>
+                                            <span style="color: #0000ff;">'contentclass_id'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$class</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'id'</span> <span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                            <span style="color: #0000ff;">'content'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'object_id'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$objectID</span><span style="color: #339933;">,</span>
+                                                                       <span style="color: #0000ff;">'object_version'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$object</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'current_version'</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                                                       <span style="color: #0000ff;">'object_language'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$languageCode</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                            <span style="color: #0000ff;">'start_node'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$node</span><span style="color: #339933;">-></span><span style="color: #004000;">attribute</span><span style="color: #009900;">(</span> <span style="color: #0000ff;">'parent_node_id'</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                            <span style="color: #0000ff;">'cancel_page'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$module</span><span style="color: #339933;">-></span><span style="color: #004000;">redirectionURIForModule</span><span style="color: #009900;">(</span> <span style="color: #000088;">$module</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'view'</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$viewMode</span><span style="color: #339933;">,</span> <span style="color: #000088;">$nodeID</span><span style="color: #339933;">,</span> <span style="color: #000088;">$languageCode</span> <span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                            <span style="color: #0000ff;">'from_page'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">"/content/action"</span> <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+                                            <span style="color: #000088;">$module</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">}</span></pre><p>This is basically the same move code the content action usually uses but with our parameters and a setting of our custom action. The interesting part here is the <b>eZContentBrowse::browse()</b> method, which enables fast access to the content browsing without the need for any custom coding. And in our custom function we have fetched the node for our object and accessed the object, and then defined that the whole node and its subtree will be ignored in the browsing process. That takes care of the custom action part. Now, on to the browse restriction part.</p><p>Let’s say that, for example, you need to restrict the class with an ID of 30 to only be moved to a subtree of a different class, let’s call it <b>my_class_tree</b> and for the browsing to start at node 4 (let’s call it <b>my_node</b>). To limit your action in this way, you’ll need the <b>browse.ini</b> file. Which means you need to create a <b>browse.ini.append.php</b> file inside your extension. Type in the following lines in it:</p>	<pre class="ezini" style="font-family:monospace;"><span><span style="">[</span></span>BrowseSettings<span style="">]</span>
+<span style="color: #000099;">AliasList</span><span style="">[</span><span style="color: #ff0000;">my_node</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">4</span>
+&nbsp;
+<span style="color: #000066; font-weight:bold;"><span style="">[</span>MyMoveAction<span style="">]</span></span>
+<span style="color: #000099;">StartNode</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">my_node</span>
+<span style="color: #000099;">SelectionType</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">single</span>
+<span style="color: #000099;">ReturnType</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">NodeID</span>
+<span style="color: #000099;">StartNode_class</span><span style="">[</span><span style="color: #ff0000;">30</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">my_node</span>
+<span style="color: #000099;">Class</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">Class</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">my_class_tree</span>
+<span style="color: #000099;">TopLevelNodes</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">TopLevelNodes</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">my_node</span></pre><p>After that, clear all caches. With these, you have just set up the browsing restrictions throughout the site for your custom action.</p><p>But, wait, you might say. Why did we need to create a custom action here? Why didn’t we just apply these changes for the regular move action in eZ Publish? The answer is very simple. We needed to create a custom action because every setting in the browse.ini file or a certain action behaviour applies each and every time that particular action is executed. So, if we just input the restrictions for an already existing action on the website, we apply that restriction everywhere. And in this particular case, we didn’t want that. We wanted to just apply the restriction for a certain type of content. And when you try to move your object after that, you’ll see that the browsing engine for eZ Publish starts at our desired node, and displays only the classes we told it to display.</p><p>
+Until next time, I wish you merry Christmas and happy coding in the upcoming year,<br />Tomislav</p>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgenlabs.com/Blog/Confessions-of-an-apprentice-Custom-actions-and-restrictions-on-content-browsing-in-eZ-Publish">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Netgen/(day)/18/(month)/8/(year)/2014">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class="currentselected today">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:4:{s:4:"text";s:95:"Confessions of an apprentice: Custom actions and restrictions on content browsing in eZ Publish";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"6851";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:3:{s:4:"text";s:95:"Confessions of an apprentice: Custom actions and restrictions on content browsing in eZ Publish";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"6851";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"6852";s:7:"node_id";s:4:"6851";s:14:"parent_node_id";s:3:"228";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:44:"RSSImport_9_8b92285e95ef23472e0a9544ded46fb3";s:14:"node_remote_id";s:32:"74066395a65f86921eae8230774c663a";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:108:"Mirror/Netgen/Confessions-of-an-apprentice-Custom-actions-and-restrictions-on-content-browsing-in-eZ-Publish";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"6851";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:23:"parent_object_remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,291 @@
+a:10:{s:7:"content";s:15744:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Changing class of an existing object in eZ Publish CMS</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgen.hr/Blog/Changing-class-of-an-existing-object">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">02/20/2012 03:27 pm</p>
+                                    <p class="author">info@netgen.hr (Administrator User)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p>A good practice in eZ Publish development is to specify the content classes (or content types) at the beginning of the project. But of course in real situations there is a big chance that something needs to be changed at later stage or even after going live. What is great with eZ is that you can easily change content types either by adding new attributes or removing the ones that are not needed. And that ability covers a lot of situation, but not all.</p><p>
+For example imagine a following scenario:<br />
+- a class is specified and created<br />
+- lot objects of that class are created too<br />
+- you realize that some of that objects should be of different class<br />- you need to convert some existing objects to that different class&nbsp;</p><p>You can create the second class but the problem is that you already have the content. The swap node feature can help if the number of objects you want to change is low. &nbsp;</p><p>But what to do if you need to change the class for a lot of existing objects? You could create an export/import script, but that takes time too. There was an extension for changing class on existing objects: <a href="http://projects.ez.no/object_content_class_change" target="_self">http://projects.ez.no/object_content_class_change</a> but its outdated (would be nice if someone could upgrade it to PHP5 and eZ 4.2+).</p><p>There is a quick solution but its not for people with weak hearth :)</p>
+<ol>
+
+<li>create the new class by copying the old one and note the new class id (e.g. 111)</li>
+
+<li>note all class attribute ids from the old class (e.g. 222,223)</li>
+
+<li>note all class attribute ids from the new class (e.g. 333,334 )</li>
+
+<li>collect object ids for objects you want to change class (e.g. 444,555,777,888)</li>
+
+<li>
+go to your database console and verify that you have good ids:<br /><i>select * from ezcontentobject where id in (444,555,777,888)</i></li>
+
+<li>backup your database (just in case)</li>
+
+<li>lock object changes to ensure that nobody changes those objects while doing this (the safest way is to just shutdown the web site or disable login for editors)</li>
+
+<li>
+run the following SQL command to update ezcontentobject table:<br /><i>update ezcontentobject set contentclass_id = 111 where id in (444,555,777,888)</i></li>
+
+<li>
+run following SQL commands to update ezcontentobject_attribute table for each attribute:<br />
+<i>update ezcontentobject_attribute set contentclassattribute_id = 333 where contentobject_id in (444,555,777,888) and contentclassattribute_id = 222;</i><br /><i>update ezcontentobject_attribute set contentclassattribute_id = 334 where contentobject_id in (444,555,777,888) and contentclassattribute_id = 223;</i></li>
+
+<li>Clear the related content caches</li>
+
+<li>Do your changes on the new class</li>
+
+</ol>
+<p>
+Important thing is that you can “map” attributes only of the same datatype. Otherwise you can break the eZ data model. So the first step is crucial to create the exact same copy of the class. Afterwards, in step 11, you can do changes to your new class.So far I didn't need this to often so there is no script. It would be rather simple to create a script which could hide few steps (like 2., 3., 8., and 9.).&nbsp;<br /><b>DISCLAIMER: No warranty! Backup before doing this!</b></p>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgen.hr/Blog/Changing-class-of-an-existing-object">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Netgen/(day)/18/(month)/8/(year)/2014">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="currentselected today left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:4:{s:4:"text";s:54:"Changing class of an existing object in eZ Publish CMS";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"3737";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:3:{s:4:"text";s:54:"Changing class of an existing object in eZ Publish CMS";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"3737";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"3737";s:7:"node_id";s:4:"3737";s:14:"parent_node_id";s:3:"228";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:44:"RSSImport_9_203b49af98ed4d347b5f94ad8ed94439";s:14:"node_remote_id";s:32:"6aac7f87b496dbf7a235244040e337a9";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:68:"Mirror/Netgen/Changing-class-of-an-existing-object-in-eZ-Publish-CMS";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"3737";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:23:"parent_object_remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

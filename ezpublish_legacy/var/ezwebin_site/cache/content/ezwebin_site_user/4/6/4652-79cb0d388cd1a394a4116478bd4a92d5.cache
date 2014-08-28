@@ -1,0 +1,714 @@
+a:10:{s:7:"content";s:29459:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ez-js-rest-client/commit/2a14bd56bb64905941e4d96f5458099469937ed1#-P0" title="gggeek commented on commit ezsystems/ez-js-rest-client@2a14bd56bb">gggeek commented on commit ezsystems/ez-js-rest-client@2a14bd56bb</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- commit_comment -->
+<span class="mega-octicon octicon-comment-discussion"></span>
+
+<div class="time">
+  <time datetime="2014-08-20T08:36:29Z" is="relative-time">August 20, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>commented</span> on commit <a href="https://github.com/ezsystems/ez-js-rest-client/commit/2a14bd56bb64905941e4d96f5458099469937ed1#commitcomment-7453763">ezsystems/ez-js-rest-client@2a14bd56bb</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message markdown-body">
+    <blockquote>
+      <p>Am I the only one who feels putting the url - including API version - in identifiers is a dab idea ?</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/20/2014 03:36 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-commit-ezsystems-ez-js-rest-client-2a14bd56bb">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ez-js-rest-client/commit/2a14bd56bb64905941e4d96f5458099469937ed1#-P0">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezsurvey/pull/21" title="gggeek opened pull request ezsystems/ezsurvey#21">gggeek opened pull request ezsystems/ezsurvey#21</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- pull_request -->
+<span class="mega-octicon octicon-git-pull-request"></span>
+
+<div class="time">
+  <time datetime="2014-08-12T12:43:57Z" is="relative-time">August 12, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>opened</span> pull request <a href="https://github.com/ezsystems/ezsurvey/pull/21">ezsystems/ezsurvey#21</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message">
+    <blockquote>Fix EZP-23257: fatal when instantiating a &quot;related object&quot; survey question</blockquote>
+      <div class="pull-info">
+        <span class="octicon octicon-git-commit"></span>
+        <em>1</em> commit with
+        <em>1</em> addition and
+        <em>1</em> deletion
+      </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/12/2014 07:43 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-opened-pull-request-ezsystems-ezsurvey-21">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezsurvey/pull/21">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/gggeek/ezsurvey/compare/EZP-23257" title="gggeek created branch EZP-23257 at gggeek/ezsurvey">gggeek created branch EZP-23257 at gggeek/ezsurvey</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- create -->
+<div class="simple">
+  <span class="octicon octicon-git-branch"></span>
+
+  <div class="title">
+    <a href="https://github.com/gggeek">gggeek</a> <span>created</span> branch <a href="http://github.com/gggeek/ezsurvey/tree/EZP-23257" class="css-truncate css-truncate-target branch-link" title="EZP-23257"><span class="octicon octicon-git-branch"></span>EZP-23257</a> at <a href="https://github.com/gggeek/ezsurvey" class="css-truncate css-truncate-target">gggeek/ezsurvey</a>
+  </div>
+
+  <div class="time">
+    <time datetime="2014-08-12T12:43:28Z" is="relative-time">August 12, 2014</time>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/12/2014 07:43 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-created-branch-EZP-23257-at-gggeek-ezsurvey">View mirror of item</a> &nbsp; <a href="https://github.com/gggeek/ezsurvey/compare/EZP-23257">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish-kernel/pull/951#discussion_r15930009" title="gggeek commented on pull request ezsystems/ezpublish-kernel#951">gggeek commented on pull request ezsystems/ezpublish-kernel#951</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- pull_request_review_comment -->
+<span class="mega-octicon octicon-comment-discussion"></span>
+
+<div class="time">
+  <time datetime="2014-08-07T11:27:12Z" is="relative-time">August 07, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>commented</span> on pull request <a href="https://github.com/ezsystems/ezpublish-kernel/pull/951#discussion_r15930009">ezsystems/ezpublish-kernel#951</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message markdown-body">
+    <blockquote>
+      <p>Mostly agree with <a href="https://github.com/lolautruche" class="user-mention">@lolautruche</a>.
+Defaulting to true makes sense, as in 90% of the cases you do not want a perf hit for rebooting the legacy kernel. …</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/07/2014 06:27 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-pull-request-ezsystems-ezpublish-kernel-951">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish-kernel/pull/951#discussion_r15930009">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1053#issuecomment-51308752" title="gggeek commented on pull request ezsystems/ezpublish-legacy#1053">gggeek commented on pull request ezsystems/ezpublish-legacy#1053</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- issue_comment -->
+<span class="mega-octicon octicon-comment-discussion"></span>
+
+<div class="time">
+  <time datetime="2014-08-06T08:49:58Z" is="relative-time">August 06, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>commented</span> on pull request <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1053#issuecomment-51308752" title="EZP-23235: Improve eZOE&#39;s UrlObjectLink handling performance.">ezsystems/ezpublish-legacy#1053</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message markdown-body">
+    <blockquote>
+      <p>PS: I checked the code. it seems that an outher transaction is indeed missing, and I surmise it should be there :-(</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/06/2014 03:49 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-pull-request-ezsystems-ezpublish-legacy-1053">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1053#issuecomment-51308752">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1053#issuecomment-51308054" title="gggeek commented on pull request ezsystems/ezpublish-legacy#1053">gggeek commented on pull request ezsystems/ezpublish-legacy#1053</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- issue_comment -->
+<span class="mega-octicon octicon-comment-discussion"></span>
+
+<div class="time">
+  <time datetime="2014-08-06T08:42:03Z" is="relative-time">August 06, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>commented</span> on pull request <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1053#issuecomment-51308054" title="EZP-23235: Improve eZOE&#39;s UrlObjectLink handling performance.">ezsystems/ezpublish-legacy#1053</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message markdown-body">
+    <blockquote>
+      <p>About transaction usage: they actually introduce CONTENTION. The db will most of the time be slower, not faster because of them.
+never, EVER introd…</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/06/2014 03:42 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-pull-request-ezsystems-ezpublish-legacy-10532">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1053#issuecomment-51308054">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish-kernel/pull/947#issuecomment-50765780" title="gggeek commented on pull request ezsystems/ezpublish-kernel#947">gggeek commented on pull request ezsystems/ezpublish-kernel#947</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- issue_comment -->
+<span class="mega-octicon octicon-comment-discussion"></span>
+
+<div class="time">
+  <time datetime="2014-07-31T14:27:20Z" is="relative-time">July 31, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>commented</span> on pull request <a href="https://github.com/ezsystems/ezpublish-kernel/pull/947#issuecomment-50765780" title="Fix EZP-23210: Exception thrown when using alternative user provider/login handler">ezsystems/ezpublish-kernel#947</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message markdown-body">
+    <blockquote>
+      <p>better thanks. +1</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>07/31/2014 09:27 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-pull-request-ezsystems-ezpublish-kernel-947">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish-kernel/pull/947#issuecomment-50765780">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish-kernel/pull/947#issuecomment-50762635" title="gggeek commented on pull request ezsystems/ezpublish-kernel#947">gggeek commented on pull request ezsystems/ezpublish-kernel#947</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- issue_comment -->
+<span class="mega-octicon octicon-comment-discussion"></span>
+
+<div class="time">
+  <time datetime="2014-07-31T14:04:39Z" is="relative-time">July 31, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>commented</span> on pull request <a href="https://github.com/ezsystems/ezpublish-kernel/pull/947#issuecomment-50762635" title="Fix EZP-23210: Exception thrown when using alternative user provider/login handler">ezsystems/ezpublish-kernel#947</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message markdown-body">
+    <blockquote>
+      <p>Very good comment, makes this quite clear. Otoh the new method name might be made a bit more self explaining (or its phpdoc)?</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>07/31/2014 09:04 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-pull-request-ezsystems-ezpublish-kernel-9472">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish-kernel/pull/947#issuecomment-50762635">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1048#issuecomment-50738827" title="gggeek commented on pull request ezsystems/ezpublish-legacy#1048">gggeek commented on pull request ezsystems/ezpublish-legacy#1048</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- issue_comment -->
+<span class="mega-octicon octicon-comment-discussion"></span>
+
+<div class="time">
+  <time datetime="2014-07-31T09:48:13Z" is="relative-time">July 31, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>commented</span> on pull request <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1048#issuecomment-50738827" title="EZP-23208: async publishing JavaScript polling gives bad results">ezsystems/ezpublish-legacy#1048</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+  <div class="message markdown-body">
+    <blockquote>
+      <p>Hand-tested on chrome/win7, trying to publish in parallel 110 versions of the same object.
+Seems to fix the issue</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>07/31/2014 04:48 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-pull-request-ezsystems-ezpublish-legacy-1048">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish-legacy/pull/1048#issuecomment-50738827">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/gggeek/ezdbintegrity/compare/ef8afbb235...470bfb7ed4" title="gggeek pushed to master at gggeek/ezdbintegrity">gggeek pushed to master at gggeek/ezdbintegrity</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <!-- push -->
+<span class="mega-octicon octicon-git-commit"></span>
+
+<div class="time">
+  <time datetime="2014-07-30T15:33:02Z" is="relative-time">July 30, 2014</time>
+</div>
+
+<div class="title">
+  <a href="https://github.com/gggeek">gggeek</a> <span>pushed</span> to <a href="http://github.com/gggeek/ezdbintegrity/tree/master">master</a> at <a href="https://github.com/gggeek/ezdbintegrity" class="css-truncate css-truncate-target">gggeek/ezdbintegrity</a>
+</div>
+
+<div class="details">
+  <a href="https://github.com/gggeek"><img alt="Gaetano Giunta" class="gravatar" data-user="308634" height="30" src="https://avatars0.githubusercontent.com/u/308634?v=2&amp;s=60" width="30" /></a>
+
+    <div class="commits pusher-is-only-committer">
+      <ul>
+        <li>
+          <span title="gggeek">
+            <img alt="Gaetano Giunta" data-user="308634" height="16" src="https://avatars1.githubusercontent.com/u/308634?v=2&amp;s=32" width="16" />
+          </span>
+          <code><a href="http://github.com/gggeek/ezdbintegrity/commit/470bfb7ed411e5f5f04f006f00e034e1f11eda75">470bfb7</a></code>
+          <div class="message">
+            <blockquote>
+              Fixed: attribute checking did not work with php &lt; 5.3.7
+            </blockquote>
+          </div>
+        </li>
+        <li>
+          <span title="gggeek">
+            <img alt="Gaetano Giunta" data-user="308634" height="16" src="https://avatars1.githubusercontent.com/u/308634?v=2&amp;s=32" width="16" />
+          </span>
+          <code><a href="http://github.com/gggeek/ezdbintegrity/commit/bdbb53f364235753de528beadbbb654038ae508a">bdbb53f</a></code>
+          <div class="message">
+            <blockquote>
+              Fix one custom sql request; comments/todos
+            </blockquote>
+          </div>
+        </li>
+        <li class="more"><a href="https://github.com/gggeek/ezdbintegrity/compare/ef8afbb235...470bfb7ed4">1 more commit &raquo;</a></li>
+      </ul>
+    </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>07/30/2014 10:33 am</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-pushed-to-master-at-gggeek-ezdbintegrity">View mirror of item</a> &nbsp; <a href="https://github.com/gggeek/ezdbintegrity/compare/ef8afbb235...470bfb7ed4">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+            
+            <span class="next"><a href="/Mirror/GG-GitHub/(offset)/10"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+    
+        <span class="current">1</span>
+
+                      <span class="other"><a href="/Mirror/GG-GitHub/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/30">4</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/40">5</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/60">7</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/70">8</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/80">9</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/90">10</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/100">11</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/110">12</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/120">13</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/130">14</a></span>
+                              <span class="other"><a href="/Mirror/GG-GitHub/(offset)/140">15</a></span>
+            <span class="other"><a href="/Mirror/GG-GitHub/(offset)/150">16</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/GG-GitHub/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/GG-GitHub/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/GG-GitHub/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/GG-GitHub/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/GG-GitHub/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/GG-GitHub/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/GG-GitHub/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/GG-GitHub/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/GG-GitHub/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/GG-GitHub/(day)/6/(month)/8/(year)/2014">6</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/GG-GitHub/(day)/7/(month)/8/(year)/2014">7</a></em>
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/GG-GitHub/(day)/12/(month)/8/(year)/2014">12</a></em>
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/GG-GitHub/(day)/20/(month)/8/(year)/2014">20</a></em>
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class="currentselected today">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:11:"GG @ GitHub";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4652";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:11:"GG @ GitHub";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4652";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4652";s:7:"node_id";s:4:"4652";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"0ef486759a92d6af06eac3a0a9a8201e";s:14:"node_remote_id";s:32:"c0434152d414bf198596af9b26cbf166";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:16:"Mirror/GG-GitHub";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4652";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

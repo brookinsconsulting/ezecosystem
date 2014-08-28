@@ -1,0 +1,329 @@
+a:10:{s:7:"content";s:21868:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/fedora-18-alpha-gnome-36-bof" title="Fedora 18 alpha &amp; GNOME 3.6, bof...">Fedora 18 alpha &amp; GNOME 3.6, bof...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Pour ceux qui ne le savent peut-être pas encore, le <a title="Fedora 18 Alpha est disponible" hreflang="fr" href="http://forums.fedora-fr.org/viewtopic.php?id=58037">18ème opus de Fedora vient de sortir en version alpha</a>. Fedora reste de loin, pour moi, la meilleure distribution Linux de part son côté novateur et &quot;<em><a title="Qu'est-ce que Fedora &amp; Pourquoi Fedora est-il différent ?" hreflang="fr" href="http://fedoraproject.org/fr/about-fedora">upstrime first</a></em>&quot; ! Cependant je dois avouer que Fedora 18 en live CD <em>out-of-the-box</em> me déçoit sur quelques points :</p>
+<ul><li>Le thème part défaut de Fedora est celui de GNOME. Certes on reste dans l'<em>upstrime first</em>
+mais j'avoue avoir de plus en plus de mal à saisir la différence entre
+le thème GNOME par défaut et le thème pour déficients visuel à fort
+contraste. Trop de noir et de blanc à mon goût, il faudrait peut-être
+revenir <a title="Tango Icon Theme Guidelines" hreflang="en" href="http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines">au fondamentaux</a>.</li>
+<li><a title="Features/firewalld-default" hreflang="en" href="http://fedoraproject.org/wiki/Features/firewalld-default">L'arrivée du pare-feu Firewalld</a> est l'une des <a title=" Fedora 18 Accepted Features " hreflang="en" href="http://fedoraproject.org/wiki/Releases/18/FeatureList">nouveautés de Fedora
+18</a>, mais pourquoi ne pas proposer aussi sur le live CD le <a title="Graphical user interface" hreflang="fr" href="http://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a> pour le
+configurer ?</li>
+<li><em>system-config-printer</em> fait maintenant doublon avec la partie &quot;Imprimante&quot; des paramètres système. Pourquoi ne pas le retirer du live ?</li>
+<li><em>system-config-date </em>fait à présent doublon avec la partie &quot;Date &amp; heure&quot; des paramètres système. Pourquoi ne pas le retirer du live ?</li>
+</ul>    <p><a title="system-config-printer" href="http://www.llaumgui.com/public/images/fedora/fedora_18/system-config-printer.png"><img style="margin: 0 auto; display: block;" alt="system-config-printer" src="http://www.llaumgui.com/public/images/fedora/fedora_18/.system-config-printer_m.jpg" /></a></p>
+<h2>GNOME 3.6</h2>
+<p><a title="GNOME" hreflang="en" href="http://www.gnome.org">GNOME</a> 3.6 est la 6ème version de GNOME 3 et de son <a title="GNOME Shell" hreflang="en" href="https://live.gnome.org/GnomeShell">GNOME Shell</a> et je dois avouer que c'est de pire en pire. D'un côté j'étais fan lors des premières bêtas pour le côté innovant, maintenant j'en viens à me demander si GNOME Shell n'est pas contre performant pour un profil comme le mien qui switch en permanence entre plusieurs fenêtres. La nouvelle interface très belle de l'écran de verrouillage va dans ce sens, c'est très beau, l'effet slide est rigolo 2 secondes mais après on se rend compte qu'on est sur un PC et non une tablette !</p>
+<p><a title="system-config-date" href="http://www.llaumgui.com/public/images/fedora/fedora_18/system-config-date.png"><img style="margin: 0 auto; display: block;" alt="system-config-date" src="http://www.llaumgui.com/public/images/fedora/fedora_18/.system-config-date_m.jpg" /></a></p>
+<p>De plus la nouvelle version de <a title="This is Nautilus, the file manager for the GNOME desktop. " hreflang="en" href="https://live.gnome.org/Nautilus">Nautilus</a> avec le maximisé-que-tu-peux-plus-fermer fini d'enfoncer le clou, on comprend mieux le <a title="Introducing Nemo" hreflang="en" href="http://cinnamon.linuxmint.com/?p=198">fork de mint </a>ou alors le fait qu'<a hreflang="en" href="http://www.ubuntu.com/">Ubuntu</a> n’intégrera <a title="Ubuntu 12.10 May Ship With Older, But More Featured, Nautilus" hreflang="en" href="http://www.omgubuntu.co.uk/2012/08/ubuntu-12-10-may-ship-with-older-but-more-featured-nautilus">pas la version 3.6 mais 3.4 de Nautilus dans leur prochaine version</a>. AMHA GNOME Shell va vers quelque chose de bien avec une sorte de global menu à la MacOS mais pour le moment on à l'impression d'être à une croisée des chemins, le cul entre 2 chaises avec quelque chose de fini mais de pas utilisable !</p>
+<p><a title="Nautilus 3.6" href="http://www.llaumgui.com/public/images/fedora/fedora_18/nautilus.png"><img style="margin: 0 auto; display: block;" alt="Nautilus 3.6" src="http://www.llaumgui.com/public/images/fedora/fedora_18/.nautilus_m.jpg" /></a></p>
+<p>Un autre exemple probant de l'esprit de GNOME Shell : le nouveau bouton dans le <em>dash</em>, c'est bien mais cette nouveauté est imposée et il n'est pas possible de configurer une option pour rester comme avant.</p>
+<p>Bref, je ne pense pas qu'un retour en arrière comme <a title="The traditional desktop environment" hreflang="en" href="http://mate-desktop.org/">MATE</a> (<a title="Features/MATE-Desktop" hreflang="en" href="http://fedoraproject.org/wiki/Features/MATE-Desktop">aussi l'une des features de Fedora 18</a>), soit une bonne chose, mais je commence à penser plus que fortement à <a title="Love your Linux, Feel at Home, Get things Done!" hreflang="en" href="http://cinnamon.linuxmint.com/">Cinnamon</a> et <a title="A sleek and fast GTK3 file manager." hreflang="en" href="https://launchpad.net/marlin">Marlin</a>.</p>
+<p><strong>Pour finir, heureusement que Fedora est complètement paramétrable (propose plein d'environnements différents)  est redevient le top, là je parlais de la version live CD tirée de la boite.</strong></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/23/2012 03:49 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Fedora-18-alpha-GNOME-3.6-bof">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/fedora-18-alpha-gnome-36-bof">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/owncloud-%3A-mon-cloud-a-moi-dropbox-like-killer" title="ownCloud : mon cloud à moi (Dropbox like &amp; killer !)">ownCloud : mon cloud à moi (Dropbox like &amp; killer !)</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Cela fait maintenant un certain temps que je me sers de <a title="Simplifiez-vous la vie" hreflang="fr" href="http://db.tt/Q0EpbzJ">Dropbox</a> pour
+synchroniser les données de mes différents postes mais également pour
+pouvoir accéder à ces informations de partout. Bref pour mettre mes données
+<a title="Cloud computing" hreflang="fr" href="http://fr.wikipedia.org/wiki/Cloud_computing">dans les nuages</a>.</p>
+<p>Le problème de Dropbox c'est qu'une fois mes 10Go passés, la solution
+devient payante (normale me direz-vous c'est un service qu'on
+consomme il est normal de la payer). L'autre problème, plus grave, est que les
+données ne sont pas cryptées et c'est plutôt dérangeant <a title="Dropbox admet un piratage et renforce sa sécurité" hreflang="fr" href="http://www.clubic.com/antivirus-securite-informatique/actualite-504076-dropbox-renforce-securite-admet-hack.html">lorsqu'un
+problème survient</a>.</p>
+<p>Donc j'ai un peu regardé ce qui s'offrait à moi comme <em>Dropbox like</em> et <em>DropBox killer</em>.</p>    <h2>Les concurrents : Box, Drive, SkyDrive et Hubic
+</h2>
+<p><a title="Enfin. Tout votre contenu mobile à un seul emplacement." hreflang="fr" href="https://www.box.com/home/">Box</a>, <a hreflang="fr" href="https://drive.google.com/">Drive</a> et <a hreflang="fr" href="https://skydrive.live.com">SkyDrive</a> ont des prix équivalents à DropBox. <a title="  hubiC, c'est votre hub dans le Cloud" hreflang="fr" href="http://www.ovh.fr/hubiC/">hubiC</a> quant à lui offre plusieurs avantages :</p>
+<ul><li>Français : mes données restent donc en France et sont donc soumises aux lois françaises,</li>
+<li>Prix compétitifs,</li>
+<li><a title="Backup rsync encfs webdav (Hubic)" hreflang="fr" href="http://forums.fedora-fr.org/viewtopic.php?pid=504317">Possibilité de monter du WebDAV et de faire des cryptages avec encfs</a>. Après il faut juste s'accrocher.</li>
+</ul>
+<p>J'ai un peu testé hubiC mais le client mal intégré à l'OS et les performances d'un montage WebDAV m'ont vite découragé.</p>
+<h2>Mon cloud à moi : ownCloud</h2>
+<p>Comme je possède un serveur, je me suis donc dit que je pouvais héberger mon cloud à moi :</p>
+<ul><li><a title="Self hosted, instant, secure file synchronisation" hreflang="en" href="http://sparkleshare.org/">SparkleShare</a> : très prometteur, mais <a title="Git est un logiciel de gestion de versions décentralisé" hreflang="fr" href="http://fr.wikipedia.org/wiki/Git">GIT</a> est-il un moteur de stockage adéquate pour des fichiers binaires (MP3, photos, etc.) ? <a title="A mon humble avis" hreflang="fr" href="http://fr.wikipedia.org/wiki/AMHA">AMHA</a>, la réponse est non !</li>
+<li><a title="Syncany is an open-source cloud storage and filesharing application" hreflang="en" href="http://www.syncany.org/">Syncany</a> : prometteur sur le papier, mais je ne bosse pas sur le papier ;-).</li>
+</ul>
+<p>Bref, je me suis alors tourné vers <a title="Your Cloud, Your Data, Your Way!" hreflang="en" href="http://owncloud.org/">OwnCloud</a> qui est une sorte de DropBox mais hébergé chez soit :</p>
+<ul><li>Client Linux / Mac / Windows,</li>
+<li>Interface web,</li>
+<li>WebDAV,</li>
+<li>Cryptage,</li>
+<li>Versioning,</li>
+<li>Partage,</li>
+<li>etc.</li>
+</ul>
+<p>Cependant, l'outil n'est pas encore exempte de problèmes. Par exemple, l'interface web est très lente, des améliorations devraient arriver avec la version 4.5 et un système de cron.</p>
+<p>L’outil possède <a hreflang="en" title="ownCloud Roadmap" href="http://owncloud.org/dev/roadmap/">une feuille de route claire</a>, la <a title="ownCloud Releases Beta of Latest Community Edition" hreflang="en" href="https://owncloud.com/blog/owncloud-releases-beta-of-latest-community-edition">version 4.5 est actuellement en beta</a>, les fonctionnalités à venir sont alléchantes : </p>
+<ul><li><a title="Features/OwnCloud" hreflang="en" href="http://fedoraproject.org/wiki/Features/OwnCloud">Intégration au sein de Fedora 18,</a></li>
+<li>Synchronisation de vos bookmarks Firefox,</li>
+<li>Montage Dropbox et Drive</li>
+<li>etc.</li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/06/2012 01:54 pm</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/ownCloud-mon-cloud-a-moi-Dropbox-like-killer-!">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/owncloud-%3A-mon-cloud-a-moi-dropbox-like-killer">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/2/(year)/2011" title="">February 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2011" title="">January 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2012" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>September&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                                        <td class="  right">
+            2
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Guillaume-Kulakowski/(day)/6/(month)/9/(year)/2012">6</a></em>
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                                        <td class="  right">
+            9
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                                        <td class="  right">
+            16
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            17
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                                        <td class="  right">
+            <em><a href="/Mirror/Guillaume-Kulakowski/(day)/23/(month)/9/(year)/2012">23</a></em>
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                                        <td class="  right">
+            30
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2012";s:5:"month";s:1:"9";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:20:"Guillaume Kulakowski";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1756";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:20:"Guillaume Kulakowski";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1756";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1756";s:7:"node_id";s:4:"1756";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"2ec82a88f40667f13475567bbf2b4370";s:14:"node_remote_id";s:32:"b2e11d35c046edf6259a59540c4d3c9c";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:27:"Mirror/Guillaume-Kulakowski";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1756";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

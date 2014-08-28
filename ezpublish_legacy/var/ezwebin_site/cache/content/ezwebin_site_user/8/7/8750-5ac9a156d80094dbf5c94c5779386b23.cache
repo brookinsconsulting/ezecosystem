@@ -1,0 +1,264 @@
+a:10:{s:7:"content";s:21397:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Introducing eZ Platform And Its New Development Cycle</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://ez.no/About-eZ/Blog/Introducing-eZ-Platform-And-Its-New-Development-Cycle">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">03/13/2014 09:53 am</p>
+                                    <p class="author">info@ez.no (Maud Brundseaux)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <a name="eztoc400797_1" id="eztoc400797_1"></a><h2># Clarifying our Product Portfolio</h2><p>eZ Publish has been built over the years on a great vision of a &quot;platform&quot;. A platform that developers would use to build websites or applications; a platform that business people (editors, marketers, information workers) would use to bring those websites to life, mostly by creating and managing content and interactions with end-users.</p><p>As content has assumed the <a href="http://ez.no/About-eZ/Blog/Content-Is-Gold" target="_self">importance</a> we know for so many businesses, the platform is now used by many different profiles (personas). It has grown organically and has turned out to be quite complex, orchestrating all kinds of interactions with all kinds of people, and operating in two &quot;editions&quot; (the community project and the Enterprise Edition) that don’t always coexist very well.</p><p>Our strategy is to move to something simpler and clearer; better defined from a user point of view. We want to provide developers with something clearly for the developer (and not for the marketer). On the other hand, we want to provide the business user with a tool that doesn't require any technical know-how, and which is not a developer tool. As it stands, we tend to combine the two sides a bit too much. In the future, we will strive to change that; put clearly, we want to better serve the &quot;digital managers&quot; - the business owners.&nbsp;</p><p>Initially, we were serving them somewhat indirectly: a lot was &quot;custom made&quot; by integrators and developers on top of eZ Publish Platform, requiring much additional work. We want to give them a more integrated solution - a tool whereby it is not only possible, but possible <b>simply, quickly and efficiently</b>, without too much technical assistance. And we don't believe this is the same as offering a technical platform. We’ll get back to this later; at this point we’re still working on it. No need to promise too much - just know that we’ll be bringing in new solutions in that area and will share them as soon as we can.</p><p>For now, I want to talk about what we offer developers: the technical platform.</p><a name="eztoc400797_2" id="eztoc400797_2"></a><h2># Introducing eZ Platform</h2><p>As I mentioned, the success of eZ Publish was based on its platform approach. Of course we want to keep this. We also want to make it even better. That’s actually what we’re doing right now, with step by step improvements to eZ Publish Platform 5.</p>
+<div class="object-left"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ezp5-devient-platform/400815-1-eng-GB/ezP5-devient-platform_small_with_border.jpg" alt="" /></div><p>This will be one of our two product focuses (the other being our solution for business users mentioned above): developing what we will now call &quot;eZ Platform&quot;, a product for developers that arms them with a solid framework, strong APIs, unequaled extensibility, user interfaces that fit developer needs, and tools and resources to help them build great websites and content-driven apps.&nbsp;</p><p><b>eZ Platform</b> will be the next generation of eZ Publish - something we might have referred to as eZ Publish 6. As you’ve noticed, we’ll be leaving the term “publish” on the roadside. “Publish” is part of our legacy. As this new generation is also technically getting rid of our legacy kernel, we will indeed shed the “publish” term in the name. Some might be a bit surprised, curious, or even nostalgic. Here are the reasons:</p>
+<ul>
+
+<li>In terms of features, it has never been purely and solely about publishing - this is misleading;</li>
+
+<li>In terms of positioning, we as a company have never focused solely on the publishing sector. We are certainly widely used in the media industry, but we are far from focusing only on that, and less still on the publishing sector. This has confused many people about what we are, which has led regularly to misunderstandings.</li>
+
+</ul>
+<p>So, welcome “eZ Platform”! It’s being built on top of the new eZ Publish 5.x kernel and, on the technical side, relies heavily on the Symfony2 framework. It won’t include any “legacy” code from the 3 and 4.x generations - no more dependency. The user interface will cover all the needs of developers and administrators, such as setting up content types, defining information and service architecture, managing users, roles, permissions, and configuring integration and extensions. It will also offer - and this is probably a question for many - an editorial interface that gives the ability to edit content, as this is something developers need when they build applications. eZ Platform will be more open, more open-source, more focused toward developers. And upgrading to eZ Platform will be easy, thanks to the effort we put into building 5.x with its dual kernel approach.</p><a name="eztoc400797_3" id="eztoc400797_3"></a><h2># Adapting our Software Development Cycle</h2><p>Something else coming with this update is a seriously refreshed development cycle. We have heard a lot of feedback. The majority of customers and partners think two releases per year is too many, except for those wanting to surf the innovation wave. We agree - one main release per year is better in most cases. On the other hand, for those who want to ride the innovation wave, a release every six months is not enough, as the community project is moving faster and you can hardly jump from one to the other. We agree: this is not optimal. So this is what we’ll be introducing with the platform:</p><p>First, there will no longer be a difference between the community project and the Enterprise software.This will be “eZ Platform” - period. Of course, we will introduce additional solutions on top of it, but there will be only one “eZ Platform”. No community and no Enterprise version of it.</p><p>The main annual release will be supported, as it is today, with Long Term Support (LTS), ensuring customers can run a stable and tested Enterprise environment for a long period of time with strong support from the eZ team.</p><p>Moreover, we will also allow a more aggressive innovation track - still fully supported by the eZ team. We will always support the latest innovation release, which will change every two months. The constraint for those taking this route will be to keep up with the pace and upgrade with us every two months if they want full support.</p><p>These changes will be introduced immediately after the 5.4 release. Keep in mind that 5.3 and 5.4 will both have long-term support (3 years after the 5.3 release date). Stay tuned for more information regarding changes in the development cycle - our engineering team is on top of it. It will be coming soon and we’ll be sharing more about this move.&nbsp;</p><a name="eztoc400797_4" id="eztoc400797_4"></a><h2># Making it Easy to Make it Better</h2><p>To wrap up, we are about to make some important changes that will make eZ better: changes we have been maturing and discussing for quite a while now. Some might now want to see something concrete behind the words. It will take us some time to get there, but we are an open company, which is why we share it all with you up front. We are no Apple or Microsoft, and don’t believe in hiding our plan until D-day to make a big splash - that’s not us. More importantly, eZ Platform will be developed in an open manner, commencing with its shipment in alpha very soon. That’s why I wanted to share the longer-term plan today, so you understand the change. We hope you’ll like it. Stay tuned for more news soon on what to expect in eZ Platform and, as you may have guessed, beyond eZ Platform too!</p>
+<div class="object-center"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/roadmap2/400819-1-eng-GB/roadmap_medium.png" alt="" /></div>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://ez.no/About-eZ/Blog/Introducing-eZ-Platform-And-Its-New-Development-Cycle">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(day)/7/(month)/8/(year)/2014">7</a></em>
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(day)/12/(month)/8/(year)/2014">12</a></em>
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(day)/19/(month)/8/(year)/2014">19</a></em>
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class="currentselected today">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";s:22:"/content/view/full/222";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:7:"node_id";s:3:"222";}i:3;a:4:{s:4:"text";s:53:"Introducing eZ Platform And Its New Development Cycle";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"8750";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";s:22:"/content/view/full/222";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:7:"node_id";s:3:"222";}i:3;a:3:{s:4:"text";s:53:"Introducing eZ Platform And Its New Development Cycle";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"8750";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:5:"30757";s:7:"node_id";s:4:"8750";s:14:"parent_node_id";s:3:"222";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:44:"RSSImport_4_a6383bfbc48e36daf64ee03f18b5140e";s:14:"node_remote_id";s:32:"91d33a2959ae9dab7724e7cdd9c177c5";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:76:"Mirror/eZ-Systems-Blog/Introducing-eZ-Platform-And-Its-New-Development-Cycle";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"8750";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"b1fd4c81985a35b4412645b300f2fee8";s:23:"parent_object_remote_id";s:32:"ae28f8b18d3a07d8a33282f880a66b18";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

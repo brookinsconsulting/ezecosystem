@@ -1,0 +1,279 @@
+a:10:{s:7:"content";s:17448:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Netgen-Language-Switcher-for-eZ-Publish-and-some-love-for-other-extensions-too" title="Netgen Language Switcher for eZ Publish (and some love for other extensions too)">Netgen Language Switcher for eZ Publish (and some love for other e ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>We wanted to make the situation better for our clients so we developed a really simple extension that is based on built-in language switcher, but instead of generating permanent redirects with the <b>/switchlanguage/to/</b> module view, it generates full blown URLs to the same node on other language siteaccesses. Optionally coupled with the canonical meta tag in the page head, it can considerably bring down the volume of search index pollution.</p><p>The extension is, as all others, published on <a href="https://github.com/netgen/nglanguageswitcher" target="_self">GitHub</a>, under the GPL v2 license. Download is also hosted on <a href="http://projects.ez.no/nglanguageswitcher" target="_self">projects.ez.no</a></p><a name="eztoc9125_1" id="eztoc9125_1"></a><h2>In other news...</h2><p>Some of our other extensions, also published on our <a href="https://github.com/netgen" target="_self">GitHub</a> profile, received some love yesterday and today. Due to lack of time, they weren’t updated for a long time, so we decided that it was time to fix some outstanding issues, pull in some requests on GitHub and so on.</p><a name="eztoc9125_1_1" id="eztoc9125_1_1"></a><h3>Netgen Connect</h3><p>Some time ago, Tumblr introduced the new API for fetching user and blog data from its service and deprecated the old one. Because of that, the Tumblr login handler in <a href="http://www.netgenlabs.com/Labs/Netgen-Connect" target="_self">Netgen Connect</a> stopped working, so we released an update to migrate the login mechanism to this new API.</p><a name="eztoc9125_1_2" id="eztoc9125_1_2"></a><h3>Netgen Open Graph</h3><p><a href="https://github.com/netgen/ngopengraph" target="_self">Netgen Open Graph</a> received a nice pull request from <a href="http://share.ez.no/community/profile/11420" target="_self">Geoff Bentley</a> that allows using multiple images per page in Open Graph metadata. It is implemented using an existing PHP class that reads data from the <b>ezobjectrelation</b> datatype, but he also created a PHP class to handle the <b>ezobjectrelationlist</b> datatype for fetching images. Thanks Geoff! We added another feature: the ability to set Open Graph metadata through persistent variables from full view templates. We also fixed some bugs and wrapped it all together in the new version.</p><a name="eztoc9125_1_3" id="eztoc9125_1_3"></a><h3>Netgen Push</h3><p>Just as Tumblr changed its API, Facebook also deprecated and disabled its old authentication API when they introduced a new one. And just as with Netgen Connect, <a href="http://www.netgenlabs.com/Labs/Netgen-Push" target="_self">Netgen Push</a> broke. We took care of it now and migrated the authentication mechanism shipped with Netgen Push to the new version of the Facebook API so you can continue to push eZ Publish content to your Facebook followers. <a href="http://share.ez.no/community/profile/120132" target="_self">Vincent Robic</a> also created a pull request to be able to store authentication tokens in INI files, so you don’t have to fetch them from remote services, which is a nice addition. Thanks Vincent!</p><a name="eztoc9125_2" id="eztoc9125_2"></a><h2>And finally...</h2><p>It’s nice being back to open source development, with the eZ Community, for the eZ Community. Even a little, as all these changes to existing extensions are small and Netgen Language Switcher by itself is simple enough. But still, eZ Community, we hope you will enjoy updates to our social extensions and that you will try out and test our new extension. Be sure to leave a comment, create some more pull requests and what not :)</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/12/2013 10:59 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Netgen-Language-Switcher-for-eZ-Publish-and-some-love-for-other-extensions-too">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Netgen-Language-Switcher-for-eZ-Publish-and-some-love-for-other-extensions-too">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://feedproxy.google.com/~r/Netgenlabs/~3/Cy93g0JIBdg/Netgen-Language-Switcher-for-eZ-Publish-and-some-love-for-other-extensions-too" title="Netgen Language Switcher for eZ Publish (and some love for other extensions too)">Netgen Language Switcher for eZ Publish (and some love for other e ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>One thing that was continuously bothering us with eZ Publish when developing websites, was its built-in language switcher. For the most part and for smaller sites it works fine, but it does have some limitations. Since it generates URLs with&nbsp;<i>/switchlanguage/to/</i> module view, it is not really SEO friendly. On larger sites with many pages and languages, it pollutes the search engine indexes and makes it really hard to filter relevant content. Another issue with it is that it doesn’t work with <i>host_uri</i> siteaccess matching. It simply won’t generate correct redirects.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/12/2013 10:59 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Netgen-Language-Switcher-for-eZ-Publish-and-some-love-for-other-extensions-too2">View mirror of item</a> &nbsp; <a href="http://feedproxy.google.com/~r/Netgenlabs/~3/Cy93g0JIBdg/Netgen-Language-Switcher-for-eZ-Publish-and-some-love-for-other-extensions-too">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>February&nbsp;2013</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2013";s:5:"month";s:1:"2";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"228";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"228";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"226";s:7:"node_id";s:3:"228";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";s:14:"node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:13:"Mirror/Netgen";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"228";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,797 @@
+a:10:{s:7:"content";s:41397:"
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-folder">
+
+        
+        <div class="attribute-header">
+            <h1>
+Planetarium</h1>
+        </div>
+
+                            
+        
+        
+
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-folder">
+
+        
+
+                
+            
+            
+                 
+            
+
+            
+            <div style="margin-top:6px;margin-bottom:8px;">
+	    	    	    
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="http://ezecosystem.org/Planetarium/(offset)/6420"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+          
+<span class="pages"><a href="http://ezecosystem.org/Planetarium">1</a> ... 
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6080">305</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6100">306</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6120">307</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6140">308</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6160">309</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6180">310</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6200">311</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6220">312</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6240">313</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6260">314</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6280">315</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6300">316</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6320">317</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6340">318</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6360">319</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6380">320</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6400">321</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6420">322</a></span>
+            
+        <span class="current">323</span>
+
+    
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+</div>
+
+            <div class="content-view-children">
+                                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/hosting/installing_ez_publish_4_0_on_home_pl_servers" title="Installing eZ Publish 4.0 on home.pl servers">Installing eZ Publish 4.0 on home.pl servers</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+<b>Home.pl </b>is Poland's largest hosting provider. Despite the fact that they do not have eZ Publish-dedicated services and their machines do not exactly match its standard requirements (FreeBSD, PHP in CGI mode), it is possible to successfully deploy eZ 4.0 installation in their shared hosting environment. Since many people seem to have problems getting through the installation wizard, here's some tips.
+</p>
+<h5>Organization</h5>
+<p>
+Put the files in a subdirectory and use the <b>subserver functionality</b> (in other words: point the domain to that subdirectory). This is not only because of some possible namespace conflicts (0:/bin is reserved by the system), but also for good organization and easy management. Since a subserver cannot reach above its own root, <b>remember </b>to create a /tmp dir for any temporary files.
+</p>
+<h5>Wizard problems</h5>
+<p>
+If you try to install version 4.0 from scratch, you may encounter some early problems. This is due to the fact that some systems functions are called during setup tests that cannot handle an error in this environment (which is FreeBSD-like by the way). You can easily cope with that by simply commenting out a line in /kernel/setup/ezsetuptests.php:
+</p>
+<div class="code">
+
+<p>
+$ginfo = posix_getgrgid( posix_getgid() ); // around line 593
+</p>
+
+</div>
+
+<p>
+This is practically never used again, so don't worry, you may revert the changes after installation, or even leave it like that.
+</p>
+<h5>Limitations</h5>
+<p>
+For a number of reasons, this hosting will only serve a number of use scenarios. The major problem is a script-like CRON, which works on PHP rights, which means it has the same limitations. It will be impossible to safely run large, exhausting notifications or maintenance scripts... Lack of CLI makes it even harder, and can only be partially compensated by enabled system() PHP function. Still, with a little practice it is possible to tame it, especially with servers' above-average efficiency.
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>02/24/2008 12:49 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Installing-eZ-Publish-4.0-on-home.pl-servers">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/hosting/installing_ez_publish_4_0_on_home_pl_servers">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/brainstorm_ini_priority_vs_extension_settings" title="Brainstorm: *.ini priority vs. extension settings">Brainstorm: *.ini priority vs. extension settings</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+
+Just looking at the priority that the settings files follow:<br />
+ <br />
+Gunnstein wrote at <a href="http://ez.no/doc/ez_publish/technical_manual/4_0/concepts_and_basics/configuration/site_management" title="Site management" target="_blank">http://ez.no/doc/ez_pub...site_management</a><br /> 
+</p>
+<div class="code">
+
+<p>
+
+1. Default configuration settings (/settings/*.ini)<br />
+2. Active extension siteaccesses (/extension/*/settings/siteaccess/[name_of_siteaccess]/*.ini.append.php)<br />
+3. Siteaccesses (/settings/siteaccess/[name_of_siteaccess]/*.ini.append.php)<br />
+4. Active extensions (/extension/*/settings/*.ini.append.php)<br />5. Global overrides (/settings/override/*.ini.append.php) 
+</p>
+
+</div>
+
+<p>
+
+ <br />It seems like the main/siteaccess/override model for settings files and its advantages weren't introduced to extensions' engine. Here's some issues I see:
+</p>
+
+<p>
+1) Let's call it <b>convenience and flexibility</b>: One great feature of the three-step system (and - as far as I understand - one of its key functions) is that we have untouched original *.ini files with all/default settings present, the rest are siteaccess-dedicated or global overrides. This is a great in case of any upgrades, modifications, or simply for reference. I don't see this possibility for extension settings (unless we move the overrides of custom *ini files to the global overrides, but that isn't that convenient we have 10 or 20 extensions...).
+</p>
+
+<p>
+2) <b>Security</b>: This actually results from the above. If there is no general override, all your general custom settings will most probably be kept in the main *.ini file. That may include project-dedicated values, passwords, options, etc. The file should then always be called *.ini.append.php, which is easy to forget about.
+</p>
+
+<p>
+3) <b>Rules</b>: While with the general settings siteaccesses overrule general files and global overrides overrule all of them, the rules seem less clear with extension settings... that includes both the priorities and the names (look at the security point).
+</p>
+
+<p>
+Here's what it could look like (just a quick idea):
+</p>
+
+<ol>
+
+<li>Default settings [/settings/*.ini]</li>
+
+<li>Default extension settings [/extension/EXT/settings/*.ini] <i>(only for custom *.ini files)</i></li>
+
+<li>Extension siteaccesses [/extension/EXT/settings/siteaccess/SITEACCESS/*.ini.append.php]</li>
+
+<li>Siteaccesses [/settings/siteaccess/SITEACCESS/*.ini.append.php]</li>
+
+<li>Extension overrides [/extension/EXT/settings/override/*.ini.append.php] <i>(for custom *.ini files as well as other *.ini files)</i></li>
+
+<li>Global overrides [/settings/override/*.ini.append.php]</li>
+
+</ol>
+
+<p>
+Of course, that would require little changes to directory structure, might be difficult.
+</p>
+
+<p>
+
+I put this on the forum, haven't given this as much thought as I would like to, so... let's see what happens ;)<br /><a href="http://ez.no/developer/forum/suggestions/ini_priority_vs_extension_settings" title="Brainstorm: *.ini priority vs. extension settings" target="_blank">http://ez.no/developer/forum/suggestions/ini_priority_vs_extension_settings</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>02/19/2008 02:14 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Brainstorm-.ini-priority-vs.-extension-settings">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/brainstorm_ini_priority_vs_extension_settings">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/random_thoughts/re_is_ez_publish_4_0_like_microsoft_vista" title="Re: Is eZ Publish 4.0 like Microsoft Vista?">Re: Is eZ Publish 4.0 like Microsoft Vista?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+<i>Inspired by Bruce Morrison's post in his blog: </i><a href="http://suffandnonsense.blogspot.com/2008/02/is-ez-publish-40-like-microsoft-vista.html" title="Is eZ Publish 4.0 like Microsoft Vista?" target="_blank"><i>http://suffandnonsense.blogspot.com/2008/02/is...</i></a>
+</p>
+<h5>eZ Publish 4.0</h5>
+<p>
+I kind of understand the disappointment with minor revolution of the current big version 4.0, although I had known (more or less) what to expect when I was awaiting it few months back. You can ask yourself: was PHP5 more of <b>an improvement, or maybe a necessity</b>? If the latter, the smaller was the step ahead, indeed. Nevertheless, <b>I am very glad this step was made</b>, no matter what the version is called, for reasons that must be obvious. Back to the expectations, I can only imagine how 3.x introduction was different (greater) to 4.x, because I've only known eZ Publish since 3.8.x or so (BTW: have to admit I gave up after several attempts with 3.5... it beat me!).
+</p>
+<h5>eZ Publish 4.0 maintenance mode, 5.0 eZ Components-based rebuild</h5>
+<p>
+Bruce's suggestion is to put eZ Publish 4.0 at its rather stable state into feature freeze mode, while concentrating efforts on taking full advantage of the maturing <a href="http://ezcomponents.org" title="eZ Components" target="_blank">eZ Components</a> to produce the next big version (5.0) from scratch. I have to say that I like this idea for similar reasons: 
+</p>
+
+<ul>
+
+<li>There's always a risk of ending up with Vista-like model,</li>
+
+<li>It will probably take equally long (or even longer) to incorporate majority of eZ Components into eZ Publish (with compromises possible/necessary on the way), than it would have taken to build a completely fresh thing,</li>
+
+<li>Past limitations and problems will probably become even more concreted,</li>
+
+<li>I believe that eZ Components with all their features would prolong the application's lifespan, secure its potential and make future port to PHP6 easier (I'm not sure if another platform "rewriting" would be a good idea).</li>
+
+</ul>
+
+<p>
+There's another thing, but it deserves to be covered in its own paragraph.
+</p>
+<h5>Solid content model vs. feature richness</h5>
+<p>
+In my comparatively short experience with eZ Publish, I have already dug deep enough to see its few weaknesses, especially regarding the content and storage models. Don't get me wrong, by no means would I call eZ Publish weak, it's just that it has its limitations defined and there are only so many things you can do with it without hacking or severely extending.
+</p>
+
+<p>
+Now, I do understand how big part various "rich" features play in the eZ business model and in those of many eZ partners. For example, extensions such as <a href="http://ez.no/ezflow" title="eZ Flow" target="_blank">eZ Flow</a> or Web interfaces that make it possible to have an advanced out-of-the-box product with time required for implementation significantly reduced. Having seen how business-oriented eZ people are, I do not expect this direction to be given up at any stage (and I like that).
+</p>
+
+<p>
+However, I hope that that direction <b>does not prevent from improving the application</b> at its core, that is the foundation for all eZ business after all. Unlike presentation layer or even more advanced extensions, which can be developed independently, core upgrades would be rather difficult to be introduced by means of hacking the kernel. I'd like to be optimistic, but don't see <a href="http://ez.no/developer/forum/suggestions/integrity_flag_element_in_the_class_definition#msg157819" title="Alternative storage models" target="_blank">alternative storage models</a> or <a href="http://ez.no/developer/forum/suggestions/integrity_flag_element_in_the_class_definition#msg157819" title="Advanced class features" target="_blank">advanced class features</a> coming any time soon. New rebuild could be an ideal opportunity to make eZ Publish even more versatile and fit to solve even more advanced content management tasks (and not only!).
+</p>
+<h5>Summing up</h5>
+<p>
+It doesn't seem like this issue is up for a discussion, but I haven't heard anything official on eZ Publish 5.0, yet. So, maybe it is not too late ;)
+</p>
+
+<p>
+If you ask me, I think I could live in this 4.0 feature freeze mode... if what I was waiting for was a completely new eZ Publish 5.0 in a year or two, with even greater core features and as few compromises as possible.
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>02/16/2008 11:23 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Re-Is-eZ-Publish-4.0-like-Microsoft-Vista">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/random_thoughts/re_is_ez_publish_4_0_like_microsoft_vista">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/lab/require_flag_on_the_object_attribute_level" title="&quot;Require flag&quot; on the object attribute level">&quot;Require flag&quot; on the object attribute level</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+
+Lately we've been having this discussion with André about different suggestions regarding ways to improve eZ content model:<br /><a href="http://ez.no/developer/forum/suggestions/integrity_flag_element_in_the_class_definition" title="eZ Publish require the attribute flag" target="_blank">http://ez.no/developer/forum/suggestions/in...</a>
+</p>
+
+<p>
+It was started by my own suggestion to introduce an additional flag that would sort of require objects attributes to be present (or, in other words, impossible to remove from the presentation/XHTML layer). And that actually resulted from my early eZ days questions on how does eZ Publish actually deal with missing attributes...
+</p>
+<h5>Back to the additional "require attribute flag"</h5>
+<ol>
+
+<li><i>"Required" flag, that we have today, suggests by semantics that the attribute is required, however, that is not so. I hope I was the only user not to go in depth with this issue, however I expect otherwise. Today's "required" should in my opinion be called "Value required" or "Require value", because that's what the checked flag actually causes.</i></li>
+
+<li><i>Why isn't the default behavior of attribute validation such that all attributes are required to be present?</i></li>
+
+<li><i>Doesn't lack of all/any of the solution ideas mentioned above (or other) make the editing process vulnerable to any manipulation of the presentation layer? Isn't that comparatively easy to simply omit all uncomfortable attributes, for example datatype-based CAPTCHA, limits, identifiers, etc.?</i></li>
+
+<li><i>"Require all required" as a class attribute/flag actually doesn't make much sense with current "Required" meaning. What would it mean? Require all required values? This is why I suggest that there should be a separation of "required flags". We could leave today's required as "Require value" flag, as I suggested above. Then, there should be an additional flag that would decide whether the attribute itself is required to be present in the editing process. This would be much more flexible than earlier "require all required" and at the same time seems to make that idea useless.</i></li>
+
+</ol>
+<h5>Discovery</h5>
+<p>
+Well, I finally found some time to look at it again, especially into the eZ Publish kernel. I followed the path that an attribute takes from the <b>edit view</b> all the way to the <b>datatype itself</b>. Actually, I found out that no matter what you do, no matter how you manipulate the presentation layer,<b> the attributes of a content class always reach input validation function in their datatype</b>. So it is up to the given datatype to take further steps, but it's already a good news: <b>it is possible to force attributes without any kernel/lib modifications</b>! Here's an example (ezstring datatype):
+</p>
+<div class="code">
+
+<p>
+
+function validateObjectAttributeHTTPInput( $http, $base, $contentObjectAttribute )<br />
+{<br />
+ if ( $http->hasPostVariable( $base . '_ezstring_data_text_' . $contentObjectAttribute->attribute( 'id' ) ) )<br />
+ {<br />
+ // THE REST OF THE CODE<br />
+ }<br />
+ $contentObjectAttribute->setValidationError( ezi18n( 'kernel/classes/datatypes', 'Attribute missing in the presentation layer!' ) );<br />
+ return eZInputValidator::STATE_INVALID;<br />}
+</p>
+
+</div>
+
+<p>
+A quick update on my four points above: I still believe the new flag would be a useful solution. I still believe there's space for both "required flags". I'm still not sure why checking an attributes presence is not default behavior in most (or all) out-of-the-box datatypes. But at least now I have it under control! ;)
+</p>
+
+<p>
+And here's how the new flag could work:
+</p>
+<div class="code">
+
+<p>
+
+function validateObjectAttributeHTTPInput( $http, $base, $contentObjectAttribute )<br />
+{<br />
+ if ( $http->hasPostVariable( $base . '_ezstring_data_text_' . $contentObjectAttribute->attribute( 'id' ) ) )<br />
+ {<br />
+ // THE REST OF THE CODE <br />
+ // Including use of: $contentObjectAttribute->validateIsRequired()... <br />
+ }<br />
+ elseif( $contentObjectAttribute->attributeIsRequired() )<br />
+ {<br />
+ $contentObjectAttribute->setValidationError( ezi18n( 'kernel/classes/datatypes', 'Attribute missing in the presentation layer!' ) );<br />
+ return eZInputValidator::STATE_INVALID;<br />
+ }<br />}
+</p>
+
+</div>
+
+<p>
+What do you think?
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>02/10/2008 01:02 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Require-flag-on-the-object-attribute-level">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/lab/require_flag_on_the_object_attribute_level">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/ez_my_collected_info_manage_your_objects_collections" title="eZ My Collected Info - manage your objects' collections">eZ My Collected Info - manage your objects' collections</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+<b>eZ My Collected Info</b> extension gives front-end access to one's collected info. The ownership of the collections is determined based on the ownership of the content object that collected the information. In other words, it is <b>not who sent the information</b>, but <b>whose object it was sent to</b>, that is considered the owner, and thus can browse/read, and optionally delete.
+</p>
+
+<p>
+
+The extension makes it possible to browse though the collections by class and then by object (a tree-like menu is provided for easy access). A <b>detailed class-level configuration</b> is possible to allow/disallow collection deletion, custom identifiers, and custom/default templates.<br />
+ <br />
+ The extension comes with two module views and two access functions for a flexible management. The standard browsing view can be accessed through: <i>/index.php/siteaccess/mycollectedinfo/browse</i><br />
+ <br /> Read the <i>settings/mycollectedinfo.ini</i> file's comments for more information.
+</p>
+
+<p>
+You can download the extension from: <a href="http://ez.no/developer/contribs/hacks/ez_my_collected_info" title="eZ My Collected Info" target="_blank">http://ez.no/developer/contribs/hacks/ez_my_collected_info</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>02/06/2008 04:32 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/eZ-My-Collected-Info-manage-your-objects-collections">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/ez_my_collected_info_manage_your_objects_collections">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/miscellaneous/busy_2008" title="Busy 2008...">Busy 2008...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+
+Didn't get much time to write this month... Projects, international partner meeting, certification... Seems like 2008 is even more busy. Some big projects running, some more and bigger coming up, our little team is growing. It's good that February will at least be a bit longer this year ;)<br /> 
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/30/2008 08:35 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Busy-2008">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/miscellaneous/busy_2008">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/ez_user_create_limit" title="eZ User Create Limit">eZ User Create Limit</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Some time ago I started to develop a simple extension that would provide some sort of control over what users can do in terms of creating objects of given classes. This is mostly due to the fact that eZ Publish access control system only provides qualitative rules (and no quantitative ones).
+</p>
+
+<p>
+The extension introduces a datatype that doesn't validate if user is trying to go beyond one's defined limits, and couple of template operators that can help produce functional templates (for example hide a NewButton if it should not be visible in the first place).
+</p>
+
+<p>
+This is the first extension I wrote that actually extends into administration interface tabs and has it's administrative views. This way two levels of limit assignments were possible to introduce. First, a detailed configuration in the ini file for defining default limit values for particular classes or users. Second, advanced filtered operations on the actual limits. For example, it is possible to stop particular user from creating any more objects (for example comments) at any point in time, without affecting any other users or this particular user's other create capabilities.
+</p>
+
+<p>
+
+You can download it form:<br /><a href="http://ez.no/developer/contribs/datatypes/ez_user_create_limit" title="eZ User Create Limit" target="_blank">http://ez.no/developer/contribs/datatypes/ez_user_create_limit</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/30/2008 08:28 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/eZ-User-Create-Limit">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/ez_user_create_limit">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/miscellaneous/finally_a_certified_ez_publish_developer" title="Finally a certified eZ Publish developer...">Finally a certified eZ Publish developer...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Back after a while of silence... lot's of projects, meetings, trips in the meantime...
+</p>
+
+<p>
+But I am happy to share the good news - <b>I have finally passed an eZ Publish developer certification</b> with 80% correct answers (including a broken one!). Not that I have tried before, first take - first passed. Not as big challenge as I had expected, still requires proficiency in pretty much every single area that a developer should be aware of, so I was glad I had reviewed some general topics the day before ;) Few ambiguous or debatable questions, but I can't actually say if I've got them right or not - maybe they were not that ambiguous after all. Majority of questions - straightforward and clear.
+</p>
+
+<p>
+And <b>the</b> link: <a href="http://ez.no/certification/verify/222415" title="eZ Publish certified developer" target="_blank">http://ez.no/certification/verify/222415</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/23/2008 12:19 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Finally-a-certified-eZ-Publish-developer">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/miscellaneous/finally_a_certified_ez_publish_developer">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/lab/custom_top_level_nodes_is_that_possible_round_i_exploration" title="Custom top level nodes - is that possible? Round I - exploration...">Custom top level nodes - is that possible? Round I - exploration...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+<b>A</b><b>re custom top level nodes possible</b>? It is especially thrilling when one has encountered top level node problems ;) I forgot about this issue for quite some time, but now it's back. As I'm typing this post, I know that it won't provide an ultimate answer tonight, and some quick <b>NO</b> answers are within reach. Still, I want to give it a try. <b>Round I</b> - no particular goals, just exploration.
+</p>
+
+<p>
+I run a fresh installation of eZ Publish 4.0.0 with just English language, URL addressing. When ready, I manually clean all the cache, just in case.
+</p>
+
+<p>
+<b>So what top level nodes do we have?</b> Out of five available, there are three that seem to have much in common (all deal with content in a similar fashion), and just one of them - the media tree root - has a two-digit node ID (<b>43</b>) that will be easier to look for, than content's '2' ;)
+</p>
+
+<p>
+<b>Let's look for some clues in the application.</b> I start with <b>/settings</b> directory as I know that it is where the top level nodes are actually declared. But just in case, I search through all the *.ini files. Only two files contain relevant 43 string: <b>menu.ini</b> in this context is only used for navigation part and tab configuration, no key information there, so let's skip it for now; <b>content.ini</b> contains the very declaration:
+</p>
+<div class="code">
+
+<p>
+
+[NodeSettings]<br />
+ # The node ID of the normal content tree<br />
+ RootNode=2<br />
+ # The node ID of the user tree<br />
+ UserRootNode=5<br />
+ # The node ID for the media tree<br />
+ MediaRootNode=43<br />
+ # The node ID for the setup tree<br />
+ SetupRootNode=48<br />
+ # The node ID for the design tree<br /> DesignRootNode=58
+</p>
+
+</div>
+
+<p>
+The above code <b>doesn't seem</b> to suggest that extending top level was <b>ever planned</b>, but let's move on.
+</p>
+
+<p>
+I log into the administration interface and create a folder called 'Custom', just under eZ Publish content tree root node. I memorize the new IDs: <b>59 as node ID</b> and <b>57 as content object ID </b>(the IDs you get may be different). I will need those as soon as I figure out what to destroy in the database ;) Basically, what I will try to do is to move this #59 node folder to the top level.
+</p>
+
+<p>
+Let's look for some clues in the database now. I run a database search for any<b> 43-like</b> values in the entire table set (assuming that 43 will be the only way of referencing parts of the database that have something in common with the media root node). I get around 15 table hits, <b>6 of which</b> seem to be relevant. Now, by analysing the tables, I come up with the following decisions:
+</p>
+
+<ol>
+
+<li><b>ezuser_role</b> - role configuration, 43 was there because of default editor role's limitations, I can skip this one</li>
+
+<li>
+<b>ezurlalias_ml</b> - URL aliases (multilanguage?), I update my 59 node just in case, md5 has to be calculated for lowercase 'custom' (probably a more complex rule behind this, but lowercase will do in this case):<br /><i>UPDATE ezurlalias_ml SET text='Custom', text_md5='8b9035807842a4e4dbe009f3f1478127' WHERE action='eznode:59'</i></li>
+
+<li>
+<b>ezurlalias</b> - URL aliases, I add a missing record, same md5 hash:<br /><i>INSERT INTO ezurlalias VALUES ('content/view/full/59', 0, NULL, 1, 1, 0, '8b9035807842a4e4dbe009f3f1478127', 'custom')</i></li>
+
+<li><b>ezsearch_object_word_link</b> - search engine, can be reindexed, so let's skip this one...</li>
+
+<li>
+<b>eznode_assignment</b> - I have absolutely no idea what this table's for, so I just take a guess and change depth:<br /><i>UPDATE eznode_assignment SET parent_node=1 WHERE id=36</i></li>
+
+<li>
+<b>ezcontentobject_tree</b> - actual tree, I modify path string, parent node, identification string and depth - all for my folder:<br /><i>UPDATE ezcontentobject_tree SET path_string='/1/59/', parent_node_id=1, path_identification_string='custom', depth=1 WHERE path_string='/1/2/59/'</i></li>
+
+</ol>
+
+<p>
+Just before I touch my eZ Publish interfaces, I clear all the cache, just in case again...
+</p>
+
+<p>
+And here we go. From this moment on I have a sixth top level folder node. I don't have a tab and navigation part for it, yet, but I can access it by system URL: <b>/content/view/full/59</b>... Not only that... it seems to properly hold newly created child nodes. I can navigate through this new, hidden structure without visible problems, but...
+</p>
+
+<p>
+...something must be missing, it's obvious when you search the kernel and libraries for 'MediaRootNode', 'RootNode', or 'UserRootNode', and see this:
+</p>
+<div class="code">
+
+<p>
+
+// /kernel/classes/ezcontentbrowse.php<br />
+static function nodeAliasID( $nodeName )<br />
+{<br />
+ if ( is_numeric( $nodeName ) )<br />
+ return $nodeName;<br />
+ $browseINI = eZINI::instance( 'browse.ini' );<br />
+ $aliasList = $browseINI->variable( 'BrowseSettings', 'AliasList' );<br />
+ if ( isset( $aliasList[$nodeName] ) )<br />
+ return $aliasList[$nodeName];<br />
+ $contentINI = eZINI::instance( 'content.ini' );<br />
+ if ( $nodeName == 'content' )<br />
+ return $contentINI->variable( 'NodeSettings', 'RootNode' );<br />
+ else if ( $nodeName == 'users' )<br />
+ return $contentINI->variable( 'NodeSettings', 'UserRootNode' );<br />
+ else if ( $nodeName == 'media' )<br />
+ return $contentINI->variable( 'NodeSettings', 'MediaRootNode' );<br />
+ else if ( $nodeName == 'setup' )<br />
+ return $contentINI->variable( 'NodeSettings', 'SetupRootNode' );<br />
+ else<br />
+ return false;<br />}
+</p>
+
+</div>
+
+<p>
+But that's for another round...
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>12/29/2007 04:39 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Custom-top-level-nodes-is-that-possible-Round-I-exploration">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/lab/custom_top_level_nodes_is_that_possible_round_i_exploration">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/ez_human_captcha_preventing_bots_from_submitting_spam_in_your_ez_website" title="eZ Human CAPTCHA - preventing bots from submitting spam in your eZ website">eZ Human CAPTCHA - preventing bots from submitting spam in your eZ ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+eZ Human CAPTCHA is a simple eZ Publish extension which provides a collection of tools that make it easier to use session-based CAPTCHA techniques for preventing bots from submitting any unwanted data to your website.
+</p>
+
+<p>
+The default way to use it is to add Human CAPTCHA-datatype-based attribute to your content class. From that moment on any edit action taken on objects representing that class will require CAPTCHA code to be provided. This will secure both editing as well as collecing info. This method is completely automatic and does not require any development whatsoever.
+</p>
+
+<p>
+The other method is meant for developers, who want their own modules and/or templates secured. There are two template operators responsible for initiating/displaying a token and validating the code respectively. Optionally, it is possible to directly call a method responsible for token validation in PHP.
+</p>
+
+<p>
+Since the quality of the CAPTCHA token image is of critical importance, this extension can be further extended by applying custom image filters. An image filter is simply a set of PHP instructions to generate a token image.
+</p>
+
+<p>
+Search the Web if you need further information on CATPCHA itself. 
+</p>
+
+<p>
+
+You can download this extension from:<br /><a href="http://ez.no/developer/contribs/applications/ez_human_captcha" title="CAPTCHA for eZ Publish" target="_blank">http://ez.no/developer/contribs/applications/ez_human_captcha</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>12/24/2007 03:39 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/eZ-Human-CAPTCHA-preventing-bots-from-submitting-spam-in-your-eZ-website">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/ez_human_captcha_preventing_bots_from_submitting_spam_in_your_ez_website">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                                </div>
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="http://ezecosystem.org/Planetarium/(offset)/6420"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+          
+<span class="pages"><a href="http://ezecosystem.org/Planetarium">1</a> ... 
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6080">305</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6100">306</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6120">307</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6140">308</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6160">309</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6180">310</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6200">311</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6220">312</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6240">313</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6260">314</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6280">315</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6300">316</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6320">317</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6340">318</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6360">319</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6380">320</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6400">321</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6420">322</a></span>
+            
+        <span class="current">323</span>
+
+    
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+        
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+
+
+            </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:4:"6440";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:11:"Planetarium";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"970";}}s:10:"title_path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:3:{s:4:"text";s:11:"Planetarium";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"970";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"969";s:7:"node_id";s:3:"970";s:14:"parent_node_id";s:1:"2";s:8:"class_id";s:1:"1";s:16:"class_identifier";s:6:"folder";s:9:"remote_id";s:32:"e4565c9579d8970a4222676fa94f5fe8";s:14:"node_remote_id";s:32:"137fe2fcc2cddc67c82e93d2abda38c8";s:6:"offset";i:6440;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"2";s:9:"url_alias";s:11:"Planetarium";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"3";s:12:"main_node_id";s:3:"970";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";b:0;s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"23";s:23:"parent_class_identifier";s:9:"frontpage";s:21:"parent_node_remote_id";s:32:"f3e90596361e31d496d4026eb624c983";s:23:"parent_object_remote_id";s:32:"8a9c9c761004866fb458d89910f52bee";}s:13:"template_list";a:5:{i:0;s:67:"extension/ezecosystem/design/eze/override/templates/full/folder.tpl";i:1;s:60:"design/standard/templates/content/datatype/view/ezstring.tpl";i:2;s:61:"extension/ezecosystem/design/eze/templates/parts/homepage.tpl";i:3;s:63:"extension/ezecosystem/design/eze/templates/navigator/google.tpl";i:4;s:70:"extension/ezecosystem/design/eze/override/templates/line/blog_post.tpl";}s:9:"cache_ttl";i:-1;}

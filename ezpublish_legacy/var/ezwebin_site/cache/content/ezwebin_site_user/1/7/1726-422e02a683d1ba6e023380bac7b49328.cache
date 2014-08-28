@@ -1,0 +1,1097 @@
+a:10:{s:7:"content";s:76113:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/mongodb-collation.html" title="Natural Sorting with MongoDB">Natural Sorting with MongoDB</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="natural_sorting_with_mongodb"/>Natural Sorting with MongoDB</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Wednesday, August 27th 2014, 09:33 BST</div>
+      </div>
+      <p>Arranging English words in order is simple--well, most of the time. You simply arrange them in alphabetical order. However sorting a set of German words, or French words with all their accents, or Chinese with their different characters is a <em>lot</em> harder than it looks. Sorting rules are specified through "locales", which determine how accents are sorted, in which order the letters are in and how to do case-insensitive sorts. There is a good set of those sorting rules available through <a href="http://cldr.unicode.org/index/cldr-spec/collation-guidelines">CLDR</a>, and there is a neat example to play with all kinds of sorting at <a href="http://demo.icu-project.org/icu-bin/locexp?_=en_UK&d_=en&x=col">ICU's demo site</a>. If you really want to know how the algorithms work, have a look at the Unicode Consortium's report on the <a href="http://www.unicode.org/reports/tr10/">Unicode Collation Algorithm</a>.</p>
+      <p>Right now, MongoDB does not support indexes or sorting on anything but Unicode Code Points. Basically, that means, that it can't sort anything but English. There is a long standing issue, <a href="https://jira.mongodb.org/browse/SERVER-1920">SERVER-1920</a>, that is at the top of the priority list, but is not scheduled to be added to a future release. I expect this to be addressed at a point in the near future. However, with some tricks there is a way to solve the sorting problem manually.</p>
+      <p>Many languages, have their own implementation of the Unicode Collation Algorithm, often implemented through ICU. PHP has an ICU based implementation as part of the <a href="http://php.net/manual/en/book.intl.php">intl</a> extension. And the class to use is the <a href="http://php.net/manual/en/class.collator.php">Collator</a> class.</p>
+      <p>The Collator class encapsulates the Collation Algorithm to allow you to sort an array of text yourself, but it also allows you extract the "sort key". By storing this generated sort key in a separate field in MongoDB, we can sort by locale—and even multiple locales.</p>
+      <p>Take for example the following array of words:</p>
+      <pre>$words = [
+        'bailey', 'boffey', 'böhm', 'brown', 'серге́й', 'сергій', 'swag',
+        'svere'
+];
+
+</pre>
+      <p>Which we can turn into sort keys with a simple PHP script like:</p>
+      <pre>$collator = new Collator( 'en' );
+foreach ( $words as $word )
+{
+        $sortKey = $collator->getSortKey( $word );
+        echo $word, ': ', bin2hex( $sortKey ), "\n";
+}
+
+</pre>
+      <p>We create a collator object for the <code>en</code> locale, which is generic English. When running the script, the output is (after formatting):</p>
+      <pre>bailey: 2927373d2f57010a010a
+boffey: 294331312f57010a010a
+böhm:   2943353f01859d060109
+brown:  294943534101090109
+серге́й: 5cba34b41a346601828d05010b
+сергій: 5cba34b41a6066010a010a
+swag:   4b53273301080108
+svere:  4b512f492f01090109
+
+</pre>
+      <p>Those sort keys can be used to then sort the array of names. In PHP, that would be:</p>
+      <pre>$collator->sort( $words );
+print_r( $words );
+
+</pre>
+      <p>Which returns the following list:</p>
+      <pre>[0] => bailey
+[1] => boffey
+[2] => böhm
+[3] => brown
+[4] => svere
+[5] => swag
+[6] => серге́й
+[7] => сергій
+
+</pre>
+      <p>We can extend this script, to use multiple collations, and import each word including its sort keys into MongoDB.</p>
+      <p>Below, we define the words we want to sort on, and the collations we want to compare. They are in order: English, German with phone book sorting, Norwegian, Russian and two forms of Swedish: "default" and "standard":</p>
+      <pre><?php
+$words = [
+        'bailey', 'boffey', 'böhm', 'brown', 'серге́й', 'сергій',
+        'swag', 'svere'
+];
+$collations = [
+        'en', 'de_DE@collation=phonebook', 'no', 'ru',
+        'sv', 'sv@collation=standard',
+];
+
+</pre>
+      <p>Make the connection to MongoDB and clean out the collection:</p>
+      <pre>$m = new MongoClient;
+$d = $m->demo;
+$c = $d->collate;
+$c->drop();
+
+</pre>
+      <p>Create the Collator objects for each of our collations:</p>
+      <pre>$collators = [];
+
+foreach ( $collations as $collation )
+{
+        $c->createIndex( [ $collation => 1 ] );
+        $collators[$collation] = new Collator( $collation );
+}
+
+</pre>
+      <p>Loop over all the words, and for each collation we have define, use the created Collator object to generate the sort key. We encode the sort key with <a href="http://docs.php.net/bin2hex">bin2hex()</a> because sort keys are binary data, and MongoDB requires UTF-8 for strings. My original plan of using MongoDB's BinData type did not work, as it <a href="http://docs.mongodb.org/manual/reference/bson-types/#comparison-sort-order">sorts first according to the length of the data</a>. Encoding with <a href="http://docs.php.net/base64_encode">base64_encode()</a> also does not work, as it's encoding scheme does not keep the original order. Encoding with <a href="http://docs.php.net/utf8_encode">utf8_encode()</a> <em>does</em> work, but as it creates some binary (but valid-for-MongoDB-UTF-8) data, it's not good to use as an example.</p>
+      <pre>foreach ( $words as $word )
+{
+        $doc = [ 'word' => $word ];
+        foreach ( $collations as $collation )
+        {
+                $sortKey = $collators[$collation]->getSortKey( $word );
+                $doc[$collation] = bin2hex( $sortKey );
+        }
+        $c->insert( $doc );
+}
+
+</pre>
+      <p>When we run the script, and see what's in the database, we find something like the following for <code>böhm</code>:</p>
+      <pre>> db.collate.find( { word: 'böhm' }).pretty();
+{
+        "_id" : ObjectId("53fc721844670a35498b4569"),
+        "word" : "böhm",
+        "en" : "2943353f01859d060109",
+        "de_DE@collation=phonebook" : "29432f353f0186870701848f06",
+        "no" : "295aa105353f018687060108",
+        "ru" : "2b45374101859d060109",
+        "sv@collation=standard" : "295aa106353f01080108",
+        "sv@collation=default" : "295aa106353f01080108"
+}
+
+</pre>
+      <p>To see the sorting for the words in all the locales, I've added the following to the end of the script:</p>
+      <pre>foreach ( $collations as $collation )
+{
+        echo $collation, ":\n";
+
+        $r = $c->find()->sort( [ $collation => 1 ] );
+        foreach ( $r as $res )
+        {
+                echo $res['word'], ' ';
+        }
+
+        echo "\n\n";
+}
+
+</pre>
+      <p>As you can see, we call <a href="http://docs.php.net/MongoCursor.sort">sort()</a> and specify which field to sort on. The <code>$collation</code> variable contains the name of the collation. In each stored document, the field with the name of the collation, stores the sort key for that collation as you saw in the previous MongoDB shell output.</p>
+      <p>Running with this part of the code added, we get:</p>
+      <pre>en:
+bailey boffey böhm brown svere swag серге́й сергій
+
+de_DE@collation=phonebook:
+bailey böhm boffey brown svere swag серге́й сергій
+
+no:
+bailey boffey brown böhm svere swag серге́й сергій
+
+ru:
+серге́й сергій bailey boffey böhm brown svere swag
+
+sv@collation=standard:
+bailey boffey brown böhm swag svere серге́й сергій
+
+sv@collation=default:
+bailey boffey brown böhm svere swag серге́й сергій
+
+</pre>
+      <ul>
+        <li>
+          <p>In English, the <code>ö</code> in <code>böhm</code> sorts as an <code>o</code>.</p>
+        </li>
+        <li>
+          <p>In Germany's phone book collation, the <code>ö</code> in <code>böhm</code> sorts like an <code>oe</code>.</p>
+        </li>
+        <li>
+          <p>In Norwegian, the <code>ö</code> in <code>böhm</code> sorts as an extra letter after <code>z</code>.</p>
+        </li>
+        <li>
+          <p>In Russian, the Cyrillic letters sort before Latin letters.</p>
+        </li>
+        <li>
+          <p>In Sweden's "standard" collation, the <code>v</code> and <code>w</code> are considered equivalent letters.</p>
+        </li>
+      </ul>
+      <p>By generating a sort key for your data, you get to chose with which locale MongoDB will do the sorting, but with the overhead of having to maintain an index yourself. ICU, the library that lies underneath PHP's <a href="http://php.net/manual/en/book.intl.php">intl</a> extension supports a lot more customisations for collators, and even allows you to define your own custom rules. In the future, we will likely see some of this functionality make it into MongoDB as well. Until this implemented, generating your own sort-key field for each document like this article shows, is your best MongoDB-only approach. If you find collation sorting in MongoDB important, feel free to vote on the <a href="https://jira.mongodb.org/browse/SERVER-1920">SERVER-1920</a> issue in Jira.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/27/2014 03:33 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Natural-Sorting-with-MongoDB">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/mongodb-collation.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/dont-fuck-over-users.html" title="On Backwards Compatibility and not Fucking Over Users">On Backwards Compatibility and not Fucking Over Users</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="on_backwards_compatibility_and_not_fucking_over_users"/>On Backwards Compatibility and not Fucking Over Users</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Thursday, August 21st 2014, 16:31 BST</div>
+      </div>
+      <p>This is a repost of an <a href="http://news.php.net/php.internals/76752">email</a> I sent to PHP internals as a reply to:</p>
+      <blockquote>
+        <p>And since you're targetting[sic] the next major release, BC isn't an issue.</p>
+      </blockquote>
+      <p>This sort of blanket statements that "Backwards Compatibility is not an issue" with a new major version is extremely unwarranted. <em>Extreme care</em> should be taken when deciding to break Backwards Compatibility. It should not be "oh we have a major new version so we can break all the things"™.</p>
+      <p>There are two main types of breaking Backwards Compatibility:</p>
+      <ol>
+        <li>
+          <p>The obvious case where running things trough <code>php -l</code> instantly tells you your code no longer works. Bugs like the two default cases, fall in this category. I have no problem with this, as it's very easy to spot the difference (In the case of allowing multiple "default" cases, it's a fricking bug fix too).</p>
+        </li>
+        <li>
+          <p>Subtle changes in how PHP behaves. There is large amount of those things currently under discussion. There is the nearly undetectable change of the "Uniform Variable Syntax", that I already <a href="http://derickrethans.nl/uniform-variable-syntax.html">wrote about</a>, the current discussion on <a href="https://wiki.php.net/rfc/binary_string_comparison">"Binary String Comparison"</a>, and now changing the <a href="https://wiki.php.net/rfc/integer_semantics">behaviour</a> on <code><<</code> and <code>>></code> in a subtle way. These changes are <em>not okay</em>, because they are nearly impossible to test for.</p>
+          <p>Changes that are so difficult to detect, mean that our users need to re-audit and check their whole code base. It makes people not want to upgrade to a newer version as there would be more overhead than gains. Heck, even changing the <code>$</code> in front of variables to <code>£</code> is a better change, as it's <em>immediately</em> apparent that stuff changed. And you can't get away with "But Symfony and ZendFramework don't use this" either, as there is so much code out there</p>
+        </li>
+      </ol>
+      <p>As I said, the first type isn't much of a problem, as it's easy to find what causes such Backwards Compatibility break, but the second type is what causes our users an enormous amount of frustration. Which then results in a lot slower adoption rate—if they bother upgrading at all. Computer Science "purity" reasons to "make things better" have little to no meaning for PHP, as it's clearly not designed in the first place.</p>
+      <p>Can I please urge people to not take Backwards Compatibility issues so lightly. Please think really careful when you suggest to break Backwards Compatibility, it should only be considered if there is a real and important reason to do so. Changing binary comparison is not one of those, changing behaviour for everybody regarding <code><<</code> and <code>>></code> is not one of those, and subtle changes to what syntax means is certainly not one of them.</p>
+      <p>
+        <strong>Don't be Evil</strong>
+      </p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/21/2014 10:31 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/On-Backwards-Compatibility-and-not-Fucking-Over-Users">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/dont-fuck-over-users.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/bc-dont-be-evil.html" title="On Backwards Compatibility and not Being Evil">On Backwards Compatibility and not Being Evil</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="on_backwards_compatibility_and_not_being_evil"/>On Backwards Compatibility and not Being Evil</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Thursday, August 21st 2014, 16:31 BST</div>
+      </div>
+      <p>This is a repost of an <a href="http://news.php.net/php.internals/76752">email</a> I sent to PHP internals as a reply to:</p>
+      <blockquote>
+        <p>And since you're targetting[sic] the next major release, BC isn't an issue.</p>
+      </blockquote>
+      <p>This sort of blanket statements that "Backwards Compatibility is not an issue" with a new major version is extremely unwarranted. <em>Extreme care</em> should be taken when deciding to break Backwards Compatibility. It should not be "oh we have a major new version so we can break all the things"™.</p>
+      <p>There are two main types of breaking Backwards Compatibility:</p>
+      <ol>
+        <li>
+          <p>The obvious case where running things trough <code>php -l</code> instantly tells you your code no longer works. Bugs like the two default cases, fall in this category. I have no problem with this, as it's very easy to spot the difference (In the case of allowing multiple "default" cases, it's a fricking bug fix too).</p>
+        </li>
+        <li>
+          <p>Subtle changes in how PHP behaves. There is large amount of those things currently under discussion. There is the nearly undetectable change of the "Uniform Variable Syntax", that I already <a href="http://derickrethans.nl/uniform-variable-syntax.html">wrote about</a>, the current discussion on <a href="https://wiki.php.net/rfc/binary_string_comparison">"Binary String Comparison"</a>, and now changing the <a href="https://wiki.php.net/rfc/integer_semantics">behaviour</a> on <code><<</code> and <code>>></code> in a subtle way. These changes are <em>not okay</em>, because they are nearly impossible to test for.</p>
+          <p>Changes that are so difficult to detect, mean that our users need to re-audit and check their whole code base. It makes people not want to upgrade to a newer version as there would be more overhead than gains. Heck, even changing the <code>$</code> in front of variables to <code>£</code> is a better change, as it's <em>immediately</em> apparent that stuff changed. And you can't get away with "But Symfony and ZendFramework don't use this" either, as there is so much code out there</p>
+        </li>
+      </ol>
+      <p>As I said, the first type isn't much of a problem, as it's easy to find what causes such Backwards Compatibility break, but the second type is what causes our users an enormous amount of frustration. Which then results in a lot slower adoption rate—if they bother upgrading at all. Computer Science "purity" reasons to "make things better" have little to no meaning for PHP, as it's clearly not designed in the first place.</p>
+      <p>Can I please urge people to not take Backwards Compatibility issues so lightly. Please think really careful when you suggest to break Backwards Compatibility, it should only be considered if there is a real and important reason to do so. Changing binary comparison is not one of those, changing behaviour for everybody regarding <code><<</code> and <code>>></code> is not one of those, and subtle changes to what syntax means is certainly not one of them.</p>
+      <p>
+        <strong>Don't be Evil</strong>
+      </p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/21/2014 10:31 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/On-Backwards-Compatibility-and-not-Being-Evil">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/bc-dont-be-evil.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/the-loop-part16.html" title="Walking the London LOOP - part 16">Walking the London LOOP - part 16</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="walking_the_london_loop_-_part_16"/>Walking the London LOOP - part 16</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Friday, August 8th 2014, 18:02 BST</div>
+      </div>
+      <p>Two months, getting married and a honeymoon later, it was finally time to continue walking the loop. Section 16 is the longest at 11 miles so we didn't double it up as we have done before.</p>
+      <p>The section starts at Elstree, which would have been two stops on the Overground to West Hampstead and a Thames Link train to get to. But it being Sunday that didn't quite work. Instead we had to catch a Rail Replacement Bus to West Hampstead, which luckily turned up quickly.</p>
+      <p>After getting to Elstree, and turning on the GPS we set off. The first stretch was along a residential <a href="http://www.openstreetmap.org/way/10363604#map=16/51.6488/-0.2811&layers=C">road</a> that became steeper and steeper the further we got along it.</p>
+      <p>At the top we turned left and proceeded besides busy Barnet Lane, passing two odd looking structures, which later turned out to be airvents for the <a href="http://en.wikipedia.org/wiki/Midland_Main_Line">Midland Main Line</a> that we just got to Elstree by.</p>
+      <img src="http://derickrethans.nl/images/content/loop16-d36_8831.jpg" alt="loop16-d36_8831.jpg"/>
+      <p>After the hill, we continued and followed a path into a forest, <a href="http://en.wikipedia.org/wiki/Scratchwood">Scratch Wood</a>. Together with <a href="http://en.wikipedia.org/wiki/Moat_Mount_Open_Space">Moat Mount Open Space</a> they are a local nature reserve. However, to get to Moat Mount Open Space, we had to make a nasty detour past the A1/Barnet Way.</p>
+      <p>Moat Mount Open Space is also the start of the <a href="http://en.wikipedia.org/wiki/Dollis_Valley_Greenwalk">Dollis Valley Greenwalk</a>, which you can follow all the way to Hampstead Heath. Wikepedia tells me that this is meant to be a link between the LOOP and the <a href="http://en.wikipedia.org/wiki/Capital_Ring">Capital Ring</a>, one of our likely future walking projects.</p>
+      <img src="http://derickrethans.nl/images/content/loop16-d36_8855.jpg" class="left" alt="loop16-d36_8855.jpg"/>
+      <p>In any case, the Greenway passes by some open spaces before crossing Hendon Wood Lane. Just after the lane we came upon a non-public path, that is open all year round, except for February 28th... not quite sure what the reason for that is!. We met a friendly horse, and soon we started following <a href="http://en.wikipedia.org/wiki/Dollis_Brook">Dollis Brook</a>. First through farm land, but then soon through parks. At the end, just before hitting the Northern Line we went North and stopped at the <a href="http://www.mcmullens.co.uk/oldredlion">Old Red Lion</a> for a refreshing pint.</p>
+      <p>After the pint we continued past the High Barnet tube depot before climbing up the hill through King George's Fields up to Hadley Common. This climb was a bit longer than we liked, but the weather was good, a pint had been drunk and the view was great. At the top we crossed the street on to Hadley Green. Here the houses are looking a lot larger and priciers than the houses down in Barnet.</p>
+      <img src="http://derickrethans.nl/images/content/loop16-d36_8875.jpg" class="right" alt="loop16-d36_8875.jpg"/>
+      <p>The east side of the green feature several mansions, and is also the home to the <a href="http://en.wikipedia.org/wiki/Wilbraham_Almshouses">Wilbraham Almshouses</a>. After passing <a href="http://www.stmarymh.co.uk/">St. Mary the Virgin</a> we crossed into <a href="http://en.wikipedia.org/wiki/Monken_Hadley_Common">Monken Hadley Common</a>, also called Hadley Woods for the remainder of the walk. After a quick detour to have a look at <a href="http://www.monkenhadleycommon.net/tour.html">Jack's Lake</a> we made it to <a href="http://en.wikipedia.org/wiki/Cockfosters_tube_station">Cockfosters</a>, the end of the section.</p>
+      <p>The weather was mostly sunny with a few clouds at the start, and a few more at the finish. It was warm at 26°C and not nearly as humid as we feared. We took four hours and a bit for this section's 19.0km.</p>
+      <p>The photos that I took on this section, as well as the photos of the other sections of the LOOP, are available as a <a href="http://www.flickr.com/photos/derickrethans/sets/72157636982853053/with/14197856337">Flickr set</a>.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/08/2014 12:02 pm</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Walking-the-London-LOOP-part-16">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/the-loop-part16.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/uniform-variable-syntax.html" title="No to a Uniform Variable Syntax">No to a Uniform Variable Syntax</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="no_to_a_uniform_variable_syntax"/>No to a Uniform Variable Syntax</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Wednesday, July 16th 2014, 16:48 BST</div>
+      </div>
+      <p>As you might have heard, PHP developers voted on an RFC called <a href="https://wiki.php.net/rfc/uniform_variable_syntax">"Uniform Variable Syntax"</a>. This RFC "proposes the introduction of an internally consistent and complete variable syntax". In general, this RFC argues for making PHP's parser more complete for all sorts of variable dereferences. For example:</p>
+      <pre>$foo()['bar']()
+[$obj1, $obj2][0]->prop
+$foo->bar()()
+$foo::$bar::$baz
+
+</pre>
+      <p>Thirty people voted for, and one against: <strong>Me</strong>.</p>
+      <p>Does that mean that I am against a unified variable syntax? No, I am not. I am actually quite a fan of having a consistent language, but we need to be careful when this hits existing users.</p>
+      <p>The already accepted RFC also has some negative aspects, in the form of backwards compatibility (BC) breaks. For example (quoted from the RFC):</p>
+      <pre>// syntax               // old meaning            // new meaning
+$$foo['bar']['baz']     ${$foo['bar']['baz']}     ($$foo)['bar']['baz']
+$foo->$bar['baz']       $foo->{$bar['baz']}       ($foo->$bar)['baz']
+$foo->$bar['baz']()     $foo->{$bar['baz']}()     ($foo->$bar)['baz']()
+Foo::$bar['baz']()      Foo::{$bar['baz']}()      (Foo::$bar)['baz']()
+
+</pre>
+      <p>This basically says that the RFC author <strong>knows</strong> there are BC breaks, but choses to ignore how this might annoy users.</p>
+      <p>Unlike keyword additions, or functions and/or settings being removed, this change in <strong>semantics</strong> is probably one of the worst BC breaks you can imagine. You can't really write a scanner for it, as the code could already have been converted. A <em>tiny</em> change like this however, can create very hard to debug issues within existing code. And this is exactly why people whine that PHP breaks BC and does not care about its users. In many cases, breaking BC happens by accident, and I'm no stranger to breaking BC due to some oversight. Accidents like <a href="https://bugs.php.net/bug.php?id=66985">this</a> are certainly annoying, but slightly unavoidable as we do not have test cases for <em>everything</em>.</p>
+      <p>However, when you know for certain that you are going to break BC, there is no excuse. With such a marginal new "feature" as is outlined in this RFC, antagonising our users is not a good thing.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>07/16/2014 10:48 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/No-to-a-Uniform-Variable-Syntax">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/uniform-variable-syntax.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/dead-code.html" title="Dead Code">Dead Code</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="dead_code"/>Dead Code</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Wednesday, June 18th 2014, 09:13 BST</div>
+      </div>
+      <p>Again and again I am being asked why <a href="http://xdebug.org">Xdebug</a> sees "dead code" in places where people don't expect it. Most often this is <a href="http://bugs.xdebug.org/view.php?id=1041">related</a> to PHPUnit's Code Coverage in the following situations:</p>
+      <pre>1:  <?php
+2:  function foo()
+3:  {
+4:      if ( false )
+5:      {
+6:          throw new Exception();
+7:      } /* line with dead code */
+8:
+9:      return 42;
+10: } /* line with dead code */
+11: ?>
+
+</pre>
+      <p>The explanation for this is rather simple. Xdebug checks code coverage by adding hooks into certain opcodes. Opcodes are the building blocks of oparrays. PHP converts each element in your script—main body, method, function—to oparrays when it parses them. The PHP engine then executes those oparrays by running some code for each opcode. Opcodes are generated, but they are not optimised. Which means that it does not remove opcodes that can not be executed.</p>
+      <p>With <a href="http://derickrethans.nl/projects.html#vld">vld</a> we can see which opcodes are generated. For the above script, there are two elements. The main body of the script, and the foo function. I used vld to show their opcodes, and after some trimming the main script body looks like:</p>
+      <pre>line     #* I O op               ext  return  operands
+--------------------------------------------------------
+   2     0  >   EXT_STMT
+         1      NOP
+  12     2      EXT_STMT
+         3    > RETURN                        1
+
+</pre>
+      <p>We'll ignore this one mostly, as there is nothing much in it, but do notice the <code>RETURN</code> opcode, which represents a <code>return</code> statement in a PHP script. We did not add a return statement, but PHP's parser <strong>always</strong> puts a <code>RETURN</code> opcode at the end of each oparray.</p>
+      <p>The <strong>foo</strong> function's oparray looks like:</p>
+      <pre>line     #* I O op               ext  return  operands
+--------------------------------------------------------
+   2     0  >   EXT_NOP
+   5     1      EXT_STMT
+         2    > JMPZ                          false, ->11
+   6     3  >   EXT_STMT
+         4      FETCH_CLASS        4  :0      'Exception'
+         5      EXT_FCALL_BEGIN
+         6      NEW                   $1      :0
+         7      DO_FCALL_BY_NAME   0
+         8      EXT_FCALL_END
+         9    > THROW              0          $1
+   7    10*     JMP                           ->11
+   9    11  >   EXT_STMT
+        12    > RETURN                        42
+  10    13*     EXT_STMT
+        14*   > RETURN                        null
+
+</pre>
+      <p>Xdebug's code coverage marks line 7 and 10 as "dead code". When we look at the <em>vld</em> output above, we see that line 10 has an <code>EXT_STMT</code> and a <code>RETURN</code> statement. But they can never be reached as there is no path through the code that does not hit the <code>RETURN</code> on line 9 first. <em>vld</em> marks dead code with a <code>*</code>. The <code>></code> in the <code>I</code> and <code>O</code> columns indicate points in the oparray that that are the end point of a jump instruction (ie., the start of a branch) and a location from where a jump is initiated respectively (ie., the exit point out of a branch).</p>
+      <p><em>vld</em> actually tells you which branches and paths are found:</p>
+      <pre>branch: #  0; line: 2- 5; sop:  0; eop:  2; out1:   3; out2:  11
+branch: #  3; line: 6- 6; sop:  3; eop:  9
+branch: # 11; line: 9-10; sop: 11; eop: 14
+path #1: 0, 3,
+path #2: 0, 11,
+
+</pre>
+      <p>Each branch is "named" by its starting opcode entry. For each of the branches, <a href="http://xdebug.org">Xdebug</a>, and <em>vld</em>, check whether there is a premature unconditional exit. Conditional exits and jumps are already checked when the oparray is split into branches.</p>
+      <p>From the three branch definitions you can already see that opcode <code>10</code> is not part of any branch as it sits between an exit point and an entry point. Hence it's marked as dead code on line 7. This line contains the closing brace (<code>}</code>) of the <code>if</code> statement.</p>
+      <p>In the branch covering opcodes <code>3</code> to <code>9</code> the <code>THROW</code> in opcode <code>9</code> is the exit point. For <code>if</code> statements, PHP's code generator always generates an extra <code>JMP</code> at the end. This opcode would simply jump to the next opcode (the jump target is shown as <code>->11</code>). However, if the branch is exitted prematurely (due to the <code>THROW</code>) in this case, it's not hit. Because it's the only opcode on line <code>7</code>, the whole line gets marked as "dead code".</p>
+      <p>In the branch covering opcodes <code>11</code> to <code>14</code>, the <code>RETURN</code> statement in opcode <code>12</code> on line 9 is the exit point of the branch, and hence opcodes <code>13-14</code> are marked as dead code.</p>
+      <p>Hopefully this explains that sometimes lines which seem to have code, are marked as dead code. And this is in the cases where PHP gets the line numbers for opcodes right... which isn't always the case either.</p>
+      <p>For <a href="http://xdebug.org">Xdebug</a>, I am improving code coverage to also include path and branch coverage, which should come in Xdebug 2.3.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/18/2014 03:13 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Dead-Code">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/dead-code.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/the-loop-part15.html" title="Walking the London LOOP - part 15">Walking the London LOOP - part 15</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="walking_the_london_loop_-_part_15"/>Walking the London LOOP - part 15</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Tuesday, June 10th 2014, 09:22 BST</div>
+      </div>
+      <p>We took a bit of a rest after last time's mud fest. But this Sunday was very looking very promising weather wise, so we set out to do section 15.</p>
+      <p>The start of section 15 is easy for us to reach, at only 11 stops on the Overground to Hatch End. We left the station on the way to the start, but after a few hundred meters we realised we forgot to take a <a href="https://www.flickr.com/photos/derickrethans/14197856337/in/set-72157636982853053">photo</a> of the LOOP section at the station. Unfortunately, it's on the other side of the barriers so Morag went back in to snap a photo. With that out of the way, we started towards the start of the section yet again, while spotting some <a href="http://www.klm.com/travel/gb_en/prepare_for_travel/on_board/travel_classes/miniatures.htm">KLM houses</a> in an antique shop for sale.</p>
+      <img src="http://derickrethans.nl/images/content/loop15-d36_6362.jpg" class="left" alt="loop15-d36_6362.jpg"/>
+      <p>Just after starting the section, we had to battle through some jungle. After a bit we gave up, and took a much easier stroll at the edge of a nearby field. Although technically not quite the LOOP, it sure beat getting stung by nettles and scratched by brambles. A make-shift LOOP sign told us where to go.</p>
+      <p>We crossed through a field, and under the West Coast Main Line towards Little Oxhey Road. After following this road for a bit we crossed a major road into a field with scary looking Keep Out signs on the right. Not sure why we would be at that side of the massively broken barb wire fence anyway, as there were only nettles and brambles. We walked past the Grims Dyke Golf Club and came upon a marker explaining about <a href="http://en.wikipedia.org/wiki/Grim%27s_Ditch_%28Harrow%29">Grim's Ditch</a> (or Grim's Dyke), an ancient earthwork.</p>
+      <img src="http://derickrethans.nl/images/content/loop15-d36_6385.jpg" class="right" alt="loop15-d36_6385.jpg"/>
+      <p>We turned into the woods—infested with mosquitoes as my legs now show—along the ditch. I made a small navigational error and instead of going past Gilbert's Lake, we ended up at his <a href="http://en.wikipedia.org/wiki/Grim%27s_Dyke">mansion</a>! The house was not built for <a href="http://en.wikipedia.org/wiki/W.S._Gilbert">W.S. Gilbert</a>, but he lived there the last two decades of his life. The <a href="https://www.flickr.com/groups/elephpants">elephpants</a> thought it beautiful too. We walked back along the lake and through some woods with only a little bit of mud. When coming out of the woods we hit to top of Grim's Dyke with excellent views over central London. Not much after that, we stopped for a quick pint at The Case is Altered, probably the pub with the weirdest name I've been at.</p>
+      <img src="http://derickrethans.nl/images/content/loop15-d36_6445.jpg" class="left" alt="loop15-d36_6445.jpg"/>
+      <p>After the pint we went back into the woods for a bit and after a while we crossed into <a href="http://en.wikipedia.org/wiki/Bentley_Priory_Nature_Reserve">Bentley Priory Nature Reserve</a>, where all the paths were nicely concreted—a big change from all the mud of the last sections. At the other end I found a unmapped postbox. Then we crossed into <a href="http://en.wikipedia.org/wiki/Stanmore_Common">Stanmore Common</a> and walked around the rugby club to come upon another bit of jungle. More stingy nettles attacked my legs while we walked past the <a href="http://en.wikipedia.org/wiki/Royal_National_Orthopedic_Hospital">Royal National Orthopedic Hospital</a>.</p>
+      <p>Out of the jungle we crossed a field filled with buttercups and clover in bloom. We spend some time taking photos. After the nice field, we crossed under the <a href="http://en.wikipedia.org/wiki/M1_motorway">M1</a> and had to walk a little bit alongside Elstree Road. Probably the least pleasant part of the walk. However, there was another pub, <a href="http://www.thefisheryinelstree.co.uk">The Fishery</a>. Some snacks, and two local bitters later we continued to finish the section. There was a leisurely walk along the <a href="http://en.wikipedia.org/wiki/Aldenham_Reservoir">Aldenham Reservoir</a> at the <a href="http://en.wikipedia.org/wiki/Aldenham_Country_Park">Aldenham Country Park</a>. The last bit of the walk went over fields and over the Elstree Golf Club to end at Elstree & Borehamwood station.</p>
+      <img src="http://derickrethans.nl/images/content/loop15-d36_6482.jpg" alt="loop15-d36_6482.jpg"/>
+      <p>The weather was mostly sunny with a few clouds at the start, and a few more at the finish. It was 24°C and not nearly as humid as we feared. We took nearly four hours for this section's 15.5km.</p>
+      <p>The photos that I took on this section, as well as the photos of the other sections of the LOOP, are available as a <a href="http://www.flickr.com/photos/derickrethans/sets/72157636982853053/with/14197856337">Flickr set</a>.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/10/2014 03:22 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Walking-the-London-LOOP-part-15">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/the-loop-part15.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/the-loop-part13-and-14.html" title="Walking the London LOOP - part 13 and 14">Walking the London LOOP - part 13 and 14</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="walking_the_london_loop_-_part_13_and_14"/>Walking the London LOOP - part 13 and 14</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Thursday, May 15th 2014, 15:19 BST</div>
+      </div>
+      <p>Another Sunday, another walk. You know the drill.</p>
+      <p>Because we cheekily stopped a little before the end of section 12 <a href="http://derickrethans.nl/the-loop-part11-and-12.html">last time</a>, we had to go back and do this last mile. So we set off for Harefield where I discovered that I had forgotten my proper camera. So sadly, this walk's photos are done on my phone.</p>
+      <p>Because we ended at <a href="http://www.brunningandprice.co.uk/oldorchard/">The Old Orchard</a> last time, we found it more than fitting to start this walk at this same pub as well. After a half pint, we walked down the hill to the Grand Union Canal for the last bit of section 12. The weather wasn't as pleasant as the previous weekend, so there were not so many boats on the canal.</p>
+      <p>There was only about a mile to go in the section and we soon found ourselves at the start of section 13.</p>
+      <div class="articleSubSection">
+        <h2><a name="section_13"/>Section 13</h2>
+        <p>This section started with a slightly steep path into the first of the woods. After a short section we came out onto fields where there were friendly horses, allotments and some stinky cows. The paths were easy going, with some gravel and some fields. This unfortunately all changed once we got to our first forest.</p>
+        <img src="http://derickrethans.nl/images/content/loop13-20140511_134826a.jpg" alt="loop13-20140511_134826a.jpg"/>
+        <p>From this point on there was a lot of mud, sometimes half a foot deep. There were a lot of grumps and it was very slow going. I guess we should have known better after so much rain the past week.</p>
+        <img src="http://derickrethans.nl/images/content/loop13-20140511_141147a.jpg" class="right" alt="loop13-20140511_141147a.jpg"/>
+        <p>There were plenty of nice parts of the walk as well, with fields and meadows. We stopped at <a href="http://www.vintageinn.co.uk/yeoldegreenemannerickmansworth/">Ye Olde Greene Manne</a> for a pint and some snacks, which made us feel quite a lot better. The last stretch went mostly over easy going public footpaths. We crossed underneath the Metropolitan Line near Moor Park towards the end of section 13.</p>
+      </div>
+      <div class="articleSubSection">
+        <h2><a name="section_14"/>Section 14</h2>
+        <img src="http://derickrethans.nl/images/content/loop14-20140511_141938.jpg" class="left" alt="loop14-20140511_141938.jpg"/>
+        <p>Section 14 started by going over <a href="http://www.sandylodge.co.uk/">Sandy Lodge golf club</a> where we had to avoid flying golf balls (not really). We had some fun with the <a href="https://www.flickr.com/groups/elephpants">elephpants</a> in a field full of buttercups. The LOOP continued through a few streets and back into the woods, Oxhey Woods. But it could also have been named for Oxhey Mud Bath. It was not as tough going as in section 13, but it was certainly no fun.</p>
+        <img src="http://derickrethans.nl/images/content/loop14-20140511_175839a.jpg" class="right" alt="loop14-20140511_175839a.jpg"/>
+        <p>After a while we crossed another field, and continued walking along some streets before getting into yet another muddy section. But luckily, most of section 14 was alongside fields so that it was rather easy to wipe our boots clean. We were happy to get to the end though of the mud. Finally, we dodged through a bit of jungle to come upon a farm and back onto paved roads. We walked straight to Hatch End station, forgoing our usual "we had made it" pint.</p>
+        <p>The weather was overcast, with 14°C and a few short showers. We took nearly five hours for the two sections that together were 22.5km long. The mud surely slowed us down.</p>
+        <p>The photos that I took on this section, as well as the photos of the other sections of the LOOP, are available as a <a href="http://www.flickr.com/photos/derickrethans/sets/72157636982853053/with/13977244037">Flickr set</a>.</p>
+        <div class="flattr">
+          <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+          <noscript>
+            <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+              <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+            </a>
+          </noscript>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/15/2014 09:19 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Walking-the-London-LOOP-part-13-and-14">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/the-loop-part13-and-14.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/the-loop-part11-and-12.html" title="Walking the London LOOP - part 11 and 12">Walking the London LOOP - part 11 and 12</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="walking_the_london_loop_-_part_11_and_12"/>Walking the London LOOP - part 11 and 12</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Thursday, May 8th 2014, 09:16 BST</div>
+      </div>
+      <p>Bank holiday Monday walking, I like it.</p>
+      <div class="articleSubSection">
+        <h2><a name="section_11"/>Section 11</h2>
+        <p>We ended at West Drayton <a href="http://derickrethans.nl/the-loop-part10.html">last time</a>, where we already sneakily had done part of section 11. This to make the last walk a bit longer and this one a bit shorter.</p>
+        <img src="http://derickrethans.nl/images/content/loop11-d36_5517.jpg" class="left" alt="loop11-d36_5517.jpg"/>
+        <p>Getting to West Drayton was quite straightforward as there are direct trains from Paddington. From the station, we started along the Grand Union canal and walked past a mega-Tesco. Leaving the Grand Union Canal we continued along the <a href="http://en.wikipedia.org/wiki/Slough_Arm">Slough Arm</a> and past a canal-boat marina. The paths are all very easy going and soon we came upon the aqueduct that brings the Slough Arm over the river <a href="http://en.wikipedia.org/wiki/River_Frays">Frays</a>.</p>
+        <img src="http://derickrethans.nl/images/content/loop11-d36_5519.jpg" class="right" alt="loop11-d36_5519.jpg"/>
+        <p>Just before we got to the river Colne (remember from last time!) we came upon a granite marker indicating that tax (on coal) had to be paid while bringing it into London. We crossed the canal and headed North towards the <a href="http://www.openstreetmap.org/way/4364811">Little Britain Lake</a>. Named after its sort-of likeness with the shape of Great Britain. There was quite a bit of fishing going on as well, but we left the anglers to their own and crossed the river Colne into Hampshire.</p>
+        <img src="http://derickrethans.nl/images/content/loop11-d36_5521.jpg" class="left" alt="loop11-d36_5521.jpg"/>
+        <p>We stumbled upon a tree that had fallen into the river, and continued following the river for a considerable amount of time, past industrial estates, to finally get back to the Grand Union Canal near Uxbridge. In Uxbridge section 11 ended, and we went for a well deserved pint at <a href="http://www.jdwetherspoon.co.uk/home/pubs/the-good-yarn">The Good Yarn</a>, a typical Weatherspoon's pub.</p>
+      </div>
+      <div class="articleSubSection">
+        <h2><a name="section_12"/>Section 12</h2>
+        <p>After our refreshments we headed back to the Grand Union Canal for section 12. Walking along the canal, we first we passed the <a href="http://canalplan.eu/gazetteer/fjou">Uxbridge Lock</a>, crept under the A40 and after a mile and a half we came upon the <a href="http://canalplan.eu/gazetteer/2fs4">Denham Deep Lock</a>. Crossing a bridge, we left the side of the canal for a bit walking past disused, and flooded quarries—one with a sailing school.</p>
+        <img src="http://derickrethans.nl/images/content/loop12-d36_5550.jpg" class="right" alt="loop12-d36_5550.jpg"/>
+        <p>We had the leave the canal for another detour to get around the <a href="http://www.harefieldmarina.co.uk/">Harefield Marina</a>, but joined it shortly after that at the <a href="http://canalplan.eu/gazetteer/ich4">Widewater Lock</a>. From there we walked a few more miles on the towpath besides the canal and made it to our last lock of the day: <a href="http://canalplan.eu/gazetteer/l2ir">Black Jack's Lock</a>. From there it would be another half mile until the end of the section, but we sneaked off and climbed up the hill to <a href="http://www.brunningandprice.co.uk/oldorchard/">The Old Orchard</a> pub. Sections 11 and 12 were mostly along canals. I also figured out that doing the stretch from West Drayton to Harefield on foot is about as fast as by boat, especially when they have to wait for locks to be in the right position.</p>
+        <img src="http://derickrethans.nl/images/content/loop12-d36_5571.jpg" alt="loop12-d36_5571.jpg"/>
+        <p>But let me get back to the pub. Unless some of the dire pubs that we walked past in Uxbridge, The Old Orchard is actually a really nice place. Good beers and ciders, and very nice food. And the view was amazing too! Glad we stopped here, and we promised each other to finish section 12 when we do 13 and 14 on our next walk. We had to run to make our bus into Northwood, and the Metropolitan line home. The pub was worth the run though :-)</p>
+        <img src="http://derickrethans.nl/images/content/loop12-d36_5553.jpg" class="right" alt="loop12-d36_5553.jpg"/>
+        <p>The weather was again very good, with 14-16°C and few light clouds. I even took my new walking shorts out! We took just under four hours for the two sections that together were 18.5km long.</p>
+        <p>The photos that I took on this section, as well as the photos of the other sections of the LOOP, are available as a <a href="http://www.flickr.com/photos/derickrethans/sets/72157636982853053/with/13930759437">Flickr set</a>.</p>
+        <div class="flattr">
+          <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+          <noscript>
+            <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+              <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+            </a>
+          </noscript>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/08/2014 03:16 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Walking-the-London-LOOP-part-11-and-12">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/the-loop-part11-and-12.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/mapping-lubumbashi.html" title="Mapping Lubumbashi">Mapping Lubumbashi</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="mapping_lubumbashi"/>Mapping Lubumbashi</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Tuesday, May 6th 2014, 19:26 BST</div>
+      </div>
+      <img src="http://derickrethans.nl/images/content/hot-logo.png" class="right" alt="hot-logo.png"/>
+      <p>I spend last Saturday helping out HOT, the <a href="http://wiki.openstreetmap.org/wiki/Humanitarian_OpenStreetMap_Team">Humanitarian OpenStreetMap Team</a>, to improve the map of Lubumbashi, Congo. This session focussed on digitizing the data that was acquired on the ground by volunteers.</p>
+      <p>But this was not where the effort started. It started a few weeks ago when <a href="https://twitter.com/Zjwarie">Jorieke</a> set off to Lubumbashi to organise the mapping party. You can read more about this on the <a href="http://hot.openstreetmap.org/updates/2014-04-01_a_week_in_lubumbashi_drc">HOT blog</a>.</p>
+      <p>In cooperation with <a href="http://www.msf.org.uk/">Doctors without Borders</a>/Médecins Sans Frontières UK (MSF UK), HOT organised this mapping effort. With help by students from the University of Lubumbashi, they idea is to map the whole or at least as much as possible of the city of Lubumbashi.</p>
+      <p>At the start of the <a href="https://wiki.openstreetmap.org/wiki/2014_London_HOT_Congo_Mapathon">Mapathon</a>, <a href="https://twitter.com/ivangayton">Harry Wood</a> went through his usual spiel of introducing OpenStreetMap to the crowd. I dropped in the moment he was done. Just in time to hear <a href="https://twitter.com/ivangayton">Ivan Gayton</a>'s talk on the work of MSF and their Congo mapping work. Mapping in Congo is not nearly as simple as it is here, where streets have street names that are neatly printed on street signs. This is not the case in Congo. There no street signs and often, people use names that are either not official, or have no official name anyway. The only way to find out how streets are called, is by asking the people living there!</p>
+      <p>MSF is interested in street name information, or more precisely, the neighbourhood names so that they have an identifier for statistical analysis for epidemiology. The accurate location names allows them to pinpoint for example cholera outbreaks, and hopefully in the future they can take preventative action against disease outbreaks.</p>
+      <p>The first step was creating a basic road layout, which was handled by a <a href="http://wiki.openstreetmap.org/wiki/MSF_Congo_Mapping_Party,_Berlin">Mapathon in Berlin</a>. Coordination of such large mapping efforts happen through the <a href="http://tasks.hotosm.org/">OSM Tasking Manager</a>. You can see the job for Lubumbashi at <a href="http://tasks.hotosm.org/job/456">http://tasks.hotosm.org/job/456</a> They did not stop at Lubumbashi though, and traced a whole of of other towns as well. And the mapping was not only remotely done from Berlin, but OpenStreetMap communities from <a href="https://twitter.com/OSM_HU/statuses/447367461310971905">Hungary</a>, <a href="https://twitter.com/ndongamadou/statuses/447435101035847680">Togo</a>, <a href="https://twitter.com/FoFB7/statuses/447794067540176896">Burkina</a> helped as well—a true global community.</p>
+      <img src="http://derickrethans.nl/images/content/hot-lubumbashi.jpg" class="left" alt="hot-lubumbashi.jpg"/>
+      <p>Besides this initial road tracing job, there are a few other things still to trace too. If you have time, give them a hand for <a href="http://tasks.hotosm.org/job/459">http://tasks.hotosm.org/job/459</a></p>
+      <p>With a basic road layout traced from areal images you have a rough idea on how a city looks like, but nothing beats a survey on the ground to see how things actually are. It is not always easy to spot things on areal imagery.</p>
+      <p>While remote mapping parties were nearing their completion of the road network, a group of volunteers from Department of Geography of the University of Lubumbashi went out into the neighbourhoods with <a href="http://fieldpapers.org/">FieldPapers</a> to do the survey. Through hints from Ivan I understood that it took MSF some time to convince their professor to help out for free. He could hardly believe that some organisation was collecting all this data and then making it available for free. Not just for "no money", but also under an open license. Perhaps he was worried about what Google <a href="http://wiki.openstreetmap.org/wiki/Google_Map_Maker">MapMaker</a> is trying to do in underdeveloped countries—getting volunteers to collect data for them and then locking it up in GoogleMaps. Having open access to the data is of course much more valuable.</p>
+      <p>FieldPapers allows you to create <a href="http://fieldpapers.org/atlas.php?id=vsm3w2nd">atlases</a> of areas. It divides this up into bite size chunks so that you can print them out and mark your survey information on the paper. For the Lubumbashi mapthon, we had an immense stack of those FieldPapers with notes on them. And our task was to go through this stack and digitize the notes on the map through an OpenStreetMap editor, such as JOSM. I think I managed to go through about 100 to 150 pages of them during the mapathon. One of the <a href="http://www.openstreetmap.org/changeset/22108730">areas</a> that I did was about 30 sheets of paper!</p>
+      <p>In the end, we made it through all of the FieldPapers. Task completed! But that does not mean we're finished. This effort was only a small section of Lubumbashi and the local volunteers are going to continue their effort. But they are also learning how to edit the data themselves. And that is the only sustainable way, but I will try to help out whenever I can!</p>
+      <div class="credits">
+        <p> Derick going through FieldPapers for Lubumbashi — CC by-sa Harry Wood (photo) — https://www.flickr.com/photos/harrywood/13909444627/</p>
+      </div>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/06/2014 01:26 pm</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Mapping-Lubumbashi">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/mapping-lubumbashi.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+            
+            <span class="next"><a href="/Mirror/Derick-Rethans/(offset)/10"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+    
+        <span class="current">1</span>
+
+                      <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/30">4</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/40">5</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/60">7</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/70">8</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/80">9</a></span>
+                              <span class="other"><a href="/Mirror/Derick-Rethans/(offset)/90">10</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/8/(month)/8/(year)/2014">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/27/(month)/8/(year)/2014">27</a></em>
+        </td>
+                            <td class="currentselected today">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1726";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1726";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1726";s:7:"node_id";s:4:"1726";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";s:14:"node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1726";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,441 @@
+a:10:{s:7:"content";s:26212:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/cli-color.html" title="New in Xdebug 2.2: Colours on the command line">New in Xdebug 2.2: Colours on the command line</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="new_in_xdebug_2_2_colours_on_the_command_line"/>New in Xdebug 2.2: Colours on the command line</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Wednesday, March 21st 2012, 09:43 GMT</div>
+      </div>
+      <p>This is the first article in a series about new features in <a href="http://xdebug.org">Xdebug</a> 2.2. Besides support for PHP 5.4, there are a few that might be of interest.</p>
+      <p>Xdebug has overloaded <a href="http://php.net/var_dump">var_dump()</a> with <a href="http://xdebug.org/docs/all_functions#xdebug_var_dump">xdebug_var_dump()</a> for a long time and the overloaded function could be configured with a few configuration settings.  There is <a href="http://xdebug.org/docs/display#var_display_max_data">xdebug.var_display_max_data</a> to configure how much of a string should be shown; <a href="http://xdebug.org/docs/display#var_display_max_children">xdebug.var_display_max_children</a> to configure how many children in an array should be shown and <a href="http://xdebug.org/docs/display#var_display_max_depth">xdebug.var_display_max_depth</a> to configure how many levels "deep" the <code>var_dump()</code> should go on for. This functionality was available for when PHP had its <a href="http://www.php.net/manual/en/errorfunc.configuration.php#ini.html-errors">html_errors</a> setting on as is usually the case in a web environment<a href="http://derickrethans.nl#_footnote_0_1" class="footnote">1</a>.</p>
+      <p>Xdebug 2.2 adds this same functionality to the non-HTML environment: the command line. Now the overloaded <code>var_dump()</code> and native <code>xdebug_var_dump()</code> functions also accept the three aforementioned settings:</p>
+      <pre>derick@whisky:~$ php \
+        -dxdebug.var_display_max_data=8 \
+        -dxdebug.var_display_max_children=4 \
+        -r 'var_dump( "a longer string", array( 1, 2, 3, 4, 5, 6, 7 ) );'
+
+</pre>
+      <p>outputs:</p>
+      <pre>string(15) "a longer"...
+array(7) {
+  [0] =>
+  int(1)
+  [1] =>
+  int(2)
+  [2] =>
+  int(3)
+  [3] =>
+  int(4)
+
+  (more elements)...
+}
+
+</pre>
+      <p>Now, to be fair. This is all a side effect; and merely an add-on to a patch by <a href="http://mgdm.net">Michael Maclean</a>. He wrote a <a href="https://github.com/mgdm/xdebug/commit/23c5739ee923938aba0c029d3971db563cb43606">patch</a> that adds colours to the output on the command line by using <a href="http://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape codes</a>. This patch also made the overloaded <code>var_dump()</code> listen to the limiting settings for variable display. After his patch, the following was the behaviour on the command line as long as <a href="http://en.wikipedia.org/wiki/Stdout#Standard_output_.28stdout.29">stdout</a> is a <a href="http://en.wikipedia.org/wiki/Tty_%28Unix%29">tty</a> and <a href="http://xdebug.org/docs/display#cli_color">xdebug.cli_color</a> is set to <code>1</code>.</p>
+      <img src="http://derickrethans.nl/images/content/cli-color-linux.png" alt="cli-color-linux.png"/>
+      <p>I have extended this so that the settings regarding data display also work without <code>xdebug.cli_color</code> set to <code>1</code>. Further more, in <a href="http://xdebug.org/updates.php#x_2_2_0rc1">Xdebug 2.2.0RC1</a>, setting <code>xdebug.cli_color</code> to <code>2</code> forces the colours from being shown, even if stdout is not a tty.</p>
+      <p>Initially, the colour coding of errors and <code>var_dump()</code> output, would only work on a Unix system where ANSI escape codes are commonly supported. After the release of Xdebug 2.2.0RC1, <a href="https://heyleek.com">Chris Jones</a> submitted a <a href="http://bugs.xdebug.org/view.php?id=794">bug report</a> suggesting that this functionality could also be available on the Windows console. I wasn't aware that Windows could do this anymore since they dropped <a href="http://en.wikipedia.org/wiki/ANSI_escape_code#Windows_and_DOS">ANSI.SYS</a> but apparently there is a tool, <a href="http://adoxa.3eeweb.com/ansicon/">ANSICON</a>, that reimplements this. From the next release, Xdebug 2.2.0RC2, Xdebug will now also check whether the <code>ANSICON</code> environment variable is set, just like Xdebug would check whether stdout is a tty on a Unix platform. As a result, the equivalent console output as shown before looks like the following on Windows (providing ANSICON is installed):</p>
+      <img src="http://derickrethans.nl/images/content/cli-color-windows.png" alt="cli-color-windows.png"/>
+      <p>Now the only thing left is adding complete documentation for this feature ;-)</p>
+      <p>As always, if you think Xdebug is a valuable tool, have a look at <a href="http://xdebug.org/buy-support.php">http://xdebug.org/buy-support.php</a>.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+      
+    </div>
+    <ul class="footnotes">
+      <li>
+        <a name="_footnote_0_1">1</a>
+        <p>: Except for in PHP 5.3, where this sadly was turned off by default.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>03/21/2012 04:43 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/New-in-Xdebug-2.2-Colours-on-the-command-line">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/cli-color.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/london-at-night.html" title="London at Night">London at Night</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="london_at_night"/>London at Night</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Saturday, March 17th 2012, 11:45 GMT</div>
+      </div>
+      <p>A few days ago I finally wandered into London with a tripod and my camera. I've been meaning to do this for months and take long exposure shots of various places in London, as well as seeing whether I can make cool timelapses.  I've only taken a few pictures near the Thames and the London Eye so far, with one timelapse of the London Eye. I am however planning to return for more. This photography trip also coincided with the <a href="http://en.wikipedia.org/wiki/Conjunction_%28astronomy_and_astrology%29">conjunction</a> of Jupiter and Venus.</p>
+      <p>Here are some of the images:</p>
+      <div class="figure">
+        <img src="http://farm8.staticflickr.com/7204/6989474439_38b5ba0a6a_z.jpg" alt="6989474439_38b5ba0a6a_z.jpg"/>
+        <p>Jupiter and Venus next to Big Ben</p>
+      </div>
+      <div class="figure">
+        <img src="http://farm8.staticflickr.com/7058/6989474675_de7a03a3de_z.jpg" alt="6989474675_de7a03a3de_z.jpg"/>
+        <p>A bus streaming past</p>
+      </div>
+      <div class="figure">
+        <img src="http://farm8.staticflickr.com/7204/6989474975_85ae0afca8_z.jpg" alt="6989474975_85ae0afca8_z.jpg"/>
+        <p>Houses of parliament</p>
+      </div>
+      <p>And at last item, a timelapse of the London Eye:</p>
+      <div class="video">
+        <iframe src="http://player.vimeo.com/video/38651688?title=0&byline=0&portrait=0" width=" 599" height=" 337" frameborder="0"/>
+        <p><a href="http://vimeo.com/38651688"/>The London Eye, spinning at 75 times its normal speed.</p>
+      </div>
+      <p>This timelapse was recorded with 802 images. Each image is taken 3 seconds after the previous one resulting in a speed-up of 75 times. Lighting has been manually monitored during the taking of the images.</p>
+      <p>The rest of the images are on <a href="http://www.flickr.com/photos/derickrethans/sets/72157629602684483/detail/">flickr</a>.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>03/17/2012 06:45 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/London-at-Night">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/london-at-night.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/foursquare-and-osm.html" title="Foursquare and OpenStreetMap">Foursquare and OpenStreetMap</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="foursquare_and_openstreetmap"/>Foursquare and OpenStreetMap</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> Montreal, Canada</div>
+        <div class="date">Thursday, March 1st 2012, 11:43 EST</div>
+      </div>
+      <img src="http://derickrethans.nl/images/content/foursquare-osm.png" class="left" alt="foursquare-osm.png"/>
+      <p>Yesterday, FourSquare <a href="http://blog.foursquare.com/2012/02/29/foursquare-is-joining-the-openstreetmap-movement-say-hi-to-pretty-new-maps/">announced</a> that they are "joining the OpenStreetMap movement", meaning that the now use <a href="http://www.openstreetmap.org/">OpenStreetMap</a> data for their map tiles. With their own map styles and using <a href="http://mapbox.com">MapBox</a> for rendering their styles. This is <strong>amazing</strong> news I think.</p>
+      <p>Of course, as with many changes, some people are <a href="http://blog.foursquare.com/2012/02/29/foursquare-is-joining-the-openstreetmap-movement-say-hi-to-pretty-new-maps/#comment-453335876">happy</a> but there are others that <a href="http://blog.foursquare.com/2012/02/29/foursquare-is-joining-the-openstreetmap-movement-say-hi-to-pretty-new-maps/#comment-453041717a">complain</a> that the map data just isn't up to standards yet for their area. That's a fair point as OpenStreetMap does not have all roads and points-of-interest (POIs) of every city and town in the whole world. The geographical data has mostly been contributed by people on the ground with GPS devices through so called <a href="http://wiki.openstreetmap.org/wiki/Mapping_party">mapping parties</a>. Both in places like <a href="http://wiki.openstreetmap.org/wiki/London/Summer_2011_mapping_parties">London</a> as well as in slums such as <a href="http://mapkibera.org/">Kibera</a>. For a look at the progress over such a weekend, check this <a href="http://vimeo.com/37255594">video</a> or have a look at <a href="http://drck.me/osmyoe11-9nz">"OpenStreetMap: A Year of Edits"</a> for an animation showing all the edits in 2011.</p>
+      <p>Foursquare is all about spamming twitter, I mean, checking into venues to acquire points and badges. OpenStreetMap is all about having a database of geographical data, and that is not only roads! I've written on OpenStreetMap <a href="http://drck.me/what-is-osm-8my">before</a>.</p>
+      <p>A venue is a POI in the OpenStreetMap jargon. It makes a whole lot of sense to keep only one database of these POIs/venues. The venues are added (and fixed) by foursquare users in the first place so getting that data into OpenStreetMap would be awesome.</p>
+      <p>I think this is a great opportunity for fourquare to contribute the venue data to improve OpenStreetMap. I think in this case, there needs to be some form of review process before they can be added to OpenStreetMap, or perhaps consolidated with already existing POI data. This is going be an interesting challenge, and luckily foursquare already is <a href="http://blog.foursquare.com/2012/02/29/foursquare-is-joining-the-openstreetmap-movement-say-hi-to-pretty-new-maps/#comment-452722147">toying</a> with how to improve OpenStreetMap's data.</p>
+      <p>Besides venues, OpenStreetMap also contains roads and in places those roads are missing or don't have names. Perhaps foursquare can even sponsor mapping parties in the "empty" areas.  In the end, a free-to-use open geographic database is what is beneficial to everybody.</p>
+      <p>For more information on OpenStreetMap, have a look at its <a href="http://wiki.openstreetmap.org/wiki/Main_Page">wiki</a> or drop by on <a href="http://wiki.openstreetmap.org/wiki/Irc">IRC</a>.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>03/01/2012 10:43 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Foursquare-and-OpenStreetMap">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/foursquare-and-osm.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>March&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/1/(month)/3/(year)/2012">1</a></em>
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                                        <td class="  right">
+            4
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                                        <td class="  right">
+            11
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/17/(month)/3/(year)/2012">17</a></em>
+        </td>
+                                        <td class="  right">
+            18
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/21/(month)/3/(year)/2012">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                                        <td class="  right">
+            25
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2012";s:5:"month";s:1:"3";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1726";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1726";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1726";s:7:"node_id";s:4:"1726";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";s:14:"node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1726";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}
