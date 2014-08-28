@@ -2,7 +2,7 @@
 // URI:       extension/ezecosystem/design/eze/templates/page_header_logo.tpl
 // Filename:  extension/ezecosystem/design/eze/templates/page_header_logo.tpl
 // Timestamp: 1409052462 (Tue Aug 26 6:27:42 CDT 2014)
-$oldSetArray_6edb281dd27ae25a81e145442bef68db = isset( $setArray ) ? $setArray : array();
+$oldSetArray_87562da7308b3f81e64113a2788a740a = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -29,6 +29,6 @@ $text .= '"><img src="/extension/ezecosystem/design/eze/images/eZecosystem.png" 
 
 </div>';
 
-$setArray = $oldSetArray_6edb281dd27ae25a81e145442bef68db;
+$setArray = $oldSetArray_87562da7308b3f81e64113a2788a740a;
 $tpl->Level--;
 ?>

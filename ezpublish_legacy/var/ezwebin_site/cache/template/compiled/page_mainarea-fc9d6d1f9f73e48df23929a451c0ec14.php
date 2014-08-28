@@ -2,7 +2,7 @@
 // URI:       extension/ezecosystem/design/eze/templates/page_mainarea.tpl
 // Filename:  extension/ezecosystem/design/eze/templates/page_mainarea.tpl
 // Timestamp: 1333442046 (Tue Apr 3 3:34:06 CDT 2012)
-$oldSetArray_e1a59ddfa4f22d51fdc008cc14b28e36 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_f87478ca7cc516b7f068122e37b9c70e = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -38,6 +38,6 @@ $text .= '
     </div>
 ';
 
-$setArray = $oldSetArray_e1a59ddfa4f22d51fdc008cc14b28e36;
+$setArray = $oldSetArray_f87478ca7cc516b7f068122e37b9c70e;
 $tpl->Level--;
 ?>

@@ -2,7 +2,7 @@
 // URI:       extension/ezwebin/design/ezwebin/templates/page_header.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/page_header.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_0acaf31df2693182197cb0a9ed7dfe64 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_d84557e9873cf2a223ee5e9fbe49b3c2 = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -18,7 +18,7 @@ $text .= '  <div id="header-position">
   <div id="header" class="float-break">
     <div id="usermenu">
       ';
-$oldRestoreIncludeArray_e303df5d71eb6157d18862e744e16412 = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
+$oldRestoreIncludeArray_24ae3a8c120eb5fa39f5c894a9d71c0b = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
 $restoreIncludeArray = array();
 
 if ( !isset( $dKeys ) )
@@ -62,11 +62,11 @@ foreach ( $restoreIncludeArray as $element )
     }
     $vars[$element[0]][$element[1]] = $element[2];
 }
-$restoreIncludeArray = $oldRestoreIncludeArray_e303df5d71eb6157d18862e744e16412;
+$restoreIncludeArray = $oldRestoreIncludeArray_24ae3a8c120eb5fa39f5c894a9d71c0b;
 
 $text .= '  
       ';
-$oldRestoreIncludeArray_558f729a5cb3141d649ad4251ceb7a7e = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
+$oldRestoreIncludeArray_225b8d6cf8366ca7c1cc7297dab786ef = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
 $restoreIncludeArray = array();
 
 if ( !isset( $dKeys ) )
@@ -110,12 +110,12 @@ foreach ( $restoreIncludeArray as $element )
     }
     $vars[$element[0]][$element[1]] = $element[2];
 }
-$restoreIncludeArray = $oldRestoreIncludeArray_558f729a5cb3141d649ad4251ceb7a7e;
+$restoreIncludeArray = $oldRestoreIncludeArray_225b8d6cf8366ca7c1cc7297dab786ef;
 
 $text .= '    </div>
 
     ';
-$oldRestoreIncludeArray_1c74adb09e0ba3ad721e8386015b6d92 = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
+$oldRestoreIncludeArray_a85e3a4ac5495bbe48c8027360a12195 = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
 $restoreIncludeArray = array();
 
 if ( !isset( $dKeys ) )
@@ -159,11 +159,11 @@ foreach ( $restoreIncludeArray as $element )
     }
     $vars[$element[0]][$element[1]] = $element[2];
 }
-$restoreIncludeArray = $oldRestoreIncludeArray_1c74adb09e0ba3ad721e8386015b6d92;
+$restoreIncludeArray = $oldRestoreIncludeArray_a85e3a4ac5495bbe48c8027360a12195;
 
 $text .= '    
     ';
-$oldRestoreIncludeArray_dc07968710868d0b9601c2b51afa86e0 = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
+$oldRestoreIncludeArray_107e6d17a32a5c815a486cdffca81128 = isset( $restoreIncludeArray ) ? $restoreIncludeArray : array();
 $restoreIncludeArray = array();
 
 if ( !isset( $dKeys ) )
@@ -207,13 +207,13 @@ foreach ( $restoreIncludeArray as $element )
     }
     $vars[$element[0]][$element[1]] = $element[2];
 }
-$restoreIncludeArray = $oldRestoreIncludeArray_dc07968710868d0b9601c2b51afa86e0;
+$restoreIncludeArray = $oldRestoreIncludeArray_107e6d17a32a5c815a486cdffca81128;
 
 $text .= '    
     <p class="hide"><a href="#main">Skip to main content</a></p>
   </div>
   </div>';
 
-$setArray = $oldSetArray_0acaf31df2693182197cb0a9ed7dfe64;
+$setArray = $oldSetArray_d84557e9873cf2a223ee5e9fbe49b3c2;
 $tpl->Level--;
 ?>

@@ -2,7 +2,7 @@
 // URI:       extension/ezwebin/design/ezwebin/templates/page_toppath.tpl
 // Filename:  extension/ezwebin/design/ezwebin/templates/page_toppath.tpl
 // Timestamp: 1333429649 (Tue Apr 3 0:07:29 CDT 2012)
-$oldSetArray_fd145df8698d49f951b47529a28a10d6 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_2510d828259256178f516e8c9647dd3f = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -99,6 +99,6 @@ $text .= implode( '', $textElements );
 
 $text .= '  </div>';
 
-$setArray = $oldSetArray_fd145df8698d49f951b47529a28a10d6;
+$setArray = $oldSetArray_2510d828259256178f516e8c9647dd3f;
 $tpl->Level--;
 ?>

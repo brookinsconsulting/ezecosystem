@@ -2,7 +2,7 @@
 // URI:       extension/ezecosystem/design/eze/templates/link.tpl
 // Filename:  extension/ezecosystem/design/eze/templates/link.tpl
 // Timestamp: 1332833224 (Tue Mar 27 2:27:04 CDT 2012)
-$oldSetArray_6bd2de07b6db1ada0e9b8661a0517731 = isset( $setArray ) ? $setArray : array();
+$oldSetArray_ba3ba365d8a81f812832bce79baffbad = isset( $setArray ) ? $setArray : array();
 $setArray = array();
 $tpl->Level++;
 if ( $tpl->Level > 40 )
@@ -254,6 +254,6 @@ unset( $vars[$currentNamespace]['enable_print'] );
 }
 
 
-$setArray = $oldSetArray_6bd2de07b6db1ada0e9b8661a0517731;
+$setArray = $oldSetArray_ba3ba365d8a81f812832bce79baffbad;
 $tpl->Level--;
 ?>
