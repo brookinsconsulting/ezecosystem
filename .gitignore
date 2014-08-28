@@ -1,0 +1,30 @@
+# .svn dirs of git
+.git/
+# .svn dirs of subversion
+.svn/
+# desktop services store file on mac os x
+\.DS_Store
+# jedit backup files
+\#*#
+# emacs backup files
+*~
+# vi backup files
+*.swp
+# jedit marker files
+\.*.marks
+# unix user trash dirs
+.Trash-*/
+# merge conflict files
+*\.orig
+# phpstorm project files
+.idea
+#eclipse stuff
+\.project
+\.buildpath
+.settings/
+
+### eZp related //start
+ezpublish_legacy/var
+ezpublish_legacy/extension/ezfind/java/logs
+ezpublish_legacy/sitemap_ezwebin_site_user.xml
+### eZp related //end
