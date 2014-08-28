@@ -1,0 +1,688 @@
+a:10:{s:7:"content";s:35169:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/fumaggo/eztube" title="crevillo started watching fumaggo/eztube">crevillo started watching fumaggo/eztube</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-watching"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>started watching</span> <a href="http://github.com/fumaggo/eztube">fumaggo/eztube</a>
+  <time class="js-relative-date" datetime="2012-05-30T11:14:30Z" title="2012-05-30 11:14:30">May 30, 2012</time>
+</div>
+<div class="details">
+  
+  <div class="message">
+    eztube's description:
+<blockquote>eztube</blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/30/2012 06:14 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-started-watching-fumaggo-eztube">View mirror of item</a> &nbsp; <a href="https://github.com/fumaggo/eztube">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish/issues/325#issuecomment-6003744" title="crevillo commented on pull request 325 on ezsystems/ezpublish">crevillo commented on pull request 325 on ezsystems/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-issue-comment"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a>
+  <span>commented</span> on
+  <a href="https://github.com/ezsystems/ezpublish/issues/325#issuecomment-6003744" title="Handling of a rare condition where the view cache file is empty">pull request 325</a> on <a href="http://github.com/ezsystems/ezpublish">ezsystems/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-30T07:22:54Z" title="2012-05-30 07:22:54">May 30, 2012</time>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="hello. i've added another issue in the tracker that probably could be related. only happening if yo define your clustering settings per siteaccess
+http://issues.ez.no/IssueView.php?Id=19455&amp;activeItem=1">
+      <p>hello. i've added another issue in the tracker that probably could be related. only happening if yo define your clustering settings per siteaccess<a href="http://issues.ez.no/IssueView.php?Id=19455&amp;activeItem=1">h…</a></p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/30/2012 02:22 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-commented-on-pull-request-325-on-ezsystems-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish/issues/325#issuecomment-6003744">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/crevillo/ezpublish/commit/076fdf0d143ec044b93ba92e97f650f006058313#-P0" title="crevillo commented on crevillo/ezpublish">crevillo commented on crevillo/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-commit-comment"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>commented</span> on <a href="http://github.com/crevillo/ezpublish">crevillo/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-29T12:24:16Z" title="2012-05-29 12:24:16">May 29, 2012</time>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    Comment 
+    in <a href="https://github.com/crevillo/ezpublish/commit/076fdf0d143ec044b93ba92e97f650f006058313#-P0">076fdf0d14</a>:
+    <blockquote title="one thing to note. https://github.com/ezsystems/ezpublish/blob/master/kernel/classes/ezcontentlanguage.php#L205
+after fetching / writing the objects this globals builds an array of eZContentLanguage objects, and then is consulted in other funcitons expecting  eZContentLanguage. 
+
+If we store the languages in array, when retrieving we need to loop that array and 'convert' (fetching by locale for example) to eZContentObjectLanguages so GLOBALS maintain this format... 
+
+i don't really know if that foreach is a good idea... ">
+      <p>one thing to note. <a href="https://github.com/ezsystems/ezpublish/blob/master/kernel/classes/ezcontentlanguage.php#L205">https://github.com/ezsystems/ezpublish/blob/master/kernel/classes/ezcontentlanguage.php#L205</a>
+after fetching / writing the object…</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/29/2012 07:24 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-commented-on-crevillo-ezpublish2">View mirror of item</a> &nbsp; <a href="https://github.com/crevillo/ezpublish/commit/076fdf0d143ec044b93ba92e97f650f006058313#-P0">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/crevillo/ezpublish/commit/076fdf0d143ec044b93ba92e97f650f006058313#-P0" title="crevillo commented on crevillo/ezpublish">crevillo commented on crevillo/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-commit-comment"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>commented</span> on <a href="http://github.com/crevillo/ezpublish">crevillo/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-29T11:40:09Z" title="2012-05-29 11:40:09">May 29, 2012</time>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    Comment 
+    in <a href="https://github.com/crevillo/ezpublish/commit/076fdf0d143ec044b93ba92e97f650f006058313#-P0">076fdf0d14</a>:
+    <blockquote title="then, what about adding a key in expiry.php file like it happens with state-limitations, for example?
+https://github.com/ezsystems/ezpublish/blob/master/kernel/private/classes/ezcontentobjectstategroup.php#L646">
+      <p>then, what about adding a key in expiry.php file like it happens with state-limitations, for example?<a href="https://github.com/ezsystems/ezpublish/blob/master/kernel/private/classes/ezcontentobjectstategroup.php#L646">https://github.com/ezsystems/ezpublish/blob/ma…</a></p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/29/2012 06:40 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-commented-on-crevillo-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/crevillo/ezpublish/commit/076fdf0d143ec044b93ba92e97f650f006058313#-P0">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/crevillo/ezpublish/compare/ef21074352...123c1e7ff8" title="crevillo pushed to issue-019454 at crevillo/ezpublish">crevillo pushed to issue-019454 at crevillo/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-push"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>pushed</span> to issue-019454 at <a href="http://github.com/crevillo/ezpublish">crevillo/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-29T11:25:36Z" title="2012-05-29 11:25:36">May 29, 2012</time>
+</div>
+<div class="details">
+  
+
+  <div class="commits">
+    <ul>
+      <li>
+      <a href="http://github.com/crevillo" class="committer">crevillo</a> committed <a href="http://github.com/crevillo/ezpublish/commit/123c1e7ff82350efd7abd8eb9d74e0385c314b35">123c1e7</a>
+
+        <div class="message">
+          <blockquote>when retrieving the language list, always store in the cache file</blockquote>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/29/2012 06:25 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-pushed-to-issue-019454-at-crevillo-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/crevillo/ezpublish/compare/ef21074352...123c1e7ff8">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/crevillo/ezpublish/compare/076fdf0d14...ef21074352" title="crevillo pushed to issue-019454 at crevillo/ezpublish">crevillo pushed to issue-019454 at crevillo/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-push"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>pushed</span> to issue-019454 at <a href="http://github.com/crevillo/ezpublish">crevillo/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-29T11:04:49Z" title="2012-05-29 11:04:49">May 29, 2012</time>
+</div>
+<div class="details">
+  
+
+  <div class="commits">
+    <ul>
+      <li>
+      <a href="http://github.com/crevillo" class="committer">crevillo</a> committed <a href="http://github.com/crevillo/ezpublish/commit/ef21074352efe732eb1dc588a1b0599346380418">ef21074</a>
+
+        <div class="message">
+          <blockquote>reverted unwanted version change</blockquote>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/29/2012 06:04 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-pushed-to-issue-019454-at-crevillo-ezpublish2">View mirror of item</a> &nbsp; <a href="https://github.com/crevillo/ezpublish/compare/076fdf0d14...ef21074352">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/crevillo/ezpublish/compare/issue-019454" title="crevillo created branch issue-019454  at crevillo/ezpublish">crevillo created branch issue-019454  at crevillo/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-create"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>created</span> branch <a href="http://github.com/crevillo/ezpublish/tree/issue-019454">issue-019454</a>  at <a href="http://github.com/crevillo/ezpublish">crevillo/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-29T11:02:25Z" title="2012-05-29 11:02:25">May 29, 2012</time>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+      New branch is at <a href="http://github.com/crevillo/ezpublish/tree/issue-019454">/crevillo/ezpublish/tree/issue-019454</a>
+      <br />
+      <a href="https://github.com/crevillo/ezpublish/compare/issue-019454" class="compare-link">Compare issue-019454 branch with master &raquo;</a>
+
+
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/29/2012 06:02 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-created-branch-issue-019454-at-crevillo-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/crevillo/ezpublish/compare/issue-019454">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish/pull/350" title="crevillo opened pull request 350 on ezsystems/ezpublish">crevillo opened pull request 350 on ezsystems/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-pull-request"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>opened</span> <a href="https://github.com/ezsystems/ezpublish/pull/350">pull request 350</a> on <a href="http://github.com/ezsystems/ezpublish">ezsystems/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-28T18:49:26Z" title="2012-05-28 18:49:26">May 28, 2012</time>
+</div>
+<div class="details">
+  
+  <div class="message">
+    <blockquote>Fixed #019453: Some cluster related &quot;define&quot; calls are not commented in ...</blockquote>
+    1 commit with
+    2 additions and
+    2 deletions
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/28/2012 01:49 pm</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-opened-pull-request-350-on-ezsystems-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish/pull/350">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/crevillo/ezpublish/compare/issue-019453" title="crevillo created branch issue-019453  at crevillo/ezpublish">crevillo created branch issue-019453  at crevillo/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-create"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a> <span>created</span> branch <a href="http://github.com/crevillo/ezpublish/tree/issue-019453">issue-019453</a>  at <a href="http://github.com/crevillo/ezpublish">crevillo/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-28T18:48:16Z" title="2012-05-28 18:48:16">May 28, 2012</time>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+      New branch is at <a href="http://github.com/crevillo/ezpublish/tree/issue-019453">/crevillo/ezpublish/tree/issue-019453</a>
+      <br />
+      <a href="https://github.com/crevillo/ezpublish/compare/issue-019453" class="compare-link">Compare issue-019453 branch with master &raquo;</a>
+
+
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/28/2012 01:48 pm</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-created-branch-issue-019453-at-crevillo-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/crevillo/ezpublish/compare/issue-019453">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/CR-GitHub">CR @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish/issues/345#issuecomment-5735771" title="crevillo commented on pull request 345 on ezsystems/ezpublish">crevillo commented on pull request 345 on ezsystems/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-issue-comment"></span>
+
+<div class="title">
+  <a href="http://github.com/crevillo">crevillo</a>
+  <span>commented</span> on
+  <a href="https://github.com/ezsystems/ezpublish/issues/345#issuecomment-5735771" title="Fixed #019427: Kernel overrides can&#39;t be used for override operation rel...">pull request 345</a> on <a href="http://github.com/ezsystems/ezpublish">ezsystems/ezpublish</a>
+  <time class="js-relative-date" datetime="2012-05-16T08:27:53Z" title="2012-05-16 08:27:53">May 16, 2012</time>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="modified my previous commit as you suggested. Thanks again!">
+      <p>modified my previous commit as you suggested. Thanks again!</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/16/2012 03:27 am</span> &nbsp; <a href="https://github.com/crevillo">CR @ GitHub</a> &nbsp; <a href="/Mirror/CR-GitHub/crevillo-commented-on-pull-request-345-on-ezsystems-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish/issues/345#issuecomment-5735771">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/CR-GitHub/(offset)/130"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/Mirror/CR-GitHub/(offset)/150"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+                      <span class="other"><a href="/Mirror/CR-GitHub">1</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/30">4</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/40">5</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/60">7</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/70">8</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/80">9</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/90">10</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/100">11</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/110">12</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/120">13</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/130">14</a></span>
+            
+        <span class="current">15</span>
+
+                      <span class="other"><a href="/Mirror/CR-GitHub/(offset)/150">16</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/160">17</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/170">18</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/180">19</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/190">20</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/200">21</a></span>
+                              <span class="other"><a href="/Mirror/CR-GitHub/(offset)/210">22</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/CR-GitHub/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/CR-GitHub/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/CR-GitHub/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/CR-GitHub/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/CR-GitHub/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/CR-GitHub/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/CR-GitHub/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/CR-GitHub/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/8/(month)/8/(year)/2014">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            <em><a href="/Mirror/CR-GitHub/(day)/10/(month)/8/(year)/2014">10</a></em>
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/CR-GitHub/(day)/11/(month)/8/(year)/2014">11</a></em>
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/13/(month)/8/(year)/2014">13</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/14/(month)/8/(year)/2014">14</a></em>
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/19/(month)/8/(year)/2014">19</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/20/(month)/8/(year)/2014">20</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/22/(month)/8/(year)/2014">22</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/23/(month)/8/(year)/2014">23</a></em>
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/Mirror/CR-GitHub/(day)/25/(month)/8/(year)/2014">25</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/26/(month)/8/(year)/2014">26</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/CR-GitHub/(day)/27/(month)/8/(year)/2014">27</a></em>
+        </td>
+                            <td class="currentselected today">
+            <em><a href="/Mirror/CR-GitHub/(day)/28/(month)/8/(year)/2014">28</a></em>
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:3:"140";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:11:"CR @ GitHub";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4720";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:11:"CR @ GitHub";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4720";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4720";s:7:"node_id";s:4:"4720";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"0f9a80dbede823f1b1a7f1e130b8bdb6";s:14:"node_remote_id";s:32:"e2c0447394909529a896446fb6b9c773";s:6:"offset";i:140;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:16:"Mirror/CR-GitHub";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4720";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

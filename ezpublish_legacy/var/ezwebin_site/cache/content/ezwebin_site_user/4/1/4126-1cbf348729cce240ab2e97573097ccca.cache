@@ -1,0 +1,378 @@
+a:10:{s:7:"content";s:36374:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Testing eZ Publish - Test System</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://ezpedia.org/ez/testing_ez_publish_test_system">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">11/24/2011 07:25 am</p>
+                                    <p class="author"></p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <a name="eztoc296378_1" id="eztoc296378_1"></a><h2>Warning</h2><p>The test system is considered ever evolving and backwards incompatible changes may occur. We do invite you to start writing tests for it, just be warned that the tests may need some updating as we evolve the system.</p><a name="eztoc296378_2" id="eztoc296378_2"></a><h2>Getting started</h2><a name="eztoc296378_2_1" id="eztoc296378_2_1"></a><h3>Requirements</h3>
+<ul>
+
+<li>PHPUnit 3.5.x or newer: http://www.phpunit.de/</li>
+
+<li>eZ Components</li>
+
+</ul>
+<a name="eztoc296378_2_2" id="eztoc296378_2_2"></a><h3>Installation</h3>
+<ol>
+
+<li>Start with a clone of the github repo (updated to at least 30/9/2008 - svn trunk rev 22408or github commit 530f3ad97ba5abecc19474baad92e8effd12d6d3)</li>
+
+<li>To run the tests in another eZ installation, copy into it the &quot;tests&quot; folder from the github installation</li>
+
+<li>Generate autoloads for the test system: </li>
+
+</ol>
+	<pre class="bash" style="font-family:monospace;">php bin<span style="color: #000000; font-weight: bold;">/</span>php<span style="color: #000000; font-weight: bold;">/</span>ezpgenerateautoloads.php <span style="color: #660033;">-s</span></pre><a name="eztoc296378_3" id="eztoc296378_3"></a><h2>Running tests</h2><p>To run all tests do:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb</pre><p>The --dsn parameter is required and is used to tell the test system what type of database, username, host and which database to use. Make sure the username you specify is allowed both create and remove the database. The DSN uses the following format:</p>	<pre class="" style="font-family:monospace;">databasetype://username:password@host/database</pre><p>Note: do not use an existing eZ Publish database for running tests, as it will be wiped out and recreated on need by the tests!</p><p>If you want to run a single test suite, just point to the directory containing a suite.php file.</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb tests<span style="color: #000000; font-weight: bold;">/</span>tests<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span>ezdb</pre><a name="eztoc296378_3_3" id="eztoc296378_3_3"></a><h3>Filter which tests to run</h3><p>To run a single test you can use the --filter option like this:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb <span style="color: #660033;">--filter</span>=testGlobBrace</pre><p>In the above example both eZSysTest::testGlobBrace and eZSys::testGlobBraceSupported will be executed. If you only want to execute eZSysTest::testGlobBrace run:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb <span style="color: #660033;">--filter</span>=<span style="color: #ff0000;">&quot;testGlobBrace$&quot;</span></pre><p>This works too:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb <span style="color: #660033;">--filter</span>=<span style="color: #ff0000;">&quot;eZSysTest::testGlobBrace$&quot;</span></pre><p>As of PHPUnit 3 --filter can also be used to filter on test class names. This is a handy way of running all tests in a test case. Example:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb <span style="color: #660033;">--filter</span>=<span style="color: #ff0000;">&quot;eZSysTest&quot;</span></pre><a name="eztoc296378_3_4" id="eztoc296378_3_4"></a><h3>List tests</h3><p>To list all test use the --list-tests option:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--list-tests</span></pre><p>You can also narrow the output to only list tests defined in a specific suite:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--list-tests</span> tests<span style="color: #000000; font-weight: bold;">/</span>tests<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span>ezutils</pre><a name="eztoc296378_3_5" id="eztoc296378_3_5"></a><h3>Running a group of tests (group annotation)</h3><p>With PHPUnit you can group different tests together by adding the group annotation to a method's documantion block:</p><p>To list all groups run:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--list-groups</span></pre><p>To run a group use the -g parameter:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb <span style="color: #660033;">-g</span> issue_13492</pre><a name="eztoc296378_4" id="eztoc296378_4"></a><h2>Writing tests</h2><a name="eztoc296378_4_6" id="eztoc296378_4_6"></a><h3>Naming conventions</h3><p>The test system itself follows eZ Components naming conventions defined here: <a href="http://ezcomponents.org/contributing/coding_standards#id8" target="_self">http://ezcomponents.org/contributing/coding_standards#id8</a>.</p><p>The tests itself follows the naming conventions of the code that it tests. In this case this means the tests follows the eZ Publish naming convention.</p><a name="eztoc296378_4_7" id="eztoc296378_4_7"></a><h3>File and directory layout</h3><p>The file structure used in eZ Publish is mirrored inside the test system. As an example, if you want to write tests for <i>kernel/classes/ezcontentobject.php</i> the test file should be located in <i>tests/tests/kernel/classes/ezcontentobject_test.php</i>. Regression tests for ezcontentobject should be located in <i>tests/tests/kernel/classes/ezcontentobject_regression.php</i></p><p>*_test.php is the suffix used for unit tests. *_regression.php is used for as the suffix for regression tests.</p><a name="eztoc296378_4_8" id="eztoc296378_4_8"></a><h3>Writing a unit test</h3><p>The test system comes with a handy CLI script for generating stub tests from an existing class to get you going quickly. As an example, you can generate a stub test from kernel/classes/ezpreferences.php like this:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>toolkit<span style="color: #000000; font-weight: bold;">/</span>extras<span style="color: #000000; font-weight: bold;">/</span>scripts<span style="color: #000000; font-weight: bold;">/</span>create-test-from-class.php \
+               <span style="color: #660033;">-s</span> kernel<span style="color: #000000; font-weight: bold;">/</span>classes<span style="color: #000000; font-weight: bold;">/</span>ezpreferences.php \
+               <span style="color: #660033;">-d</span> tests<span style="color: #000000; font-weight: bold;">/</span>tests<span style="color: #000000; font-weight: bold;">/</span>kernel<span style="color: #000000; font-weight: bold;">/</span>classes<span style="color: #000000; font-weight: bold;">/</span>ezpreferences_test.php</pre><p>The generated tests/tests/kernel/classes/ezpreferences_test.php file will then look like this:</p>	<pre class="php-brief" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> eZPreferencesTest <span style="color: #000000; font-weight: bold;">extends</span> ezpTestCase
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> __construct<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        parent<span style="color: #339933;">::</span>__construct<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #0000ff;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setName</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;eZPreferences Unit Tests&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> testSetValue<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">markTestIncomplete</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;Not implemented&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> testValue<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">self</span><span style="color: #339933;">::</span><span style="color: #004000;">markTestIncomplete</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;Not implemented&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #666666; font-style: italic;">// [...]</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre><p>To make the new test case work we need to add it to the appropriate suite.php. For this test case that is tests/tests/kernel/suite.php. Add</p>	<pre class="php-brief" style="font-family:monospace;"><span style="color: #0000ff;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addTestSuite</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'eZPreferencesTest'</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre><p>to the __construct method of eZKernelTestSuite and remember to regenerate test autoloads. To verify that the new test case is working run 'runtests.php' with -v:</p>	<pre class="bash" style="font-family:monospace;">oh:<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>trunk $ php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">-D</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb <span style="color: #660033;">-v</span> 
+Based on ezcUnitTest <span style="color: #000000; font-weight: bold;">in</span> eZ Components
+&nbsp;
+PHPUnit 3.3.0 by Sebastian Bergmann.
+&nbsp;
+eZ Publish
+ eZ Publish Test Suite
+  eZ Publish Kernel Test Suite
+   eZPreferencesTest
+   IIIIIIII
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">&#91;</span>...<span style="color: #7a0874; font-weight: bold;">&#93;</span></pre><p>Success! We're now ready to start writing the test by filling in the test* methods.</p><p>Normally tests are short and straight forward and should require little or no documentation. Due to the complexity of eZ Publish not all tests ends up being in this way. If you are writing a somewhat complex unit test, please document it a way that makes it easier to understand.</p><a name="eztoc296378_4_9" id="eztoc296378_4_9"></a><h3>Writing a regression test</h3><p>Regression tests are created in the same way as with unit tests, except the classes end with &quot;Regression&quot; and the file suffix is _regression.php. When writing a regression test please document it with the following:</p>
+<ol>
+
+<li>Issue number + title of the issue.</li>
+
+<li>Short description of the issue if the title isn't descriptive enough.</li>
+
+<li>If the test is longer than a few lines, include what the test does in order to reproduce the issue.</li>
+
+<li>The result and the expected result.</li>
+
+<li>Link to the issue.</li>
+
+</ol>
+<p>Here's a doc header example taken from testLinksAcrossTranslations():</p>	<pre class="php-brief" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">/**
+ * Test scenario for issue #13492: Links are lost after removing version
+ *
+ * Test Outline
+ * ------------
+ * 1. Create a Folder in English containing a link (in the short_description attribute).
+ * 2. Translate Folder into Norwegian containing another link (not the same link as above.)
+ * 3. Remove Folder version 1. (Version 2 is created when translating).
+ *
+ * @result: short_description in version 2 will have an empty link.
+ * @expected: short_description should contain same link as in version 1.
+ * @link http://issues.ez.no/13492
+ */</span></pre><p>If the issue has multiple tests group them together to make it easy to execute all tests for a single issue using the group annotation &quot;@group issue_ISSUE_NUMBER&quot; where ISSUE_NUMBER is the issue ID in the bug tracker. Example:</p>	<pre class="" style="font-family:monospace;">* @group issue_13492</pre><a name="eztoc296378_4_10" id="eztoc296378_4_10"></a><h3>Using a database</h3><p>A common thing for tests is to interact with a database. By extending your test class or suite from either <i>ezpDatabaseTestCase</i> or <i>ezpDatabaseTestSuite</i> your test class/suite will become database aware. By default <i>ezpDatabaseTestCase</i> and <i>ezpDatabaseTestSuite</i> sets up a clean database using the dba files included in eZ Publish:</p>
+<ul>
+
+<li>share/db_schema.dba</li>
+
+<li>share/db_data.dba</li>
+
+</ul>
+<a name="eztoc296378_4_10_1" id="eztoc296378_4_10_1"></a><h4>Inserting your own data</h4><p>If you need to provide your own schema/data you can override which SQL files is loaded by <i>ezpDatabaseTestSuite</i> by specifing the path to one or more SQL files in the $sqlFiles class method:</p><p>Example:</p>	<pre class="php-brief" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">class</span> eZURLAliasMlTest <span style="color: #000000; font-weight: bold;">extends</span> ezpDatabaseTestCase
+    <span style="color: #009900;">&#123;</span>
+        protected <span style="color: #0000ff;">$insertDefaultData</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+        protected <span style="color: #0000ff;">$sqlFiles</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;kernel/sql/&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;kernel_schema.sql&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+                                             <span style="color: #0000ff;">&quot;kernel/sql/common/cleandata.sql&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #666666; font-style: italic;">// [...]</span>
+    <span style="color: #009900;">&#125;</span></pre><p>Setting $insertDefaultData to false tells the test system that it should not attempt to load any data. If $insertDefaultData is not defined or if it's set to true the test system will first load the default data, then load any SQL files defined in $sqlFiles.</p><p>The first entry in $sqlFiles, <i>array( &quot;kernel/sql/&quot;, &quot;kernel_schema.sql&quot; )</i> is a way to provide a SQL file for one or more of the supported database types. If you're using MySQL, the test system would try to insert <i>kernel/sql/ <b>mysql</b>/kernel_schema.sql</i>. If the database type is postgresql, the test system would try to insert <i>kernel/sql/ <b>postgresql</b>/kernel_schema.sql</i>, and so forth.</p><p>The database type is determined by the -D (--dsn) parameter provided to the test runner.</p><p><b>Note:</b> you can specify $sqlFiles on either your test class or in your suite. The default test runner behaviour is to only create a new database per suite. If you provide $sqlFiles in your test classes you will need start the test runner with the <i>--db-per-test</i> argument.</p><a name="eztoc296378_4_10_2" id="eztoc296378_4_10_2"></a><h4>Providing extra data</h4><p>In the above exampe we discussed how to override what data gets initially loaded into the test database. If all you need is to provide some additional data you can leverage the <i>ezpTestDatabaseHelper</i> class to load some extra SQL files:</p>	<pre class="php-brief" style="font-family:monospace;"><span style="color: #0000ff;">$sqlFiles</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;myextension/sql/data.sql&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ezpTestDatabaseHelper<span style="color: #339933;">::</span><span style="color: #004000;">insertSqlData</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">sharedFixture</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">$sqlFiles</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre><a name="eztoc296378_4_11" id="eztoc296378_4_11"></a><h3>Writing tests for an extension</h3><p>Extensions can include their own tests. When running tests the test runner will not only look for tests inside the tests/ directory, it will also scan each extension looking for a tests/suite.php file inside the extension. The extension does not need to be in the list of active extension (ActiveExtensions[] in site.ini) for it to be included.* The only critera for the extension to be included is that is has a folder &quot;tests/&quot; with a suite.php inside. The suite.php should then include all tests in the extension. Below is an example of a typical extension file layout and where the tests should be located:</p>	<pre class="" style="font-family:monospace;">extension
+    |-- myextension
+        |-- autoloads
+        |-- design
+        |-- modules
+        |-- settings
+        |-- tests
+        |   |-- mytest1.php
+        |   |-- mytest2.php
+        |   `-- suite.php
+        `-- translations</pre><p>You can specify the path to an extension to only run tests for that extension:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb extension<span style="color: #000000; font-weight: bold;">/</span>myextension</pre><p>* Remember that you still might need to regenerate the autoload array for the extension depending on how it's built.</p><a name="eztoc296378_5" id="eztoc296378_5"></a><h2>One database per suite</h2><p>Currently, the default behaviour is that a database is created per suite, not per test. Creating/removing the database easily adds 1-2 seconds of overhead per test on the database management systems that eZ Publish supports out of the box (MySQL, PostgreSQL). However, there's an extension <a href="http://projects.ez.no/ezsqlite" target="_self">ezsqlite</a> which allows you to use an in-memory SQLite 3 database to run the tests with.</p><p>If you pass in the argument <i>--db-per-test</i> to the test runner it will change from the default behaviour, one database per suite, to one database per test. It's <b>strongly encouraged</b> that you write tests that works with both <i>--db-per-test</i> turned on and off.</p><p>To illustrate the difference in speed, below is how long it takes to run all tests with <i>--db-per-test</i>:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">--dsn</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb <span style="color: #660033;">--db-per-test</span>
+PHPUnit 3.3.0 by Sebastian Bergmann.
+&nbsp;
+............................................
+&nbsp;
+Time: 01:<span style="color: #000000;">48</span>
+&nbsp;
+OK <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #000000;">44</span> tests, <span style="color: #000000;">99</span> assertions<span style="color: #7a0874; font-weight: bold;">&#41;</span></pre><p>And without <i>--db-per-test</i>:</p>	<pre class="bash" style="font-family:monospace;">php tests<span style="color: #000000; font-weight: bold;">/</span>runtests.php <span style="color: #660033;">-D</span> mysql:<span style="color: #000000; font-weight: bold;">//</span>root<span style="color: #000000; font-weight: bold;">@</span>localhost<span style="color: #000000; font-weight: bold;">/</span>testdb
+PHPUnit 3.3.0 by Sebastian Bergmann.
+&nbsp;
+............................................
+&nbsp;
+Time: <span style="color: #000000;">19</span> seconds
+&nbsp;
+OK <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #000000;">44</span> tests, <span style="color: #000000;">99</span> assertions<span style="color: #7a0874; font-weight: bold;">&#41;</span></pre><a name="eztoc296378_6" id="eztoc296378_6"></a><h2>Resources</h2>
+<ul>
+
+<li><a href="http://www.phpunit.de/" target="_self">PHPUnit site</a></li>
+
+<li><a href="http://www.phpunit.de/manual/3.3/en/installation.html" target="_self">How to install PHPUnit</a></li>
+
+<li><a href="http://www.phpunit.de/manual/3.3/en/" target="_self">PHPUnit documentation</a></li>
+
+<li><a href="http://www.slideshare.net/sebastian_bergmann/new-features-in-phpunit-33" target="_self">New features in PHPUnit 3.3</a></li>
+
+</ul>
+
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://ezpedia.org/ez/testing_ez_publish_test_system">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/eZpedia/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/2/(year)/2011" title="">February 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/12/(year)/2010" title="">December 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/10/(year)/2010" title="">October 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/7/(year)/2010" title="">July 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/6/(year)/2010" title="">June 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/4/(year)/2010" title="">April 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/3/(year)/2010" title="">March 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/2/(year)/2010" title="">February 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/1/(year)/2010" title="">January 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/10/(year)/2009" title="">October 2009</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/9/(year)/2009" title="">September 2009</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/8/(year)/2009" title="">August 2009</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                        
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/eZpedia/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/eZpedia/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/Mirror/eZpedia/(day)/25/(month)/8/(year)/2014">25</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZpedia/(day)/26/(month)/8/(year)/2014">26</a></em>
+        </td>
+                            <td class="currentselected today">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:7:"eZpedia";s:3:"url";s:23:"/content/view/full/4097";s:9:"url_alias";s:14:"Mirror/eZpedia";s:7:"node_id";s:4:"4097";}i:3;a:4:{s:4:"text";s:32:"Testing eZ Publish - Test System";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4126";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:7:"eZpedia";s:3:"url";s:23:"/content/view/full/4097";s:9:"url_alias";s:14:"Mirror/eZpedia";s:7:"node_id";s:4:"4097";}i:3;a:3:{s:4:"text";s:32:"Testing eZ Publish - Test System";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4126";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4126";s:7:"node_id";s:4:"4126";s:14:"parent_node_id";s:4:"4097";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_33_43cbd73564f912b67d630b6563aa3616";s:14:"node_remote_id";s:32:"0809a4290b2527eb0a11748fc86c8d0a";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:45:"Mirror/eZpedia/Testing-eZ-Publish-Test-System";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4126";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"74c5292acdfb48976337839eeecba1f4";s:23:"parent_object_remote_id";s:32:"7f157eb63e066aeee67e1105e9005afe";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

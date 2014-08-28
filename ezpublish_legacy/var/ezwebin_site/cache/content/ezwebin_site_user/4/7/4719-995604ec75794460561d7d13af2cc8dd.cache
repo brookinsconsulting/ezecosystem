@@ -1,0 +1,815 @@
+a:10:{s:7:"content";s:35546:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezjscore/issues/12#issuecomment-3333439" title="jdespatis commented on pull request 12 on ezsystems/ezjscore">jdespatis commented on pull request 12 on ezsystems/ezjscore</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-issue-comment"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T20:44:10Z" title="2012-01-02 20:44:10">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a>
+  <span>commented</span> on
+  <a href="https://github.com/ezsystems/ezjscore/issues/12#issuecomment-3333439" title="upgrade css/js optimizer to ezpEvent logic">pull request 12</a> on <a href="http://github.com/ezsystems/ezjscore">ezsystems/ezjscore</a>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="Well here is the behavior: if ezjscore.ini\[eZJSCore]\Packer is set to a value (1, 2 or 3), it overrides the value a user may specify in ezscript* and ezcss* template operators
+
+It's due to the fact it's not possible to set a packLevel per file
+Even if the user uses {ezscript()} template operator with only one file and set a specific pack_level, the latter will be overridden by ezjscore.ini\[eZJSCore]\Packer 
+
+So impossible to use the hint to set Packer=1 to force ezjscore to pack but not optimize
+
+=&gt; therefore solution 1 is to add a key in the Listeners is a working solution, as indicated by @andrerom , this way for example:
+
+```
+Listeners[css_optimizer]=optimize/css@ezjscCssOptimizer::optimize
+```
+
+Then a developer will be able to deactivate the optimizer from ezjscore by setting Listeners[css_optimizer]=
+But the problem is that he/she can only do it once, and it can be messy if there're several css optimizer running (which is my case)
+
+=&gt; or solution 2 is to add a new setting in ezjscore.ini\[eZJSCore]\Optimize set to 'enabled' or 'disabled' (set to 'enabled' by default)
+and both js/css optimizers from ezjscore check this setting to know if they have to optimize or not
+
+That way a developer, even if using several custom css optimizers will be able to fully deactivate optimization from ezjscore and control everything
+
+From my pov, I think solution 2 is the best
+
+or maybe a better solution, feel free to explain it...
+
+@andrerom how to say... I need help ? :)">
+      <p>Well here is the behavior: if ezjscore.ini[eZJSCore]\Packer is set to a value (1, 2 or 3), it overrides the value a user may specify in ezscript* a…</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 02:44 pm</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-commented-on-pull-request-12-on-ezsystems-ezjscore5">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezjscore/issues/12#issuecomment-3333439">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezjscore/issues/12#issuecomment-3332907" title="jdespatis commented on pull request 12 on ezsystems/ezjscore">jdespatis commented on pull request 12 on ezsystems/ezjscore</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-issue-comment"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T19:45:03Z" title="2012-01-02 19:45:03">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a>
+  <span>commented</span> on
+  <a href="https://github.com/ezsystems/ezjscore/issues/12#issuecomment-3332907" title="upgrade css/js optimizer to ezpEvent logic">pull request 12</a> on <a href="http://github.com/ezsystems/ezjscore">ezsystems/ezjscore</a>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="Hum wait a minute, I encounter a problem by setting Packer=1:
+when a user does something like {ezscript('djdojo::init',,,,0)} to force the pack level to 0 to add inline javascript code, then finally it gets overidden by 1 (because of Packer=1)
+
+Strange... Investigation is needed...">
+      <p>Hum wait a minute, I encounter a problem by setting Packer=1:
+when a user does something like {ezscript('djdojo::init',,,,0)} to force the pack lev…</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 01:45 pm</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-commented-on-pull-request-12-on-ezsystems-ezjscore6">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezjscore/issues/12#issuecomment-3332907">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/jdespatis/ezpublish/compare/6eb045cd69...270b259537" title="jdespatis pushed to filter-args at jdespatis/ezpublish">jdespatis pushed to filter-args at jdespatis/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-push"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T18:29:25Z" title="2012-01-02 18:29:25">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a> <span>pushed</span> to filter-args at <a href="http://github.com/jdespatis/ezpublish">jdespatis/ezpublish</a>
+</div>
+<div class="details">
+  
+
+  <div class="commits">
+    <ul>
+      <li>
+      <a href="http://github.com/jdespatis" class="committer">jdespatis</a> committed <a href="http://github.com/jdespatis/ezpublish/commit/270b259537885d45d8fa6db966a58b41ffe59917">270b259</a>
+
+        <div class="message">
+          <blockquote>oups... bugfix</blockquote>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 12:29 pm</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-pushed-to-filter-args-at-jdespatis-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/jdespatis/ezpublish/compare/6eb045cd69...270b259537">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3331397" title="jdespatis commented on pull request 144 on ezsystems/ezpublish">jdespatis commented on pull request 144 on ezsystems/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-issue-comment"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T17:03:43Z" title="2012-01-02 17:03:43">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a>
+  <span>commented</span> on
+  <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3331397" title="Fixed #018817: correct [HTTP] ContentLanguage according to ISO_639-1">pull request 144</a> on <a href="http://github.com/ezsystems/ezpublish">ezsystems/ezpublish</a>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="Well the pull request can be considered as complete, including stuff asked by @andrerom 
+
+I've tested on a fresh new install, and setup seems ok for the languages prefilled (thanks to eZSetupLanguageList)
+
+I've done a git pull on my local copy at one moment, it seems to have put a big mess in this pull request, however the diff is ok, it only contain my addon
+I hope this pull hasn't spamed many users... I really feel sorry if it's the case...
+I can do another clean pull request if needed, tell me
+
+@glye @bdunogier and @andrerom please tell me if something is missing or wrong
+
+">
+      <p>Well the pull request can be considered as complete, including stuff asked by <a class="user-mention" href="https://github.com/andrerom">@andrerom</a>  I've tested on a fresh new install, and setup seems ok for…</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 11:03 am</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-commented-on-pull-request-144-on-ezsystems-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3331397">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/jdespatis/ezpublish/compare/3cda811140...e90ea4683b" title="jdespatis pushed to locales-18817 at jdespatis/ezpublish">jdespatis pushed to locales-18817 at jdespatis/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-push"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T16:29:13Z" title="2012-01-02 16:29:13">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a> <span>pushed</span> to locales-18817 at <a href="http://github.com/jdespatis/ezpublish">jdespatis/ezpublish</a>
+</div>
+<div class="details">
+  
+
+  <div class="commits">
+    <ul>
+      <li>
+      <a href="http://github.com/jdespatis" class="committer">jdespatis</a> committed <a href="http://github.com/jdespatis/ezpublish/commit/e90ea4683bed0535d667bc4a94a519b4f72105be">e90ea46</a>
+
+        <div class="message">
+          <blockquote>No more useless httpAliases</blockquote>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 10:29 am</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-pushed-to-locales-18817-at-jdespatis-ezpublish">View mirror of item</a> &nbsp; <a href="https://github.com/jdespatis/ezpublish/compare/3cda811140...e90ea4683b">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3330810" title="jdespatis commented on pull request 144 on ezsystems/ezpublish">jdespatis commented on pull request 144 on ezsystems/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-issue-comment"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T15:55:22Z" title="2012-01-02 15:55:22">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a>
+  <span>commented</span> on
+  <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3330810" title="Fixed #018817: correct [HTTP] ContentLanguage according to ISO_639-1">pull request 144</a> on <a href="http://github.com/ezsystems/ezpublish">ezsystems/ezpublish</a>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="@andrerom concerning now the use of $httpAliases in eZSetupLanguageList() function:
+
+First and foremost, all the concern of this piece of code, if my understanding is correct (here it is for memory:)
+
+```
+    $httpAliases = array( 'no-bokmaal' =&gt; 'nb',
+                          'no-nynorsk' =&gt; 'nn',
+                          'ru-ru' =&gt; 'ru' );
+
+    foreach ( array_keys( $locales ) as $localeKey )
+    {
+        $locale =&amp; $locales[$localeKey];
+        if ( !$locale-&gt;attribute( 'country_variation' ) )
+        {
+            $languageList[] = $locale;
+            $httpLocale = strtolower( $locale-&gt;httpLocaleCode() );
+            $httpMap[$httpLocale] = $locale;
+            list( $httpLocaleShort ) = explode( '-', $httpLocale );
+            $httpMapShort[$httpLocale] = $locale;
+            if ( isset( $httpAliases[$httpLocale] ) )
+            {
+                $httpMapShort[$httpAliases[$httpLocale]] = $locale;
+            }
+        }
+    }
+```
+
+is to fill in $httpMap and $httpMapShort, with all the languages supported by ezpublish, for example:
+
+$httpMap['en-en'] = 'the eZLocale of eng-GB'
+$httpMap['en-us'] = 'the eZLocale of eng-US'
+etc...
+
+$httpMapShort['en'] = 'the eZLocale of eng-GB'
+
+the key of $httpMap is the httpLocaleCode(), and the key for httpMapShort is the first part of httpLocaleCode(), when we explode it with '-'
+
+And after $httpMap, and $httpMapShort have been created, they're used to parse $_SERVER['HTTP_ACCEPT_LANGUAGE'], in order to get all the languages the user can accept, in order to get all the corresponding eZLocales
+
+Finally, the aim of eZSetupLanguageList() is to find the defaultLanguage of the navigator of the user, in order to prefill language packs to install for example etc..
+
+Now, some information on the specs of HTTP_ACCEPT_LANGUAGE, it's just the value of the http header AcceptLanguage, which is:
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+and language tags are explained here:
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.10
+where we can read:
+
+```
+where any two-letter primary-tag is an ISO-639 language abbreviation
+and any two-letter initial subtag is an ISO-3166 country code
+```
+
+As a result, I would say it's completely useless to have other keys than the iso 639-1 httpLocaleCode in $httpMap and $httpMapShort. So I would say that $httpAliases is completely useless
+
+Further more I think this piece of code for $httpAliases is useless and also buggy indeed...
+
+Look at the code:
+```
+            list( $httpLocaleShort ) = explode( '-', $httpLocale );
+            $httpMapShort[$httpLocale] = $locale;
+```
+
+The fact is $httpLocaleShort is never used..., as a result $httpMapShort is just a copy of $httpMap, with however 3 new records (from $httpAliases):
+
+$httpMapShort[nb] = 'eZLocale of nor-NO'
+$httpMapShort[nn] = 'eZLocale of nno-NO'
+$httpMapShort[ru] = 'eZLocale of rus-RU'
+
+So the fix is to put $httpMapShort[$httpLocaleShort] = $locale; to do as the developer has intended to do
+
+I'll do a commit soon to correct this
+">
+      <p><a class="user-mention" href="https://github.com/andrerom">@andrerom</a> concerning now the use of $httpAliases in eZSetupLanguageList() function: First and foremost, all the concern of this piece of code, if m…</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 09:55 am</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-commented-on-pull-request-144-on-ezsystems-ezpublish2">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3330810">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3330371" title="jdespatis commented on pull request 144 on ezsystems/ezpublish">jdespatis commented on pull request 144 on ezsystems/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-issue-comment"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T15:08:49Z" title="2012-01-02 15:08:49">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a>
+  <span>commented</span> on
+  <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3330371" title="Fixed #018817: correct [HTTP] ContentLanguage according to ISO_639-1">pull request 144</a> on <a href="http://github.com/ezsystems/ezpublish">ezsystems/ezpublish</a>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="@andrerom concerning your wondering on ezoe, I've checked all codes used by tinymce:
+http://www.tinymce.com/i18n/index.php?ctrl=lang&amp;act=download&amp;pr_id=1
+
+and all is ok, the [HTTP]\ContentLanguage (the first part of it when we explode the value with '-', as all templates in ezoe just take consideration of the first part of it), is the same code as the one used by tinymce.
+
+And to tell more, as codes would be the same (if this pull request is merged), then it would be possible to create a big language pack from tinymce containing all the languages supported by ezpublish, and it would work out of the box!
+
+Because, for now, the tinymce bundled into ezoe seems to only contain the english language and not at all all other languages supported by ezpublish...
+
+One remark though, ezpublish and tinymce both supports traditional and simplified chinese BUT ezoe only gives the first part of the ContentLanguage to tinymce, which would be only zh for chinese. It will work as tinymce provides a language pack for zh, but we loose the type of chinese (traditional or simplified)...
+
+A correction could be done afterwards by giving the first part of the ContentLanguage *except* for chinese, where the full ContentLanguage should be given (zh-tw or zh-cn), and as zh-hk (traditional) doesn't exist in tinymce, a symbolic link or a copy of zh-tw could be done while bundling tinymce into ezoe (zh-tw and zh-hk are the same thing, traditional chinese)
+">
+      <p><a class="user-mention" href="https://github.com/andrerom">@andrerom</a> concerning your wondering on ezoe, I've checked all codes used by tinymce:<a href="http://www.tinymce.com/i18n/index.php?ctrl=lang&amp;act=download&amp;pr_id=1">http://www.tinymce.com/i18n/index.php?ctrl=lang&amp;act=download&amp;pr…</a></p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 09:08 am</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-commented-on-pull-request-144-on-ezsystems-ezpublish3">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish/issues/144#issuecomment-3330371">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/jdespatis/ezpublish/compare/226a075445...3cda811140" title="jdespatis pushed to locales-18817 at jdespatis/ezpublish">jdespatis pushed to locales-18817 at jdespatis/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-push"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T14:20:56Z" title="2012-01-02 14:20:56">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a> <span>pushed</span> to locales-18817 at <a href="http://github.com/jdespatis/ezpublish">jdespatis/ezpublish</a>
+</div>
+<div class="details">
+  
+
+  <div class="commits">
+    <ul>
+      <li>
+      <a href="http://github.com/jdespatis" class="committer">jdespatis</a> committed <a href="http://github.com/jdespatis/ezpublish/commit/3cda811140251094729b13d3b58758c12ba79ffb">3cda811</a>
+
+        <div class="message">
+          <blockquote>Correction for norvegian http locale as well</blockquote>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 08:20 am</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-pushed-to-locales-18817-at-jdespatis-ezpublish2">View mirror of item</a> &nbsp; <a href="https://github.com/jdespatis/ezpublish/compare/226a075445...3cda811140">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/jdespatis/ezpublish/compare/fcf5d42add...226a075445" title="jdespatis pushed to locales-18817 at jdespatis/ezpublish">jdespatis pushed to locales-18817 at jdespatis/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-push"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T14:13:31Z" title="2012-01-02 14:13:31">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a> <span>pushed</span> to locales-18817 at <a href="http://github.com/jdespatis/ezpublish">jdespatis/ezpublish</a>
+</div>
+<div class="details">
+  
+
+  <div class="commits">
+    <ul>
+      <li>
+      <a href="http://github.com/jdespatis" class="committer">jdespatis</a> committed <a href="http://github.com/jdespatis/ezpublish/commit/226a075445ad0fc14cdaab9fd45dc364db49a089">226a075</a>
+
+        <div class="message">
+          <blockquote>Update doc, HTTPLocale contains an iso 639-1 and an iso 3166-1-alpha2</blockquote>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 08:13 am</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-pushed-to-locales-18817-at-jdespatis-ezpublish3">View mirror of item</a> &nbsp; <a href="https://github.com/jdespatis/ezpublish/compare/fcf5d42add...226a075445">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/JD-GitHub">JD @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/jdespatis/ezpublish/compare/541169f0d0...fcf5d42add" title="jdespatis pushed to locales-18817 at jdespatis/ezpublish">jdespatis pushed to locales-18817 at jdespatis/ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mega-icon mega-icon-push"></span>
+
+<div class="time">
+  <time class="js-relative-date" datetime="2012-01-02T14:10:10Z" title="2012-01-02 14:10:10">January 02, 2012</time>
+</div>
+<div class="title">
+  <a href="http://github.com/jdespatis">jdespatis</a> <span>pushed</span> to locales-18817 at <a href="http://github.com/jdespatis/ezpublish">jdespatis/ezpublish</a>
+</div>
+<div class="details">
+  
+
+  <div class="commits">
+    <ul>
+      <li>
+      <a href="http://github.com/jdespatis" class="committer">jdespatis</a> committed <a href="http://github.com/jdespatis/ezpublish/commit/fcf5d42add58718a1a68a9cdd9365d81e10aee57">fcf5d42</a>
+
+        <div class="message">
+          <blockquote>Adding changelog file</blockquote>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>01/02/2012 08:10 am</span> &nbsp; <a href="https://github.com/jdespatis"></a> &nbsp; <a href="/Mirror/JD-GitHub/jdespatis-pushed-to-locales-18817-at-jdespatis-ezpublish4">View mirror of item</a> &nbsp; <a href="https://github.com/jdespatis/ezpublish/compare/541169f0d0...fcf5d42add">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                     
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/JD-GitHub/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/JD-GitHub/(month)/12/(year)/2011" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/JD-GitHub/(month)/2/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>January&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="right">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="currentselected  left">
+            <em><a href="/Mirror/JD-GitHub/(day)/2/(month)/1/(year)/2012">2</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/JD-GitHub/(day)/3/(month)/1/(year)/2012">3</a></em>
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                                        <td class="  right">
+            8
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            9
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/JD-GitHub/(day)/10/(month)/1/(year)/2012">10</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/JD-GitHub/(day)/11/(month)/1/(year)/2012">11</a></em>
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                                        <td class="  right">
+            15
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                                        <td class="  right">
+            22
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                                        <td class="  right">
+            29
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/Mirror/JD-GitHub/(day)/30/(month)/1/(year)/2012">30</a></em>
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2012";s:5:"month";s:1:"1";s:3:"day";s:1:"2";s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:11:"JD @ GitHub";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4719";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:11:"JD @ GitHub";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4719";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4719";s:7:"node_id";s:4:"4719";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"52283330a9adc46712114f513b8b1ca5";s:14:"node_remote_id";s:32:"9c8fdd6885a79977f42beeb4004c992a";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:16:"Mirror/JD-GitHub";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4719";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

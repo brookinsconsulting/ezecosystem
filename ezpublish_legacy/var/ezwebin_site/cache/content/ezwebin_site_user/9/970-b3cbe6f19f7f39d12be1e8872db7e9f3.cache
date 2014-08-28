@@ -1,0 +1,901 @@
+a:10:{s:7:"content";s:47931:"
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-folder">
+
+        
+        <div class="attribute-header">
+            <h1>
+Planetarium</h1>
+        </div>
+
+                            
+        
+        
+
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-folder">
+
+        
+
+                
+            
+            
+                 
+            
+
+            
+            <div style="margin-top:6px;margin-bottom:8px;">
+	    	    	    
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="http://ezecosystem.org/Planetarium/(offset)/4740"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="http://ezecosystem.org/Planetarium/(offset)/4780"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages"><a href="http://ezecosystem.org/Planetarium">1</a> ... 
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4400">221</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4420">222</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4440">223</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4460">224</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4480">225</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4500">226</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4520">227</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4540">228</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4560">229</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4580">230</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4600">231</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4620">232</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4640">233</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4660">234</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4680">235</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4700">236</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4720">237</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4740">238</a></span>
+            
+        <span class="current">239</span>
+
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4780">240</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4800">241</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4820">242</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4840">243</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4860">244</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4880">245</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4900">246</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4920">247</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4940">248</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4960">249</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4980">250</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/5000">251</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/5020">252</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/5040">253</a></span>
+            <span class="other"> ... </span><span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6480">325</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+</div>
+
+            <div class="content-view-children">
+                                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/fedora-17-in-da-place" title="Fedora 17 in da place !">Fedora 17 in da place !</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Après un petit <code>yum update</code> suivie d'un <code>preupgrade</code>, ma station de travail (<em>enterprise</em>) est enfin sous <a href="http://forums.fedora-fr.org/viewtopic.php?id=57097" hreflang="fr" title="La Fedora 17 alias Beefy Miracle est arrivée !">Fedora 17</a> !</p>
+
+
+<p>Mais une fois sous le nouvel opus il ne faut pas oublier de faire quelques contrôles notamment avec les commande suivante :</p>    <p>Détection des éventuels problèmes :</p>
+<pre class="bash bash" style="font-family:inherit">package-cleanup <span style="color: #660033;">--problems</span></pre>
+
+
+<p>Détection des éventuels doublons :</p>
+<pre class="bash bash" style="font-family:inherit">package-cleanup <span style="color: #660033;">--dupes</span></pre>
+
+
+<p>Détection des éventuels paquets qui ne seraient plus disponibles dans les dépôts :</p>
+<pre class="bash bash" style="font-family:inherit">package-cleanup <span style="color: #660033;">--orphans</span></pre>
+
+
+<p>Détection des éventuels paquets qui ne seraient plus reliés à aucun autres RPM (leaves) :</p>
+<pre class="bash bash" style="font-family:inherit">package-cleanup <span style="color: #660033;">--leaves</span></pre>
+
+
+<p>Et puis on réinstalle les paquets qui peuvent subsister en F16 :</p>
+<pre class="bash bash" style="font-family:inherit">root<span style="color: #000000; font-weight: bold;">@</span>zhukov ~<span style="color: #000000; font-weight: bold;">&gt;</span> rpm <span style="color: #660033;">-qa</span> <span style="color: #660033;">--qf</span> <span style="color: #ff0000;">&quot;%{NAME} %{RELEASE}<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span> <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">grep</span> fc16 <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">cut</span> <span style="color: #660033;">-d</span><span style="color: #ff0000;">' '</span> <span style="color: #660033;">-f1</span> <span style="color: #000000; font-weight: bold;">&gt;</span> list.txt
+root<span style="color: #000000; font-weight: bold;">@</span>zhukov ~<span style="color: #000000; font-weight: bold;">&gt;</span> yum reinstall $<span style="color: #7a0874; font-weight: bold;">(</span><span style="color: #c20cb9; font-weight: bold;">cat</span> list.txt<span style="color: #7a0874; font-weight: bold;">)</span></pre>
+
+
+<p>Voila une Fedora 17 qui tourne.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 03:44 pm</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Fedora-17-in-da-place">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/fedora-17-in-da-place">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/14952" title="	 
+	 New link (#002183): 
+	 #014952 (ezflow: hidden nodes are shown in blocks)
+	 relates to #013654 (ezflow: hidden nodes get inserted in automatic blocks)
+
+">	 
+	 New link (#002183): 
+	 #014952 (ezflow: hidden nodes are show ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New link has been added: this issue issue <a href="http://issues.ez.no/IssueView.php?Id=14952&ProjectId=3">#014952</a> (ezflow: hidden nodes are shown in blocks)
+		relates to <a href="http://issues.ez.no/IssueView.php?Id=13654&ProjectId=3">#013654</a></p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 02:06 pm</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/New-link-002183-014952-ezflow-hidden-nodes-are-shown-in-blocks-relates-to-013654-ezflow-hidden-nodes-get-inserted-in-automatic-blocks">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/14952">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/18935" title="	 
+	 New link (#002182): 
+	 #018935 (Improvde debug report: readability, accuracy)
+	 relates to #019466 (debug output: for every template executed, show list of including templates)
+
+">	 
+	 New link (#002182): 
+	 #018935 (Improvde debug report: readab ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New link has been added: this issue issue <a href="http://issues.ez.no/IssueView.php?Id=18935&ProjectId=3">#018935</a> (Improvde debug report: readability, accuracy)
+		relates to <a href="http://issues.ez.no/IssueView.php?Id=19466&ProjectId=3">#019466</a></p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 11:03 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/New-link-002182-018935-Improvde-debug-report-readability-accuracy-relates-to-019466-debug-output-for-every-template-executed-show-list-of-including-templates">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/18935">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19466" title="
+		New Enhancement - #019466: debug output: for every template executed, show list of including templates
+">
+		New Enhancement - #019466: debug output: for every template exe ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New Enhancement (<a href="http://issues.ez.no/IssueView.php?Id=19466&ProjectId=3">#019466</a>): debug output: for every template executed, show list of including templates</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 11:03 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/New-Enhancement-019466-debug-output-for-every-template-executed-show-list-of-including-templates">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19466">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19465" title="
+		Issue #019465:  has been updated
+
+">
+		Issue #019465:  has been updated
+
+</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">Issue <a href="http://issues.ez.no/IssueView.php?Id=19465&ProjectId=3">#019465</a> has been updated:
+		<table cellspacing="1" cellpadding="2" border="0" width="100%"><thead><tr><th>Field</th><th width="50%">Old</th><th width="50%">New</th></tr></thead><tbody><tr><td>Components</td><td><div style="overflow: auto;">Extensions, Database related, eZ XML export</div></td><td><div style="overflow: auto;">Database related, Extensions, eZ XML export</div></td></tr><tr><td>Fix versions</td><td><div style="overflow: auto;"><None></div></td><td><div style="overflow: auto;">Customer request</div></td></tr></tbody></table></p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 10:34 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Issue-019465-has-been-updated">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19465">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/oworfilter/subversion/14e3af9954a2afc28fa3ac07ee19b168f6071059" title="http://projects.ez.no/oworfilter/subversion/14e3af9954a2afc28fa3ac07ee19b168f6071059">http://projects.ez.no/oworfilter/subversion/14e3af9954a2afc28fa3ac ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m README.md
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Update doc files</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 10:31 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-oworfilter-subversion-14e3af9954a2afc28fa3ac07ee19b168f6071059">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/oworfilter/subversion/14e3af9954a2afc28fa3ac07ee19b168f6071059">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/oworfilter/subversion/bb8408a5cbaca63ef882ed3f80819dd36213f960" title="http://projects.ez.no/oworfilter/subversion/bb8408a5cbaca63ef882ed3f80819dd36213f960">http://projects.ez.no/oworfilter/subversion/bb8408a5cbaca63ef882ed ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m README.md
+m doc/INSTALL.txt
++ extension.xml
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Update doc files</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 10:31 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-oworfilter-subversion-bb8408a5cbaca63ef882ed3f80819dd36213f960">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/oworfilter/subversion/bb8408a5cbaca63ef882ed3f80819dd36213f960">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/oworfilter/subversion/41c13e73a2436d8acfe216c9f15a4996837d811a" title="http://projects.ez.no/oworfilter/subversion/41c13e73a2436d8acfe216c9f15a4996837d811a">http://projects.ez.no/oworfilter/subversion/41c13e73a2436d8acfe216 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m README.md
++ classes/orfilter.php
++ doc/INSTALL.txt
++ settings/extendedattributefilter.ini.append.php
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Initialize with OWOrFilter v0.1</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 10:31 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-oworfilter-subversion-41c13e73a2436d8acfe216c9f15a4996837d811a">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/oworfilter/subversion/41c13e73a2436d8acfe216c9f15a4996837d811a">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/oworfilter/subversion/9e31661db347114867debf8aafba45b5187fa51b" title="http://projects.ez.no/oworfilter/subversion/9e31661db347114867debf8aafba45b5187fa51b">http://projects.ez.no/oworfilter/subversion/9e31661db347114867debf ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>+ README.md
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Initial commit</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 10:31 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-oworfilter-subversion-9e31661db347114867debf8aafba45b5187fa51b">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/oworfilter/subversion/9e31661db347114867debf8aafba45b5187fa51b">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/oworfilter/news/oworfilter_now_hosted_on_github" title="OWOrFilter now hosted on github !">OWOrFilter now hosted on github !</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>
+OWOrFilter (for OpenWide Object Relations Filter) is now hosted on github.<br />SVN has been replaced by git, thus the svn repo will not be updated anymore.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 10:21 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/OWOrFilter-now-hosted-on-github">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/oworfilter/news/oworfilter_now_hosted_on_github">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezfluxbb/subversion/1a4601f1b3acd8077bf9ba7d27e35e1500022ccd" title="http://projects.ez.no/ezfluxbb/subversion/1a4601f1b3acd8077bf9ba7d27e35e1500022ccd">http://projects.ez.no/ezfluxbb/subversion/1a4601f1b3acd8077bf9ba7d ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m doc/CHANGELOG
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Release 1.3</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 07:30 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/Mirror/Projects-Commits/http-projects.ez.no-ezfluxbb-subversion-1a4601f1b3acd8077bf9ba7d27e35e1500022ccd">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezfluxbb/subversion/1a4601f1b3acd8077bf9ba7d27e35e1500022ccd">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/15350" title="
+	Status of Bug #015350 (eZODF does not support selective language updates) has been set to Assigned
+">
+	Status of Bug #015350 (eZODF does not support selective language ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">Workflow transition: issue status of issue <a href="http://issues.ez.no/IssueView.php?Id=15350&ProjectId=3">#015350</a> (eZODF does not support selective language updates) has been moved from Assigned to Assigned (Re-assign action) </p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 07:22 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Status-of-Bug-015350-eZODF-does-not-support-selective-language-updates-has-been-set-to-Assigned">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/15350">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19462" title="
+		New Bug - #019462: ezcontentstaging : wsproviders.ini missing upon installation 
+">
+		New Bug - #019462: ezcontentstaging : wsproviders.ini missing u ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New Bug (<a href="http://issues.ez.no/IssueView.php?Id=19462&ProjectId=3">#019462</a>): ezcontentstaging : wsproviders.ini missing upon installation </p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 07:20 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/New-Bug-019462-ezcontentstaging-wsproviders.ini-missing-upon-installation">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19462">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Legacy-Commits">eZ Publish Legacy Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish/commit/ef87563238b62a86305c8b9082f66bbdfd9cd709" title="Fixed #019349: Table Width not being respected in eZP 4.6">Fixed #019349: Table Width not being respected in eZP 4.6</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre>m design/standard/templates/content/datatype/view/ezxmltags/table.tpl
+</pre>
+      <pre style='white-space:pre-wrap;width:81ex'>Fixed #019349: Table Width not being respected in eZP 4.6</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 05:59 am</span> &nbsp; <a href="https://github.com/ezsystems/ezpublish-legacy/commits/master">eZ Publish Legacy Commits</a> &nbsp; <a href="/Mirror/eZ-Publish-Legacy-Commits/Fixed-019349-Table-Width-not-being-respected-in-eZP-4.6">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish/commit/ef87563238b62a86305c8b9082f66bbdfd9cd709">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/ipb-for-drupal%3A-un-connecteur-ipboard-/-drupal" title="IPB for Drupal: un connecteur IP.Board / Drupal">IPB for Drupal: un connecteur IP.Board / Drupal</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<div><p>A l'occasion du projet de refonte de <a title="Le repaire des fougères" hreflang="fr" href="http://www.scenario-paintball.com/">Scénario-Paintball</a> sous <a title="Drupal is an open source content management platform powering millions of websites and applications. It’s built, used, and supported by an active and diverse community of people around the world." hreflang="en" href="http://drupal.org/">Drupal</a>, je suis en train de développer un <a title="IPB for Drupal Integration" hreflang="en" href="https://projects.llaumgui.com/p/ipb-for-drupal/">connecteur IPB / Drupal</a>.</p>
+<h3>Pourquoi IP.Board ?</h3>
+<p>SPB tourne maintenant depuis plusieurs années sous <a title="Community Forum software" hreflang="en" href="http://www.invisionpower.com/products/board/">IP.Board</a>. C'est malheureusement un logiciel propriétaire mais c'est aussi un forum terriblement efficace dont je possède une licence à vie (qui n'existe plus maintenant mais qui me permet de ne pas payer la redevance annuelle).</p>
+<p>Le problème c'est que SPB ce n'est pas qu'un forum, c'est également un site. A chaque montée de version d'IPB, il faut trouver un portail et refaire pas mal de développements pour adapter les éléments hors forums à la nouvelle version.</p>
+<p>J'ai donc décidé de migrer le portail de SPB sous un <a title="Système de gestion de contenu" hreflang="en" href="http://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu">CMS</a> et de ne maintenir que le connecteur, un peu à la manière de <a title="Communauté des utilisateurs francophones de la distribution Linux Fedora" hreflang="fr" href="http://www.fedora-fr.org/">Fedora-Fr</a> sous <a title="FluxBB is fast, light, user-friendly forum software for your website." hreflang="en" href="http://fluxbb.org/">FluxBB</a> & <a title="eZ Systems Enterprise Content Management System | Enterprise Web CMS Open-Source" hreflang="en" href="http://ez.no/">eZ Publish</a> connectés via <a title=" eZFluxBB is an extension eZ publish which allows FluxBB (formerly PunBB) and eZ Publish to communicate. " hreflang="en" href="https://projects.llaumgui.com/p/ezfluxbb/">eZFluxBB</a>.</p>
+<h3>Pourquoi Drupal ?</h3>
+<p>Pour le cas de SPB, les avantages par rapport à une solution comme eZ Publish sont nombreux :</p>
+<ul>
+<li>Possibilité nativement pour les membres de personnaliser l'affichage des blocs.</li>
+<li>Possibilité nativement pour les membres de créer des blogs (l'extension <a title="Integrated Blog Software for your IP.Board Community" hreflang="en" href="http://www.invisionpower.com/products/blog/">IP.Blog</a> existe pour IP.Board mais est soumise à une redevance annuelle).</li>
+<li>Comme le site fait pas mal appel à la base de membres, j'ai préféré Drupal qui stocke les membres comme une entité à part contrairement à eZ Publish qui les stocke comme des objets classiques. Le problème intervient lorsqu'on possède un site à faible contenu avec une grosse base d'utilisateur, on fait vite grimper les ressources nécessaires juste pour les membres.</li>
+<li>Après presque 7 années de pratique d'eZ Publish, je commence à faire le tour et j'avais envie de profiter de SPB pour varier les plaisirs..</li>
+</ul>
+<h3>Où en est le projet ?</h3>
+<p>Pour le moment l'extension en est à ses balbutiements :</p>
+<ul>
+<li>Interface de configuration depuis le back-office Drupal.</li>
+<li>Utilisation du couple login / mot de passe pour se connecter au site Drupal.</li>
+<li>La session IP.Board est récupérée dans Drupal pour connecter automatiquement l'utilisateur.</li>
+<li>Création des utilisateurs Drupal à la volée lors de leur connexion.</li>
+<li>Bloc de statistiques.</li>
+</ul>
+<p>A venir :</p>
+<ul>
+<li>Exploitation des données sur les forums et topics.</li>
+</ul>
+<p>Bref, c'est un projet en cours de développement et sous licence <a title="GNU General Public License, version 2" hreflang="en" href="http://www.gnu.org/licenses/gpl-2.0.html">GPL v2</a> :</p>
+<ul>
+<li>Projet <a title="IPB for Drupal Integration" hreflang="en" href="https://projects.llaumgui.com/p/ipb-for-drupal/">IPB for Drupal</a>.</li>
+<li>Miroir <a title="IPB for Drupal Integration" hreflang="en" href="https://github.com/llaumgui/ipb-for-drupal">GitHub</a>.</li>
+<li><a title="llaumgui's sandbox: IPB for Drupal" hreflang="en" href="http://drupal.org/sandbox/llaumgui/1613432">Incubation sur le site de Drupal</a>.</li>
+</ul>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 05:16 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/IPB-for-Drupal-un-connecteur-IP.Board-Drupal">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/ipb-for-drupal%3A-un-connecteur-ipboard-/-drupal">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/ipb-for-drupal%3A-un-connecteur-ipboard-/-drupal" title="IPB for Drupal: un connecteur IP.Board / Drupal">IPB for Drupal: un connecteur IP.Board / Drupal</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>A l'occasion du projet de refonte de <a title="Le repaire des fougères" hreflang="fr" href="http://www.scenario-paintball.com/">Scénario-Paintball</a> sous <a title="Drupal is an open source content management platform powering millions of websites and applications. It’s built, used, and supported by an active and diverse community of people around the world." hreflang="en" href="http://drupal.org/">Drupal</a>, je suis en train de développer un <a title="IPB for Drupal Integration" hreflang="en" href="https://projects.llaumgui.com/p/ipb-for-drupal/">connecteur IPB / Drupal</a>.</p>
+<h3>Pourquoi IP.Board ?</h3>
+<p>SPB tourne maintenant depuis plusieurs années sous <a title="Community Forum software" hreflang="en" href="http://www.invisionpower.com/products/board/">IP.Board</a>. C'est
+malheureusement un logiciel propriétaire mais c'est aussi un forum
+terriblement efficace dont je possède une licence à vie (qui n'existe plus maintenant mais qui me permet de ne pas payer la redevance annuelle).</p>
+<p>Le problème c'est que SPB ce n'est pas qu'un
+forum, c'est également un site. A chaque montée de version d'IPB, il faut trouver un portail et refaire
+pas mal de développements pour adapter les éléments hors forums à la nouvelle
+version.</p>
+<p>J'ai donc décidé de migrer le portail de SPB sous un <a title="Système de gestion de contenu" hreflang="en" href="http://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu">CMS</a> et de ne maintenir que le connecteur, un peu à la manière de <a title="Communauté des utilisateurs francophones de la distribution Linux Fedora" hreflang="fr" href="http://www.fedora-fr.org/">Fedora-Fr</a> sous <a title="FluxBB is fast, light, user-friendly forum software for your website." hreflang="en" href="http://fluxbb.org/">FluxBB</a> &amp; <a title="eZ Systems Enterprise Content Management System | Enterprise Web CMS Open-Source" hreflang="en" href="http://ez.no/">eZ Publish</a> connectés via <a title=" eZFluxBB is an extension eZ publish which allows FluxBB (formerly PunBB) and eZ Publish to communicate. " hreflang="en" href="https://projects.llaumgui.com/p/ezfluxbb/">eZFluxBB</a>. </p>    <h3>Pourquoi Drupal ?</h3>
+<p>Pour le cas de SPB, les avantages par rapport à une solution comme eZ Publish sont nombreux :</p>
+<ul><li>Possibilité nativement pour les membres de personnaliser l'affichage des blocs.</li>
+<li>Possibilité nativement pour les membres de créer des blogs (l'extension <a title="Integrated Blog Software for your IP.Board Community" hreflang="en" href="http://www.invisionpower.com/products/blog/">IP.Blog</a> existe pour IP.Board mais est soumise à une redevance annuelle).</li>
+<li>Comme le site fait pas mal appel à la base de membres, j'ai préféré Drupal qui stocke les membres comme une entité à part contrairement à eZ Publish qui les stocke comme des objets classiques. Le problème intervient lorsqu'on possède un site à faible contenu avec une grosse base d'utilisateur, on fait vite grimper les ressources nécessaires juste pour les membres.</li>
+<li>Après presque 7 années de pratique d'eZ Publish, je commence à faire le tour et j'avais envie de profiter de SPB pour varier les plaisirs..</li>
+</ul>
+<h3>Où en est le projet ?</h3>
+<p>Pour le moment l'extension en est à ses balbutiements :</p>
+<ul><li>Interface de configuration depuis le back-office Drupal.</li>
+<li>Utilisation du couple login / mot de passe pour se connecter au site Drupal.</li>
+<li>La session IP.Board est récupérée dans Drupal pour connecter automatiquement l'utilisateur.</li>
+<li>Création des utilisateurs Drupal à la volée lors de leur connexion.</li>
+<li>Bloc de statistiques.</li>
+</ul>
+<p>A venir :</p>
+<ul><li>Exploitation des données sur les forums et topics.</li>
+</ul>
+<p>Bref, c'est un projet en cours de développement et sous licence <a title="GNU General Public License, version 2" hreflang="en" href="http://www.gnu.org/licenses/gpl-2.0.html">GPL v2</a> :</p>
+<ul><li>Projet <a title="IPB for Drupal Integration" hreflang="en" href="https://projects.llaumgui.com/p/ipb-for-drupal/">IPB for Drupal</a>.</li>
+<li>Miroir <a title="IPB for Drupal Integration" hreflang="en" href="https://github.com/llaumgui/ipb-for-drupal">GitHub</a>.</li>
+<li><a title="llaumgui's sandbox: IPB for Drupal" hreflang="en" href="http://drupal.org/sandbox/llaumgui/1613432">Incubation sur le site de Drupal</a>.</li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 05:16 am</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/IPB-for-Drupal-un-connecteur-IP.Board-Drupal">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/ipb-for-drupal%3A-un-connecteur-ipboard-/-drupal">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19461" title="
+		New Bug - #019461: eZ Flow block item rotation not working
+">
+		New Bug - #019461: eZ Flow block item rotation not working
+</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New Bug (<a href="http://issues.ez.no/IssueView.php?Id=19461&ProjectId=3">#019461</a>): eZ Flow block item rotation not working</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 02:52 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/New-Bug-019461-eZ-Flow-block-item-rotation-not-working">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19461">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://blog.agenceyuzu.fr/eZ-Publish/Integrer-vos-images-Pinterest-dans-eZ-Publish" title="Intégrer vos images Pinterest dans eZ Publish">Intégrer vos images Pinterest dans eZ Publish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<div><p><a href="http://www.pinterest.com">Pinterest</a> est le dernier réseau social qui fait parler en ce moment. Nous avons développé une extension qui permet d'intégrer vos images publiées sur votre compte Pinterest dans votre site <a href="http://ez.no">eZ Publish</a></p>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/03/2012 05:59 pm</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/Integrer-vos-images-Pinterest-dans-eZ-Publish">View mirror of item</a> &nbsp; <a href="http://blog.agenceyuzu.fr/eZ-Publish/Integrer-vos-images-Pinterest-dans-eZ-Publish">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/GG-GitHub">GG @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/indeyets/pake/issues/19#issuecomment-6082985" title="gggeek commented on pull request 19 on indeyets/pake">gggeek commented on pull request 19 on indeyets/pake</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <span class="mini-icon mini-icon-issue-comment"></span>
+
+<div class="title">
+  <a href="http://github.com/gggeek">gggeek</a>
+  <span>commented</span> on
+  <a href="https://github.com/indeyets/pake/issues/19#issuecomment-6082985" title="Better windows support for pake_which calls">pull request 19</a> on <a href="http://github.com/indeyets/pake">indeyets/pake</a>
+  <time class="js-relative-date" datetime="2012-06-03T04:36:22Z" title="2012-06-03 04:36:22">June 03, 2012</time>
+</div>
+
+<div class="details">
+  
+  <div class="message">
+    <blockquote title="'any idea why? PATHEXT isn't set?'
+
+pathext is set, but 'git' has no extension - and the code currently does not recognize such commands as valid 'windows' ones.
+I could of course use pake_which( 'git.exe' ), but then my code would not be portable...">
+      <p>"any idea why? PATHEXT isn't set?"</p>
+
+<p>pathext is set, but "git" has no extension - and the code currently does not recognize such commands as valid "windows" ones.<br>
+I could of course use pake_which( 'git.exe' ), but then my code would not be portable...</p>
+    </blockquote>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/02/2012 11:36 pm</span> &nbsp; <a href="https://github.com/gggeek">GG @ GitHub</a> &nbsp; <a href="/Mirror/GG-GitHub/gggeek-commented-on-pull-request-19-on-indeyets-pake3">View mirror of item</a> &nbsp; <a href="https://github.com/indeyets/pake/issues/19#issuecomment-6082985">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/BC-GitHub">BC @ GitHub</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/brookinsconsulting/ezpersistentobjectgenerator" title="brookinsconsulting started watching brookinsconsulting/ezpersistentobjectgenerator">brookinsconsulting started watching brookinsconsulting/ezpersisten ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="simple">
+  <span class="mini-icon mini-icon-watching"></span>
+  <div class="title">
+    <a href="http://github.com/brookinsconsulting">brookinsconsulting</a> <span>started watching</span> <a href="http://github.com/brookinsconsulting/ezpersistentobjectgenerator">brookinsconsulting/ezpersistentobjectgenerator</a>
+  </div>
+  <div class="time">
+    <time class="js-relative-date" datetime="2012-06-02T13:20:48Z" title="2012-06-02 13:20:48">June 02, 2012</time>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/02/2012 08:20 am</span> &nbsp; <a href="http://github.com/brookinsconsulting">BC @ GitHub</a> &nbsp; <a href="/Mirror/BC-GitHub/brookinsconsulting-started-watching-brookinsconsulting-ezpersistentobjectgenerator">View mirror of item</a> &nbsp; <a href="https://github.com/brookinsconsulting/ezpersistentobjectgenerator">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                                </div>
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="http://ezecosystem.org/Planetarium/(offset)/4740"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="http://ezecosystem.org/Planetarium/(offset)/4780"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages"><a href="http://ezecosystem.org/Planetarium">1</a> ... 
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4400">221</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4420">222</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4440">223</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4460">224</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4480">225</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4500">226</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4520">227</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4540">228</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4560">229</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4580">230</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4600">231</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4620">232</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4640">233</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4660">234</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4680">235</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4700">236</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4720">237</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4740">238</a></span>
+            
+        <span class="current">239</span>
+
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4780">240</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4800">241</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4820">242</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4840">243</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4860">244</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4880">245</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4900">246</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4920">247</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4940">248</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4960">249</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/4980">250</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/5000">251</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/5020">252</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/5040">253</a></span>
+            <span class="other"> ... </span><span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6480">325</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+        
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+
+
+            </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:4:"4760";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:11:"Planetarium";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"970";}}s:10:"title_path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:3:{s:4:"text";s:11:"Planetarium";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"970";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"969";s:7:"node_id";s:3:"970";s:14:"parent_node_id";s:1:"2";s:8:"class_id";s:1:"1";s:16:"class_identifier";s:6:"folder";s:9:"remote_id";s:32:"e4565c9579d8970a4222676fa94f5fe8";s:14:"node_remote_id";s:32:"137fe2fcc2cddc67c82e93d2abda38c8";s:6:"offset";i:4760;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"2";s:9:"url_alias";s:11:"Planetarium";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"3";s:12:"main_node_id";s:3:"970";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";b:0;s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"23";s:23:"parent_class_identifier";s:9:"frontpage";s:21:"parent_node_remote_id";s:32:"f3e90596361e31d496d4026eb624c983";s:23:"parent_object_remote_id";s:32:"8a9c9c761004866fb458d89910f52bee";}s:13:"template_list";a:5:{i:0;s:67:"extension/ezecosystem/design/eze/override/templates/full/folder.tpl";i:1;s:60:"design/standard/templates/content/datatype/view/ezstring.tpl";i:2;s:61:"extension/ezecosystem/design/eze/templates/parts/homepage.tpl";i:3;s:63:"extension/ezecosystem/design/eze/templates/navigator/google.tpl";i:4;s:70:"extension/ezecosystem/design/eze/override/templates/line/blog_post.tpl";}s:9:"cache_ttl";i:-1;}

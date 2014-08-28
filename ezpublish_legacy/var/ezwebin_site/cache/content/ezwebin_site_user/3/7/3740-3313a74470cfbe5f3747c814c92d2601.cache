@@ -1,0 +1,279 @@
+a:10:{s:7:"content";s:21428:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Confessions of an apprentice: Creating a custom page layout in eZ Publish</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-Creating-a-custom-page-layout-in-eZ-Publish">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">01/10/2012 06:36 am</p>
+                                    <p class="author">info@netgen.hr (Tomislav Buljević)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p><b>&nbsp;</b></p><p>In the last two articles we have covered the creation of a custom module and a custom view of that module. Based on this, you can really customize eZ Publish to your heart's desire. And that's basically the whole point of creating your own websites, isn't it? Now we will make a turn, and look at all the ways you can change layouts on a portion of your website.</p><a name="eztoc6566_1" id="eztoc6566_1"></a><h2>Creation of a custom page layout in eZ Publish</h2><a name="eztoc6566_1_1" id="eztoc6566_1_1"></a><h3>The need for an extra layout</h3><p>Sometimes there arises a need for the developer to create a new page layout inside an existing page for a client. It's almost always based on the need to create a different look and feel on a section of a page which is used for all kinds of purposes (mobile web, different section of a page, etc.). When I say a different look and feel, I'm referring to a radical change in the layout of a page. New header, body, elements, footer, the works. There are actually three ways to do that, and we will cover them all.</p><a name="eztoc6566_1_2" id="eztoc6566_1_2"></a><h3>Overriding a pagelayout template</h3><p>Looking back on<a href="http://www.netgen.hr/eng/Blog/eZ-Publish-CMS-persistent-variables" target="_blank">&nbsp;Ivo Lukač's post on persistent variables</a> a while ago, we can see that it's relatively easy to set them using the<b>&nbsp;ezpagedata_set()</b> operator built in ezwebin. Also, there is a <b>set-block</b> function which we can use to set a persistent variable if the <b>ezpagedata_set()</b> operator is not available. We will show you how to override a layout and define it's persistent variable key, where to put the overridden template, and how to activate it.</p><p>So, open your project, and go to the <b>settings/siteaccess</b> folder. In it, find your siteaccess, and open it, and when you do, you will see, among all of your INI files, one called <b>override.ini.append.php</b>. In this file, if you recall, you override the templates which already exist in your project with custom ones. When you open the file, input the following lines of code:</p><pre>[new_pagelayout]
+Source=pagelayout.tpl
+MatchFile=new_pagelayout.tpl
+Subdir=templates
+Match[persistent_variable]=new_pagelayout</pre><p>What did we do here? We created a new persistent variable key in the override.ini, and linked it to a template called <b>new_pagelayout.tpl</b>. Now, in order for the template to work, you need to create it. So, of course, go to your extension. Open the <b>mypage/design/mypage/override/templates/</b> folder and in it, create a file called&nbsp;<b>new_pagelayout.tpl</b>. Bear in mind that this layout has to be set up as your original layout in the extent that you define everything from scratch. If you need a reference, just go to the original layout in your extension (<b>mypage/design/mypage/templates/pagelayout.tpl</b>), and look at how it is set up. After that, clear the INI and override caches and just put whatever elements you'd like in your new layout.</p><p>To determine what templates will use this new layout, enter the following lines at the beginning of your template to set up your persistent variable like so:</p><pre>{ezpagedata_set('new_pagelayout', true())}</pre><p>or:</p><pre>{set scope=global persistent_variable=hash('new_pagelayout', true())}</pre><p>if the <b>ezpagedata_set()</b> operator is not available to you.</p><p>Then you can look at the object using the layout to see your results. It's important to notice that only the view view of the content module is able to set persistent variables in such a manner.</p><p>When you use a persistent variable, you decide which templates are going to use the overridden layout. The same applies to usage with nodes, classes, etc. Which means that, for example, you can create a class (let’s call it custom_class for the purposes of this article), and just use it in your <b>override.ini</b> like so:</p><pre>[new_pagelayout]
+Source=pagelayout.tpl
+MatchFile=new_pagelayout.tpl
+Subdir=templates
+Match[class_identifier]=custom_class</pre><p>Now, the <b>new_pagelayout.tpl</b> will be used on every object of the class you’ve defined for this purpose.</p><p>Of course, the overriding doesn’t stop at classes because you can use a big list of override conditions for your new layout. You can find the whole reference fore the override conditions <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Template-override-conditions" target="_blank">here</a>.</p><p>After you clear all caches and display an object of your custom class, you will see that the <b>new_pagelayout.tpl</b> will be used! Isn’t that neat? In addition, there is no big hassle in creating new sub-domains, instances of eZ Publish, and whatnot. The stuff just works and that’s the most important thing.</p><p>Also, it’s important to notice that overriding a pagelayout template is only possible with the override rules applicable in the <b>content</b> module. Other modules (e.g. user/login) are unable to apply this type of change to their layouts. On the other hand, no unnecessary strings need to be added to the URL. So I would recommend this method only if you need to change the look and feel of the <b>content</b> module.</p><a name="eztoc6566_1_3" id="eztoc6566_1_3"></a><h3>Setting up a new layout template using the <b>layout</b> module</h3><p>Another way of setting up a new layout for a page is through the <b>layout</b> module. This is a more universal way than the one previously described, because it will work for all of the modules, but you need to have an extra part in the URL.</p><p>If you have examined all of the INI files in your eZ Publish project, you may have noticed that there is a<b>&nbsp;layout.ini</b> file. This file defines all of the different layouts you can use at a given portion of your site. And when you want to use the layout you define in this INI file, you just need to enter the following lines in your address bar:<b>&nbsp;/layout/set/new_pagelayout/url_of_the_node</b>. This gives an order to eZ Publish to use a new layout instead of the default one.</p><p>To set up your layout in the INI, go to your extension. In the <b>mypage/settings</b> folder, create a new PHP file called<b>&nbsp;layout.ini.append.php</b> and put the following settings in it:</p><pre><?php /* #?ini charset="utf-8"?
+[new_pagelayout]
+PageLayout=new_pagelayout.tpl
+*/ ?></pre><p>As you can see, we have set up an alias for our layout in the square brackets and determined that when you type '<b>/layout/set/new_pagelayout</b>', eZ Publish overrides the default pagelayout and uses everything in the template you've accessed in a new layout.</p><p>After you set up your INI, put the <b>new_pagelayout.tpl</b> in the <b>mypage/design/mypage/templates</b> folder and clear all caches. If you then try to access your object in the previously described manner, you will see that your new layout is set up correctly.</p><a name="eztoc6566_1_4" id="eztoc6566_1_4"></a><h3>Setting up a new layout using a new module</h3><p>If you remember, in the article before last we have shown you how to create a new module. This is actually a quick, surefire way to set up a new layout using a module. And it is useful only in the cases when the previous two ways we’ve described are not enough, because you can make custom PHP additions and changes.</p><p>Let's say, for example, that you have created a new module called '<b>get</b>'. In it, you have created a view called '<b>layout</b>'. Now, in the<b>&nbsp;layout.php</b> file in your module, just put following lines of code:</p><pre><?php
+$tpl = eZTemplate::factory();
+$data = new eZPageData();
+$data->modify($tpl, 'ezpagedata', null, null, null, $pagedata);
+$tpl->setVariable( 'pagedata', $pagedata );
+$tpl->setVariable( 'pagestyle', $pagedata['css_classes'] );
+$tpl->setVariable( 'pagedesign', $pagedata['template_look'] );
+$tpl->setVariable( 'current_node_id', $pagedata['node_id'] );
+$tpl->setVariable( "access_type", $GLOBALS['eZCurrentAccess'] );
+$pagelayoutResult = $tpl->fetch( 'design:new_pagelayout.tpl' );
+echo( $pagelayoutResult );
+eZExecution::cleanExit();
+?></pre><p>So, in here we have set up an instance of our template, and set the persistent variables for the view, also, we have set up the CSS files we are going to use, as well as the node id we wish to set for our pagedata. After everything is set up, we fetch our page layout and use it in the view. To access this view, you need to type in the address bar the following: '<b>/get/layout/</b>', and there you have it, a new layout for your page!</p><p>As you can see, setting up a new page layout is really not that big of a deal once you get the hang of it, and this newfound knowledge can really help you in your future projects.</p><p>Until next time, I wish you happy coding,</p><p>Tomislav</p>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-Creating-a-custom-page-layout-in-eZ-Publish">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Netgen/(day)/18/(month)/8/(year)/2014">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class="currentselected today">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:4:{s:4:"text";s:73:"Confessions of an apprentice: Creating a custom page layout in eZ Publish";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"3740";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:3:{s:4:"text";s:73:"Confessions of an apprentice: Creating a custom page layout in eZ Publish";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"3740";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"3740";s:7:"node_id";s:4:"3740";s:14:"parent_node_id";s:3:"228";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:44:"RSSImport_9_6fa6d355c3726b20829727922310bc28";s:14:"node_remote_id";s:32:"12dc16fdd8d6b0b9c24321ac852d6977";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:86:"Mirror/Netgen/Confessions-of-an-apprentice-Creating-a-custom-page-layout-in-eZ-Publish";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"3740";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:23:"parent_object_remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

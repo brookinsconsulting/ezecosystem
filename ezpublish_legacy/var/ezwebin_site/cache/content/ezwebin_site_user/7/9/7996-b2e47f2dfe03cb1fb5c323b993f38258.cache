@@ -1,0 +1,538 @@
+a:10:{s:7:"content";s:25716:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Introduction to Document Databases with MongoDB</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://derickrethans.nl/introduction-to-document-databases.html">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">09/06/2013 03:11 am</p>
+                                    <p class="author"></p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="introduction_to_document_databases_with_mongodb"/>Introduction to Document Databases with MongoDB</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Friday, September 6th 2013, 09:11 BST</div>
+      </div>
+      <p>This article originally appeared in the June 2013 issue of <a href="http://webandphp.com/June2013">Web & PHP</a>.</p>
+      <p>By now most you will probably have heard of the term <em>NoSQL</em>. It's a vague term that covers a lot of different types of database engines. The main classes of <em>NoSQL</em> databases are <em>key/value stores</em>, <em>column databases</em>, <em>graph databases</em> and <em>document databases</em>. Examples of a key/value stores are <a href="http://en.wikipedia.org/wiki/Memcache">memcache</a> or <a href="http://en.wikipedia.org/wiki/Redis">Redis</a>, where data can only be stored and retrieved through a specific key. Column databases, such as <a href="http://en.wikipedia.org/wiki/Cassandra_%28database%29">Cassandra</a> and <a href="http://en.wikipedia.org/wiki/Hadoop">Hadoop</a>, are great for processing large amounts of data. Graph databases such as <a href="http://en.wikipedia.org/wiki/Neo4J">Neo4j</a> and <a href="http://en.wikipedia.org/wiki/OrientDB">OrientDB</a> model the <em>relations</em> between entities. <a href="http://en.wikipedia.org/wiki/CouchDB">Apache CouchDB</a> and <a href="http://mongodb.org">MongoDB</a> belong to the last category, Document databases. We will be looking extensively at MongoDB in this article.</p>
+      <p>In a document database such as MongoDB the smallest unit is a <em>document</em>.  In MongoDB, documents are stored in a <em>collection</em>, which in turn make up a <em>database</em>. Document are analogous to rows in a SQL table, but there is one big difference: not every document needs to have the same structure—each of them <em>can</em> have different fields and that is a very useful feature in many situations. Another feature of MongoDB is that fields in a document can contain arrays and or sub-documents (sometimes called nested or embedded documents).</p>
+      <p>
+        <strong>MongoDB's Strengths</strong>
+      </p>
+      <p>Supporting a <strong>different set of fields for each document</strong> in a collection is one of MongoDB's features. It allows you to store similar data, but with different properties in the same collection. A good example of this is storing real (not MongoDB) documents in a way that is beneficial for a Content Management System (CMS). The CMS might want to store articles, which have certain properties (e.g. author, tags, and body), but also related books, which have additional properties such as their ISBN number, but no <em>body</em> field. An article may need to store the periodical's ISSN number in lieu of an ISBN number. In a relational database there are various ways to solve this. Most frequently it is either solved by having a table per object "class" (article or book) or coming up with a scheme that stores object's properties in linked tables (for example through the <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">EAV pattern</a>). In MongoDB you would simply store the article and book with the fields they need:</p>
+      <pre>{
+        _id: ObjectId("51156a1e056d6f966f268f81"),
+        type: "Article",
+        author: "Derick Rethans",
+        title: "Introduction to Document Databases with MongoDB",
+        date: ISODate("2013-04-24T16:26:31.911Z"),
+        body: "This arti…"
+},
+{
+        _id: ObjectId("51156a1e056d6f966f268f82"),
+        type: "Book",
+        author: "Derick Rethans",
+        title: "php|architect's Guide to Date and Time Programming with PHP",
+        isbn: "978-0-9738621-5-7"
+}
+
+</pre>
+      <p>Even though the two documents represent different classes of objects, you can still construct a query that looks for all the items by an author, or for all the items with a specific title.</p>
+      <p>
+        <strong>Data Model</strong>
+      </p>
+      <p>Each document in a collection in MongoDB can look totally different, and how you structure your documents is up to you. MongoDB doesn't enforce a schema, but your application still should. Although MongoDB is generally very fast, the way how you structure and index your documents and collections has a big influence on the performance of your application. While designing your schema you should focus more on how the data is inserted, updated and queried and less on how the data is structured. If sometimes you need to denormalise your data, then that is a totally normal thing to do, even though it might look dirty at first.</p>
+      <p>
+        <strong>Interactions Between Collections</strong>
+      </p>
+      <p>MongoDB makes different choices regarding functionality and scaling than relational databases. MongoDB is very easy to scale through replication and sharding, but it misses out on features like joins and transactions because of this. Operations in MongoDB are only atomic per single document, and only operate on one collection. Not allowing operations between collections (joins) sounds like a real issue, but with the <strong>support of arrays and sub-documents</strong> this is actually in most cases not a problem. Let's have a look at the following example:</p>
+      <p>Take an application where we store image (meta) data and tags that go with those images. In a relational database you would store that in three different tables:</p>
+      <p>
+        <strong>Images</strong>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <p><em>id</em>  </p>
+            </td>
+            <td>
+              <p>filename    </p>
+            </td>
+            <td>
+              <p>mimetype    </p>
+            </td>
+            <td>
+              <p>size</p>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>1     </p>
+            </td>
+            <td>
+              <p>cow.jpg     </p>
+            </td>
+            <td>
+              <p>image/jpg   </p>
+            </td>
+            <td>
+              <p>9123</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>2     </p>
+            </td>
+            <td>
+              <p>bunny.png   </p>
+            </td>
+            <td>
+              <p>image/png   </p>
+            </td>
+            <td>
+              <p>8192</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>Tags</strong>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <p><em>id</em>  </p>
+            </td>
+            <td>
+              <p>value</p>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>1     </p>
+            </td>
+            <td>
+              <p>animal</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>2     </p>
+            </td>
+            <td>
+              <p>cute</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>3     </p>
+            </td>
+            <td>
+              <p>tasty</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>ImageTags</strong>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <p><em>image_id</em>  </p>
+            </td>
+            <td>
+              <p>
+                <em>tag_id</em>
+              </p>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>1           </p>
+            </td>
+            <td>
+              <p>1</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>1           </p>
+            </td>
+            <td>
+              <p>3</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>2           </p>
+            </td>
+            <td>
+              <p>1</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>2           </p>
+            </td>
+            <td>
+              <p>2</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>And queries for both meta-data and the tags for the bunny (<code>id = 2</code>) are as follows:</p>
+      <pre>SELECT *
+        FROM Images
+        WHERE id = 2
+
+SELECT value
+        FROM ImageTags LEFT JOIN Tags ON (Tags.id = ImageTags.tag_id)
+        WHERE ImageTags.image_id = 2
+
+</pre>
+      <p>This is quite complex as you can see. There are three tables, and two queries involved. In MongoDB, you might store the same data as:</p>
+      <p>
+        <strong>Images</strong>
+      </p>
+      <pre>{
+        _id: 1,
+        filename: 'cow.jpg',
+        mimetype: 'image/jpg',
+        size: 9123,
+        tags: [ 'animal', 'tasty' ]
+},
+{
+        _id: 2,
+        filename: 'bunny.png',
+        mimetype: 'image/png',
+        size: 8192,
+        tags: [ 'animal', 'cute' ]
+}
+
+</pre>
+      <p>To provide the same results as with the two SQL queries above, you would run in the <em>MongoDB shell</em>:</p>
+      <pre>db.Images.find( { _id: 2 } );
+
+</pre>
+      <p>And on top of that, you have all the data right in one place ready for display.</p>
+      <p>Most examples for MongoDB will show your documents as <em>JSON</em> documents. This is not how MongoDB stores it internally, but it is a good representation of how MongoDB deals with documents. For use within PHP, you would convert <strong>both</strong> objects and arrays to PHP arrays. The above can be translated to PHP like so:</p>
+      <pre>$doc1 = array(
+        '_id' => 1,
+        'filename' => 'cow.jpg',
+        'mimetype' => 'image/jpg',
+        'size' => 9123,
+        'tags' => array( 'animal', 'tasty' )
+},
+
+</pre>
+      <p>Or if you use PHP 5.4 you can use the following:</p>
+      <pre>$doc1 = [
+        '_id' => 1,
+        'filename' => 'cow.jpg',
+        'mimetype' => 'image/jpg',
+        'size' => 9123,
+        'tags' => [ 'animal', 'tasty' ]
+],
+
+</pre>
+      <p>PHP 5.4's short array syntax can come in quite handy when dealing with MongoDB documents with nested arrays and objects.</p>
+      <p>
+        <strong>Getting Started</strong>
+      </p>
+      <p>MongoDB can be downloaded for free from <a href="http://mongodb.org/downloads">http://mongodb.org/downloads</a>. If you are on Debian or Ubuntu, I would greatly advice to follow the <a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/">specific instructions</a> with packages because they make updating easy. After downloading, please make sure that MongoDB runs by running on the command line <code>mongo test</code>. This opens up a shell like interface for the <em>test</em> database. If that works, then you can issue commands in JavaScript syntax such as:</p>
+      <pre>db.persons.insert( { 'name': 'Derick Rethans', 'twitter': 'derickr' } );
+db.persons.find( { 'twitter': 'derickr' } );
+
+</pre>
+      <p>In order to use MongoDB from PHP, you also need to install the <a href="http://pecl.php.net/mongo">PHP driver for MongoDB</a>. In most situations you should be able to do so by running:</p>
+      <pre>pecl install mongo
+
+</pre>
+      <p>Please refer to the <a href="http://php.net/manual/en/mongo.installation.php">PECL manual</a> for further installation instructions.</p>
+      <p>Analogous to the previous example on the shell in PHP we would do:</p>
+      <pre><?php
+$m = new MongoClient;
+$db = $m->test;
+$col = $db->persons;
+
+$col->insert( array( 'name' => 'Derick Rethans', 'twitter' => 'derickr' ) );
+foreach ( $col->find( array( 'twitter' => 'derickr' ) ) as $record )
+{
+        var_dump( $record );
+}
+
+</pre>
+      <p>The PHP documentation also includes a section for working with the MongoDB driver, including a <a href="http://php.net/manual/en/mongo.tutorial.php">tutorial</a>. A handy <a href="http://www.php.net/manual/en/mongo.sqltomongo.php">cheat sheet</a> gives you a quick overview on how to map SQL queries to the MongoDB query syntax.</p>
+      <p>
+        <strong>Closing Words</strong>
+      </p>
+      <p>MongoDB is not a straight replacement for your relational database. Questions such as <em>"How do I convert my relational database to MongoDB?"</em> make little sense as such a different approach is required to write applications with MongoDB. That doesn't mean that MongoDB is not a general purpose database—it can replace a relational database in almost every situation. You just need to approach it differently, and when you do so you should find working with MongoDB a breeze. Try it out, and stay tuned for future articles!</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://derickrethans.nl/introduction-to-document-databases.html">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/8/(month)/8/(year)/2014">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/27/(month)/8/(year)/2014">27</a></em>
+        </td>
+                            <td class="currentselected today">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";s:23:"/content/view/full/1726";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:7:"node_id";s:4:"1726";}i:3;a:4:{s:4:"text";s:47:"Introduction to Document Databases with MongoDB";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"7996";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";s:23:"/content/view/full/1726";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:7:"node_id";s:4:"1726";}i:3;a:3:{s:4:"text";s:47:"Introduction to Document Databases with MongoDB";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"7996";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:5:"29998";s:7:"node_id";s:4:"7996";s:14:"parent_node_id";s:4:"1726";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_26_84abec76ac2f9480674c008914d85c30";s:14:"node_remote_id";s:32:"a90abfe61a859073701264844a9a6230";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:69:"Mirror/Derick-Rethans/Introduction-to-Document-Databases-with-MongoDB";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"7996";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:23:"parent_object_remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

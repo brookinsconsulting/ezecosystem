@@ -1,0 +1,310 @@
+a:10:{s:7:"content";s:17468:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Using Tomcat with eZ Find</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgenlabs.com/Blog/Using-Tomcat-with-eZ-Find">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">06/27/2012 03:31 pm</p>
+                                    <p class="author">info@netgen.hr (Ivo Lukač)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p>Few years back when <a href="http://doc.ez.no/Extensions/eZ-Publish-extensions/eZ-Find" target="_self">eZ Find</a>&nbsp;(on <a href="https://github.com/ezsystems/ezfind" target="_self">github</a>) showed up we soon started to deploy it on almost every site we were implementing. We even worked with the ezlucene extension which was a kind of predecessor of eZ Find.</p><p>The hearth of eZ Find is <a href="http://lucene.apache.org/solr/" target="_self">Solr</a> - a Lucene based java search engine with REST interface. Bundled wit eZ Find comes <a href="http://jetty.codehaus.org/jetty/" target="_self">Jetty</a> for running the whole java stack with one command to keep the usage as simple as possible. And we used Jetty for a while but soon hit an issue. Jetty had the problem with UTF-8 encoding, can’t remember what it was but it didn’t use all Croatian letters well. So we switched to <a href="http://tomcat.apache.org/" target="_self">Apache Tomcat</a> instead. In the meanwhile Jetty probably resolved that issue but we discovered some other good things with Tomcat.</p>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/grumman_f-14_tomcat/8395-1-cro-HR/Grumman_F-14_Tomcat_large.png" width="360" height="241"  style="border: 0px solid ;" alt="Grumman_F-14_Tomcat" title="Grumman_F-14_Tomcat" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div><p>Surely there are many differences between Jetty and Tomcat in general, but I found a lot of contradicting information on the web regarding performance and system level stuff. In my experience Tomcat has a bit more configuration and tuning capabilities, which are important if you have a multi site setup.</p><p>The multi site setup is possible with Jetty too but a bit awkward. &nbsp;If you need more instances &nbsp;(for example different versions of solr or you just want to separate it ) you would need to set new port for each one, etc.</p><a name="eztoc8385_0_1" id="eztoc8385_0_1"></a><h3>Multi site setup with tomcat</h3><p>
+For live environment after tomcat 5.5 or higher is installed and running, there is only one configuration file to add. Go to <br />/etc/tomcat/Catalina/localhost folder and create a myezfind.xml file:</p>	<pre class="" style="font-family:monospace;"><?xml version="<span style="">1.0</span>" encoding="UTF-<span style="">8</span>" ?>
+<Context docBase="/<span class="br0">[</span>PATH_TO_WEB_ROOT<span class="br0">]</span>/extension/ezfind/java/webapps/solr.war" debug="<span style="">0</span>" crossContext="true">
+<Environment name="solr/home" type="java.lang.String" value="/<span class="br0">[</span>PATH_TO_WEB_ROOT<span class="br0">]</span>/extension/ezfind/java/solr" override="true"/>
+</Context>
+&nbsp;</pre><p>You then need to do all other stuff you usally do:</p>
+<ul>
+
+<li>configure solr.ini with port etc (Tomcat is usually set to 8080 by default but that can be changed easily) </li>
+
+<li>set writing permissions in java/data folder </li>
+
+<li>run the indexing script</li>
+
+</ul>
+<p>With this configuration every eZ Publish instance has the index separated.</p><p>On the development server where 50+ web sites are held we have even less instances. This is achieved by having only one instance of solr for each ezfind version.</p><p><b>How we do it?</b></p>
+<ul>
+
+<li>we have &nbsp;ezfind installations deployed outside an ezpublish web root for each version. Basically only solr is there, not the whole ezfind</li>
+
+<li>
+we have 3 instances in tomcat pointing to those solr folders (as explained already)<br />
+http://dev.server.local:8080/ezfind23<br />
+http://dev.server.local:8080/ezfind24<br />http://dev.server.local:8080/ezfind25</li>
+
+<li>for deploying a new web on the dev server we just need to point the right url in sorl.ini and run the indexing script.</li>
+
+<li>installation_id parameter is taking care of dividing the results for each web </li>
+
+</ul>
+<p>2 remarks:</p>
+<ul>
+
+<li>do not use --clean-all when running the index script as you will wipe out all data from one index</li>
+
+<li>if you duplicate a web by copying database make sure to delete the ezfind_id row in ezsite_data to reset the installation id</li>
+
+</ul>
+<p><b>autoDeploy="false"</b></p><p>One warning for the end. There is a very interesting Tomcat option for auto-deploying which is enabled by default. This enables that all changes you make to the configuration files are executed instantly. Although it does make some sense in some situations, we disabled it on dev server. Reason? If you by any chance change the folder pointed from tha Catalina xml file (e.g upgrading ez installations, etc.) tomcat will delete the xml configuration file :) Scary, if you don’t know what is&nbsp;happening&nbsp;(like I didn’t know first time configuring Tom the cat)</p>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://www.netgenlabs.com/Blog/Using-Tomcat-with-eZ-Find">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Netgen/(day)/18/(month)/8/(year)/2014">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class="currentselected today">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:4:{s:4:"text";s:25:"Using Tomcat with eZ Find";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"6644";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";s:22:"/content/view/full/228";s:9:"url_alias";s:13:"Mirror/Netgen";s:7:"node_id";s:3:"228";}i:3;a:3:{s:4:"text";s:25:"Using Tomcat with eZ Find";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"6644";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"6645";s:7:"node_id";s:4:"6644";s:14:"parent_node_id";s:3:"228";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:44:"RSSImport_9_b2cefdcb32d3821980bc8858359e8519";s:14:"node_remote_id";s:32:"9b6b071ce762ce1ee5d8c47227c3fc4c";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:40:"Mirror/Netgen/Using-Tomcat-with-eZ-Find2";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"6644";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:23:"parent_object_remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

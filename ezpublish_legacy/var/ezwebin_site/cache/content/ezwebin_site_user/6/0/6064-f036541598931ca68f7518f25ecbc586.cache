@@ -1,0 +1,314 @@
+a:10:{s:7:"content";s:17510:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Derick's MongoDB tour</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://derickrethans.nl/mongodb-tour.html">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">08/20/2012 03:12 am</p>
+                                    <p class="author"></p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="derick_s_mongodb_tour"/>Derick's MongoDB tour</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, UK</div>
+        <div class="date">Monday, August 20th 2012, 09:12 BST</div>
+      </div>
+      <p>It has been a while since I have written anything. In the last few months I have been busy rewriting the connection handling parts of the <a href="http://pecl.php.net/mongodb">MongoDB driver</a> for PHP. The next post will go deeper into that, and what else will be new in version 1.2 of the driver. Anyway.</p>
+      <p>Some time ago, my friend <a href="http://www.khankennels.com/blog/">Ligaya Turmelle</a> suggested that I should come and talk at the <a href="http://www.meetup.com/JaxPHP-JaxWeb/">JaxPHP/JaxWeb</a>, the PHP and web developers usergroup in Jacksonville, Florida. And while I was there, why not visit a few other user groups too?</p>
+      <p>At all the meetups, <a href="http://10gen.com">10gen</a> (my employer) has kindly provided some swag - and rumours go that I get to buy you guys and girls a drink as well.</p>
+      <p>In the end, after discussing with other web/PHP usergroups in the South East of the US, we came to the following schedule:</p>
+      <img src="http://derickrethans.nl/images/content/mongo-tour.png" class="left" alt="mongo-tour.png"/>
+      <p>
+        <strong>Boca Raton, Florida - SoFloPHP - Tuesday, September 18</strong>
+      </p>
+      <p>The first stop is the South Florida group (<a href="http://www.soflophp.org/events/71930042/">SoFloPHP`</a>) in Boca Raton. On the evening of the 18th, I will introduce MongoDB for PHP developers:</p>
+      <p>
+        <em>This talk introduces MongoDB for developers who aren't familiar with it with a detailed introduction of how to work with MongoDB from PHP.  The talk will cover the basics from installing the PHP driver and connecting to mongoDB to creating, inserting, querying for, and updating documents. We will also briefly touch on aggregation, geospatial indexes, GridFS and running database commands.</em>
+      </p>
+      <p>I will focus on schema design and indexes, although I will also quickly cover the basics.</p>
+      <p>
+        <strong>Orlando, Florida - The Orlando PHP User Group - Wednesday, September 19</strong>
+      </p>
+      <p>After South Florida I will be making a stop at the <a href="http://www.meetup.com/OrlandoPHP/events/73968932/">Orlando PHP</a> User Group. The abstract:</p>
+      <p>
+        <em>This talk introduces MongoDB for developers who aren't familiar with it through a detailed introduction of how to work with MongoDB from PHP. Derick will cover the basics: from installing the PHP driver and connecting to a MongoDB server to creating, inserting, querying, and updating documents.  He'll also cover some accepted best practices in schema design and indexing.</em>
+      </p>
+      <p>There is also a related MongoDB event in Orlando, on September 6th there is an <a href="http://www.meetup.com/OrlandoPHP/events/75843562/">evening with MongoDB</a>.</p>
+      <p>
+        <strong>Jacksonville, Floria - JaxPHP/JaxWeb - Thursday, September 20</strong>
+      </p>
+      <p>The third stop is in Jacksonville. In Jacksonville, the presentation will not be very PHP specific, and members of other user groups are most welcome to attend as well. You can RSVP at <a href="http://mongodb-jax.eventbrite.com/">http://mongodb-jax.eventbrite.com/</a>, and more information is available on the JaxPHP/JaxWeb <a href="http://www.meetup.com/JaxPHP-JaxWeb/events/63085372/">website</a>.</p>
+      <p>As other user groups are invited as well, I will keep my presentation as language agnostic as possible, and focus on schema design and indexing.</p>
+      <p>
+        <strong>Atlanta, Georgia - Atlanta PHP User Group - Friday, September 21</strong>
+      </p>
+      <p>I then leave Florida and head to Atlanta to talk at the <a href="http://meetup.atlantaphp.org/events/73155922">Atlanta PHP</a> User Group. In Atlanta, I will give a similar presentation as at the other user groups.</p>
+      <p>
+        <strong>Nashville, Tennessee - Nashville PHP User Group - Monday, September 24</strong>
+      </p>
+      <p>In Nashville, I will speak after the weekend at the <a href="http://www.nashvillephp.org/events/67112052/">Nashville PHP</a> User Group. In this location, my talk focusses on:</p>
+      <p>
+        <em>Derick will be giving an introductory presentation covering the do's and don'ts, best practices and design schemas for MongoDB.</em>
+      </p>
+      <p>
+        <strong>Holiday!</strong>
+      </p>
+      <p>After the five user group appearences, I head to the North West of the USA for some R&R - after three weeks on the road (I speak at <a href="http://pfcongres.com/">PFCongres</a> before traveling to the USA) - I think I will need one!</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://derickrethans.nl/mongodb-tour.html">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                        
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/8/(month)/8/(year)/2014">8</a></em>
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class="currentselected today">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";s:23:"/content/view/full/1726";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:7:"node_id";s:4:"1726";}i:3;a:4:{s:4:"text";s:21:"Derick's MongoDB tour";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"6064";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";s:23:"/content/view/full/1726";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:7:"node_id";s:4:"1726";}i:3;a:3:{s:4:"text";s:21:"Derick's MongoDB tour";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"6064";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"6064";s:7:"node_id";s:4:"6064";s:14:"parent_node_id";s:4:"1726";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_26_4e99100be61d378a96d2dbbd968cf168";s:14:"node_remote_id";s:32:"f72d89b030fe51b563a61b29e5baff00";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:43:"Mirror/Derick-Rethans/Derick-s-MongoDB-tour";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"6064";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:23:"parent_object_remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

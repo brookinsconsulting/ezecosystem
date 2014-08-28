@@ -1,0 +1,376 @@
+a:10:{s:7:"content";s:24362:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>eZ Publish Security</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://ezpedia.org/learning/ez_publish_security">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">03/19/2012 04:23 am</p>
+                                    <p class="author"></p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      
+<div class="object-center"> <p class="editor_motivation">This is a <a href="/template/stub">Stub</a> article. Help the eZ Publish community by expanding it!</p></div><p>For a general description of security, we recommend <a href="http://en.wikipedia.org/wiki/Computer_security" target="_self">Computer security on Wikipedia</a>.</p><p>eZ publish is very secure! The <a href="http://ez.no/community/articles/us_department_of_defense_information_assurance_achieving_successful_ditscap_with_ez_publish_as_a_platform" target="_self">U.S Department of Defense</a> uses eZ publish!</p><a name="eztoc878_1" id="eztoc878_1"></a><h2>Securing eZ publish</h2><p>eZ publish in <b>production</b>! A look at hardening best practices.</p><a name="eztoc878_1_1" id="eztoc878_1_1"></a><h3>eZ Publish Security Advisories</h3><p>Published on ez.no,&nbsp;<a href="http://ez.no/developer/security/security_advisories" target="_blank">eZ Publish Security Advisories</a>&nbsp;<i>[update: this is now a redirect to&nbsp;<a href="http://share.ez.no" target="_self">http://share.ez.no</a>&nbsp;- add your complaint&nbsp;<a href="http://share.ez.no/forums/developer/security-advisories" target="_self">here</a></i></p><p>Keeping your eZ Publish installation up-to-date with the latest release and security patches is a good way to ensure the underlying code base is stable &amp; secure.</p><a name="eztoc878_1_2" id="eztoc878_1_2"></a><h3>File Permissions</h3><p>&quot;Also in productive environments the extension directory <i>should not</i> be any longer writeable to <a href="/ez/apache" target="_self">apache</a> cause of security.&quot; -- tos@ez.no</p>
+<ol>
+
+<li>Installation directory permission</li>
+
+</ol>
+<a name="eztoc878_1_3" id="eztoc878_1_3"></a><h3>Database Permissions</h3>
+<ol>
+
+<li>Use a separate user for each eZ publish installation</li>
+
+<li>Reduce user database server permissions to minimum.
+<ol>
+
+<li>Forum: <a href="http://ez.no/community/forum/install_configuration/mysql_database_privileges" target="_self">MySQL Database Privileges Required</a></li>
+
+</ol>
+</li>
+
+</ol>
+<a name="eztoc878_1_4" id="eztoc878_1_4"></a><h3>Module view security</h3><p>There are several module views are available to anonymous users by default which can expose information about your software and website:</p>
+<ul>
+
+<li>&nbsp;<b>ezinfo/about</b>&nbsp;contains the version of eZ Publish, and all extensions used by your website, as well as information about copyright, license, contributors, etc.</li>
+
+<li><b>content/browse </b>can allow a user to explore the node structure of your site, to access information which is not linked on your site.</li>
+
+<li><b>user/register</b>, <b>user/activate</b>, <b>user/success</b>, and <b>user/forgotpassword</b>&nbsp;can also be disabled if you don't need user registration on the front-end, to prevent spammers clogging up your system, or people accidentally using it</li>
+
+</ul>
+<p>There are several ways to disable these module views for anonymous users - both are by changing settings in site.ini:</p>
+<ol>
+
+<li>Remove if from <b>[RoleSettings] PolicyOmitList</b> (require policy access)</li>
+
+<li>Add it to <b>[SiteAccessRules] Rules</b> disable list (disable it totally)</li>
+
+</ol>
+<a name="eztoc878_1_4_1" id="eztoc878_1_4_1"></a><h4>PolicyOmitList</h4><p>You can reset the site.ini:[RoleSettings]&nbsp;PolicyOmitList array with a settings override to exclude the module entirely thus preventing it's use and index from other external sources (engines, bots, etc)</p><p>Here is an example from a settings/override/site.ini.append.php file:</p>	<pre class="ezini" style="font-family:monospace;">span style="background-color: yellow;"> <span style="">&#91;</span></span>RoleSettings<span style="">&#93;</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">user/login</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">user/logout</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">user/register</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">user/activate</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">user/success</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">user/forgotpassword</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">layout</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">manual</span>
+<span style="color: #666666; font-style: italic;"># PolicyOmitList<span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span>ezinfo</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">paypal/notify_url</span>
+<span style="color: #000099;">PolicyOmitList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">switchlanguage</span></pre><p>You might choose for example to leave this enabled in development settings while disabled directly in production settings.</p><p>You could also add a new user group and coresponding new role for that group called say 'Developers' and within the role add a policy for ezinfo module and the read function. Save and clear caches. Now all developer group users can use ezinfo and everyone else gets access denied errors instead.</p><a name="eztoc878_1_4_2" id="eztoc878_1_4_2"></a><h4>SiteAccessRules</h4><p>If you want to completely disable a module view so no-one can use it, you can reset the site.ini:[SiteAccessRules] Rules array with a settings override, e.g:</p>	<pre class="ezini" style="font-family:monospace;">span style="background-color: yellow;"> <span style="">&#91;</span></span>SiteAccessRules<span style="">&#93;</span>
+<span style="color: #000099;">Rules</span><span style="">&#91;</span><span style="">&#93;</span>
+<span style="color: #000099;">Rules</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">access;enable</span></span>
+<span style="color: #000099;">Rules</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">module;all</span></span>
+<span style="color: #000099;">Rules</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">access;disable</span></span>
+<span style="color: #000099;">Rules</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">module;ezinfo/about</span></span>
+<span style="color: #000099;">Rules</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">module;content/browse</span></span></pre><a name="eztoc878_1_5" id="eztoc878_1_5"></a><h3>HTTP Headers</h3><p>eZ Publish adds an HTTP header &quot;X-Powered-By: eZ Publish&quot; - you can override this.</p><p>In eZ Publish 4.7 you can change a setting in config.php:</p>	<pre class="php" style="font-family:monospace;"><span style="color: #339933;">&amp;</span>nbsp<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">/*** Enable usage of &quot;X-Powered-By&quot; headers.
+* Optional. Defaults to true.
+*/</span>
+<a href="http://www.php.net/define"><span style="color: #990000;">define</span></a><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'CLUSTER_HEADER_X_POWERED_BY'</span><span style="color: #339933;">,</span> <span style="color: #000000; font-weight: bold;">false</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre><p>In eZ Publish 4.6 &amp; below, in your settings/override/site.ini.append.php file by adding the following (and while we're at it, let's turn off the webserver identifier):</p>	<pre class="ezini" style="font-family:monospace;">span style="background-color: yellow;"> <span style="">&#91;</span></span>HTTPHeaderSettings<span style="">&#93;</span>
+<span style="color: #666666; font-style: italic;"># Enable/disable custom HTTP header data.</span>
+<span style="color: #000099;">CustomHeader</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">enabled</span>
+&nbsp;
+<span style="color: #000066; font-weight:bold;"><span style="color: #666666; font-style: italic;"># Only apply custom headers for anonymous users&amp;nbsp;</span></span>
+<span style="color: #000099;">OnlyForAnonymous</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">enabled</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;"># Header list. Contains all HTTP which should override standard ones.</span>
+<span style="color: #000099;">HeaderList</span><span style="">&#91;</span><span style="">&#93;</span>
+<span style="color: #000099;">HeaderList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">X-Powered-By</span>
+<span style="color: #000099;">HeaderList</span><span style="">&#91;</span><span style="">&#93;</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">Server</span>
+&nbsp;
+<span style="color: #000099;">X-Powered-By</span><span style="">&#91;</span><span style="">&#93;</span>
+<span style="color: #000099;">X-Powered-By</span><span style="">&#91;</span>/<span style="">&#93;</span><span style="background-color: yellow;">= </span>
+&nbsp;
+<span style="color: #000099;">Server</span><span style="">&#91;</span><span style="">&#93;</span>
+<span style="color: #000099;">Server</span><span style="">&#91;</span>/<span style="">&#93;</span><span style="background-color: yellow;">= </span>
+&nbsp;
+&nbsp;</pre><a name="eztoc878_2" id="eztoc878_2"></a><h2>eZ publish Administration</h2><a name="eztoc878_2_6" id="eztoc878_2_6"></a><h3>Browser security</h3><a name="eztoc878_2_6_2_1" id="eztoc878_2_6_2_1"></a><h5>SSL</h5>
+<ol>
+
+<li>Use an browser and web server which supports ssl/https. Require all login and admin usage use ssl.</li>
+
+<li>The use of ssl protects the clear text information (username and password) during transmission.</li>
+
+</ol>
+<a name="eztoc878_2_6_2_2" id="eztoc878_2_6_2_2"></a><h5>ACL</h5>
+<ol>
+
+<li>Use an httpd browser based authentication realm to protect eZ publish</li>
+
+<li>The use of two forms of authentication, ACL and eZ reduces greatly the chance someone can compromise eZ publish</li>
+
+</ol>
+<a name="eztoc878_2_6_3" id="eztoc878_2_6_3"></a><h4>eZ publish Users, Groups, Roles and Permissions</h4>
+<ol>
+
+<li>Do not use the 'admin' user. This is similar to the unix-like operating system's rule to use a non-privileged user as much as possible.</li>
+
+<li>If you need more permissions, create a group called say 'ez-admin', and add a new user 'eza-john' to the group. Add permissions as needed to your group/user roles.</li>
+
+</ol>
+
+<ul>
+
+<li>Example #1 - <a href="http://ez.no/community/forum/general/email_header_injection" target="_self">Email Abuse</a> </li>
+
+</ul>
+<a name="eztoc878_3" id="eztoc878_3"></a><h2>Security related topics</h2>
+<ul>
+
+<li><a href="/ez/antivirus" target="_self">Antivirus software</a></li>
+
+<li><a href="/ez/encryption" target="_self">Encryption</a></li>
+
+<li><a href="/ez/spam" target="_self">Spam</a></li>
+
+<li><a href="/ez/captcha" target="_self">Captcha</a></li>
+
+</ul>
+<a name="eztoc878_4" id="eztoc878_4"></a><h2>External resources</h2>
+<ul>
+
+<li><a href="http://ez.no/community/forum/install_configuration/mysql_database_privileges" target="_self">Forum topic about MySQL database privileges on ez.no</a></li>
+
+<li><a href="http://ez.no/community/forum/general/how_avoid_tip_a_friend_abuse" target="_self">how avoid tip a friend abuse?</a></li>
+
+</ul>
+
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://ezpedia.org/learning/ez_publish_security">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/eZpedia/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/2/(year)/2011" title="">February 2011</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/12/(year)/2010" title="">December 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/10/(year)/2010" title="">October 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/7/(year)/2010" title="">July 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/6/(year)/2010" title="">June 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/4/(year)/2010" title="">April 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/3/(year)/2010" title="">March 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/2/(year)/2010" title="">February 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/1/(year)/2010" title="">January 2010</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/10/(year)/2009" title="">October 2009</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/9/(year)/2009" title="">September 2009</a></li>
+                                                            <li><a href="/Mirror/eZpedia/(month)/8/(year)/2009" title="">August 2009</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/eZpedia/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/eZpedia/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class="currentselected today">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:7:"eZpedia";s:3:"url";s:23:"/content/view/full/4097";s:9:"url_alias";s:14:"Mirror/eZpedia";s:7:"node_id";s:4:"4097";}i:3;a:4:{s:4:"text";s:19:"eZ Publish Security";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4101";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:7:"eZpedia";s:3:"url";s:23:"/content/view/full/4097";s:9:"url_alias";s:14:"Mirror/eZpedia";s:7:"node_id";s:4:"4097";}i:3;a:3:{s:4:"text";s:19:"eZ Publish Security";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4101";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4101";s:7:"node_id";s:4:"4101";s:14:"parent_node_id";s:4:"4097";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_33_146927fb8b89a8ce7093f642757e27cb";s:14:"node_remote_id";s:32:"8c6b24dec872e085c608e3d0f73161d0";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:34:"Mirror/eZpedia/eZ-Publish-Security";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4101";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"74c5292acdfb48976337839eeecba1f4";s:23:"parent_object_remote_id";s:32:"7f157eb63e066aeee67e1105e9005afe";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

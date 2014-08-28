@@ -1,0 +1,972 @@
+a:10:{s:7:"content";s:77721:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-Setting-up-template-operators-in-eZ-Publish" title="Confessions of an apprentice: Setting up template operators in eZ Publish">Confessions of an apprentice: Setting up template operators in eZ  ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Welcome to the first article in a series of articles concerning development in the eZ Publish CMS. This series of articles is targeted at developers who already possess a basic knowledge of eZ Publish, especially those who went through all of the articles in my previous tutorial series, <b>Confessions of a n00b</b>. So, if you still have some need to brush up on your knowledge of the basics, regarding any or all of the issues, I would like to point you to the <a href="http://escapestudio.net/" target="_blank">escapestudio.net</a> site where the whole series is published. Now, let's get to the matter at hand: setting up custom template operators.</p><a name="eztoc6424_1" id="eztoc6424_1"></a><h2>Template operators setup in eZ Publish</h2><a name="eztoc6424_1_1" id="eztoc6424_1_1"></a><h3>Difference between template operators and template functions</h3><p>If you have any knowledge of working with templates in eZ Publish, you will know that the template operators make a base of all the magic you can do in your templates, from simple mathematics to more complex issues such as array manipulation and logical operations. Now, what makes template operators so different from template functions? Well, template functions work under the assumption that the developer has a knowledge of all the names of parameters required to make it work. The best example for this is the <b>node_view_gui</b> function. Let's take a look at how it works:</p><pre>{node_view_gui content_node=$node view='full'}</pre><p>So, in this example you see the basic usage of the <b>node_view_gui</b> function. In the line above, <b>node_view_gui</b> is the function we want to use in the template, <b>content_node</b> is the name of the first parameter in which we put the $node value, and <b>view</b> is the name of the second parameter in which we put value 'full'. Now, in this particular example, $node is a variable in which the node we want to display is stored, and the 'full' is a string depicting which view we want to use for that node. As you can see, we are aware of everything we need to pass to a function in order for it to work. Fail in one parameter, nothing will come out.</p><p>On the other hand, template operators use a set of unnamed parameters, which means that you only need to know what kind of a datatype you need to pass to a parameter (be it an integer, string, array, etc.), and what kind of an operator you need in a given situation. So, for example, if you have a timestamp you wish to display in a human-readable fashion, like so: mm/dd/yyyy, you will use the <b>datetime</b> operator which is already a built in feature of eZ Publish:</p><pre>{$timestamp|datetime('custom', '%m/%d/%Y')}</pre><p>Now, what did we do here? We have taken a variable $timestamp in which our original timestamp was stored, and we have passed it as an input parameter to the <b>datetime</b> operator using a pipe sign ( | ). Now, the <b>datetime </b>operator uses two more parameters, the first one defines which preset time format we will be using. Since none of the formats in the datetime.ini wasn't good for us, we have defined it as 'custom' which only means that we determine how this particular date and time will be displayed. The second parameter defines how the actual display is going to take place. So, since the display possibilities are already set in the <b>datetime </b>operator, we just use those available to us.</p><p>As you can see, the difference isn't great, but it's crucial. Using operators actually gives you greater manipulation of the results you get from various variables used in your templates. Also, template operators use PHP as their main engine for variable manipulation as opposed to variable manipulation through he template, and that really speeds up caching of the system. For all of you who have previous knowledge of PHP, you can see that the usage of functions vs. operators is no different than the basic usage of functions and operators in PHP.</p><a name="eztoc6424_1_2" id="eztoc6424_1_2"></a><h3>Creating a template operator in eZ Publish</h3><p>Now you're probably wondering, why would anyone work on creating his/her own template operator since there is so many of them already defined and working perfectly. Well, the plain and simple answer is: Sometimes you just have to. Sometimes you need a functionality on your site you previously never had to use, and as such it isn't defined in the existing set of operators. That's where custom operators kick in, and you'll see that they're really easy to create.</p><p>So, basically, what is a template operator? It's a PHP class defining a functionality which allows you to manipulate the variable values in your code. Why do we use it? Mostly to create your own PHP instead of the template compiler translating the template language to PHP. It looks cleaner, loads faster, and is a good practice. How do we create it? Through our extension, of course!</p><p>Let’s say that you have a web-page called mypage set up, and you have created your own extension called mypage in it. It probably has only two basic folders in it called <b>design</b> and <b>settings</b>. What you need to do before you set up your template operator is enable it through your extension’s ini settings. So, go to<b>&nbsp;/extension/mypage/settings/</b> folder and in it, create a <b>site.ini.append.php</b> file if it’s not already created. We won’t be putting any settings of this manner into any of the siteaccesses because we want our template operator to be available in all siteaccesses throughout the page. In the <b>site.ini.append.php</b> file, enter the following lines of code:</p><pre>[TemplateSettings]
+ExtensionAutoloadPath[]=mypage</pre><p>This means that we want our extension to be available on the autoload path of eZ Publish. Autoloads are, as you have probably already guessed, a set of scripts used to automatically load all PHP files we want to be preloaded so we can use them later. Operators need to be on the autoload path so they can be easily accessible all the time.</p><p>Now, since we’ve designated our extension to be on the autoload path, the next course of action is to actually put in some code which will enable the creation of our template operator. So, go one file up into the <b>extension/mypage</b> folder. In it, create a new folder called <b>autoloads</b>. Yup, you guessed it, <b>autoloads </b>is the folder which will handle the loading of our template operator script. So, inside this new folder, create a PHP file called <b>eztemplateautoload.php</b> in which you’ll input the following lines of code:</p><pre><?php
+$eZTemplateOperatorArray = array();
+$eZTemplateOperatorArray[] = array( 'script' => 'extension/mypage/classes/my_operator.php', 'class' => 'MyOperator', 'operator_names' => array('my_operator'));
+?></pre><p>In this file we’ve instantiated a variable called $eZTemplateOperatorArray and determined to be an array, of course. After that, we’ve put in an associative array in our variable as the first element, and defined the path to our operator’s script, the class we’ll be using and the operator name(s). Of course, since we’ve designated the <b>extension/mypage/classes/my_operator.php</b> as the path to our script, we need to create it. So let’s do just that.</p><p>Create a new folder in your <b>extension/mypage</b> folder called <b>classes</b>. In the <b>extension/mypage/classes</b> folder, create a new PHP file called <b>my_operator.php</b> and fill it with code like so:</p><pre><?php
+class MyOperator
+{ 
+
+function __construct()
+{
+$this->Operators = array('my_operator');
+}
+
+function operatorList()
+{
+return $this->Operators;
+}
+
+function namedParameterPerOperator()
+{
+return true;
+}
+
+function namedParameterList()
+{
+return array('my_operator' => array( 'display_string' => array( 'type' => 'string', 'required' => true, 'default' => '')));
+}
+
+function modify( $tpl, $operatorName, $operatorParameters, $rootNamespace,$currentNamespace, &$operatorValue, $namedParameters )
+{
+if ($operatorName == 'my_operator') { $operatorValue = $this->my_operator($namedParameters['display_string']); }
+}
+
+function my_operator( $args )
+{
+return ('My operator displays any string I want, for example: '.$args);
+}
+
+private $Operators;
+}
+?></pre><p>As you can see, this is a pretty big chunk of code. Let’s break it down to its defining elements.</p><p>So, the first thing we see here is that we have defined our class called <b>MyOperator()</b>. At the end of it, we can see that there is a private variable called $Operators defined. In the constructor, which is the function <b>__construct()</b>, we have set this variable to be an array in which we’ve put only one element, and that’s the template operator identifier ‘my_operator’. After that, we have a function called <b>operatorList()</b> which returns the value of the operators in our class (that very same array defined in the constructor). The function <b>namedParameterPerOperator()</b> which returns true to tell the template engine that the parameter list exists per operator type, this is needed for operator classes that have multiple operators. After that, we have the <b>namedParameterList()</b> function which returns every argument (or parameter, if you will) for every defined operator in the class, in the type of an associative array. You can see that we define the kind of parameters we will pass onto out template operator here. After that, we have a <b>modify()</b> function which tells the engine which parameters to use if it stumbles upon my_operator in the code. And, last but not least, the <b>my_operator()</b> function which defines the actions you want your operator to achieve. In this example, we’ve passed one argument to our operator, and displayed it on the screen.</p><p>After you’ve defined your operator in such a manner, the last task you need to do is regenerate the autoload arrays in your administration (under the section Setup/Extensions just select Regenerate autoload arrays) and clear the cache. And you’re all set!</p><a name="eztoc6424_1_3" id="eztoc6424_1_3"></a><h3>Usage of a template operator</h3><p>Usage of a template operator is pretty straightforward. Just open any template you wish your operator to be used in, and type in the following:</p><pre>{my_operator(‘some string or param I want to display’)}</pre><p>After that, you will see that the information on the display page looks like this:</p><p>My operator displays any string I want, for example: some string or param I want to display</p><p>If you want to make the use of a pipe (|), you need to change the&nbsp;<b>namedParameterList()</b>&nbsp;and&nbsp;<b>modify()</b>&nbsp;functions accordingly, for example:</p><pre>function namedParameterList()
+{
+return array( 'my_operator' => array('display_string' => array('type'=> 'string', 'required' => false, 'default' => '' )));
+}</pre><pre>function modify($tpl, $operatorName, $operatorParameters, $rootNamespace, $currentNamespace, &$operatorValue, $namedParameters)
+{
+if ($operatorName !== null) { $operatorValue = $this->my_operator($operatorValue); }
+else if ( !empty( $namedParameters[‘display_string’] ) )
+{ $operatorValue =$this->my_operator($namedParameters[‘display_string’]); }
+else { $operatorValue = "";}
+}</pre><p>As you can see, we have designated the first parameter of our operator to be false in the <b>namedParameterList()</b> function, because we want the input parameter of the operator to serve the same function. And of course, if you write the following in your template:</p><pre>{‘some string or param I want to display’|my_operator}</pre><p>you will get the same result as before but handled in a different way.</p><p>And that’s pretty much it! As you can see, the creation and usage of a template operator in eZ Publish is really easy enough for any programmer to accomplish, and it helps you out in situations where: a) the basic template operators just don’t cut it, and b) you need to get performance by custom PHP. That being said, if you ever find yourself staring at large number of lines in your template, remember the template operators, they can be a life-saver in such cases.</p><p>I truly hope that you’ve gained some knowledge and new vision concerning the creation and usage of template operators out of this article, and that it will help you in your future projects.</p><p>
+Until next time, I wish you happy coding,<br />Tomislav</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>11/21/2011 07:57 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Confessions-of-an-apprentice-Setting-up-template-operators-in-eZ-Publish">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-Setting-up-template-operators-in-eZ-Publish">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Netgen-family-celebrated-9th-birthday" title="Netgen family celebrated 9th birthday">Netgen family celebrated 9th birthday</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Yesterday Netgen celebrated 9th birthday of the company. We had a great dinner: all of the current crew with&nbsp;families with bunch of children, some past members, some future members. Old stories were told, new ideas shared.&nbsp;It is hard to imagine that 9 years already passed.</p><p>Looking forward to the next year! It will be a decade!</p><p>Few pictures from the event :)</p><table class="default" cellpadding="2" cellspacing="0" width="100%" summary="Gallery"><tr><td valign="top">  
+<div class=""><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/p1010425/6356-1-eng-GB/P1010425_medium.jpg" width="200" height="150"  style="border: 0px solid ;" alt="P1010425" title="P1010425" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>
+  </td><td valign="top">  
+<div class=""><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/p1010415/6348-1-eng-GB/P1010415_medium.jpg" width="200" height="150"  style="border: 0px solid ;" alt="P1010415" title="P1010415" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>
+  </td><td valign="top">  
+<div class=""><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/p1010424/6352-1-eng-GB/P1010424_medium.jpg" width="200" height="150"  style="border: 0px solid ;" alt="P1010424" title="P1010424" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>
+  </td></tr><tr class="bglight"><td valign="top">  
+<div class=""><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/p1010428/6360-1-eng-GB/P1010428_medium.jpg" width="200" height="150"  style="border: 0px solid ;" alt="P1010428" title="P1010428" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>
+  </td><td valign="top">  
+<div class=""><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/p10104292/6368-1-cro-HR/P1010429_medium.jpg" width="200" height="150"  style="border: 0px solid ;" alt="P1010429" title="P1010429" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>
+  </td><td valign="top">  
+<div class=""><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/p1010423/6372-1-cro-HR/P1010423_medium.jpg" width="200" height="150"  style="border: 0px solid ;" alt="P1010423" title="P1010423" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>
+  </td></tr>
+</table>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>10/18/2011 08:32 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Netgen-family-celebrated-9th-birthday">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Netgen-family-celebrated-9th-birthday">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Interview-with-Aleksander-Farstad-founder-of-eZ-Systems-and-eZ-Publish-open-source-CMS" title="Interview with Aleksander Farstad,  founder of eZ Systems and eZ Publish open source CMS">Interview with Aleksander Farstad,  founder of eZ Systems and eZ P ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In the first interview here on Netgen Blog we have Aleksander Farstad. He is the founder of eZ Systems with their main product eZ Publish open source CMS and was the CEO from 1999 to 2009. Currently, he is the Member of the Board and VP of Business Development.</p><p><b>NG: Hello Aleksander and welcome to our blog. Let's start from the beginning.&nbsp;</b><b>Back in 1999 you founded eZ Systems and soon after that released your main product eZ Publish CMS as open source software. Running a software company was quite different back then, open source was not even close to mainstream, so how come you decided to share it? What were the main reasons for such an unusual action?</b></p><p>AF: In the end of the 90s we saw the first open source companies being&nbsp;established. Even though we at that time did not know how the business&nbsp;model would work out, we knew it would be the business model of the&nbsp;future for the software industry for one simple reason, it created the&nbsp;most value for the customers. It was disruptive! We figured we over&nbsp;time would find a fair way to make our share, without compromising the&nbsp;core values of open source, and so we have.</p><p><b>NG: 12 years after, eZ Systems is a respectable business with many offices all over the world, with respectable client portfolio and with numerous community. Knowing&nbsp;from personal experience how hard it is to run a consulting business while making a product: what kept you going all this time especially in the early years?</b></p><p>AF: When you believe in something you never ever give up. We have been and&nbsp;we still are in this for the long term. When you set out to build a&nbsp;new business on a new technology, with a new unproven business model&nbsp;in a global highly competitive market, you know you are not in for a&nbsp;quiet ride.</p><p><b>NG: When you look back, are you satisfied with the outcome? Do you think you could achieve more? Any regrets?</b></p><p>AF: Of course we are proud of what eZ and its ecosystem has accomplished&nbsp;so far. Building this has been alot of trial and error, as there was&nbsp;no one else to look at. But this is merely a first start, we now have&nbsp;a proven technology platform and a proven business model. When I&nbsp;handed over the company to Gabriel, I told her that you have a 4,2&nbsp;version of the software, 1.0 of the business model and a 1,0 beta&nbsp;version of a company. So this marks a start, not an end.</p><p><b>NG: When you look at the situation on the market now, how do you see eZ Publish CMS in relation to other open source CMS-es like Drupal on one side and commercial CMS products on the other side?</b></p><p>AF: eZ is and has always been the high end alternative towards to leading&nbsp;commercial open source CMS. What eZ and other open source CMS has in&nbsp;common is the open source model. As always we have been ahead of the&nbsp;market, but as it now matures we also see that the market understands&nbsp;this as well.</p><p><b>NG: In you opinion what is the main advantage of eZ over other products and what part of eZ would need improvements the most?</b></p><p>AF: The key of eZ Publish is its unique content model in combination with&nbsp;its open standards, APIs and being a true content management system&nbsp;with full separation of content and layout. Making eZ Publish not only&nbsp;into a very flexible enterprise platform, but in the CMS world by far&nbsp;the leader of the Multi-Challenge (Multi channel, Multi sites, Multi&nbsp;language, Multi user...)</p><p><b>NG: Regarding all the changes during last 2 years (replacing consultancy model with the subscription model, splitting the code to Enterprise and Community version, etc.) are you satisfied with the current ratio between the open source part (including eZ Community) and the business part (eZ Systems)? Will there be more strategic changes in the near future?</b></p><p>AF: These are the results of a process started in 2007. Now our business&nbsp;model has come together. We are now more open source than ever, but we&nbsp;still have a strong scalable business model.</p><p>One of the mistakes of the past is that we rather have done most&nbsp;things ourselves, than involving the community. Going forward we want&nbsp;to involve the community even further, as we know this is a key&nbsp;critical success criteria of our business model.</p><p><b>NG: eZ Community is usually very eager to see new feature and improvements in the product, so I need to ask: are you going to focus more on the product to improve it even more now the business path is set?</b>&nbsp;</p><p>AF: Of course, both from continuously improving the open innovation&nbsp;processes with the community, and by adding resources to our own&nbsp;development team. So to sum up; the stronger the community, the&nbsp;stronger the product and the stronger the company the stronger the&nbsp;product...this is adding up.</p><p><b>NG: Due to the fact that we always have a shortage of eZ developers, how would you encourage people to start working with eZ Publish? What would be your key messages&nbsp;to them?</b></p><p>AF: It is simple; If you are a developer with eZ Publish knowledge and&nbsp;expertise, I can guarantee you that there is a job for you out there.&nbsp;Unlike other open source CMS eZ is in the enterprise market giving&nbsp;totally different opportunities. So if you do not have this knowledge, get it! I promise you an interesting and well paid job.</p><p><b>NG: Where do you see the eZ Ecosystem (eZ Systems, eZ Publish, eZ Community) in 5 years? Do you see yourself as an important part of it?</b></p><p>AF:&nbsp;In 5 years eZ is one of the top 3 players in the Web CMS industry&nbsp;globally, open source or commercial, and the eZ Ecosystem being at the&nbsp;heart of it. I do of course want to be part of this.</p><p><b>NG: How do you spend your time when not dealing with eZ*?</b></p><p>AF: I travel a lot with eZ all around the world, so when at home in Norway,&nbsp;I spend time with my family and love exploring the rugged nature&nbsp;either by skis in winter, or by sailing, diving, hiking or climbing in&nbsp;summer.</p><p><b>NG: Thank you for your time!</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>10/05/2011 10:23 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Interview-with-Aleksander-Farstad-founder-of-eZ-Systems-and-eZ-Publish-open-source-CMS">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Interview-with-Aleksander-Farstad-founder-of-eZ-Systems-and-eZ-Publish-open-source-CMS">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/New-version-of-eZ-Tags-released" title="New version of eZ Tags released">New version of eZ Tags released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>We have just released a new version of eZ Tags extension which brings the version number up to 1.2. This is a second version released since the&nbsp;<a href="http://www.netgen.hr/eng/Blog/Overview-of-eZ-Tags-extension" target="_self">initial blog post</a>&nbsp;introducing eZ Tags six months ago and we thought it would be a good idea to give an overview of what is new in eZ Tags 1.1 and 1.2.</p><p>As you probably already know, eZ Tags is an eZ Publish extension for taxonomy management and easier classification of content objects. It can be used for all taxonomies, including:</p>
+<ul>
+
+<li>closed classifications which are usually predefined</li>
+
+<li>open classifications like user tags (usually referred to as “folksonomy”)</li>
+
+<li>combination of both</li>
+
+</ul>
+<p>We’ve heard many people talk about eZ Tags on 2011 eZ Summer Conference in London, so we’re very proud to have developed an extension which is really useful to fellow eZ developers. It was also nominated for extension of the year, which is also a great honor. We didn’t win, but the winning extension (SQLI Import by <a href="https://twitter.com/jvieilledent" target="_blank">Jérôme Vieilledent</a>) most certainly deserved the award. What we really liked is that all those nice words about eZ Tags were based on version 1.0, and that version doesn’t even have all the features we planned and are still planning for the extension.</p><p>Version 1.1 was released just two or three days before the conference, and the main focus of that version was to add different fetches so developers can easily access all tags through their templates and PHP code, raising the value of the extension as tags now behave just as content objects and nodes. You can do with them whatever you want, organize them in whatever way you see fit, and act upon the model in your code.</p><p>Four fetches were added and they mimic the built in eZ Publish content fetches:</p>
+<ul>
+
+<li>tags/list and tags/list_count fetches behave just like content/list and content/list_count. They return a list of child tags and their count just below a specific tag ID, respectively. You can use those fetches to build navigation structures, for example.</li>
+
+<li>tags/tree and tags/tree_count, which can be used to fetch absolutely all tags below a specific tag ID, just like content/tree and content/tree_count fetches do for content nodes.</li>
+
+</ul>
+<p>Version 1.2 is a mix of a maintenance changes and bug fixes, while still adding a couple of useful features:</p>
+<ul>
+
+<li>eZ Tags datatype now fully supports class serialization</li>
+
+<li>we have included a handy script that can be used to convert the content of ezkeyword datatype to eZ Tags, which allows you to migrate easily from ezkeyword to eZ Tags (why wouldn’t you? :)</li>
+
+<li>a small but valuable feature is “tags” attribute in datatype content (example: $node.data_map.eztags.content.tags) which allows you to get a list of all tags in your content object attribute</li>
+
+<li>administration interface got a handy new feature that displays the table of all child tags at the bottom of the tags/id page.</li>
+
+<li>tags/view module view in the user part of the site was initially conceived to display only the latest objects that were related to a specific tag. It is now extended to display all objects, through pagination support</li>
+
+<li>included extended attribute filter got a small upgrade and now you can fetch nodes/objects that have one or more tags you specify, and is not limited to one tag as before</li>
+
+<li>eZ Tags datatype got two new options to better match the requirements of your taxonomy/folksonomy rules: 
+<ul>
+
+<li>You can now limit the number of tags that can be added to content object attribute. eZ Tags content object attribute edit interface supports that setting in a streamlined way. When you add the maximum possible number of tags, all controls for adding additional tags simply disappear and reappear again as you remove tags from your attributes</li>
+
+<li>When you use some of the tags as a closed taxonomy, sometimes there’s a requirement to not be able to add the root tag of of your tag subtree to your objects, as it only serves as a container and doesn’t have any real value to you. You can now set the option not to display that tag in object edit interface so your editors cannot add it to your object, thus respecting the rules you set for your data model. This option was available in the initial release of eZ Tags, however, hidden in the ini file and applied system wide, not per class attribute</li>
+
+</ul>
+</li>
+
+</ul>
+<p>We hope that all those new features can be useful to developers. If you have any questions or feature suggestions (besides multilanguage support for tags, we’re working on it :), <a href="http://www.netgen.hr/eng/Netgen" target="_self">contact us</a> and we’ll gladly help!</p><p>As always, eZ Tags can be downloaded at <a href="http://projects.ez.no/eztags" target="_self">http://projects.ez.no/eztags</a></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/07/2011 07:19 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/New-version-of-eZ-Tags-released">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/New-version-of-eZ-Tags-released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/eZ-Publish-CMS-persistent-variables" title="eZ Publish CMS persistent variables">eZ Publish CMS persistent variables</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>I will share with you a secret known only to eZ Publish gurus: persistent variables are not that hard to learn :). Of course, learning depends on good materials so hopefully this blog post will help clarify some things.</p><p>Just for test I spent 30 seconds on google (usually enough time) to find some good learning content about persistent variables and I found no such page on&nbsp;<a href="http://ez.no/" target="_self">ez.no</a>&nbsp;ecosystem. I did found 2 short &nbsp;blog posts (<a href="http://ez.ryba.eu/index.php/ez_publish/lab/persistent_variables_checked_out" target="_self">first</a>&nbsp;and&nbsp;<a href="http://www.andrew-wigglesworth.co.uk/journal/2011/01/13/Persistent_variables_in_ez_publish/" target="_self">second</a>) about the topic, not counting several forum posts. Interesting though, from both blogs you can see that authors haven’t been aware of persistent variables possibilities (second one even calls it mythical) but realized quickly how useful they are.&nbsp;</p><p>Before proceeding to the good stuff there is an important thing to know to successfully master persistent variables (advanced users can skip the next part).&nbsp;</p><a name="eztoc6288_1" id="eztoc6288_1"></a><h2>The Execution Order</h2><p>Sometimes while you are learning a technology you get misled and learn things the wrong way. When you reach a certain point and look back you can only hit the wall with your head because of the time you wasted. I admit, when starting with eZ, it took me a while to understand in which order templates are executed. Probably the fact that pagelayout.tpl includes the $module_result.content was misleading so I thought pagelayout is executed first. Don’t make the same mistake.</p><p>The right clue was under my nose all the time: check the debug log templates list, node/view/full template is the first :)</p><p>Why is this important?&nbsp;You can’t transfer variables from the layout to the module, of course. But you can do it in the other direction, although, that usage is not obvious as you may think.</p><a name="eztoc6288_2" id="eztoc6288_2"></a><h2>Persistent variables</h2>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/persistance/6297-1-eng-GB/persistance_mainstory1.png" width="468" height="245"  style="border: 0px solid ;" alt="persistance" title="persistance" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div><p>
+First let see what documentation specifies about these variable:<br />“<i>A variable set in one of the templates used by the view that was executed. Regardless of the caching mechanisms used, this variable will be available in the pagelayout. The type of the persistent variable depends on the value it contains. If the variable is not set, it will simply return a boolean FALSE</i>” (<a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Templates/The-pagelayout/Variables-in-pagelayout" target="_self">link</a>). Not clear enough, I would say, so lets help out here.</p><a name="eztoc6288_2_1" id="eztoc6288_2_1"></a><h3>Setting a persistent variable</h3><p>You can find the simplest example in full frontpage template of the ezwebin extension:</p><pre>{set scope=global persistent_variable=hash('left_menu', false(), 'extra_menu', false(), 'show_path', false())}</pre><p>Here you enable or disable certain parts in the ezwebin pagelayout. The problem with this code is that:</p>
+<ul>
+
+<li>all variables can be set only once, if you call the above line the second time it will reset all variables set before</li>
+
+<li>hash array can’t be created dynamically so you can’t set more combinations without nested “if” nightmare..</li>
+
+</ul>
+<p>Solutions is the ezpagedata_set() operator from the ezwebin extension. You can simply set each variable like this:</p><pre>{ezpagedata_set('key', 'value')}
+{ezpagedata_set('key2', 'value2')}</pre><p>More elegant, of course.</p><a name="eztoc6288_2_2" id="eztoc6288_2_2"></a><h3>Using persistent variable</h3><p>After you set a persistent variable it can be used where needed in pagelayout templates. There are 2 ways:</p><p>- via module_result variable:</p><pre>{$module_result.content_info.persistent_variable.key}</pre><p>- via ezpagedata() operator from ezwebin extension: &nbsp;</p><pre>{def $pagedata = ezpagedata()}
+{$pagedata.persistent_variable.key}
+</pre><p>Simple is that.</p><a name="eztoc6288_2_3" id="eztoc6288_2_3"></a><h3>Few simple scenarios</h3>
+<ul>
+
+<li>controlling things shown in layout like path, menus and similar</li>
+
+<li>showing some information from $node so it's not needed to fetch it again</li>
+
+<li>replacing some default info with current node specific stuff (e.g. <title>, meta description, meta keywords, etc.)</li>
+
+</ul>
+<a name="eztoc6288_2_4" id="eztoc6288_2_4"></a><h3>Advanced usages</h3><p>1. <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Template-override-conditions/note-on-persistent_variable-as-override/(language)/eng-GB" target="_self">Override </a>a template with persistent variable:</p><pre>[foo_layout]
+Source=pagelayout.tpl
+MatchFile=pagelayout_foo.tpl
+Subdir=templates
+Match[persistent_variable]=foo
+</pre><p>2. Transfer bigger chunk of html.&nbsp;Use <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Template-functions/Variables/set-block" target="_self">set-block</a> and persistent variable to transfer bigger chunk of code. &nbsp;&nbsp;</p><pre>{set-block variable=$foo}
+<div class=”box”>
+{node_view_gui content_node=$child view=’line’}
+</div>
+{/set-block}
+{ezpagedata_set('foo', $foo)}</pre><p>3. Doing some really cool stuff like setting Varnish TTL via custom headers (via <a href="http://twitter.com/jeanvoye" target="_blank">@jeanvoye</a>).</p><a name="eztoc6288_2_5" id="eztoc6288_2_5"></a><h3><b>Things to remember</b></h3><p>Persistent variables are usually generated in full views and as such are part of view cache. They will expire with the view cache of the view. Of course, if used within a cache-block in pagelayout they will be cached again. So don’t get confused.</p><p>You can’t store complex data types like objects, but usually numbers, strings, arrays and hashes are enough. &nbsp;</p><p>Any feedback on this topic would be useful. Thanks.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/25/2011 04:24 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/eZ-Publish-CMS-persistent-variables">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/eZ-Publish-CMS-persistent-variables">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/eZ-Conference-2011-in-London-a-Late-Recap" title="eZ Conference 2011 in London, a Late Recap">eZ Conference 2011 in London, a Late Recap</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>It has been more than a month now from the event so the topic is no longer in the spotlight, but I will do a late recap anyway. The main reason for such a big delay was, to be completely honest,&nbsp;<b>no free time whatsoever</b>. So I hope you find this post as a nice reminder on the event.</p><a name="eztoc6259_0_1" id="eztoc6259_0_1"></a><h3><b>The Venue</b></h3><p>Location was excellent: <a href="http://london2011.ez.no/Venue" target="_self">Cumberland hotel near the Marble Arch</a>, a luxury hotel with great conference capabilities and nice restaurant. It was great to visit London though we were not used to the frenzic weather. I never saw rain and sun change so fast and so often in one day. Now I understand why English people carry their umbrellas all the time :).</p><a name="eztoc6259_0_2" id="eztoc6259_0_2"></a><h3><b>The Event</b></h3><p>Great speakers, interesting presentation, even better mingling. There is nothing more to say which is not already mentioned on the <a href="http://london2011.ez.no/" target="_self">eZ Conference web</a>, on the <a href="http://share.ez.no/blogs/ez/ez-conference-2011-wrap-up-slides-pictures-videos" target="_self">eZ Community web</a> wrap up and on&nbsp;<a href="http://www.visionwt.com/Vision-blog/eZ-Publish-conference-2011-round-up" target="_self">Vision blog</a>.</p><p>What I want here is to check my <a href="http://www.netgen.hr/eng/Blog/eZ-Conference-2010-in-Berlin-Summary" target="_self">blog post </a>from last years conference in Berlin and compare it with this years impressions:</p>
+<ol>
+
+<li>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/horatio-nelson-vice-admiral-of-the-white/6276-1-eng-GB/Horatio-Nelson-Vice-Admiral-of-the-White_large.jpg" width="330" height="440"  style="border: 0px solid ;" alt="Horatio Nelson, Vice Admiral of the White" title="Horatio Nelson, Vice Admiral of the White" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>In general, the direction of eZ Publish development is much clearer than last year. In Berlin we had a lot of uncertainty as 2 editions where announced: Enterprise and Community. It was a hard decision to make for <a href="http://ez.no" target="_self">eZ Systems</a> and a huge step toward the Open Source business model that can be sustainable. Of course, <b>good business and community leadership</b> is a must for that to succeed.</li>
+
+<li>Last year a big topic was the code split and we now have <b>Community edition and Enterprise edition</b> as a result. Now the Community edition releases are more often (every month) and <a href="https://github.com/ezsystems/ezpublish" target="_self">github code repository</a> provides pull requests so community users can actively work on the core too. It certainly is a big step forward but I would like to see more community extensions (mature enough) to be bundled into community version. This would encourage community members to provide even better extensions.</li>
+
+<li>An important topic last year was using<b>&nbsp;Solr as a content storage</b>. This would enable using far more objects (10 millions and more) in eZ storage than we can today. But, unfortunately, this topic got lost from Berlin to London. Maybe it will revive in some other way in 2012 :). Recently I met some people behind <a href="http://phpcr.github.com/" target="_self">PHPCR </a>which should be considered in that respect.</li>
+
+<li>Long anticipated and announced last year was the<b>&nbsp;REST API</b>. Good news is that we have progress there, though only in read mode. Hopefully full read/write will be supported by the next conference.</li>
+
+<li>New topic was <b>mobile</b>, which is no surprise due to huge increase of mobile usage in last 12 months. The already mentioned REST API is the basis for easier multichannel development and we already have seen some nice implementations of mobile apps delivering content from eZ. </li>
+
+</ol>
+<a name="eztoc6259_0_3" id="eztoc6259_0_3"></a><h3><b>Netgen impact</b></h3>
+<ul>
+
+<li>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/big-ben-netgen-crew/6272-1-eng-GB/Big-Ben-Netgen-crew_large.jpg" width="360" height="270"  style="border: 0px solid ;" alt="Big Ben & Netgen crew" title="Big Ben & Netgen crew" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>There was 5 of us (<a href="http://twitter.com/vjeran" target="_blank">@vjeran</a>, <a href="http://twitter.com/ivrdoljak" target="_blank">@ivrdoljak</a>, <a href="http://twitter.com/emodric" target="_blank">@emodric</a>, <a href="http://twitter.com/periklo" target="_blank">@periklo</a> and <a href="http://twitter.com/ilukac" target="_blank">@ilukac</a>). That is what I call a strong presence, we could cover both, business and community tracks efficiently :)</li>
+
+<li>Lot of people approached us and thanked for good work we are doing with our extensions. Thanks to all, we really appreciate it.</li>
+
+<li>Before the conference we helped eZ Systems with the <a href="http://london2011.ez.no/" target="_self">Conference page</a> by implementing it in eZ Publish CMS in just few days (#48hours)</li>
+
+<li>We also revamped our <a href="http://netgen.hr/eng" target="_self">site</a> before the conference, implemented new fresh design which should better present Netgen and our work.</li>
+
+<li>We were nominated in 2 categories for eZ Awards: “Blogger of the year” for my blogging efforts and “Extension of the year” for <a href="http://www.netgen.hr/eng/Labs/eZ-Tags" target="_self">eZ Tags</a>. </li>
+
+<li>I had a very short “Flash talk” slot , with only 10 minutes to present an important topic (Social Flavoured eZ Publish). Very optimistic, but not wise, as I didn’t manage to show everything what I wanted. The punchline was that a modern CMS should support WEM (web engagement management) as much as possible. But more on that topic in my <a href="http://share.ez.no/blogs/ivo-lukac/social-flavours-reloaded" target="_self">blog post</a> on the community site.</li>
+
+<li>We discussed with <a href="http://twitter.com/paulborgermans" target="_blank">@paulborgermans</a>&nbsp;about working together on semantic features which includes some new stuff in eZ Tags too. Stay tuned.</li>
+
+<li>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/ez-award-winners/6268-1-eng-GB/eZ-Award-winners_large.jpg" width="360" height="270"  style="border: 0px solid ;" alt="eZ Award winners" title="eZ Award winners" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>Sweets left for the end: I won the “Blogger of the year” <a href="http://london2011.ez.no/Awards/Awards-Winner-2011" target="_self">award</a> ;)&nbsp;</li>
+
+</ul>
+<a name="eztoc6259_0_3_1" id="eztoc6259_0_3_1"></a><h4>A reminder</h4><p>Vote for the next years conference venue <a href="http://london2011.ez.no/2012-Conference" target="_self">here</a>!</p><p><b>See you next year.</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/11/2011 02:44 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/eZ-Conference-2011-in-London-a-Late-Recap">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/eZ-Conference-2011-in-London-a-Late-Recap">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/We-presented-on-eZ-Publish-Conference-in-London" title="We presented on eZ Publish Conference in London">We presented on eZ Publish Conference in London</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>We presented our social flavored extensions on eZ Conference in London on June 16th. The presentation covered Web Engagement Management features which will modern CMS platform like eZ Publish need to be successful in the near future.&nbsp;</p><p>Intention was to give a short theoretical intro about web engagement on top of content management systems and give a live demo of 5 simple extension developed by Netgen:&nbsp;</p>
+<ul>
+
+<li><b><a href="http://www.netgen.hr/eng/Labs/eZ-Tags" target="_self">eztags</a></b> for advanced and easy tagging of content</li>
+
+<li><a href="http://www.netgen.hr/eng/Labs/Netgen-Push" target="_self"><b>ngpush</b> </a>for pushing content to channels like twitter and facebook</li>
+
+<li><a href="http://projects.ez.no/ngopengraph" target="_blank"><b>ngopengraph</b> </a>for giving more info about the page for facebook "like" button</li>
+
+<li><a href="http://www.netgen.hr/eng/Labs/Netgen-Connect" target="_self"><b>ngconnect</b> </a>for giving user a faster way to connect to a site without registration</li>
+
+<li><a href="http://www.netgen.hr/eng/Labs/Netgen-Comments" target="_self"><b>ngcomments</b> </a>to give user a nicer ajax based commenting on top of ezcomments</li>
+
+</ul>
+<p>Time given to us was a bit short, so I was not able to demonstrate 2 last extension, but you can check it your self on this blog post: <b>connect and comment</b> :)</p><p>The slides are available on <a href="http://www.slideshare.net/gofina/social-flavors-in-ez-publish-cms" target="_self">Slideshare</a>.&nbsp;</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>06/16/2011 09:17 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/We-presented-on-eZ-Publish-Conference-in-London">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/We-presented-on-eZ-Publish-Conference-in-London">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/How-to-create-a-modern-web-site-part-2-the-site-map" title="How to create a modern web site - part 2: the site map">How to create a modern web site - part 2: the site map</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>This is the second post in the series on how to create a modern web site. In previous post we covered <a href="http://www.netgen.hr/eng/Blog/How-to-create-a-modern-web-site-part-1-from-the-first-idea-to-the-project-baseline" target="_self">how to set up the baseline for a web project</a>. This post will cover the next step in a web project:<b>&nbsp;setting up a site map</b>. In this case we are not talking about the actual page “Site map” many sites have, and we don’t talk about the Sitemap protocol that crawlers use to index sites either. The topic is about drawing a conceptual site map which will eventually become a real web site so the “Site map” page and the <a href="http://en.wikipedia.org/wiki/Sitemaps" target="_self">Sitemap protocol </a>data could derive from it.</p><a name="eztoc4144_0_1" id="eztoc4144_0_1"></a><h3>What is a site map?</h3><p>In fact, it is a very simple thing. My definition would be that it’s a <b>hierarchical organization of important pages</b>. It is the starting point for the site information architecture. A lot things derive from the site map:</p>
+<ul>
+
+<li>basic information architecture</li>
+
+<li>navigation &nbsp;</li>
+
+<li>list of wireframes and design layouts</li>
+
+<li>structure of URL-s</li>
+
+<li>content structure in the CMS </li>
+
+</ul>
+<a name="eztoc4144_0_2" id="eztoc4144_0_2"></a><h3>Why is it important?</h3><p>The conceptual site map is important because it gives a <b>sense of how complex the site will be</b>&nbsp;and how to <b>organize navigation in that respect</b>.</p><p>Usually, we note all links on the site map with some letters to specify what type of page is needed. E.g. “A” for article, “C” for category, “BP” for blog post, etc. That can also show how complex the site will be regarding page diversity. From that, the information architecture sheet can be started.</p><p>Also, we try to identify cross links by traversing across the tree, which can also show how complex the site will be regarding page content. E.g. an article could have some related products so we draw a line from the article to a product. Later on a "related product" box should be implemented.</p><p>Number of important top level links will influence the solution of the top level navigation. Usually, top level navigation is placed on the top of the page horizontally, however, with to many first level links more suitable would be to use top level navigation on the left. Maximum level of site map depth will dictate the overall navigation solution. Is one level sub menu enough or a multi level tree would do the job?</p><a name="eztoc4144_0_3" id="eztoc4144_0_3"></a><h3>How to create it?</h3><p>As the site map is really simple, there are many ways how to do it:</p>
+<ul>
+
+<li>sketch it on paper (scan it later)</li>
+
+<li>use some web services like <a href="http://writemaps.com/" target="_self">writemaps.com</a></li>
+
+<li>write in in some spreadsheet like Excel or Google Docs or any text application (from Notepad to Word) </li>
+
+<li>specify it in Visio </li>
+
+<li>or use more specific apps like for mind mapping or similar</li>
+
+</ul>
+<p>Obviously there are many way to skin a cat, some are better suited than other, but the bottom line is to do it.</p><p>To summarize, a good site map will show to all parties involved what are they dealing with. With site map as common ground, creative staff can begin to work on the concept and do some prototyping/wireframing, which precedes the design process and technical people can start working on the information architecture.</p><p>That’s all for today’s post. In the next one, we will cover a web information architecture and what it is used for.</p><p>ps.</p><a name="eztoc4144_0_4" id="eztoc4144_0_4"></a><h3>Netgen web revamp example</h3><p>
+Check our new site map on&nbsp;<a href="http://writemaps.com/sitemaps/shareMap/a79f578amjmqts3tvzhb4ciw0osxbuq5wmcbjat5zwf97iylvn" target="_self">writemaps.com</a>&nbsp;and how it started on paper :)<br /></p>
+<div class=""><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/new-netgen-site-map/4151-1-eng-GB/New-Netgen-Site-map_mainstory1.jpg" width="468" height="351"  style="border: 0px solid ;" alt="New Netgen Site map" title="New Netgen Site map" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/25/2011 03:04 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/How-to-create-a-modern-web-site-part-2-the-site-map">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/How-to-create-a-modern-web-site-part-2-the-site-map">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/How-to-install-and-use-eZ-Tags" title="How to install and use eZ Tags">How to install and use eZ Tags</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Since we tagged eZ Tags extension as stable on GitHub few weeks ago, we thought this would be a good time to write something about how to install eZ Tags extension and common usages.</p><a name="eztoc4102_0_1" id="eztoc4102_0_1"></a><h3>Installing eZ Tags extension</h3><p>eZ Tags requires eZ Publish version 4.3 and above to function properly. Versions 4.2 and below are not supported mainly because they don’t have eZ JSCore extension in distribution files, and eZ Tags relies heavily on it. Other than that, there may also be some incompatibilities with APIs in mentioned eZ Publish versions, since eZ Tags is not tested on them. Also, eZ Tags uses eZ Find for suggesting tags and fetching related tags, so those features will not be available if eZ Find is not installed and activated.</p><p>For the most part, installing eZ Tags is a straightforward process. Download the stable release version from <a href="http://projects.ez.no/eztags" target="_blank">http://projects.ez.no/eztags</a>&nbsp;and unpack it into extension directory of your eZ Publish installation. You need to add two tables in your database, so run the following command from root of your web, replacing the example values with the real ones:</p><pre>mysql -u "user" -p"password" -h"host" "database" < extension/eztags/sql/mysql/schema.sql</pre><p>After that, activate the extension in your site.ini, regenerate the autoload array and clear the caches. This simple process is enough to have eZ Tags working. However, to gain access to all the functionality and speed, there are couple of more steps you can do. These steps are optional, but highly recommended:</p>
+<ul>
+
+<li><p>To speed up loading of the tags tree in admin interface, you need to symlink index_treemenu_tags.php file from the extension, to root directory of your web (note the dot at the end of the command):</p><pre>ln -s extension/eztags/index_treemenu_tags.php .</pre><p>After that, add the following in your .htaccess file, just below "RewriteEngine On" line:</p><pre>RewriteRule tags/treemenu/? index_treemenu_tags.php
+RewriteRule ^index_treemenu_tags\.php - [L]</pre></li>
+
+</ul>
+
+<ul>
+
+<li>To enable anonymous users to actually see the content that is related to a particular tag, allow anonymous access to "view" view of "tags" module</li>
+
+</ul>
+
+<ul>
+
+<li>Finally, if you wish to use tags suggestion and see related tags on tag view page, install and activate eZ Find extension and then edit the file extension/ezfind/java/solr/conf/schema.xml, add the following block of text and then restart Tomcat and reindex:&nbsp;
+<ul>
+
+<li>Inside <schema> element add:<pre><copyField source="*_lk" dest="ezf_df_tags" />
+<copyField source="*_k" dest="ezf_df_tags" /></pre></li>
+
+<li>Inside <fields> element add:<pre><field name="ezf_df_tags" type="text" indexed="true"
+stored="true" multiValued="true" termVectors="true" /></pre></li>
+
+</ul>
+</li>
+
+</ul>
+<a name="eztoc4102_0_2" id="eztoc4102_0_2"></a><h3>Using eZ Tags</h3><p>There are two sides to using eZ Tags extension. First one is in content object edit interface and the second one is a separate tab in administration where you can manage your tags (search tags, add new ones, delete them, merge two tags into one, add/edit/delete the tag synonyms and convert tags to synonyms). Image below is a screenshot of tags admin interface:</p>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/ez-tags-admin-interface/4109-1-cro-HR/eZ-Tags-admin-interface_mainstory1.png" width="468" height="249"  style="border: 0px solid ;" alt="eZ Tags admin interface" title="eZ Tags admin interface" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div><p>Before adding tags to your objects, you need to edit your classes and add the “Tags” attribute to them. When adding the datatype to your class, you can choose if this particular attribute can use all available tags in the database, or just a particular subtree. This can be done by selecting one of the tags in tag tree popup window. If you do select one of tags, only tags below the selected one can be added to the content object attribute. If you select the root of the tree, object attribute can use all the available tags.</p><p>Image below illustrates how content object attribute edit interface looks like:</p>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/ez-tags-object-edit-interface/4113-1-cro-HR/eZ-Tags-object-edit-interface_mainstory1.png" width="468" height="257"  style="border: 0px solid ;" alt="eZ Tags object edit interface" title="eZ Tags object edit interface" />
+            
+    
+    
+    </div>
+
+     </div>
+</div>
+</div><p>Orange items (changed to blue in version 1.0 final) represent tags that are currently present in your object attribute and adding them is easy. Just type anything into the available input field, autocomplete will be activated to show you matching tags, and after that, just click on one of the results.</p><p>If you find yourself in need to add the tags not already present in the database, enter tag name into input field and click “Add new” button which will show you a popup window to place your tag into tree hierarchy. After selecting a parent tag in popup window, it will automatically close and the tag will be added to your object.</p><p>Grey items represent tags that were suggested to you based on your current selection of tags in the attribute and tags present in other objects as your current selection.</p><a name="eztoc4102_0_3" id="eztoc4102_0_3"></a><h3>Usage scenarios</h3><p>
+There are several scenarios on how to use eZ Tags. It is a matter of what kind of taxonomy you need (you can find more about this topic on <a href="http://www.slideshare.net/gofina/taxonomy-management-in-ez-publish-the-new-ez-tags-datatype" target="_blank">slides</a>&nbsp;from eZ Winter Conference 2011). <br />Here are some general scenarios:</p>
+<ol>
+
+<li>The most obvious is to replace standard ezkeyword dataype used for open taxonomies. It basically means to let users add tags by their own. Important thing is that web admin can always rearrange the tags for better usage:
+<ol>
+
+<li>for SEO: more context words in tag links (e.g. /tags/vew/Places/UK/London/BigBen)</li>
+
+<li>for cross linking: parent tag linking on tag pages</li>
+
+<li>for easier management</li>
+
+<li>less duplicated entries by merging and synonyms</li>
+
+</ol>
+</li>
+
+<li>Setup a closed taxonomy with more classification where tags will be inserted in bulk. Users can only select predefined tags. Important thing is that it is very easy to manage tags if there are some changes after deployment. Also, as tags can be structured in tree hierarchy, search can be done by tag context (parent line)</li>
+
+<li>The mix of both previous scenarios. It is possible to simply open up a closed taxonomy or close the open one. Depends on the situation</li>
+
+</ol>
+<p>We also hope some new scenarios will be invented by happy users :)</p><a name="eztoc4102_0_4" id="eztoc4102_0_4"></a><h3>Website example</h3><p>The first site we built that uses eZ Tags is <a href="http://www.exportboomers.com" target="_blank">ExportBoomers.com</a>, home of Croatian Independent Software Exporters blog. It’s a nice example of how eZ Tags can be used because it uses a mix of closed and open taxonomies (for example technologies each of the members uses in their daily work or locations where they export their products or which post type they publish on the site). Site also takes advantage of eZ Tags, together with eZ Find to search and filter blog posts based on different tags attributes. Ofcourse, eZ Find is also being used to display related tags when a tag is being viewed together with all objects related to it.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>04/27/2011 03:25 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/How-to-install-and-use-eZ-Tags">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/How-to-install-and-use-eZ-Tags">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/Netgen/(offset)/100"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+          
+<span class="pages">
+                      <span class="other"><a href="/Mirror/Netgen">1</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/30">4</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/40">5</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/60">7</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/70">8</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/80">9</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/90">10</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/100">11</a></span>
+            
+        <span class="current">12</span>
+
+    
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Netgen/(day)/18/(month)/8/(year)/2014">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class="currentselected today">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:3:"110";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"228";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"228";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"226";s:7:"node_id";s:3:"228";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";s:14:"node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:6:"offset";i:110;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:13:"Mirror/Netgen";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"228";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

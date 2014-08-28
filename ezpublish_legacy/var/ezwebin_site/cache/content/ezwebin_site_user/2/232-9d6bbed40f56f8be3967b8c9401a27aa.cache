@@ -1,0 +1,961 @@
+a:10:{s:7:"content";s:43175:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/self_overlib_ez_publish_javascript_overlib_library_integration" title="SELF OverLib - eZ Publish JavaScript overLIB library integration">SELF OverLib - eZ Publish JavaScript overLIB library integration</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+This extension integrates a popular OverLib JavaScript library with eZ Publish. Beside providing a simple template operator for automated generation of OverLib instances, it introduces a fallback configuration architecture for even easier and flexible use. It is possible to use pre-configurable presets, ad-hoc configurated calls as well as any combination of the two approaches. 
+</p>
+<h5>Description</h5>
+<p>
+
+For each OverLib instance, a JavaScript code must be generated within HTML document that requires a number of paramter variables to be passed. Those variables control what text/content will be displayed, how the window will behave, what it will look like, will it be sticky, and so on. There are several problems with literally defining this JavaScript code in the templates:<br />
+- It is not easy to deal with special characters and escape strings, especially in the eZ template language,<br />
+- Static JavaScript code is not flexible in case of any future changes, especially across big projects.<br />
+ <br />
+To cope with those problems, a simple template operator is introduced. The operator automatically deals with any special chars that could destroy JavaScript code. It is also configurable by means of presets. Any number of presets can be defined and each preset can define any combination of OverLib settings.<br />
+ <br />
+To ensure that overlib gets always generated properly and the JavaScript has every variable required, a setting fallback system is introduced. The following priority is used to determine the values of OverLib parameters:<br />
+1) Ad-hoc declarations (within the template itself, when using the operator),<br />
+2) Preset declarations (if a preset was declared and used)<br />
+3) Default system values.<br />
+Any combination and order of parameters can be used.<br />
+ <br />
+<b>Note:</b> Please read the selfoverlib.ini configuration file for further details.<br />
+<b>Note:</b> Find out more about OverLib library at <a href="http://www.bosrup.com/web/overlib/" title="http://www.bosrup.com/web/overlib/" target="_self">http://www.bosrup.com/web/overlib/</a><br /> 
+</p>
+<h5> Examples</h5><div class="code">
+
+<p>
+
+{* This is an adhoc declaration, it has no pre-configured settings, *}<br />
+ {* all the paramters that are not declared will have default OverLib values. *}<br />
+ {selfoverlib_display( <br />
+ hash( <br />
+ 'content', 'THIS IS MY OVERLIB TEXT', <br />
+ 'caption', 'THIS IS MY OVERLIB CAPTION', <br />
+ 'html_value', 'THIS IS THE ANCHOR',<br />
+ 'width', '225',<br />
+ ) <br />
+ )}<br />
+ {* This is a preset-based declaration. You do not have to define anything *}<br />
+ {* except for the preset and the content. *}<br />
+ {selfoverlib_display(<br />
+ hash( <br />
+ 'preset', 'admindefault', <br />
+ 'caption', 'Help: how to use it?', <br />
+ 'content', 'It order to use this functionality, you must...',<br />
+ )<br /> )}
+</p>
+
+</div>
+
+<p>
+Read doc/readme.txt for further details. 
+</p>
+
+<p>
+
+This extension is available at:<br /><a href="http://ez.no/developer/contribs/template_plugins/self_overlib" title="SELF OverLib" target="_blank">http://ez.no/developer/contribs/template_plugins/self_overlib</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/24/2008 04:44 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/SELF-OverLib-eZ-Publish-JavaScript-overLIB-library-integration">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/self_overlib_ez_publish_javascript_overlib_library_integration">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/lab/class_attribute_based_button_sets_in_new_mce_online_editor" title="Class-attribute-based button sets in new MCE Online Editor">Class-attribute-based button sets in new MCE Online Editor</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+One of my primary postulates towards the new MCE Online Editor is that it supports different button sets, depending on explicit call <b>or</b> preset settings. Actually, presets would stand a much better approach, so let's forget about template declaration for a while. I decided to find out how much work it would require to make the preset approach run.
+</p>
+<h5>Ini structure modification</h5>
+<p>
+First of all, we have to store the settings we will be using later on. Current button declaration in <i>ezoe.ini</i> looks as follows:
+</p>
+<div class="code">
+
+<p>
+
+[EditorSettings]<br />
+Buttons[]<br />
+Buttons[]=formatselect<br />
+Buttons[]=bold<br />
+Buttons[]=italic<br />
+Buttons[]=underline<br />...
+</p>
+
+</div>
+
+<p>
+We would need multi-dimentional array with multiple preset-like named blocks instead:
+</p>
+<div class="code">
+
+<p>
+
+[EditorSettings]<br />
+ButtonPresets[]<br />
+ButtonPresets[]=full<br />
+ButtonPresets[]=mini<br />
+#...<br />
+[ButtonPreset-full]<br />
+Buttons[]<br />
+Buttons[]=formatselect<br />
+Buttons[]=bold<br />
+Buttons[]=italic<br />
+Buttons[]=underline<br />
+Buttons[]=|<br />
+Buttons[]=bullist<br />
+Buttons[]=numlist<br />
+Buttons[]=indent<br />
+Buttons[]=outdent<br />
+Buttons[]=|<br />
+Buttons[]=undo<br />
+Buttons[]=redo<br />
+#...<br />
+[ButtonPreset-mini]<br />
+Buttons[]<br />
+Buttons[]=formatselect<br />
+Buttons[]=bold<br />
+Buttons[]=italic<br />
+Buttons[]=underline<br />
+Buttons[]=|<br />
+Buttons[]=bullist<br />
+Buttons[]=numlist<br />
+Buttons[]=indent<br />Buttons[]=outdent
+</p>
+
+</div>
+<h5>XMLBlock datatype modification</h5>
+<p>
+Once we're done with our preset configuration, we have to make the XML Block datatype actually display and store the preset values. First of all, we need to modify the datatype itself (<i>kernel/classes/datatypes/ezxmltext/ezxmltexttype.php</i>):
+</p>
+<div class="code">
+
+<p>
+
+// Class constants declaration<br />
+const BUTTONS_FIELD = 'data_text2';<br />
+const BUTTONS_VARIABLE = '_ezxmltext_buttons_';<br />
+// Fetch and store post data - method modification<br />
+function <b>fetchClassAttributeHTTPInput</b>( $http, $base, $classAttribute )<br />
+{<br />
+$column = $base . self::COLS_VARIABLE . $classAttribute->attribute( 'id' );<br />
+$buttons = $base . self::BUTTONS_VARIABLE . $classAttribute->attribute( 'id' );<br />
+if ( $http->hasPostVariable( $column ) )<br />
+{<br />
+$columnValue = $http->postVariable( $column );<br />
+$classAttribute->setAttribute( self::COLS_FIELD, $columnValue );<br />
+$buttonsValue = $http->postVariable( $buttons );<br />
+$classAttribute->setAttribute( self::BUTTONS_FIELD, $buttonsValue );<br />
+return true;<br />
+}<br />
+return false;<br />}
+</p>
+
+</div>
+
+<p>
+The example above is not complete, there are other methods to modify, like initialization or (un)serialization ones. This should be enough to run the test, though.
+</p>
+
+<p>
+We still have to modify the datatype templates. Again, we'll do the minimum: modify the datatype's class attribute template (design/standard/templates/class/datatype/edit/ezxmltext.tpl) by adding the following code:
+</p>
+<div class="code">
+
+<p>
+
+<div class="block"><br />
+<label>{'Button preset'|i18n( 'design/standard/class/datatype' )}:</label><br />
+<select name="ContentClass_ezxmltext_buttons_{$class_attribute.id}"><br />
+{def $preset_list=ezini( 'EditorSettings', 'ButtonPresets', 'ezoe.ini' )}<br />
+{foreach $preset_list as $preset}<br />
+<option value="{$preset|wash()}"{if eq( $preset, $class_attribute.data_text2 )} selected="selected"{/if}>{$preset|wash()}</option><br />
+{/foreach}<br />
+</select><br /></div>
+</p>
+
+</div>
+
+<p>
+Now, all pieces are in their place for the final cuts.
+</p>
+<h5>MCE Online Editor modification</h5>
+<p>
+First of all, we have to modify the method responsible for collecting the button settings from the configuration files. We locate the <i>eZOEXMLInput </i>handler class and extend the proper method:
+</p>
+<div class="code">
+
+<p>
+
+ function getEditorButtonList()<br />
+ {<br />
+ if ( $this->editorButtonList === null )<br />
+ {<br />
+ $contentClassAttributeID = $this->ContentObjectAttribute->ContentClassAttributeID;<br />
+ $contentClassAttribute = eZContentClassAttribute::fetch( $contentClassAttributeID );<br /> $buttonPreset = $contentClassAttribute->DataText2;
+</p>
+
+<p>
+
+ $oeini = eZINI::instance( 'ezoe.ini' );<br /> $buttonPresets = $oeini->variable( 'EditorSettings', 'ButtonPresets' );
+</p>
+
+<p>
+
+ if( !in_array( $buttonPreset, $buttonPresets ) )<br />
+ {<br />
+ $buttonPreset = $buttonPresets[0];<br />
+ }<br />
+ $buttonList = $oeini->variable( 'ButtonPreset-' . $buttonPreset , 'Buttons' );<br /> 
+</p>
+
+<p>
+
+ $contentini = eZINI::instance( 'content.ini' );<br />
+ $tags = $contentini->variable('CustomTagSettings', 'AvailableCustomTags' );<br />
+ $hideButtons = array();<br /> $showButtons = array();
+</p>
+
+<p>
+
+ // filter out underline if custom underline tag is not enabled<br />
+ if ( !in_array('underline', $tags ) )<br /> $hideButtons[] = 'underline';
+</p>
+
+<p>
+
+ // filter out pagebreak if custom pagebreak tag is not enabled<br />
+ if ( !in_array('pagebreak', $tags ) )<br /> $hideButtons[] = 'pagebreak';
+</p>
+
+<p>
+
+ // filter out relations buttons if user dosn't have access to relations<br />
+ if ( !eZOEXMLInput::currentUserHasAccess( 'relations' ) )<br />
+ {<br />
+ $hideButtons[] = 'image';<br />
+ $hideButtons[] = 'objects';<br />
+ }<br />
+ foreach( $buttonList as $button )<br />
+ {<br />
+ if ( !in_array( $button, $hideButtons ) )<br />
+ $showButtons[] = $button;<br />
+ }<br />
+ $this->editorButtonList = $showButtons;<br />
+ }<br />
+ return $this->editorButtonList;<br /> }
+</p>
+
+</div>
+
+<p>
+All this modification does is choose a proper button preset instead of a general one. It could be more warning-secured, this is the minimum.
+</p>
+
+<p>
+This seems to be all, but it is not. The main MCE init template uses run-once operator to make sure that OE init is only run once. This is going to be a problem since OE button configuration is part of the init. We have to remove the run-once operator and allow multiple initializations. Now, I'm not sure at the moment if this is JavaScript-safe, but seems to work fine at first glance. Edit <i>ezxmltext_ezoe.tpl</i> template file and comment out run-once operators:
+</p>
+<div class="code">
+
+<p>
+
+{*run-once*}<br />
+...<br />{*/run-once*}
+</p>
+
+</div>
+
+<p>
+This should be it.
+</p>
+<h5>Summary</h5>
+<p>
+As this example shows, a number of kernel-located files have to be modified in order to achieve this functionality. This takes just a couple of minutes once you know what you're doing, but kernel modification won't likely be accepted for premium support, for example. This is why I really hope this modification makes it to the eZ Publish 4.1.0 release, with some 4.0.x backward compatibility mode.
+</p>
+
+<p>
+Also, note that this is hardly a substitute for server-side validation of what user is allowed to do within the OE (which ideally should automatically control what a user can do and I hope for that in eZ 4.2+), but stands a great transitional presentation-layer functionality that can be backed up with proper access control. Many projects will suffer if this is not in place...
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/23/2008 07:58 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Class-attribute-based-button-sets-in-new-MCE-Online-Editor">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/lab/class_attribute_based_button_sets_in_new_mce_online_editor">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/blue_screen_of_death_ez_publish" title="Blue screen of death ">Blue screen of death </a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Does eZ Publish have its own <a href="http://en.wikipedia.org/wiki/Blue_Screen_of_Death" title="blue screen of death" target="_blank">blue screen of death</a>? Yes, it does! It is the setup wizard on a production site. And how do you make go off? Well, it's quite enough to have anything about site.ini global override messed up: transmission error, solid syntax error, etc... Over thirty eZ installations and deployments, I was calm enough to figure it out just in seconds, but it still made me sweat... And imagine a beginner... ;)
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/28/2008 12:41 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Blue-screen-of-death">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/blue_screen_of_death_ez_publish">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/random_thoughts/themes_for_ez_publish_discussion" title="Themes for eZ Publish - discussion">Themes for eZ Publish - discussion</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+An interesting topic emerged among suggestions in the ez.no forum, regarding themes for eZ Publish. I thought it was an interesting theme, so here's the link: <a href="http://ez.no/developer/forum/suggestions/provide_new_themes" title="Provide new themes for eZ Publish discussion" target="_blank">http://ez.no/developer/forum/suggestions/provide_new_themes</a>
+</p>
+
+<p>
+And here's what I think:
+</p>
+
+<p>
+
+I have to agree that easier theme management and exchange would help to widespread eZ Publish. Personalization seems like the big thing right now and even if it's not about that, ability to implement selected themes easily might be one of the key factors when deciding on a particular CMS.<br />
+ <br />
+ However, we need to realize what theme engines we're talking about when trying to incorporate that idea into eZ Publish. Most themes that I know of are prepared for systems that have a very isolated and precise functionality due to the kind of system they are (CMS blogs, forums, shops, web galleries, CRMs, or CMSs with preexisting module sets, etc..), and whose content model, internal structure etc. do not change.<br />
+ <br />
+ Meanwhile, with eZ Publish we have a content engine that makes it possible to handle most of the above functionalities and nearly everything can be customized. With the system we don't have preset roles for a forum, for a blog etc - we have to arrange that ourselves, minding all the implementation details. There's entire list of other dimensions that have to be taken under consideration (sections, access rules, caching, custom overrides, class modifications, structure...). Many of those things are handled or reach to the presentation layer (*.tpl), many of them in a customized way, again.<br />
+ <br />
+ If some of the themes available for those other, isolated systems, have to be versioned along with the core (for example: theme for version 2.0, theme for version 2.1, etc..), how do we want to handle the change with eZ Publish and its complexity? Would that be possible without limiting of what's one of eZ's key features - extensibility? Wouldn't that concrete the development of the core in some ways?<br />
+ <br /> If I look at ezwebin, I see an intelligent GUI, not a skin. This interface is crucial for developers to ease the learning curve and also pick up some good practices, but with around 40 eZ Publish implementations, we haven't yet had a customer who would fit into ezwebin precisely (or sometimes - at all).
+</p>
+<h5> Yet, another perspective.</h5>
+<p>
+ Much as I appreciate the marketing goals, I don't think they are that important for this level of CMS (and ezwebin versions do just fine for that matter), and nowhere near as important as the core of the system. And there's only so much time eZ people have. I believe we're all much better off getting solutions such as eZ toolbar or eZ Flow (or bug-free stability and security) rather than color variations of backgrounds...
+</p>
+
+<p>
+
+To be continued... here:<br /><a href="http://ez.no/developer/forum/suggestions/provide_new_themes" title="Provide new themes for eZ Publish discussion" target="_blank">http://ez.no/developer/forum/suggestions/provide_new_themes</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/22/2008 03:10 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Themes-for-eZ-Publish-discussion">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/random_thoughts/themes_for_ez_publish_discussion">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/lab/persistent_variables_checked_out" title="Persistent variables - checked out">Persistent variables - checked out</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Well, I gave up my variable caching ideas, even if just for a while. I wanted to master the standard caching techniques (there had always been an excuse, some extension to write...). And I am very glad now because it starts to feel like having real control over my eZ implementations ;)
+</p>
+
+<p>
+Among things that I've discovered were persistent variables, recommended by Gaetano in response to my var cache struggling, and completely unknown to me before. Even if not a complete substitute, still a very nice solution, one of those that you ask yourself how you could have lived without...
+</p>
+
+<p>
+So what's so great about persistent variables without going into much detail?
+</p>
+<h5>Control</h5>
+<p>
+They don't require any additional control. Persistent variables are compiled as part of viewcache, which means that they only expire when the viewcache expires, and they naturally follow the smart viewcache clear rules as well. What more control needed than that?
+</p>
+<h5>Availability</h5>
+<p>
+They seem to be available at all times, if not cached before, calculated upon request for the full view that stores them.
+</p>
+
+<p>
+This also means that expiry times of cache-blocks that depend on that data do not have to be synchronized in any way (not that it is even possible...). Gaetano mentioned the relationship between viewcache and cache-block clear being an important issue, but I haven't been able to spot any unwanted or problematic link, yet.
+</p>
+<h5>Cost</h5>
+<p>
+Persistent variables can indeed store a variety of data useful for further generating parts of the pagelayout. Even if the singular cost of viewcache generation goes slightly up, this is usually benefitial: once generated, the variables are simply there as long as needed. And in most cases all I need is some $node-related operations.
+</p>
+
+<p>
+Even if some more expensive data is to be fetched, once you're through the effort of composing you persistent hash, it's there!
+</p>
+<h5>Some minor disadvantages.</h5>
+<p>
+Since the variables are physically serialized, it is impossible to pass complex objects, such as $node directly. You have to precisely choose which simple data you want (numbers, strings, arrays, hashes...). Luckily, arrays do just fine in most cases, so that's probably as much as one may need before going straight to a fetch outside of a full view.
+</p>
+
+<p>
+Then, some includes seem to be able to damage a persistent var that had been generated few lines before, so you have to carefully test if the persistent var set is available in all the full views required. Haven't found an exact rule, yet.
+</p>
+
+<p>
+If you're interested if a very nice use example, look <a href="/index.php/ez_publish/lab/variable_cache_layer_var_block_wouldn_t_that_be_something" title="Post on variable cache" target="_self">here</a> in the comments.
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/21/2008 11:50 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Persistent-variables-checked-out">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/lab/persistent_variables_checked_out">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/events/upcomming_summer_2008_ez_php_developer_events" title="Upcomming Summer 2008 eZ ">Upcomming Summer 2008 eZ </a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+A busy week expected in the fourth week of June this year:
+</p>
+<h5>eZ Publish Community Developer Day, June 18th, 2008</h5>
+<p>
+Tutorials, <b> </b>break-out sessions, talks and presentations, barcamp... some topics announced till now include: performance and testing, improving usability & accessibility in eZ publish, web 2.0, OpenID, integration between ez publish and Ajax frameworks, Open office integration, eZ Components, eZ Find, TinyERP integration, microformats...
+</p>
+
+<p>
+<a href="http://ez.no/developer/news/ez_publish_community_developer_day_june_18th_2008" title="eZ Publish Community Developer Day, June 18th 2008" target="_blank">http://ez.no/developer/news/ez_publish_community_developer_day_june_18th_2008</a>
+</p>
+<h5>eZ Conference & Awards, June 19-20th, 2008</h5>
+<p>
+The annual eZ Conference & Awards is the largest Open Source CMS event in Europe. This year marks the 6th annual eZ Conference and new this year is that it will be run together with the Open Nordic Conference and the Open Nordic Mobile event. This is without doubt, the biggest event ever held in Europe with main focus on Free Software.
+</p>
+
+<p>
+All together more than 1000 people are expected to join during these days. The program will include keynote sessions, panel discussions and valuable exhibiting.
+</p>
+
+<p>
+<a href="http://conference.ez.no/" title="eZ Conference & Awards, June 19-20th, 2008" target="_blank">http://conference.ez.no/</a>
+</p>
+<h5>PHP Vikinger, June 21st, 2008</h5>
+<p>
+PHP Vikinger is an unconference directed towards everyone who wants to learn more about PHP and likes to discuss and meet with new people. Unlike normal conferences, the talks at conferences are determined by the attendees, and not a program committee.
+</p>
+
+<p>
+<a href="http://phpvikinger.org/" title="PHP Vikinger, June 21st, 2008" target="_blank">http://phpvikinger.org/</a>
+</p>
+<h5>Can't wait!</h5>
+<p>
+
+This year will be my first time to join eZ Community during this series of events.<br /> 
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/21/2008 11:36 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Upcomming-Summer-2008-eZ">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/events/upcomming_summer_2008_ez_php_developer_events">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/random_thoughts/user_readable_cache_block_identifiers" title="User-readable cache-block identifiers">User-readable cache-block identifiers</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Just as I'm struggling with cache optimization for one of the current projects, I discovered that it would be great if cache-block functionality had one more parameter - a user-defined and user-readable identifier. Being able to clear all the cache by calling this identifier would be a great enhancement. It would be enough if it was implemented at eZ API level, so that users were able to create their own actions (views) to handle it. This would be especially benefitial for caching of custom modules and views, outside content and content tree itself.
+</p>
+
+<p>
+Life example: Imagine expensive custom views that require couple of hundreds of SQL queries per view or view/param combination, and can be accessed/managed by a) the owner (of something), b) all other users. Now, leaving these views uncached would be suicidal, and cache-blocks would be quite handy, and there would be only two cache blocks per view (since you either are the owner or not). Now, the additional expectation is that the owner will always have his view up-to-date, which means we can't really cache it for him. Wouldn't it be great to be able to create a button named "Refresh my view", which would cause one particular cache-block (or cache block group) be cleared? In that way, we could cache the owner's view as well, making it possible to let a manual clear only when needed ;)
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>05/10/2008 07:18 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/User-readable-cache-block-identifiers">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/random_thoughts/user_readable_cache_block_identifiers">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/lab/variable_cache_layer_var_block_wouldn_t_that_be_something" title="Variable cache layer... Var-block - wouldn't that be something?">Variable cache layer... Var-block - wouldn't that be something?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+It took me fairly long time to figure out what particular tool available from PHP in my custom software and website implementations was missing from eZ Publish... but I finally got it. It's the ability to dynamically, flexibly cache variables, understood as operation or logic results, stored in a reusable form. Naturally, there is no significant need of caching simple variables defined directly within the pagelayout, just like these:
+</p>
+<div class="code">
+
+<p>
+
+{def $my_var=345}<br />{def $my_other_var=hash( 'a', '4023' )}
+</p>
+
+</div>
+
+<p>
+However, it gets worse not being able to cheaply store an array of ten values, whose fetching/generating cost was over fifty or one hundred SQL queries, several files accessed in the file system, etc.
+</p>
+<h5>Problem</h5>
+<p>
+The problem seems quite straightforward - out of many caching techniques and layers in eZ Publish, only two are universally useful: the viewcache and the cache-blocks. Unfortunately, both of them store presentation layer results rather than data, and both are quite independent. As a result:
+</p>
+
+<ol>
+
+<li>Whenever you crave for variables that will be used by several cache-blocks in the pagelayout, they must be placed outside of cache-blocks themselves. <b>Don't get fooled</b> by the top cache-block apparently holding the variables used further on - it's a coincidence. This may only work if all expiry times are equal for all the blocks <b>and</b> no subtree expiry is ever used (or you've used bugged eZ 4.0.0 for half-a-year, where subtree expiry is simply broken and it's easy to take it as the default behavior), provided that the blocks never got desynchronized. <b>The point is: variables must be kept outside cache-blocks and they will not be cached.</b></li>
+
+<li>The module result gets generated before the pagelayout, so there's little reusability between their vars.</li>
+
+</ol>
+<h5>So what's missing?</h5>
+<p>
+My idea is <b>a cache layer halfway between logic/data and the presentation layer</b>. It could be a variable-dedicated cache-block equivalent (maybe a var-block?). 
+</p>
+
+<p>
+<b>Example:</b> Imagine a website that for each of its node views should be able to access both current node data (data map) as well as root node data in order to make some decisions, calculations, etc. Further, the data could be required by at least three of its cache blocks (with different expiry times, expiry rules and "uncomfortable" locations within the pagelayout). Today that sort of combination requires a substantial...
+</p>
+
+<p>
+The var-block as I imagine it would have expiry settings similar to cache-blocks: subtree expiry, expiry ignore, expiry time and a flexible key management. In order to prevent frequent file system access, var-block could serialize variable collections rather than just singles. An additional "collection name" parameter could help organize the blocks within the pagelayout.
+</p>
+
+<p>
+<b>Please let me know what you think.</b>
+</p>
+
+<p>
+
+Here's the prototype:<br /><a href="http://ez.no/developer/contribs/template_plugins/self_var_cache" title="SELF Var Cache" target="_blank">http://ez.no/developer/contribs/template_plugins/self_var_cache</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>04/22/2008 12:49 pm</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Variable-cache-layer-Var-block-wouldn-t-that-be-something">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/lab/variable_cache_layer_var_block_wouldn_t_that_be_something">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/extendable_cache_definition_list_for_easy_extension_cache_management" title="Extendable cache definition list for easy extension cache management">Extendable cache definition list for easy extension cache management</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Back after a longer while... wasn't on holiday, though ;)
+</p>
+
+<p>
+About a week ago, while developing my fifth or tenth extension with its own, custom caching layer, I caught myself trying to clear that cache with eZ standard "Clear cache" button. To none of my surprise, it never worked, but after few attempts I decided to see why ;)
+</p>
+
+<p>
+
+The Fine-grained cache control in the administration interface turned out to be a definition-type of array - easy enough to be made extensible with some effort. Why should a developer be in need of creating custom tools then? Let's hope the team picks up the idea soon:<br /><a href="http://issues.ez.no/IssueView.php?Id=12860&activeItem=3" title="Extendable cache definition list for easy extension cache management" target="_blank">http://issues.ez.no/IssueView.php?Id=12860&activeItem=3</a>
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>04/22/2008 08:13 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/Extendable-cache-definition-list-for-easy-extension-cache-management">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/ez_publish/extensions/extendable_cache_definition_list_for_easy_extension_cache_management">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Nabil-Alimi">Nabil Alimi</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.ryba.eu/index.php/events/ez_developer_day_first_one_in_poland_warsaw_15th_april_2008" title="eZ Developer Day - first one in Poland (Warsaw, 15th April 2008)">eZ Developer Day - first one in Poland (Warsaw, 15th April 2008)</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<p>
+Polish eZ community has met during the first official eZ Developer Day held in the country. Up to thirty people showed up, representing eZ partners, independent developers as well as users, both experienced and potential. Many of the participants were active <a href="http://ez-publish.pl/" title="Polish eZ Community" target="_blank">Polish eZ Community</a> members. eZ Systems was represented by Bård Farstad, co-funder and CTO (Chief Technical Officer) and our native system developer Łukasz Serwatka.
+</p>
+
+<p>
+The meeting, which was held in the heart of capital city of Poland, included the introduction to eZ Systems and their flag products, including eZ Flow (both functional and technical demos), the discussion on eZ Publish roadmap and its future releases.
+</p>
+
+<p>
+The community had a chance to present their recent implementations as well as share and discuss their problems or requests (I hope we didn't kill Łukasz during this part, as we tried to clear up issues that had been awaiting "closure" for quite some time).
+</p>
+
+<p>
+Bård attempted to provoke some community commitment, so that it grows stronger and bigger, but I'm not sure how much response that would get. It got little while there, but there might be some follow-up. Seems like the active will remain active in their ways anyways.
+</p>
+
+<p>
+Personally, I am very glad that we had this meeting. Maybe there was too little technical/developer detail, but everyone had an opportunity to bring things up... Maybe it lacked some social part, during which the community would get to know each other little better and discuss things in a more informal, open way. One suggestion though: make that a weekend event because socializing for most people in Poland hardly ever works during the weekdays! ;)
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>04/17/2008 12:17 am</span> &nbsp; <a href="http://ez.ryba.eu">ez.ryba.eu</a> &nbsp; <a href="/Mirror/Nabil-Alimi/eZ-Developer-Day-first-one-in-Poland-Warsaw-15th-April-2008">View mirror of item</a> &nbsp; <a href="http://ez.ryba.eu/index.php/events/ez_developer_day_first_one_in_poland_warsaw_15th_april_2008">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+            
+            <span class="next"><a href="/Mirror/Nabil-Alimi/(offset)/10"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+    
+        <span class="current">1</span>
+
+                      <span class="other"><a href="/Mirror/Nabil-Alimi/(offset)/10">2</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/6/(year)/2008" title="">June 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/5/(year)/2008" title="">May 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/4/(year)/2008" title="">April 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/2/(year)/2008" title="">February 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/1/(year)/2008" title="">January 2008</a></li>
+                                                            <li><a href="/Mirror/Nabil-Alimi/(month)/12/(year)/2007" title="">December 2007</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Nabil-Alimi/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Nabil-Alimi/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class="currentselected today">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:11:"Nabil Alimi";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"232";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:11:"Nabil Alimi";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"232";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"230";s:7:"node_id";s:3:"232";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"eb3ec397bd26e4854a462950ecee1c9d";s:14:"node_remote_id";s:32:"8f726b195ee3331aefd32c363f97ace6";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:18:"Mirror/Nabil-Alimi";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"232";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

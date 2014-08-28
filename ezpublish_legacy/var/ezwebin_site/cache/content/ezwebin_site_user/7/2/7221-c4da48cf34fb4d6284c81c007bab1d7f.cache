@@ -1,0 +1,293 @@
+a:10:{s:7:"content";s:21373:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>How to locate the PHP code corresponding to a template operator?</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://damien.pobel.fr/post/how-to-locate-the-php-code-corresponding-to-a-template-operator">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">10/14/2011 02:20 pm</p>
+                                    <p class="author"></p>
+				                                        <p class="tags"> Tags:
+                                                                                      <a href="/Mirror/Damien-Pobel/(id)/229/(tag)/extension" title="extension">extension</a>
+                                                                                                                          </p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      
+                    <p>I've seen this question for <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Formatting-and-internationalization/datetime">the <code>datetime</code>
+ operator</a> lately on Google+. This is a very common question that has an easy answer whenever you know how the eZ Publish template operators are working internally.</p>
+<p>If you look at <a href="http://share.ez.no/learn/ez-publish/an-introduction-to-developing-ez-publish-extensions/">the tutorial on how to write a template operator in an eZ Publish extension</a>, you'll notice that you have to declare in an array that a given set of template operators is implemented by a given PHP class. This system is valid for extensions but in fact, it's also how the stock template operators are declared. The only difference is where the <code>eztemplateautoload.php</code>
+ files are located. For the stock template operators, those files are in the directories listed in <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/TemplateSettings/AutoloadPathList">site.ini/[TemplateSettings]/AutoloadPathList[]</a> and not in the <code>autoloads</code>
+ sub-directory of each extension declared in <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/TemplateSettings/ExtensionAutoloadPath">site.ini/[TemplateSettings]/ExtensionAutoloadPath[]</a>.</p>
+<p>Given that, it's easy to find where the <code>datetime</code>
+ operator is declared for instance with the following command:</p>
+<pre><code class="lang-bash">$ find . -name eztemplateautoload.php -exec grep -il datetime {} \;
+<span class="comment"># looking for file named eztemplateautoload.php containing "datetime"</span>
+./lib/eztemplate/classes/eztemplateautoload.php</code></pre>
+<p>And by looking at this file, you can see that this template operator is implemented by the class <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/lib/eztemplate/classes/eztemplatelocaleoperator.php">eZTemplateLocaleOperator</a> and the autoload file or your favorite IDE will then show you where it is located in the eZ Publish directory.</p>
+
+                
+				</div>
+
+                                    <div class="attribute-relatedcontent">
+    <h1>Related content</h1>
+    <ul>
+            <li><a href="/Mirror/Damien-Pobel/Sortie-de-Auto-Status-0.22" title="Sortie de Auto Status 0.2">Sortie de Auto Status 0.2</a></li>
+            <li><a href="/Mirror/Share.ez.no-Blogs/Review-MultiTaskingOne-admin-extension" title="Review: MultiTaskingOne admin extension">Review: MultiTaskingOne admin extension</a></li>
+            <li><a href="/Mirror/eZ-Roadmap/Make-it-easy-to-open-an-eZ-Publish-implementation" title="Make it easy to &quot;open&quot; an eZ Publish implementation">Make it easy to &quot;open&quot; an eZ Publish implementation</a></li>
+            <li><a href="/Mirror/Share.ez.no-Blogs/ezpaypal-using-cURL" title="ezpaypal using cURL">ezpaypal using cURL</a></li>
+            <li><a href="/Mirror/eZ-Roadmap/Present-list-with-selected-extensions-during-eZ-Publish-installation-process" title="Present list with selected extensions during eZ Publish installation process">Present list with selected extensions during eZ Publish installation process</a></li>
+            <li><a href="/Mirror/Share.ez.no-Blogs/Payment-gateways-available-for-eZ-Publish" title="Payment gateways available for eZ Publish">Payment gateways available for eZ Publish</a></li>
+        </ul>
+</div>
+                                <div class="attribute-byline">
+				    <div><a href="http://damien.pobel.fr/post/how-to-locate-the-php-code-corresponding-to-a-template-operator">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            <a href="/content/keyword/adsl" style="font-size: 100%" title="1 objects tagged with 'adsl'">adsl</a> <a href="/content/keyword/affiche" style="font-size: 100%" title="1 objects tagged with 'affiche'">affiche</a> <a href="/content/keyword/afup" style="font-size: 110%" title="2 objects tagged with 'afup'">afup</a> <a href="/content/keyword/Ain" style="font-size: 110%" title="2 objects tagged with 'Ain'">Ain</a> <a href="/content/keyword/ain" style="font-size: 200%" title="11 objects tagged with 'ain'">ain</a> <a href="/content/keyword/apache" style="font-size: 100%" title="1 objects tagged with 'apache'">apache</a> <a href="/content/keyword/araign%C3%A9e" style="font-size: 100%" title="1 objects tagged with 'araignée'">araignée</a> <a href="/content/keyword/blog" style="font-size: 110%" title="2 objects tagged with 'blog'">blog</a> <a href="/content/keyword/bol" style="font-size: 100%" title="1 objects tagged with 'bol'">bol</a> <a href="/content/keyword/Bourg-en-Bresse" style="font-size: 100%" title="1 objects tagged with 'Bourg-en-Bresse'">Bourg-en-Bresse</a> <a href="/content/keyword/browser" style="font-size: 100%" title="1 objects tagged with 'browser'">browser</a> <a href="/content/keyword/Conference" style="font-size: 100%" title="1 objects tagged with 'Conference'">Conference</a> <a href="/content/keyword/conference" style="font-size: 110%" title="2 objects tagged with 'conference'">conference</a> <a href="/content/keyword/css" style="font-size: 100%" title="1 objects tagged with 'css'">css</a> <a href="/content/keyword/css3" style="font-size: 100%" title="1 objects tagged with 'css3'">css3</a> <a href="/content/keyword/ergonomie" style="font-size: 110%" title="2 objects tagged with 'ergonomie'">ergonomie</a> <a href="/content/keyword/Extension" style="font-size: 100%" title="1 objects tagged with 'Extension'">Extension</a> <a href="/content/keyword/extension" style="font-size: 110%" title="2 objects tagged with 'extension'">extension</a> <a href="/content/keyword/ez%20find" style="font-size: 100%" title="1 objects tagged with 'ez find'">ez find</a> <a href="/content/keyword/eZ%20Publish" style="font-size: 140%" title="5 objects tagged with 'eZ Publish'">eZ Publish</a> <a href="/content/keyword/ez%20publish" style="font-size: 190%" title="10 objects tagged with 'ez publish'">ez publish</a> <a href="/content/keyword/frontend" style="font-size: 110%" title="2 objects tagged with 'frontend'">frontend</a> <a href="/content/keyword/gnome" style="font-size: 110%" title="2 objects tagged with 'gnome'">gnome</a> <a href="/content/keyword/gr%C3%A8ve" style="font-size: 100%" title="1 objects tagged with 'grève'">grève</a> <a href="/content/keyword/humeur" style="font-size: 140%" title="5 objects tagged with 'humeur'">humeur</a> <a href="/content/keyword/humour" style="font-size: 100%" title="1 objects tagged with 'humour'">humour</a> <a href="/content/keyword/javascript" style="font-size: 120%" title="3 objects tagged with 'javascript'">javascript</a> <a href="/content/keyword/linux" style="font-size: 110%" title="2 objects tagged with 'linux'">linux</a> <a href="/content/keyword/macro" style="font-size: 100%" title="1 objects tagged with 'macro'">macro</a> <a href="/content/keyword/Responsive%20design" style="font-size: 100%" title="1 objects tagged with 'Responsive design'">Responsive design</a> <a href="/content/keyword/Symfony%202" style="font-size: 100%" title="1 objects tagged with 'Symfony 2'">Symfony 2</a> 
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/adsl" title="adsl">adsl (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/affiche" title="affiche">affiche (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/afup" title="afup">afup (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Ain" title="Ain">Ain (13)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/apache" title="apache">apache (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/araign%C3%A9e" title="araignée">araignée (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/blog" title="blog">blog (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/bol" title="bol">bol (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Bourg-en-Bresse" title="Bourg-en-Bresse">Bourg-en-Bresse (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/browser" title="browser">browser (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Conference" title="Conference">Conference (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css" title="css">css (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css3" title="css3">css3 (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ergonomie" title="ergonomie">ergonomie (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Extension" title="Extension">Extension (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ez%20find" title="ez find">ez find (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/eZ%20Publish" title="eZ Publish">eZ Publish (15)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/frontend" title="frontend">frontend (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gnome" title="gnome">gnome (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gr%C3%A8ve" title="grève">grève (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humeur" title="humeur">humeur (5)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humour" title="humour">humour (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/javascript" title="javascript">javascript (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/linux" title="linux">linux (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/macro" title="macro">macro (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Responsive%20design" title="Responsive design">Responsive design (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Symfony%202" title="Symfony 2">Symfony 2 (1)</a></li>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class="currentselected today">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:12:"Damien Pobel";s:3:"url";s:22:"/content/view/full/229";s:9:"url_alias";s:19:"Mirror/Damien-Pobel";s:7:"node_id";s:3:"229";}i:3;a:4:{s:4:"text";s:64:"How to locate the PHP code corresponding to a template operator?";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"7221";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:12:"Damien Pobel";s:3:"url";s:22:"/content/view/full/229";s:9:"url_alias";s:19:"Mirror/Damien-Pobel";s:7:"node_id";s:3:"229";}i:3;a:3:{s:4:"text";s:64:"How to locate the PHP code corresponding to a template operator?";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"7221";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"7222";s:7:"node_id";s:4:"7221";s:14:"parent_node_id";s:3:"229";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_10_318e1ca171b1b7b0437e95bf2caf892f";s:14:"node_remote_id";s:32:"d368842b241e804a54be4c9a7d03247d";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:84:"Mirror/Damien-Pobel/How-to-locate-the-PHP-code-corresponding-to-a-template-operator2";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"7221";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"f888e9dfe7f87b8c8240f892bc4f47c9";s:23:"parent_object_remote_id";s:32:"e6f81f2637ec547e52c3518bf0f11e88";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

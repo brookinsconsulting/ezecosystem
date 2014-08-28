@@ -1,0 +1,460 @@
+a:10:{s:7:"content";s:31084:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/ez-publish-forum-php-2013-creer-site-oriente-contenu" title="Forum PHP 2013: eZ Publish, créer un site orienté contenu en 45 min.">Forum PHP 2013: eZ Publish, créer un site orienté contenu en 45 min.</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/afup" title="afup">afup</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p><em>An english version of this post is available <a href="http://share.ez.no/blogs/damien-pobel/conference-at-the-forum-php-2013-create-an-ez-publish-website-in-45-minutes">on
+share.ez.no</a></em></p>
+<p>Avec <a href="http://patrickallaert.blogspot.be/">Patrick Allaert</a>, nous avons présenté
+une conférence intitulée <em>eZ Publish : un CMS pour créer un site orienté
+contenu en 45 minutes</em> au <a href="http://afup.org/pages/forumphp2013/">the Forum PHP
+2013</a> à Paris.</p>
+<p><a href="https://patrickallaert.github.io/create-site-from-scratch.html">Les slides sont disponibles en
+ligne</a> avec <a href="https://github.com/dpobel/ForumPhp2013DemoBundle">le
+code associé, le
+ForumPhp2013DemoBundle</a> sur Github.
+L'idée était de présenter quelques uns des principaux concepts <a href="http://ez.no/Products/The-eZ-Publish-Platform">du CMS
+eZ Publish 5</a> (au passage
+<a href="http://ez.no/5.2">la version 5.2</a> est sortie cette semaine):</p>
+<ul>
+<li>les types de contenu</li>
+<li>eZ Publish 5 est une application Symfony2</li>
+<li>la flexibilité du CMS et la manière de construire un vrai site</li>
+</ul>
+<p>Dans la partie pratique, nous avons construit le site d'une conférence PHP comme
+le Forum PHP pour montrer les fonctionnalités suivantes: (les liens pointent vers la diff correspondant sur
+Github)</p>
+<ol>
+<li><a href="https://github.com/dpobel/ForumPhp2013DemoBundle/commit/dd8329485118944514372e91e70973a699f0045c">Comment écrire une règle d'override pour la vue full pour utilisé un
+template spécifique</a></li>
+<li><a href="https://github.com/dpobel/ForumPhp2013DemoBundle/commit/626d619afe24f14f517e1a8c81623de918db96b5">Comment en plus utilisé un controller spécifique pour injecter des données
+supplémentaires</a></li>
+<li><a href="https://github.com/dpobel/ForumPhp2013DemoBundle/commit/f561f7ee2c266f282c28e75fa01327561704d6f7">Comment organiser les templates en utilisant des <em>sub-views</em></a></li>
+<li><a href="https://github.com/dpobel/ForumPhp2013DemoBundle/commit/4c53df7c238f56332f1e2e4fd27a5f6200b45d3f">Exemple d'utilisation des <em>sub-views</em> et de controllers spécifiques</a></li>
+</ol>
+<p>Après ces étapes, nous avons aussi modifié un type de contenu pendant la
+conférence et <a href="https://github.com/dpobel/ForumPhp2013DemoBundle/commit/0342db41f50f7a3885379a8687bd1699266c507c">adapté le template pour prendre en compte le nouvel attribut</a> (Un fichier à télécharger).</p>
+<p>Biensûr, ces sujets sont documentés:</p>
+<ul>
+<li><a href="https://confluence.ez.no/display/EZP52/View+provider+configuration">La configuration des <em>view provider</em> (en)</a> (~override rules)</li>
+<li><a href="https://confluence.ez.no/display/EZP52/How+to+use+a+custom+controller+to+display+a+content+or+location">Comment utiliser un controller spécifique pour afficher du contenu (en)</a></li>
+<li><a href="https://confluence.ez.no/display/EZP52/Twig+functions">Les fonctions Twig (en)</a> (<code>ez_render_field</code>, <code>ez_content_name</code>, …)</li>
+</ul>
+<p>Si vous étiez présent, merci <a href="https://joind.in/talk/view/9358">de noter et commenter notre présentation
+sur joind.in</a> et la vidéo devrait bientôt être
+disponible en ligne.</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>11/22/2013 05:15 am</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Forum-PHP-2013-eZ-Publish-creer-un-site-oriente-contenu-en-45-min">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/ez-publish-forum-php-2013-creer-site-oriente-contenu">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/jouets-sexistes-stereotypes" title="Jouer à &quot;devenir une véritable fée de logis!&quot;">Jouer à &quot;devenir une véritable fée de logis!&quot;</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/humeur" title="humeur">humeur</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p>Dernièrement, j'ai partagé sur Twitter et Google+ plusieurs articles sur le
+sexisme, les stéréotypes sexuels, <a href="http://insolente0veggie.over-blog.com/article-la-theorie-du-genre-djendeure-120623797.html">la <em>théorie du
+genre</em></a>
+et quelques autres stupidités du style. Pour être tout à fait honnête, il y a
+quelques temps je n‘aurais pas été aussi vindicatif mais le fait d’être le père
+d‘une petite fille de bientôt 2 ans change quelque peu l’angle de vue sur ce
+sujet notamment en voyant les jouets <em>pour fille</em> tant ils sont parfois
+stupides, hypersexualisés et sexistes entretenant certains stéréotypes qu‘on
+pourrait croire d’un autre âge. <a href="http://leplus.nouvelobs.com/contribution/964003-catalogue-de-noel-bravo-super-u-d-horripiler-le-printemps-francais-et-les-autres-reacs.html">Certaines enseignes comme Super U semblent
+faire des
+efforts</a>
+mais chez certaines autres c‘est souvent hallucinant. Voici une revue de ce
+qu’on peut trouver dans les magasins en ligne de certaines enseignes bien
+connues.</p>
+<h1>Maxitoys</h1>
+<p><a href="http://damien.pobel.fr/images/aspirateur-smoby-sexiste.png"><img src="http://damien.pobel.fr/images/660x/aspirateur-smoby-sexiste.png" alt="Aspirateur Smoby
+sexiste"></a></p>
+<p><a href="https://twitter.com/ZeCherryBlossom/status/399645088336211968">Katia a repéré</a>
+cet <a href="http://www.maxitoys.fr/aspirateur-silence-force-cyclonic.html">aspirateur chez
+Maxitoys</a>. Bon
+déjà, un aspirateur comme jouet… je comprend bien que les enfants veulent
+imiter leurs parents, mais n‘y a t il que ça comme imitation possible&nbsp;?
+Mais le pire ici est dans la fiche du jouet où on peut lire que celui-ci est
+destiné aux filles et voir une fillette utiliser l’appareil… Joli assemblage,
+merci Maxitoys et Smoby, ça donne envie d'acheter <em>Made in France</em>.</p>
+<p>On pourrait croire que ce <em>jouet</em> est une exception sur ce site. Si il obtient
+la palme du stéréotype, des alternatives sont disponibles (on sait jamais, peut
+être que papa passe l'aspirateur de temps en temps…) dans <a href="http://www.maxitoys.fr/jouets/jeux-de-role.html?limit=200&maxitoys_sexe=401">les jeux de rôle
+pour
+fille</a>
+(sic!), on peut trouver <a href="http://www.maxitoys.fr/chariot-de-supermarche.html">des chariots de supermarchés</a>, <a href="http://www.maxitoys.fr/set-laverie.html">des sets
+laverie</a> ou <a href="http://www.maxitoys.fr/set-balai-ramassette.html">un set balai +
+ramassette</a> et toujours pour
+faire comme maman bien sûr… Vous en voulez encore? visitez la sous catégorie
+<a href="http://www.maxitoys.fr/jouets/jeux-de-role/menage-et-accessoires.html">Ménage et
+accessoires</a>
+avec un total de 11 articles et d'après les filtres dans le menu de gauche, 11
+articles pour filles et 1 aussi pour garçon (un autre kit brosse et
+ramassette qui apparemment convient aux filles et aux garçons)…</p>
+<h1>Toys &#34;R&#34; Us</h1>
+<p>Chez Toys &#34;R&#34; Us, c‘est un peu plus subtil, les fiches produits
+n’indiquent pas directement si un jouet est destiné aux filles ou aux garçons en
+revanche, en filtrant sur <a href="http://www.toysrus.fr/family/viewall/index.jsp?fd=Fille&fg=Genre&f=PAD&fv=Boy+Girl%2fFille&categoryId=4066341&overrideStore=TRUFR"><em>Genre: fille</em> dans la catégorie <em>Jeux
+d'imitation</em></a>,
+on trouve <a href="http://www.toysrus.fr/product/index.jsp?productId=8207311">cette <em>fabuleuse</em> planche à repasser et son
+fer</a>… On notera
+que <a href="http://www.toysrus.fr/family/viewall/index.jsp?fd=Gar%C3%A7on&fg=Genre&f=PAD&fv=Boy+Girl%2fGar%C3%A7on&categoryId=3937251&overrideStore=TRUFR">chez les
+garçons</a>,
+les jeux d‘imitations consistent pour la plupart à incarner des super héros, des
+espions (bon il y a aussi des armes…) ou papa qui bricole, mais chez les
+filles, on astique, balaie, aspire, frotte, repasse, nettoie, … mais surtout
+on ne s’évade jamais du quotidien voire on ne sort pas de la maison!</p>
+<h1>Carrefour</h1>
+<p>La situation chez Carrefour est à peu près la même que chez Toys &#34;R&#34; Us,
+dans la catégorie <a href="http://online.carrefour.fr/jouets-jeux/jouets-fille/jeux-d-imitation_m3304_frfr.html">Jeux d'imitation pour
+fille</a>,
+on trouve par exemple <a href="http://online.carrefour.fr/jouets-jeux/step-2/chariot-de-supermarche_a21501456_frfr.html">ce chariot de supermarché poussé par une
+fillette</a>
+(il faut bien préparer sa future clientèle…). C'est dommage parce que la
+description du produit commence par:</p>
+<blockquote>
+<p>Ce chariot est adapté aux enfants dès 2 ans, pour imiter maman et papa faire
+leurs courses.</p>
+</blockquote>
+<p>Mais ce que je trouve le plus <em>amusant</em> chez Carrefour, c'est la différence de
+filtrage disponible dans <a href="http://online.carrefour.fr/jouets-jeux/jouets-fille/jeux-d-imitation_m3304_frfr.html">les jeux d'imitation pour
+garçons</a>
+et ceux dédiés aux filles. Chez les filles, dans cette catégorie on peut filtrer
+par <em>Type: Jeux d'imitation</em> (sic!) mais chez les garçons on a un filtre <em>Type:
+Vie professionnelle</em> ou majoritairement le garçon sera un espion, un Power
+Ranger (de bien beaux métiers) ou bricolera sur un établi…</p>
+<h1>Auchan</h1>
+<p>Chez Auchan, <a href="http://www.auchan.fr/jeux--jouets/comme-les-grands/jouet-menage/achat2/6860372">la catégorie <em>Jouet
+menage</em></a>
+contient 11 articles, certains sont indiqués comme étant mixtes, d‘autres comme
+dédiés aux filles mais aucun pour les garçons. En revanche, Auchan se distingue
+par quelques descriptions surprenantes (pour rester poli) notamment sur les
+jouets de marque Rik & Rok (une filliale d’Auchan) avec <a href="http://www.auchan.fr/jeux--jouets/comme-les-grands/rik-et-rok-mon-four--/achat4/6856160/C383854/Liste">un four <em>pour cuisiner
+comme
+maman</em></a>
+ou <a href="http://www.auchan.fr/rik-et-rok-ma-machine-a-laver--/achat4/C384543">une machine à laver <em>pour faire une lessive […] et regarder le linge à
+travers le
+hublot</em></a>.
+Mais la meilleure description reste celle de <a href="http://www.auchan.fr/jeux--jouets/comme-les-grands/rik-et-rok-rik-rok-mon-kit-nettoyage--/achat4/6856160/C381472/Liste">ce kit de
+nettoyage</a>
+pour <strong>Fille</strong> (la mise en gras vient de la fiche, il ne faudrait pas se
+tromper!) qui débute par:</p>
+<blockquote>
+<p>Avec mon kit de nettoyage Rik & Rok, deviens une véritable fée du logis!</p>
+</blockquote>
+<p>Comme Carrefour, Auchan vend <a href="http://www.auchan.fr/jeux--jouets/comme-les-grands/marchand/step2-chariot-de-supermarche-dimensions-53-3-x-50-8-x-37-5/achat4/6860369/C415209/Recherche">ce chariot de
+supermarché</a>
+(même photo, même description mais la fiche indique cette fois
+<em>Genre: <strong>Fille</strong></em>); mais pour changer un peu du sexisme et des
+stéréotypes, on trouve aussi <a href="http://www.auchan.fr/jeux--jouets/comme-les-grands/jeu-de-cuisine/panier-plastique-des-marques--/achat4/6860366/C397932/Liste">ce
+panier</a>
+ou <a href="http://www.auchan.fr/jeux--jouets/comme-les-grands/jeu-de-cuisine/cagette-drive-plastique-marques--/achat4/6860366/C396713/Liste">cette
+cagette</a>
+<em>des marques</em> (mixtes) histoire de former dès le plus jeune âge les
+futurs consommateurs! Je serais curieux de connaître les accords commerciaux
+entre les marques en question et le fabricant du jouet…</p>
+<h1>Et les autres ?</h1>
+<p>À des degrés divers, les autres enseignes comme Joué Club, King Jouet, la Grande
+Récré, …  présentent ces fameux jouets d'imitation de la même manière. Super U
+qui est donné comme bon élève avec <a href="http://solution.poptract.fr/SU/13817880004001/30965">son
+catalogue</a> n'a pas de
+boutique en ligne mais dans les rayons de jouets pour fille on trouve le même
+aspirateur Smoby mentionné plus haut avec la même petite fille sur la boîte! Il
+est d'ailleurs intéressant de constater que sur le site de Smoby, <a href="http://www.smoby.com/jeux-dimitation/menage/liste/aspirateur-rowenta-silence-force-cyclonic?opt=1">cet
+aspirateur</a>
+n‘est pas présenté avec cette fillette et n’est pas indiqué comme un jouet pour
+fille…</p>
+<p>Ce billet est déjà bien assez long et pourtant d‘autres sujets connexes me
+viennent à l’esprit. Par exemple, retrouve-t-on les mêmes stéréotypes et le même
+sexisme dans les boutiques de jouets à l'étranger&nbsp;? Pourquoi cette overdose
+de rose dans les rayons (pas seulement de jouets) pour filles&nbsp;?  Pourquoi
+mêmes les jouets type Lego ou Playmobil proposent des versions différenciées
+fille/garçon&nbsp;? … mais ce sera peut être pour de prochains billets.</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>11/18/2013 03:04 pm</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Jouer-a-devenir-une-veritable-fee-de-logis!">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/jouets-sexistes-stereotypes">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            <a href="/content/keyword/adsl" style="font-size: 100%" title="1 objects tagged with 'adsl'">adsl</a> <a href="/content/keyword/affiche" style="font-size: 100%" title="1 objects tagged with 'affiche'">affiche</a> <a href="/content/keyword/afup" style="font-size: 110%" title="2 objects tagged with 'afup'">afup</a> <a href="/content/keyword/Ain" style="font-size: 110%" title="2 objects tagged with 'Ain'">Ain</a> <a href="/content/keyword/ain" style="font-size: 200%" title="11 objects tagged with 'ain'">ain</a> <a href="/content/keyword/apache" style="font-size: 100%" title="1 objects tagged with 'apache'">apache</a> <a href="/content/keyword/araign%C3%A9e" style="font-size: 100%" title="1 objects tagged with 'araignée'">araignée</a> <a href="/content/keyword/blog" style="font-size: 110%" title="2 objects tagged with 'blog'">blog</a> <a href="/content/keyword/bol" style="font-size: 100%" title="1 objects tagged with 'bol'">bol</a> <a href="/content/keyword/Bourg-en-Bresse" style="font-size: 100%" title="1 objects tagged with 'Bourg-en-Bresse'">Bourg-en-Bresse</a> <a href="/content/keyword/browser" style="font-size: 100%" title="1 objects tagged with 'browser'">browser</a> <a href="/content/keyword/Conference" style="font-size: 100%" title="1 objects tagged with 'Conference'">Conference</a> <a href="/content/keyword/conference" style="font-size: 110%" title="2 objects tagged with 'conference'">conference</a> <a href="/content/keyword/css" style="font-size: 100%" title="1 objects tagged with 'css'">css</a> <a href="/content/keyword/css3" style="font-size: 100%" title="1 objects tagged with 'css3'">css3</a> <a href="/content/keyword/ergonomie" style="font-size: 110%" title="2 objects tagged with 'ergonomie'">ergonomie</a> <a href="/content/keyword/Extension" style="font-size: 100%" title="1 objects tagged with 'Extension'">Extension</a> <a href="/content/keyword/extension" style="font-size: 110%" title="2 objects tagged with 'extension'">extension</a> <a href="/content/keyword/ez%20find" style="font-size: 100%" title="1 objects tagged with 'ez find'">ez find</a> <a href="/content/keyword/eZ%20Publish" style="font-size: 140%" title="5 objects tagged with 'eZ Publish'">eZ Publish</a> <a href="/content/keyword/ez%20publish" style="font-size: 190%" title="10 objects tagged with 'ez publish'">ez publish</a> <a href="/content/keyword/frontend" style="font-size: 110%" title="2 objects tagged with 'frontend'">frontend</a> <a href="/content/keyword/gnome" style="font-size: 110%" title="2 objects tagged with 'gnome'">gnome</a> <a href="/content/keyword/gr%C3%A8ve" style="font-size: 100%" title="1 objects tagged with 'grève'">grève</a> <a href="/content/keyword/humeur" style="font-size: 140%" title="5 objects tagged with 'humeur'">humeur</a> <a href="/content/keyword/humour" style="font-size: 100%" title="1 objects tagged with 'humour'">humour</a> <a href="/content/keyword/javascript" style="font-size: 120%" title="3 objects tagged with 'javascript'">javascript</a> <a href="/content/keyword/linux" style="font-size: 110%" title="2 objects tagged with 'linux'">linux</a> <a href="/content/keyword/macro" style="font-size: 100%" title="1 objects tagged with 'macro'">macro</a> <a href="/content/keyword/Responsive%20design" style="font-size: 100%" title="1 objects tagged with 'Responsive design'">Responsive design</a> <a href="/content/keyword/Symfony%202" style="font-size: 100%" title="1 objects tagged with 'Symfony 2'">Symfony 2</a> 
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/adsl" title="adsl">adsl (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/affiche" title="affiche">affiche (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/afup" title="afup">afup (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Ain" title="Ain">Ain (13)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/apache" title="apache">apache (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/araign%C3%A9e" title="araignée">araignée (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/blog" title="blog">blog (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/bol" title="bol">bol (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Bourg-en-Bresse" title="Bourg-en-Bresse">Bourg-en-Bresse (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/browser" title="browser">browser (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Conference" title="Conference">Conference (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css" title="css">css (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css3" title="css3">css3 (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ergonomie" title="ergonomie">ergonomie (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Extension" title="Extension">Extension (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ez%20find" title="ez find">ez find (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/eZ%20Publish" title="eZ Publish">eZ Publish (15)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/frontend" title="frontend">frontend (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gnome" title="gnome">gnome (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gr%C3%A8ve" title="grève">grève (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humeur" title="humeur">humeur (5)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humour" title="humour">humour (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/javascript" title="javascript">javascript (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/linux" title="linux">linux (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/macro" title="macro">macro (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Responsive%20design" title="Responsive design">Responsive design (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Symfony%202" title="Symfony 2">Symfony 2 (1)</a></li>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Damien-Pobel/(month)/10/(year)/2013" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2013" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>November&nbsp;2013</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Damien-Pobel/(day)/18/(month)/11/(year)/2013">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Damien-Pobel/(day)/22/(month)/11/(year)/2013">22</a></em>
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2013";s:5:"month";s:2:"11";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:12:"Damien Pobel";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"229";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:12:"Damien Pobel";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"229";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"227";s:7:"node_id";s:3:"229";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"e6f81f2637ec547e52c3518bf0f11e88";s:14:"node_remote_id";s:32:"f888e9dfe7f87b8c8240f892bc4f47c9";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:19:"Mirror/Damien-Pobel";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"229";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,638 @@
+a:10:{s:7:"content";s:41364:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/future-ez-publish-platform-ui" title="La future interface utilisateur d'eZ Publish Platform">La future interface utilisateur d'eZ Publish Platform</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>Je viens de publier <a href="http://share.ez.no/blogs/core-development-team/the-future-ez-publish-platform-backend-ui-is-here">The future eZ Publish Platform backend UI is “here”!</a> sur <a href="http://share.ez.no/blogs/core-development-team/">le blog de l‘équipe d’ingénierie d'eZ Systems</a>. Ce post annonce l'ouverture (au sens accessible à tous mais <a href="https://github.com/ezsystems/PlatformUIBundle/blob/master/LICENSE">le code est aussi sous licence GNU GPL v2</a>) du <a href="https://github.com/ezsystems/PlatformUIBundle">dépôt Github du bundle PlatformUIBundle</a>. Il fait suite à la présentation que j'avais donnée en compagnie de Roland Benedetti aux <a href="https://ezdays.ez.no/">eZ Days</a> et à <a href="https://twitter.com/afup/status/481386967238971393">la démo improvisée lors du PHPTour</a>.</p>
+<p>J'ai aussi, tant bien que mal, enregistré un <em>screencast</em> (commenté en anglais avec mon <em>French accent</em>) que je vous invite à regarder pour voir ce vers quoi nous tendons et ce qui est effectivement implémenté:</p>
+<div class="object-center"><iframe width="560" height="360" src="http://damien.pobel.fr//www.youtube.com/embed/veSJaUJV61Y?rel=0" frameborder="0" allowfullscreen=""/></div>
+<p>Les plus aventureux peuvent aussi tenter d'installer le bundle <a href="https://github.com/ezsystems/PlatformUIBundle/blob/master/README.md#installation">même si je reconnais que l'opération est un peu <em>chaotique</em></a> à l‘heure actuelle; ce n’est pas <a href="https://twitter.com/andrerom/status/481380915114180608">une Pre-Pre-Pre-Pre-Alpha</a> pour rien :-)</p>
+<p>Assez ironiquement, alors que j'écris ces lignes, Github indique que le code disponible dans le dépôt est composé de 87,9% de JavaScript pour seulement 2,3% de PHP. <a href="https://github.com/ezsystems/PlatformUIBundle/graphs/contributors">Même si je n'ai pas écrit la totalité du code</a>, cette statistique reflète plutôt bien ce qui m‘a occupé durant l’année passée (voire un peu plus) et compte tenu des fonctionnalités manquantes ce qui va probablement m'occuper dans les mois qui viennent!</p>
+<p>Comme d'habitude, les commentaires et retours sont appréciés, tout comme <a href="http://j.mp/platform-ui-issues">les rapports de bugs</a> et les <em>pull requests</em> pour les plus aventureux ;-)</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/08/2014 12:04 pm</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/La-future-interface-utilisateur-d-eZ-Publish-Platform">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/future-ez-publish-platform-ui">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.acidre.com/blog/ez-publish-generer-un-alias-dimage-avec-php/" title="[eZ Publish] Générer un alias d’image avec PHP">[eZ Publish] Générer un alias d’image avec PHP</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><pre>
+<span class="drop">$</span>img = eZImageManager::instance();
+$img->readINISettings();
+$img->convert( $source, $dest, $aliasName );</pre>
+<p>Permet de générer un alias d’une image sans ezimage. La manière « propre » :</p>
+<pre>$myObject = eZContentObject::fetch( $objectID );
+$dataMap = $myObject->attribute( 'data_map' );
+$imageAttribute = $dataMap[ 'image' ];
+$imageHandler = new eZImageAliasHandler( $imageAttribute );
+$result = $imageHandler->imageAlias( $aliasName );
+return $result['full_path'];</pre>
+<p>Plus de détails sur les liens suivants :</p>
+<p><a href="http://www.mugo.ca/Blog/How-to-create-image-aliases-in-eZ-Publish-using-PHP">http://www.mugo.ca/Blog/How-to-create-image-aliases-in-eZ-Publish-using-PHP</a></p>
+<p><a href="http://share.ez.no/forums/developer/pregenerate-image-alias-on-object-publishing">http://share.ez.no/forums/developer/pregenerate-image-alias-on-object-publishing</a></p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>03/18/2014 09:56 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/eZ-Publish-Generer-un-alias-d-image-avec-PHP">View mirror of item</a> &nbsp; <a href="http://www.acidre.com/blog/ez-publish-generer-un-alias-dimage-avec-php/">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.miximum.fr/la-dure-vie-des-developpeurs-web.html" title="La dure vie des développeurs web">La dure vie des développeurs web</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>Travailler dans le web est parfois ingrat. Ingrat parce que c'est un métier peu connu, et par conséquent rarement apprécié à sa juste valeur.</p>
+<p>Quel développeur web n'a jamais entendu des phrases comme «Tu fais des sites ? Alors tu peux venir me réparer mon ordi ?» ou encore «Vous pouvez me faire un youtube pour 400€ ?»</p>
+<p>Pourquoi je vous raconte tout ça ? Juste pour servir d'intro à ce truc que j'ai bricolé aujourd'hui, et qui, je le confesse, m'a bien fait marrer (oui, je suis bon public et je rigole de mes propres conneries).</p>
+<object width="480" height="275"><embed src="http://www.dailymotion.com/swf/xbfjlq&related=0" type="application/x-shockwave-flash" width="480" height="275" allowfullscreen="true" allowscriptaccess="always"/> </object></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/14/2014 06:13 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/La-dure-vie-des-developpeurs-web">View mirror of item</a> &nbsp; <a href="http://www.miximum.fr/la-dure-vie-des-developpeurs-web.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.miximum.fr/besoin-dun-freelance.html" title="Besoin d'un freelance ?">Besoin d'un freelance ?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><div class="figure align-center"><a class="reference external image-reference" href="http://www.flickr.com/photos/16230215@N08/3066799064/"><img alt="Knight Horse and Sword" class="full" src="http://farm4.static.flickr.com/3171/3066799064_ed792a1b3f_z.jpg"/></a></div>
+<p>C'est un petit pas pour l'humanité, mais un grand saut pour moi. À partir de décembre, je serai inéluctablement <strong>freelance à plein temps</strong>.</p>
+<p>Fini les embouteillages tous les matins (même si je prends le vélo, ça n'empêche pas l'air de puer le gaz). Envolés, les 2.5 jours de congés par mois. Me voilà pleinement maître de mon destin, et ça fait du bien (Ah ?! On me signale que les freelances n'ont pas la vie rose tous les jours ? Bon, tant pis…)</p>
+<p>J'aurais pu me qualifier d'«entrepreneur», de «chef d'entreprise», d'«indépendant», voire d'«indep'», mais j'aime cette image du chevalier, libre comme l'air et cheveux au vent, n'ayant pour biens que sa monture et son épée (une lance, en l'occurence), chevauchant par monts et par vaux en combattant pour ses idéaux, et aussi un peu pour remplir sa gamelle.</p>
+<p>Alors voilà, puisque vous me le demandez (sisi, vous me le demandez), j'ai choisi, dans un premier temps, de focaliser mon activité sur les développements web spécifiques, basés sur l'intégration des technologies libres suivantes :</p>
+<ul class="simple">
+<li><strong>Symfony</strong> : Le top des frameworks PHP, pour des développements spécifiques fonctionnels et standardisés ;</li>
+<li><strong>eZ Publish</strong> : La Rolls Royce des CMS, pour des sites éditoriaux haut de gamme ;</li>
+<li><strong>Solr</strong> : Le meilleur moteur de recherche libre au monde, pour fournir à vos utilisateurs une expérience de recherche incomparable ;</li>
+</ul>
+<p>Et puis, tant qu'à faire, j'entends bien batir des prestations de qualité, en industrialisant mes développements au maximum (TDD, intégration continue, méthodo agile, etc.).</p>
+<p>Je serai bien entendu enchanté de répondre à votre coup de fil si vous souhaitez discuter de votre projet. Si vous voulez en savoir plus, vous pouvez <a class="reference external" href="http://thibault.jouannic.fr">consulter ma page professionnelle</a>. Vous y trouverez les informations nécessaires pour me contacter.</p>
+<p>Comme je suis d'un naturel optimiste, je suis intimement convaincu que tout ce passera bien et que j'adorerai ma nouvelle vie. Cela dit, un petit commentaire d'encouragement est toujours bon à prendre :)</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/14/2014 06:13 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/Besoin-d-un-freelance">View mirror of item</a> &nbsp; <a href="http://www.miximum.fr/besoin-dun-freelance.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.miximum.fr/ez-publish-fetch-recherche-et-limitation.html" title="eZ Publish, fetch, recherche et limitation">eZ Publish, fetch, recherche et limitation</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>Ce que j'aime bien, avec <a class="reference external" href="http://ez.no">le CMS eZ Publish</a>, c'est son abondante documentation. Quoique parfois, je la trouve un peu lacunaire sur les bords.</p>
+<p>Quand par exemple, j'utilise la commande <a class="reference external" href="http://ez.no/doc/ez_publish/technical_manual/3_10/reference/modules/content/fetch_functions/search">fetch content search</a>, j'aimerais bien avoir un indice sur la signification du paramètre "limitation". La documentation ne m'est pas d'une grande aide dans ce cas :</p>
+<blockquote>You'll have to look in the source code of the kernel for details related to the format of this array</blockquote>
+<p>Ok, la doc me dit ce que fait le paramètre. Pas comment l'utiliser. Sympa. Étant donné que j'ai passé une demi-journée sur la question, je vais quand même vous en faire profiter.</p>
+<p>Le paramètre "limitation" sert donc à définir à la main des limites d'accès, alternativement à celles pré-existantes pour l'utilisateur enregistré. C'est à dire que :</p>
+<pre class="code smarty literal-block">
+<span class="cp">{</span><span class="nf">set</span> <span class="na">search</span><span class="o">=</span><span class="na">fetch</span><span class="o">(</span> <span class="na">content</span><span class="o">,</span><span class="na">search</span>
+                  <span class="na">hash</span><span class="o">(</span><span class="na">text</span><span class="o">,</span><span class="nv">$search_text</span><span class="o">,</span>
+                      <span class="na">subtree_array</span><span class="o">,</span><span class="nv">$search_sub_tree</span><span class="o">,</span>
+                      <span class="na">sort_by</span><span class="o">,</span><span class="na">array</span><span class="o">(</span> <span class="s1">'modified'</span><span class="o">,</span><span class="kc">false</span><span class="o">()</span> <span class="o">),</span>
+                      <span class="na">offset</span><span class="o">,</span><span class="nv">$offset</span><span class="o">,</span>
+                      <span class="na">limitation</span><span class="o">,</span> <span class="na">array</span><span class="o">(),</span>
+                      <span class="na">limit</span><span class="o">,</span><span class="nv">$limit</span> <span class="o">)</span> <span class="o">)</span> <span class="cp">}</span></pre>
+<p>(notez le "array" vide en face de "limitation"), permet d'effectuer une recherche sur l'ensemble du site, indépendamment des droits de l'utilisateur.</p>
+<p>Le paramètre "limitation", si j'ai bien compris, sert donc à ajouter des éléments qui sont autorisés pour la recherche. Exemple :</p>
+<pre class="code smarty literal-block">
+<span class="cp">{</span><span class="nf">set</span> <span class="na">search</span><span class="o">=</span><span class="na">fetch</span><span class="o">(</span> <span class="na">content</span><span class="o">,</span><span class="na">search</span>
+                  <span class="na">hash</span><span class="o">(</span><span class="na">text</span><span class="o">,</span><span class="nv">$search_text</span><span class="o">,</span>
+                      <span class="na">subtree_array</span><span class="o">,</span><span class="nv">$search_sub_tree</span><span class="o">,</span>
+                      <span class="na">sort_by</span><span class="o">,</span><span class="na">array</span><span class="o">(</span> <span class="s1">'modified'</span><span class="o">,</span><span class="kc">false</span><span class="o">()</span> <span class="o">),</span>
+                      <span class="na">offset</span><span class="o">,</span><span class="nv">$offset</span><span class="o">,</span>
+                      <span class="na">limitation</span><span class="o">,</span> <span class="na">array</span><span class="o">(</span> <span class="na">hash</span><span class="o">(</span>
+                          <span class="na">Class</span><span class="o">,</span> <span class="na">array</span><span class="o">(</span> <span class="m">65</span><span class="o">,</span> <span class="m">66</span><span class="o">,</span> <span class="m">67</span><span class="o">),</span>
+                          <span class="na">Section</span><span class="o">,</span> <span class="na">array</span><span class="o">(</span> <span class="m">1</span><span class="o">,</span> <span class="m">2</span><span class="o">,</span> <span class="m">3</span> <span class="o">),</span>
+                          <span class="na">Node</span><span class="o">,</span> <span class="na">array</span><span class="o">(</span> <span class="m">25789</span><span class="o">,</span> <span class="m">25790</span><span class="o">,</span> <span class="m">25791</span><span class="o">,</span> <span class="o">...</span> <span class="o">),</span>
+                          <span class="na">Subtree</span><span class="o">,</span><span class="na">array</span><span class="o">(</span> <span class="s1">'/1/2/125'</span><span class="o">,</span> <span class="s1">'/1/2/151/'</span><span class="o">),</span>
+                          <span class="na">Owner</span><span class="o">,,</span>
+                      <span class="o">)</span> <span class="o">),</span>
+                      <span class="na">limit</span><span class="o">,</span><span class="nv">$limit</span> <span class="o">)</span> <span class="o">)</span> <span class="cp">}</span></pre>
+<p>Il est possible de créer toutes les combinaisons possibles de paramètres. Le paramètre "Owner" limite les recherches aux objets possédés par les utilisateurs. Il existe quelques autres paramètres, dont je ne parle pas pour ne pas bien en saisir la portée.</p>
+<p>J'espère que ça pourra dépanner. Sur ce, si quelqu'un dispose d'une documentation plus complète et plus officielle, je suis preneur.</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/14/2014 06:13 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/eZ-Publish-fetch-recherche-et-limitation">View mirror of item</a> &nbsp; <a href="http://www.miximum.fr/ez-publish-fetch-recherche-et-limitation.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.miximum.fr/ez-publish-et-les-caches-une-grande-histoire-damour.html" title="eZ Publish et les caches, une grande histoire d'amour ?">eZ Publish et les caches, une grande histoire d'amour ?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>"Vide les caches !", c'est le premier truc qu'on entends ici quand quelque chose ne va pas. <a class="reference external" href="http://pwet.fr/blog/ez_publish_et_son_cache">L'usage intensif des caches par eZ Publish</a> est bien connu. Mais je viens seulement de réaliser à quel point les caches et le CMS entretiennent une relation fusionnelle.</p>
+<p>Je savais qu'eZ Publish utilisait des caches de contenu, de templates et de configuration. Normal. J'ai découvert lundi qu'il (ou elle, d'ailleurs ?) <a class="reference external" href="http://www.miximum.fr/musee-des-horreurs/48-mon-attributefilter-deconne-pourquoi">utilisait aussi des caches internes</a> qui n'étaient pas effacés par le processus habituel.</p>
+<p>Aujourd'hui, je viens de découvrir qu'eZ Publish utilisait des caches en mémoire vive durant l'exécution d'extensions PHP. Note : pour les gros scripts, penser à régulièrement vider les caches en appelant la fonction eZContentObject::clearCache(), sinon, ça sera un beau heap overflow.</p>
+<p>En bonus, une petite fonction que vous pouvez appeler dans une grosse boucle, pour vider les caches à intervalles réguliers :</p>
+<pre class="code php literal-block">
+<span class="x">function clearCache($maxIterations)
+{
+    static $iteration = 0;
+
+    $iteration++;
+
+    if($iteration >= $maxIterations)
+    {
+        printf("nettoyage du cache\n");
+        eZContentObject::clearCache();
+        $iteration = 0;
+    }
+}</span></pre>
+<p>Combien d'autres caches que je n'ai pas encore découvert ?</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/14/2014 06:13 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/eZ-Publish-et-les-caches-une-grande-histoire-d-amour">View mirror of item</a> &nbsp; <a href="http://www.miximum.fr/ez-publish-et-les-caches-une-grande-histoire-damour.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.miximum.fr/mon-attributefilter-deconne-pourquoi.html" title="Mon AttributeFilter déconne ! Pourquoi ?!">Mon AttributeFilter déconne ! Pourquoi ?!</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>Dans mon <a class="reference external" href="http://www.miximum.fr/methodes-et-outils/47-recuperer-des-objets-de-contenu-en-filtrant-par-attribut-avec-lapi-ez-publish">snippet précédent sur la récupération d'objets de contenu</a>, j'utilise la fonction subTree avec une option AttributeFilter. Savez vous combien de temps j'ai passé à écrire ces 5 lignes ? 4h ! Tout ça à cause d'une stupide erreur de cache.</p>
+<p>Pendant 4h, j'ai tout essayé pour faire fonctionner ce code : rien à faire ! Il ne me retournait aucun résultat. J'ai essayé toutes les combinaisons d'attributs possibles et imaginables, rien à faire. Le pire, c'est qu'en utilisant un autre attribut pour le test, tout se passait nickel. Rageant.</p>
+<p>En désespoir de cause, j'ai fini par me plonger dans le code source d'eZ Publish, voici ce que j'ai découvert.</p>
+<p>La fonction <a class="reference external" href="http://pubsvn.ez.no/doxygen/3.9/html/ezcontentobjecttreenode_8php-source.html#l01774">subTree</a> d'eZ Publish fait appel à <a class="reference external" href="http://pubsvn.ez.no/doxygen/3.9/html/ezcontentobjecttreenode_8php-source.html#l00955">createAttributeFilterSQLStrings</a>, qui elle même appelle <a class="reference external" href="http://pubsvn.ez.no/doxygen/3.9/html/ezcontentobjecttreenode_8php-source.html#l00268">classAttributeIDByIdentifier</a>.</p>
+<p>Cette dernière fonction permet de récupérer l'id d'un l'attribut en fonction de son identifiant de la forme 'classe/attribut', notation fort pratique qui évite d'avoir à utiliser directement l'id.</p>
+<p>Pour retourner rapidement un résultat, classAttributeIDByIdentifier récupère la liste de tous les attributs existants dans la base de données, et construit un tableau d'index :</p>
+<pre class="code php literal-block">
+<span class="x">...
+foreach ( $identifierArray as $identifierRow )
+{
+    ...
+    $combinedIdentifier = $classIdentifier . '/' . $attributeIdentifier;
+    $identifierHash[$combinedIdentifier] = (int)$attributeID;
+}</span></pre>
+<p>On a donc un tableau de la forme</p>
+<pre class="code php literal-block">
+<span class="x">$identifier_hash = array( "folder/name" => 4,
+                          "folder/short_description" => 119,
+                          "folder/short_name" => 155,
+                          "folder/description" => 156,
+                          "folder/show_children" => 158,
+                          "user_group/name" => 6,
+                          ...</span></pre>
+<p>Pour renvoyer l'id, le reste est trés simple :</p>
+<pre class="code php literal-block">
+<span class="x">$return = $identifierHash[$identifier];</span></pre>
+<p>Rien de bien sorcier, non ? Sauf que ! Le problème, c'est que le tableau d'index est mis en cache, dans le fichier var/plain/cache/classattributeidentifiers_nom_de_la_base.php</p>
+<p>Mon problème, c'était que l'attribut que je voulais filtrer n'était pas dans le cache. Après quelques recherches, j'ai compris pourquoi :</p>
+<pre class="code bash literal-block">ls -l var/plain/cache/classattributeidentifiers_nom_de_la_base.php
+-rw-rw-rw-  1 root root 25750 2008-05-26 16:46 var/plain/cache/classattributeidentifiers_nom_de_la_classe.php</pre>
+<p>Le propriétaire du fichier est root ! Du coup, lorsque j'ai modifié mes classes de contenu dans la backoffice ez Publish, ce cache n'a pas été mis à jour. Comme il s'agit d'un cache interne, il n'a pas non plus été supprimé par la commande</p>
+<pre class="code bash literal-block">php bin/cache/ezcache.php --clear-all</pre>
+<p>Résultat : un cache obsolète, une après-midi perdue. Moralité : même quand on supprime les caches, il reste encore des problèmes de cache.</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/14/2014 06:13 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/Mon-AttributeFilter-deconne-!-Pourquoi">View mirror of item</a> &nbsp; <a href="http://www.miximum.fr/mon-attributefilter-deconne-pourquoi.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.miximum.fr/recuperer-des-objets-de-contenu-en-filtrant-par-attribut-avec-lapi-ez-publish.html" title="Récupérer des objets de contenu en filtrant par attribut avec l'API eZ Publish">Récupérer des objets de contenu en filtrant par attribut avec l' ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>Mon besoin est simple : je veux récupérer en PHP, avec l'<a class="reference external" href="http://pubsvn.ez.no/">API eZ Publish</a>, toutes les instances d'une certaine classe, en effectuant un filtre sur la valeur d'un attribut (dans mon cas bien précis : c'est une checkbox qui doit être cochée).</p>
+<p>Voici le snippet qui permet de faire ça :</p>
+<pre class="code php literal-block">
+<span class="x">$nodes = array();
+$nodes =& eZContentObjectTreeNode::subTree( array(
+                'IgnoreVisibility' => false,
+                // 'Limit' => 10, // Je peux rajouter une limite max
+                'ClassFilterType' => 'include',  // Je ne veux que les objets de type classe
+                'ClassFilterArray' => array( 'classe' ),
+                'AttributeFilter' => array( array( 'classe/attribut', '=', '1' ) ) // Mon attribut est à 1, ma case est cochée
+                ), 2);</span></pre>
+<p>Plus d'infos sur l'usage de <a class="reference external" href="http://www.frefred.fr/blog/ezcontentobjecttreenode_subtree_d_ez_publish">ezContentObjectTreeNode chez Frefred</a>.</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/14/2014 06:13 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/Recuperer-des-objets-de-contenu-en-filtrant-par-attribut-avec-l-API-eZ-Publish">View mirror of item</a> &nbsp; <a href="http://www.miximum.fr/recuperer-des-objets-de-contenu-en-filtrant-par-attribut-avec-lapi-ez-publish.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.miximum.fr/exporter-des-classes-de-contenu-sous-ezpublish.html" title="Exporter des classes de contenu sous ezpublish">Exporter des classes de contenu sous ezpublish</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>C'est vraiment un truc tout bête à faire, mais j'ai eu du mal à trouver comme <strong>exporter des classes de contenu</strong> avec le CMS <a class="reference external" href="http://www.ez.no">eZ Publish</a>.</p>
+<p>Pour ce faire, il faut se rendre dans l'administration, puis paquetages (package en anglais). Sélectionnez Export de classe de contenu (content class export). De là, il vous reste à sélectionner vos classes, et à suivre les instructions. Vous pourrez alors télécharger le fichier correspondant à votre paquetage.</p>
+<p>Pour exporter le contenu utilisant ces classes, il faut choisir Export d'objet de contenu à la création du package.</p>
+<p>Pour importer le tout dans une autre instance d'eZ Publish, retournez dans administration > package > importer.</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>02/14/2014 06:13 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/Exporter-des-classes-de-contenu-sous-ezpublish">View mirror of item</a> &nbsp; <a href="http://www.miximum.fr/exporter-des-classes-de-contenu-sous-ezpublish.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Planet-eZ-Publish.fr">Planet eZ Publish.fr</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/video-forum-php-ez-publish-creer-site-oriente-contenu" title="Vidéo de la conférence &quot;eZ Publish, créer un site orienté contenu&quot; au Forum PHP">Vidéo de la conférence &quot;eZ Publish, créer un site orienté cont ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div><p>Je viens de voir que la vidéo de la conférence <a href="http://damien.pobel.fr/post/ez-publish-forum-php-2013-creer-site-oriente-contenu">eZ Publish, créer un site orienté contenu en 45 minutes</a> que <a href="http://patrickallaert.blogpost.be/">Patrick Allaert</a> et moi-même avons donnée au Forum PHP en novembre est maintenant disponible.</p>
+<p>Pour rappel, <a href="https://patrickallaert.github.io/create-site-from-scratch.html">les slides</a> et <a href="https://github.com/dpobel/ForumPhp2013DemoBundle">le code associé</a> (il y a <a href="https://github.com/dpobel/ForumPhp2013DemoBundle/tags">un tag par étape</a>) sont disponibles en ligne, ce qui facilitera aussi le suivi de la conférence vue la taille réduite des écrans dans cette salle et les quelques problèmes de son avec le micro de Patrick :(</p>
+<iframe width="640" height="360" src="http://damien.pobel.fr//www.youtube.com/embed/cxBUanbJCn0?vq=hd720" frameborder="0" allowfullscreen=""/>
+<p>Si vous étiez présent ou même à partir de cette vidéo, il est encore temps <a href="https://joind.in/talk/view/9358">de noter et commenter notre présentation sur joind.in</a>.</p>
+<p>Les vidéos des autres conférences arrivent progressivement sur <a href="http://www.youtube.com/user/afupPHP/videos">le compte Youtube de l'AFUP</a>, je ne peux que vous conseillez de suivre les mises en lignes, <a href="https://joind.in/event/view/1371#event-tabs">certaines méritent vraiment d'être vues</a>.</p></div>
+    </div>
+
+    <div class="attribute-url">
+	<span>12/24/2013 07:46 am</span> &nbsp; <a href="http://www.planet-ezpublish.fr">www.planet-ezpublish.fr</a> &nbsp; <a href="/Mirror/Planet-eZ-Publish.fr/Video-de-la-conference-eZ-Publish-creer-un-site-oriente-contenu-au-Forum-PHP">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/video-forum-php-ez-publish-creer-site-oriente-contenu">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+            
+            <span class="next"><a href="/Mirror/Planet-eZ-Publish.fr/(offset)/10"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+    
+        <span class="current">1</span>
+
+                      <span class="other"><a href="/Mirror/Planet-eZ-Publish.fr/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/Planet-eZ-Publish.fr/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/Planet-eZ-Publish.fr/(offset)/30">4</a></span>
+                              <span class="other"><a href="/Mirror/Planet-eZ-Publish.fr/(offset)/40">5</a></span>
+                              <span class="other"><a href="/Mirror/Planet-eZ-Publish.fr/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/Planet-eZ-Publish.fr/(offset)/60">7</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Planet-eZ-Publish.fr/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Planet-eZ-Publish.fr/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Planet-eZ-Publish.fr/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class="currentselected today">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:20:"Planet eZ Publish.fr";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"239";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:20:"Planet eZ Publish.fr";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"239";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"237";s:7:"node_id";s:3:"239";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"151890fdce8e55ae15819afeafc7c857";s:14:"node_remote_id";s:32:"7f415b1fa83ea305e9dda229c01e0140";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:27:"Mirror/Planet-eZ-Publish.fr";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"239";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,556 @@
+a:10:{s:7:"content";s:29932:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19470" title="
+		New Bug - #019470: the connection problem in Internet Explorer comes with an underscore in the URL.
+">
+		New Bug - #019470: the connection problem in Internet Explorer  ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New Bug (<a href="http://issues.ez.no/IssueView.php?Id=19470&ProjectId=3">#019470</a>): the connection problem in Internet Explorer comes with an underscore in the URL.</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/06/2012 04:57 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/New-Bug-019470-the-connection-problem-in-Internet-Explorer-comes-with-an-underscore-in-the-URL.">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19470">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19468" title="
+	Comment #274231 has been added to issue #019468: eZContentStaging: Restoring an object from trash do not synchronize
+">
+	Comment #274231 has been added to issue #019468: eZContentStagin ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New comment (<a href="http://issues.ez.no/IssueView.php?Id=19468&ProjectId=3&Anchor=Comment274231">#274231</a>) has been added to issue <a href="http://issues.ez.no/IssueView.php?Id=19468&ProjectId=3">#019468</a> (eZContentStaging: Restoring an object from trash do not synchronize)
+	
+	 (Attachments: <None>): 
+	<p>The event fired is: eZContentStagingEvent::ACTION_PUBLISH</p>
+
+</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/06/2012 02:19 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/Comment-274231-has-been-added-to-issue-019468-eZContentStaging-Restoring-an-object-from-trash-do-not-synchronize">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19468">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19464" title="
+	Status of Bug #019464 (Unable to search an object with double quotes) has been set to Closed
+">
+	Status of Bug #019464 (Unable to search an object with double qu ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">Workflow transition: issue status of issue <a href="http://issues.ez.no/IssueView.php?Id=19464&ProjectId=3">#019464</a> (Unable to search an object with double quotes) has been moved from New to Closed (Close as invalid action) </p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/05/2012 09:39 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/Status-of-Bug-019464-Unable-to-search-an-object-with-double-quotes-has-been-set-to-Closed">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19464">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19467" title="
+		Issue #019467: add triggers for adding/removing urlaliases to a node has been updated
+
+">
+		Issue #019467: add triggers for adding/removing urlaliases to a ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">Issue <a href="http://issues.ez.no/IssueView.php?Id=19467&ProjectId=3">#019467</a> has been updated:
+		<table cellspacing="1" cellpadding="2" border="0" width="100%"><thead><tr><th>Field</th><th width="50%">Old</th><th width="50%">New</th></tr></thead><tbody><tr><td>Summary</td><td><div style="overflow: auto;">add triggers fort adding/removing urlaliases to a node</div></td><td><div style="overflow: auto;">add triggers for adding/removing urlaliases to a node</div></td></tr><tr><td>Components</td><td><div style="overflow: auto;">Misc, eZ Content Staging</div></td><td><div style="overflow: auto;">eZ Content Staging, Misc</div></td></tr><tr><td>Affected versions</td><td><div style="overflow: auto;">4.7.0-dev, Community Project</div></td><td><div style="overflow: auto;">Community Project, 4.7.0-dev</div></td></tr></tbody></table></p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 03:58 pm</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/Issue-019467-add-triggers-for-adding-removing-urlaliases-to-a-node-has-been-updated">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19467">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/14952" title="	 
+	 New link (#002183): 
+	 #014952 (ezflow: hidden nodes are shown in blocks)
+	 relates to #013654 (ezflow: hidden nodes get inserted in automatic blocks)
+
+">	 
+	 New link (#002183): 
+	 #014952 (ezflow: hidden nodes are show ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New link has been added: this issue issue <a href="http://issues.ez.no/IssueView.php?Id=14952&ProjectId=3">#014952</a> (ezflow: hidden nodes are shown in blocks)
+		relates to <a href="http://issues.ez.no/IssueView.php?Id=13654&ProjectId=3">#013654</a></p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 02:06 pm</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/New-link-002183-014952-ezflow-hidden-nodes-are-shown-in-blocks-relates-to-013654-ezflow-hidden-nodes-get-inserted-in-automatic-blocks">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/14952">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/18935" title="	 
+	 New link (#002182): 
+	 #018935 (Improvde debug report: readability, accuracy)
+	 relates to #019466 (debug output: for every template executed, show list of including templates)
+
+">	 
+	 New link (#002182): 
+	 #018935 (Improvde debug report: readab ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New link has been added: this issue issue <a href="http://issues.ez.no/IssueView.php?Id=18935&ProjectId=3">#018935</a> (Improvde debug report: readability, accuracy)
+		relates to <a href="http://issues.ez.no/IssueView.php?Id=19466&ProjectId=3">#019466</a></p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 11:03 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/New-link-002182-018935-Improvde-debug-report-readability-accuracy-relates-to-019466-debug-output-for-every-template-executed-show-list-of-including-templates">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/18935">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19466" title="
+		New Enhancement - #019466: debug output: for every template executed, show list of including templates
+">
+		New Enhancement - #019466: debug output: for every template exe ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New Enhancement (<a href="http://issues.ez.no/IssueView.php?Id=19466&ProjectId=3">#019466</a>): debug output: for every template executed, show list of including templates</p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 11:03 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/New-Enhancement-019466-debug-output-for-every-template-executed-show-list-of-including-templates">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19466">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19465" title="
+		Issue #019465:  has been updated
+
+">
+		Issue #019465:  has been updated
+
+</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">Issue <a href="http://issues.ez.no/IssueView.php?Id=19465&ProjectId=3">#019465</a> has been updated:
+		<table cellspacing="1" cellpadding="2" border="0" width="100%"><thead><tr><th>Field</th><th width="50%">Old</th><th width="50%">New</th></tr></thead><tbody><tr><td>Components</td><td><div style="overflow: auto;">Extensions, Database related, eZ XML export</div></td><td><div style="overflow: auto;">Database related, Extensions, eZ XML export</div></td></tr><tr><td>Fix versions</td><td><div style="overflow: auto;"><None></div></td><td><div style="overflow: auto;">Customer request</div></td></tr></tbody></table></p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 10:34 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/Issue-019465-has-been-updated">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19465">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/15350" title="
+	Status of Bug #015350 (eZODF does not support selective language updates) has been set to Assigned
+">
+	Status of Bug #015350 (eZODF does not support selective language ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">Workflow transition: issue status of issue <a href="http://issues.ez.no/IssueView.php?Id=15350&ProjectId=3">#015350</a> (eZODF does not support selective language updates) has been moved from Assigned to Assigned (Re-assign action) </p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 07:22 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/Status-of-Bug-015350-eZODF-does-not-support-selective-language-updates-has-been-set-to-Assigned">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/15350">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://issues.ez.no/19462" title="
+		New Bug - #019462: ezcontentstaging : wsproviders.ini missing upon installation 
+">
+		New Bug - #019462: ezcontentstaging : wsproviders.ini missing u ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p xmlns:php="http://php.net/xsl">New Bug (<a href="http://issues.ez.no/IssueView.php?Id=19462&ProjectId=3">#019462</a>): ezcontentstaging : wsproviders.ini missing upon installation </p>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>06/04/2012 07:20 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Publish-Issues/New-Bug-019462-ezcontentstaging-wsproviders.ini-missing-upon-installation">View mirror of item</a> &nbsp; <a href="http://issues.ez.no/19462">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(offset)/40/(year)/2012/(month)/6"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(offset)/60/(year)/2012/(month)/6"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+                      <span class="other"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(year)/2012/(month)/6">1</a></span>
+                              <span class="other"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(offset)/10/(year)/2012/(month)/6">2</a></span>
+                              <span class="other"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(offset)/20/(year)/2012/(month)/6">3</a></span>
+                              <span class="other"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(offset)/30/(year)/2012/(month)/6">4</a></span>
+                              <span class="other"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(offset)/40/(year)/2012/(month)/6">5</a></span>
+            
+        <span class="current">6</span>
+
+                      <span class="other"><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(offset)/60/(year)/2012/(month)/6">7</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/5/(year)/2012" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(month)/7/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>June&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/1/(month)/6/(year)/2012">1</a></em>
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/4/(month)/6/(year)/2012">4</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/5/(month)/6/(year)/2012">5</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/6/(month)/6/(year)/2012">6</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/7/(month)/6/(year)/2012">7</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/8/(month)/6/(year)/2012">8</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/9/(month)/6/(year)/2012">9</a></em>
+        </td>
+                                        <td class="  right">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/10/(month)/6/(year)/2012">10</a></em>
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/12/(month)/6/(year)/2012">12</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/13/(month)/6/(year)/2012">13</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/14/(month)/6/(year)/2012">14</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/15/(month)/6/(year)/2012">15</a></em>
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/18/(month)/6/(year)/2012">18</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/19/(month)/6/(year)/2012">19</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/20/(month)/6/(year)/2012">20</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/21/(month)/6/(year)/2012">21</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/22/(month)/6/(year)/2012">22</a></em>
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/25/(month)/6/(year)/2012">25</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/26/(month)/6/(year)/2012">26</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/27/(month)/6/(year)/2012">27</a></em>
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/29/(month)/6/(year)/2012">29</a></em>
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Publish-Issues/(day)/30/(month)/6/(year)/2012">30</a></em>
+        </td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:2:"50";s:4:"year";s:4:"2012";s:5:"month";s:1:"6";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:17:"eZ Publish Issues";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"4198";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:17:"eZ Publish Issues";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"4198";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"4198";s:7:"node_id";s:4:"4198";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"5dd3054e1d1f0615538219e40ccb9c22";s:14:"node_remote_id";s:32:"8b3105ac9e820dbdc5764859b6f67fc7";s:6:"offset";i:50;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:24:"Mirror/eZ-Publish-Issues";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"4198";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

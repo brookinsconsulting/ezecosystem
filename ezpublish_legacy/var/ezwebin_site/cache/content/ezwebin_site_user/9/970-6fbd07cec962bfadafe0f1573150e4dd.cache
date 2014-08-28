@@ -1,0 +1,803 @@
+a:10:{s:7:"content";s:42548:"
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-folder">
+
+        
+        <div class="attribute-header">
+            <h1>
+Planetarium</h1>
+        </div>
+
+                            
+        
+        
+
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-folder">
+
+        
+
+                
+            
+            
+                 
+            
+
+            
+            <div style="margin-top:6px;margin-bottom:8px;">
+	    	    	    
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="http://ezecosystem.org/Planetarium/(offset)/2360"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="http://ezecosystem.org/Planetarium/(offset)/2400"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages"><a href="http://ezecosystem.org/Planetarium">1</a> ... 
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2020">102</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2040">103</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2060">104</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2080">105</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2100">106</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2120">107</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2140">108</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2160">109</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2180">110</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2200">111</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2220">112</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2240">113</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2260">114</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2280">115</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2300">116</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2320">117</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2340">118</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2360">119</a></span>
+            
+        <span class="current">120</span>
+
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2400">121</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2420">122</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2440">123</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2460">124</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2480">125</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2500">126</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2520">127</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2540">128</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2560">129</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2580">130</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2600">131</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2620">132</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2640">133</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2660">134</a></span>
+            <span class="other"> ... </span><span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6540">328</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+</div>
+
+            <div class="content-view-children">
+                                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezworkflowcollection/news/ezworkflowcollection_0_6_released" title="eZWorkflowCollection 0.6 released">eZWorkflowCollection 0.6 released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>- adds a new workflow event: add secondary location upon publish based on an object-relation attribute of current object</p><p>- tested for compatibility with eZP 5.1</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2013 05:18 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-New-Articles/eZWorkflowCollection-0.6-released">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezworkflowcollection/news/ezworkflowcollection_0_6_released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezworkflowcollection/subversion/fabbd4ff62e4e58b46f304657ab179df58ae6541" title="http://projects.ez.no/ezworkflowcollection/subversion/fabbd4ff62e4e58b46f304657ab179df58ae6541">http://projects.ez.no/ezworkflowcollection/subversion/fabbd4ff62e4 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Add gitignore for ezextbuilder</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2013 05:11 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ezworkflowcollection-subversion-fabbd4ff62e4e58b46f304657ab179df58ae6541">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezworkflowcollection/subversion/fabbd4ff62e4e58b46f304657ab179df58ae6541">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezworkflowcollection/subversion/ea78fa9d660c3794c77c5b134798ca0fc3a2c3fc" title="http://projects.ez.no/ezworkflowcollection/subversion/ea78fa9d660c3794c77c5b134798ca0fc3a2c3fc">http://projects.ez.no/ezworkflowcollection/subversion/ea78fa9d660c ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>tag for release</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2013 05:11 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ezworkflowcollection-subversion-ea78fa9d660c3794c77c5b134798ca0fc3a2c3fc">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezworkflowcollection/subversion/ea78fa9d660c3794c77c5b134798ca0fc3a2c3fc">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/xrowcdn/subversion/41" title="http://projects.ez.no/xrowcdn/subversion/41">http://projects.ez.no/xrowcdn/subversion/41</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      removed class
+    </div>
+
+    <div class="attribute-url">
+	<span>07/23/2013 08:15 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-xrowcdn-subversion-41">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/xrowcdn/subversion/41">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/owtranslate/source/3e1fe8dd598fa6acf0a95741627fd6efd33fd438" title="http://projects.ez.no/owtranslate/source/3e1fe8dd598fa6acf0a95741627fd6efd33fd438">http://projects.ez.no/owtranslate/source/3e1fe8dd598fa6acf0a957416 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>CSS corrections</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/23/2013 04:22 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-owtranslate-source-3e1fe8dd598fa6acf0a95741627fd6efd33fd438">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/owtranslate/source/3e1fe8dd598fa6acf0a95741627fd6efd33fd438">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Share.ez.no-Blogs">Share.ez.no Blogs</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://share.ez.no/blogs/community-project-board/community-project-board-meeting-minutes-july-22nd" title="Community Project Board meeting minutes - July 22nd">Community Project Board meeting minutes - July 22nd</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/layout/set/print/Mirror/Share.ez.no-Blogs/(tag)/community%20project%20board" title="community project board">community project board</a>
+                                                                                                                               ,
+                                                                                      <a href="/layout/set/print/Mirror/Share.ez.no-Blogs/(tag)/meeting%20minutes" title="meeting minutes">meeting minutes</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Here are the minutes of the 37th Community Project Board meeting. Our previous minutes can be found <a href="http://share.ez.no/blogs/community-project-board/community-project-board-meeting-minutes-may-27th" title="Previous meeting minutes" target="_self">here</a>.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/22/2013 02:54 pm</span> &nbsp; <a href="http://share.ez.no/blogs">share.ez.no/blogs</a> &nbsp; <a href="/layout/set/print/Mirror/Share.ez.no-Blogs/Community-Project-Board-meeting-minutes-July-22nd">View mirror of item</a> &nbsp; <a href="http://share.ez.no/blogs/community-project-board/community-project-board-meeting-minutes-july-22nd">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Systems-Blog">eZ Systems Blog</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Blog/Web-to-Print-Smoother-Than-Ever-with-eZ-Publish" title="Web to Print Smoother Than Ever with eZ Publish!">Web to Print Smoother Than Ever with eZ Publish!</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>OpenMagazine is developed and offered by our trusted partner Opencontent. It's definitely a blast to see how the folks at <a href="http://www.opencontent.it/" target="_self">Opencontent</a> understand and use the eZ Publish platform, extending the possibilities our technology offers to build solutions that meet very specific needs and work elegantly on top of eZ Publish. &nbsp;This is what's happening with OpenMagazine's new version.&nbsp;Congratulations, Opencontent!</p><p>But let's stop with the foggy, fuzzy words and break into the concrete features of this new version. Let's look at why it should make you click if you have a need for publishing quality brochures, magazines, and documents in addition to your web presence.</p><a name="eztoc375002_0_1" id="eztoc375002_0_1"></a><h3>Mapping Indesign styles with your content types and structure</h3><p>First off: A major new feature is that OpenMagazine offers a new interface that's intuitive (and not technical) to define your &quot;mapping&quot;. Through the mapping, you tell the system how content information stored in your eZ Publish information architecture (aka the Content Classes) should fit into the layout structure of your Adobe Indesign templates. It's a crucial step in implementing a Web to Print solution. &nbsp;Until this second version, this had to be done by technical people in Adobe Indesign, as this was done by manual tagging in the Indesign files. &nbsp;Now, this is doable by editors from the CMS in a visual and user-friendly way! This is a major new feature that will streamline the process.</p>
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/mapping_1/375016-1-eng-GB/mapping_1_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/mapping_1/375016-1-eng-GB/mapping_1_medium.jpg" width="462" height="236" style="border: 0px solid ;" alt="Open Magazine, the mapping of style in eZ Publish" title="Open Magazine, the mapping of style in eZ Publish" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:462px;">
+						
+<p>Open Magazine, the mapping of style in eZ Publish</p>		</div>
+			</div>
+</div>
+</div><a name="eztoc375002_0_2" id="eztoc375002_0_2"></a><h3>Automating the production of a whole publication</h3><p>OpenMagazine Version 2 also comes with a desktop agent that will help you generate a whole publication (called 'an issue' in the print world). Let say you want to export a whole magazine issue to the print production when you're done with the editorial content. &nbsp;This is now possible &nbsp;thanks simple to this desktop agent. Before that, composition was handled manually at a further step in the process. The desktop agent is also smart, as it keeps synchronizing resources. This means that any changes done will be automatically be accessible to the layout designers/producers in the Indesign files with no need to log-in eZ Publish.</p><p>Again, it's all about streamlining the process and making it possible to manage a more complete and complex workflow with clear separation of tasks between designers (in Indesign) and editors (in eZ Publish), similar to what can be done using incopy.</p>
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/indesign_bmw_1/375020-1-eng-GB/indesign_bmw_1_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/indesign_bmw_1/375020-1-eng-GB/indesign_bmw_1_medium.png" width="462" height="422" style="border: 0px solid ;" alt="Generating multipage documents in indesign directly from eZ Publish" title="Generating multipage documents in indesign directly from eZ Publish" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:462px;">
+						
+<p>Generating multipage documents in indesign directly from eZ Publish</p>		</div>
+			</div>
+</div>
+</div><a name="eztoc375002_0_3" id="eztoc375002_0_3"></a><h3>Full IDML support… and more</h3>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/editing_2/375024-1-eng-GB/editing_2_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/editing_2/375024-1-eng-GB/editing_2_small_with_border.jpg" width="217" height="124" style="border: 0px solid ;" alt="Rich table styling from eZ Publish" title="Rich table styling from eZ Publish" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:217px;">
+						
+<p>Rich table styling from eZ Publish</p>		</div>
+			</div>
+</div>
+</div><p>Another new feature is that OpenMagazine fully supports the Adobe IDML format. This complete support gives more power to editors who can now use complex styling such as tables or chained paragraphs from eZ Publish itself.</p><p>Finally, OpenMagazine can also manage your fonts mapping. From eZ Publish, the editor can now define in a very granular way &nbsp;which fonts will be used in all styles in the Indesign document.</p><p>I might have missed a few enhancements and additional features, but this might be enough for now! OpenMagazine was already cutting edge, showing how to set up a full content management process across digital and print channels. It now just took a big new step in terms of completeness, enabling publishers to set up complex and efficient workflow that works for all those channels.</p><p>OpenMagazine fits publishing businesses (magazines, journals, newspapers) but also businesses of any kind that have publishing needs such as releasing brochures, reports, internal journals… who doesn't?!</p><p>If ever you have such a need, please feel free to reach out. OpenMagazine v2 will be shortly available, if it not already when you read those lines. The Opencontent and eZ teams would be more than happy to tell you about this solution and see how it can help you break the silos and build successful and efficient content workflow across channels!</p><p>-- <a href="https://plus.google.com/u/0/100387701195070391722?rel=author" target="_self">Roland</a> for the Product team at eZ</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/22/2013 10:35 am</span> &nbsp; <a href="http://ez.no/About-eZ/Blog">ez.no/About-eZ/Blog</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Systems-Blog/Web-to-Print-Smoother-Than-Ever-with-eZ-Publish">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Blog/Web-to-Print-Smoother-Than-Ever-with-eZ-Publish">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Community-Issues">eZ Community Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/COM-19785" title="Sylvain Guittard changed the status to In Progress on       COM-19785 - Update Reference Export
+  ">Sylvain Guittard changed the status to In Progress on       COM-19 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>07/22/2013 06:28 am</span> &nbsp; <a href="https://jira.ez.no/browse/COM">eZ Community Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Community-Issues/Sylvain-Guittard-changed-the-status-to-In-Progress-on-COM-19785-Update-Reference-Export">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/COM-19785">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Community-Issues">eZ Community Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/COM-19785" title="Sylvain Guittard changed the Due Date to '26/Jul/13' on       COM-19785 - Update Reference Export
+  ">Sylvain Guittard changed the Due Date to '26/Jul/13' on       COM- ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>07/22/2013 06:28 am</span> &nbsp; <a href="https://jira.ez.no/browse/COM">eZ Community Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Community-Issues/Sylvain-Guittard-changed-the-Due-Date-to-26-Jul-13-on-COM-19785-Update-Reference-Export">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/COM-19785">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Community-Issues">eZ Community Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/COM-19785" title="Sylvain Guittard changed the status to InputQ on       COM-19785 - Update Reference Export
+  ">Sylvain Guittard changed the status to InputQ on       COM-19785 - ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>07/22/2013 06:28 am</span> &nbsp; <a href="https://jira.ez.no/browse/COM">eZ Community Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Community-Issues/Sylvain-Guittard-changed-the-status-to-InputQ-on-COM-19785-Update-Reference-Export">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/COM-19785">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggwebservices/news/gg_webservices_0_14_released" title="gg Webservices 0.14 released">gg Webservices 0.14 released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>The biggest new feature of this release is compatibility with the eZPublish REST v2 API.</p><p>This includes the visual debugger - making troubleshooting pesky REST problems nice and easy.</p><p>But there's a lot of both bugfices and new features - read on for a detailed changelog</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/20/2013 04:28 pm</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-New-Articles/gg-Webservices-0.14-released">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggwebservices/news/gg_webservices_0_14_released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggwebservices/subversion/3decdc6582d06b46aa6b770069eebe424a491c90" title="http://projects.ez.no/ggwebservices/subversion/3decdc6582d06b46aa6b770069eebe424a491c90">http://projects.ez.no/ggwebservices/subversion/3decdc6582d06b46aa6 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Phpdoc comments</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/20/2013 04:20 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ggwebservices-subversion-3decdc6582d06b46aa6b770069eebe424a491c90">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggwebservices/subversion/3decdc6582d06b46aa6b770069eebe424a491c90">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggwebservices/subversion/119ec83571d3b8592f9fec9dbc7589beb54ffa49" title="http://projects.ez.no/ggwebservices/subversion/119ec83571d3b8592f9fec9dbc7589beb54ffa49">http://projects.ez.no/ggwebservices/subversion/119ec83571d3b8592f9 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Allow REST requests to have custom http headers added (useful for eZ Rest v2)</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/20/2013 04:20 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ggwebservices-subversion-119ec83571d3b8592f9fec9dbc7589beb54ffa49">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggwebservices/subversion/119ec83571d3b8592f9fec9dbc7589beb54ffa49">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggwebservices/subversion/ecaef681adead406a8ee6cdd4138dcf131367863" title="http://projects.ez.no/ggwebservices/subversion/ecaef681adead406a8ee6cdd4138dcf131367863">http://projects.ez.no/ggwebservices/subversion/ecaef681adead406a8e ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Generate correct debugger configuration for more servers in left-hand menu</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/20/2013 04:20 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ggwebservices-subversion-ecaef681adead406a8ee6cdd4138dcf131367863">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggwebservices/subversion/ecaef681adead406a8ee6cdd4138dcf131367863">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggwebservices/subversion/8cce8baed29d311edf8c373bc60c8252ee14e5b9" title="http://projects.ez.no/ggwebservices/subversion/8cce8baed29d311edf8c373bc60c8252ee14e5b9">http://projects.ez.no/ggwebservices/subversion/8cce8baed29d311edf8 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Allow fetch function to return full response object; in the process, expose all properties for subclasses</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/20/2013 04:20 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ggwebservices-subversion-8cce8baed29d311edf8c373bc60c8252ee14e5b9">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggwebservices/subversion/8cce8baed29d311edf8c373bc60c8252ee14e5b9">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggwebservices/subversion/e3ab3a5ebac7aade45963441fe80cb64b1969f0a" title="http://projects.ez.no/ggwebservices/subversion/e3ab3a5ebac7aade45963441fe80cb64b1969f0a">http://projects.ez.no/ggwebservices/subversion/e3ab3a5ebac7aade459 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>better docs for restavpiv2; tag for build</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/20/2013 04:20 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ggwebservices-subversion-e3ab3a5ebac7aade45963441fe80cb64b1969f0a">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggwebservices/subversion/e3ab3a5ebac7aade45963441fe80cb64b1969f0a">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/owtranslate/source/5dd4d327a3fd66f6436c7e778da344739366b6df" title="http://projects.ez.no/owtranslate/source/5dd4d327a3fd66f6436c7e778da344739366b6df">http://projects.ez.no/owtranslate/source/5dd4d327a3fd66f6436c7e778 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>- Html special chars supported during file generation
+- Spaces inside the I18n tpl call function are supported</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/19/2013 08:52 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-owtranslate-source-5dd4d327a3fd66f6436c7e778da344739366b6df">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/owtranslate/source/5dd4d327a3fd66f6436c7e778da344739366b6df">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/owtranslate/source/f54a144a9fcd4bc945f02f84309c182312994f99" title="http://projects.ez.no/owtranslate/source/f54a144a9fcd4bc945f02f84309c182312994f99">http://projects.ez.no/owtranslate/source/f54a144a9fcd4bc945f02f843 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Merge pull request #1 from nniewiadomski/master
+
+Html special chars + I18n spaces support</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/19/2013 08:52 am</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-owtranslate-source-f54a144a9fcd4bc945f02f84309c182312994f99">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/owtranslate/source/f54a144a9fcd4bc945f02f84309c182312994f99">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/eZ-Community-Issues">eZ Community Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/COM-19518" title="Sylvain Guittard changed the status to Resolved on       COM-19518 - Allow Gist inclusion in blogs/articles/forums
+   with a resolution of 'Fixed'">Sylvain Guittard changed the status to Resolved on       COM-19518 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>07/17/2013 02:36 am</span> &nbsp; <a href="https://jira.ez.no/browse/COM">eZ Community Issues</a> &nbsp; <a href="/layout/set/print/Mirror/eZ-Community-Issues/Sylvain-Guittard-changed-the-status-to-Resolved-on-COM-19518-Allow-Gist-inclusion-in-blogs-articles-forums-with-a-resolution-of-Fixed">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/COM-19518">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/layout/set/print/Mirror/Projects-Commits">Projects Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezworkflowcollection/subversion/0fe6afdd2ad755d72e9acca937cce469c4fa1669" title="http://projects.ez.no/ezworkflowcollection/subversion/0fe6afdd2ad755d72e9acca937cce469c4fa1669">http://projects.ez.no/ezworkflowcollection/subversion/0fe6afdd2ad7 ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Merge branch 'master' of github.com:gggeek/ezworkflowcollection</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>07/16/2013 12:11 pm</span> &nbsp; <a href="http://projects.ez.no">Projects Commits</a> &nbsp; <a href="/layout/set/print/Mirror/Projects-Commits/http-projects.ez.no-ezworkflowcollection-subversion-0fe6afdd2ad755d72e9acca937cce469c4fa1669">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezworkflowcollection/subversion/0fe6afdd2ad755d72e9acca937cce469c4fa1669">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                                </div>
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="http://ezecosystem.org/Planetarium/(offset)/2360"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="http://ezecosystem.org/Planetarium/(offset)/2400"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages"><a href="http://ezecosystem.org/Planetarium">1</a> ... 
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2020">102</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2040">103</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2060">104</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2080">105</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2100">106</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2120">107</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2140">108</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2160">109</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2180">110</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2200">111</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2220">112</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2240">113</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2260">114</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2280">115</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2300">116</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2320">117</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2340">118</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2360">119</a></span>
+            
+        <span class="current">120</span>
+
+                      <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2400">121</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2420">122</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2440">123</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2460">124</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2480">125</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2500">126</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2520">127</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2540">128</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2560">129</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2580">130</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2600">131</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2620">132</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2640">133</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/2660">134</a></span>
+            <span class="other"> ... </span><span class="other"><a href="http://ezecosystem.org/Planetarium/(offset)/6540">328</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+        
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+
+
+            </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:4:"2380";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:11:"Planetarium";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"970";}}s:10:"title_path";a:2:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:3:{s:4:"text";s:11:"Planetarium";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"970";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"969";s:7:"node_id";s:3:"970";s:14:"parent_node_id";s:1:"2";s:8:"class_id";s:1:"1";s:16:"class_identifier";s:6:"folder";s:9:"remote_id";s:32:"e4565c9579d8970a4222676fa94f5fe8";s:14:"node_remote_id";s:32:"137fe2fcc2cddc67c82e93d2abda38c8";s:6:"offset";i:2380;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"2";s:9:"url_alias";s:11:"Planetarium";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"3";s:12:"main_node_id";s:3:"970";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";b:0;s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"23";s:23:"parent_class_identifier";s:9:"frontpage";s:21:"parent_node_remote_id";s:32:"f3e90596361e31d496d4026eb624c983";s:23:"parent_object_remote_id";s:32:"8a9c9c761004866fb458d89910f52bee";}s:13:"template_list";a:5:{i:0;s:67:"extension/ezecosystem/design/eze/override/templates/full/folder.tpl";i:1;s:60:"design/standard/templates/content/datatype/view/ezstring.tpl";i:2;s:61:"extension/ezecosystem/design/eze/templates/parts/homepage.tpl";i:3;s:63:"extension/ezecosystem/design/eze/templates/navigator/google.tpl";i:4;s:70:"extension/ezecosystem/design/eze/override/templates/line/blog_post.tpl";}s:9:"cache_ttl";i:-1;}

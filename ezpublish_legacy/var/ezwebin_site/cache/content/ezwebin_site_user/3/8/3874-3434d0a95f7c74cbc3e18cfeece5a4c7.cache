@@ -1,0 +1,340 @@
+a:10:{s:7:"content";s:12802:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>eZ Components silently reach a turning point</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://www.ymc.ch/weblog/ez_components_silently_reach_a_turning_point">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">07/15/2009 04:02 am</p>
+                                    <p class="author"></p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      
+<p>
+In 2006 the eZ Publish developers were planning the migration to PHP5. This effort was combined with further modularization. Generic &quot;building blocks&quot; were defined that should later form the basis of the new eZ Publish. All of these programs called &quot;Components&quot; had some equivalent in the &quot;old&quot; eZ Publish. And they are impressively stable and practically useful, as they resume the functional tradition of their their ancestors, which have provided tons of examples, test cases and best practices over the years: 
+</p>
+
+<ul>
+
+<li>Cache </li>
+
+<li>Configuration </li>
+
+<li>ConsoleTools </li>
+
+<li>Database </li>
+
+<li>EventLog </li>
+
+<li>Feed </li>
+
+<li>ImageAnalysis </li>
+
+<li>ImageConversion </li>
+
+<li>Mail </li>
+
+<li>PersistentObject </li>
+
+<li>Template </li>
+
+<li>Url </li>
+
+<li>Workflow </li>
+
+</ul>
+
+<p>
+The development of these components was done following a very strict process to assure highest quality. This process was in line with the principles of refactoring a grown system: 
+</p>
+
+<ol>
+
+<li>identify requirements a components needs to fulfill (based on the requirements of the component in eZ Publish) </li>
+
+<li>create a design (based on experiences made with eZ Publish) </li>
+
+<li>implement (with unit tests), review and freeze the API </li>
+
+</ol>
+
+<p>
+Since that time all mentioned Components have reached maturity. One could argue that the original mission of the eZ Components project has been fulfilled. The &quot;blocks&quot; can be used to build a new generation of the eZ Publish CMS on top of it. 
+</p>
+
+<p>
+Unfortunately, only few steps in this direction are taken. Instead new components are written, that do not have a direct ancestor in eZ Publish: 
+</p>
+
+<ul>
+
+<li>UserInput </li>
+
+<li>Search </li>
+
+<li>Tree </li>
+
+<li>MvcTools </li>
+
+<li>Document </li>
+
+</ul>
+
+<p>
+In my opinion the original development process doesn't fit for these new components. Their requirement and design phase can't rely on experiences from years of practical use of eZ Publish. As a result, more and more Components are published that have a stable API, however could be improved by altering the API based on experiences made using the components. 
+</p>
+
+<p>
+For example: 
+</p>
+
+<ul>
+
+<li>UserInput is considered unusable even by its creator </li>
+
+<li>Search doesn't give you full control over SOLR (see the <a href="http://thread.gmane.org/gmane.comp.web.ezcomponents.devel/4222"  target="_blank"  >&quot;ezcSearch Feedback&quot; thread</a> in the components mailing list) </li>
+
+<li><a href="http://issues.ez.no/IssueView.php?Id=14123""  target="_blank"  >Tree requires the user to use a NULL</a> column in a table, where only the root node could ever be NULL </li>
+
+<li>Authentication handles <a href="http://article.gmane.org/gmane.comp.web.ezcomponents.devel/4050"  target="_blank"  >the session variable in a very unorthodox way</a> </li>
+
+<li>The Lazy Initialization mechanism makes it necessary to <a href="http://issues.ez.no/IssueView.php?Id=14633"  target="_blank"  >copy and paste the same code</a> for every component. </li>
+
+</ul>
+
+<p>
+Since there is no public listing of projects that use eZ Components, nobody knows which harm would be done by fixing some of the above issues, giving up backwards compatibility thereby. The feedback on the mailing list makes it obvious, that some components are heavily used in production projects, whilst others (SignalSlot, Tree) might be used only by a handful of private projects. Still, the strict backwards compatibility rule applies to all components.
+</p>
+
+<p>
+While so much effort is put into backwards compatibility there are still things that break, so actually the goal isn't fully achieved. For example a new feature of the PersistentObject component (IdentitySession) made two subtle changes that broke code of mine and of another eZComponents user: 
+</p>
+
+<ul>
+
+<li>An array of persistent objects returned by the PersistentSession isn't indexed from 0 upward anymore, but indexed by the objects ids. </li>
+
+<li>PersistentSession::createFindQuery doesn't return an ezcQuerySelect anymore, but an instance of ezcPersistentFindQuery. </li>
+
+</ul>
+
+<p>
+I see no problem with such breaks. Any developer needs to test before upgrading anyway. Therefore I suggest that, three years after the start of the Components, it is time to take a break and reconsider the mission, the process and the results. Do all the guidelines from three years ago still make sense? How can contributions become a better part of the general concept? What about Project V? While some components are included in the old eZ Publish there is still <a href="http://ez.no/br/developer/forum/general/ez_project_v_five"  target="_blank"   title="Project V question in eZ Forum">no public discussion about the development of Project V</a>. 
+</p>
+
+<p>
+2006 there were 10 people at eZ Systems working full time on the Components. Many errors could be avoided in the design phase. Today, there are only 4 people payed (part time) to look over requirements and design documents. Naturally, 4 pairs of eyes will identify fewer design errors then 10 pairs. It would be helpful to know what priority eZ Systems actually assigns to the Components.
+</p>
+
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://www.ymc.ch/weblog/ez_components_silently_reach_a_turning_point">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/YMC/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/7/(year)/2010" title="">July 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/5/(year)/2010" title="">May 2010</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/9/(year)/2009" title="">September 2009</a></li>
+                                                            <li><a href="/Mirror/YMC/(month)/7/(year)/2009" title="">July 2009</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/YMC/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/YMC/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="currentselected today left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:3:"YMC";s:3:"url";s:22:"/content/view/full/236";s:9:"url_alias";s:10:"Mirror/YMC";s:7:"node_id";s:3:"236";}i:3;a:4:{s:4:"text";s:44:"eZ Components silently reach a turning point";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"3874";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:3:"YMC";s:3:"url";s:22:"/content/view/full/236";s:9:"url_alias";s:10:"Mirror/YMC";s:7:"node_id";s:3:"236";}i:3;a:3:{s:4:"text";s:44:"eZ Components silently reach a turning point";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"3874";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"3874";s:7:"node_id";s:4:"3874";s:14:"parent_node_id";s:3:"236";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_17_275942015f094acee79428920a28446f";s:14:"node_remote_id";s:32:"1fcff4a7ef21220dcef5f0613033b8f2";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:55:"Mirror/YMC/eZ-Components-silently-reach-a-turning-point";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"3874";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"ef49a1bf614a25d88c1d72e867b38fcc";s:23:"parent_object_remote_id";s:32:"be64d5ebfca7cb008f3c25ad4498083c";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

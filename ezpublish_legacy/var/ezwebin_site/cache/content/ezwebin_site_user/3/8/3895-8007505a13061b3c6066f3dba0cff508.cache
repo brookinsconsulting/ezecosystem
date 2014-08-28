@@ -1,0 +1,268 @@
+a:10:{s:7:"content";s:13773:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Collecter des informations sous eZ publish</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://www.frefred.fr/blog/ez-publish/collecter-des-informations-sous-ez-publish">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">05/01/2008 07:47 am</p>
+                                    <p class="author">fredericdavid@wanadoo.fr (Frédéric DAVID)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p>eZ publish nous offre la possibilité d'ajouter des formulaires, permettant de collecter des informations. Voici quelques informations sur les collecteurs d'informations(information collector) dans <a href="/blog/ez-publish">eZ publish</a>
+, et comment les utiliser.</p><a name="eztoc724_1" id="eztoc724_1"></a><h2>Les champs collecteur d'informations</h2><p>eZ publish nous propose un nombre de type de données très suffisant, mais seuls certains de ces champs permettent de récupérer des informations. Ces types sont :</p>
+<ul>
+
+<li>Case à cocher</li>
+
+<li>E-Mail</li>
+
+<li>Option</li>
+
+<li>Ligne de texte</li>
+
+<li>Bloc de texte</li>
+
+</ul>
+<p>Avec ces 5 champs, on peut répondre à tous les besoins pour collecter les informations. On retrouve en général les mêmes types de champs dans tout les formulaires sur Internet.</p><p>Pour créer un collecteur d'information, il suffit de rajouter les champs supplémentaires à votre classe, et de choisir <b>collecteur d'informations.</b></p><p>Comme exemple, voici la procédure pour créer une page de contact. Pour commencer, créons une nouvelle classe. Je mets en général pour une page, un champs nom de type ligne de texte, et d'un bloc xml, me permettant de faire une description de la page. Pour un formulaire de contact, 3 champs sont utilisés. Il faut le nom de l'expéditeur, l'email de l'expéditeur, ainsi qu'un champ permettant de récupérer le message. Pour cela, nous allons rajouter 3 champs, un champs ligne de texte, un champs email et un champs bloc de texte. Voici ce que vous devriez avoir à la fin de l'opération :</p><p>Une fois la classe validée, Il nous faut l'intégrer au site.</p><a name="eztoc724_2" id="eztoc724_2"></a><h2>Template pour collecter des informations</h2><p>Pour mettre en page un formulaire collecteur d'informations, il y a quelques lignes de code obligatoire à mettre dans votre template. Pour afficher simplement nos champs "collecteur d'information", on utilise la fonction <b>attribute_view_gui</b> , qui va nous permettre de nous simplifier la vie.</p><p>Après avoir afficher nos trois champs, il faut rajouter les différentes informations nécéssaires à <a href="/blog/ez-publish">eZ publish</a>
+. La première chose est d'entourer nos trois champs par un formulaire. Ce formulaire renvoie vers la page "content/action". Pour qu'eZ publish sache relier les informations collectées au bon objet, il faut rajouter deux champs cachés, l'identifiant de l'objet, ainsi que l'identifiant du node. Il ne nous reste plus qu'à créer un champs "submit" pour publier les informations. Ce champ doit avoir comme nom ActionCollectInformation, pour spécifier correctement le type de traitement que eZ publish doit exécuter sur le formulaire.</p><p>On se retrouve à la fin avec le code suivant :</p>	<pre class="" style="font-family:monospace;"><form method="post" action=<span class="br0">{</span>'content/action'|ezurl<span class="br0">}</span>>
+<span class="br0">{</span>attribute_view_gui attribute=$node.data_map.contact_nom<span class="br0">}</span>
+<span class="br0">{</span>attribute_view_gui attribute=$node.data_map.contact_email<span class="br0">}</span>
+<span class="br0">{</span>attribute_view_gui attribute=$node.data_map.contact_message<span class="br0">}</span>
+<input name="TopLevelNode" value="<span class="br0">{</span>$node.node_id<span class="br0">}</span>" type="hidden">
+<input name="ContentNodeID" value="<span class="br0">{</span>$node.node_id<span class="br0">}</span>" type="hidden">
+<input name="ContentObjectID" value="<span class="br0">{</span>$node.object.id<span class="br0">}</span>" type="hidden">
+<input class="button" name="ActionCollectInformation" value="Envoyer" type="submit">
+</form>
+&nbsp;</pre><p>Les visiteurs peuvent désormais vous laisser un message. Pour voir les différentes informations collectées, il faut aller dans Administration > Informations recueillies. Vous y retrouverez tous vos formulaires de contact.</p><a name="eztoc724_2_1" id="eztoc724_2_1"></a><h3>Comment récupérer les informations récupérées dans eZ publish</h3><p>eZ publish fournit 3 fonctions, nous permettant de manipuler les collections d'information, pour les afficher dans un template. Les trois fonctions sont :</p>
+<ul>
+
+<li>collected_info_collection</li>
+
+<li>collected_info_count</li>
+
+<li>collected_info_count_list</li>
+
+</ul>
+<p>Les fonctions qui sont les plus intéréssantes sont les deux premières fonctions.La fonction <b>collected_info_count</b> nous permet de récupérer le nombre d'informations collectées (le nombre de fois que le formulaire a été validé). La fonction <b>collected_info_collection</b> permet de récupérer les informations pour un collecteur d'information spécifique.</p><p>
+Voici un exemple d'un template permettant de lister les informations récupérées dans un template :<br />&nbsp;</p>	<pre class="" style="font-family:monospace;"><span class="br0">{</span>def $collection_count = fetch<span class="br0">(</span>content, collected_info_count, hash<span class="br0">(</span>object_id, $node.object.id<span class="br0">)</span><span class="br0">)</span><span class="br0">}</span>
+<span class="br0">{</span>for <span style="">1</span> to $collection_count as $counter<span class="br0">}</span>
+<span class="br0">{</span>def $collection = fetch<span class="br0">(</span>content, collected_info_collection, hash<span class="br0">(</span>collection_id, $counter, contentobject_id, $node.object.id<span class="br0">)</span><span class="br0">)</span><span class="br0">}</span>
+<p><span class="br0">{</span>$collection.data_map.votre_attribut.data_text<span class="br0">}</span></p>
+<span class="br0">{</span>undef $collection<span class="br0">}</span>
+<span class="br0">{</span>/for<span class="br0">}</span>
+<span class="br0">{</span>undef $collection_count<span class="br0">}</span>
+&nbsp;</pre><p>
+&nbsp;<br />Avec ce système, on peut afficher directement les informations liées sans devoir cliquer sur chaque formulaire envoyé par l'utilisateur final.</p>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://www.frefred.fr/blog/ez-publish/collecter-des-informations-sous-ez-publish">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/9/(year)/2010" title="">September 2010</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/11/(year)/2009" title="">November 2009</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/8/(year)/2009" title="">August 2009</a></li>
+                                                            <li><a href="/Mirror/Frederic-David/(month)/5/(year)/2008" title="">May 2008</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Frederic-David/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Frederic-David/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="currentselected today left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:16:"Frédéric David";s:3:"url";s:22:"/content/view/full/238";s:9:"url_alias";s:21:"Mirror/Frederic-David";s:7:"node_id";s:3:"238";}i:3;a:4:{s:4:"text";s:42:"Collecter des informations sous eZ publish";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"3895";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:16:"Frédéric David";s:3:"url";s:22:"/content/view/full/238";s:9:"url_alias";s:21:"Mirror/Frederic-David";s:7:"node_id";s:3:"238";}i:3;a:3:{s:4:"text";s:42:"Collecter des informations sous eZ publish";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"3895";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"3895";s:7:"node_id";s:4:"3895";s:14:"parent_node_id";s:3:"238";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:45:"RSSImport_19_aa2f027e3d5553245fd834663df647e5";s:14:"node_remote_id";s:32:"2e0d42ba37960f56c62dbc0c5445e5b1";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:64:"Mirror/Frederic-David/Collecter-des-informations-sous-eZ-publish";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"3895";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"07bfd73edf3833e5a3b8999cd77489c8";s:23:"parent_object_remote_id";s:32:"1886dbb21ac2158355f6c11a6cebe9d9";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,243 @@
+                                <title>eZ Publish Legacy Commits / Mirror / eZ Ecosystem - eZecosystem</title>
+
+    
+    
+                <meta name="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta name="Content-language" content="en-US" />
+
+                    <meta name="author" content="eZecosystem" />
+    
+                <meta name="copyright" content="eZecosystem (except where otherwise noted.)" />
+    
+                <meta name="description" content="An eZ Publish Community Planet" />
+    
+                <meta name="keywords" content="ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem,blog, cms, publish, e-commerce, content management, development framework, share, echo, eco" />
+    
+    
+    
+    <!--[if lt IE 9 ]>
+        <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />
+    <![endif]-->
+
+    <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+    <meta name="generator" content="eZ Publish" />
+        
+<link rel="Home" href="/" title="eZecosystem front page" />
+<link rel="Index" href="/" />
+<link rel="Top"  href="/" title="eZ Publish Legacy Commits / Mirror / eZ Ecosystem - eZecosystem" />
+<link rel="Search" href="/content/advancedsearch" title="Search eZecosystem" />
+<link rel="Shortcut icon" href="/design/standard/images/favicon.ico" type="image/x-icon" />
+<link rel="Copyright" href="/ezinfo/copyright" />
+<link rel="Author" href="/ezinfo/about" />
+<link rel="Alternate" type="application/rss+xml" title="RSS" href="/rss/feed/rss" />
+<script type="text/javascript">
+(function() {
+    var head = document.getElementsByTagName('head')[0];
+    var printNode = document.createElement('link');
+    printNode.rel = 'Alternate';
+    printNode.href = "/layout/set/print/Mirror/eZ-Publish-Legacy-Commits/(month)/7/(year)/2012" + document.location.search;
+    printNode.media = 'print';
+    printNode.title = "Printable version";
+    head.appendChild(printNode);
+})();
+</script>
+
+<meta name="verify-v1" content="XuvrJqCAkKvOee3lZK8tmb+ZjAF5EiUSCB/WMaRfLbo=" />
+<meta name="robots" content="index,follow" />
+      <link rel="stylesheet" type="text/css" href="/extension/ezwebin/design/ezwebin/stylesheets/core.css" />
+<link rel="stylesheet" type="text/css" href="/design/standard/stylesheets/debug.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezwebin/design/ezwebin/stylesheets/pagelayout.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezwebin/design/ezwebin/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezwt/design/standard/stylesheets/websitetoolbar.css" />
+
+<link rel="stylesheet" type="text/css" href="/var/storage/packages/eZ-systems/ezwebin_design_cleangray/files/default/file/classes-colors.css" />
+<link rel="stylesheet" type="text/css" href="/var/storage/packages/eZ-systems/ezwebin_design_cleangray/files/default/file/site-colors.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezwebin/design/ezwebin/stylesheets/print.css" media="print" />
+<!-- IE conditional comments; for bug fixes for different IE versions -->
+<!--[if IE 5]>     <style type="text/css"> @import url(/extension/ezwebin/design/ezwebin/stylesheets/browsers/ie5.css);    </style> <![endif]-->
+<!--[if lte IE 7]> <style type="text/css"> @import url(/extension/ezwebin/design/ezwebin/stylesheets/browsers/ie7lte.css); </style> <![endif]-->
+<link rel="stylesheet" type="text/css" href="/extension/ezecosystem/design/eze/stylesheets/override.css" />
+
+
+<script type="text/javascript" src="/extension/ezwebin/design/ezwebin/javascript/insertmedia.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezjscore/design/standard/javascript/jquery-1.7.2rc1.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezsh/design/standard/javascript/ezgeshi.js" charset="utf-8"></script>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-280811-19']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<!--[if lt IE 7 ]><body class="ie6"><![endif]-->
+<!--[if IE 7 ]>   <body class="ie7"><![endif]-->
+<!--[if IE 8 ]>   <body class="ie8"><![endif]-->
+<!--[if (gt IE 8)|!(IE)]><!--><body><!--<![endif]-->
+<!-- Complete page area: START -->
+
+<a name="top"></a>
+
+<!-- Change between "sidemenu"/"nosidemenu" and "extrainfo"/"noextrainfo" to switch display of side columns on or off  -->
+<div id="page" class="nosidemenu noextrainfo section_id_1 subtree_level_0_node_id_2 subtree_level_1_node_id_216 subtree_level_2_node_id_4399">
+
+  
+  <!-- Header area: START -->
+    <div id="header-position">
+  <div id="header" class="float-break">
+    <div id="usermenu">
+      <div id="languages">
+    <ul>
+                            <li><a href="/switchlanguage/to/eng/Mirror/eZ-Publish-Legacy-Commits">Eng</a></li>
+        </ul>
+</div>  
+      <div id="links">
+    <ul>
+                                <li id="tagcloud"><a href="/content/view/tagcloud/2" title="Tags">Tags</a></li>
+                                                    <li id="sitemap"><a href="/content/view/sitemap/2" title="Sitemap">Sitemap</a></li>
+                                                        <li id="login"><a href="/user/login" title="Login">Login</a></li>
+            
+        </ul>
+</div>    </div>
+
+    <div id="logo">    <a href="/" title="eZecosystem"><img src="/var/ezwebin_site/storage/images/design/ezecosystem/172-15-eng-US/eZecosystem.png" title="eZecosystem : An eZ Publish Community Planet" alt="eZecosystem : An eZ Publish Community Planet" width="327" height="107" /></a></div>    
+    <div id="searchbox">
+  <form action="/content/search">
+  <div id="searchbox-inner">
+    <label for="searchtext" class="hide">Search text:</label>
+        <input id="searchtext" name="SearchText" type="text" value="" size="12" />
+    <input id="searchbutton" class="button" type="submit" value="Search" title="Search" />
+              </div>
+  </form>
+</div>    
+    <p class="hide"><a href="#main">Skip to main content</a></p>
+  </div>
+  </div>  <!-- Header area: END -->
+
+  
+  <!-- Top menu area: START -->
+        <div id="topmenu-position">
+  <div id="topmenu" class="float-break">
+    <div class="topmenu-design">
+    <!-- Top menu content: START -->
+    <ul id="topmenu-firstlevel">
+        
+       
+
+            
+
+                      
+
+            
+
+            
+                                                
+                            <li id="node_id_985"><div><a href="http://ezecosystem.org/" title="Home" class="menu-item-link" rel="/Home"><span>Home</span></a></div></li>
+                                  
+
+            
+
+            
+                                                
+                            <li id="node_id_216" class="selected"><div><a href="/Mirror"><span>Mirror</span></a></div></li>
+                                  
+
+            
+
+                      
+
+            
+
+                      
+
+            
+
+            
+                                                
+                            <li id="node_id_4388"><div><a href="http://ezpedia.org" title="eZpedia" class="menu-item-link" rel="/eZpedia"><span>eZpedia</span></a></div></li>
+                                  
+
+            
+
+            
+                                                
+                            <li id="node_id_4391"><div><a href="http://doc.ez.no" title="Documentation" class="menu-item-link" rel="/Documentation"><span>Documentation</span></a></div></li>
+                                  
+
+            
+
+            
+                                                
+                            <li id="node_id_9179"><div><a href="http://share.ez.no" target="_blank" title="Share" class="menu-item-link" rel="/Share"><span>Share</span></a></div></li>
+                                  
+
+            
+
+            
+                                                
+                            <li id="node_id_4389"><div><a href="http://projects.ez.no" title="Projects" class="menu-item-link" rel="/Projects"><span>Projects</span></a></div></li>
+                                  
+
+            
+
+            
+                                                
+                            <li id="node_id_4390"><div><a href="http://pubsvn.ez.no" title="PubSVN" class="menu-item-link" rel="/PubSVN"><span>PubSVN</span></a></div></li>
+                                  
+
+            
+
+            
+                                                
+                            <li id="node_id_4392"><div><a href="http://goozee.benn.org" title="GooZee" class="menu-item-link" rel="/GooZee"><span>GooZee</span></a></div></li>
+                                  
+
+            
+
+            
+                                                
+                            <li id="node_id_4394"><div><a href="http://webchat.freenode.net/?randomnick=1&channels=ezpublish%2Cezpedia%2Cezcomponents&uio=Mj10cnVlJjQ9dHJ1ZSY5PXRydWUmMTE9MjE12e" target="_blank" title="Chat About eZ Publish" class="menu-item-link" rel="/Chat-About-eZ-Publish"><span>Chat About eZ Publish</span></a></div></li>
+                                  
+
+            
+
+                      
+
+            
+
+                                  </ul>
+    <!-- Top menu content: END -->
+</div>  </div>
+  </div>    <!-- Top menu area: END -->
+
+  <!-- Path area: START -->
+        <div id="path">
+      <!-- Path content: START -->
+  <p>
+        <a href="/">eZ Ecosystem</a>
+      <span class="path-separator">/</span>      <a href="/Mirror">Mirror</a>
+      <span class="path-separator">/</span>      <span class="path-text">eZ Publish Legacy Commits</span>
+        </p>
+  <!-- Path content: END -->  </div>    <!-- Path area: END -->
+
+  <!-- Toolbar area: START -->
+    <!-- Toolbar area: END -->
+
+  <!-- Columns area: START -->
+  <div id="columns-position">
+  <div id="columns" class="float-break">
+
+    <!-- Side menu area: START -->
+        <!-- Side menu area: END -->
+
+  

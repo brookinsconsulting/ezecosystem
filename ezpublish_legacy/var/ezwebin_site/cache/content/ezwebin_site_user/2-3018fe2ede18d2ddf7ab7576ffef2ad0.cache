@@ -1,0 +1,889 @@
+a:10:{s:7:"content";s:70966:"
+
+
+
+<div class="content-view-full" style="width: 100%">
+    <div class="class-frontpage ">
+    <div class="columns-frontpage float-break" style="padding: 0 200px 0 246px;">
+        <div class="left-column-position" style="width: 586px; margin-left: -246px;">
+            <div class="left-column" style="">
+            <!-- Content: START -->
+
+
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full">
+    <div class="class-folder">
+
+        
+
+                
+            
+            
+                 
+            
+
+            
+            <div style="margin-top:6px;margin-bottom:8px;">
+	    	    	    
+            
+
+<div class="pagenavigator">
+<p>
+
+            
+            <span class="next"><a href="http://ezecosystem.org/(offset)/20"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+    
+        <span class="current">1</span>
+
+                      <span class="other"><a href="http://ezecosystem.org/(offset)/20">2</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/40">3</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/60">4</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/80">5</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/100">6</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/120">7</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/140">8</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/160">9</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/180">10</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/200">11</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/220">12</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/240">13</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/260">14</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/280">15</a></span>
+            <span class="other"> ... </span><span class="other"><a href="http://ezecosystem.org/(offset)/6780">340</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+</div>
+
+            <div class="content-view-children">
+                                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23296" title="Nuno Oliveira changed the status to Confirmed on       EZP-23296 - Improve Template Block Cache mechanism
+  ">Nuno Oliveira changed the status to Confirmed on       EZP-23296 - ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 12:22 pm</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Nuno-Oliveira-changed-the-status-to-Confirmed-on-EZP-23296-Improve-Template-Block-Cache-mechanism">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23296">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23296" title="Nuno Oliveira added the Fix Version 'Customer request' to       EZP-23296 - Improve Template Block Cache mechanism
+  ">Nuno Oliveira added the Fix Version 'Customer request' to       EZ ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 12:19 pm</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Nuno-Oliveira-added-the-Fix-Version-Customer-request-to-EZP-23296-Improve-Template-Block-Cache-mechanism">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23296">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23296" title="Nuno Oliveira created       EZP-23296 - Improve Template Block Cache mechanism
+  ">Nuno Oliveira created       EZP-23296 - Improve Template Block Cac ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="user-content">
+  <p>Cache block paths are generated using the CRC32 algorithm, in ezpublish_legacy/lib/eztemplate/classes/eztemplatecacheblock.php eZTemplateCacheBlock::cachePath. This algorightm has a high probability of collisions (see here: <a class="external-link" href="http://preshing.com/20110504/hash-collision-probabilities/" rel="nofollow">http://preshing.com/20110504/hash-collision-probabilities/</a>), which can be problematic in installations with a high number of template block cache files.</p>
+
+<p>Exchanging the hashing algorithm is no solution, as it decreases the probability of collisions, but does not eliminate it. A more useful solution would be to precede the hash in the filename with the stringified cache-keys, as they have to be unique (same keys, same cache).</p> </div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 12:18 pm</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Nuno-Oliveira-created-EZP-23296-Improve-Template-Block-Cache-mechanism">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23296">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZP-New-Stack-Commits">eZP New Stack Commits</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://github.com/ezsystems/ezpublish-community/commit/5bef9670d581cd6accb5cdf6c856e4ab142964a4" title="
+        Merge pull request #179 from MLoureiro/add_sw_installations
+    ">
+        Merge pull request #179 from MLoureiro/add_sw_installatio ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+      <pre style='white-space:pre-wrap;width:81ex'>Merge pull request #179 from MLoureiro/add_sw_installations
+
+Group SW profiles and add default ones</pre>
+    
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 11:23 am</span> &nbsp; <a href="https://github.com/ezsystems/ezpublish-community/commits/master">eZP New Stack Commits</a> &nbsp; <a href="/Mirror/eZP-New-Stack-Commits/Merge-pull-request-179-from-MLoureiro-add_sw_installations">View mirror of item</a> &nbsp; <a href="https://github.com/ezsystems/ezpublish-community/commit/5bef9670d581cd6accb5cdf6c856e4ab142964a4">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23295" title="Nuno Oliveira changed the status to Confirmed on       EZP-23295 - Formtoken exception when copying subtree
+  ">Nuno Oliveira changed the status to Confirmed on       EZP-23295 - ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 11:16 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Nuno-Oliveira-changed-the-status-to-Confirmed-on-EZP-23295-Formtoken-exception-when-copying-subtree">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23295">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23295" title="Nuno Oliveira attached one file to       EZP-23295 - Formtoken exception when copying subtree
+  ">Nuno Oliveira attached one file to       EZP-23295 - Formtoken exc ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <ul class="attachments activity-list">
+      <li><a href="https://jira.ez.no/secure/attachment/18635/Wrong+form+token+found+in+Request%21+%28500+Internal+Server+Error%29.htm">Wrong form token found in Request! (500 Internal Server Error).htm</a>
+  </ul>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 11:14 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Nuno-Oliveira-attached-one-file-to-EZP-23295-Formtoken-exception-when-copying-subtree">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23295">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23295" title="Nuno Oliveira updated the Description of       EZP-23295 - Formtoken exception when copying subtree
+  ">Nuno Oliveira updated the Description of       EZP-23295 - Formtok ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 11:13 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Nuno-Oliveira-updated-the-Description-of-EZP-23295-Formtoken-exception-when-copying-subtree">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23295">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23295" title="Nuno Oliveira created       EZP-23295 - Formtoken exception when copying subtree
+  ">Nuno Oliveira created       EZP-23295 - Formtoken exception when c ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 11:10 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Nuno-Oliveira-created-EZP-23295-Formtoken-exception-when-copying-subtree">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23295">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZpedia">eZpedia</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ezpedia.org/solution/how_to_add_view_parameter_support_to_your_custom_module_view" title="How to add view parameter support to your custom module view">How to add view parameter support to your custom module view</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Have you ever wanted to add view parameter support to your custom module view templates?</p><a name="eztoc1280050_1" id="eztoc1280050_1"></a><h2>Example Solution</h2><p>Simply add this snippet of php into your custom module view.</p>	<pre class="php-brief" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">// Set the view parameters</span>
+<span style="color: #0000ff;">$viewParameters</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #0000ff;">$uri</span> <span style="color: #339933;">=</span> eZURI<span style="color: #339933;">::</span><span style="color: #004000;">instance</span><span style="color: #009900;">&#40;</span> eZSys<span style="color: #339933;">::</span><span style="color: #004000;">requestURI</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #0000ff;">$uriUserParameters</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">$uri</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">userParameters</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #b1b100;">foreach</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">$uriUserParameters</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$key</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">$param</span> <span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">$param</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">''</span> <span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #0000ff;">$viewParameters</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array_merge"><span style="color: #990000;">array_merge</span></a><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">$viewParameters</span><span style="color: #339933;">,</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">$key</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">$param</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">$tpl</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">hasVariable</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'view_parameters'</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #0000ff;">$viewParameters</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array_merge"><span style="color: #990000;">array_merge</span></a><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">$tpl</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">variable</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'view_parameters'</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">$viewParameters</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">$tpl</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setVariable</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'view_parameters'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">$viewParameters</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;</pre><p>Place the above PHP snippet code before you include your primary module view template within $Result['content'].</p>	<pre class="php-brief" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">/**
+  * Prepare module view content results for display to user
+  */</span>
+<span style="color: #0000ff;">$Result</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'content'</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">$tpl</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetch</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'design:custom-module/create.tpl'</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;</pre>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 11:09 am</span> &nbsp; <a href="http://ezpedia.org">eZpedia.org</a> &nbsp; <a href="/Mirror/eZpedia/How-to-add-view-parameter-support-to-your-custom-module-view">View mirror of item</a> &nbsp; <a href="http://ezpedia.org/solution/how_to_add_view_parameter_support_to_your_custom_module_view">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23193" title="André Rømcke changed the Remaining Estimate to '2 days' on       EZP-23193 - Rendering issue in Chrome 36
+  ">André Rømcke changed the Remaining Estimate to '2 days' on       ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:14 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Andre-Roemcke-changed-the-Remaining-Estimate-to-2-days-on-EZP-23193-Rendering-issue-in-Chrome-36">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23193">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23193" title="André Rømcke updated the Rank of       EZP-23193 - Rendering issue in Chrome 36
+  ">André Rømcke updated the Rank of       EZP-23193 - Rendering iss ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:14 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Andre-Roemcke-updated-the-Rank-of-EZP-23193-Rendering-issue-in-Chrome-36">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23193">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23193" title="André Rømcke changed the Original Estimate to '3 days' on       EZP-23193 - Rendering issue in Chrome 36
+  ">André Rømcke changed the Original Estimate to '3 days' on        ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:14 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Andre-Roemcke-changed-the-Original-Estimate-to-3-days-on-EZP-23193-Rendering-issue-in-Chrome-36">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23193">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23200" title="André Rømcke updated the Rank of       EZP-23200 - As a developer, I want to be able to add new CSS files
+  ">André Rømcke updated the Rank of       EZP-23200 - As a develope ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:14 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Andre-Roemcke-updated-the-Rank-of-EZP-23200-As-a-developer-I-want-to-be-able-to-add-new-CSS-files">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23200">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23200" title="André Rømcke changed the Original Estimate to '3 days' on       EZP-23200 - As a developer, I want to be able to add new CSS files
+  ">André Rømcke changed the Original Estimate to '3 days' on        ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:14 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Andre-Roemcke-changed-the-Original-Estimate-to-3-days-on-EZP-23200-As-a-developer-I-want-to-be-able-to-add-new-CSS-files">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23200">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23199" title="André Rømcke changed the Original Estimate to '3 days' on       EZP-23199 - As a developer, I want to be able to override and add new Handlebars templates
+  ">André Rømcke changed the Original Estimate to '3 days' on        ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:13 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Andre-Roemcke-changed-the-Original-Estimate-to-3-days-on-EZP-23199-As-a-developer-I-want-to-be-able-to-override-and-add-new-Handlebars-templates">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23199">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23199" title="André Rømcke updated the Rank of       EZP-23199 - As a developer, I want to be able to override and add new Handlebars templates
+  ">André Rømcke updated the Rank of       EZP-23199 - As a develope ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:13 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Andre-Roemcke-updated-the-Rank-of-EZP-23199-As-a-developer-I-want-to-be-able-to-override-and-add-new-Handlebars-templates">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23199">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23200" title="Roland Benedetti changed the status to Backlog on       EZP-23200 - As a developer, I want to be able to add new CSS files
+  ">Roland Benedetti changed the status to Backlog on       EZP-23200  ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:12 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Roland-Benedetti-changed-the-status-to-Backlog-on-EZP-23200-As-a-developer-I-want-to-be-able-to-add-new-CSS-files">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23200">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23199" title="Roland Benedetti changed the status to InputQ on       EZP-23199 - As a developer, I want to be able to override and add new Handlebars templates
+  ">Roland Benedetti changed the status to InputQ on       EZP-23199 - ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 10:12 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Roland-Benedetti-changed-the-status-to-InputQ-on-EZP-23199-As-a-developer-I-want-to-be-able-to-override-and-add-new-Handlebars-templates">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23199">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23269" title="Paulo Nunes closed       EZP-23269 - DemoBundle: pager design is broken
+  ">Paulo Nunes closed       EZP-23269 - DemoBundle: pager design is b ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 09:31 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Paulo-Nunes-closed-EZP-23269-DemoBundle-pager-design-is-broken">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23269">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Publish-Issues">eZ Publish Issues</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="https://jira.ez.no/browse/EZP-23269?focusedCommentId=98078&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-98078" title="Paulo Nunes commented on       EZP-23269 - DemoBundle: pager design is broken
+  ">Paulo Nunes commented on       EZP-23269 - DemoBundle: pager desig ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <blockquote>
+   <p>QA Approved</p>
+
+<p>Tested on master (5.4)</p>   </blockquote>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>08/28/2014 09:30 am</span> &nbsp; <a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a> &nbsp; <a href="/Mirror/eZ-Publish-Issues/Paulo-Nunes-commented-on-EZP-23269-DemoBundle-pager-design-is-broken3">View mirror of item</a> &nbsp; <a href="https://jira.ez.no/browse/EZP-23269?focusedCommentId=98078&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-98078">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                                                </div>
+            
+
+<div class="pagenavigator">
+<p>
+
+            
+            <span class="next"><a href="http://ezecosystem.org/(offset)/20"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+    
+        <span class="current">1</span>
+
+                      <span class="other"><a href="http://ezecosystem.org/(offset)/20">2</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/40">3</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/60">4</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/80">5</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/100">6</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/120">7</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/140">8</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/160">9</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/180">10</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/200">11</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/220">12</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/240">13</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/260">14</a></span>
+                              <span class="other"><a href="http://ezecosystem.org/(offset)/280">15</a></span>
+            <span class="other"> ... </span><span class="other"><a href="http://ezecosystem.org/(offset)/6780">340</a></span>
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+        
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+            <!-- Content: END -->
+            </div>
+        </div>
+
+        <div class="right-column-position" style="">
+            <div class="right-column" style="float:right">
+            <!-- Content: START -->
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full" style="width: 210px;">
+    <div class="class-folder">
+    <h3>Sources<h3>
+    
+    <div style="width: 200px">
+    <ul>
+                            <li><a href="https://jira.ez.no/browse/EZP">eZ Publish Issues</a></li>
+	                                                    <li><a href="https://github.com/ezsystems/ezpublish-community/commits/master">eZP New Stack Commits</a></li>
+	                                                                            <li><a href="http://ezpedia.org">eZpedia</a></li>
+	                                                                                                                                                                                                                                                                                                    <li><a href="https://github.com/ezsystems/ezpublish-kernel/commits/master">eZ Publish API Commits</a></li>
+	                                                                                                                            <li><a href="https://github.com/crevillo">CR @ GitHub</a></li>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <li><a href="http://projects.ez.no">Projects Commits</a></li>
+	                                                                                                                                                                                                                                                                                                    <li><a href="http://derickrethans.nl">Derick Rethans</a></li>
+	                                                                                                                                        <li><a href="http://github.com/brookinsconsulting">BC @ GitHub</a></li>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <li><a href="https://github.com/ezsystems/ezpublish-legacy/commits/master">eZ Publish Legacy Commits</a></li>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <li><a href="http://www.llaumgui.com">Guillaume Kulakowski</a></li>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <li><a href="http://www.ez-publish-blog.de">ez-publish-blog.de</a></li>
+	                                                                                                    <li><a href="http://projects.ez.no">Projects New Projects</a></li>
+	                                                                                        <li><a href="http://www.netgen.hr/eng/Blog">Netgen</a></li>
+	                                                                                                                                                                                                                                                                <li><a href="https://jira.ez.no/browse/COM">eZ Community Issues</a></li>
+	                                                                                                                                                                            <li><a href="http://share.ez.no/blogs">Share.ez.no Blogs</a></li>
+	                                                                                                                                                                                                                                                                                                                                                                                                                <li><a href="https://github.com/gggeek">GG @ GitHub</a></li>
+	                                                                                                                                                                                                                                                                                                                                                    <li><a href="http://ez.no/About-eZ/Blog">eZ Systems Blog</a></li>
+	                                                                                                                                                                                                                                                                                                                    </ul>
+    </div>
+
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div><div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full" style="width: 210px;">
+    <div class="class-folder">
+    
+
+    
+	<div style="position:relative;top:-15px;left:28px;"><a href="/rss/feed/rss" style="" title="eZecosystem RSS Feed"><img src="/extension/ezecosystem/design/eze/images/feed-icon-28x28.png" border=0 /></a>&nbsp;&nbsp;<a href="https://raw.github.com/brookinsconsulting/ezecosystemopml/master/index.opml" style="" title="eZecosystem OPML File"><img src="/extension/ezecosystem/design/eze/images/opml-icon-24x24.png" border=0 /></a></div>
+        
+
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full" style="width: 210px;">
+    <div class="class-folder">
+    <h3>Community<h3>
+        <div style="width: 200px">
+    <ul>
+            <li><a href="http://share.ez.no">English</a></li>
+            <li><a href="https://plus.google.com/117032755469051854224/posts">Google+</a></li>
+            <li><a href="http://www.linkedin.com/groups?gid=2759">LinkedIn</a></li>
+            <li><a href="https://twitter.com/search?q=ezpublish+OR+ezcommunity+OR+ezfind+OR+ezsystems">Twitter</a></li>
+            <li><a href="http://www.ezpublish.de">German</a></li>
+        </ul>
+    </div>
+
+     <div align="right"><a href="#top">Top</a></div>
+
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full" style="width: 210px;">
+    <div class="class-folder">
+    <h3>Planetarium<h3>
+
+        <div style="width: 200px">
+    <ul>
+            <li><a href="http://planetezpublish.org">eZ Publish Planet</a></li>
+            <li><a href="http://www.planet-ezpublish.fr">Planet eZ Publish.fr</a></li>
+            <li><a href="http://planet-php.org">PHP</a></li>
+            <li><a href="http://planet.debian.net">Debian</a></li>
+            <li><a href="http://planet.mozilla.org">Mozilla</a></li>
+            <li><a href="http://www.planetmysql.org">MySQL</a></li>
+            <li><a href="http://planet.apache.org">Apache</a></li>
+        </ul>
+    </div>
+
+     <div align="right"><a href="#top">Top</a></div>
+
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full" style="width: 210px;">
+    <div class="class-folder">
+    <h3>Twitter<h3>
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=ezpublish+OR+ezcommunity+OR+ezfind+OR+ezsystems" data-widget-id="503439438320394240" data-chrome="noheader nofooter" height="1000">Tweets about "ezpublish OR ezcommunity OR ezfind OR ezsystems"</a>
+
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
+</div>
+
+<h3><div align="right"><a href="#top">Top</a></div></h3>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+<br />
+<div class="border-box">
+<div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+<div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+<div class="content-view-full" style="width: 210px;">
+    <div class="class-folder">
+    <h3>Tags<h3>
+
+    <div style="width: 200px">
+			<p>
+                            <a href="/content/keyword/Symfony" style="font-size: 200%" title="54 objects tagged with 'Symfony'">Symfony</a> <a href="/content/keyword/eZ%20Publish" style="font-size: 194.23076923077%" title="51 objects tagged with 'eZ Publish'">eZ Publish</a> <a href="/content/keyword/eZ%20Publish%205" style="font-size: 171.15384615385%" title="39 objects tagged with 'eZ Publish 5'">eZ Publish 5</a> <a href="/content/keyword/tip" style="font-size: 159.61538461538%" title="33 objects tagged with 'tip'">tip</a> <a href="/content/keyword/Code" style="font-size: 153.84615384615%" title="30 objects tagged with 'Code'">Code</a> <a href="/content/keyword/ez%20publish%205" style="font-size: 151.92307692308%" title="29 objects tagged with 'ez publish 5'">ez publish 5</a> <a href="/content/keyword/meeting%20minutes" style="font-size: 146.15384615385%" title="26 objects tagged with 'meeting minutes'">meeting minutes</a> <a href="/content/keyword/Innovation" style="font-size: 146.15384615385%" title="26 objects tagged with 'Innovation'">Innovation</a> <a href="/content/keyword/community" style="font-size: 144.23076923077%" title="25 objects tagged with 'community'">community</a> <a href="/content/keyword/ez%20publish" style="font-size: 140.38461538462%" title="23 objects tagged with 'ez publish'">ez publish</a> <a href="/content/keyword/eZ%20Publish%20Community%20Project" style="font-size: 140.38461538462%" title="23 objects tagged with 'eZ Publish Community Project'">eZ Publish Community Project</a> <a href="/content/keyword/ezpublish" style="font-size: 138.46153846154%" title="22 objects tagged with 'ezpublish'">ezpublish</a> <a href="/content/keyword/Communities" style="font-size: 138.46153846154%" title="22 objects tagged with 'Communities'">Communities</a> <a href="/content/keyword/%23ezcomproj" style="font-size: 136.53846153846%" title="21 objects tagged with '#ezcomproj'">#ezcomproj</a> <a href="/content/keyword/eZ%20Events" style="font-size: 136.53846153846%" title="21 objects tagged with 'eZ Events'">eZ Events</a> <a href="/content/keyword/Opensource" style="font-size: 134.61538461538%" title="20 objects tagged with 'Opensource'">Opensource</a> <a href="/content/keyword/ezsummercamp" style="font-size: 128.84615384615%" title="17 objects tagged with 'ezsummercamp'">ezsummercamp</a> <a href="/content/keyword/ezpublish%205" style="font-size: 125%" title="15 objects tagged with 'ezpublish 5'">ezpublish 5</a> <a href="/content/keyword/the%20ezpublish%20show" style="font-size: 125%" title="15 objects tagged with 'the ezpublish show'">the ezpublish show</a> <a href="/content/keyword/symfony" style="font-size: 125%" title="15 objects tagged with 'symfony'">symfony</a> <a href="/content/keyword/tutorial" style="font-size: 123.07692307692%" title="14 objects tagged with 'tutorial'">tutorial</a> <a href="/content/keyword/LETSGO" style="font-size: 123.07692307692%" title="14 objects tagged with 'LETSGO'">LETSGO</a> <a href="/content/keyword/Symfony%20Framework" style="font-size: 123.07692307692%" title="14 objects tagged with 'Symfony Framework'">Symfony Framework</a> <a href="/content/keyword/ez5" style="font-size: 121.15384615385%" title="13 objects tagged with 'ez5'">ez5</a> <a href="/content/keyword/Cologne" style="font-size: 121.15384615385%" title="13 objects tagged with 'Cologne'">Cologne</a> <a href="/content/keyword/UX" style="font-size: 121.15384615385%" title="13 objects tagged with 'UX'">UX</a> <a href="/content/keyword/Backend" style="font-size: 121.15384615385%" title="13 objects tagged with 'Backend'">Backend</a> <a href="/content/keyword/PHP" style="font-size: 121.15384615385%" title="13 objects tagged with 'PHP'">PHP</a> <a href="/content/keyword/eZ%20Publish%20Community%20Project%20Board" style="font-size: 119.23076923077%" title="12 objects tagged with 'eZ Publish Community Project Board'">eZ Publish Community Project Board</a> <a href="/content/keyword/community%20project%20board" style="font-size: 119.23076923077%" title="12 objects tagged with 'community project board'">community project board</a> <a href="/content/keyword/ain" style="font-size: 117.30769230769%" title="11 objects tagged with 'ain'">ain</a> <a href="/content/keyword/hangouts" style="font-size: 117.30769230769%" title="11 objects tagged with 'hangouts'">hangouts</a> <a href="/content/keyword/twig" style="font-size: 115.38461538462%" title="10 objects tagged with 'twig'">twig</a> <a href="/content/keyword/editorial%20interface" style="font-size: 115.38461538462%" title="10 objects tagged with 'editorial interface'">editorial interface</a> <a href="/content/keyword/ezpublish5" style="font-size: 115.38461538462%" title="10 objects tagged with 'ezpublish5'">ezpublish5</a> <a href="/content/keyword/team%20meeting" style="font-size: 115.38461538462%" title="10 objects tagged with 'team meeting'">team meeting</a> <a href="/content/keyword/user%20interface" style="font-size: 113.46153846154%" title="9 objects tagged with 'user interface'">user interface</a> <a href="/content/keyword/symfony2" style="font-size: 111.53846153846%" title="8 objects tagged with 'symfony2'">symfony2</a> <a href="/content/keyword/ezuncon" style="font-size: 111.53846153846%" title="8 objects tagged with 'ezuncon'">ezuncon</a> <a href="/content/keyword/usability" style="font-size: 111.53846153846%" title="8 objects tagged with 'usability'">usability</a> <a href="/content/keyword/Internationalization" style="font-size: 111.53846153846%" title="8 objects tagged with 'Internationalization'">Internationalization</a> <a href="/content/keyword/api" style="font-size: 111.53846153846%" title="8 objects tagged with 'api'">api</a> <a href="/content/keyword/workflow" style="font-size: 111.53846153846%" title="8 objects tagged with 'workflow'">workflow</a> <a href="/content/keyword/templates" style="font-size: 111.53846153846%" title="8 objects tagged with 'templates'">templates</a> <a href="/content/keyword/template" style="font-size: 111.53846153846%" title="8 objects tagged with 'template'">template</a> <a href="/content/keyword/REST" style="font-size: 109.61538461538%" title="7 objects tagged with 'REST'">REST</a> <a href="/content/keyword/extension" style="font-size: 109.61538461538%" title="7 objects tagged with 'extension'">extension</a> <a href="/content/keyword/UnConference" style="font-size: 109.61538461538%" title="7 objects tagged with 'UnConference'">UnConference</a> <a href="/content/keyword/Twig" style="font-size: 109.61538461538%" title="7 objects tagged with 'Twig'">Twig</a> <a href="/content/keyword/eZ%20UnConference" style="font-size: 109.61538461538%" title="7 objects tagged with 'eZ UnConference'">eZ UnConference</a> <a href="/content/keyword/wascou" style="font-size: 109.61538461538%" title="7 objects tagged with 'wascou'">wascou</a> <a href="/content/keyword/Montpellier" style="font-size: 109.61538461538%" title="7 objects tagged with 'Montpellier'">Montpellier</a> <a href="/content/keyword/tips" style="font-size: 109.61538461538%" title="7 objects tagged with 'tips'">tips</a> <a href="/content/keyword/Web%20Development" style="font-size: 109.61538461538%" title="7 objects tagged with 'Web Development'">Web Development</a> <a href="/content/keyword/conference" style="font-size: 109.61538461538%" title="7 objects tagged with 'conference'">conference</a> <a href="/content/keyword/Open-source" style="font-size: 109.61538461538%" title="7 objects tagged with 'Open-source'">Open-source</a> <a href="/content/keyword/javascript" style="font-size: 109.61538461538%" title="7 objects tagged with 'javascript'">javascript</a> <a href="/content/keyword/eZ%20Community" style="font-size: 109.61538461538%" title="7 objects tagged with 'eZ Community'">eZ Community</a> <a href="/content/keyword/Localization" style="font-size: 109.61538461538%" title="7 objects tagged with 'Localization'">Localization</a> <a href="/content/keyword/Translation" style="font-size: 109.61538461538%" title="7 objects tagged with 'Translation'">Translation</a> <a href="/content/keyword/cms" style="font-size: 109.61538461538%" title="7 objects tagged with 'cms'">cms</a> <a href="/content/keyword/eZ%20publish%205" style="font-size: 109.61538461538%" title="7 objects tagged with 'eZ publish 5'">eZ publish 5</a> <a href="/content/keyword/%23ezuncon" style="font-size: 107.69230769231%" title="6 objects tagged with '#ezuncon'">#ezuncon</a> <a href="/content/keyword/eznextui" style="font-size: 107.69230769231%" title="6 objects tagged with 'eznextui'">eznextui</a> <a href="/content/keyword/php" style="font-size: 107.69230769231%" title="6 objects tagged with 'php'">php</a> <a href="/content/keyword/eZ%20Publish%20Community" style="font-size: 107.69230769231%" title="6 objects tagged with 'eZ Publish Community'">eZ Publish Community</a> <a href="/content/keyword/Etna" style="font-size: 107.69230769231%" title="6 objects tagged with 'Etna'">Etna</a> <a href="/content/keyword/4.7" style="font-size: 107.69230769231%" title="6 objects tagged with '4.7'">4.7</a> <a href="/content/keyword/developer" style="font-size: 107.69230769231%" title="6 objects tagged with 'developer'">developer</a> <a href="/content/keyword/status" style="font-size: 107.69230769231%" title="6 objects tagged with 'status'">status</a> <a href="/content/keyword/bundle" style="font-size: 107.69230769231%" title="6 objects tagged with 'bundle'">bundle</a> <a href="/content/keyword/Asides" style="font-size: 105.76923076923%" title="5 objects tagged with 'Asides'">Asides</a> <a href="/content/keyword/ezcommunity" style="font-size: 105.76923076923%" title="5 objects tagged with 'ezcommunity'">ezcommunity</a> <a href="/content/keyword/Content" style="font-size: 105.76923076923%" title="5 objects tagged with 'Content'">Content</a> <a href="/content/keyword/extensibility" style="font-size: 105.76923076923%" title="5 objects tagged with 'extensibility'">extensibility</a> <a href="/content/keyword/Kilimanjaro" style="font-size: 105.76923076923%" title="5 objects tagged with 'Kilimanjaro'">Kilimanjaro</a> <a href="/content/keyword/humeur" style="font-size: 105.76923076923%" title="5 objects tagged with 'humeur'">humeur</a> <a href="/content/keyword/2012.4" style="font-size: 105.76923076923%" title="5 objects tagged with '2012.4'">2012.4</a> <a href="/content/keyword/security" style="font-size: 105.76923076923%" title="5 objects tagged with 'security'">security</a> <a href="/content/keyword/Community%20Translation%20Initiative" style="font-size: 105.76923076923%" title="5 objects tagged with 'Community Translation Initiative'">Community Translation Initiative</a> <a href="/content/keyword/multitasking" style="font-size: 105.76923076923%" title="5 objects tagged with 'multitasking'">multitasking</a> <a href="/content/keyword/development" style="font-size: 105.76923076923%" title="5 objects tagged with 'development'">development</a> <a href="/content/keyword/migration" style="font-size: 105.76923076923%" title="5 objects tagged with 'migration'">migration</a> <a href="/content/keyword/uxd" style="font-size: 105.76923076923%" title="5 objects tagged with 'uxd'">uxd</a> <a href="/content/keyword/performance" style="font-size: 105.76923076923%" title="5 objects tagged with 'performance'">performance</a> <a href="/content/keyword/devops" style="font-size: 103.84615384615%" title="4 objects tagged with 'devops'">devops</a> <a href="/content/keyword/solr" style="font-size: 103.84615384615%" title="4 objects tagged with 'solr'">solr</a> <a href="/content/keyword/search" style="font-size: 103.84615384615%" title="4 objects tagged with 'search'">search</a> <a href="/content/keyword/API" style="font-size: 103.84615384615%" title="4 objects tagged with 'API'">API</a> <a href="/content/keyword/mobile" style="font-size: 103.84615384615%" title="4 objects tagged with 'mobile'">mobile</a> <a href="/content/keyword/CMS" style="font-size: 103.84615384615%" title="4 objects tagged with 'CMS'">CMS</a> <a href="/content/keyword/controller" style="font-size: 103.84615384615%" title="4 objects tagged with 'controller'">controller</a> <a href="/content/keyword/multisite" style="font-size: 103.84615384615%" title="4 objects tagged with 'multisite'">multisite</a> <a href="/content/keyword/Symfony%20framework" style="font-size: 103.84615384615%" title="4 objects tagged with 'Symfony framework'">Symfony framework</a> <a href="/content/keyword/twitter" style="font-size: 103.84615384615%" title="4 objects tagged with 'twitter'">twitter</a> <a href="/content/keyword/eZ%20Conference%202012" style="font-size: 103.84615384615%" title="4 objects tagged with 'eZ Conference 2012'">eZ Conference 2012</a> <a href="/content/keyword/eZ%20Publish%20Community%20meetup" style="font-size: 103.84615384615%" title="4 objects tagged with 'eZ Publish Community meetup'">eZ Publish Community meetup</a> <a href="/content/keyword/github" style="font-size: 103.84615384615%" title="4 objects tagged with 'github'">github</a> <a href="/content/keyword/ez%20multitasking%20one" style="font-size: 103.84615384615%" title="4 objects tagged with 'ez multitasking one'">ez multitasking one</a> <a href="/content/keyword/Community%20Management" style="font-size: 103.84615384615%" title="4 objects tagged with 'Community Management'">Community Management</a> <a href="/content/keyword/content%20repository" style="font-size: 103.84615384615%" title="4 objects tagged with 'content repository'">content repository</a> <a href="/content/keyword/cloud" style="font-size: 103.84615384615%" title="4 objects tagged with 'cloud'">cloud</a> <a href="/content/keyword/google%2B" style="font-size: 103.84615384615%" title="4 objects tagged with 'google+'">google+</a> <a href="/content/keyword/ez%20market" style="font-size: 103.84615384615%" title="4 objects tagged with 'ez market'">ez market</a> <a href="/content/keyword/extensions" style="font-size: 103.84615384615%" title="4 objects tagged with 'extensions'">extensions</a> <a href="/content/keyword/image" style="font-size: 103.84615384615%" title="4 objects tagged with 'image'">image</a> <a href="/content/keyword/social%20media" style="font-size: 103.84615384615%" title="4 objects tagged with 'social media'">social media</a> <a href="/content/keyword/product%20development" style="font-size: 101.92307692308%" title="3 objects tagged with 'product development'">product development</a> <a href="/content/keyword/ezfind" style="font-size: 101.92307692308%" title="3 objects tagged with 'ezfind'">ezfind</a> <a href="/content/keyword/Paris" style="font-size: 101.92307692308%" title="3 objects tagged with 'Paris'">Paris</a> <a href="/content/keyword/talk" style="font-size: 101.92307692308%" title="3 objects tagged with 'talk'">talk</a> <a href="/content/keyword/ez%20conference" style="font-size: 101.92307692308%" title="3 objects tagged with 'ez conference'">ez conference</a> <a href="/content/keyword/Conference" style="font-size: 101.92307692308%" title="3 objects tagged with 'Conference'">Conference</a> <a href="/content/keyword/externe%20eZ%20Beitr%C3%A4ge" style="font-size: 101.92307692308%" title="3 objects tagged with 'externe eZ Beiträge'">externe eZ Beiträge</a> <a href="/content/keyword/engagement" style="font-size: 101.92307692308%" title="3 objects tagged with 'engagement'">engagement</a> <a href="/content/keyword/slideshow" style="font-size: 101.92307692308%" title="3 objects tagged with 'slideshow'">slideshow</a> <a href="/content/keyword/override" style="font-size: 101.92307692308%" title="3 objects tagged with 'override'">override</a> <a href="/content/keyword/accessibility" style="font-size: 101.92307692308%" title="3 objects tagged with 'accessibility'">accessibility</a> <a href="/content/keyword/slides" style="font-size: 101.92307692308%" title="3 objects tagged with 'slides'">slides</a> <a href="/content/keyword/symfony%202" style="font-size: 101.92307692308%" title="3 objects tagged with 'symfony 2'">symfony 2</a> <a href="/content/keyword/user%20experience" style="font-size: 101.92307692308%" title="3 objects tagged with 'user experience'">user experience</a> <a href="/content/keyword/cache" style="font-size: 101.92307692308%" title="3 objects tagged with 'cache'">cache</a> <a href="/content/keyword/siteaccess" style="font-size: 101.92307692308%" title="3 objects tagged with 'siteaccess'">siteaccess</a> <a href="/content/keyword/sql" style="font-size: 101.92307692308%" title="3 objects tagged with 'sql'">sql</a> <a href="/content/keyword/facebook" style="font-size: 101.92307692308%" title="3 objects tagged with 'facebook'">facebook</a> <a href="/content/keyword/git" style="font-size: 101.92307692308%" title="3 objects tagged with 'git'">git</a> <a href="/content/keyword/partners" style="font-size: 101.92307692308%" title="3 objects tagged with 'partners'">partners</a> <a href="/content/keyword/eZ%20Summit" style="font-size: 101.92307692308%" title="3 objects tagged with 'eZ Summit'">eZ Summit</a> <a href="/content/keyword/Community" style="font-size: 101.92307692308%" title="3 objects tagged with 'Community'">Community</a> <a href="/content/keyword/future" style="font-size: 101.92307692308%" title="3 objects tagged with 'future'">future</a> <a href="/content/keyword/developers" style="font-size: 101.92307692308%" title="3 objects tagged with 'developers'">developers</a> <a href="/content/keyword/eZ%20Engineering" style="font-size: 101.92307692308%" title="3 objects tagged with 'eZ Engineering'">eZ Engineering</a> <a href="/content/keyword/css" style="font-size: 101.92307692308%" title="3 objects tagged with 'css'">css</a> <a href="/content/keyword/Blog" style="font-size: 101.92307692308%" title="3 objects tagged with 'Blog'">Blog</a> <a href="/content/keyword/google" style="font-size: 101.92307692308%" title="3 objects tagged with 'google'">google</a> <a href="/content/keyword/locale" style="font-size: 101.92307692308%" title="3 objects tagged with 'locale'">locale</a> <a href="/content/keyword/Changes" style="font-size: 101.92307692308%" title="3 objects tagged with 'Changes'">Changes</a> <a href="/content/keyword/%E7%A4%BE%E5%8C%BA%E5%A7%94%E5%91%98%E4%BC%9A" style="font-size: 101.92307692308%" title="3 objects tagged with '社区委员会'">社区委员会</a> <a href="/content/keyword/ez%20systems" style="font-size: 101.92307692308%" title="3 objects tagged with 'ez systems'">ez systems</a> <a href="/content/keyword/Management" style="font-size: 101.92307692308%" title="3 objects tagged with 'Management'">Management</a> <a href="/content/keyword/form" style="font-size: 101.92307692308%" title="3 objects tagged with 'form'">form</a> <a href="/content/keyword/installation" style="font-size: 101.92307692308%" title="3 objects tagged with 'installation'">installation</a> <a href="/content/keyword/Strategy" style="font-size: 101.92307692308%" title="3 objects tagged with 'Strategy'">Strategy</a> <a href="/content/keyword/editing" style="font-size: 101.92307692308%" title="3 objects tagged with 'editing'">editing</a> <a href="/content/keyword/ezconf12" style="font-size: 101.92307692308%" title="3 objects tagged with 'ezconf12'">ezconf12</a> <a href="/content/keyword/Poland" style="font-size: 101.92307692308%" title="3 objects tagged with 'Poland'">Poland</a> <a href="/content/keyword/install" style="font-size: 101.92307692308%" title="3 objects tagged with 'install'">install</a> <a href="/content/keyword/legacy" style="font-size: 101.92307692308%" title="3 objects tagged with 'legacy'">legacy</a> <a href="/content/keyword/%23ezconf12" style="font-size: 101.92307692308%" title="3 objects tagged with '#ezconf12'">#ezconf12</a> <a href="/content/keyword/Opening" style="font-size: 101.92307692308%" title="3 objects tagged with 'Opening'">Opening</a> <a href="/content/keyword/project%20board" style="font-size: 100%" title="2 objects tagged with 'project board'">project board</a> <a href="/content/keyword/OAuth2" style="font-size: 100%" title="2 objects tagged with 'OAuth2'">OAuth2</a> <a href="/content/keyword/Multivariate%20testing" style="font-size: 100%" title="2 objects tagged with 'Multivariate testing'">Multivariate testing</a> <a href="/content/keyword/eZ%20Ecosystem" style="font-size: 100%" title="2 objects tagged with 'eZ Ecosystem'">eZ Ecosystem</a> <a href="/content/keyword/fetch%20functions" style="font-size: 100%" title="2 objects tagged with 'fetch functions'">fetch functions</a> <a href="/content/keyword/fieldtype" style="font-size: 100%" title="2 objects tagged with 'fieldtype'">fieldtype</a> <a href="/content/keyword/gnome" style="font-size: 100%" title="2 objects tagged with 'gnome'">gnome</a> <a href="/content/keyword/view" style="font-size: 100%" title="2 objects tagged with 'view'">view</a> <a href="/content/keyword/SEO" style="font-size: 100%" title="2 objects tagged with 'SEO'">SEO</a> <a href="/content/keyword/Adaptive%20Content" style="font-size: 100%" title="2 objects tagged with 'Adaptive Content'">Adaptive Content</a> <a href="/content/keyword/apache" style="font-size: 100%" title="2 objects tagged with 'apache'">apache</a> <a href="/content/keyword/content%20management%20system" style="font-size: 100%" title="2 objects tagged with 'content management system'">content management system</a> <a href="/content/keyword/Survey" style="font-size: 100%" title="2 objects tagged with 'Survey'">Survey</a> <a href="/content/keyword/browser" style="font-size: 100%" title="2 objects tagged with 'browser'">browser</a> <a href="/content/keyword/education" style="font-size: 100%" title="2 objects tagged with 'education'">education</a> <a href="/content/keyword/general" style="font-size: 100%" title="2 objects tagged with 'general'">general</a> <a href="/content/keyword/review" style="font-size: 100%" title="2 objects tagged with 'review'">review</a> <a href="/content/keyword/Business" style="font-size: 100%" title="2 objects tagged with 'Business'">Business</a> <a href="/content/keyword/ezunconf" style="font-size: 100%" title="2 objects tagged with 'ezunconf'">ezunconf</a> <a href="/content/keyword/frontend" style="font-size: 100%" title="2 objects tagged with 'frontend'">frontend</a> <a href="/content/keyword/website" style="font-size: 100%" title="2 objects tagged with 'website'">website</a> <a href="/content/keyword/seo" style="font-size: 100%" title="2 objects tagged with 'seo'">seo</a> <a href="/content/keyword/multilanguage" style="font-size: 100%" title="2 objects tagged with 'multilanguage'">multilanguage</a> <a href="/content/keyword/content" style="font-size: 100%" title="2 objects tagged with 'content'">content</a> <a href="/content/keyword/permissions" style="font-size: 100%" title="2 objects tagged with 'permissions'">permissions</a> <a href="/content/keyword/release" style="font-size: 100%" title="2 objects tagged with 'release'">release</a> <a href="/content/keyword/Symfony2" style="font-size: 100%" title="2 objects tagged with 'Symfony2'">Symfony2</a> <a href="/content/keyword/open-source" style="font-size: 100%" title="2 objects tagged with 'open-source'">open-source</a> <a href="/content/keyword/linkedin" style="font-size: 100%" title="2 objects tagged with 'linkedin'">linkedin</a> <a href="/content/keyword/Digital%20Media" style="font-size: 100%" title="2 objects tagged with 'Digital Media'">Digital Media</a> <a href="/content/keyword/ergonomie" style="font-size: 100%" title="2 objects tagged with 'ergonomie'">ergonomie</a> <a href="/content/keyword/team" style="font-size: 100%" title="2 objects tagged with 'team'">team</a> <a href="/content/keyword/linux" style="font-size: 100%" title="2 objects tagged with 'linux'">linux</a> <a href="/content/keyword/innovation" style="font-size: 100%" title="2 objects tagged with 'innovation'">innovation</a> <a href="/content/keyword/error" style="font-size: 100%" title="2 objects tagged with 'error'">error</a> <a href="/content/keyword/afup" style="font-size: 100%" title="2 objects tagged with 'afup'">afup</a> <a href="/content/keyword/database" style="font-size: 100%" title="2 objects tagged with 'database'">database</a> <a href="/content/keyword/REST%20API" style="font-size: 100%" title="2 objects tagged with 'REST API'">REST API</a> <a href="/content/keyword/API-layering" style="font-size: 100%" title="2 objects tagged with 'API-layering'">API-layering</a> <a href="/content/keyword/2012.20" style="font-size: 100%" title="2 objects tagged with '2012.20'">2012.20</a> 
+                        </p>
+    </div>
+
+
+
+	 <div align="right"><a href="#top">Top</a></div>
+
+    </div>
+</div>
+
+</div></div></div>
+<div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+</div>
+
+
+            <!-- Content: END -->
+            </div>
+        </div>
+    </div>
+
+    <div class="attribute-bottom-column">
+        
+    </div>
+
+    </div>
+</div>
+
+
+
+";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:1:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:1:"2";}}s:10:"title_path";a:1:{i:0;a:3:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:1:"2";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:2:"65";s:7:"node_id";s:1:"2";s:14:"parent_node_id";s:1:"1";s:8:"class_id";s:2:"23";s:16:"class_identifier";s:9:"frontpage";s:9:"remote_id";s:32:"8a9c9c761004866fb458d89910f52bee";s:14:"node_remote_id";s:32:"f3e90596361e31d496d4026eb624c983";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"1";s:9:"url_alias";s:0:"";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"3";s:12:"main_node_id";s:1:"2";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";b:0;s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"629709ba256fe317c3ddcee35453a96a";s:23:"parent_object_remote_id";s:32:"873313a1ceb33d04157b8c4ac0df8d7b";}s:13:"template_list";a:2:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";}s:9:"cache_ttl";i:-1;}

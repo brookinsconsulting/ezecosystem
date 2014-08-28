@@ -1,0 +1,1010 @@
+a:10:{s:7:"content";s:122636:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-My-experience-on-the-eZ-Publish-Summer-Camp-2012" title="Confessions of an apprentice: My experience on the eZ Publish Summer Camp 2012">Confessions of an apprentice: My experience on the eZ Publish Summ ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>This article will deviate from the normal tutorial-like format and deal with my personal experience regarding the eZ Publish Summer Camp 2012 which took place 5th to 8th September 2012 in the Elaphusa hotel in Bol on the island of Brač in Croatia. I’ll try to convey just a bit of the atmosphere going on because you just had to be there for the whole experience. What I write here probably won’t do the event justice, but bear with me.</p><p>When I got to Split where we were to board the catamaran, I truly didn’t know what to expect from this whole event. You see, it’s the first eZ Publish event I ever went to, and it’s the first major event Netgen was ever organizing. So, basically, it could go either way: it could be a complete bust, or a complete success. I prefer to think it was the latter, but from an objective point of view, the true answer probably lies somewhere in the middle of the two. But, let’s start from the beginning, shall we?</p><a name="eztoc8493_0_1" id="eztoc8493_0_1"></a><h3>Organization</h3><p>If you look at the two articles on this blog, you will see how much effort went into organizing such an event and how it all came to be (you can find the first article <a href="http://www.netgen.hr/eng/Blog/eZ-Publish-Summer-Camp-behind-the-scenes" target="_blank">here</a>, and the second one <a href="http://www.netgen.hr/eng/Blog/eZ-Publish-Summer-Camp-behind-the-scenes-part-2" target="_blank">here</a>). But in my opinion, the organization was spot on, from the venue all through the extra activities the attendees could participate in.</p><p>The choice of the location for a summer event such as this one couldn’t be better. The island of Brač is a beautiful place, and the small town of Bol has enough different activities for everyone to enjoy, from simple sunbathing to kite-surfing. And there is a reason the Golden Horn beach was named the most beautiful beach in Croatia. It is almost completely surrounded with the sea, and even though it’s not a sandy beach, but covered in pebbles, it is still very comfortable to sunbathe there.</p><a name="eztoc8493_0_2" id="eztoc8493_0_2"></a><h3>Day 0</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/welcome-drinks/8503-1-cro-HR/Welcome-drinks_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Welcome drinks" title="Welcome drinks" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Welcome drinks at the terrace of the Elaphusa hotel</p> </div>
+         </div>
+</div>
+</div><p>We went aboard the catamaran, supplied with tickets from one of my co-workers, Marko, and set sail towards Brač. When we got there, we picked up the accreditations and welcome packets from our animators, Danijela and Vlado, and went to the terrace of the Elaphusa hotel for the Welcome drinks where Ivo Lukač (<a href="http://twitter.com/ilukac" target="_blank">@ilukac</a>) and Nicolas Pastorino (<a href="https://twitter.com/jeanvoye" target="_blank">@jeanvoye</a>) gave a few words greeting us all. It was also a chance for old acquaintances to be renewed, and for new acquaintances to form. All in all, very pleasant, but sort of low-key. Possibly because we were all still a bit tired from the trip and the unpacking.</p><a name="eztoc8493_0_3" id="eztoc8493_0_3"></a><h3>Day 1</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/opening-session/8507-1-cro-HR/Opening-session_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Opening session" title="Opening session" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Day 1 of eZ Publish Summer camp: Opening session - the turnout was great!</p> </div>
+         </div>
+</div>
+</div><p>After the opening session with Ivo and Nicolas at the helm, we all got to our respective halls for the first presentations. I really don’t know how it was on the other tracks, but I can tell you about the CMS track.</p><p>So, the CMS track first presentation was Paul Borgermans (<a href="http://twitter.com/paulborgermans" target="_blank">@paulborgermans</a>) from PHPBenelux with Advanced eZFind. I know that eZFind is always a major topic for any developer and we got to explore some of the intricacies of this powerful extension. Really interesting and totally useful.</p>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/lecturers-of-day-one/8511-1-cro-HR/Lecturers-of-day-one_medium.jpg" width="200" height="140"  style="border: 0px solid ;" alt="Lecturers of day one" title="Lecturers of day one" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 200px">
+                
+<p>From left to right: Paul Borgermans and Marko Dugonjić holding their presentations</p> </div>
+         </div>
+</div>
+</div><p>After lunch, Marko Dugonjić (<a href="http://twitter.com/markodugonjic" target="_blank">@markodugonjic</a>) from Creative Nights told us about some details of the responsive web design. Also, his theory is that not only front-end developers, but designers also, should completely change the way design and layout should be presented to the clients, which is only logical, as responsive design is something that completely changes the game. Also, Marko had this hands-on approach, where we were supposed to analyse some cool-looking websites, and see what makes them so cool regarding the design.</p><p>After the presentations, we had some time to kill, and some of the Netgen crew went for a swim at the sea, while the others relaxed before the dinner.</p><p>In the evening, we had a dinner for all the participants in the restaurant called Vagabundo in Bol. Even though Vagabundo stands for vagabond, as you might have assumed, the restaurant was pretty fancy, I can tell you. With domestic red wine, and a delicious menu, those couple of hours passed too soon. All of us Netgen folk were at one table, and Bertrand Dunogier (<a href="http://twitter.com/bdunogier" target="_blank">@bdunogier</a>) from eZ Systems joined us, so we had a few laughs, and he assured me that he’ll visit Croatia with the family to see more. I hope that he does.</p><a name="eztoc8493_0_4" id="eztoc8493_0_4"></a><h3>Day 2</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/hallway/8515-1-cro-HR/Hallway_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Start of day 2 of eZ Publish Summer Camp" title="Start of day 2 of eZ Publish Summer Camp" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Day 2 of eZ Publish Summer Camp</p> </div>
+         </div>
+</div>
+</div><p>Well, the weather wasn’t completely nice on day 2. In fact, a heavy rain was falling that morning, so the spirits were a bit down. Nevertheless, we hit it off with Sébastien Morel (<a href="http://twitter.com/Plopix" target="_blank">@Plopix</a>) from Novactive, making a presentation about eZ Publish integration with Varnish. Let me tell you, the guy has so many stickers on his Mac, from Yoda to Google’s +1 button, it’s ridiculous! But when he started talking about Varnish capabilities, and how it takes the caching to a completely different level, your mind gets completely blown.</p>
+<div class="object-left"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/day-2-lecturers/8519-1-cro-HR/Day-2-lecturers_medium.jpg" width="188" height="290"  style="border: 0px solid ;" alt="Day 2 lecturers" title="Day 2 lecturers" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 188px">
+                
+<p>In the top: Sebastian Morel with his funky laptop; bottom left: Bertrand Dunogier; bottom right: Gaetano Giunta</p> </div>
+         </div>
+</div>
+</div><p>This time, I had lunch with Ivo, Bertrand and Yannick Modah Gouez (<a href="http://twitter.com/ymgouez" target="_blank">@ymgouez</a>) who arrived that day, and was an interesting, totally likeable guy. The talk was mainly focused on work-related topics, but he also had questions about Croatia, and we gladly provided answers for him.</p><p>After lunch, Bertrand came up on stage and talked about taking eZ Publish to a completely new level by clustering it, which basically means usage of multiple servers for different siteaccesses of an eZ Publish installation. Let me tell you, I thought eZ Publish was powerful before, but as the days of the event progressed, I could truly see what a versatile CMS this actually was.</p><p>After the coffee break, Gaetano Giunta (<a href="http://twitter.com/gggeek" target="_blank">@gggeek</a>) talked about Performance analysis for eZ Publish and we saw that sometimes, eZ Debug isn’t enough for a developer to optimize his/her website. He also pointed out to an extension he created, ezperformancelogger, which generates reports on server capabilities for easier performance analysis.</p><p>The weather picked up by then, and we found out that Danijela and Vlado organized two activities for us: beach volleyball and bowling. I went to the beach volleyball where we found out one important piece of trivia: web-developers can’t play volleyball. But that didn’t matter, because we had so much fun.</p><a name="eztoc8493_0_5" id="eztoc8493_0_5"></a><h3>Day 3</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/day-3-of-ez-publish-summer-camp/8527-1-cro-HR/Day-3-of-eZ-Publish-Summer-Camp_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Day 3 of eZ Summer Camp" title="Day 3 of eZ Summer Camp" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Day 3 of eZ Publish Summer Camp</p> </div>
+         </div>
+</div>
+</div><p>Third day of Summer Camp, the sun was shining and the weather was perfect. Gilles Guirand (<a href="http://twitter.com/gandbox" target="_blank">@gandbox</a>), the co-founder of Kaliop, was waiting for us to explain some Advanced caching techniques in eZ Publish. We performed analysis of certain key segments of our installation which was pretty interesting.</p>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/day-3-lecturers/8523-1-cro-HR/Day-3-lecturers_medium.jpg" width="200" height="111"  style="border: 0px solid ;" alt="Day 3 lecturers" title="Day 3 lecturers" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 200px">
+                
+<p>From left to right: Gilles Guirand, Igor Vrdoljak and Lucijan Blagonić holding their presentations</p> </div>
+         </div>
+</div>
+</div><p>Then, after lunch, Igor Vrdoljak (<a href="http://twitter.com/ivrdoljak" target="_blank">@ivrdoljak</a>) and Lucijan Blagonić (<a href="http://twitter.com/lblagonic" target="_blank">@lblagonic</a>) went up on stage to explain creation of a mobile site in eZ, working with the mobile siteaccess, and of course, some more design intricacies for mobile sites in general.</p>
+<div class="object-left"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/wine-tasting/8535-1-cro-HR/Wine-tasting_medium.jpg" width="193" height="290"  style="border: 0px solid ;" alt="Wine tasting" title="Wine tasting" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 193px">
+                
+<p>In anticipation of the wine...</p> </div>
+         </div>
+</div>
+</div><p>I have to share something with you: I became an eZ Publish certified developer. We had certification after the presentations, and even though the new certification system had some minor issues, which Nicolas assured us will be dealt with by October, on the 10th Annual eZ Conference and Awards in Cologne, I managed to solve the Basic certification exam, and it was just a wonderful feeling, like I’ve just won the lottery.</p><p>After that, we had the closing ceremony, and we could all let our hair down, so to speak. For you see, the events which were prepared for attendees weren’t finished, and it was all about fun from this point on.</p><p>In the evening, we went to a wine-tasting to a local wine vault, which has over a 100 years of tradition and created wine from grapes bought exclusively from local manufacturers. Netgen organized a lottery where three lucky people won a bottle of wine from this wine vault. After that, we went to town where a discussion was started by Gaetano and me about food (what are an Italian and a Croatian with a bunch of French guys to talk about than food) and after a couple of hours worth of laughs, we went to party to the closest lounge bar to us, Varadero. Even though the prices were a bit steep, we had major laughs there. Unfortunately, our “French connection”, as Gaetano put it, needed to leave the next morning and miss out on the boat trip.</p><a name="eztoc8493_0_6" id="eztoc8493_0_6"></a><h3>The boat trip</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/start-of-the-boat-trip/8531-1-cro-HR/Start-of-the-boat-trip_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Start of the boat trip" title="Start of the boat trip" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Start of the boat trip</p> </div>
+         </div>
+</div>
+</div><p>The last day of the camp was all about relaxation. We all went for a boat trip to the island of Hvar, and afterwards to Palmižana which is on a group of Paklinski islands near Hvar. Now the boat trip was something to be experienced. We travelled for 2 and a half hours to Hvar, and it was a comfortable ride, if you’re used to it. If you’re not, well... I don’t need to talk about the consequences of sea sickness, now, do I?</p><p>Anyways, when we got to Hvar, most of the crew went to this fortress which is on a hilltop over the Hvar town. Since I’m not much of a fortress-climber, based on previous experiences, I went for a cup of coffee to the town square with two of my fellow Netgen crew, Edi Modrić and Hrvoje Knežević. A group of German attendees from :data factory joined us and we spent about an hour chatting about everything. It turns out they were pretty satisfied with the event.</p>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/at-the-boat/8539-1-cro-HR/At-the-boat_medium.jpg" width="200" height="133"  style="border: 0px solid ;" alt="At the boat" title="At the boat" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 200px">
+                
+<p>Yours truly at the boat trip: The sun was burning hot!</p> </div>
+         </div>
+</div>
+</div><p>When we got to Palmižana, after a long climb or two, we got to this picture-perfect cove with yachts anchored in it, and we climbed down to the beach and threw ourselves in the sea. I cannot describe how wonderful that was. You just had to be there.</p><p>So, after all of this, we went back to Bol, and the morning after got onto the catamaran which took us to the mainland, and we all went home. It was a pretty sad thing to leave, but what can you do? There will surely be other summer camps to come. All in all, to all of the people who didn’t come, next time be sure to reserve your tickets and a spot at Summer Camp, because I think we started a wonderful tradition which is both educational and fun at the same time.</p><p>Until next time, I wish you happy coding,</p><p>Tomislav<b>&nbsp;</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/11/2012 08:17 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Confessions-of-an-apprentice-My-experience-on-the-eZ-Publish-Summer-Camp-2012">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-My-experience-on-the-eZ-Publish-Summer-Camp-2012">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Confessions-of-an-apprentice-My-experience-on-the-eZ-Publish-Summer-Camp-2012" title="Confessions of an apprentice: My experience on the eZ Publish Summer Camp 2012">Confessions of an apprentice: My experience on the eZ Publish Summ ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>This article will deviate from the normal tutorial-like format and deal with my personal experience regarding the eZ Publish Summer Camp 2012 which took place 5th to 8th September 2012 in the Elaphusa hotel in Bol on the island of Brač in Croatia. I’ll try to convey just a bit of the atmosphere going on because you just had to be there for the whole experience. What I write here probably won’t do the event justice, but bear with me.</p><p>When I got to Split where we were to board the catamaran, I truly didn’t know what to expect from this whole event. You see, it’s the first eZ Publish event I ever went to, and it’s the first major event Netgen was ever organizing. So, basically, it could go either way: it could be a complete bust, or a complete success. I prefer to think it was the latter, but from an objective point of view, the true answer probably lies somewhere in the middle of the two. But, let’s start from the beginning, shall we?</p><a name="eztoc8493_0_1" id="eztoc8493_0_1"></a><h3>Organization</h3><p>If you look at the two articles on this blog, you will see how much effort went into organizing such an event and how it all came to be (you can find the first article <a href="http://www.netgen.hr/eng/Blog/eZ-Publish-Summer-Camp-behind-the-scenes" target="_blank">here</a>, and the second one <a href="http://www.netgen.hr/eng/Blog/eZ-Publish-Summer-Camp-behind-the-scenes-part-2" target="_blank">here</a>). But in my opinion, the organization was spot on, from the venue all through the extra activities the attendees could participate in.</p><p>The choice of the location for a summer event such as this one couldn’t be better. The island of Brač is a beautiful place, and the small town of Bol has enough different activities for everyone to enjoy, from simple sunbathing to kite-surfing. And there is a reason the Golden Horn beach was named the most beautiful beach in Croatia. It is almost completely surrounded with the sea, and even though it’s not a sandy beach, but covered in pebbles, it is still very comfortable to sunbathe there.</p><a name="eztoc8493_0_2" id="eztoc8493_0_2"></a><h3>Day 0</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/welcome-drinks/8503-1-cro-HR/Welcome-drinks_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Welcome drinks" title="Welcome drinks" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Welcome drinks at the terrace of the Elaphusa hotel</p> </div>
+         </div>
+</div>
+</div><p>We went aboard the catamaran, supplied with tickets from one of my co-workers, Marko, and set sail towards Brač. When we got there, we picked up the accreditations and welcome packets from our animators, Danijela and Vlado, and went to the terrace of the Elaphusa hotel for the Welcome drinks where Ivo Lukač (<a href="http://twitter.com/ilukac" target="_blank">@ilukac</a>) and Nicolas Pastorino (<a href="https://twitter.com/jeanvoye" target="_blank">@jeanvoye</a>) gave a few words greeting us all. It was also a chance for old acquaintances to be renewed, and for new acquaintances to form. All in all, very pleasant, but sort of low-key. Possibly because we were all still a bit tired from the trip and the unpacking.</p><a name="eztoc8493_0_3" id="eztoc8493_0_3"></a><h3>Day 1</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/opening-session/8507-1-cro-HR/Opening-session_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Opening session" title="Opening session" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Day 1 of eZ Publish Summer camp: Opening session - the turnout was great!</p> </div>
+         </div>
+</div>
+</div><p>After the opening session with Ivo and Nicolas at the helm, we all got to our respective halls for the first presentations. I really don’t know how it was on the other tracks, but I can tell you about the CMS track.</p><p>So, the CMS track first presentation was Paul Borgermans (<a href="http://twitter.com/paulborgermans" target="_blank">@paulborgermans</a>) from PHPBenelux with Advanced eZFind. I know that eZFind is always a major topic for any developer and we got to explore some of the intricacies of this powerful extension. Really interesting and totally useful.</p>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/day-1-lecturers/8511-1-cro-HR/Day-1-lecturers_medium.jpg" width="200" height="140"  style="border: 0px solid ;" alt="Lecturers of day one" title="Lecturers of day one" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 200px">
+                
+<p>From left to right: Paul Borgermans and Marko Dugonjić holding their presentations</p> </div>
+         </div>
+</div>
+</div><p>After lunch, Marko Dugonjić (<a href="http://twitter.com/markodugonjic" target="_blank">@markodugonjic</a>) from Creative Nights told us about some details of the responsive web design. Also, his theory is that not only front-end developers, but designers also, should completely change the way design and layout should be presented to the clients, which is only logical, as responsive design is something that completely changes the game. Also, Marko had this hands-on approach, where we were supposed to analyse some cool-looking websites, and see what makes them so cool regarding the design.</p><p>After the presentations, we had some time to kill, and some of the Netgen crew went for a swim at the sea, while the others relaxed before the dinner.</p><p>In the evening, we had a dinner for all the participants in the restaurant called Vagabundo in Bol. Even though Vagabundo stands for vagabond, as you might have assumed, the restaurant was pretty fancy, I can tell you. With domestic red wine, and a delicious menu, those couple of hours passed too soon. All of us Netgen folk were at one table, and Bertrand Dunogier (<a href="http://twitter.com/bdunogier" target="_blank">@bdunogier</a>) from eZ Systems joined us, so we had a few laughs, and he assured me that he’ll visit Croatia with the family to see more. I hope that he does.</p><a name="eztoc8493_0_4" id="eztoc8493_0_4"></a><h3>Day 2</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/hallway/8515-1-cro-HR/Hallway_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Start of day 2 of eZ Publish Summer Camp" title="Start of day 2 of eZ Publish Summer Camp" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Day 2 of eZ Publish Summer Camp</p> </div>
+         </div>
+</div>
+</div><p>Well, the weather wasn’t completely nice on day 2. In fact, a heavy rain was falling that morning, so the spirits were a bit down. Nevertheless, we hit it off with Sébastien Morel (<a href="http://twitter.com/Plopix" target="_blank">@Plopix</a>) from Novactive, making a presentation about eZ Publish integration with Varnish. Let me tell you, the guy has so many stickers on his Mac, from Yoda to Google’s +1 button, it’s ridiculous! But when he started talking about Varnish capabilities, and how it takes the caching to a completely different level, your mind gets completely blown.</p>
+<div class="object-left"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/day-2-lecturers/8519-1-cro-HR/Day-2-lecturers_medium.jpg" width="188" height="290"  style="border: 0px solid ;" alt="Day 2 lecturers" title="Day 2 lecturers" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 188px">
+                
+<p>In the top: Sébastien Morel with his funky laptop; bottom left: Bertrand Dunogier; bottom right: Gaetano Giunta</p> </div>
+         </div>
+</div>
+</div><p>This time, I had lunch with Ivo, Bertrand and Yannick Modah Gouez (<a href="http://twitter.com/ymgouez" target="_blank">@ymgouez</a>) who arrived that day, and was an interesting, totally likeable guy. The talk was mainly focused on work-related topics, but he also had questions about Croatia, and we gladly provided answers for him.</p><p>After lunch, Bertrand came up on stage and talked about taking eZ Publish to a completely new level by clustering it, which basically means usage of multiple servers for different siteaccesses of an eZ Publish installation. Let me tell you, I thought eZ Publish was powerful before, but as the days of the event progressed, I could truly see what a versatile CMS this actually was.</p><p>After the coffee break, Gaetano Giunta (<a href="http://twitter.com/gggeek" target="_blank">@gggeek</a>) talked about Performance analysis for eZ Publish and we saw that sometimes, eZ Debug isn’t enough for a developer to optimize his/her website. He also pointed out to an extension he created, ezperformancelogger, which generates reports on server capabilities for easier performance analysis.</p><p>The weather picked up by then, and we found out that Danijela and Vlado organized two activities for us: beach volleyball and bowling. I went to the beach volleyball where we found out one important piece of trivia: web-developers can’t play volleyball. But that didn’t matter, because we had so much fun.</p><a name="eztoc8493_0_5" id="eztoc8493_0_5"></a><h3>Day 3</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/day-3-of-ez-publish-summer-camp/8527-1-cro-HR/Day-3-of-eZ-Publish-Summer-Camp_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Day 3 of eZ Summer Camp" title="Day 3 of eZ Summer Camp" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Day 3 of eZ Publish Summer Camp</p> </div>
+         </div>
+</div>
+</div><p>Third day of Summer Camp, the sun was shining and the weather was perfect. Gilles Guirand (<a href="http://twitter.com/gandbox" target="_blank">@gandbox</a>), the co-founder of Kaliop, was waiting for us to explain some Advanced caching techniques in eZ Publish. We performed analysis of certain key segments of our installation which was pretty interesting.</p>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/day-3-lecturers/8523-1-cro-HR/Day-3-lecturers_medium.jpg" width="200" height="111"  style="border: 0px solid ;" alt="Day 3 lecturers" title="Day 3 lecturers" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 200px">
+                
+<p>From left to right: Gilles Guirand, Igor Vrdoljak and Lucijan Blagonić holding their presentations</p> </div>
+         </div>
+</div>
+</div><p>Then, after lunch, Igor Vrdoljak (<a href="http://twitter.com/ivrdoljak" target="_blank">@ivrdoljak</a>) and Lucijan Blagonić (<a href="http://twitter.com/lblagonic" target="_blank">@lblagonic</a>) went up on stage to explain creation of a mobile site in eZ, working with the mobile siteaccess, and of course, some more design intricacies for mobile sites in general.</p>
+<div class="object-left"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/wine-tasting/8535-1-cro-HR/Wine-tasting_medium.jpg" width="193" height="290"  style="border: 0px solid ;" alt="Wine tasting" title="Wine tasting" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 193px">
+                
+<p>In anticipation of the wine...</p> </div>
+         </div>
+</div>
+</div><p>I have to share something with you: I became an eZ Publish certified developer. We had certification after the presentations, and even though the new certification system had some minor issues, which Nicolas assured us will be dealt with by October, on the 10th Annual eZ Conference and Awards in Cologne, I managed to solve the Basic certification exam, and it was just a wonderful feeling, like I’ve just won the lottery.</p><p>After that, we had the closing ceremony, and we could all let our hair down, so to speak. For you see, the events which were prepared for attendees weren’t finished, and it was all about fun from this point on.</p><p>In the evening, we went to a wine-tasting to a local wine vault, which has over a 100 years of tradition and created wine from grapes bought exclusively from local manufacturers. Netgen organized a lottery where three lucky people won a bottle of wine from this wine vault. After that, we went to town where a discussion was started by Gaetano and me about food (what are an Italian and a Croatian with a bunch of French guys to talk about than food) and after a couple of hours worth of laughs, we went to party to the closest lounge bar to us, Varadero. Even though the prices were a bit steep, we had major laughs there. Unfortunately, our “French connection”, as Gaetano put it, needed to leave the next morning and miss out on the boat trip.</p><a name="eztoc8493_0_6" id="eztoc8493_0_6"></a><h3>The boat trip</h3>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/start-of-the-boat-trip/8531-1-cro-HR/Start-of-the-boat-trip_reference.jpg" width="620" height="413"  style="border: 0px solid ;" alt="Start of the boat trip" title="Start of the boat trip" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>Start of the boat trip</p> </div>
+         </div>
+</div>
+</div><p>The last day of the camp was all about relaxation. We all went for a boat trip to the island of Hvar, and afterwards to Palmižana which is on a group of Paklinski islands near Hvar. Now the boat trip was something to be experienced. We travelled for 2 and a half hours to Hvar, and it was a comfortable ride, if you’re used to it. If you’re not, well... I don’t need to talk about the consequences of sea sickness, now, do I?</p><p>Anyways, when we got to Hvar, most of the crew went to this fortress which is on a hilltop over the Hvar town. Since I’m not much of a fortress-climber, based on previous experiences, I went for a cup of coffee to the town square with two of my fellow Netgen crew, Edi Modrić and Hrvoje Knežević. A group of German attendees from :data factory joined us and we spent about an hour chatting about everything. It turns out they were pretty satisfied with the event.</p>
+<div class="object-right"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/at-the-boat/8539-1-cro-HR/At-the-boat_medium.jpg" width="200" height="133"  style="border: 0px solid ;" alt="At the boat" title="At the boat" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 200px">
+                
+<p>Yours truly at the boat trip: The sun was burning hot!</p> </div>
+         </div>
+</div>
+</div><p>When we got to Palmižana, after a long climb or two, we got to this picture-perfect cove with yachts anchored in it, and we climbed down to the beach and threw ourselves in the sea. I cannot describe how wonderful that was. You just had to be there.</p><p>So, after all of this, we went back to Bol, and the morning after got onto the catamaran which took us to the mainland, and we all went home. It was a pretty sad thing to leave, but what can you do? There will surely be other summer camps to come. All in all, to all of the people who didn’t come, next time be sure to reserve your tickets and a spot at Summer Camp, because I think we started a wonderful tradition which is both educational and fun at the same time.</p><p>Until next time, I wish you happy coding,</p><p>Tomislav<b>&nbsp;</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/11/2012 08:17 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Confessions-of-an-apprentice-My-experience-on-the-eZ-Publish-Summer-Camp-20122">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Confessions-of-an-apprentice-My-experience-on-the-eZ-Publish-Summer-Camp-2012">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/eZ-Publish-Summer-Camp-behind-the-scenes-part-2" title="eZ Publish Summer Camp - behind the scenes - part 2">eZ Publish Summer Camp - behind the scenes - part 2</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>We have just hit a new milestone. After&nbsp;<a href="http://ezsummercamp.com/news/registrations_now_open" target="_self">opening the registrations</a>&nbsp;back in May, today we finished all that we can do off site and tomorrow we are going to the Summer Camp location (Bol on island of Brač) to finish the preparations and welcome all attendees. Also, the registrations on the web site are&nbsp;<a href="http://ezsummercamp.com/news/registrations_are_now_closed" target="_self">closed</a>&nbsp;too as we exceeded our expectations and there is too little time for some late guest to organize the trip.&nbsp;</p><p>Anyway, most of the preparations are done, there is still some nitpicking. But I don’t want to talk about the details here, those can be found on the <a href="http://ezsummercamp.com" target="_self">summer camp site</a>. I would like to talk about the challenges we faced while organizing this event.</p><a name="eztoc8478_1" id="eztoc8478_1"></a><h2><b>Challenge number one</b></h2><p>Well, that one is easy to guess. We are doing an event organization such as this for the first time :) We don’t have any experience in event management and we are just about to welcome 70 people from all across the Europe. Quite scary stuff :) But we wouldn’t been doing this if we thought that we can’t do it. We asked our friend Vladimir to help us as he has much more experience in organizing events. We also recognize the great need for such an event and that is why we strongly believe in the success.</p><a name="eztoc8478_2" id="eztoc8478_2"></a><h2><b>Challenge number two &nbsp;&nbsp;</b></h2><p>At one moment, while working on the camp program back in May, we decided to base the whole PHP track on the new upcoming eZ Publish 5 version. Big challenge because the whole eZ Publish 5 stack is a “moving target”. It is being heavily developed currently, the &nbsp;alpha version is just about to hit the streets. It is very difficult to plan the workshops at this moment and I praise all the speakers from the PHP track who will do it. Although the final release is due in 2 months I nevertheless think that it is very important to show to the community where the version 5 is heading. And the eZ Publish Summer Camp is an excellent opportunity to do so, to give to the community an early start.&nbsp;</p><a name="eztoc8478_3" id="eztoc8478_3"></a><h2><b>Challenge number three</b></h2><p>A personal one. I never held a long workshop, now I am doing a 3-day one :) Since I was not smart enough to delegate this to someone else, seems that there is no escape for me. Luckily, Nicolas Pastorino, Community Management Director at eZ Systems, will help me with this task. So I am confident we will have a great workshop.</p><p>To summarize: <b>challenges exist to overcome them</b>.</p><p>Yo-ho-ho!</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/01/2012 03:23 pm</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/eZ-Publish-Summer-Camp-behind-the-scenes-part-2">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/eZ-Publish-Summer-Camp-behind-the-scenes-part-2">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/eZ-Publish-Summer-Camp-behind-the-scenes-part-2" title="eZ Publish Summer Camp - behind the scenes - part 2">eZ Publish Summer Camp - behind the scenes - part 2</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>We have just hit a new milestone. After&nbsp;<a href="http://ezsummercamp.com/news/registrations_now_open" target="_self">opening the registrations</a>&nbsp;back in May, today we finished all that we can do off site and tomorrow we are going to the Summer Camp location (Bol on island of Brač) to finish the preparations and welcome all attendees. Also, the registrations on the web site are&nbsp;<a href="http://ezsummercamp.com/news/registrations_are_now_closed" target="_self">closed</a>&nbsp;too as we exceeded our expectations and there is too little time for some late guest to organize the trip.&nbsp;</p><p>Anyway, most of the preparations are done, there is still some nitpicking. But I don’t want to talk about the details here, those can be found on the <a href="http://ezsummercamp.com" target="_self">summer camp site</a>. I would like to talk about the challenges we faced while organizing this event.</p><a name="eztoc8478_1" id="eztoc8478_1"></a><h2><b>Challenge number one</b></h2><p>Well, that one is easy to guess. We are doing an event organization such as this for the first time :) We don’t have any experience in event management and we are just about to welcome 70 people from all across the Europe. Quite scary stuff :) But we wouldn’t been doing this if we thought that we can’t do it. We asked our friend Vladimir to help us as he has much more experience in organizing events. We also recognize the great need for such an event and that is why we strongly believe in the success.</p><a name="eztoc8478_2" id="eztoc8478_2"></a><h2><b>Challenge number two &nbsp;&nbsp;</b></h2><p>At one moment, while working on the camp program back in May, we decided to base the whole PHP track on the new upcoming eZ Publish 5 version. Big challenge because the whole eZ Publish 5 stack is a “moving target”. It is being heavily developed currently, the &nbsp;alpha version is just about to hit the streets. It is very difficult to plan the workshops at this moment and I praise all the speakers from the PHP track who will do it. Although the final release is due in 2 months I nevertheless think that it is very important to show to the community where the version 5 is heading. And the eZ Publish Summer Camp is an excellent opportunity to do so, to give to the community an early start.&nbsp;</p><a name="eztoc8478_3" id="eztoc8478_3"></a><h2><b>Challenge number three</b></h2><p>A personal one. I never held a long workshop, now I am doing a 3-day one :) Since I was not smart enough to delegate this to someone else, seems that there is no escape for me. Luckily, Nicolas Pastorino, Community Management Director at eZ Systems, will help me with this task. So I am confident we will have a great workshop.</p><p>To summarize: <b>challenges exist to overcome them</b>.</p><p>Yo-ho-ho!</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/01/2012 03:23 pm</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/eZ-Publish-Summer-Camp-behind-the-scenes-part-22">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/eZ-Publish-Summer-Camp-behind-the-scenes-part-2">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS" title="Interview with André Rømcke, Lead Engineer for eZ Publish CMS">Interview with André Rømcke, Lead Engineer for eZ Publish CMS</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In the second interview here on Netgen Blog our guest is&nbsp;<b>André Rømcke</b>. He is the&nbsp;Lead Engineer for eZ Publish CMS and one of the main people behind the new verison 5. By the was you can check the first interview with Aleksandar Farstad <a href="http://www.netgen.hr/eng/Blog/Interview-with-Aleksander-Farstad-founder-of-eZ-Systems-and-eZ-Publish-open-source-CMS" target="_self">here</a>.</p><p><b>NG:&nbsp;Hello André&nbsp;and welcome to our blog. Lets start with the time when you first joined eZ Systems. How did you end up in eZ and what was your first role?</b></p><p>AR: I joined eZ Systems as a consultant in the summer of 2006 after having used eZ Publish for a year for several websites related to my student union and some private freelance projects. I did not have much prior experience with PHP, but I had plenty with html, css, javascript (and ASP[.Net]), which was a combination eZ did not have that many fluent people in.</p><p><b>NG: From your short bio we can see that you are a bachelor in economics. What brought you to finish economics and work in IT? Do you think the combination gives you some edge?</b></p><p>
+AR: Since the age of 14-15 I have always had an deep interest in web technologies, back then checking out the source code of for instance 3dfx website to steal some of their "dhtml"* effects for my own private websites. Over some years I lost interest, but before and during my studies this hobby was taking more and more of my spare time and interest again, leading me to start my own individual enterprise and eventually to stop studying after 3 years and come work for eZ.<br />
+I think the combination can be very interesting, as it makes it possible to see both technical, business and market needs. These needs map to what is referred to as the technology, business and customer perspective in classic software project management teachings, which is IMHO just as important today with Agile development methodologies like Scrum and Kanban, the two variants we have deployed internally.<br />(* fast forward to 2006 and this was referred to as "ajax")</p><p><b>NG: You are currently the Lead Engineer for eZ Publish. How do you fit in the eZ Engineering team and what are your responsibilities?</b></p><p>AR: I fit in the sense that I have, in the past, been highly involved in certain key aspects of eZ Publish like Online Editor, eZXML, eZINI, ezjscore, (..), pushed the envelope on performance and been involved in Public API efforts since the beginning in early 2011. In my consulting background I was also doing project management which is now the case with my role as Scrum/Kanban master & technical project / release manager within Engineering. And on top of that my background has made me usually quite pragmatic, preferring KISS solutions, witch sometimes simplifies problems solving in the team a bit. But as am I luckily working with quite a lot of skilled co workers, I have over the years learnt a lot surrounding OOP and design patterns leading me to prefer de coupled object oriented clean code. So for me KISS does not mean cutting corners and write bad code, it simply means fully understanding out what the problem is without over complicating it, then solving just that problem and nothing more.</p><p><b>NG: Your community profile on&nbsp;<a href="http://share.ez.no/" target="_blank">share.ez.no</a>&nbsp;shows quite a lot of engagement. How do you find time for helping people on forums, etc? Do you feel it is part of your job or you do it completely in your free time?</b></p><p>AR: For quite a while I did both, I felt it was somewhat part of my job, and did it as well as quite some development in my spare time. Nowadays I'm not as active, there are several reasons for that. Those worth mentioning are: #1 being that I think I can contribute much more in my role by making sure our 5.x product is as rock solid and documented as possible, #2 change our innovation process to become transparent and open. And #3 I was about to go crazy because of lack of a proper FAQ in the community :) These are some of the things we are currently working on, so within the next months I hope we can open up JIRA and Confluence for a fully open innovation process that includes everyone and allows everyone to contribute in every step of the process. But it involves lots of changes, so it has taken quite some time and will continue to take even more before everything is in place.</p><p><b>NG: As an economics bachelor how do you see the dual nature of eZ Ecosystem: from eZ Systems as a company to eZ community and the open source model?</b></p><p>
+AR: I see it as a symbiosis where both sides benefit from the other, if done right. In my view the API should be exactly the same so that extensions written for community project work on the enterprise edition as well as the other way around, this implies a common API versioning. Both variants can then bundle different set of extensions/bundles which makes them differ in branding and feature set. This was not possible with 4.x as there was no single public api, just a whole lot of different low level api's spread all over the kernel as well as in extensions.<br />IMHO if both sides agree that enterprise level features belong to the enterprise edition, then both sides will win. eZ Systems in that they can have a model that is proven, a large talent and potential customer pool in a vibrant community, and noticeable market presence thanks to the community version. Community benefits in that they continue to have a company which puts considerable efforts into moving the project forward and wanting to improve it in all aspects, and a company that creates a market for them to do business in, both as consulting as well as eZ Market solutions. This is already the case, but with 5.x it is now technically possible for eZ Systems to offer advance scalability solutions and for instance Oracle driver as enterprise feature, without affecting the extensions and websites written on top of the cms. &nbsp;Such solutions can also be written by partners and be placed on eZ Market, providing interesting features not offered by eZ.</p><p><b>NG: eZ Publish 5 will be released by the end of the year. How are things going in that respect? What are your current priorities regarding the release?</b></p><p>AR:&nbsp;Things are going good, we have clear aims now in what we would like to deliver, and I think it is feasible. First up is an Alpha at the end of August, it will contain a first look at eZ Publish 5.x with a snapshot of our current progress on getting demo design working on top of Public API and Symfony stack. Hopefully with confluence containing some initial documentation on how to extend the system and build FieldTypes. &nbsp;The Alpha should also contain most of the "legacy fallback" features we have talked about in the past, making it possible to run existing 4.x site smoothly on 5.x. A month later we will release a Beta, and it should be future complete, which means all field types (data types) needed by demo design should work, and so should REST API v2 which is the other main priority of 5.0. By this time we would have hopefully finished our internal projects needed to make JIRA and Confluence fully open, which would then mark the introduction of an open innovation process.</p><p><b>NG:&nbsp;Recently eZ announced that eZ Publish 5 will rely a lot on Symfony 2 PHP framework. Can you tell us a bit more on what were the main reasons to go in that direction? What parts of the Symfony framework will be heavily used by the new kernel?</b></p><p>AR: The discussions about using other frameworks have always been present, but after eZ Components was moved to Apache, and lost it's pace there, it opened the door in a much bigger degree to instead take a best of breed approach. And after selecting Twig for template engine back in February, it became much more easy to also take Symfony for it's controller, view, routing and form handling instead of spending efforts on making something from scratch or updating ezcMVCTools to be able to natively handle hierarchical views. Hierarchical views being one of the many things we wanted in the new stack to reduce code duplication. You can think of it as a system native version of eZ Publish 4.x's {node_view_gui()}.So as mentioned, Symfony is currently used as the web stack, the model is provided by Public API.&nbsp;We might end up using some of it in Public API as well, for instance ServiceContainer, but from my perspective I want to avoid deep coupling as much as possible and unfortunately use of the Symfony2 ServiceContainer currently encourages exactly that. Deep coupling is wrong for several reasons, two reasons for making sure we abstract dependencies being: #1 it makes testing harder as it will depend on the external project, and #2 I see Public API as having a longer life span then what Symfony2[/<Insert any framework>] will most likely have.</p><p><b>NG: The version 5 release will bring the new major release, but it will not replace the old version fully (old version will be bundled in for backwards compatibility anyway). When do you think &nbsp;version 5 will have almost all features that version 4 has now?</b></p><p>AR: eZ Publish 4.x is maybe the open source CMS out there with most features, so we might never have the same feature set in the core of 5.x as it represents a slight change of focus from quantity to quality. One the same page, my views on the open innovation process is that it should be unified for all features being developed for eZ Publish 5.x, hence that we in the future can make sure all new features go through a process of requirements collection-, design- and implementation-phase that everyone can contribute on. This in turn will increase quality in what we deliver, and for those features we don't prioritize to deliver, there is, as before, a golden chance for community or eZ Market partners to fill the gap with extensions.</p><p><b>NG: Where do you see the eZ Ecosystem (eZ Systems, eZ Publish, eZ Community) in 5 years? Do you see yourself as an important part of it?</b></p><p>AR:&nbsp;Difficult question, but I think if we manage to all agree on a vision for eZ Publish 5.x and get everyone on board of a unified open innovation process, which includes everyone, then I think we can potentially accelerate the interest in eZ Publish, both in the open source realm and the enterprise realm a lot. For me 5.x is _the_ possibility to undo mistakes of the past, unlock the potential that many of us feel live in the concept of the eZ Publish content model and gear up for a architecture that can serve us for the next 5-10 years and potentially beyond, if properly maintained and kept up to date with technologies and trends.</p><p><b>NG: How do you spend your time when not dealing with eZ*?</b></p><p>AR: I think I kind of always deal with eZ things, if it is on the top of Huayna Picchu on Machu Picchu, on the beach in Paje, Zanzibar, at the gym, with my folks or out with friends in Oslo or Cologne. I always end up stopping up once in a while and writing down ideas, answering mails or somehow communicating with co workers. It's the pitfall of choosing a carrier within something which also happens to be your personal interest. But indirectly, I think I managed to answer the question there, even if not too verbose ;)</p><p><b>NG: Thank you for your time!</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/17/2012 03:27 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS" title="Interview with André Rømcke, Lead Engineer for eZ Publish CMS">Interview with André Rømcke, Lead Engineer for eZ Publish CMS</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In the second interview here on Netgen Blog our guest is&nbsp;<b>André Rømcke</b>. He is the&nbsp;Lead Engineer for eZ Publish CMS and one of the main people behind the new verison 5. By the way check the first interview with Aleksandar Farstad <a href="http://www.netgenlabs.com/Blog/Interview-with-Aleksander-Farstad-founder-of-eZ-Systems-and-eZ-Publish-open-source-CMS" target="_self">here</a>.</p><p><b>NG:&nbsp;Hello André&nbsp;and welcome to our blog. Lets start with the time when you first joined eZ Systems. How did you end up in eZ and what was your first role?</b></p><p>AR: I joined eZ Systems as a consultant in the summer of 2006 after having used eZ Publish for a year for several websites related to my student union and some private freelance projects. I did not have much prior experience with PHP, but I had plenty with html, css, javascript (and ASP[.Net]), which was a combination eZ did not have that many fluent people in.</p><p><b>NG: From your short bio we can see that you are a bachelor in economics. What brought you to finish economics and work in IT? Do you think the combination gives you some edge?</b></p><p>
+AR: Since the age of 14-15 I have always had an deep interest in web technologies, back then checking out the source code of for instance 3dfx website to steal some of their "dhtml"* effects for my own private websites. Over some years I lost interest, but before and during my studies this hobby was taking more and more of my spare time and interest again, leading me to start my own individual enterprise and eventually to stop studying after 3 years and come work for eZ.<br />
+I think the combination can be very interesting, as it makes it possible to see both technical, business and market needs. These needs map to what is referred to as the technology, business and customer perspective in classic software project management teachings, which is IMHO just as important today with Agile development methodologies like Scrum and Kanban, the two variants we have deployed internally.<br />(* fast forward to 2006 and this was referred to as "ajax")</p><p><b>NG: You are currently the Lead Engineer for eZ Publish. How do you fit in the eZ Engineering team and what are your responsibilities?</b></p><p>AR: I fit in the sense that I have, in the past, been highly involved in certain key aspects of eZ Publish like Online Editor, eZXML, eZINI, ezjscore, (..), pushed the envelope on performance and been involved in Public API efforts since the beginning in early 2011. In my consulting background I was also doing project management which is now the case with my role as Scrum/Kanban master & technical project / release manager within Engineering. And on top of that my background has made me usually quite pragmatic, preferring KISS solutions, witch sometimes simplifies problems solving in the team a bit. But as am I luckily working with quite a lot of skilled co workers, I have over the years learnt a lot surrounding OOP and design patterns leading me to prefer de coupled object oriented clean code. So for me KISS does not mean cutting corners and write bad code, it simply means fully understanding out what the problem is without over complicating it, then solving just that problem and nothing more.</p><p><b>NG: Your community profile on&nbsp;<a href="http://share.ez.no/" target="_blank">share.ez.no</a>&nbsp;shows quite a lot of engagement. How do you find time for helping people on forums, etc? Do you feel it is part of your job or you do it completely in your free time?</b></p><p>AR: For quite a while I did both, I felt it was somewhat part of my job, and did it as well as quite some development in my spare time. Nowadays I'm not as active, there are several reasons for that. Those worth mentioning are: #1 being that I think I can contribute much more in my role by making sure our 5.x product is as rock solid and documented as possible, #2 change our innovation process to become transparent and open. And #3 I was about to go crazy because of lack of a proper FAQ in the community :) These are some of the things we are currently working on, so within the next months I hope we can open up JIRA and Confluence for a fully open innovation process that includes everyone and allows everyone to contribute in every step of the process. But it involves lots of changes, so it has taken quite some time and will continue to take even more before everything is in place.</p><p><b>NG: As an economics bachelor how do you see the dual nature of eZ Ecosystem: from eZ Systems as a company to eZ community and the open source model?</b></p><p>
+AR: I see it as a symbiosis where both sides benefit from the other, if done right. In my view the API should be exactly the same so that extensions written for community project work on the enterprise edition as well as the other way around, this implies a common API versioning. Both variants can then bundle different set of extensions/bundles which makes them differ in branding and feature set. This was not possible with 4.x as there was no single public api, just a whole lot of different low level api's spread all over the kernel as well as in extensions.<br />IMHO if both sides agree that enterprise level features belong to the enterprise edition, then both sides will win. eZ Systems in that they can have a model that is proven, a large talent and potential customer pool in a vibrant community, and noticeable market presence thanks to the community version. Community benefits in that they continue to have a company which puts considerable efforts into moving the project forward and wanting to improve it in all aspects, and a company that creates a market for them to do business in, both as consulting as well as eZ Market solutions. This is already the case, but with 5.x it is now technically possible for eZ Systems to offer advance scalability solutions and for instance Oracle driver as enterprise feature, without affecting the extensions and websites written on top of the cms. &nbsp;Such solutions can also be written by partners and be placed on eZ Market, providing interesting features not offered by eZ.</p><p><b>NG: eZ Publish 5 will be released by the end of the year. How are things going in that respect? What are your current priorities regarding the release?</b></p><p>AR:&nbsp;Things are going good, we have clear aims now in what we would like to deliver, and I think it is feasible. First up is an Alpha at the end of August, it will contain a first look at eZ Publish 5.x with a snapshot of our current progress on getting demo design working on top of Public API and Symfony stack. Hopefully with confluence containing some initial documentation on how to extend the system and build FieldTypes. &nbsp;The Alpha should also contain most of the "legacy fallback" features we have talked about in the past, making it possible to run existing 4.x site smoothly on 5.x. A month later we will release a Beta, and it should be future complete, which means all field types (data types) needed by demo design should work, and so should REST API v2 which is the other main priority of 5.0. By this time we would have hopefully finished our internal projects needed to make JIRA and Confluence fully open, which would then mark the introduction of an open innovation process.</p><p><b>NG:&nbsp;Recently eZ announced that eZ Publish 5 will rely a lot on Symfony 2 PHP framework. Can you tell us a bit more on what were the main reasons to go in that direction? What parts of the Symfony framework will be heavily used by the new kernel?</b></p><p>AR: The discussions about using other frameworks have always been present, but after eZ Components was moved to Apache, and lost it's pace there, it opened the door in a much bigger degree to instead take a best of breed approach. And after selecting Twig for template engine back in February, it became much more easy to also take Symfony for it's controller, view, routing and form handling instead of spending efforts on making something from scratch or updating ezcMVCTools to be able to natively handle hierarchical views. Hierarchical views being one of the many things we wanted in the new stack to reduce code duplication. You can think of it as a system native version of eZ Publish 4.x's {node_view_gui()}.So as mentioned, Symfony is currently used as the web stack, the model is provided by Public API.&nbsp;We might end up using some of it in Public API as well, for instance ServiceContainer, but from my perspective I want to avoid deep coupling as much as possible and unfortunately use of the Symfony2 ServiceContainer currently encourages exactly that. Deep coupling is wrong for several reasons, two reasons for making sure we abstract dependencies being: #1 it makes testing harder as it will depend on the external project, and #2 I see Public API as having a longer life span then what Symfony2[/<Insert any framework>] will most likely have.</p><p><b>NG: The version 5 release will bring the new major release, but it will not replace the old version fully (old version will be bundled in for backwards compatibility anyway). When do you think &nbsp;version 5 will have almost all features that version 4 has now?</b></p><p>AR: eZ Publish 4.x is maybe the open source CMS out there with most features, so we might never have the same feature set in the core of 5.x as it represents a slight change of focus from quantity to quality. One the same page, my views on the open innovation process is that it should be unified for all features being developed for eZ Publish 5.x, hence that we in the future can make sure all new features go through a process of requirements collection-, design- and implementation-phase that everyone can contribute on. This in turn will increase quality in what we deliver, and for those features we don't prioritize to deliver, there is, as before, a golden chance for community or eZ Market partners to fill the gap with extensions.</p><p><b>NG: Where do you see the eZ Ecosystem (eZ Systems, eZ Publish, eZ Community) in 5 years? Do you see yourself as an important part of it?</b></p><p>AR:&nbsp;Difficult question, but I think if we manage to all agree on a vision for eZ Publish 5.x and get everyone on board of a unified open innovation process, which includes everyone, then I think we can potentially accelerate the interest in eZ Publish, both in the open source realm and the enterprise realm a lot. For me 5.x is _the_ possibility to undo mistakes of the past, unlock the potential that many of us feel live in the concept of the eZ Publish content model and gear up for a architecture that can serve us for the next 5-10 years and potentially beyond, if properly maintained and kept up to date with technologies and trends.</p><p><b>NG: How do you spend your time when not dealing with eZ*?</b></p><p>AR: I think I kind of always deal with eZ things, if it is on the top of Huayna Picchu on Machu Picchu, on the beach in Paje, Zanzibar, at the gym, with my folks or out with friends in Oslo or Cologne. I always end up stopping up once in a while and writing down ideas, answering mails or somehow communicating with co workers. It's the pitfall of choosing a carrier within something which also happens to be your personal interest. But indirectly, I think I managed to answer the question there, even if not too verbose ;)</p><p><b>NG: Thank you for your time!</b></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/17/2012 03:27 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Interview-with-Andre-Roemcke-Lead-Engineer-for-eZ-Publish-CMS">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Setting-up-eZ-Publish-host_uri-matching-properly" title="Setting up eZ Publish host_uri matching properly">Setting up eZ Publish host_uri matching properly</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>As we all know, eZ Publish is very powerful, so much that there are probably some settings you didn’t even know existed and when you do find them, you feel like a luckiest man/woman alive. But, so much power can sometimes bring lots of headaches :)</p><p>One, relatively recent, headache I was having was when setting up host_uri siteaccess matching on one fairly large multilanguage & multisite eZ Publish installation. The installation has couple of databases and domains and many languages.</p><a name="eztoc8449_1" id="eztoc8449_1"></a><h2>What is (host_uri) siteaccess matching anyway?</h2><p>Every time you request a page from eZ Publish, it needs to decide what siteaccess to load based on your request. This process is called siteaccess matching. Most of the times, various parts of the request URI are used to decide which siteaccess to load. host_uri matching specifically allows you to match a combination of request host and first part of the request URI to one specific siteaccess. For example: <i>http://www.example.com/fr/A-propos-de-nous</i> will use <i>www.example.com</i> host and <i>fr</i> part of the URI to find the correct siteaccess to use. This rule would be defined in <i>site.ini/[SiteAccessSettings]/HostUriMatchMapItems</i> config array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;french</span></span></pre><p>which says: When the host is <i>www.example.com</i> and the URI starts with <i>fr</i>, load the siteaccess called <i>french</i>.</p><p>The other variant of the rule looks like this (notice that the second part of the value is empty):</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;english</span></span></pre><p>which says: If no other rules for <i>www.example.com</i> domain match the first part of the URI, load the siteaccess called <i>english</i>. Basically, this is a fallback rule.</p><a name="eztoc8449_2" id="eztoc8449_2"></a><h2>The problem</h2><p>On large multisite/multilanguage installations, host_uri matching array can quickly grow to 20+ lines of rules. The problem I was having was that no matter what I did, one of the rules did not function: <b>Module “en” not found.</b> The following is an excerpt from the rules:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren</span></span></pre><p>There were no syntax errors in the settings so I was losing my head over this for hours. Random reordering or array did nothing, apart giving the same <b>Module not found</b> error, but with different siteaccess. Left with nothing else to do, I went digging through <i>kernel/classes/ezsiteaccess.php</i>, which is responsible for matching.</p><a name="eztoc8449_3" id="eztoc8449_3"></a><h2>The solution</h2><p>After 2+ hours of digging, the solution was found. It turns out that order of array items does matter, but in very specific way. In every group of config values which have the same domain in <i>HostUriMatchMapItems</i> array, if there’s a config value with the empty second part, that specific config value needs to be the last one in that particular group of values. So, the solution to finally get the whole set of rules working was to reorder the mentioned array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en <strong># Moved to the end of group of values for www.example.com domain</strong></span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren <strong># Moved to the end of group of values for www.otherexample.com domain</strong></span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren <strong># Already at the end of group of values for otherexample.com domain</strong></span></span></pre><p>Later, I found exactly this solution in the last sentence of eZ Publish 4.4 release notes describing host_uri matching, which annoyed me even more because of the time lost which could’ve been used for more productive work. With this I hope at least some of you will be spared the headache I was having.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/16/2012 09:36 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Setting-up-eZ-Publish-host_uri-matching-properly">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Setting-up-eZ-Publish-host_uri-matching-properly">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Setting-up-eZ-Publish-host_uri-matching-properly" title="Setting up eZ Publish host_uri matching properly">Setting up eZ Publish host_uri matching properly</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>As we all know, eZ Publish is very powerful, so much that there are probably some settings you didn’t even know existed and when you do find them, you feel like a luckiest man/woman alive. But, so much power can sometimes bring lots of headaches :)</p><p>One, relatively recent, headache I was having was when setting up host_uri siteaccess matching on one fairly large multilanguage & multisite eZ Publish installation. The installation has couple of databases and domains and many languages.</p><a name="eztoc8449_1" id="eztoc8449_1"></a><h2>What is (host_uri) siteaccess matching anyway?</h2><p>Every time you request a page from eZ Publish, it needs to decide what siteaccess to load based on your request. This process is called siteaccess matching. Most of the times, various parts of the request URI are used to decide which siteaccess to load. host_uri matching specifically allows you to match a combination of request host and first part of the request URI to one specific siteaccess. For example: <i>http://www.example.com/fr/A-propos-de-nous</i> will use <i>www.example.com</i> host and <i>fr</i> part of the URI to find the correct siteaccess to use. This rule would be defined in <i>site.ini/[SiteAccessSettings]/HostUriMatchMapItems</i> config array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;french</span></span></pre><p>which says: When the host is <i>www.example.com</i> and the URI starts with <i>fr</i>, load the siteaccess called <i>french</i>.</p><p>The other variant of the rule looks like this (notice that the second part of the value is empty):</p>	<pre class="ezini" style="font-family:monospace;"><span>H</span>ostUriMatchMapItems<span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;english</span></span></pre><p>which says: If no other rules for <i>www.example.com</i> domain match the first part of the URI, load the siteaccess called <i>english</i>. Basically, this is a fallback rule.</p><a name="eztoc8449_2" id="eztoc8449_2"></a><h2>The problem</h2><p>On large multisite/multilanguage installations, host_uri matching array can quickly grow to 20+ lines of rules. The problem I was having was that no matter what I did, one of the rules did not function: <b>Module “en” not found.</b> The following is an excerpt from the rules:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren</span></span></pre><p>There were no syntax errors in the settings so I was losing my head over this for hours. Random reordering or array did nothing, apart giving the same <b>Module not found</b> error, but with different siteaccess. Left with nothing else to do, I went digging through <i>kernel/classes/ezsiteaccess.php</i>, which is responsible for matching.</p><a name="eztoc8449_3" id="eztoc8449_3"></a><h2>The solution</h2><p>After 2+ hours of digging, the solution was found. It turns out that order of array items does matter, but in very specific way. In every group of config values which have the same domain in <i>HostUriMatchMapItems</i> array, if there’s a config value with the empty second part, that specific config value needs to be the last one in that particular group of values. So, the solution to finally get the whole set of rules working was to reorder the mentioned array in the following way:</p>	<pre class="ezini" style="font-family:monospace;"><span>M</span>atchOrder<span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">host_uri</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;en;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;fr;fr</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;it;it</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;de;de</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;admin;admin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;otheradmin;otheradmin</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;thirdadmin;thirdadmin</span></span>
+<span style="color: #666666; font-style: italic;"># Next rule is now moved to the end of group of values for www.example.com domain</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.example.com;;en</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;fr;otherfr</span></span>
+<span style="color: #666666; font-style: italic;"># Next rule is now moved to the end of group of values for www.otherexample.com domain</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">www.otherexample.com;;otheren</span></span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;fr;otherfr</span></span>
+<span style="color: #666666; font-style: italic;"># Next rule is already at the end of group of values for otherexample.com domain</span>
+<span style="color: #000099;">HostUriMatchMapItems</span><span style="">[</span><span style="">]</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #000066; font-weight:bold;"><span style="color: #660066;">otherexample.com;;otheren</span></span></pre><p>Later, I found exactly this solution in the last sentence of eZ Publish 4.4 release notes describing host_uri matching, which annoyed me even more because of the time lost which could’ve been used for more productive work. With this I hope at least some of you will be spared the headache I was having.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/16/2012 09:36 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Setting-up-eZ-Publish-host_uri-matching-properly2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Setting-up-eZ-Publish-host_uri-matching-properly">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Let-s-enjoy-the-Symfony" title="Let’s enjoy the Symfony">Let’s enjoy the Symfony</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>
+One of the news that shook the eZ Community this month is the announcement of eZ Publish 5 being developed with Symfony framework. Initial blog post (check it out at <a href="http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces" target="_self">http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces</a>, do not skip comments, there are some juicy elements there) got a lot of attention, with the sentiment by far being positive, but with some well put concerns regarding the business side of the decision. <br />Taking these into account, we still think the positive repercussions of this decision greatly out weight the possibly problematic ones, and here is why:</p><a name="eztoc8435_1" id="eztoc8435_1"></a><h2>Focus</h2><p>By leaving out the parts of the system that are not related to it’s core business to the quality framework such as Symfony, eZ can focus even more to CMS features that need to be engineered and developed. Netgen is actively involved in development of the next version of eZ Publish (some of our crew are working intensively on the new <a href="https://github.com/ezsystems/ezp-next" target="_self">Public API &nbsp;</a>&nbsp;and the new REST API implementation), and we know from first hand how much work is there to be done to fulfill the vision of the new eZ Publish stack. All this work takes time (and money!) and every engineer hour not being wasted on yet another MVC implementation can be put into making eZ the best CMS solution it can be. And there <b>IS</b> work to be done, as can be seen on the image depicting the difference between the old and the new eZ Publish stack:</p>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgen.hr/var/ezflow_site/storage/images/media/images/ez-publish-5-architechture/8445-1-cro-HR/ez-publish-5-architechture_reference.png" width="620" height="422"  style="border: 0px solid ;" alt="ez-publish-5-architechture" title="ez-publish-5-architechture" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>eZ Publish 5 architecture, <a href="http://en.wikipedia.org/wiki/Spaghetti_code#Lasagna_code" target="_self">lasagne</a> style!</p> </div>
+         </div>
+</div>
+</div><a name="eztoc8435_2" id="eztoc8435_2"></a><h2>&nbsp;</h2><a name="eztoc8435_3" id="eztoc8435_3"></a><h2>The wheel is invented</h2><p>Symfony is a great and extensively used framework, and it provides a great number of infrastructure that eZ needs. As it is a modular framework, only the components eZ engineering needs (and do not want to waste time on developing) can be used, like HMVC, templating engine, etc. While there were earlier attempts to develop all this in-house (eZ Components), I think that it just wastes too much resources that can be put to a better usage.</p><a name="eztoc8435_4" id="eztoc8435_4"></a><h2>The more the merrier</h2><p>One of the issues any web development company focused on eZ Publish encounters is a shortage of eZ developers available. eZ is a great product, and it is the cornerstone of our technical expertise here at Netgen, but if there is one thing I could mention as a possible problem for anyone trying it out for the first time, it is its rather steep learning curve. With so many big players in the CMS arena one can choose from, eZ needs to be as competitive on this field as on others. By using a well known and popular framework such as Symfony more new developers can be attracted to eZ and become productive in shorter period of time. Also, potential clients could be more willing to embrace the CMS if it is, even partially, based on a technology that they are already using or they are aware of.</p><a name="eztoc8435_5" id="eztoc8435_5"></a><h2>Tricky parts</h2><p>Of course, as any change, this one also brings some issues. For one, there will be a lot of new things to learn, and some very specific skills in eZ development could become obsolete. But anyone working in web business should be already accustomed to this, as if there is anything constant in web development world it is change itself. The other thing often mentioned is the problem with existing clients, and their willing to pay for the re-implementation of their sites. eZ Systems seems to be determined to support the 4.x versions of eZ Publish for years to come, and the 4.x kernel will be fully integrated in the first version of eZ 5 (as a legacy bundle), with gradual transition to the new technology stack. Also, as the database schema remains the same, the transition to eZ Publish 5 could be made a part of usual 2-3 years re-design cycle which most of the sites need to follow anyhow.</p><a name="eztoc8435_6" id="eztoc8435_6"></a><h2>Conclusion</h2><p>The CMS market is advancing even faster, and eZ needs to keep up the pace of changes. With its focus retained on solving core business issues and by providing added value in CMS and CXM field, eZ will be able to keep it’s position as a technology leader in the field.</p><p>And we all want exactly that, so let’s enjoy the Symfony.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2012 05:27 pm</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Let-s-enjoy-the-Symfony">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Let-s-enjoy-the-Symfony">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Let-s-enjoy-the-Symfony" title="Let’s enjoy the Symfony">Let’s enjoy the Symfony</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>
+One of the news that shook the eZ Community this month is the announcement of eZ Publish 5 being developed with Symfony framework.The initial blog post (check it out at <a href="http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces" target="_self">http://share.ez.no/blogs/ez/an-explosive-cocktail-symfony-and-ez-publish-5-joining-forces</a>, do not skip the comments, there are some juicy elements there) got a lot of attention, with the sentiment by far being positive, but with some well put concerns regarding the business side of the decision. <br />Taking these into account, we still think the positive repercussions of this decision greatly out weight the possibly problematic ones, and here is why:</p><a name="eztoc8435_1" id="eztoc8435_1"></a><h2>Focus</h2><p>By leaving out the parts of the system that are not related to it’s core business to a quality framework such as Symfony, eZ can focus even more on the CMS features that need to be engineered and developed. Netgen is actively involved in the development of the next version of eZ Publish (part of our crew is working intensively on the new <a href="https://github.com/ezsystems/ezp-next" target="_self">Public API</a>&nbsp;and the new REST API implementation), and we know from the first hand how much work is there to be done to fulfill the vision of the new eZ Publish stack. All this work takes time (and money!) and every engineer hour not being wasted on yet another MVC implementation can be put into making eZ the best CMS solution it can be. And there <b>IS</b> work to be done, as can be seen on the image depicting the difference between the old and the new eZ Publish stack:</p>
+<div class="object-center"><div class="content-view-embed">
+<div class="class-image">
+    <div class="attribute-image">
+
+    
+        
+    
+                                                                                                                                            <img src="http://www.netgenlabs.com/var/ezflow_site/storage/images/media/images/ez-publish-5-architechture/8445-1-cro-HR/ez-publish-5-architechture_reference.png" width="620" height="422"  style="border: 0px solid ;" alt="ez-publish-5-architechture" title="ez-publish-5-architechture" />
+            
+    
+    
+    </div>
+
+                                        <div class="attribute-caption" style="width: 620px">
+                
+<p>eZ Publish 5 architecture, <a href="http://en.wikipedia.org/wiki/Spaghetti_code#Lasagna_code" target="_self">lasagne</a> style!</p> </div>
+         </div>
+</div>
+</div><a name="eztoc8435_2" id="eztoc8435_2"></a><h2>&nbsp;</h2><a name="eztoc8435_3" id="eztoc8435_3"></a><h2>The wheel is invented</h2><p>Symfony is a great and extensively used framework, and it provides a great number of infrastructure that eZ needs. As it is a modular framework, only the components eZ engineering needs (and do not want to waste time on developing) can be used, like HMVC, templating engine, etc. While there were earlier attempts to develop all this in-house (eZ Components), I think that this approach just wastes too much resources that can be put to a better usage.</p><a name="eztoc8435_4" id="eztoc8435_4"></a><h2>The more the merrier</h2><p>One of the issues any web development company focused on eZ Publish encounters is a shortage of eZ developers available. eZ is a great product, and it is the cornerstone of our technical expertise here at Netgen, but if there is one thing I could mention as a possible problem for anyone trying it out for the first time, it is its rather steep learning curve. With so many big players in the CMS arena one can choose from, eZ needs to be as competitive on this field as on others. By using a well known and popular framework such as Symfony more new developers can be attracted to eZ and become productive in shorter period of time. Also, potential clients could be more willing to embrace the CMS if it is, even partially, based on a technology that they are already using or they are aware of.</p><a name="eztoc8435_5" id="eztoc8435_5"></a><h2>Tricky parts</h2><p>Of course, as any change, this one also brings some issues. For one, there will be a lot of new things to learn, and some very specific skills in eZ development could become obsolete. But anyone working in the web business should be already accustomed to this, as if there is anything constant in the web development world it is the change itself. The other thing often mentioned is the problem with the existing clients, and their willingness to pay for the re-implementation of their sites. eZ Systems seems to be determined to support the 4.x versions of eZ Publish for years to come, and the 4.x kernel will be fully integrated in the first version of eZ 5 (as a legacy bundle), with gradual transition to the new technology stack. Also, as the database schema remains the same, the transition to eZ Publish 5 could be made a part of usual 2-3 years re-design cycle which most of the sites need to follow anyhow.</p><a name="eztoc8435_6" id="eztoc8435_6"></a><h2>Conclusion</h2><p>The CMS market is advancing even faster, and eZ needs to keep up the pace of changes. With its focus retained on solving the core business issues and by providing added value in CMS and CXM field, eZ will be able to keep it’s position as a technology leader in the field.</p><p>And we all want exactly that, so let’s enjoy the Symfony.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2012 05:27 pm</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Let-s-enjoy-the-Symfony2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Let-s-enjoy-the-Symfony">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/Netgen/(offset)/60"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/Mirror/Netgen/(offset)/80"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+                      <span class="other"><a href="/Mirror/Netgen">1</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/30">4</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/40">5</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/60">7</a></span>
+            
+        <span class="current">8</span>
+
+                      <span class="other"><a href="/Mirror/Netgen/(offset)/80">9</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/90">10</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/100">11</a></span>
+                              <span class="other"><a href="/Mirror/Netgen/(offset)/110">12</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Netgen/(day)/18/(month)/8/(year)/2014">18</a></em>
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/21/(month)/8/(year)/2014">21</a></em>
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class="currentselected today">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:2:"70";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"228";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"228";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"226";s:7:"node_id";s:3:"228";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";s:14:"node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:6:"offset";i:70;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:13:"Mirror/Netgen";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"228";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

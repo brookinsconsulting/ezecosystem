@@ -1,0 +1,1 @@
+extension/ezecosystem/design/eze/root/config.php

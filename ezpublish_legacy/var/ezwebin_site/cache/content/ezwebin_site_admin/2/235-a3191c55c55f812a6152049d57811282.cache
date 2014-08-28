@@ -1,0 +1,686 @@
+a:10:{s:7:"content";s:31657:"<div class="content-view-full">
+ <div class="class-blog">
+
+<div class="content-navigation">
+
+
+<div class="context-block">
+
+<div class="box-header">
+
+
+<h1 class="context-title"><a href="/class/view/19" onclick="ezpopmenu_showTopLevel( event, 'ClassMenu', ez_createAArray( new Array( '%classID%', 19, '%objectID%', 233, '%nodeID%', 235, '%currentURL%', 'Mirror/Share.ez.no-Blogs', '%languages%', [{'locale':'eng-GB','name':'English (United Kingdom)'}] ) ), 'Blog', ['class-createnodefeed', 'class-removenodefeed'], -1 ); return false;"><img class="transparent-png-icon" src="/share/icons/crystal-admin/32x32/mimetypes/empty.png" width="32" height="32" alt="Blog" title="Blog" /></a>&nbsp;Share.ez.no Blogs&nbsp;[Blog]&nbsp;</h1>
+
+<div class="header-mainline"></div>
+
+</div>
+
+
+<div class="box-content">
+
+<div class="context-information">
+<p class="left modified">Last modified: 04/03/2012 12:44 am, <a href="/Users/Administrator-users/Administrator-User">Administrator User</a> (Node ID: 235, Object ID: 233)</p>
+<p class="right translation">English (American)&nbsp;<img src="/share/icons/flags/eng-US.gif" width="18" height="12" alt="" style="vertical-align: middle;" /></p>
+<div class="break"></div>
+</div>
+
+<div id="window-controls" class="tab-block">
+                            <div class="button-left"><a id="maincontent-hide" class="show-hide-tabs" href="/user/preferences/set/admin_navigation_content/0" title="Disable &quot;Tabs&quot; by default while browsing content.">&nbsp;</a></div>
+<ul class="tabs tabs-by-cookie">
+    
+    <li id="node-tab-view" class="first selected">
+                    <a href="/Mirror/Share.ez.no-Blogs/(tab)/view" title="Show simplified view of content.">View</a>
+            </li>
+
+    
+    <li id="node-tab-details" class="middle">
+                    <a href="/Mirror/Share.ez.no-Blogs/(tab)/details" title="Show details.">Details</a>
+            </li>
+
+    
+            <li id="node-tab-translations" class="middle">
+                    <a href="/Mirror/Share.ez.no-Blogs/(tab)/translations" title="Show available translations.">Translations (1)</a>
+            </li>
+        
+    
+    <li id="node-tab-locations" class="middle">
+                    <a href="/Mirror/Share.ez.no-Blogs/(tab)/locations" title="Show location overview.">Locations (1)</a>
+            </li>
+
+    
+    <li id="node-tab-relations" class="middle">
+                    <a href="/Mirror/Share.ez.no-Blogs/(tab)/relations" title="Show object relation overview.">Relations (0)</a>
+            </li>
+
+    
+    <li id="node-tab-ordering" class="last">
+                    <a href="/Mirror/Share.ez.no-Blogs/(tab)/ordering" title="Show published ordering overview.">Ordering</a>
+            </li>
+            </ul>
+<div class="float-break"></div>
+<div class="tabs-content">
+    
+<div id="node-tab-view-content" class="tab-content selected">
+    
+    
+
+
+    <div class="block">
+            <label>Name:</label>
+        
+Share.ez.no Blogs        </div>    <div class="block">
+            <label>Description:</label>
+        
+        </div>    <div class="block">
+            <label>Blog:</label>
+        <a href="http://share.ez.no/blogs">share.ez.no/blogs</a>        </div>    <div class="block">
+            <label>Language:</label>
+        
+English        </div>    <div class="block">
+            <label>Tags:</label>
+        
+                        </div><div class="break"></div>
+</div>
+
+
+<div id="node-tab-details-content" class="tab-content hide">
+    <div class="block">
+
+
+<table class="list" cellspacing="0" summary="Node and object details like creator, when it was created, section it belongs to, number of versions and translations, Node ID and Object ID.">
+<tr>
+    <th>Creator</th>
+    <th>Created</th>
+    <th>Section</th>
+    <th class="tight">Versions</th>
+    <th class="tight">Translations</th>
+    <th class="tight">Node ID</th>
+    <th class="tight">Object ID</th>
+</tr>
+<tr class="bglight">
+    <td><a href="/Users/Administrator-users/Administrator-User">Administrator User</a></td>
+    <td>04/03/2012 12:44 am</td>
+    <td>
+    <form name="changesection" id="changesection" method="post" action="/content/edit/233">
+    <input type="hidden" name="RedirectRelativeURI" value="Mirror/Share.ez.no-Blogs" />
+    <input type="hidden" name="ChangeSectionOnly" value="1" />
+
+    <select id="selected-section-id" name="SelectedSectionId">
+                    <option value="5">Design</option>
+                            <option value="3">Media</option>
+                            <option value="6">Restricted</option>
+                            <option value="4">Setup</option>
+                            <option value="1" selected="selected">Standard</option>
+                            <option value="2">Users</option>
+                </select>
+    <input id="tab-details-set-section" type="submit" value="Set" name="SectionEditButton" class="button" />
+    </form>
+
+    </td>
+    <td class="number" align="right">1</td>
+    <td class="number" align="right">1</td>
+    <td class="number" align="right">235</td>
+    <td class="number" align="right">233</td>
+</tr>
+</table>
+</div>
+
+<div class="block">
+<table class="list" cellspacing="0" summary="Node Remote ID and Object Remote ID">
+    <tr>
+        <th>Node Remote ID</th>
+        <th>Object Remote ID</th>
+    </tr>
+    <tr>
+         <td>698a5f830c156b39abfd53242fd0f5da</td>
+         <td>3976589504b0ba061e9d1e5a7f844331</td>
+    </tr>
+</table>
+</div>
+
+<br />
+
+<div class="block">
+<h3>Content state</h3>
+
+
+<form name="statesform" method="post" action="/state/assign">
+<input type="hidden" name="ObjectID" value="233" />
+<input type="hidden" name="RedirectRelativeURI" value="Mirror/Share.ez.no-Blogs" />
+
+<table id="tab-details-states-list" class="list" cellspacing="0" summary="States and their states groups for current object.">    <tr class="bgdark">
+    <td colspan="2">
+    <em>No content object state is configured. This can be done <a href="/state/groups"> here</a>.</em>
+    </td>
+    </tr></table>
+
+<div class="block">
+<div class="button-left">
+        <input type="submit" id="tab-details-set-states" value="Set states" name="AssignButton" class="button-disabled" disabled="disabled" title="No state to be applied to this content object. You might need to be assigned a more permissive access policy."/>
+    </div>
+<div class="break"></div>
+</div>
+
+</form>
+</div>
+<script type="text/javascript">
+
+(function( $ )
+{
+    $('#tab-details-states-list select').change(function()
+    {
+        var btn = $('#tab-details-set-states');
+        if ( !btn.attr('disabled') )
+        {
+            btn.removeClass('button').addClass('defaultbutton');
+        }
+    });
+    $('#selected-section-id').change(function()
+    {
+        var btn = $('#tab-details-set-section');
+        if ( !btn.attr('disabled') )
+        {
+            btn.removeClass('button').addClass('defaultbutton');
+        }
+    });
+})( jQuery );
+
+</script>
+<div class="break"></div>
+</div>
+
+
+<div id="node-tab-translations-content" class="tab-content hide">
+    
+<form name="translationsform" method="post" action="/content/translation">
+<input type="hidden" name="ContentNodeID" value="235" />
+<input type="hidden" name="ContentObjectID" value="233" />
+<input type="hidden" name="ViewMode" value="full" />
+<input type="hidden" name="ContentObjectLanguageCode" value="" />
+
+<fieldset>
+<legend>Existing translations</legend>
+
+<table id="tab-translations-list" class="list" cellspacing="0" summary="Language list of translations for current object.">
+<tr>
+    <th class="tight"><img src="/design/admin/images/toggle-button-16x16.gif" width="16" height="16" alt="Invert selection." title="Invert selection." onclick="ezjs_toggleCheckboxes( document.translationsform, 'LanguageID[]' ); return false;"/></th>
+    <th>Language</th>
+    <th>Locale</th>
+    <th class="tight">Main</th>
+    <th class="tight">&nbsp;</th>
+</tr>
+
+<tr class="bglight">
+
+
+<td>
+    <input type="checkbox" name="LanguageID[]" value="2" disabled="disabled" />
+</td>
+
+
+<td>
+<img src="/share/icons/flags/eng-US.gif" width="18" height="12" alt="eng-US" />
+&nbsp;<b><a href="/Mirror/Share.ez.no-Blogs/(language)/eng-US" title="View translation.">English (American)</a></b></td>
+
+
+<td>eng-US</td>
+
+
+<td>
+
+<input type="radio"  checked="checked" class="main-translation-radio main-translation-radio-initial" name="InitialLanguageID" value="2" title="Use these radio buttons to select the desired main language." />
+
+</td>
+
+
+<td>
+
+<a href="/content/edit/233/f/eng-US"><img src="/design/standard/images/edit.gif" width="16" height="16" alt="Edit in &lt;English (American)&gt;." title="Edit in &lt;English (American)&gt;." /></a>
+
+</td>
+
+</tr>
+</table>
+
+<div class="block">
+<div class="button-left">        <input class="button-disabled" type="submit" name="RemoveTranslationButton" value="Remove selected" title="There is no removable language." disabled="disabled" />
+    </div>
+
+<div class="button-right">        <input class="button-disabled" type="submit" name="UpdateInitialLanguageButton" value="Set main" disabled="disabled" title="You cannot change the main language because the object is not translated to any other languages." />
+    </div>
+
+<div class="break"></div>
+</div>
+
+</fieldset>
+
+
+<div class="block">
+
+<div class="block">
+<input id="tab-translations-alwaysavailable-checkbox" type="checkbox" name="AlwaysAvailable" value="1" /> Use the main language if there is no prioritized translation.
+</div>
+
+<div class="block">    <input id="tab-translations-alwaysavailable-btn" class="button" type="submit" name="UpdateAlwaysAvailableButton" value="Update" title="Use this button to store the value of the checkbox above." />
+    <script type="text/javascript">
+    
+    (function( $ )
+    {
+        $('#tab-translations-alwaysavailable-checkbox').change(function()
+        {
+            $('#tab-translations-alwaysavailable-btn').removeClass('button').addClass('defaultbutton');
+        });
+    })( jQuery );
+    
+    </script></div>
+</div>
+
+
+</form>
+<div class="break"></div>
+</div>
+
+
+<div id="node-tab-locations-content" class="tab-content hide">
+    
+<form name="locationsform" method="post" action="/content/action">
+<input type="hidden" name="ContentNodeID" value="235" />
+<input type="hidden" name="ContentObjectID" value="233" />
+<input type="hidden" name="ViewMode" value="full" />
+<input type="hidden" name="ContentObjectLanguageCode" value="" />
+
+<table id="tab-locations-list" class="list" cellspacing="0" summary="Locations (aka Nodes) for current object.">
+<tr>
+    <th class="tight"><img src="/design/admin/images/toggle-button-16x16.gif" width="16" height="16" alt="Invert selection." title="Invert selection." onclick="ezjs_toggleCheckboxes( document.locationsform, 'LocationIDSelection[]' ); return false;"/></th>
+    <th class="wide">Location</th>
+    <th class="tight">Sub items</th>
+
+    <th class="tight">Visibility</th>
+    <th class="tight">Main</th>
+</tr>    
+<tr class="bglight">
+
+    
+    <td>
+            <input type="checkbox" name="LocationIDSelection[]" value="235" disabled="disabled" title="This location cannot be removed either because you do not have permission to remove it or because it is currently being displayed." />
+        </td>
+
+    
+        <td> <a href="/">eZ Ecosystem</a> /  <a href="/Mirror">Mirror</a> /  <a href="/Mirror/Share.ez.no-Blogs">Share.ez.no Blogs</a></td>
+    
+
+    
+    <td class="number" align="right">395</td>
+
+    
+
+
+    
+    <td class="nowrap">
+            Visible
+        [ <a href="/content/hide/235" title="Hide location and all sub items." >Hide</a> ]
+        </td>
+
+    
+    <td>
+
+    
+        <input type="radio" checked="checked" name="MainAssignmentCheck" value="235" disabled="disabled" title="The item being displayed has only one location, which is by default the main location." />
+    
+    
+    </td>
+</tr></table>
+
+
+<input type="hidden" name="HasMainAssignment" value="1" />
+
+
+<div class="block">
+<div class="button-left">
+        <input class="button-disabled" type="submit" name="RemoveAssignmentButton" value="Remove selected" title="There is no removable location." disabled="disabled" />
+    
+        <input class="button" type="submit" name="AddAssignmentButton" value="Add locations" title="Add one or more new locations." />
+    </div>
+
+<div class="button-right">    <input class="button-disabled" type="submit" name="UpdateMainAssignmentButton" value="Set main" disabled="disabled" title="You cannot set the main location because there is only one location present." /></div>
+
+<div class="break"></div>
+</div>
+
+</form><div class="break"></div>
+</div>
+
+
+<div id="node-tab-relations-content" class="tab-content hide">
+    
+<table class="list" cellspacing="0" summary="Object relation list from current object.">
+<tr>
+    <th>Related objects (0)</th>
+    </tr>    <tr><td>The item being viewed does not make use of any other objects.</td></tr></table>
+
+<br />
+
+
+<table class="list" cellspacing="0" summary="Reverse object relation list to current object.">
+<tr>
+    <th>Reverse related objects (0)</th>
+    </tr>    <tr><td>The item being viewed is not used by any other objects.</td></tr></table>
+
+ 
+<div class="break"></div>
+</div>
+
+
+<div id="node-tab-ordering-content" class="tab-content hide">
+    
+<form name="ordering" method="post" action="/content/action">
+<input type="hidden" name="ContentNodeID" value="235" />
+<div class="block">    
+    <fieldset>
+        <legend>Published order</legend>
+    
+            
+                                            <input type="hidden" name="ContentObjectID" value="233" />
+                
+        <div class="block">Use these controls to set the sorting method for the sub items of the current location.</div>
+        <select id="ezasi-sort-field" name="SortingField" title="Use these controls to set the sorting method for the sub items of the current location.">
+                    <option value="6" >Class identifier</option>
+                    <option value="7" >Class name</option>
+                    <option value="5" >Depth</option>
+                    <option value="3" >Modified</option>
+                    <option value="9" >Name</option>
+                    <option value="1" selected="selected">Path String</option>
+                    <option value="8" >Priority</option>
+                    <option value="2" >Published</option>
+                    <option value="4" >Section</option>
+                </select>
+    
+        <select id="ezasi-sort-order" name="SortingOrder" title="Use these controls to set the sorting method for the sub items of the current location.">
+            <option value="0">Descending</option>
+            <option value="1" selected="selected">Ascending</option>
+        </select>
+    
+        <input  id="ezasi-sort-set" class="button" type="submit" name="SetSorting" value="Set" title="Use these controls to set the sorting method for the sub items of the current location."  />
+    
+            </fieldset>
+</div>
+</form>
+
+
+
+<script type="text/javascript">
+jQuery('#ezasi-sort-field, #ezasi-sort-order').each( function(){
+    jQuery( this ).attr( 'initial', this.value );
+} ).change(function(){
+    var t = $(this), o = $(this.id === 'ezasi-sort-field' ? '#ezasi-sort-order' : '#ezasi-sort-field'), s = $('#ezasi-sort-set');
+    // signal in gui if user needs to save this or not
+    if ( t.val() === t.attr('initial') && o.val() === o.attr('initial') )
+        s.removeClass('defaultbutton').addClass('button');
+    else
+        s.removeClass('button').addClass('defaultbutton');
+});
+</script>
+
+<div class="break"></div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="controlbar">
+
+
+<form method="post" action="/content/action">
+<input type="hidden" name="TopLevelNode" value="235" />
+<input type="hidden" name="ContentNodeID" value="235" />
+<input type="hidden" name="ContentObjectID" value="233" />
+
+<div class="button-left">
+<div class='block'>
+                <select name="ContentObjectLanguageCode">
+                                   <option value="eng-US" selected="selected">English (American)</option>
+                                        <option value="">New translation</option>
+                        </select>
+        <input class="button" type="submit" name="EditButton" value="Edit" title="Edit the contents of this item." />
+    <input class="button" type="submit" name="MoveNodeButton" value="Move" title="Move this item to another location." />
+    <input class="button" type="submit" name="ActionRemove" value="Remove" title="Remove this item." /></div>
+</div>
+
+<div class="button-right">
+	<p class='versions'>
+    
+    <a href="/content/history/233" title="View and manage (copy, delete, etc.) the versions of this object.">Manage versions</a>
+    </p>
+</div>
+
+<div class="float-break"></div>
+</form>
+
+</div>
+
+
+</div>
+
+
+<div id="content-view-children">    <div class="content-view-children">
+
+
+
+<!-- Children START -->
+
+<div class="context-block">
+<form name="children" method="post" action="/content/action">
+<input type="hidden" name="ContentNodeID" value="235" />
+<input type="hidden" name="ContentObjectID" value="233" />
+    
+
+<div class="box-header">
+
+    <h2 class="context-title"><a href="/Mirror" title="Up one level."><img src="/design/admin/images/up-16x16-grey.png" width="16" height="16" alt="Up one level." title="Up one level." /></a>&nbsp;Sub items (395)</h2>
+
+</div>
+
+<div class="box-content">
+
+
+
+<div class="context-toolbar">
+<div class="float-break"></div>
+</div>
+
+    
+    
+    
+    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    <input type="hidden" name="NodeID" value="235" />
+    
+    
+    
+    
+
+<script type="text/javascript">
+(function() {
+
+
+var availableLanguages = {'eng-US': 'English (American)','eng-GB': 'English (United Kingdom)'};
+
+var icons = {'eng-US': '/share/icons/flags/eng-US.gif','eng-GB': '/share/icons/flags/eng-GB.gif'};
+
+var vcols = {    ezcontentnavigationpart : 'checkbox;crank;name;published_date;translations;priority'.split(';'),
+    ezmedianavigationpart : 'checkbox;crank;thumbnail;name;hidden_status_string;class_name'.split(';'),
+    ezusernavigationpart : 'checkbox;crank;name;creator;published_date'.split(';')};
+
+var confObj = {
+    sortKey: "published_date",
+    dataSourceURL: "/ezjscore/call/ezjscnode::subtree::235",
+    editPrefixURL: "/content/edit",
+    rowsPrPage: 50,
+    sortOrder: 1,
+    nameFilter: '',
+    defaultShownColumns: vcols,
+    navigationPart: "ezcontentnavigationpart",
+    cookieName: "eZSubitemColumns",
+    cookieSecure: false,
+    cookieDomain: "admin.ezecosystem.org",
+    languages: availableLanguages,
+    classesString: [{"classID":16,"name":"Article"},{"classID":17,"name":"Article (main-page)"},{"classID":18,"name":"Article (sub-page)"},{"classID":42,"name":"Banner"},{"classID":19,"name":"Blog"},{"classID":20,"name":"Blog post"},{"classID":13,"name":"Comment"},{"classID":24,"name":"Documentation page"},{"classID":40,"name":"Event"},{"classID":41,"name":"Event calendar"},{"classID":22,"name":"Feedback form"},{"classID":28,"name":"File"},{"classID":29,"name":"Flash"},{"classID":1,"name":"Folder"},{"classID":37,"name":"Forum"},{"classID":39,"name":"Forum reply"},{"classID":38,"name":"Forum topic"},{"classID":43,"name":"Forums"},{"classID":23,"name":"Frontpage"},{"classID":35,"name":"Gallery"},{"classID":36,"name":"Geo Article"},{"classID":30,"name":"Image"},{"classID":25,"name":"Infobox"},{"classID":31,"name":"Link"},{"classID":26,"name":"Multicalendar"},{"classID":27,"name":"Poll"},{"classID":21,"name":"Product"},{"classID":32,"name":"Quicktime"},{"classID":34,"name":"Real video"},{"classID":44,"name":"Silverlight"},{"classID":33,"name":"Windows media"}],
+    flagIcons: icons
+}
+
+var labelsObj = {
+
+    DATA_TABLE: {
+                        msg_loading: "Loading ..."
+                    },
+
+    DATA_TABLE_COLS: {
+                        thumbnail: "Thumbnail",
+                        name: "Name",
+                        visibility: "Visibility",
+                        type: "Type",
+                        modifier: "Modifier",
+                        modified: "Modified",
+                        published: "Published",
+                        section: "Section",
+                        translations: "Translations",
+                        priority: "Priority",
+                        nodeid: "Node ID",
+                        objectid: "Object ID",
+                        noderemoteid: "Node remote ID",
+                        objectremoteid: "Object remote ID",
+                        objectstate: "Object state"
+                    },
+
+    TABLE_OPTIONS: {
+                        header: "Table options",
+                        header_noipp: "Number of items per page:",
+                        header_vtc: "Visible table columns:",
+                        button_close: "Close"
+                   },
+
+    ACTION_BUTTONS: {
+                        select: "Select",
+                        select_sav: "Select all visible",
+                        select_sn: "Select none",
+                        select_inv: "Invert selection",
+                        create_new: "Create new",
+                        more_actions: "More actions",
+                        more_actions_rs: "Remove selected",
+                        more_actions_ms: "Move selected",
+                        more_actions_no: "Use the checkboxes to select one or more items.",
+                        table_options: "Table options",
+                        first_page: "&laquo;&nbsp;first",
+                        previous_page: "&lsaquo;&nbsp;prev",
+                        next_page: "next&nbsp;&rsaquo;",
+                        last_page: "last&nbsp;&raquo;"
+                    }
+};
+                
+    
+    var createGroups = [
+
+            "Content"
+                    ,
+                "Setup"
+                    ,
+                "Media"
+                    ,
+                "Users"
+            
+    ];
+
+    var createOptions = [
+
+            [
+                                { text: "Article", value: 16 }
+                                ,                        { text: "Article (main-page)", value: 17 }
+                                ,                        { text: "Article (sub-page)", value: 18 }
+                                ,                        { text: "Banner", value: 42 }
+                                ,                        { text: "Blog", value: 19 }
+                                ,                        { text: "Blog post", value: 20 }
+                                ,                        { text: "Comment", value: 13 }
+                                ,                        { text: "Documentation page", value: 24 }
+                                ,                        { text: "Event", value: 40 }
+                                ,                        { text: "Event calendar", value: 41 }
+                                ,                        { text: "Feedback form", value: 22 }
+                                ,                        { text: "Folder", value: 1 }
+                                ,                        { text: "Forum", value: 37 }
+                                ,                        { text: "Forum reply", value: 39 }
+                                ,                        { text: "Forum topic", value: 38 }
+                                ,                        { text: "Forums", value: 43 }
+                                ,                        { text: "Frontpage", value: 23 }
+                                ,                        { text: "Gallery", value: 35 }
+                                ,                        { text: "Geo Article", value: 36 }
+                                ,                        { text: "Infobox", value: 25 }
+                                ,                        { text: "Link", value: 31 }
+                                ,                        { text: "Multicalendar", value: 26 }
+                                ,                        { text: "Poll", value: 27 }
+                                ,                        { text: "Product", value: 21 }
+                                        ]
+                    ,
+                [
+                                { text: "Common ini settings", value: 14 }
+                                ,                        { text: "Template look", value: 15 }
+                                        ]
+                    ,
+                [
+                                { text: "File", value: 28 }
+                                ,                        { text: "Flash", value: 29 }
+                                ,                        { text: "Image", value: 30 }
+                                ,                        { text: "Quicktime", value: 32 }
+                                ,                        { text: "Real video", value: 34 }
+                                ,                        { text: "Silverlight", value: 44 }
+                                ,                        { text: "Windows media", value: 33 }
+                                        ]
+                    ,
+                [
+                                { text: "User", value: 4 }
+                                ,                        { text: "User group", value: 3 }
+                                        ]
+                ];
+
+
+YUILoader.require(['datatable', 'button', 'container', 'cookie', 'element']);
+YUILoader.onSuccess = function() {
+    sortableSubitems.init(confObj, labelsObj, createGroups, createOptions);
+};
+var options = [];
+YUILoader.insert(options, 'js');
+
+})();
+</script>
+
+<div id="action-controls-container">
+    <div id="action-controls"></div>
+    <div id="tpg"></div>
+</div>
+<div id="content-sub-items-list" class="content-navigation-childlist"></div>
+<div id="bpg"></div>
+
+<div id="to-dialog-container"></div>
+
+
+
+    <div class="context-toolbar">
+        </div>
+
+</div>
+
+</form>
+
+</div>
+
+
+
+
+<!-- Children END -->
+</div>
+</div>
+
+</div>
+
+ </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:17:"Share.ez.no Blogs";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"235";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:17:"Share.ez.no Blogs";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"235";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"233";s:7:"node_id";s:3:"235";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"3976589504b0ba061e9d1e5a7f844331";s:14:"node_remote_id";s:32:"698a5f830c156b39abfd53242fd0f5da";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:24:"Mirror/Share.ez.no-Blogs";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"235";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:8:"keywords";s:0:"";s:8:"js_files";a:3:{i:0;s:12:"node_tabs.js";i:1;s:11:"ezjsc::yui2";i:2;s:27:"ezajaxsubitems_datatable.js";}}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:21:{i:0;s:41:"design/admin/templates/node/view/full.tpl";i:1;s:52:"design/admin/templates/infocollection_validation.tpl";i:2;s:42:"design/admin/templates/window_controls.tpl";i:3;s:52:"design/admin/templates/window_controls_extratabs.tpl";i:4;s:34:"design/admin/templates/windows.tpl";i:5;s:34:"design/admin/templates/preview.tpl";i:6;s:50:"design/admin/templates/node/view/admin_preview.tpl";i:7;s:60:"design/standard/templates/content/datatype/view/ezstring.tpl";i:8;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:9;s:57:"design/standard/templates/content/datatype/view/ezurl.tpl";i:11;s:61:"design/standard/templates/content/datatype/view/ezkeyword.tpl";i:12;s:34:"design/admin/templates/details.tpl";i:13;s:39:"design/admin/templates/translations.tpl";i:14;s:36:"design/admin/templates/locations.tpl";i:15;s:36:"design/admin/templates/relations.tpl";i:16;s:43:"design/admin/templates/navigator/google.tpl";i:17;s:35:"design/admin/templates/ordering.tpl";i:18;s:44:"design/admin/templates/windows_extratabs.tpl";i:19;s:35:"design/admin/templates/children.tpl";i:20;s:44:"design/admin/templates/children_detailed.tpl";i:21;s:49:"design/admin/templates/navigator/alphabetical.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,557 @@
+a:10:{s:7:"content";s:25353:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezperformancelogger/news/ez_performance_logger_0_8_released_works_with_ez_publish_5_0" title="eZ Performance Logger 0.8 released - works with eZ Publish 5.0!">eZ Performance Logger 0.8 released - works with eZ Publish 5.0!</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>A release which brings some nice new features, making this swiss-army-knife of performance measurement more useful than ever:</p>
+<ul>
+
+<li>support for eZP 5 (when running the Legacy Stack)</li>
+
+<li>can trace events from the event subsystem, such as cache clearing and image-alias generation</li>
+
+<li>now has full support for tracing database operations and cluster operations - with debug mode off - for all eZ versions from 4.5 to 5.0</li>
+
+<li>supports tracing time spent while generating images with imagemagick as well</li>
+
+<li>adds (experimental) support for sending data directly to a Pinba server</li>
+
+<li>last but not least, it fixes the only known bug ;-)</li>
+
+</ul>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>12/12/2012 02:43 pm</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/eZ-Performance-Logger-0.8-released-works-with-eZ-Publish-5.0">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezperformancelogger/news/ez_performance_logger_0_8_released_works_with_ez_publish_5_0">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/nxc_social_networks/news/how_to_set_up_publishing_workflow" title="How to set up publishing workflow">How to set up publishing workflow</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In the&nbsp;<a href="http://blog.nxcgroup.com/2012/ez-publish-social-networks-integration-signin/" target="_self">previous blog post</a>&nbsp;we announced the&nbsp;<a href="https://github.com/nxc/nxc_social_networks" target="_blank">nxc_social_networks</a>&nbsp;extension and demonstrated how to implement Sign-on buttons.&nbsp;This blog post describes how to fetch feeds from social networks (Facebook, Twitter and Google+) and use them within eZ Publish templates.</p><p><a href="http://blog.nxcgroup.com/2012/ez-publish-social-media-integration-publishing/" target="_self">eZ Publish Social Media Integration: Publishing</a></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>10/11/2012 01:58 pm</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/How-to-set-up-publishing-workflow">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/nxc_social_networks/news/how_to_set_up_publishing_workflow">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/nxc_social_networks/news/new_tutorial_is_published" title="New tutorial is published">New tutorial is published</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In the&nbsp;<a href="http://blog.nxcgroup.com/2012/ez-publish-social-networks-integration-signin/" target="_self">previous blog post</a>&nbsp;we announced the <a href="https://github.com/nxc/nxc_social_networks" target="_blank">nxc_social_networks</a>&nbsp;extension and demonstrated how to implement Sign-on buttons.&nbsp;This blog post describes how to fetch feeds from social networks (Facebook, Twitter and Google+) and use them within eZ Publish templates.</p><p><a href="http://blog.nxcgroup.com/2012/ez-publish-social-media-integration-feeds/" target="_self">eZ Publish Social Media Integration: Feeds</a></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>10/02/2012 05:30 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/New-tutorial-is-published">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/nxc_social_networks/news/new_tutorial_is_published">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/nxc_social_networks/news/nxc_social_networks_is_published" title="NXC Social Networks is published">NXC Social Networks is published</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>
+This extension implements full eZ Publish integration with social networks, and provides the following capabilities:<br />
+- SignIn button, which allows users to login/register via social networks (Facebook, Twitter, LinkedIn and Google) in one click<br />
+- eZ Publish template fetch functions to get the social network feeds (Facebook, Twitter, Google+)<br />- Publish to social networks from eZ Publish (Facebook, Twitter, LinkedIn)</p><p>Also&nbsp;<a href="http://blog.nxcgroup.com/2012/ez-publish-social-networs-integration-signin" target="_self">eZ Publish Social Media Integration: Single Sign-on</a> tutorial is available</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/26/2012 11:07 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/NXC-Social-Networks-is-published">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/nxc_social_networks/news/nxc_social_networks_is_published">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggwebservices/news/gg_webservices_0_13_released" title="gg Webservices 0.13 released">gg Webservices 0.13 released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>An ajax + bugfixes + documentation release</p>
+<ul>
+
+<li>better support for ajax calls</li>
+
+<li>added a dedicated javascript function for "proxy" mode (useful to avoid same-origin problems when accessing remote services)</li>
+
+<li>fixed a fatal error when assigning access permissions to webservices/execute</li>
+
+<li>much improved documentation</li>
+
+</ul>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>09/25/2012 08:55 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/gg-Webservices-0.13-released">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggwebservices/news/gg_webservices_0_13_released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/cjw_mediaconnector/news/first_beta_of_cjw_mediaconnector" title="First beta of CJW Mediaconnector">First beta of CJW Mediaconnector</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>CJW Mediaconnector is an eZ Publish extension for file upload and file management on external servers. You can use simple network file systems like FTP or WebDAV or external cloud storage services like Youtube or Slideshare. Other services are very easy to implement.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/12/2012 04:59 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/First-beta-of-CJW-Mediaconnector">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/cjw_mediaconnector/news/first_beta_of_cjw_mediaconnector">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ggsysinfo/news/ggsysinfo_0_6_released" title="ggSysInfo 0.6 released">ggSysInfo 0.6 released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>New features in this version: more QA checks!</p>
+<ul>
+
+<li>all php files are parsed for valid syntax</li>
+
+<li>all tpl files are parsed for valid syntax</li>
+
+<li>the tests run by the setup wizard, checking system requirements, are now available inside the gui too</li>
+
+</ul>
+<p>Note that checking syntax of all tpl and php files takes a loong time, please do not close the browser and allow the page to load fully</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/12/2012 10:48 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/ggSysInfo-0.6-released">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ggsysinfo/news/ggsysinfo_0_6_released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/optionmatrix/news/status_report" title="Status Report">Status Report</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>In cleaning up the code to upload it here, I, of course, found some problems.&nbsp; So, I'm going through it function by function to make sure there are no obvious bugs... and, of course, I keep coming up with enhancements while I'm at it...</p><p>I should be able to upload the code (perhaps not bug-free but hopefully close) today.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2012 04:49 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/Status-Report">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/optionmatrix/news/status_report">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/optionmatrix/news/option_matrix_1_0_released" title="Option Matrix 1.0 Released">Option Matrix 1.0 Released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>The first hack at the optionmatrix datatype has been released.&nbsp; To keep up on changes etc. you can also take a look at https://github.com/leidentech/optionmatrix.git</p><p>Keep in mind this is beta code.</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/24/2012 04:49 am</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/Option-Matrix-1.0-Released">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/optionmatrix/news/option_matrix_1_0_released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Projects-New-Articles">Projects New Articles</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://projects.ez.no/ezperformancelogger/news/ez_performance_logger_0_7_released" title="eZ Performance Logger 0.7 released">eZ Performance Logger 0.7 released</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>A release I am particularly proud of, it brings a whole new world to eZ monitoring: out-of-the box integration with Munin to display graphs!</p><p>Read on after the break for more details...</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/17/2012 04:40 pm</span> &nbsp; <a href="http://projects.ez.no">Projects New Articles</a> &nbsp; <a href="/Mirror/Projects-New-Articles/eZ-Performance-Logger-0.7-released">View mirror of item</a> &nbsp; <a href="http://projects.ez.no/ezperformancelogger/news/ez_performance_logger_0_7_released">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/Projects-New-Articles/(offset)/20"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/Mirror/Projects-New-Articles/(offset)/40"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+                      <span class="other"><a href="/Mirror/Projects-New-Articles">1</a></span>
+                              <span class="other"><a href="/Mirror/Projects-New-Articles/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/Projects-New-Articles/(offset)/20">3</a></span>
+            
+        <span class="current">4</span>
+
+                      <span class="other"><a href="/Mirror/Projects-New-Articles/(offset)/40">5</a></span>
+                              <span class="other"><a href="/Mirror/Projects-New-Articles/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/Projects-New-Articles/(offset)/60">7</a></span>
+                              <span class="other"><a href="/Mirror/Projects-New-Articles/(offset)/70">8</a></span>
+                              <span class="other"><a href="/Mirror/Projects-New-Articles/(offset)/80">9</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Projects-New-Articles/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Projects-New-Articles/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Projects-New-Articles/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class="currentselected today">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:2:"30";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:21:"Projects New Articles";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"231";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:21:"Projects New Articles";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"231";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"229";s:7:"node_id";s:3:"231";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"20c751d02d1532c06d9cf40023aff6ce";s:14:"node_remote_id";s:32:"92bbea3ffe4e195d159bb3b0a2eb0216";s:6:"offset";i:30;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:28:"Mirror/Projects-New-Articles";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"231";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

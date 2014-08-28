@@ -1,0 +1,292 @@
+a:10:{s:7:"content";s:17119:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/publication-de-gauffr-09" title="Publication de Gauffr 0.9">Publication de Gauffr 0.9</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Après <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/timeline/all/">pas mal de travail</a>, la <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/downloads/57/">version 0.9</a> de <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr">Gauffr</a> vient de voir le
+jour. Cette version préfigure <a hreflang="fr" href="https://projects.llaumgui.com/p/gauffr/issues/label/664/open/">à peu de chose près</a> ce que sera la version 1.0 une
+fois que les derniers ajustements seront réalisés.</p>
+<p><a title="Ecran de connection de Gauffr" href="http://www.llaumgui.com/public/gauffr/gauffr_login.png"><img title="Ecran de connection de Gauffr" style="margin: 0 auto; display: block;" alt="Ecran de connection de Gauffr" src="http://www.llaumgui.com/public/gauffr/.gauffr_login_m.jpg" /></a></p>    <p>Pour énième rappel, Gauffr est un système permettant de connecter des applications diverses appelées <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/page/Vocabulary/#wikititle_2">GauffrSlave</a> qui vont utiliser le couple &quot;login / mot de passe&quot; issu d'une seule application déjà existante appelée <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/page/Vocabulary/#wikititle_1">GauffrMaster</a>. Gauffr vous offre donc un niveau d'abstraction entre vos applications GauffrSlave et votre application maitresse que vous pouvez changer sans avoir à tout re-développer.</p>
+<p>Les <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/page/Changelog/">nouveautés de cette 0.9</a> sont essentiellement centrées autour de la GauffrAdmin qui permet de manipuler certaines données telles que les informations étendues qui vous permettent d'enrichir vos données maitresses sans en altérer le modèle de données ni le code.</p>
+<p><a title="Informations étendues sur les utilisateurs" href="http://www.llaumgui.com/public/gauffr/gauffruserextended.png"><img title="Informations étendues sur les utilisateurs" style="margin: 0 auto; display: block;" alt="Informations étendues sur les utilisateurs" src="http://www.llaumgui.com/public/gauffr/.gauffruserextended_m.jpg" /></a></p>
+<p>Pour le moment, ces informations étendues sont essentiellement orientées vers les logins alternatifs, par exemple, si comme pour <a hreflang="fr" href="http://www.fedora-fr.org/">Fedora-Fr</a> vous avez un login de type forums (<em>llaumgui</em> dans mon cas) et un login pour les wiki (<em>GuillaumeKulakowski</em>). A terme, j'envisage de stocker les informations OpenID mais surtout de permettre d'étendre ces données à partir d'un fichier de configuration.</p>
+<p>Une autre fonctionnalité de la GauffrAdmin est de permettre de configurer les droits utilisateurs. Vous pouvez par exemple permettre à vos membres qui en ont le droit et seulement eux de se connecter au wiki, les plugins <a hreflang="en" href="https://projects.llaumgui.com/p/mwgauffr/">mwGauffr</a> créera automatiquement le compte à la première connexion.</p>
+<p><a title="Droits utilisateur" href="http://www.llaumgui.com/public/gauffr/gauffrcredential.png"><img title="Droits utilisateur" style="margin: 0 auto; display: block;" alt="Droits utilisateur" src="http://www.llaumgui.com/public/gauffr/.gauffrcredential_m.jpg" /></a></p>
+<ul><li><a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/downloads/57/">Télécharger Gauffr 0.9</a></li>
+<li><a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/page/Changelog/">Site du projet</a></li>
+<li><a hreflang="en" href="https://github.com/llaumgui/gauffr">Miroir GitHub</a></li>
+<li><a hreflang="fr" href="http://www.llaumgui.com/pages/depot-llaumgui">Les RPM sont disponibles sur mon dépôt</a>.</li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/18/2011 01:07 pm</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Publication-de-Gauffr-0.9">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/publication-de-gauffr-09">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Guillaume-Kulakowski">Guillaume Kulakowski</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.llaumgui.com/post/gauffr-avance-a-grand-pas" title="Gauffr avance à grand pas">Gauffr avance à grand pas</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+          <p>Après plus d'un an de gestation je suis en train d'achever le projet <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr">Gauffr</a> et devrais bientôt publier une version 0.9 préfigurant la version 1.0 finale.</p>
+<p>Pour rappel Gauffr est une solution d’authentification centralisée prenant ses informations à partir d'un système préexistant appelé le <em>GauffrMaster</em>. Vous pouvez, par exemple, vous connecter sur vos blogs <a hreflang="fr" href="http://fr.dotclear.org/">Dotclear</a> ou votre CMS <a hreflang="en" href="http://ez.no/">eZ Publish</a> (tout deux <em>GauffrSlave</em>) à partir des informations issues de <a hreflang="en" href="http://fluxbb.org/">FluxBB</a> (dans notre cas le <em>GauffrMaster</em>).</p>
+<p>Histoire de teaser, voici une vidéo de l’installation de Gauffr et de sa GauffrAdmin :</p>
+<p style="text-align:center"><iframe width="640" height="390" src="http://www.youtube.com/embed/Q2xGWBF0mxk?rel=0&amp;hd=1" frameborder="0" allowfullscreen></iframe></p>
+<ul><li><strong>Page du projet :</strong> <a hreflang="en" href="https://projects.llaumgui.com/p/gauffr/">https://projects.llaumgui.com/p/gauffr/</a></li>
+<li><strong>Miroir GitHub :</strong> <a hreflang="en" href="https://github.com/llaumgui/gauffr">https://github.com/llaumgui/gauffr</a></li>
+</ul>
+    </div>
+
+    <div class="attribute-url">
+	<span>09/06/2011 01:44 pm</span> &nbsp; <a href="http://www.llaumgui.com">llaumgui.com</a> &nbsp; <a href="/Mirror/Guillaume-Kulakowski/Gauffr-avance-a-grand-pas">View mirror of item</a> &nbsp; <a href="http://www.llaumgui.com/post/gauffr-avance-a-grand-pas">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/3/(year)/2011" title="">March 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/2/(year)/2011" title="">February 2011</a></li>
+                                                            <li><a href="/Mirror/Guillaume-Kulakowski/(month)/1/(year)/2011" title="">January 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Guillaume-Kulakowski/(month)/8/(year)/2011" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Guillaume-Kulakowski/(month)/10/(year)/2011" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>September&nbsp;2011</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                                        <td class="  right">
+            4
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            5
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Guillaume-Kulakowski/(day)/6/(month)/9/(year)/2011">6</a></em>
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                                        <td class="  right">
+            11
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                                        <td class="  right">
+            <em><a href="/Mirror/Guillaume-Kulakowski/(day)/18/(month)/9/(year)/2011">18</a></em>
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                                        <td class="  right">
+            25
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2011";s:5:"month";s:1:"9";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:20:"Guillaume Kulakowski";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1756";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:20:"Guillaume Kulakowski";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1756";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1756";s:7:"node_id";s:4:"1756";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"2ec82a88f40667f13475567bbf2b4370";s:14:"node_remote_id";s:32:"b2e11d35c046edf6259a59540c4d3c9c";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:27:"Mirror/Guillaume-Kulakowski";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1756";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

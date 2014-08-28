@@ -1,0 +1,709 @@
+a:10:{s:7:"content";s:29284:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/contributing-advent.html" title="Contributing Advent">Contributing Advent</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="contributing_advent"/>Contributing Advent</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> London, United Kingdom</div>
+        <div class="date">Monday, November 25th 2013, 13:51 GMT</div>
+      </div>
+      <p>As a project for this year's advent, I will be making an open source contribution for each day of the period. I will focus on resolving bugs in <a href="http://xdebug.org">Xdebug</a>, PHP's <a href="http://php.net/manual/en/ref.datetime.php">DateTime</a> extension and <a href="http://openstreetmap.org">OpenStreetMap</a>. I will also try to write a small article about the specific case to show how I fixed and/or contributed—providing it is interesting enough.</p>
+      <p>Each project has plenty of addressable issues (<a href="http://bugs.xdebug.org/view_all_bug_page.php">Xdebug bugs</a>, <a href="https://bugs.php.net/search.php?cmd=display&search_for=date&project=&php_os=&php_os_not=&author_email=&bug_type=&boolean=0&bug_age=0&bug_updated=0&order_by=&direction=DESC&limit=30&phpver=&cve_id=&cve_id_not=&patch=&pull=&assign=&package_name[]=Date%2Ftime+related">DateTime bugs</a> and <a href="http://www.openstreetmap.org/#map=10/51.4869/-0.2273&layers=N">OpenStreetMap notes</a>) and I don't doubt other Open Source projects have a backlog of issues as well. Who joins me in contributing to your favourite Open Source project for the advent? Leave a comment below.</p>
+      <div class="flattr">
+        <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+        <noscript>
+          <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+          </a>
+        </noscript>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>11/25/2013 07:51 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Contributing-Advent">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/contributing-advent.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Derick-Rethans">Derick Rethans</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://derickrethans.nl/managing-schema-changes.html" title="Managing schema changes with MongoDB">Managing schema changes with MongoDB</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <div class="article">
+  <div class="body">
+    <div class="articleListItem">
+      <h1><a name="managing_schema_changes_with_mongodb"/>Managing schema changes with MongoDB</h1>
+      <dl class="head"/>
+      <div class="articleMetaData">
+        <div class="location"> Paris, France</div>
+        <div class="date">Tuesday, November 19th 2013, 09:32 CET</div>
+      </div>
+      <p>In an <a href="http://derickrethans.nl/introduction-to-document-databases.html">earlier article</a> I explained that although <a href="http://mongodb.org">MongoDB</a> stores documents in a "schema-less" collection you still have to think about how you store your data if you want to get the best out of the database.</p>
+      <p>However, sometimes you have to change your mind on how a document should look like. For example when you realize that your <a href="http://www.w3.org/International/questions/qa-personal-names">firstname and surname fields</a> really should have been just one <code>name</code> field, when you need to be able to store more than one phone number or address, or when you decide that hashing passwords is a good idea after all.</p>
+      <div class="articleSubSection">
+        <h2><a name="relational_databases"/>Relational Databases</h2>
+        <p>With traditional relational databases it is often necessary to make these database schema changes as part of a deployment process. There are various methods for doing so, and they most often consist of a process of applying SQL <a href="http://en.wikipedia.org/wiki/Data_Definition_Language">DDL</a> to the schema and then when necessary a specific script to move data around. Tools like <a href="http://phinx.org/">Phinx</a> and <a href="http://www.liquibase.org/">Liquibase</a> can help with that but of course you can also do it manually.</p>
+        <p>Let's have a look at the following schema:</p>
+        <p>
+          <strong>Users</strong>
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <p><em>id</em> </p>
+              </td>
+              <td>
+                <p>password  </p>
+              </td>
+              <td>
+                <p>firstname</p>
+              </td>
+              <td>
+                <p>lastname</p>
+              </td>
+              <td>
+                <p>phone number</p>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>1    </p>
+              </td>
+              <td>
+                <p>sekret    </p>
+              </td>
+              <td>
+                <p>Derick    </p>
+              </td>
+              <td>
+                <p>Rethans  </p>
+              </td>
+              <td>
+                <p>+447551569555</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>2    </p>
+              </td>
+              <td>
+                <p>elephpant</p>
+              </td>
+              <td>
+                <p>Rasmus    </p>
+              </td>
+              <td>
+                <p>Lerdorf  </p>
+              </td>
+              <td>
+                <p>NULL</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>In this schema for users, we have records containing a name, a password and a phone number. Now let's imagine we want to be able to store multiple contact details and we also want to hash the passwords. The new schema will look like:</p>
+        <p>
+          <strong>Users</strong>
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <p><em>id</em> </p>
+              </td>
+              <td>
+                <p>password  </p>
+              </td>
+              <td>
+                <p>firstname</p>
+              </td>
+              <td>
+                <p>lastname</p>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>1    </p>
+              </td>
+              <td>
+                <p>7f1afdbe  </p>
+              </td>
+              <td>
+                <p>Derick    </p>
+              </td>
+              <td>
+                <p>Rethans</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>2    </p>
+              </td>
+              <td>
+                <p>ae9c300e  </p>
+              </td>
+              <td>
+                <p>Rasmus    </p>
+              </td>
+              <td>
+                <p>Lerdorf</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Contacts</strong>
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <p>userid</p>
+              </td>
+              <td>
+                <p>method  </p>
+              </td>
+              <td>
+                <p>value</p>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>1      </p>
+              </td>
+              <td>
+                <p>phone   </p>
+              </td>
+              <td>
+                <p>+447551569555</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>2      </p>
+              </td>
+              <td>
+                <p>twitter</p>
+              </td>
+              <td>
+                <p>derickr</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>2      </p>
+              </td>
+              <td>
+                <p>twitter</p>
+              </td>
+              <td>
+                <p>rasmus</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>To make this transition, you could run the following SQL statements:</p>
+        <ol>
+          <li>
+            <p>The new table:</p>
+            <pre>CREATE TABLE Contacts(userid INT, method VARCHAR(16), value VARCHAR(250));
+ALTER TABLE Contacts ADD FOREIGN KEY (userid) REFERENCES Users(id);
+
+</pre>
+          </li>
+          <li>
+            <p>Moving the phone number:</p>
+            <pre>INSERT INTO Contacts
+    SELECT id, "phone", phonenumber FROM Users WHERE phonenumber IS NOT NULL;
+
+ALTER TABLE Users DROP phonenumber;
+
+</pre>
+          </li>
+          <li>
+            <p>Hashing the password (please don't use CRC32 in your code, it is here as an example):</p>
+            <pre>UPDATE Users SET password = CRC32(CONCAT(firstname,lastname,password));
+
+</pre>
+          </li>
+        </ol>
+        <p>Reverting this "migration" is problematic. While you can easily move the phone numbers back to the <code>Users</code> table, you can not "unhash" the password—as that's the whole idea behind a hash. If things go wrong, you have a bit of a problem and you will probably need to reset all the passwords.</p>
+      </div>
+      <div class="articleSubSection">
+        <h2><a name="mongodb"/>MongoDB</h2>
+        <p>So how do you deal with schema changes in MongoDB? First, let's have a look at how we would store the original documents:</p>
+        <p>
+          <strong>Users</strong>
+        </p>
+        <pre>{
+    _id: 1,
+    password: "sekret",
+    firstname: "Derick",
+    lastname: "Rethans",
+    phonenumber: "+447551569555",
+},
+{
+    _id: 2,
+    password: "elephpant",
+    firstname: "Rasmus",
+    lastname: "Lerdorf",
+}
+
+</pre>
+        <p>And now secondly after the migration:</p>
+        <p>
+          <strong>Users</strong>
+        </p>
+        <pre>{
+    _id: 1,
+    password: "7f1afdbe",
+    firstname: "Derick",
+    lastname: "Rethans",
+    contacts: [
+        {
+            method: "phone",
+            value: "+447551569555",
+        }
+    ]
+},
+{
+    _id: 2,
+    password: "ae9c300e",
+    firstname: "Rasmus",
+    lastname: "Lerdorf",
+}
+
+</pre>
+        <p>As you can see we store the contacts as an array unlike as in the relational model where we used a second table.</p>
+        <p>To migrate the data between the two schemas we can use the same approach as in the relational example from above: write a migration script to convert the data from the old to the new schema. We don't really have to do a schema change, but we do need to update each document. MongoDB however does not allow you to update fields according to the value of other fields so we can not simply do a:</p>
+        <pre>$set: { 'contacts' : { method: 'phone', value: '$phonenumber' } }
+
+</pre>
+        <p>Although you can retrieve the data like this through the Aggregation Framework:</p>
+        <pre>db.Users.aggregate( [
+    { '$group': {
+        '_id': '$_id',
+        'firstname' : { $first: '$firstname' },
+        'lastname' : { $first: '$lastname' },
+        'contacts' : { $push : { method: { $concat: [ 'phone' ] }, value: '$phonenumber' } }
+    } }
+] );
+
+</pre>
+        <p>
+          <em>Note that I am abusing <a href="http://docs.mongodb.org/manual/reference/operator/aggregation/concat/#exp._S_concat">$concat</a> here. From MongoDB 2.6 (or 2.5.2 if you use a development version) you can use <a href="https://jira.mongodb.org/browse/SERVER-5782">$literal</a> instead.</em>
+        </p>
+        <p>But this still requires you to read all the documents in a script, in which you also have to do the password encoding, and subsequently write the documents back to collection.</p>
+        <p>Reading all the documents and writing them back takes a great toll on your server. In some situations you might not even care about a large amount of your records. Take for example a forum with 500.000 total users, but with only 5.000 active users. You could argue that you are wasting 99% of the time that it takes to update 495.000 records that are never going to be used.</p>
+        <p>An alternative way of doing this is by using a versioning system for your documents. This allows you to have documents of both versions at the same time. An application should support reading documents in all versions and update/write only the latest version.</p>
+        <p>Let's have a look at how this might look at in the collection:</p>
+        <pre>{
+    _id: 1,
+    schema_version: 1,
+    password: "sekret",
+    firstname: "Derick",
+    lastname: "Rethans",
+    phonenumber: "+447551569555",
+},
+{
+    _id: 2,
+    schema_version: 2,
+    password: "ae9c300e",
+    firstname: "Rasmus",
+    lastname: "Lerdorf",
+    contacts [
+        {
+            method: 'twitter',
+            value: 'rasmus',
+        }
+    ]
+}
+
+</pre>
+        <p>Here the record for me has the old layout still, whereas the one for Rasmus has been updated to <em>schema version 2</em>. Your model layer could read User documents in the following way:</p>
+        <pre>class Model
+{
+    public function fetchUser( $id )
+    {
+        $raw = $this->Users->find( array( '_id' => (int) $id ) );
+        return User::createFromDB( $raw );
+    }
+}
+
+class User
+{
+    private $id;
+    private $firstname;
+    private $lastname;
+    private $password; // hashed password
+    private $contacts; // array of contacts with method and value
+
+    private static function createFromDBv1( $raw )
+    {
+        $n = new User;
+        $n->firstname = $raw['firstname'];
+        $n->lastname  = $raw['lastname'];
+        $n->password  = hash( 'crc32', $raw['password'] );
+
+        $contact = array(
+            'method' => 'phone',
+            'value'  => $raw['phonenumber'],
+        );
+        $n->contacts = array( $contact );
+
+        return $n;
+    }
+
+    private static function createFromDBv2( $raw )
+    {
+        $n = new User;
+        $n->firstname = $raw['firstname'];
+        $n->lastname  = $raw['lastname'];
+        $n->password  = $raw['password'];
+        $n->contacts  = $raw['contacts'];
+
+        return $n;
+    }
+
+    static function createFromDB( $raw )
+    {
+        $fname = "createFromDB{$raw['schema_version']}";
+
+        $n = $this->$fname( $raw );
+        $n->id = $raw['_id'];
+
+        return $n;
+    }
+}
+
+</pre>
+        <p>The above (greatly simplified) example can read documents of both version 1 and</p>
+        <p>2. Internally it is stored as a one-to-one translation of the version 2 document, where for version 1 we fake the contacts as an array and hash the password upon <strong>reading</strong>.</p>
+        <p>When storing the data, we will only write version 2 documents:</p>
+        <pre>class Model
+{
+    public function saveUser( User $user )
+    {
+        $internal = $user->hydrate();
+        $this->Users->update( array( '_id' => (int) $id ), $internal );
+    }
+}
+
+class User
+{
+    private $id;
+    private $firstname;
+    private $lastname;
+    private $password; // hashed password
+    private $contacts; // array of contacts with method and value
+
+    function hydrate()
+    {
+        $internal = array();
+        $internal['schema_version'] = 2;
+        $internal['firstname'] = $this->firstname;
+        $internal['lastname'] = $this->lastname;
+        $internal['password'] = $this->password;
+        $internal['contacts'] = $this->contacts;
+
+        return $internal;
+    }
+}
+
+</pre>
+        <p>I realise that this of course a simplified example, but the general idea should be applicable in many situations.</p>
+        <p>
+          <strong>Closing Words</strong>
+        </p>
+        <p>Among the benefits of using versioning for your document's structure is that no extra processing is needed on the database side as the structure is only updated when they are changed, which has a similar inpact as in normal operations. All of the maintenance and testing burdens are placed on the developer that decides to change the structure in the first place. It means that you don't have to create a long running script to update all the documents, and neither is there a situation where you have to roll back if something goes wrong during a migration. It might take a <em>long</em> time before all the documents in a collection are updated, depending on their use case. And later, you can decide to not support really old versions if the maintenance burden becomes too great, or perhaps even get rid of documents of an older version altogether.</p>
+        <div class="flattr">
+          <a class="FlattrButton" rev="flattr;button:compact;" style="display: none" href="http://derickrethans.nl"/>
+          <noscript>
+            <a href="http://flattr.com/thing/429095/Derick-Rethans-website">
+              <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this"/>
+            </a>
+          </noscript>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="attribute-url">
+	<span>11/19/2013 02:32 am</span> &nbsp; <a href="http://derickrethans.nl">derickrethans.nl</a> &nbsp; <a href="/Mirror/Derick-Rethans/Managing-schema-changes-with-MongoDB">View mirror of item</a> &nbsp; <a href="http://derickrethans.nl/managing-schema-changes.html">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Derick-Rethans/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Derick-Rethans/(month)/10/(year)/2013" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Derick-Rethans/(month)/12/(year)/2013" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>November&nbsp;2013</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Derick-Rethans/(day)/19/(month)/11/(year)/2013">19</a></em>
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            <em><a href="/Mirror/Derick-Rethans/(day)/25/(month)/11/(year)/2013">25</a></em>
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2013";s:5:"month";s:2:"11";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"1726";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:14:"Derick Rethans";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"1726";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"1726";s:7:"node_id";s:4:"1726";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"ef986f18ea990204d5c4a5afc1984cd0";s:14:"node_remote_id";s:32:"91895b5e697408d3dc46d96fc84528e1";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:21:"Mirror/Derick-Rethans";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"1726";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

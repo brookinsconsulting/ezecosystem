@@ -1,0 +1,401 @@
+                
+    <title>About / eZ Ecosystem - eZecosystem</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-US" />
+
+    
+                <meta name="author" content="eZecosystem" />
+                    <meta name="copyright" content="eZecosystem (except where otherwise noted.)" />
+                    <meta name="description" content="An eZ Publish Community Planet" />
+                    <meta name="keywords" content="ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem,blog, cms, publish, e-commerce, content management, development framework, share, echo, eco" />
+        
+    <meta name="generator" content="eZ Publish" />
+    
+
+<link rel="Home" href="/" title="eZecosystem front page" />
+<link rel="Index" href="/" />
+<link rel="Top"  href="/" title="About / eZ Ecosystem - eZecosystem" />
+<link rel="Search" href="/content/advancedsearch" title="Search eZecosystem" />
+<link rel="Shortcut icon" href="/design/standard/images/favicon.ico" type="image/x-icon" />
+<link rel="Copyright" href="/ezinfo/copyright" />
+<link rel="Author" href="/ezinfo/about" />
+
+<script type="text/javascript">
+(function() {
+    var head = document.getElementsByTagName('head')[0];
+    var printNode = document.createElement('link');
+    printNode.rel = 'Alternate';
+    printNode.href = "/layout/set/print/content/edit/4397/5/eng-US" + document.location.search;
+    printNode.media = 'print';
+    printNode.title = "Printable version";
+    head.appendChild(printNode);
+})();
+</script>
+        
+      <link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/core.css" />
+<link rel="stylesheet" type="text/css" href="/design/standard/stylesheets/debug.css" />
+<link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/pagelayout.css" />
+<link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/theme/rounded.css" />
+<link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/theme/yui_datatable.css" />
+<link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/theme/yui_menu.css" />
+<link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/theme/yui_container.css" />
+<link rel="stylesheet" type="text/css" href="/design/admin/stylesheets/theme/modalwindow.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezautosave/design/admin2/stylesheets/autosave.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezautosave/design/admin2/stylesheets/preview.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezie/design/standard/stylesheets/ezie/ezie.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezie/design/standard/stylesheets/ezie/slider.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezie/design/standard/stylesheets/ezie/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezie/design/standard/stylesheets/ezie/vtip.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezie/design/standard/stylesheets/ezie/jquery.Jcrop.css" />
+<link rel="stylesheet" type="text/css" href="/extension/ezjscore/design/standard/lib/yui/2.8.2/build/calendar/assets/calendar.css" />
+
+  
+  
+
+<!--[if lt IE 8]>
+<style>
+/* Terminate floating elements flow in IE < 8 */
+.float-break
+{
+  height: 1%;
+}
+</style>
+<![endif]-->
+<!--[if lte IE 8]>
+<style>
+#controlbar-top .box-bc
+{
+  filter:progid:DXImageTransform.Microsoft.Shadow(color='gray', Direction=180, Strength=8);
+  zoom: 1;
+}
+</style>
+<![endif]-->
+<!--[if lte IE 7]>
+<style>
+#controlbar-top .box-bc
+{
+padding-bottom:8px;
+}
+</style>
+<![endif]-->
+<!--[if IE 6]>
+<style>
+.yui3-js-enabled .scroll-to-top {display: none;}
+input.box, textarea.box {width: 99%}
+</style>
+<![endif]-->
+
+
+  <script type="text/javascript" src="/extension/ezjscore/design/standard/javascript/jquery-1.7.2rc1.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+(function($) {
+    var _rootUrl = '/', _serverUrl = _rootUrl + 'ezjscore/', _seperator = '@SEPERATOR$',
+        _prefUrl = _rootUrl + 'user/preferences';
+
+    // FIX: Ajax is broken on IE8 / IE7 on jQuery 1.4.x as it's trying to use the broken window.XMLHttpRequest object
+    if ( window.XMLHttpRequest && window.ActiveXObject )
+        $.ajaxSettings.xhr = function() { try { return new window.ActiveXObject('Microsoft.XMLHTTP'); } catch(e) {} };
+
+    // (static) jQuery.ez() uses jQuery.post() (Or jQuery.get() if post paramer is false)
+    //
+    // @param string callArgs
+    // @param object|array|string|false post Optional post values, uses get request if false or undefined
+    // @param function Optional callBack
+    function _ez( callArgs, post, callBack )
+    {
+        callArgs = callArgs.join !== undefined ? callArgs.join( _seperator ) : callArgs;
+        var url = _serverUrl + 'call/';
+        if ( post )
+        {
+            var _token = '', _tokenNode = document.getElementById('ezxform_token_js');
+            if ( _tokenNode ) _token = _tokenNode.getAttribute('title');
+            if ( post.join !== undefined )// support serializeArray() format
+            {
+                post.push( { 'name': 'ezjscServer_function_arguments', 'value': callArgs } );
+                post.push( { 'name': 'ezxform_token', 'value': _token } );
+            }
+            else if ( typeof(post) === 'string' )// string
+            {
+                post += ( post ? '&' : '' ) + 'ezjscServer_function_arguments=' + callArgs + '&ezxform_token=' + _token;
+            }
+            else // object
+            {
+                post['ezjscServer_function_arguments'] = callArgs;
+                post['ezxform_token'] = _token;
+            }
+            return $.post( url, post, callBack, 'json' );
+        }
+        return $.get( url + encodeURIComponent( callArgs ), {}, callBack, 'json' );
+    };
+    _ez.url = _serverUrl;
+    _ez.root_url = _rootUrl;
+    _ez.seperator = _seperator;
+    $.ez = _ez;
+
+    $.ez.setPreference = function( name, value )
+    {
+        var param = {'Function': 'set_and_exit', 'Key': name, 'Value': value};
+            _tokenNode = document.getElementById( 'ezxform_token_js' );
+        if ( _tokenNode )
+            param.ezxform_token = _tokenNode.getAttribute( 'title' );
+
+        return $.post( _prefUrl, param );
+    };
+
+    // Method version, for loading response into elements
+    // NB: Does not use json (not possible with .load), so ezjscore/call will return string
+    function _ezLoad( callArgs, post, selector, callBack )
+    {
+        callArgs = callArgs.join !== undefined ? callArgs.join( _seperator ) : callArgs;
+        var url = _serverUrl + 'call/';
+        if ( post )
+        {
+            post['ezjscServer_function_arguments'] = callArgs;
+            post['ezxform_token'] = jQuery('#ezxformtoken').attr('title');
+        }
+        else
+            url += encodeURIComponent( callArgs );
+
+        return this.load( url + ( selector ? ' ' + selector : '' ), post, callBack );
+    };
+    $.fn.ez = _ezLoad;
+})(jQuery);
+        
+</script>
+<script type="text/javascript" src="/extension/ezjscore/design/standard/lib/yui/3.4.1/build/yui/yui-min.js" charset="utf-8"></script>
+<script type="text/javascript">
+var YUI3_config = {"base":"\/extension\/ezjscore\/design\/standard\/lib\/yui\/3.4.1\/build\/","combine":false,"modules":{}};
+</script>
+<script type="text/javascript">
+
+YUI( YUI3_config ).add('io-ez', function( Y )
+{
+    var _rootUrl = '/', _serverUrl = _rootUrl + 'ezjscore/', _seperator = '@SEPERATOR$', _configBak,
+        _prefUrl = _rootUrl + 'user/preferences';
+
+    // (static) Y.io.ez() uses Y.io()
+    //
+    // @param string callArgs
+    // @param object|undefined c Same format as second parameter of Y.io()
+    function _ez( callArgs, c )
+    {
+        callArgs = callArgs.join !== undefined ? callArgs.join( _seperator ) : callArgs;
+        var url = _serverUrl + 'call/';
+
+        // Merge configuration object
+        if ( c === undefined )
+            c = {on:{}, data: '', headers: {}, method: 'POST'};
+        else
+            c = Y.merge( {on:{}, data: '', headers: {}, method: 'POST'}, c );
+
+        var _token = '', _tokenNode = document.getElementById('ezxform_token_js');
+        if ( _tokenNode ) _token = '&ezxform_token=' + _tokenNode.getAttribute('title');
+
+        // Append function arguments as post param if method is POST
+        if ( c.method === 'POST' )
+            c.data += ( c.data ? '&' : '' ) + 'ezjscServer_function_arguments=' + callArgs + _token;
+        else
+            url += encodeURIComponent( callArgs );
+
+        // force json transport
+        c.headers.Accept = 'application/json,text/javascript,*/*';
+
+        // backup user success call
+        if ( c.on.success !== undefined )
+            c.on.successCallback = c.on.success;
+
+        c.on.success = _ioezSuccess;
+        _configBak = c;
+
+        return Y.io( url, c );
+    }
+
+    function _ioezSuccess( id, o )
+    {
+        if ( o.responseJSON === undefined )
+        {
+            // create new object to avoid error in ie6 (and do not use Y.merge since it fails in ff)
+            var returnObject = {'responseJSON': Y.JSON.parse( o.responseText ),
+                                'readyState': o.readyState,
+                                'responseText': o.responseText,
+                                'responseXML': o.responseXML,
+                                'status': o.status,
+                                'statusText': o.statusText
+            };
+        }
+        else
+        {
+            var returnObject = o;
+        }
+
+        var c = _configBak;
+        if ( c.on.successCallback !== undefined )
+        {
+            if ( c.arguments !== undefined )
+                c.on.successCallback( id, returnObject, c.arguments );
+            else
+                c.on.successCallback( id, returnObject, null );
+        }
+        else if ( window.console !== undefined )
+        {
+            if ( returnObject.responseJSON.error_text )
+                window.console.error( 'Y.ez(): ' + returnObject.responseJSON.error_text );
+            else
+                window.console.log( 'Y.ez(): ' + returnObject.responseJSON.content );
+        }
+        _configBak.on.success = _configBak.on.successCallback;
+        _configBak.on.successCallback = undefined;
+    }
+
+    _ez.url = _serverUrl;
+    _ez.root_url = _rootUrl;
+    _ez.seperator = _seperator;
+    Y.io.ez = _ez;
+    Y.io.ez.setPreference = function( name, value )
+    {
+        var c = {on:{}, data:'', headers: {}, method: 'POST'},
+            _tokenNode = document.getElementById( 'ezxform_token_js' );
+
+        c.data = 'Function=set_and_exit&Key=' + encodeURIComponent( name ) + '&Value=' + encodeURIComponent( value );
+        if ( _tokenNode )
+            c.data += '&ezxform_token=' + _tokenNode.getAttribute( 'title' );
+        return Y.io( _prefUrl, c );
+    }
+}, '3.0.0' ,{requires:['io-base', 'json-parse']});
+        
+</script>
+<script type="text/javascript" src="/design/standard/javascript/tools/ezjsselection.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/standard/javascript/lib/ezjslibimagepreloader.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/admin/javascript/popupmenu/ezpopupmenu.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/admin/javascript/leftmenu_widthcontrol.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/admin/javascript/contentstructuremenu_dynamic.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/admin/javascript/fixed_toolbar.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/admin/javascript/ezmodalwindow.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/admin/javascript/ezajaxuploader.js" charset="utf-8"></script>
+<script type="text/javascript" src="/design/admin/javascript/ezcollapsiblemenu.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezautosave/design/standard/javascript/ezautosubmit.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezautosave/design/admin2/javascript/ezcontentpreview.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezsh/design/standard/javascript/ezgeshi.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezjscore/design/standard/javascript/jquery-ui-1.8.18.custom.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.namespaces.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.ezconnect.success_default.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.ezconnect.failure_default.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.ezconnect.complete_default.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.ezconnect.connect.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.ezconnect.prepare.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.history.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.selection.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.filter_black_and_white.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.filter_sepia.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.filter_contrast.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.filter_brightness.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.menu_close_without_saving.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.menu_save_and_close.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_flip_hor.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_flip_ver.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_redo.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_select.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_undo.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_watermark.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_pixelate.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_rotation.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_zoom.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.tool_crop.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.opts_attach.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bind.opts_detach.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.zoom.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.main_window.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.tools_window.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.opts_window.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bindings.opts_items_sliders.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bindings.opts_items_buttons.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bindings.main_window.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bindings.tools_window.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/ezie.gui.config.bindings.opts_window.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/jquery.ezie.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/jquery.Jcrop.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/jquery.hotkeys.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/jquery.circular.slider.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/colorpicker/colorpicker.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/colorpicker/eye.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/colorpicker/utils.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/vtip-min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezie/design/standard/javascript/wait.js" charset="utf-8"></script>
+<script type="text/javascript" src="/extension/ezjscore/design/standard/lib/yui/2.8.2/build/yuiloader/yuiloader-min.js" charset="utf-8"></script>
+<script type="text/javascript">
+var YUI2_config = {
+                base: '/extension/ezjscore/design/standard/lib/yui/2.8.2/build/',
+                loadOptional: true
+            };
+            var YUILoader =  new YAHOO.util.YUILoader(YUI2_config);
+</script>
+
+</head>
+<body>
+
+<div id="page" class="ezcontentnavigationpart section_id_1">
+
+<div id="header">
+<div id="header-design" class="float-break">
+
+<div id="header-logo">    <span title="eZ Publish Community Project 2013.5">&nbsp;</span></div>
+
+<div id="header-search"><div class="searchblock">
+<form action="/content/search" method="get">
+            <input id="searchtext" name="SearchText" class="disabled" type="text" size="20" value="" disabled="disabled" title="Search in all content" />
+        <input id="searchbutton" class="button-disabled hide" name="SearchButton" type="submit" value="Search" disabled="disabled" />
+        <p class="advanced hide"><span class="disabled">Advanced</span></p>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+
+(function($){
+    if ( !document.getElementById('searchbuttonfield') )return;
+
+    $('#searchbuttonfield').click(function(){
+        if ( $('#searchtext').val() === $('#searchtext').attr('title') )return;
+          $('#searchbutton').click();
+    });
+    $('#searchscope').click(function(){
+        $('#searchscope-pane').addClass('active');
+    });
+    $('#searchscope-pane-close').click(function(){
+        $('#searchscope-pane').removeClass('active');
+    });
+    $('input:radio[name=SubTreeArray]').change( function() {
+        $('#searchtext').attr('value', $(this).attr('title'));
+        $('#searchtext').attr('title', $(this).attr('title'));
+    } );
+})( jQuery );
+
+</script></div>
+
+<div id="header-usermenu">    <span title="Logout from the system." id="header-usermenu-logout" class="disabled">Logout</span></div>
+
+
+
+<div id="header-topmenu">
+<ul>    <li class="unselected first ezmynavigationpart"><div>    <span class="disabled" title="Manage items and settings that belong to your account.">Dashboard</span></div></li>        <li class="selected middle ezcontentnavigationpart"><div>    <span class="disabled" title="Manage the main content structure of the site.">Content structure</span></div></li>    <li class="unselected middle ezmedianavigationpart"><div>    <span class="disabled" title="Manage images, files, documents, etc.">Media library</span></div></li>    <li class="unselected middle ezusernavigationpart"><div>    <span class="disabled" title="Manage users, user groups and permission settings.">User accounts</span></div></li>    <li class="unselected middle ezsetupnavigationpart"><div>    <span class="disabled" title="Configure settings and manage advanced functionality.">Setup</span></div></li>    <li class="unselected middle sqliimportnavigationpart"><div>    <span class="disabled" title="Manage your imports">Import management</span></div></li>    <li class="unselected last bcupdatecachepart"><div>    <span class="disabled" title="Regenerate cache for nodes">Update Cache</span></div></li></ul>
+</div>
+
+<script type="text/javascript">
+
+jQuery( '#header-topmenu ul li' ).click(function(){ jQuery(this).addClass('active'); });
+
+</script>
+
+</div>
+</div>
+
+<hr class="hide" />

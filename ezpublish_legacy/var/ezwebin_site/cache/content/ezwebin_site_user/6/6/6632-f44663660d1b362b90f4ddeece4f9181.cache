@@ -1,0 +1,274 @@
+a:10:{s:7:"content";s:17275:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>3 reasons why (and when) you should not hesitate to get started with eZ Publish 5</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://ez.no/About-eZ/Blog/3-reasons-why-and-when-you-should-not-hesitate-to-get-started-with-eZ-Publish-5">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">11/07/2012 02:47 am</p>
+                                    <p class="author">info@ez.no (Charles Clement-Cottuz)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p>Anyone having worked in the software business is used to these kind of questions. Even if all releases are not the same, from the time we actually release it is certainly a given that it is production ready! Otherwise we would keep releasing beta...</p><p>That aside, here are my top 3 reasons why you should not hesitate to use eZ Publish 5!</p>
+<ul>
+
+<li>eZ Publish 5.0 is also eZ Publish 4.8!</li>
+
+</ul>
+<p>Well I am playing with the numbers here and some might not like it - but bare with me. eZ Publish 5 brings a lot of new things into the architecture (like the adoption of the Symfony stack or the new scope complete REST API) but more than anything, we have made it “dual kernel” which means it embeds a 4.x kernel and architecture that act as a fall back. Thanks to this system, a site developed on and for the 4.x generation can fully work on 5.0 without having to upgrade the templates or database (and can still benefit from the new REST API). So if what worries you about the 5.0 release is the new “unknown” architecture, rest assured - 5.0 is above all designed to run the legacy architecture to ensure the long term transition is easy! Another perspective can, in fact, be that 5.0 is also the latest and more stable version of the 4.x series!</p>
+<ul>
+
+<li>eZ Publish 5.0 will be the latest stable version, as soon as it is out</li>
+
+</ul>
+<p>No need to elaborate on this. Running beta software is certainly a risk but running on the latest stable release of a software is what people should always look for. So if you start a new project, why starting it on an older release? It reminds me of a car race where those drivers that have been penalized have to start from the stand and not from the grid - and 30 seconds after everyone else too...Of course if we are talking of existing project, there are other considerations that I will touch on at the end of this post, but surely, latest and stable also means better maintenance and better support.</p>
+<ul>
+
+<li>You don’t want to miss the opportunities brought by ez publish 5!</li>
+
+</ul>
+<p>
+I won’t explore here the opportunities that eZ Publish 5.x series will offer you such as from the development consideration (for instance, embedding the best php framework available on the market and offering state of the art APIs) to production (e.g. delivering way better performance and jumping to new levels of scalability) and from the multiple business reasons (offering unequalled online marketing features) to usability (on track to offer a new state of the art user interface). We must emphasize, however, that we know all this is not rolling out in one go, and so we have deliberately decided to go for a smooth and progressive transition. While as a user you take no risk since the legacy stack is all there and &nbsp;supported, running eZ Publish 5.0 will give you the opportunity, if you wish, to put a toe in the 5.x water, following your own pace. You surely don’t want to be late here!<br />
+So with all this being said, of course you must remain reasonable. If you asked me, “should I migrate my existing project to eZ Publish 5.0?”, the answers are obviously not the same. The three reasons above pushing in favor of a YES are totally valid but you obviously must take into consideration a bunch of other very important operational matters like how to deal with the migration, the change, the impact on the infrastructure, the risk of this in parallel of a running application. Enough fodder to dedicate to a new blog post! <br />So of course, don’t be blind and plan carefully for any upgrade, even though using the latest stable version is always very good in itself! In any upgrade consideration, we definitely advise you and your team to take the time &nbsp;to learn, experience and understand how 5.x works both with &nbsp;the legacy architecture and the new one. This will help to plan a smooth and progressive upgrade which may mean sticking &nbsp;to the legacy architecture first and then progressively migrating part of your project to the new template engine... More than anything, here we recommend to dedicate some time for your developers to test and learn before working on a project in production. And yes it might be that in some case, the time to do this takes you to 5.1 or further. That is the normal life of a cms project, they can’t always upgrade every 6 months or even every year!</p>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://ez.no/About-eZ/Blog/3-reasons-why-and-when-you-should-not-hesitate-to-get-started-with-eZ-Publish-5">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Systems-Blog/(day)/7/(month)/8/(year)/2014">7</a></em>
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Systems-Blog/(day)/12/(month)/8/(year)/2014">12</a></em>
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Systems-Blog/(day)/19/(month)/8/(year)/2014">19</a></em>
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                                        <td class="currentselected today right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";s:22:"/content/view/full/222";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:7:"node_id";s:3:"222";}i:3;a:4:{s:4:"text";s:81:"3 reasons why (and when) you should not hesitate to get started with eZ Publish 5";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"6632";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";s:22:"/content/view/full/222";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:7:"node_id";s:3:"222";}i:3;a:3:{s:4:"text";s:81:"3 reasons why (and when) you should not hesitate to get started with eZ Publish 5";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"6632";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:4:"6633";s:7:"node_id";s:4:"6632";s:14:"parent_node_id";s:3:"222";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:44:"RSSImport_4_0b78dfd50ea2ed943601d10f9ee57783";s:14:"node_remote_id";s:32:"b1f8161f173c21bbc4d00fe7c0f9369d";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:102:"Mirror/eZ-Systems-Blog/3-reasons-why-and-when-you-should-not-hesitate-to-get-started-with-eZ-Publish-5";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"6632";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"b1fd4c81985a35b4412645b300f2fee8";s:23:"parent_object_remote_id";s:32:"ae28f8b18d3a07d8a33282f880a66b18";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

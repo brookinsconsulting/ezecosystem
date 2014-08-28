@@ -1,0 +1,320 @@
+a:10:{s:7:"content";s:20264:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+
+                        <div class="content-view-full">
+                            <div class="class-blog-post float-break">
+
+                                <div class="attribute-header">
+                                    <h1>Web to Print Smoother Than Ever with eZ Publish!</h1>
+                                </div>
+
+                                <div class="attribute-byline">
+				    <div><a href="http://ez.no/About-eZ/Blog/Web-to-Print-Smoother-Than-Ever-with-eZ-Publish">Read Original Item</a></div><br />
+                                </div>
+
+                                <div class="attribute-byline">
+                                    <p class="date">07/22/2013 10:35 am</p>
+                                    <p class="author">info@ez.no (Maud Brundseaux)</p>
+				                                    </div>
+
+				
+
+				<div class="attribute-body float-break">
+				      <p>OpenMagazine is developed and offered by our trusted partner Opencontent. It's definitely a blast to see how the folks at <a href="http://www.opencontent.it/" target="_self">Opencontent</a> understand and use the eZ Publish platform, extending the possibilities our technology offers to build solutions that meet very specific needs and work elegantly on top of eZ Publish. &nbsp;This is what's happening with OpenMagazine's new version.&nbsp;Congratulations, Opencontent!</p><p>But let's stop with the foggy, fuzzy words and break into the concrete features of this new version. Let's look at why it should make you click if you have a need for publishing quality brochures, magazines, and documents in addition to your web presence.</p><a name="eztoc375002_0_1" id="eztoc375002_0_1"></a><h3>Mapping Indesign styles with your content types and structure</h3><p>First off: A major new feature is that OpenMagazine offers a new interface that's intuitive (and not technical) to define your &quot;mapping&quot;. Through the mapping, you tell the system how content information stored in your eZ Publish information architecture (aka the Content Classes) should fit into the layout structure of your Adobe Indesign templates. It's a crucial step in implementing a Web to Print solution. &nbsp;Until this second version, this had to be done by technical people in Adobe Indesign, as this was done by manual tagging in the Indesign files. &nbsp;Now, this is doable by editors from the CMS in a visual and user-friendly way! This is a major new feature that will streamline the process.</p>
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/mapping_1/375016-1-eng-GB/mapping_1_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/mapping_1/375016-1-eng-GB/mapping_1_medium.jpg" width="462" height="236" style="border: 0px solid ;" alt="Open Magazine, the mapping of style in eZ Publish" title="Open Magazine, the mapping of style in eZ Publish" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:462px;">
+						
+<p>Open Magazine, the mapping of style in eZ Publish</p>		</div>
+			</div>
+</div>
+</div><a name="eztoc375002_0_2" id="eztoc375002_0_2"></a><h3>Automating the production of a whole publication</h3><p>OpenMagazine Version 2 also comes with a desktop agent that will help you generate a whole publication (called 'an issue' in the print world). Let say you want to export a whole magazine issue to the print production when you're done with the editorial content. &nbsp;This is now possible &nbsp;thanks simple to this desktop agent. Before that, composition was handled manually at a further step in the process. The desktop agent is also smart, as it keeps synchronizing resources. This means that any changes done will be automatically be accessible to the layout designers/producers in the Indesign files with no need to log-in eZ Publish.</p><p>Again, it's all about streamlining the process and making it possible to manage a more complete and complex workflow with clear separation of tasks between designers (in Indesign) and editors (in eZ Publish), similar to what can be done using incopy.</p>
+<div class=""><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/indesign_bmw_1/375020-1-eng-GB/indesign_bmw_1_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/indesign_bmw_1/375020-1-eng-GB/indesign_bmw_1_medium.png" width="462" height="422" style="border: 0px solid ;" alt="Generating multipage documents in indesign directly from eZ Publish" title="Generating multipage documents in indesign directly from eZ Publish" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:462px;">
+						
+<p>Generating multipage documents in indesign directly from eZ Publish</p>		</div>
+			</div>
+</div>
+</div><a name="eztoc375002_0_3" id="eztoc375002_0_3"></a><h3>Full IDML support… and more</h3>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/editing_2/375024-1-eng-GB/editing_2_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/editing_2/375024-1-eng-GB/editing_2_small_with_border.jpg" width="217" height="124" style="border: 0px solid ;" alt="Rich table styling from eZ Publish" title="Rich table styling from eZ Publish" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:217px;">
+						
+<p>Rich table styling from eZ Publish</p>		</div>
+			</div>
+</div>
+</div><p>Another new feature is that OpenMagazine fully supports the Adobe IDML format. This complete support gives more power to editors who can now use complex styling such as tables or chained paragraphs from eZ Publish itself.</p><p>Finally, OpenMagazine can also manage your fonts mapping. From eZ Publish, the editor can now define in a very granular way &nbsp;which fonts will be used in all styles in the Indesign document.</p><p>I might have missed a few enhancements and additional features, but this might be enough for now! OpenMagazine was already cutting edge, showing how to set up a full content management process across digital and print channels. It now just took a big new step in terms of completeness, enabling publishers to set up complex and efficient workflow that works for all those channels.</p><p>OpenMagazine fits publishing businesses (magazines, journals, newspapers) but also businesses of any kind that have publishing needs such as releasing brochures, reports, internal journals… who doesn't?!</p><p>If ever you have such a need, please feel free to reach out. OpenMagazine v2 will be shortly available, if it not already when you read those lines. The Opencontent and eZ teams would be more than happy to tell you about this solution and see how it can help you break the silos and build successful and efficient content workflow across channels!</p><p>-- <a href="https://plus.google.com/u/0/100387701195070391722?rel=author" target="_self">Roland</a> for the Product team at eZ</p>
+				</div>
+
+                                
+                                <div class="attribute-byline">
+				    <div><a href="http://ez.no/About-eZ/Blog/Web-to-Print-Smoother-Than-Ever-with-eZ-Publish">Read Original Item</a></div>
+                                </div>
+
+                                                            </div>
+                        </div>
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(day)/7/(month)/8/(year)/2014">7</a></em>
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(day)/12/(month)/8/(year)/2014">12</a></em>
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            <em><a href="/layout/set/print/Mirror/eZ-Systems-Blog/(day)/19/(month)/8/(year)/2014">19</a></em>
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class="currentselected today">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";s:22:"/content/view/full/222";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:7:"node_id";s:3:"222";}i:3;a:4:{s:4:"text";s:48:"Web to Print Smoother Than Ever with eZ Publish!";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:4:"7827";}}s:10:"title_path";a:4:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";s:22:"/content/view/full/222";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:7:"node_id";s:3:"222";}i:3;a:3:{s:4:"text";s:48:"Web to Print Smoother Than Ever with eZ Publish!";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:4:"7827";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:5:"15058";s:7:"node_id";s:4:"7827";s:14:"parent_node_id";s:3:"222";s:8:"class_id";s:2:"20";s:16:"class_identifier";s:9:"blog_post";s:9:"remote_id";s:44:"RSSImport_4_c12275a8838b426c6ae5ed049e9a676f";s:14:"node_remote_id";s:32:"9a49662378955ef69992d45fed294cd8";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"4";s:9:"url_alias";s:70:"Mirror/eZ-Systems-Blog/Web-to-Print-Smoother-Than-Ever-with-eZ-Publish";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:4:"7827";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:2:"19";s:23:"parent_class_identifier";s:4:"blog";s:21:"parent_node_remote_id";s:32:"b1fd4c81985a35b4412645b300f2fee8";s:23:"parent_object_remote_id";s:32:"ae28f8b18d3a07d8a33282f880a66b18";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

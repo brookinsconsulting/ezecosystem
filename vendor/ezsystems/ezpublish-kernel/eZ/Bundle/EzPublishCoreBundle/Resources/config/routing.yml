@@ -1,0 +1,77 @@
+parameters:
+    # Redefining the default router class to implement the RequestMatcherInterface
+    router.class: eZ\Bundle\EzPublishCoreBundle\Routing\DefaultRouter
+    ezpublish.chain_router.class: Symfony\Cmf\Component\Routing\ChainRouter
+    ezpublish.url_generator.base.class: eZ\Publish\Core\MVC\Symfony\Routing\Generator
+    ezpublish.urlalias_router.class: eZ\Bundle\EzPublishCoreBundle\Routing\UrlAliasRouter
+    ezpublish.urlalias_generator.class: eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator
+    ezpublish.siteaccess.matcher_builder.class: eZ\Bundle\EzPublishCoreBundle\SiteAccess\MatcherBuilder
+    ezpublish.siteaccess_router.class: eZ\Publish\Core\MVC\Symfony\SiteAccess\Router
+    ezpublish.siteaccess_listener.class: eZ\Bundle\EzPublishCoreBundle\EventListener\SiteAccessListener
+    ezpublish.siteaccess_listener.routing.class: eZ\Bundle\EzPublishCoreBundle\EventListener\RoutingListener
+    ezpublish.request_redirect_listener.class: eZ\Bundle\EzPublishCoreBundle\EventListener\RequestEventListener
+    ezpublish.siteaccess_match_listener.class: eZ\Publish\Core\MVC\Symfony\EventListener\SiteAccessMatchListener
+
+services:
+    ezpublish.chain_router:
+        class: %ezpublish.chain_router.class%
+        arguments: [@?logger]
+        calls:
+            - [setContext, [@router.request_context]]
+
+    ezpublish.siteaccess_match_listener:
+        class: %ezpublish.siteaccess_match_listener.class%
+        arguments: [@ezpublish.siteaccess_router, @event_dispatcher]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    ezpublish.url_generator.base:
+        class: %ezpublish.url_generator.base.class%
+        abstract: true
+        calls:
+            - [setRequestContext, [@router.request_context]]
+
+    ezpublish.urlalias_router:
+        class: %ezpublish.urlalias_router.class%
+        arguments: [@ezpublish.api.repository.lazy, @ezpublish.urlalias_generator, @?router.request_context, @?logger]
+        calls:
+            - [setContainer, [@service_container]]
+        tags:
+            - {name: router, priority: 200}
+
+    ezpublish.urlalias_generator:
+        class: %ezpublish.urlalias_generator.class%
+        arguments: [@ezpublish.api.repository.lazy, @router, @?logger]
+        parent: ezpublish.url_generator.base
+
+    ezpublish.siteaccess.matcher_builder:
+        class: %ezpublish.siteaccess.matcher_builder.class%
+        arguments: [@service_container]
+
+    ezpublish.siteaccess_router:
+        class: %ezpublish.siteaccess_router.class%
+        arguments:
+            - @ezpublish.siteaccess.matcher_builder
+            - @logger
+            - %ezpublish.siteaccess.default%
+            - %ezpublish.siteaccess.match_config%
+            - %ezpublish.siteaccess.list%
+            - %ezpublish.siteaccess.class%
+
+    ezpublish.siteaccess_listener:
+        class: %ezpublish.siteaccess_listener.class%
+        arguments: [@service_container]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    ezpublish.siteaccess_listener.routing:
+        class: %ezpublish.siteaccess_listener.routing.class%
+        arguments: [@service_container]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    ezpublish.request_redirect_listener:
+        class: %ezpublish.request_redirect_listener.class%
+        arguments: [@service_container, @?logger]
+        tags:
+            - { name: kernel.event_subscriber }

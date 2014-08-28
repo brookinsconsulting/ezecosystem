@@ -1,0 +1,728 @@
+a:10:{s:7:"content";s:65150:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/How-to-create-a-modern-web-site-part-3-the-Web-Content-Model" title="How to create a modern web site - part 3: the Web Content Model">How to create a modern web site - part 3: the Web Content Model</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Before I started to write these posts we used to call this part of the project Information Architecture (IA). While browsing the web about the topic for this post, I noticed that IA is used in much broader sense. It usually includes the site map (we covered it already), navigation, content organization, wire frames, mock-ups and user scenarios. The topic covered in this post is very specific part of this broader picture: how the content should be organized, thus we can call it information structure or content model. A similar concept is the database model when designing a system which uses an SQL database (of course, content model could be implemented via a database, depends on the software used).</p><a name="eztoc8288_0_1" id="eztoc8288_0_1"></a><h3>What is a web content model?</h3><p>There are several definitions we could apply:</p>
+<ul>
+
+<li>it is a basic information architecture (focusing on just describing each specific page)</li>
+
+<li>it specifies information on each specific page</li>
+
+<li>assessing needed content on each specific page</li>
+
+</ul>
+<p>First, you’ll notice that ‘specific page’ is mentioned always. In the process of specifying the content model all page types ought to be identified (we already defined some of them on the site map). The process is natural thing to do after site map is created. Also, with the content model in place you should have all the info for creating wire frames.</p><a name="eztoc8288_0_2" id="eztoc8288_0_2"></a><h3>How to create it?</h3><p>The content model is basically a sheet, so you can create it in Google spreadsheet, Excel or any other sheet application.</p>
+<ol>
+
+<li>Check your site map notes and collect all different types of pages specified there. Probably you will need to add more pages which were not in the site map. For example interstitial pages like login screen or error pages are usually not in the site map.</li>
+
+<li>Next step would be to list all pieces of information for each page type</li>
+
+<li>For each pieces of information set type and source </li>
+
+</ol>
+<p>Example for this web site showing just few page types:</p><table class="cols" cellpadding="2" cellspacing="0" summary="content model example"><col class="bglight" /><col class="bgdark" /><col class="bglight" /><col class="bgdark" /><tr><th scope="col" valign="top">  page type
+  </th><th scope="col" valign="top">  what
+  </th><th scope="col" valign="top">  type
+  </th><th scope="col" valign="top">  source
+  </th></tr><tr class="bglight"><td valign="top">  Frontpage
+  </td><td valign="top">  3 messages with image
+  </td><td valign="top">  slider
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  list of news and posts
+  </td><td valign="top">  title, image, intro
+  </td><td valign="top">  news, blog
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  manual list of references
+  </td><td valign="top">  title, image, intro
+  </td><td valign="top">  portfolio
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  feedback box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  testimonial box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  contact box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  manual list of clients
+  </td><td valign="top">  slider
+  </td><td valign="top">  clients
+  </td></tr><tr class="bgdark"><td valign="top">  Blog post
+  </td><td valign="top">  title
+  </td><td valign="top">  text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  date
+  </td><td valign="top">  date
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  author
+  </td><td valign="top">  text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  tags
+  </td><td valign="top">  tags
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  intro
+  </td><td valign="top">  rich text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  image
+  </td><td valign="top">  image
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  body
+  </td><td valign="top">  rich text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  user comments
+  </td><td valign="top">  comments
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  RSS subscribe box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  tags box
+  </td><td valign="top">  cloud
+  </td><td valign="top">  blog
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  manual list of clients
+  </td><td valign="top">  slider
+  </td><td valign="top">  clients
+  </td></tr>
+</table>
+<p>In “page type” column all specific pages are listed. In “what” column all specific pieces of information are listed. For each “what” there is a description in “type” column of what kind of information is shown. This can be a simple information type like text for Title or more complex like comments. Also for all pieces of information which are not directly managed on the page, the page which manages that content is listed in “source” column. For example: Title of the page is always managed by the page, but a List of News & Posts is usually not, that information is actually gathered from other pages to avoid duplicate entry.</p><p>It is important that all stakeholders understand how each piece of information works, so that the functionality is common to all team members. If this is not the case, it can lead to problems later. E.g. client could expect User Comments to behave in some different way so the specification could be broken down to even smaller pieces.</p><p>Creating this sheet is probably not needed is some cases:</p>
+<ul>
+
+<li>if the site is simple so all information can be specified in sitemap and wireframes,</li>
+
+<li>or, if the site is standard in some way (e.g blog site) so the content model is known,</li>
+
+<li>or for very simple pages that have no manageable information </li>
+
+</ul>
+<p>But for more complex sites, especially with more customized content, this step should give a complete overview on all information that is presented and should be an excellent base for next &nbsp;steps:</p>
+<ul>
+
+<li>User scenarios</li>
+
+<li>Wireframes</li>
+
+<li>CMS page type definitions (if the site is being implement with modern CMS)</li>
+
+</ul>
+<p>For even more complex sites additional columns would be very handy. If, for example, a site has more user groups with different policies an additional “can read” column would be good to have.</p><p>What is important to remember that this model should be revised in situations were you learn more information in the following steps. For example, if you produce a clickable demo for user testing purposes and the results are telling you to change the content model, do it.</p><p>That is all for know, hopefully next post from this series will be published in less than year time :)</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/15/2012 04:12 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/How-to-create-a-modern-web-site-part-3-the-Web-Content-Model">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/How-to-create-a-modern-web-site-part-3-the-Web-Content-Model">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/How-to-create-a-modern-web-site-part-3-the-Web-Content-Model" title="How to create a modern web site - part 3: the Web Content Model">How to create a modern web site - part 3: the Web Content Model</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>This is the third post in the series on how to create a modern web site. In previous post we covered&nbsp;<a href="http://www.netgenlabs.com/Blog/How-to-create-a-modern-web-site-part-1-from-the-first-idea-to-the-project-baseline" target="_self">how to set up the baseline for a web project</a>&nbsp;&nbsp;and&nbsp;<a href="http://www.netgenlabs.com/Blog/How-to-create-a-modern-web-site-part-2-the-site-map" target="_self">how to set up the site map</a>. This post will cover the next step in a web project: the<b> Web Content Mode</b>l.</p><p>Before I started to write these posts we used to call this part of the project Information Architecture (IA). While browsing the web about the topic for this post, I noticed that IA is used in much broader sense. It usually includes the site map (we covered it already), navigation, content organization, wire frames, mock-ups and user scenarios. The topic covered in this post is very specific part of this broader picture: how the content should be organized, thus we can call it information structure or content model. A similar concept is the database model when designing a system which uses an SQL database (of course, content model could be implemented via a database, depends on the software used).</p><a name="eztoc8288_0_1" id="eztoc8288_0_1"></a><h3>What is a web content model?</h3><p>There are several definitions we could apply:</p>
+<ul>
+
+<li>it is a basic information architecture (focusing on just describing each specific page)</li>
+
+<li>it specifies information on each specific page</li>
+
+<li>assessing needed content on each specific page</li>
+
+</ul>
+<p>First, you’ll notice that ‘specific page’ is mentioned always. In the process of specifying the content model all page types ought to be identified (we already defined some of them on the site map). The process is natural thing to do after site map is created. Also, with the content model in place you should have all the info for creating wire frames.</p><a name="eztoc8288_0_2" id="eztoc8288_0_2"></a><h3>How to create it?</h3><p>The content model is basically a sheet, so you can create it in Google spreadsheet, Excel or any other sheet application.</p>
+<ol>
+
+<li>Check your site map notes and collect all different types of pages specified there. Probably you will need to add more pages which were not in the site map. For example interstitial pages like login screen or error pages are usually not in the site map.</li>
+
+<li>Next step would be to list all pieces of information for each page type</li>
+
+<li>For each pieces of information set type and source </li>
+
+</ol>
+<p>Example for this web site showing just few page types:</p><table class="cols" cellpadding="2" cellspacing="0" summary="content model example"><col class="bglight" /><col class="bgdark" /><col class="bglight" /><col class="bgdark" /><tr><th scope="col" valign="top">  page type
+  </th><th scope="col" valign="top">  what
+  </th><th scope="col" valign="top">  type
+  </th><th scope="col" valign="top">  source
+  </th></tr><tr class="bglight"><td valign="top">  Frontpage
+  </td><td valign="top">  3 messages with image
+  </td><td valign="top">  slider
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  list of news and posts
+  </td><td valign="top">  title, image, intro
+  </td><td valign="top">  news, blog
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  manual list of references
+  </td><td valign="top">  title, image, intro
+  </td><td valign="top">  portfolio
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  feedback box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  testimonial box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  contact box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  manual list of clients
+  </td><td valign="top">  slider
+  </td><td valign="top">  clients
+  </td></tr><tr class="bgdark"><td valign="top">  Blog post
+  </td><td valign="top">  title
+  </td><td valign="top">  text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  date
+  </td><td valign="top">  date
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  author
+  </td><td valign="top">  text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  tags
+  </td><td valign="top">  tags
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  intro
+  </td><td valign="top">  rich text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  image
+  </td><td valign="top">  image
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  body
+  </td><td valign="top">  rich text
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  user comments
+  </td><td valign="top">  comments
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  RSS subscribe box
+  </td><td valign="top">  custom
+  </td><td valign="top">  &nbsp;
+  </td></tr><tr class="bglight"><td valign="top">  &nbsp;
+  </td><td valign="top">  tags box
+  </td><td valign="top">  cloud
+  </td><td valign="top">  blog
+  </td></tr><tr class="bgdark"><td valign="top">  &nbsp;
+  </td><td valign="top">  manual list of clients
+  </td><td valign="top">  slider
+  </td><td valign="top">  clients
+  </td></tr>
+</table>
+<p>In “page type” column all specific pages are listed. In “what” column all specific pieces of information are listed. For each “what” there is a description in “type” column of what kind of information is shown. This can be a simple information type like text for Title or more complex like comments. Also for all pieces of information which are not directly managed on the page, the page which manages that content is listed in “source” column. For example: Title of the page is always managed by the page, but a List of News & Posts is usually not, that information is actually gathered from other pages to avoid duplicate entry.</p><p><b>It is important that all stakeholders understand how each piece of information works, so that the functionality is common to all team members.</b> If this is not the case, it can lead to problems later. E.g. client could expect User Comments to behave in some different way so the specification could be broken down to even smaller pieces.</p><p>Creating this sheet is probably not needed is some cases:</p>
+<ul>
+
+<li>if the site is simple so all information can be specified in sitemap and wireframes,</li>
+
+<li>or, if the site is standard in some way (e.g blog site) so the content model is known,</li>
+
+<li>or for very simple pages that have no manageable information </li>
+
+</ul>
+<p>But for more complex sites, especially with more customized content, this step should give a complete overview on all information that is presented and should be an excellent base for next &nbsp;steps:</p>
+<ul>
+
+<li>User scenarios</li>
+
+<li>Wireframes</li>
+
+<li>CMS page type definitions (if the site is being implement with modern CMS)</li>
+
+</ul>
+<p>For even more complex sites additional columns would be very handy. If, for example, a site has more user groups with different policies an additional “can read” column would be good to have.</p><p><b>What is important to remember that this model should be revised in situations were you learn more information in the following steps.</b> For example, if you produce a clickable demo for user testing purposes and the results are telling you to change the content model, do it.</p><p>That is all for know, hopefully next post from this series will be published in less than year time :)</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/15/2012 04:12 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/How-to-create-a-modern-web-site-part-3-the-Web-Content-Model2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/How-to-create-a-modern-web-site-part-3-the-Web-Content-Model">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-How-to-create-and-use-custom-fetch-functions-in-eZ-Publish" title="Confessions of an apprentice: How to create and use custom fetch functions in eZ Publish">Confessions of an apprentice: How to create and use custom fetch f ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>Last time we have created a new database table, linked it to a new class we created specifically for this purpose, and learned how to extend the&nbsp;<b>eZPersistentObject</b> class which is used for all the data manipulation.</p><p>This time, we will learn how to actually use all of the features we’ve created last time in the templates. Of course, as always, I’ll create a simple example which will use as a foundation for all of your work in eZ Publish, as you progress to truly being a wizard.<b>&nbsp;</b></p><a name="eztoc8278_1" id="eztoc8278_1"></a><h2>Setting up fetch functions</h2><a name="eztoc8278_1_1" id="eztoc8278_1_1"></a><h3>Creating custom fetch functions</h3><p>The first thing you need to create are two PHP files for your module:<b>&nbsp;function_definition.php</b> and <b>mymodulefunctioncollection.php</b>. As you can see from the names of the files, <b>mymodulefunctioncollection.php</b> is a collection of all the functions that our fetch functions will use in the PHP side of the module, and<b>&nbsp;function_definition.php</b> is the PHP script which defines the names and parameters of our fetch functions.</p><p>First off, create the<b>&nbsp;mymodulefunctioncollection.php</b> in the <b>modules/mymodule</b> folder of your extension. This is actually a PHP class which will have a few of the functions we need in the templates. Let’s fill it up with some code, shall we?</p><pre><?php
+
+class myModuleFunctionCollection
+{
+public static function fetchDiscountCodes( $offset=false, $limit = false )
+{
+$limits = null;
+if ( is_numeric( $offset ) || is_numeric( $limit ) )
+{
+$limits = array();
+$limits['offset'] = is_numeric( $offset ) ? (int) $offset : 0;
+$limits['length'] = is_numeric( $limit ) ? (int) $limit : 15;
+}
+
+$fetchResult = myDiscountCode::fetchList( null, $limits );
+
+if ( is_array( $fetchResult ) && !empty( $fetchResult ) )
+return array( 'result' => $fetchResult );
+
+return array( 'result' => false );
+}
+
+public static function fetchDiscountCodesCount()
+{
+$fetchResult = myDiscountCode::fetchCount();
+if ( is_numeric( $fetchResult ) )
+return array( 'result' => (int) $fetchResult );
+
+return array( 'result' => 0 );
+}
+}
+
+?></pre><p>
+As you can see, we have defined two methods here: <b>fetchDiscountCodes()</b>, and <b>fetchDiscountCodesCount()</b>. The <b>fetchDiscountCodes()</b> method will take two parameters,<b>&nbsp;$offset</b> and <b>$limit</b> which will serve as parameters for one of the fetch functions. With those, we can define how much of the codes we want to fetch at once, and where in the table to begin fetching results, assuming we have a bunch of codes in our table. Since we already have a <b>fetchList()</b> method defined in the&nbsp;<b>myDiscountCode</b> class, we will just return a result according to those parameters. Therefore, we check if <b>$offset</b> and <b>$limit</b> are numeric values, and if either of them is a numeric value, we will set an offset value or a limit value to our <b>$limits</b> array accordingly. If none of them is a numeric value, we set them to some default values. In this case, I have chosen these values to be 0 for offset and 15 for limit, but you can set them to whichever values you’d like. After that, we just call the <b>fetchList()</b> method from the <b>myDiscountCode</b> class and apply those limits to it. When this function is called from a template, it will return either a false result, in case no data is in the table or if offset and limit are invalid or out of range, or a list of the <b>myDiscountCode</b> objects within specified limits.<br />The second function we have created is the fetchDiscountCodesCount() function which we’ll use to count all of the rows in the database table. And if there is data in the table, we will get a number of all the rows in it, otherwise, we will get a zero count.</p><p>The next step is to modify the function_definition.php file we’ve created. This file is the place where we create definitions for our fetch functions. As you will see in a moment, the structure of this file is very similar to the actual module.php file&nbsp;itself. We’ll start coding it like so:</p><pre><?php
+
+$FunctionList = array();
+
+$FunctionList['discount_codes'] = array( 
+'name' => 'discount_codes',
+'call_method' => array( 'class' => 'myModuleFunctionCollection', 'method' => 'fetchDiscountCodes' ),
+'parameter_type' => 'standard',
+'parameters' => array( array( 'name' => 'offset', 'type' => 'integer', 'required' => false, 'default' => 0 ), array( 'name' => 'limit', 'type' => 'integer', 'required' => false, 'default' => 15 ) )
+);
+
+$FunctionList['discount_codes_count'] = array(
+'name' => 'discount_codes_count',
+'call_method' => array( 'class' => 'myModuleFunctionCollection', 'method' => 'fetchDiscountCodesCount' ),
+'parameter_type' => 'standard',
+'parameters' => array()
+);
+
+?></pre><p>OK, so what do we see here? We have defined a <b>$FunctionList</b> array and put in it two keys called <b>discount_codes</b> and <b>discount_codes_count</b>. Each of these keys is an array which contains the following keys: <b>name</b>, <b>call_method</b>, <b>parameter_type</b>, and <b>parameters</b>.</p><p>The <b>name</b> key speaks for itself, it’s the name of the function we need to call. The <b>call_method</b> key is the key in which we define an array of the class and method this particular function uses, therefore, we’ll use our function collection and a method from it which matches the function we’d like to perform. The <b>parameter_type</b> key is a deprecated feature which is here because of backwards compatibility with the previous versions. And the last key is parameters. Its value is an array which consists of inner arrays which define the parameters we want to pass onto a function one by one. In the case of the <b>discount_codes</b> function, we have determined two integer parameters, ‘offset’ and ‘limit’, both of which are optional, and have default values of 0 and 15 respectively.</p><p>At the end of the day, when you test your code, if everything is set up properly, you’ll be able to write something like this:</p><pre>{def $discount_codes_fetch = fetch(‘mymodule’, ‘discount_codes’)}</pre><p>and get a list of discount codes.</p><a name="eztoc8278_1_2" id="eztoc8278_1_2"></a><h3>Using fetch functions in the templates</h3><p>Let’s say that you want to set up a template which will have a main purpose of editing discount codes in the database table. We will use both fetch functions we created to demonstrate their use. This is just a fragment of a larger code involving a form which submits the changes:</p><pre>{def $codes = fetch(mymodule, discount_codes, hash( offset, first_set( $view_parameters.offset, 0 ) ) )}
+{def $codes_count = fetch(mymodule, discount_codes_count)}
+
+{if $codes_count|gt( 0 )}
+{foreach $codes as $code}
+<tr>
+<td><input type="checkbox" value="{$code.id}" name="CodeIDArray[]" /></td>
+<td>{$code.discount_code|wash}</td>
+<td>{$code.valid_from|datetime('custom', '%Y-%m-%d %H:%i')}</td>
+<td>{$code.valid_to|datetime('custom', '%Y-%m-%d %H:%i')}</td>
+<td><a href={concat('mymodule/editdiscountcode/', $code.id)|ezurl}><img src={'edit.gif'|ezimage} alt="Edit discount code" /></a></td>
+</tr>
+{/foreach}
+{/if}</pre><p>
+As you can see, after we fetched the codes count and the codes themselves, we created an HTML table inside the template which displays all of the relevant information regarding our discount codes. Also, at the end of each row in the table, we added an Edit link which will enable us to add new codes, and edit the existing ones.<br />
+In the next article, we will deal with the necessary views for our discount codes to be fully functional.<br />
+Until next time, I wish you happy coding,<br />Tomislav</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/07/2012 06:37 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Confessions-of-an-apprentice-How-to-create-and-use-custom-fetch-functions-in-eZ-Publish">View mirror of item</a> &nbsp; <a href="http://www.netgen.hr/Blog/Confessions-of-an-apprentice-How-to-create-and-use-custom-fetch-functions-in-eZ-Publish">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Netgen">Netgen</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://www.netgenlabs.com/Blog/Confessions-of-an-apprentice-How-to-create-and-use-custom-fetch-functions-in-eZ-Publish" title="Confessions of an apprentice: How to create and use custom fetch functions in eZ Publish">Confessions of an apprentice: How to create and use custom fetch f ...</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p><a href="http://www.netgen.hr/eng/Blog/Confessions-of-an-apprentice-How-to-manipulate-data-from-an-eZ-Publish-database-with-PHP" target="_blank">Last time</a> we have created a new database table, linked it to a new class we created specifically for this purpose, and learned how to extend the&nbsp;<b>eZPersistentObject</b> class which is used for all the data manipulation.</p><p>This time, we will learn how to actually create fetch functions for use in the templates. Of course, as always, I’ll create a simple example which will use as a foundation for all of your work in eZ Publish, as you progress to truly being a wizard.<b>&nbsp;</b></p><a name="eztoc8278_1" id="eztoc8278_1"></a><h2>Setting up fetch functions</h2><a name="eztoc8278_1_1" id="eztoc8278_1_1"></a><h3>Creating custom fetch functions</h3><p>The first thing you need to create are two PHP files for your module:<b>&nbsp;function_definition.php</b> and <b>mymodulefunctioncollection.php</b>. As you can see from the names of the files, <b>mymodulefunctioncollection.php</b> is a collection of all the functions that our fetch functions will use in the PHP side of the module, and<b>&nbsp;function_definition.php</b> is the PHP script which defines the names and parameters of our fetch functions.</p><p>First off, create the<b>&nbsp;mymodulefunctioncollection.php</b> in the <b>modules/mymodule</b> folder of your extension. This is actually a PHP class which will have a few of the functions we need in the templates. Let’s fill it up with some code, shall we?</p>	<pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;"><?php</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> myModuleFunctionCollection
+<span style="color: #009900;">{</span>
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> fetchDiscountCodes<span style="color: #009900;">(</span> <span style="color: #000088;">$offset</span><span style="color: #339933;">=</span><span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span> <span style="color: #000088;">$limit</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">false</span> <span style="color: #009900;">)</span>
+    <span style="color: #009900;">{</span>
+        <span style="color: #000088;">$limits</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span> <a href="http://www.php.net/is_numeric"><span style="color: #990000;">is_numeric</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$offset</span> <span style="color: #009900;">)</span> <span style="color: #339933;">||</span> <a href="http://www.php.net/is_numeric"><span style="color: #990000;">is_numeric</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$limit</span> <span style="color: #009900;">)</span> <span style="color: #009900;">)</span>
+        <span style="color: #009900;">{</span>
+            <span style="color: #000088;">$limits</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+            <span style="color: #000088;">$limits</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'offset'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/is_numeric"><span style="color: #990000;">is_numeric</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$offset</span> <span style="color: #009900;">)</span> ? <span style="color: #009900;">(</span>int<span style="color: #009900;">)</span> <span style="color: #000088;">$offset</span> <span style="color: #339933;">:</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+            <span style="color: #000088;">$limits</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'length'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/is_numeric"><span style="color: #990000;">is_numeric</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$limit</span> <span style="color: #009900;">)</span> ? <span style="color: #009900;">(</span>int<span style="color: #009900;">)</span> <span style="color: #000088;">$limit</span> <span style="color: #339933;">:</span> <span style="color: #cc66cc;">15</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">}</span>
+&nbsp;
+        <span style="color: #000088;">$fetchResult</span> <span style="color: #339933;">=</span> myDiscountCode<span style="color: #339933;">::</span><span style="color: #004000;">fetchList</span><span style="color: #009900;">(</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">,</span> <span style="color: #000088;">$limits</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span> <a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$fetchResult</span> <span style="color: #009900;">)</span> <span style="color: #339933;">&&</span> <span style="color: #339933;">!</span><a href="http://www.php.net/empty"><span style="color: #990000;">empty</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$fetchResult</span> <span style="color: #009900;">)</span> <span style="color: #009900;">)</span>
+            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'result'</span> <span style="color: #339933;">=></span> <span style="color: #000088;">$fetchResult</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'result'</span> <span style="color: #339933;">=></span> <span style="color: #009900; font-weight: bold;">false</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">}</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> fetchDiscountCodesCount<span style="color: #009900;">(</span><span style="color: #009900;">)</span>
+    <span style="color: #009900;">{</span>
+        <span style="color: #000088;">$fetchResult</span> <span style="color: #339933;">=</span> myDiscountCode<span style="color: #339933;">::</span><span style="color: #004000;">fetchCount</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span> <a href="http://www.php.net/is_numeric"><span style="color: #990000;">is_numeric</span></a><span style="color: #009900;">(</span> <span style="color: #000088;">$fetchResult</span> <span style="color: #009900;">)</span> <span style="color: #009900;">)</span>
+            <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'result'</span> <span style="color: #339933;">=></span> <span style="color: #009900;">(</span>int<span style="color: #009900;">)</span> <span style="color: #000088;">$fetchResult</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #b1b100;">return</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> <span style="color: #0000ff;">'result'</span> <span style="color: #339933;">=></span> <span style="color: #cc66cc;">0</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">}</span>
+<span style="color: #009900;">}</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?></span></pre><p>
+As you can see, we have defined two methods here: <b>fetchDiscountCodes()</b>, and <b>fetchDiscountCodesCount()</b>. The <b>fetchDiscountCodes()</b> method will take two parameters,<b>&nbsp;$offset</b> and <b>$limit</b> which will serve as parameters for one of the fetch functions. With those, we can define how much of the codes we want to fetch at once, and where in the table to begin fetching results, assuming we have a bunch of codes in our table. Since we already have a <b>fetchList()</b> method defined in the&nbsp;<b>myDiscountCode</b> class, we will just return a result according to those parameters. Therefore, we check if <b>$offset</b> and <b>$limit</b> are numeric values, and if either of them is a numeric value, we will set an offset value or a limit value to our <b>$limits</b> array accordingly. If none of them is a numeric value, we set them to some default values. In this case, I have chosen these values to be 0 for offset and 15 for limit, but you can set them to whichever values you’d like. After that, we just call the <b>fetchList()</b> method from the <b>myDiscountCode</b> class and apply those limits to it. When this function is called from a template, it will return either a false result, in case no data is in the table or if offset and limit are invalid or out of range, or a list of the <b>myDiscountCode</b> objects within specified limits.<br />The second function we have created is the fetchDiscountCodesCount() function which we’ll use to count all of the rows in the database table. And if there is data in the table, we will get a number of all the rows in it, otherwise, we will get a zero count.</p><p>The next step is to modify the function_definition.php file we’ve created. This file is the place where we create definitions for our fetch functions. As you will see in a moment, the structure of this file is very similar to the actual module.php file&nbsp;itself. We’ll start coding it like so:</p>	<pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;"><?php</span>
+&nbsp;
+<span style="color: #000088;">$FunctionList</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$FunctionList</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'discount_codes'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span> 
+    <span style="color: #0000ff;">'name'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'discount_codes'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'call_method'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span>
+        <span style="color: #0000ff;">'class'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'myModuleFunctionCollection'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'method'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'fetchDiscountCodes'</span>
+    <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'parameter_type'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'standard'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'parameters'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span>
+        <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span>
+            <span style="color: #0000ff;">'name'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'offset'</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'type'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'integer'</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'required'</span> <span style="color: #339933;">=></span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'default'</span> <span style="color: #339933;">=></span> <span style="color: #cc66cc;">0</span>
+        <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+        <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span>
+            <span style="color: #0000ff;">'name'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'limit'</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'type'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'integer'</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'required'</span> <span style="color: #339933;">=></span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">,</span>
+            <span style="color: #0000ff;">'default'</span> <span style="color: #339933;">=></span> <span style="color: #cc66cc;">15</span>
+        <span style="color: #009900;">)</span>
+    <span style="color: #009900;">)</span>
+<span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$FunctionList</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'discount_codes_count'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span>
+    <span style="color: #0000ff;">'name'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'discount_codes_count'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'call_method'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span>
+        <span style="color: #0000ff;">'class'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'myModuleFunctionCollection'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'method'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'fetchDiscountCodesCount'</span>
+    <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'parameter_type'</span> <span style="color: #339933;">=></span> <span style="color: #0000ff;">'standard'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'parameters'</span> <span style="color: #339933;">=></span> <a href="http://www.php.net/array"><span style="color: #990000;">array</span></a><span style="color: #009900;">(</span><span style="color: #009900;">)</span>
+<span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?></span></pre><p>OK, so what do we see here? We have defined a <b>$FunctionList</b> array and put in it two keys called <b>discount_codes</b> and <b>discount_codes_count</b>. Each of these keys is an array which contains the following keys: <b>name</b>, <b>call_method</b>, <b>parameter_type</b>, and <b>parameters</b>.</p><p>The <b>name</b> key speaks for itself, it’s the name of the function we need to call. The <b>call_method</b> key is the key in which we define an array of the class and method this particular function uses, therefore, we’ll use our function collection and a method from it which matches the function we’d like to perform. The <b>parameter_type</b> key is a deprecated feature which is here because of backwards compatibility with the previous versions. And the last key is <b>parameters</b>. Its value is an array which consists of inner arrays which define the parameters we want to pass onto a function one by one. In the case of the <b>discount_codes</b> function, we have determined two integer parameters, ‘offset’ and ‘limit’, both of which are optional, and have default values of 0 and 15 respectively.</p><p>At the end of the day, when you test your code, if everything is set up properly, you’ll be able to write something like this:</p>	<pre class="eztemplate" style="font-family:monospace;"><span style="color: #66cc66;">{</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_functions/variables/def"><span style="color: #0600FF;">def</span></a> <span style="color: #0000bb;">$discount_codes_fetch</span> <span style="color: #66cc66;">=</span><span style="color: #dd0000;"> <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/data_and_information_extraction/fetch"><span style="color: #0600FF;">fetch</span></a><span style="color: #66cc66;">(</span></span><span style="color: #dd0000;">'mymodule'</span>, <span style="color: #dd0000;">'discount_codes'</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">}</span></pre><p>and get a list of discount codes.</p><a name="eztoc8278_1_2" id="eztoc8278_1_2"></a><h3>Using fetch functions in the templates</h3><p>Let’s say that you want to set up a template which will have a main purpose of editing discount codes in the database table. We will use both fetch functions we created to demonstrate their use. This is just a fragment of a larger code involving a form which submits the changes:</p>	<pre class="eztemplate" style="font-family:monospace;"><span style="color: #66cc66;">{</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_functions/variables/def"><span style="color: #0600FF;">def</span></a> <span style="color: #0000bb;">$codes</span> <span style="color: #66cc66;">=</span><span style="color: #dd0000;"> <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/data_and_information_extraction/fetch"><span style="color: #0600FF;">fetch</span></a><span style="color: #66cc66;">(</span>mymodule,</span> discount_codes, <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/arrays/hash"><span style="color: #0600FF;">hash</span></a><span style="color: #66cc66;">(</span> <span style="color: #0600FF;">offset</span>, <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/logical_operations/first_set"><span style="color: #0600FF;">first_set</span></a><span style="color: #66cc66;">(</span> <span style="color: #0000bb;">$view_parameters.</span><span style="color: #0600FF;">offset</span>, <span style="color: #cc66cc;">0</span> <span style="color: #66cc66;">)</span> <span style="color: #66cc66;">)</span> <span style="color: #66cc66;">)</span><span style="color: #66cc66;">}</span>
+<span style="color: #66cc66;">{</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_functions/variables/def"><span style="color: #0600FF;">def</span></a> <span style="color: #0000bb;">$codes_count</span> <span style="color: #66cc66;">=</span><span style="color: #dd0000;"> <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/data_and_information_extraction/fetch"><span style="color: #0600FF;">fetch</span></a><span style="color: #66cc66;">(</span>mymodule,</span> discount_codes_count<span style="color: #66cc66;">)</span><span style="color: #66cc66;">}</span>
+&nbsp;
+<span style="color: #66cc66;">{</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_control_structures/conditional_control/if"><span style="color: #0600FF;">if</span></a> <span style="color: #0000bb;">$codes_count</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/logical_operations/gt"><span style="color: #0600FF;">gt</span></a><span style="color: #66cc66;">(</span> <span style="color: #cc66cc;">0</span> <span style="color: #66cc66;">)</span><span style="color: #66cc66;">}</span>
+    <span style="color: #66cc66;">{</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_control_structures/looping/foreach"><span style="color: #0600FF;">foreach</span></a> <span style="color: #0000bb;">$codes</span> <span style="color: #0600FF;">as</span> <span style="color: #0000bb;">$code</span><span style="color: #66cc66;">}</span>
+        <tr>
+            <td><input type="checkbox" value="<span style="color: #66cc66;">{</span><span style="color: #0000bb;">$code.id</span><span style="color: #66cc66;">}</span>" name="CodeIDArray[]" /></td>
+            <td><span style="color: #66cc66;">{</span><span style="color: #0000bb;">$code.discount_code</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/strings/wash"><span style="color: #0600FF;">wash</span></a><span style="color: #66cc66;">}</span></td>
+            <td><span style="color: #66cc66;">{</span><span style="color: #0000bb;">$code.valid_from</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/formatting_and_internationalization/datetime"><span style="color: #0600FF;">datetime</span></a><span style="color: #66cc66;">(</span><span style="color: #dd0000;">'custom'</span>, <span style="color: #dd0000;">'%Y-%m-%d %H:%i'</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">}</span></td>
+            <td><span style="color: #66cc66;">{</span><span style="color: #0000bb;">$code.valid_to</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/formatting_and_internationalization/datetime"><span style="color: #0600FF;">datetime</span></a><span style="color: #66cc66;">(</span><span style="color: #dd0000;">'custom'</span>, <span style="color: #dd0000;">'%Y-%m-%d %H:%i'</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">}</span></td>
+            <td><a href=<span style="color: #66cc66;">{</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/strings/concat"><span style="color: #0600FF;">concat</span></a><span style="color: #66cc66;">(</span><span style="color: #dd0000;">'mymodule/editdiscountcode/'</span>, <span style="color: #0000bb;">$code.id</span><span style="color: #66cc66;">)</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/urls/ezurl"><span style="color: #0600FF;">ezurl</span></a><span style="color: #66cc66;">}</span>><img src=<span style="color: #66cc66;">{</span><span style="color: #dd0000;">'edit.gif'</span><span style="color: #66cc66;">|</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_operators/urls/ezimage"><span style="color: #0600FF;">ezimage</span></a><span style="color: #66cc66;">}</span> alt="Edit discount code" /></a></td>
+        </tr>
+    <span style="color: #66cc66;">{</span><span style="color: #66cc66;">/</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_control_structures/looping/foreach"><span style="color: #0600FF;">foreach</span></a><span style="color: #66cc66;">}</span>
+<span style="color: #66cc66;">{</span><span style="color: #66cc66;">/</span><a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/template_control_structures/conditional_control/if"><span style="color: #0600FF;">if</span></a><span style="color: #66cc66;">}</span></pre><p>
+As you can see, after we fetched the codes count and the codes themselves, we created an HTML table inside the template which displays all of the relevant information regarding our discount codes. Also, at the end of each row in the table, we added an Edit link which will enable us to add new codes, and edit the existing ones.<br />
+In the next article, we will deal with the necessary views for our discount codes to be fully functional.<br />
+Until next time, I wish you happy coding,<br />Tomislav</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>05/07/2012 06:37 am</span> &nbsp; <a href="http://www.netgen.hr/eng/Blog">www.netgen.hr/eng/Blog</a> &nbsp; <a href="/Mirror/Netgen/Confessions-of-an-apprentice-How-to-create-and-use-custom-fetch-functions-in-eZ-Publish2">View mirror of item</a> &nbsp; <a href="http://www.netgenlabs.com/Blog/Confessions-of-an-apprentice-How-to-create-and-use-custom-fetch-functions-in-eZ-Publish">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/2/(year)/2012" title="">February 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                            <li><a href="/Mirror/Netgen/(month)/4/(year)/2011" title="">April 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                                                                                                                                                                                    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Netgen/(month)/4/(year)/2012" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Netgen/(month)/6/(year)/2012" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>May&nbsp;2012</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                            <td class="currentselected ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                            <td class=" ">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                                        <td class="  right">
+            6
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            <em><a href="/Mirror/Netgen/(day)/7/(month)/5/(year)/2012">7</a></em>
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                            <td class=" ">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                                        <td class="  right">
+            13
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            14
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/Netgen/(day)/15/(month)/5/(year)/2012">15</a></em>
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                            <td class=" ">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                                        <td class="  right">
+            20
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                            <td class=" ">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                                        <td class="  right">
+            27
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2012";s:5:"month";s:1:"5";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"228";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:6:"Netgen";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"228";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"226";s:7:"node_id";s:3:"228";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"7f359aaa74ea9081f7b9d7c57013072d";s:14:"node_remote_id";s:32:"80d65711644b755185f988f146faca0d";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:13:"Mirror/Netgen";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"228";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

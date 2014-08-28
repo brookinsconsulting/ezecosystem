@@ -1,0 +1,768 @@
+a:10:{s:7:"content";s:61074:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/powered-lectroid-javascript-nodejs" title="Powered by Lectroid, JavaScript and Node.js">Powered by Lectroid, JavaScript and Node.js</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/blog" title="blog">blog</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p><a href="http://damien.pobel.fr/post/console-log-hello-world">This blog is now powered by Lectroid</a>, a very
+nice blog engine found by chance on
+<a href="https://github.com/rgrove/lectroid">Github</a>. In short:</p>
+<ul>
+<li>it is written in JavaScript for Node.js</li>
+<li>it does not need any database</li>
+<li>it is small enough (~800 JavaScript lines without my changes) that I've read and understood every single line of code</li>
+<li>it is easy to extend</li>
+<li>the posts can be written in Markdown (or HTML)</li>
+<li>it is damn <strong>fast</strong></li>
+</ul>
+<p>Lectroid does not have any administration interface. That might sound a bit old
+school but that's actually a strong asset (at least for a geek like me :)). I
+can completely write my post offline with my favorite text editor, and when I'm
+done, I commit and push on a private git repository. Then, a git post receive
+script mirrors the changes in the directory watched by Lectroid and it does the
+rest!</p>
+<p>I also added some features and that was very easy thanks to some great node
+modules:</p>
+<ul>
+<li>a system to resize images with <a href="https://npmjs.org/package/imgr">IMGR</a></li>
+<li>a custom CSS management system to merge and minify (with
+<a href="https://npmjs.org/package/clean-css">clean-css</a>) the stylesheets in the
+production environment while still keeping the development easy</li>
+<li>the syntax highlighting of the code snippets with
+<a href="https://npmjs.org/package/highlight.js">highlight.js</a></li>
+</ul>
+<p>I'm quite happy with the result even if I still have to polish stuff here and
+there.</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>03/06/2013 02:40 pm</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Powered-by-Lectroid-JavaScript-and-Node.js">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/powered-lectroid-javascript-nodejs">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/twitter-bootstrap-indigestion" title="Twitter Bootstrap indigestion">Twitter Bootstrap indigestion</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/css" title="css">css</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p><a href="http://notes.unwieldy.net/post/43508972396/please-stop-using-twitter-bootstrap">Please stop using Twitter
+Bootstrap</a></p>
+<blockquote>
+<p>Let's be honest: a great many of us are tired of seeing the same old Twitter
+Bootstrap theme again and again.</p>
+<p>[...]</p>
+<p>But when you start to see the same layout <a href="http://www.financialq.com/">over</a>,
+and <a href="http://www.appfeed.net/">over</a>, and <a href="http://fiveaday.co/">over</a> again users
+begin to tune out. You’ve lost me. Your design looks like one of 6,000 other
+sites out there.</p>
+</blockquote>
+<p>Don't get me wrong, <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> is
+a great tool to quickly build something with a decent look and feel. But it is
+so much used without any customization that it becomes completely boring!</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>03/04/2013 05:04 am</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Twitter-Bootstrap-indigestion">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/twitter-bootstrap-indigestion">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/my-javascript-style-badge" title="My JavaScript style badge">My JavaScript style badge</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/javascript" title="javascript">javascript</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p><figure class="object-left"><img src="http://damien.pobel.fr/images/javascript-style-badge.png"
+alt="My JavaScript style badge"></figure>
+OK that's completely useless, hence why you have to <a href="http://jsstyle.github.com/#create">generate
+yours</a> and spread the world with it! Now,
+I want a compatibility checker ;-)</p>
+<p><a href="http://jsstyle.github.com/?838078131129297429667031171770#text">The details can be viewed on the
+website</a>, here
+are my JavaScript style key points:</p>
+<ul>
+<li>no processor, pure JavaScript only</li>
+<li>indent with spaces</li>
+<li>comma at the end in lists</li>
+<li><strong>ALWAYS</strong> use semicolons</li>
+<li>private names begins with an underscore</li>
+<li>variable declaration at the beginning</li>
+</ul>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>03/03/2013 08:40 am</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/My-JavaScript-style-badge">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/my-javascript-style-badge">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/firefox-os" title="Firefox OS">Firefox OS</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/css3" title="css3">css3</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <figure class="object-left"><a href="http://damien.pobel.fr/images/firefox-os-home-screen.jpg"><img
+src="http://damien.pobel.fr/images/220x/firefox-os-home-screen.jpg" alt="Firefox OS Home
+screen"></a></figure>
+
+<p><a href="http://www.mozilla.org/en-US/firefox/partners/#os">Firefox OS</a> begins to make
+some noise these days and that's pretty cool! For those who don't know it yet,
+Firefox OS is the last project from the Mozilla Foundation that aims at
+building a mobile OS powered by
+<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Gecko">Gecko</a> (the layout
+engine behind Firefox). As a result in Firefox OS, almost everything is built
+with HTML5, CSS3 and JavaScript.</p>
+<p>From a technical point of view, this is just a brilliant and exciting idea!
+Those technologies are open and standardized. And <a href="https://marketplace.firefox.com/developers/docs/quick_start">to start developping your own
+applications</a>, you
+just need your preferred text editor and a recent version of Firefox!</p>
+<p>I'm very happy with Android 4.2 on my Nexus 4 but I'd really like to start using
+(and maybe hacking :-)) Firefox OS on a real device (instead of <a href="https://addons.mozilla.org/en-US/firefox/addon/firefox-os-simulator/">the
+simulator</a>),
+unfortunatelly, <a href="https://github.com/mozilla-b2g/B2G/blob/master/config.sh#L51">the compatible
+devices</a> and the
+port efforts are <a href="https://autonome.wordpress.com/2013/01/15/firefox-os-devices-and-dark-matter/">quite rare and unstable at the
+moment</a>.
+While writing this post, I found that <a href="https://wiki.mozilla.org/B2G/Nexus7">Firefox OS can also be installed on Nexus
+7</a> but the lack of WIFI explained in the
+last sentence of this page is not very motivating...</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>03/02/2013 12:55 pm</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Firefox-OS">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/firefox-os">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/console-log-hello-world" title="console.log('Hello world!')">console.log('Hello world!')</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/blog" title="blog">blog</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p>Hello world! And welcome on my brand new blog. And when I write <em>new</em>, I mean
+<strong>NEW</strong>.</p>
+<p>First, the URL is now <a href="http://damien.pobel.fr/">http://damien.pobel.fr/</a>, nothing fancy here, that's my
+name, and maybe, thanks to that change (and some others...), this website will
+be the first result in Google when searching for "<a href="https://www.google.com/search?q=damien+pobel">Damien
+Pobel</a>"!</p>
+<p>Second, as you can see if you're not reading this text through an aggregator, there
+are a lot of visible changes, I hope you like it as much I'm proud of it ;-) I
+also removed the comments, I don't know yet if it's definitive or not.</p>
+<p>Lastly, it's not based on <a href="http://damien.pobel.fr/tag/ez+publish">eZ Publish</a> anymore. It's built with a
+tool called <a href="https://github.com/rgrove/lectroid">Lectroid</a> which is a <em>really
+boring blog engine</em> written in JavaScript by <a href="http://wonko.com/">Ryan Grove</a>. I
+discovered this tool while randomly browsing repositories on Github and I found
+it very closed to what I had in mind for a potential new blog for months now.
+It's also a good occasion to dive a bit more into the server side JavaScript. I will
+probably explain more in details in an other post why Lectroid is far less boring
+than what its tagline suggests. But in any case, I want to thank Ryan for publishing
+it on Github.</p>
+<p>For the people interested in eZ Publish, don't worry, I will still write blog
+posts on this fantastic <acronym title="Content Management
+System">CMS</acronym>. The 5.x story has just began, the next months will be
+interesting :-)</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>02/28/2013 03:48 pm</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/console.log-Hello-world!">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/console-log-hello-world">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://pwet.fr/blog/planet_ez_publish_fr_mis_sur_orbite_par_ez_publish_5" title="Planet eZ Publish.fr mis sur orbite par eZ Publish 5!">Planet eZ Publish.fr mis sur orbite par eZ Publish 5!</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/Symfony%202" title="Symfony 2">Symfony 2</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>(<a href="http://share.ez.no/blogs/damien-pobel/planet-ez-publish.fr-orbited-by-ez-publish-5">English version available on share.ez.no</a>)</p><p>Comme annoncé via <a href="https://twitter.com/dpobel/status/276627335921414144">Twitter</a> et <a href="https://plus.google.com/102664237253121682993/posts/8hm2tSo9NUC">Google+</a> il y a une semaine, <a href="http://www.planet-ezpublish.fr/">le Planet eZ Publish.fr</a> est dorénavant mis sur orbite par <a href="http://ez.no/fr/Produits/eZ-Publish-5-Platform">eZ Publish 5</a> (en réalité des <i>clones</i> github du 04/12/2012 soit quelque part entre la version 5.0 et <a href="http://share.ez.no/downloads/downloads">les futures 2012.11/2012.12</a>). Pour autant que je sache, il s'agit du premier site utilisant eZ Publish 5 ou au moins qui ne se contente pas d'utiliser le <i>fallback</i> sur la partie legacy (ie eZ Publish 4.x). En effet, j'ai tenté de ré-implémenter au maximum le site dans la nouvelle pile basée sur Symfony 2. L'ensemble du code source est disponible dans <a href="https://github.com/dpobel/planet-ezpublish.fr">le dépôt git dpobel/planet-ezpublish.fr</a>, pour les curieux les éléments dignes d'intérêt se situent dans le <a href="https://github.com/dpobel/planet-ezpublish.fr/tree/master/planet/src/Planet/PlanetBundle">PlanetBundle</a> et dans les fichiers de configuration <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/ezpublish.yml">ezpublish.yml</a>, <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/override.yml">override.yml</a> et <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/parameters.yml">parameters.yml</a>.</p><h2 id="eztoc233516_1">Nouvelle stack vs. legacy</h2><p>Au final, il reste 3 fonctionnalités basées sur la partie <i>legacy</i> :</p>
+<ul>
+
+<li>Le formulaire de <a href="http://www.planet-ezpublish.fr/contact">contact</a>, les attributs collecteur d'information n'étant pas pris en charge pour le moment</li>
+
+<li><a href="http://www.planet-ezpublish.fr/planet/search">Le moteur de recherche</a>, là encore l'intégration de Solr est incomplete</li>
+
+<li><a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/legacy/extensions/planete/cronjobs/cleanup_planetarium.php">Un script de nettoyage</a> de la partie planétarium, pour ce dernier point, j'avoue que c'est par pure flemme :-)</li>
+
+</ul>
+<p>À l'inverse, le reste du site n'utilise que les nouvelles API et le moteur de template <a href="http://twig.sensiolabs.org/">Twig</a>:</p>
+<ul>
+
+<li><a href="https://github.com/dpobel/planet-ezpublish.fr/tree/master/planet/src/Planet/PlanetBundle/Resources/views/full">Les différentes vues </a>des contenus (<a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/override.yml">règles d'override</a>)</li>
+
+<li>Le flux RSS sur mesure est <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Controller/PlanetController.php#L283">une simple action d'un contrôleur</a> derrière <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Resources/config/routing.yml">la route adhoc</a></li>
+
+<li><a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Command/ImportCommand.php">Le script d'import</a> utilise l'API publique pour créer et mettre à jour les contenus à partir des flux RSS</li>
+
+</ul>
+<h2 id="eztoc233516_2">Bugs et difficultés diverses</h2><p>Sans surprise, il y a quelques bugs dans cette nouvelle version; pour une version majeure en point 0, le contraire aurait été très étonnant, mais il y a aussi des manques plus globaux.</p><p>
+D'une manière générale, <a href="http://ezsystems.github.com/ezp-next/">l'API publique</a> est très verbeuse. J'ai publié <a href="https://gist.github.com/3983418">un gist</a> qui compare le code nécessaire pour récupérer une liste de nœuds triée par priorité dans l'ancienne et la nouvelle API. Je crois que le constat est assez clair. Pour éviter de répéter encore et encore, les mêmes bouts de code, j'ai <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Repository/LocationService.php#L36">2 méthodes utilitaires dans une surcharge du Location service</a>. Avec le recul, ce n'est probablement pas la meilleure manière de faire, mais en tout cas, cette petite addition m'évite de me répéter.<br />
+ <br />Les templates eZ Publish 5 sont radicalement différents des templates eZ Publish 4.x. Et c'est pas uniquement une question de langage. Le point le plus impactant est la disparition de <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Template-fetch-functions">nos bonnes vieilles fonctions <i>fetch</i></a>. Il s'agit d'une excellente chose en terme d'architecture technique mais en l'état elle complexifie un peu l'écriture de template. Il est en effet assez rare de pouvoir se contenter du contenu et de l'emplacement de ce contenu pour générer la vue d'objet. Dans ce cas, une solution est d'appeler dans une sous requête une action d'un <i>controller custom</i> (voir par exemple <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Resources/views/full/planet.html.twig#L18">la vue full correspondant à la page d'accueil</a>). Une autre solution consiste à utiliser <a href="https://confluence.ez.no/display/EZP/Events">l'évènement <tt>ezpublish.pre_content_view</tt></a> mais cet évènement est générique ce qui oblige à détecter d'une manière ou d'une autre dans quel cas l'évènement est lancé ce qui n'est pas forcément évident (<a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/EventListener/PreContentViewListener.php#L28">voir par exemple PlanetBundle/EventListener/PreContentViewListener.php</a>). Bref, pour moi il manque quelque chose ici qui permette de facilement injecter des paramètres dans les templates de vue.</p><p>En tant qu'ancien intégrateur, j'espère qu'on pourra remédier à ces deux points pour rendre le au jour le jour développement un peu plus facile.</p><h2 id="eztoc233516_3">Performances</h2><p>Qu'en est il des performances ? Contrasté est probablement le terme le plus adapté. En effet, sur un site sans identification et peu d'évolution dans le contenu, il est relativement facile de maximiser l'utilisation du cache HTTP et de finalement atteindre les performances <a href="http://symfony.com/fr/doc/master/book/http_cache.html">du reverse proxy Symfony 2</a>. Dans ce cas eZ Publish 5 est assez nettement supérieur à eZ Publish 4.x qui servirait une page complètement cachée et optimisée (<i>cache-block + viewcache</i>)! Si, le reverse proxy de Symfony se révèle trop lent, il est bien sûr possible de le remplacer par un reverse proxy dédié; dans ce domaine <a href="https://www.varnish-cache.org/">Varnish</a> est un candidat de choix qui apportera de bien meilleures performances encore!</p><p>En revanche, lorsque des parties de la page doivent être recalculées, les performances s'effondrent rapidement. <a href="https://github.com/ezsystems/ezp-next/pull/191">Un chantier est en cours</a> pour améliorer les performances des API et cela devrait durer quelques temps.</p><h2 id="eztoc233516_4">Conclusion</h2><p><b>ÇA FONCTIONNE!</b> À vrai dire plutôt mieux que je ne l'aurai cru il y a quelques mois! Bien sûr il reste bien des bugs à corriger et des choses à améliorer, mais clairement eZ Publish 5 est utilisables dans pas mal de cas et pour tout le reste il y a le <i>legacy fallback</i> :-)</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>12/13/2012 05:05 am</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Planet-eZ-Publish.fr-mis-sur-orbite-par-eZ-Publish-5">View mirror of item</a> &nbsp; <a href="http://pwet.fr/blog/planet_ez_publish_fr_mis_sur_orbite_par_ez_publish_5">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/planet-ez-publish-fr-mis-sur-orbite-par-ez-publish-5" title="Planet eZ Publish.fr mis sur orbite par eZ Publish 5!">Planet eZ Publish.fr mis sur orbite par eZ Publish 5!</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/ez%20publish" title="ez publish">ez publish</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <p>(<a href="http://share.ez.no/blogs/damien-pobel/planet-ez-publish.fr-orbited-by-ez-publish-5">English version available on share.ez.no</a>)</p>
+<p>Comme annoncé via <a href="https://twitter.com/dpobel/status/276627335921414144">Twitter</a> et <a href="https://plus.google.com/102664237253121682993/posts/8hm2tSo9NUC">Google+</a> il y a une semaine, <a href="http://www.planet-ezpublish.fr/">le Planet eZ Publish.fr</a> est dorénavant mis sur orbite par <a href="http://ez.no/fr/Produits/eZ-Publish-5-Platform">eZ Publish 5</a> (en réalité des <em>clones</em> github du 04/12/2012 soit quelque part entre la version 5.0 et <a href="http://share.ez.no/downloads/downloads">les futures 2012.11/2012.12</a>). Pour autant que je sache, il s'agit du premier site utilisant eZ Publish 5 ou au moins qui ne se contente pas d'utiliser le <em>fallback</em> sur la partie legacy (ie eZ Publish 4.x). En effet, j'ai tenté de ré-implémenter au maximum le site dans la nouvelle pile basée sur Symfony 2. L'ensemble du code source est disponible dans <a href="https://github.com/dpobel/planet-ezpublish.fr">le dépôt git dpobel/planet-ezpublish.fr</a>, pour les curieux les éléments dignes d'intérêt se situent dans le <a href="https://github.com/dpobel/planet-ezpublish.fr/tree/master/planet/src/Planet/PlanetBundle">PlanetBundle</a> et dans les fichiers de configuration <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/ezpublish.yml">ezpublish.yml</a>, <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/override.yml">override.yml</a> et <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/parameters.yml">parameters.yml</a>.</p>
+<h2>Nouvelle stack vs. legacy</h2>
+<p>Au final, il reste 3 fonctionnalités basées sur la partie <em>legacy</em> :</p>
+<ul>
+<li>Le formulaire de <a href="http://www.planet-ezpublish.fr/contact">contact</a>, les attributs collecteur d'information n'étant pas pris en charge pour le moment</li>
+<li><a href="http://www.planet-ezpublish.fr/planet/search">Le moteur de recherche</a>, là encore l'intégration de Solr est incomplete</li>
+<li><a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/legacy/extensions/planete/cronjobs/cleanup_planetarium.php">Un script de nettoyage</a> de la partie planétarium, pour ce dernier point, j'avoue que c'est par pure flemme :-)</li>
+</ul>
+<p>À l'inverse, le reste du site n'utilise que les nouvelles API et le moteur de template <a href="http://twig.sensiolabs.org/">Twig</a>:</p>
+<ul>
+<li><a href="https://github.com/dpobel/planet-ezpublish.fr/tree/master/planet/src/Planet/PlanetBundle/Resources/views/full">Les différentes vues</a>des contenus (<a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/ezpublish/config/override.yml">règles d'override</a>)</li>
+<li>Le flux RSS sur mesure est <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Controller/PlanetController.php#L283">une simple action d'un contrôleur</a> derrière <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Resources/config/routing.yml">la route adhoc</a></li>
+<li><a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Command/ImportCommand.php">Le script d'import</a> utilise l'API publique pour créer et mettre à jour les contenus à partir des flux RSS</li>
+</ul>
+<h2>Bugs et difficultés diverses</h2>
+<p>Sans surprise, il y a quelques bugs dans cette nouvelle version; pour une version majeure en point 0, le contraire aurait été très étonnant, mais il y a aussi des manques plus globaux.</p>
+<p>D'une manière générale, <a href="http://ezsystems.github.com/ezp-next/">l'API publique</a> est très verbeuse. J'ai publié <a href="https://gist.github.com/3983418">un gist</a> qui compare le code nécessaire pour récupérer une liste de nœuds triée par priorité dans l'ancienne et la nouvelle API. Je crois que le constat est assez clair. Pour éviter de répéter encore et encore, les mêmes bouts de code, j'ai <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Repository/LocationService.php#L36">2 méthodes utilitaires dans une surcharge du Location service</a>. Avec le recul, ce n'est probablement pas la meilleure manière de faire, mais en tout cas, cette petite addition m'évite de me répéter.</p>
+<p>Les templates eZ Publish 5 sont radicalement différents des templates eZ Publish 4.x. Et c'est pas uniquement une question de langage. Le point le plus impactant est la disparition de <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Template-fetch-functions">nos bonnes vieilles fonctions <em>fetch</em></a>. Il s'agit d'une excellente chose en terme d'architecture technique mais en l'état elle complexifie un peu l'écriture de template. Il est en effet assez rare de pouvoir se contenter du contenu et de l'emplacement de ce contenu pour générer la vue d'objet. Dans ce cas, une solution est d'appeler dans une sous requête une action d'un <em>controller custom</em> (voir par exemple <a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/Resources/views/full/planet.html.twig#L18">la vue full correspondant à la page d'accueil</a>). Une autre solution consiste à utiliser <a href="https://confluence.ez.no/display/EZP/Events">l'évènement <code>ezpublish.pre_content_view</code></a> mais cet évènement est générique ce qui oblige à détecter d'une manière ou d'une autre dans quel cas l'évènement est lancé ce qui n'est pas forcément évident (<a href="https://github.com/dpobel/planet-ezpublish.fr/blob/master/planet/src/Planet/PlanetBundle/EventListener/PreContentViewListener.php#L28">voir par exemple PlanetBundle/EventListener/PreContentViewListener.php</a>). Bref, pour moi il manque quelque chose ici qui permette de facilement injecter des paramètres dans les templates de vue.</p>
+<p>En tant qu'ancien intégrateur, j'espère qu'on pourra remédier à ces deux points pour rendre le au jour le jour développement un peu plus facile.</p>
+<h2>Performances</h2>
+<p>Qu'en est il des performances ? Contrasté est probablement le terme le plus adapté. En effet, sur un site sans identification et peu d'évolution dans le contenu, il est relativement facile de maximiser l'utilisation du cache HTTP et de finalement atteindre les performances <a href="http://symfony.com/fr/doc/master/book/http_cache.html">du reverse proxy Symfony 2</a>. Dans ce cas eZ Publish 5 est assez nettement supérieur à eZ Publish 4.x qui servirait une page complètement cachée et optimisée (<em>cache-block + viewcache</em>)! Si, le reverse proxy de Symfony se révèle trop lent, il est bien sûr possible de le remplacer par un reverse proxy dédié; dans ce domaine <a href="https://www.varnish-cache.org/">Varnish</a> est un candidat de choix qui apportera de bien meilleures performances encore!</p>
+<p>En revanche, lorsque des parties de la page doivent être recalculées, les performances s'effondrent rapidement. <a href="https://github.com/ezsystems/ezpublish-kernel/pull/191">Un chantier est en cours</a> pour améliorer les performances des API et cela devrait durer quelques temps.</p>
+<h2>Conclusion</h2>
+<p><strong>ÇA FONCTIONNE!</strong> À vrai dire plutôt mieux que je ne l'aurai cru il y a quelques mois! Bien sûr il reste bien des bugs à corriger et des choses à améliorer, mais clairement eZ Publish 5 est utilisables dans pas mal de cas et pour tout le reste il y a le <em>legacy fallback</em> :-)</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>12/13/2012 05:05 am</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Planet-eZ-Publish.fr-mis-sur-orbite-par-eZ-Publish-52">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/planet-ez-publish-fr-mis-sur-orbite-par-ez-publish-5">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://pwet.fr/blog/symlink_to_the_ez_publish_var_directory_a_good_idea" title="Symlink to the eZ Publish var directory, a good idea ?">Symlink to the eZ Publish var directory, a good idea ?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/eZ%20Publish" title="eZ Publish">eZ Publish</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <h2 id="eztoc233367_1">Symlink based directory layout</h2><p>On most of my sites, I tend to adopt the following folder layout:</p>	<pre class="bash">/web/sites/planet-ezpublish.fr$ <a href="http://pwet.fr/man/linux/commandes/find"><span style="color: #000066;">find</span></a> . -maxdepth <span style="color: #cc66cc;">2</span> -name www\* -o -name var -<a href="http://pwet.fr/man/linux/commandes/ls"><span style="color: #000066;">ls</span></a> | tr -s <span style="color: #ff0000;">' '</span> | <a href="http://pwet.fr/man/linux/commandes/cut"><span style="color: #000066;">cut</span></a> -d <span style="color: #ff0000;">' '</span> -f <span style="color: #cc66cc;">11</span>-<span style="color: #cc66cc;">14</span>
+./wwwnewdesign/var -> ../var/
+./www44/var -> ../var
+./var
+./www2012.<span style="color: #cc66cc;">5</span>/var -> ../var
+./www -> wwwnewdesign</pre><p>As you can see, <tt>www</tt> (the Apache document root) and <tt>www<version>/var</tt> are symlinks. The main idea behind this organization is to ease upgrades from an eZ Publish version to another, after upgrading on my developer machine and uploading the code to <tt>/web/sites/mywebsite.com/www<version></tt>, I just have to change the symlinks on the disk and I'm done!</p><h2 id="eztoc233367_2">Cache issues</h2><p>I know that some others are using a quite similar setup but <a href="https://twitter.com/#!/npanau">Nicolas</a> and <a href="http://www.arnaudlafon.com/">Arnaud</a> seem <a href="https://twitter.com/arnaudlafon/status/215755953675567104">to encounter caching issues with it</a>. At first, <a href="https://twitter.com/dpobel/status/215774405547147264">I answered that this is working as expected for me</a>, but a while after, I discovered that I also have some cache issues on <a href="http://www.planet-ezpublish.fr">Planet eZ Publish.fr</a> (mainly <tt>cache-block</tt> not being expired) while the same setup on <a href="http://pwet.fr">pwet.fr</a>/<a href="http://t-ka.net">t-ka.net</a> does not seem to be affected.</p><p>Actually, this comes from <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/file.ini/ClusteringSettings/FileHandler">the configured file handler</a>. pwet.fr/t-ka.net eZ Publish instance is configured with the <tt>eZFS2FileHandler</tt> while Planet eZ Publish.fr was configured with <tt>eZFSFileHandler</tt>. And there is a big difference between those file handlers: when a cache file is outdated, <tt>eZFSFileHandler</tt> will try to remove it while <tt>eZFS2FileHandler</tt> just sets a specific last modified time to mark it as expired (this is the base of <a href="http://share.ez.no/learn/ez-publish/ez-publish-knowledge-series-stale-cache-or-how-caches-in-ez-publish-4.1-are-handled-in-a-smarter-way">the stale cache mechanism</a>). In addition, <a href="https://github.com/ezsystems/ezpublish/commit/c6c38454">a protection had been added in eZ Publish</a> (and <a href="https://github.com/ezsystems/ezpublish/commit/33439b3d">it's enabled by default</a>) to not let it remove files that are outside of the eZ Publish directory, and of course, this is the case with the symlink layout above. <i>So the cache issue is not a bug, it's a feature</i> ;-)</p><p>So if you want to use this kind of setup, you have to configure your eZ Publish instance with the <tt>eZFS2FileHandler</tt>. But keep in mind, that <tt>eZFS2FileHandler</tt> is still a bit experimental and that <a href="http://share.ez.no/downloads/downloads/ez-publish-community-project-2012.4">2012.4</a> and <a href="http://share.ez.no/downloads/downloads/ez-publish-community-project-2012.5">2012.5</a> community releases were affected by <a href="http://issues.ez.no/19480">this bug</a>, so you'd better apply <a href="https://github.com/ezsystems/ezpublish/commit/ca5f2805ab179d7426697d9d5d32d8f0701fbc1f">this patch</a> to keep your images!</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>07/06/2012 10:49 am</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Symlink-to-the-eZ-Publish-var-directory-a-good-idea">View mirror of item</a> &nbsp; <a href="http://pwet.fr/blog/symlink_to_the_ez_publish_var_directory_a_good_idea">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://damien.pobel.fr/post/symlink-to-the-ez-publish-var-directory-a-good-idea" title="Symlink to the eZ Publish var directory, a good idea?">Symlink to the eZ Publish var directory, a good idea?</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/apache" title="apache">apache</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+                    <h2>Symlink based directory layout</h2>
+<p>On most of my sites, I tend to adopt the following folder layout:</p>
+<pre><code class="lang-bash">/web/sites/planet-ezpublish.fr$ find . -maxdepth 2 -name www\* -o -name var -ls | tr -s <span class="string">' '</span> | cut -d <span class="string">' '</span> -f 11-14
+./wwwnewdesign/var -> ../var/
+./www44/var -> ../var
+./var
+./www2012.5/var -> ../var
+./www -> wwwnewdesign</code></pre>
+<p>As you can see, <code>www</code>
+ (the Apache document root) and <code>www<version>/var</code>
+ are symlinks. The main idea behind this organization is to ease upgrades from an eZ Publish version to another, after upgrading on my developer machine and uploading the code to <code>/web/sites/mywebsite.com/www<version></code>
+, I just have to change the symlinks on the disk and I'm done!</p>
+<h2>Cache issues</h2>
+<p>I know that some others are using a quite similar setup but <a href="https://twitter.com/#!/npanau">Nicolas</a> and <a href="http://www.arnaudlafon.com/">Arnaud</a> seem <a href="https://twitter.com/arnaudlafon/status/215755953675567104">to encounter caching issues with it</a>. At first, <a href="https://twitter.com/dpobel/status/215774405547147264">I answered that this is working as expected for me</a>, but a while after, I discovered that I also have some cache issues on <a href="http://www.planet-ezpublish.fr">Planet eZ Publish.fr</a> (mainly <code>cache-block</code>
+ not being expired) while the same setup on <a href="http://pwet.fr">pwet.fr</a>/<a href="http://t-ka.net">t-ka.net</a> does not seem to be affected.</p>
+<p>Actually, this comes from <a href="http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/file.ini/ClusteringSettings/FileHandler">the configured file handler</a>. pwet.fr/t-ka.net eZ Publish instance is configured with the <code>eZFS2FileHandler</code>
+ while Planet eZ Publish.fr was configured with <code>eZFSFileHandler</code>
+. And there is a big difference between those file handlers: when a cache file is outdated, <code>eZFSFileHandler</code>
+ will try to remove it while <code>eZFS2FileHandler</code>
+ just sets a specific last modified time to mark it as expired (this is the base of <a href="http://share.ez.no/learn/ez-publish/ez-publish-knowledge-series-stale-cache-or-how-caches-in-ez-publish-4.1-are-handled-in-a-smarter-way">the stale cache mechanism</a>). In addition, <a href="https://github.com/ezsystems/ezpublish-legacy/commit/c6c38454">a protection had been added in eZ Publish</a> (and <a href="https://github.com/ezsystems/ezpublish-legacy/commit/33439b3d">it's enabled by default</a>) to not let it remove files that are outside of the eZ Publish directory, and of course, this is the case with the symlink layout above. <em>So the cache issue is not a bug, it's a feature</em> ;-)</p>
+<p>So if you want to use this kind of setup, you have to configure your eZ Publish instance with the <code>eZFS2FileHandler</code>
+. But keep in mind, that <code>eZFS2FileHandler</code>
+ is still a bit experimental and that <a href="http://share.ez.no/downloads/downloads/ez-publish-community-project-2012.4">2012.4</a> and <a href="http://share.ez.no/downloads/downloads/ez-publish-community-project-2012.5">2012.5</a> community releases were affected by <a href="http://issues.ez.no/19480">this bug</a>, so you'd better apply <a href="https://github.com/ezsystems/ezpublish-legacy/commit/ca5f2805ab179d7426697d9d5d32d8f0701fbc1f">this patch</a> to keep your images!</p>
+
+                
+    </div>
+
+    <div class="attribute-url">
+	<span>07/06/2012 10:49 am</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Symlink-to-the-eZ-Publish-var-directory-a-good-idea2">View mirror of item</a> &nbsp; <a href="http://damien.pobel.fr/post/symlink-to-the-ez-publish-var-directory-a-good-idea">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/Damien-Pobel">Damien Pobel</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://pwet.fr/blog/peinture_fraiche_sur_le_planet_ez_publish_fr" title="Peinture fraîche sur le Planet eZ Publish.fr">Peinture fraîche sur le Planet eZ Publish.fr</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	        <p class="tags"> Tags:                                            <a href="/Mirror/Damien-Pobel/(tag)/Responsive%20design" title="Responsive design">Responsive design</a>
+                                                                                        </p>
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      
+<div class="object-center"><div class="content-view-embeddedmedia">
+<div class="class-image">
+
+<div class="attribute-image">
+<p>    
+    
+        
+    
+            <a href="http://pwet.fr/media/images/nouveau_design_du_planet_ez_publish_fr"><img src="http://pwet.fr/var/plain/storage/images/media/images/nouveau_design_du_planet_ez_publish_fr/233365-1-fre-FR/nouveau_design_du_planet_ez_publish_fr_largeurBlog.png" width="524" height="241"  alt="" /></a>    
+    
+    
+    </p>
+</div>
+
+</div>
+</div>
+
+</div><p>Attention, la peinture est toute fraîche sur le <a href="http://www.planet-ezpublish.fr/">Planet eZ Publish.fr</a>! Après la migration <a href="https://github.com/dpobel/planet-ezpublish.fr">du code sur Github</a> et la mise à jour d'eZ Publish 4.4 vers <a href="http://share.ez.no/downloads/downloads/ez-publish-community-project-2012.5">eZ Publish Community Project 2012.5</a> il y a <a href="https://plus.google.com/u/1/117983402181816331301/posts/3xYeKhbBgex">une dizaine de jours</a>, j'ai donné un gros coup de frais au design du site. Ce nouveau design se veut évidemment plus sympa et est aussi <i>responsive</i> pour une mise en page optimisée en fonction des capacités de la plate-forme utilisée. En principe, il ne devrait pas y avoir de problèmes d'affichage sur les navigateurs modernes et même avec Internet Explorer 8 et supérieur mais je ne suis pas maso, j'ai pas cherché la compatibilité les versions 6 et 7 même ça ne doit pas être si terrible :-)</p><p>J'en ai aussi profité pour intégrer eZ Find et Solr ce qui m'a donné l'occasion de mettre en place <a href="http://doc.ez.no/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-2.7/Customization/General-Index-Time-Plugin-Mechanism">le nouveau mécanisme de plugin lors de l'indexation</a> permettant notamment d'ajouter des champs spécifique dans l'index Solr ce qui est utile dans mon cas pour générer les <i>facets</i> par auteur (qui ne sont pas des auteurs au sens eZ Publish du terme).</p><p>Comme d'habitude, les commentaires, <a href="http://www.planet-ezpublish.fr/contact">inscriptions</a>, <a href="https://github.com/dpobel/planet-ezpublish.fr/issues">rapports de bug</a> ou même <a href="https://github.com/dpobel/planet-ezpublish.fr/pulls">les pull requests</a> sont les bienvenues !</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>06/20/2012 03:58 pm</span> &nbsp; <a href="http://pwet.fr/blog">pwet.fr/blog</a> &nbsp; <a href="/Mirror/Damien-Pobel/Peinture-fraiche-sur-le-Planet-eZ-Publish.fr">View mirror of item</a> &nbsp; <a href="http://pwet.fr/blog/peinture_fraiche_sur_le_planet_ez_publish_fr">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+            
+
+<div class="pagenavigator">
+<p>
+
+           <span class="previous"><a href="/Mirror/Damien-Pobel/(offset)/30"><span class="text">&laquo;&nbsp;Previous</span></a></span>
+       
+            <span class="next"><a href="/Mirror/Damien-Pobel/(offset)/50"><span class="text">Next&nbsp;&raquo;</span></a></span>
+      
+<span class="pages">
+                      <span class="other"><a href="/Mirror/Damien-Pobel">1</a></span>
+                              <span class="other"><a href="/Mirror/Damien-Pobel/(offset)/10">2</a></span>
+                              <span class="other"><a href="/Mirror/Damien-Pobel/(offset)/20">3</a></span>
+                              <span class="other"><a href="/Mirror/Damien-Pobel/(offset)/30">4</a></span>
+            
+        <span class="current">5</span>
+
+                      <span class="other"><a href="/Mirror/Damien-Pobel/(offset)/50">6</a></span>
+                              <span class="other"><a href="/Mirror/Damien-Pobel/(offset)/60">7</a></span>
+            
+</span>
+
+</p>
+<div class="break"></div>
+</div>
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            <a href="/content/keyword/adsl" style="font-size: 100%" title="1 objects tagged with 'adsl'">adsl</a> <a href="/content/keyword/affiche" style="font-size: 100%" title="1 objects tagged with 'affiche'">affiche</a> <a href="/content/keyword/afup" style="font-size: 110%" title="2 objects tagged with 'afup'">afup</a> <a href="/content/keyword/Ain" style="font-size: 110%" title="2 objects tagged with 'Ain'">Ain</a> <a href="/content/keyword/ain" style="font-size: 200%" title="11 objects tagged with 'ain'">ain</a> <a href="/content/keyword/apache" style="font-size: 100%" title="1 objects tagged with 'apache'">apache</a> <a href="/content/keyword/araign%C3%A9e" style="font-size: 100%" title="1 objects tagged with 'araignée'">araignée</a> <a href="/content/keyword/blog" style="font-size: 110%" title="2 objects tagged with 'blog'">blog</a> <a href="/content/keyword/bol" style="font-size: 100%" title="1 objects tagged with 'bol'">bol</a> <a href="/content/keyword/Bourg-en-Bresse" style="font-size: 100%" title="1 objects tagged with 'Bourg-en-Bresse'">Bourg-en-Bresse</a> <a href="/content/keyword/browser" style="font-size: 100%" title="1 objects tagged with 'browser'">browser</a> <a href="/content/keyword/Conference" style="font-size: 100%" title="1 objects tagged with 'Conference'">Conference</a> <a href="/content/keyword/conference" style="font-size: 110%" title="2 objects tagged with 'conference'">conference</a> <a href="/content/keyword/css" style="font-size: 100%" title="1 objects tagged with 'css'">css</a> <a href="/content/keyword/css3" style="font-size: 100%" title="1 objects tagged with 'css3'">css3</a> <a href="/content/keyword/ergonomie" style="font-size: 110%" title="2 objects tagged with 'ergonomie'">ergonomie</a> <a href="/content/keyword/Extension" style="font-size: 100%" title="1 objects tagged with 'Extension'">Extension</a> <a href="/content/keyword/extension" style="font-size: 110%" title="2 objects tagged with 'extension'">extension</a> <a href="/content/keyword/ez%20find" style="font-size: 100%" title="1 objects tagged with 'ez find'">ez find</a> <a href="/content/keyword/eZ%20Publish" style="font-size: 140%" title="5 objects tagged with 'eZ Publish'">eZ Publish</a> <a href="/content/keyword/ez%20publish" style="font-size: 190%" title="10 objects tagged with 'ez publish'">ez publish</a> <a href="/content/keyword/frontend" style="font-size: 110%" title="2 objects tagged with 'frontend'">frontend</a> <a href="/content/keyword/gnome" style="font-size: 110%" title="2 objects tagged with 'gnome'">gnome</a> <a href="/content/keyword/gr%C3%A8ve" style="font-size: 100%" title="1 objects tagged with 'grève'">grève</a> <a href="/content/keyword/humeur" style="font-size: 140%" title="5 objects tagged with 'humeur'">humeur</a> <a href="/content/keyword/humour" style="font-size: 100%" title="1 objects tagged with 'humour'">humour</a> <a href="/content/keyword/javascript" style="font-size: 120%" title="3 objects tagged with 'javascript'">javascript</a> <a href="/content/keyword/linux" style="font-size: 110%" title="2 objects tagged with 'linux'">linux</a> <a href="/content/keyword/macro" style="font-size: 100%" title="1 objects tagged with 'macro'">macro</a> <a href="/content/keyword/Responsive%20design" style="font-size: 100%" title="1 objects tagged with 'Responsive design'">Responsive design</a> <a href="/content/keyword/Symfony%202" style="font-size: 100%" title="1 objects tagged with 'Symfony 2'">Symfony 2</a> 
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/adsl" title="adsl">adsl (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/affiche" title="affiche">affiche (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/afup" title="afup">afup (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Ain" title="Ain">Ain (13)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/apache" title="apache">apache (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/araign%C3%A9e" title="araignée">araignée (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/blog" title="blog">blog (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/bol" title="bol">bol (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Bourg-en-Bresse" title="Bourg-en-Bresse">Bourg-en-Bresse (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/browser" title="browser">browser (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Conference" title="Conference">Conference (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css" title="css">css (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/css3" title="css3">css3 (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ergonomie" title="ergonomie">ergonomie (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Extension" title="Extension">Extension (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/ez%20find" title="ez find">ez find (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/eZ%20Publish" title="eZ Publish">eZ Publish (15)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/frontend" title="frontend">frontend (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gnome" title="gnome">gnome (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/gr%C3%A8ve" title="grève">grève (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humeur" title="humeur">humeur (5)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/humour" title="humour">humour (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/javascript" title="javascript">javascript (3)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/linux" title="linux">linux (2)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/macro" title="macro">macro (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Responsive%20design" title="Responsive design">Responsive design (1)</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(tag)/Symfony%202" title="Symfony 2">Symfony 2 (1)</a></li>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/2/(year)/2013" title="">February 2013</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2011" title="">July 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/6/(year)/2011" title="">June 2011</a></li>
+                                                            <li><a href="/Mirror/Damien-Pobel/(month)/5/(year)/2011" title="">May 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+    
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/Damien-Pobel/(month)/7/(year)/2014" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/Damien-Pobel/(month)/9/(year)/2014" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2014</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                                        <td class="  right">
+            3
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            4
+        </td>
+                            <td class=" ">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            9
+        </td>
+                                        <td class="  right">
+            10
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            11
+        </td>
+                            <td class=" ">
+            12
+        </td>
+                            <td class=" ">
+            13
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                                        <td class="  right">
+            17
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            18
+        </td>
+                            <td class=" ">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class="currentselected today">
+            23
+        </td>
+                                        <td class="  right">
+            24
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            25
+        </td>
+                            <td class=" ">
+            26
+        </td>
+                            <td class=" ">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                                        <td class="  right">
+            31
+        </td>
+                </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";s:2:"40";s:4:"year";b:0;s:5:"month";b:0;s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:12:"Damien Pobel";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"229";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:12:"Damien Pobel";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"229";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"227";s:7:"node_id";s:3:"229";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"e6f81f2637ec547e52c3518bf0f11e88";s:14:"node_remote_id";s:32:"f888e9dfe7f87b8c8240f892bc4f47c9";s:6:"offset";i:40;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:19:"Mirror/Damien-Pobel";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"229";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

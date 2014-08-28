@@ -1,0 +1,389 @@
+a:10:{s:7:"content";s:27148:"
+<div class="class-blog extrainfo">
+    <div class="columns-blog float-break">
+        <div class="main-column-position">
+            <div class="main-column float-break">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+            
+                                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-Blog">eZ Systems Blog</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Blog/eZ-Live-Viewer-Major-Upgrade-with-Support-for-Historical-Data" title="eZ Live Viewer Major Upgrade with Support for Historical Data">eZ Live Viewer Major Upgrade with Support for Historical Data</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <a name="eztoc376690_1" id="eztoc376690_1"></a><h2>eZ Live Viewer 3 now lets you visualize historical content usage</h2>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/lv3-1/376700-1-eng-GB/lv3-1_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/lv3-1/376700-1-eng-GB/lv3-1_articleimage.png" width="170" height="109" style="border: 0px solid ;" alt="Timeframe Selector in Live Viewer 3" title="Timeframe Selector in Live Viewer 3" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:170px;">
+						
+<p>Timeframe Selector in Live Viewer 3</p>		</div>
+			</div>
+</div>
+</div><p>First and foremost - a major change: eZ Live Viewer has significantly extended its memory range. In version 1.0 the solution aimed at providing insights on the real-time activity of the website. It looked back only a few minutes or hours. Listening to the end users, we learned that the screens and visualization techniques eZ Live Viewer offers would also be extremely useful when looking at the more distant past. So basically, we made this possible. Now you can simply click on the top right corner of the screen, open a drop-down list and choose the timeframe you want to look at: either now, today, yesterday, the current week or month or any previous period of your choosing…</p><p>(Note: of course we have not been storing any data in the past - version 3.0 marks the start of this method of data collection so if you are using the service already, we can't retrieve data from the past - sorry!)</p><a name="eztoc376690_2" id="eztoc376690_2"></a><h2>Added improvements on the article tiles</h2>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/lv3-2/376704-1-eng-GB/lv3-2_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/lv3-2/376704-1-eng-GB/lv3-2_articleimage.png" width="170" height="66" style="border: 0px solid ;" alt="New information on the Article tile" title="New information on the Article tile" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:170px;">
+						
+<p>New information on the Article tile</p>		</div>
+			</div>
+</div>
+</div><p>In synch with this improvement, we brought a few minor changes to the article tile:</p><p>First off is a simple switch to be able to look at the article history or simply the latest trends, directly connected to the historical data feature above. Click either TOTAL or LAST to get the data you want to look at.</p><p>Next, on the graph showing the evolution of the trend of the article, we added small dots that indicate when the article was placed or taken out of the front page.</p><p>This status -- being featured on the front-page -- has also been added to the tiles by using a top-right white triangle corner. All tiles with this top-right white triangle are the one being featured on the front page at the moment.</p>
+<div class="object-right"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+																								
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/lv3-3/376708-1-eng-GB/lv3-3_fancybox.png" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/lv3-3/376708-1-eng-GB/lv3-3_articleimage.png" width="170" height="121" style="border: 0px solid ;" alt="Updated home screen" title="Updated home screen" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+																					<div class="attribute-caption" style="width:170px;">
+						
+<p>Updated home screen</p>		</div>
+			</div>
+</div>
+</div><p>We also added new information to the tile, which makes it even simpler to visually understand the activity on the site. We decided to use the <i>darkness</i> of the tile to represent the age of the content. The darker a tile is, the older the content. New content are shown the lightest. This is a minor change that makes the interface simpler and more intuitive for the editor.</p><p>Finally, another minor but important change - all information related to referrers (the left part of the home screen) are now based on visits instead of unique visitors. This is more coherent with the rest of the information displayed on the different screens.</p><p>We hope you will like this new version.&nbsp;If you are already a user, just log into eZ Live Viewer and check it out. If you are not yet, these are more reasons for you to reach out to us and ask for a demo, a trial or simply&nbsp;subscribe!</p><p>We think the Historical Data mode opens up a new type of usage for the tool which is great. For all the usability enhancements, we are really glad to keep optimizing the interface to stay ahead of competitors when it comes to visualizing web analytics. Be sure to expect more improvements in the future. The visual interface, flat and real-time, is not only a pleasure for the eyes, but it conveys more and more value to online marketers and editors without needing complex examination by a skilled analyst. This is the true value of eZ Live Viewer - making something others make hard, well, eZ. :)</p><p>--&nbsp;<a href="https://plus.google.com/u/0/100387701195070391722?rel=author" target="_self">Roland</a>&nbsp;for the Product team at eZ</p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/13/2013 04:56 pm</span> &nbsp; <a href="http://ez.no/About-eZ/Blog">ez.no/About-eZ/Blog</a> &nbsp; <a href="/Mirror/eZ-Systems-Blog/eZ-Live-Viewer-Major-Upgrade-with-Support-for-Historical-Data">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Blog/eZ-Live-Viewer-Major-Upgrade-with-Support-for-Historical-Data">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                            
+<div class="content-view-line">
+    <div class="class-blog-post float-break">
+
+    <div class="attribute-header">
+        <h1><a href="/Mirror/eZ-Systems-Blog">eZ Systems Blog</a></h1>
+     </div>
+    <div class="attribute-header">
+        <h2>> <a href="http://ez.no/About-eZ/Blog/eZ-Publish-A-CMS-Framework-with-Open-Source-in-Its-DNA" title="eZ Publish: A CMS Framework with Open Source in Its DNA">eZ Publish: A CMS Framework with Open Source in Its DNA</a></h2>
+     </div>
+
+    <div class="attribute-byline">
+	    </div>
+
+    
+
+    <div class="attribute-body float-break">
+      <p>There are a variety of options when it comes to content management. We’ve explored Drupal a bit, and in this email interview I talked to some folks who work with eZ Publish. It is an open source (with commercial options) CMS written in PHP. Brandon Chambers and Greg McAvoy-Jensen talk about how the platform acts as a content management framework, how being open source has affected the project, and what we should expect to see coming up for CMS in general.</p>
+<div class="object-center"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-12/376357-1-eng-GB/ez-publish-1_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-12/376357-1-eng-GB/ez-publish-1_imagelarge.jpg" width="550" height="132" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p>Brandon Chambers is a Senior Developer at Granite Horizon, an eZ Publish integrator. He has 14 years of web development experience focused on open source technologies such as PHP, MySQL, Python, Java, Android, HTML, JavaScript, AJAX, CSS and XML.</p><p>Greg McAvoy-Jensen is a member of the eZ Publish Community Project Board. He also founded and is the CEO of Granite Horizon, and has been developing with eZ Publish since 2002.</p><p><b>Q: What problems does eZ Publish solve for users?</b></p><p>A: eZ Publish grew up not just as a CMS, but as a content management framework. It sports a flexible and object-oriented content model (an important early decision), and provides developers an MVC framework as a platform for building complex web applications and extending the CMS. Like any CMS it makes content publishing accessible for the non-programmer, and provides an easy editorial interface. eZ Publish does a fine job of separating content from presentation and providing reusability and multi-channel delivery. It targets the enterprise more than smaller organizations, so the software quality remains pegged at high standards, and high degrees of flexibility and extensibility continue to be required.</p><p><b>Q: How you feel being open source has affected the project?</b></p><p>A: Fourteen years on, eZ Systems is still firm that open source is in its DNA. This foundational commitment created a culture of sharing, and it attracts developers who prefer to share their code and to collaborate with others outside their organization for the benefit of their customers. Contributions flow in as both extensions and core code pull requests. The commercial open source model, similar to Red Hat’s, means the vendor takes primary responsibility for code maintenance and development, and derives its profit from support subscriptions, while leaving customizations to its network of certified partners. Because the source is open, organizations evaluating the software can have their developers compare the code of, for example, eZ Publish and Drupal, and make their own determinations. This, in turn, keeps the vendor accountable for the code: eZ engineers program knowing full well that the world can see their work.</p><p><b>Q: What distinguishes eZ Publish from other CMS options?</b></p><p>A: While there may be a thousand or so CMS’s around, analysts typically look at something more like 30 that are important today. eZ Publish fits into that group, most recently by inclusion on Gartner’s Magic Quadrant beginning in 2011. Not all open source CMS’s have a vendor behind them who both provides support and has full control over the code, a level of accountability required in enterprise applications. eZ is a great fit for particularly complex implementations, or situations where there is no assurance that future needs will be simple. And despite the complex customizations developers do with eZ Publish, they rarely interfere with upgrades.</p><p>eZ’s engineers recently became dissatisfied with the merely vast degree of flexibility they had built into the MVC framework, so they’ve now moved the whole system on top of the Symfony PHP framework. eZ Publish is now a native Symfony application, the only CMS to utilize Symfony’s full stack. This leverages the great speed and excellent libraries Symfony provides, and makes eZ easier to learn by those who are familiar with Symfony. Some CMS’s require many plug-ins just to get a basic feature set going on a site, but eZ Publish has long included granular security, content versioning, multi-language support, multi-channel/multi-site capability, workflows, and the like as part of the kernel.</p>
+<div class="object-center"><div class="content-view-embed">
+	<div class="class-image">
+		<div class="attribute-image">
+
+	
+															
+		
+		
+														
+										
+													
+													
+						
+			<a href="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-22/376361-1-eng-GB/ez-publish-2_fancybox.jpg" rel="fancybox" class="fancybox"><img src="http://ez.no/var/ezflow_site/storage/images/media/images/ez-publish-22/376361-1-eng-GB/ez-publish-2_imagelarge.jpg" width="550" height="310" style="border: 0px solid ;" alt="" title="" /><span title="Enlarge this image"></span></a>		
+		
+		
+	</div>
+			</div>
+</div>
+</div><p><b>Q: What do you see as the future of content management: where the field is going and what users and programmers can expect?</b></p><p>A: Over the last ten years we have seen many different flavors of CMS’s come and go, their features, user experiences, and editing workflows. We will see the blending of apps and websites together, creating a highly engaging user experience. Mobile websites built on top of a CMS will act as smooth web apps. The feature set of systems has expanded greatly with the dawn of the Web 2.0 and will become solidified to include out-of-the-box features instead of plugins without sacrificing performance.</p><p>CMS’s often tie together separate solutions for email marketing, marketing automation, client relationship management, social media engagement, website analytics, and the like, however this has created a mess for managing all the solutions. The single sign-on solution to one’s CMS has helped but that feature is still yet to be standardized. We will continue to see a more general, standardized integration across these different apps through REST APIs. CMS’s will act as a user’s central hub for all avenues of web engagement, without their knowledge that they are using separate applications. Editors’ lives will be made easier as they will be able to create publishing workflows for their business processes and be efficient online content engagement editors.</p><p>For CMS’s with APIs, opportunities to tie in mobile apps or server-based web applications will abound, without requiring full knowledge of the CMS. But for those developers responsible for the whole CMS, having more features and functions out of the box can also mean an increase in complexity for some, requiring more expertise (e.g. learning an entire framework) to manage one’s CMS. What it will mean for programmers is they will likely spend less time on small integration problems, custom apps, and features as they have been. Instead they will likely be required to turn their focus toward exotic and creative integrations, performance tuning, big data problems, and as a result web programmers will need to know more about design patterns. It will be very lucrative for programmers to master content management frameworks as they will take more time to learn.</p><p><i>This interview was edited and condensed.</i></p>
+    </div>
+
+    <div class="attribute-url">
+	<span>08/09/2013 09:31 am</span> &nbsp; <a href="http://ez.no/About-eZ/Blog">ez.no/About-eZ/Blog</a> &nbsp; <a href="/Mirror/eZ-Systems-Blog/eZ-Publish-A-CMS-Framework-with-Open-Source-in-Its-DNA">View mirror of item</a> &nbsp; <a href="http://ez.no/About-eZ/Blog/eZ-Publish-A-CMS-Framework-with-Open-Source-in-Its-DNA">View item</a>
+    </div>
+
+        
+
+    </div>
+</div>                        
+                  
+
+ 
+
+                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="extrainfo-column-position">
+            <div class="extrainfo-column">
+                <div class="border-box">
+                <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
+                <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
+                                                <div class="attribute-tag-cloud">
+                        <p>
+                            
+                        </p>
+                        </div>
+
+                        <div class="attribute-description">
+                            
+                        </div>
+
+                        <div class="attribute-tags">
+                            <h1>Tags</h1>
+                            <ul>
+                                                        </ul>
+                        </div>
+
+                        <div class="attribute-archive">
+                            <h1>Archive</h1>
+                            <ul>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2014" title="">August 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2014" title="">July 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/6/(year)/2014" title="">June 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/5/(year)/2014" title="">May 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/4/(year)/2014" title="">April 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/3/(year)/2014" title="">March 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/2/(year)/2014" title="">February 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/1/(year)/2014" title="">January 2014</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/12/(year)/2013" title="">December 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/11/(year)/2013" title="">November 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/10/(year)/2013" title="">October 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2013" title="">September 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2013" title="">August 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2013" title="">July 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/6/(year)/2013" title="">June 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/5/(year)/2013" title="">May 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/4/(year)/2013" title="">April 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/3/(year)/2013" title="">March 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/1/(year)/2013" title="">January 2013</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/12/(year)/2012" title="">December 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/11/(year)/2012" title="">November 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/10/(year)/2012" title="">October 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2012" title="">September 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2012" title="">August 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2012" title="">July 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/6/(year)/2012" title="">June 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/5/(year)/2012" title="">May 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/4/(year)/2012" title="">April 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/3/(year)/2012" title="">March 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/1/(year)/2012" title="">January 2012</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/12/(year)/2011" title="">December 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/11/(year)/2011" title="">November 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/10/(year)/2011" title="">October 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2011" title="">September 2011</a></li>
+                                                            <li><a href="/Mirror/eZ-Systems-Blog/(month)/8/(year)/2011" title="">August 2011</a></li>
+                                                        </ul>
+                        </div>
+
+                        <!--START: CAL NAV -->
+                                                                                                                                                            
+<div class="calendar">
+<div class="calendar-tl"><div class="calendar-tr"><div class="calendar-bl"><div class="calendar-br">
+<div class="content">
+
+<div class="month">
+<div class="previous">
+<p><a href="/Mirror/eZ-Systems-Blog/(month)/7/(year)/2013" title="Previous month">&#8249;&#8249;<span class="hide"> Previous month</span></a></p>
+</div>
+<div class="next">
+<p><a href="/Mirror/eZ-Systems-Blog/(month)/9/(year)/2013" title="Next month"><span class="hide">Next month </span>&#8250;&#8250;</a></p>
+</div>
+<h2>August&nbsp;2013</h2>
+</div>
+
+<div class="table">
+<table cellspacing="0" border="0" summary="Calendar">
+<tr class="top">
+    <th class="left">Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th class="right">Sun</th>
+</tr>                <tr class="">
+                                            <td class="left">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            <td class=" ">
+            1
+        </td>
+                            <td class=" ">
+            2
+        </td>
+                            <td class=" ">
+            3
+        </td>
+                                        <td class="  right">
+            4
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            5
+        </td>
+                            <td class=" ">
+            6
+        </td>
+                            <td class=" ">
+            7
+        </td>
+                            <td class=" ">
+            8
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Systems-Blog/(day)/9/(month)/8/(year)/2013">9</a></em>
+        </td>
+                            <td class=" ">
+            10
+        </td>
+                                        <td class="  right">
+            11
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            12
+        </td>
+                            <td class=" ">
+            <em><a href="/Mirror/eZ-Systems-Blog/(day)/13/(month)/8/(year)/2013">13</a></em>
+        </td>
+                            <td class=" ">
+            14
+        </td>
+                            <td class=" ">
+            15
+        </td>
+                            <td class=" ">
+            16
+        </td>
+                            <td class=" ">
+            17
+        </td>
+                                        <td class="  right">
+            18
+        </td>
+                </tr>
+                        <tr class="">
+                    <td class="  left">
+            19
+        </td>
+                            <td class=" ">
+            20
+        </td>
+                            <td class=" ">
+            21
+        </td>
+                            <td class=" ">
+            22
+        </td>
+                            <td class=" ">
+            23
+        </td>
+                            <td class=" ">
+            24
+        </td>
+                                        <td class="  right">
+            25
+        </td>
+                </tr>
+                        <tr class="bottom">
+                    <td class="  left">
+            26
+        </td>
+                            <td class="currentselected today">
+            27
+        </td>
+                            <td class=" ">
+            28
+        </td>
+                            <td class=" ">
+            29
+        </td>
+                            <td class=" ">
+            30
+        </td>
+                            <td class=" ">
+            31
+        </td>
+                                <td class="right">&nbsp;</td>
+                                    </tr>
+        </table>
+</div>
+
+</div>
+</div></div></div></div>
+</div>
+
+<!-- END: CAL NAV -->                </div></div></div>
+                <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:15:"view_parameters";a:5:{s:6:"offset";b:0;s:4:"year";s:4:"2013";s:5:"month";s:1:"8";s:3:"day";b:0;s:10:"namefilter";b:0;}s:4:"path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:4:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";b:0;s:9:"url_alias";b:0;s:7:"node_id";s:3:"222";}}s:10:"title_path";a:3:{i:0;a:4:{s:4:"text";s:12:"eZ Ecosystem";s:3:"url";s:20:"/content/view/full/2";s:9:"url_alias";s:0:"";s:7:"node_id";s:1:"2";}i:1;a:4:{s:4:"text";s:6:"Mirror";s:3:"url";s:22:"/content/view/full/216";s:9:"url_alias";s:6:"Mirror";s:7:"node_id";s:3:"216";}i:2;a:3:{s:4:"text";s:15:"eZ Systems Blog";s:3:"url";b:0;s:9:"url_alias";b:0;}}s:10:"section_id";s:1:"1";s:7:"node_id";s:3:"222";s:15:"navigation_part";s:23:"ezcontentnavigationpart";s:12:"content_info";a:24:{s:9:"object_id";s:3:"220";s:7:"node_id";s:3:"222";s:14:"parent_node_id";s:3:"216";s:8:"class_id";s:2:"19";s:16:"class_identifier";s:4:"blog";s:9:"remote_id";s:32:"ae28f8b18d3a07d8a33282f880a66b18";s:14:"node_remote_id";s:32:"b1fd4c81985a35b4412645b300f2fee8";s:6:"offset";b:0;s:8:"viewmode";s:4:"full";s:26:"navigation_part_identifier";s:23:"ezcontentnavigationpart";s:10:"node_depth";s:1:"3";s:9:"url_alias";s:22:"Mirror/eZ-Systems-Blog";s:16:"current_language";s:6:"eng-US";s:13:"language_mask";s:1:"2";s:12:"main_node_id";s:3:"222";s:19:"main_node_url_alias";b:0;s:19:"persistent_variable";a:2:{s:9:"left_menu";b:0;s:10:"extra_menu";b:0;}s:11:"class_group";b:0;s:5:"state";a:1:{i:2;s:1:"1";}s:16:"state_identifier";a:1:{i:0;s:18:"ez_lock/not_locked";}s:15:"parent_class_id";s:1:"1";s:23:"parent_class_identifier";s:6:"folder";s:21:"parent_node_remote_id";s:32:"418ada46ecd2d42b7744e9cee6c51085";s:23:"parent_object_remote_id";s:32:"5b6a5a0179108fb40b786874ab09d743";}s:13:"template_list";a:3:{i:0;s:64:"extension/ezecosystem/design/eze/templates/tagcloud/tagcloud.tpl";i:1;s:61:"design/standard/templates/content/datatype/view/ezxmltext.tpl";i:2;s:66:"extension/ezwebin/design/ezwebin/templates/parts/blog/calendar.tpl";}s:9:"cache_ttl";i:-1;}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension name="ezstarrating">
+  <file name="autoloads" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrtemplateoperators.php" path="/autoloads" md5sum="f170ca58d0e6ff5cca08377747539811"/>
+  <file name="eztemplateautoload.php" path="/autoloads" md5sum="e96f179cca7811d0a864830c494ad2d2"/>
+  <file name="classes" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrratingdataobject.php" path="/classes" md5sum="a8e02ba86d5643d251cc8b5cb4bb1715"/>
+  <file name="ezsrratingobjecttreenode.php" path="/classes" md5sum="316b817b3550341ad74df87e60c4abc3"/>
+  <file name="ezsrratingobject.php" path="/classes" md5sum="2582cfbae53f698af396903c5460baf0"/>
+  <file name="ezsrratingfilter.php" path="/classes" md5sum="98106508199ee8e86e89366de50af3b3"/>
+  <file name="ezsrserverfunctions.php" path="/classes" md5sum="04f43c03e7060118f09dcbd75b030599"/>
+  <file name="CHANGELOG" md5sum="524ef94b1f2fcb197e30f65c07a8cea8"/>
+  <file name="sql" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="oracle" path="/sql" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="oracle.sql" path="/sql/oracle" md5sum="47da201bdd93148da7f6ae176c9e7e82"/>
+  <file name="mysql" path="/sql" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="mysql.sql" path="/sql/mysql" md5sum="59dcc5329bfba026df6105488938db00"/>
+  <file name="postgresql" path="/sql" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="postgresql.sql" path="/sql/postgresql" md5sum="a4e7e006449a7aebca5ff3da4a8c87bc"/>
+  <file name="README" md5sum="86af1ba571ccc7e929496560b3cd1ba1"/>
+  <file name="LICENSE" md5sum="eb723b61539feef013de476e68b5c50a"/>
+  <file name="translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="jpn-JP" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/jpn-JP" md5sum="14d02b40868a1308564b2454a96dcd90"/>
+  <file name="fre-FR" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/fre-FR" md5sum="43dd11ec02987576311a65e0cc7a804b"/>
+  <file name="ita-IT" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/ita-IT" md5sum="bc99b80a059cf1b9fdad2e396451ef11"/>
+  <file name="cat-ES" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/cat-ES" md5sum="8cf26874ff44e058d88522d4b71acd28"/>
+  <file name="ger-DE" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/ger-DE" md5sum="eeda448e784e3ab23c5aa3ecfe6baab4"/>
+  <file name="dut-NL" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/dut-NL" md5sum="216e800aab28898234f5e38fc549cc4b"/>
+  <file name="cro-HR" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/cro-HR" md5sum="4872fdff99193a48999d6bb81a6ef3c1"/>
+  <file name="por-BR" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/por-BR" md5sum="af0df3ade204433786570e482cd32c1b"/>
+  <file name="esl-ES" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/esl-ES" md5sum="76650256e470587116770f581b04dc4d"/>
+  <file name="untranslated" path="/translations" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="translation.ts" path="/translations/untranslated" md5sum="03d64d517251e8aa6e26ed173503ef1e"/>
+  <file name="design" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="standard" path="/design" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="stylesheets" path="/design/standard" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="star_rating.css" path="/design/standard/stylesheets" md5sum="59d83d2e34999c04b8a3b78ff9672c11"/>
+  <file name="images" path="/design/standard" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="star.gif" path="/design/standard/images" md5sum="8133f85857fcd21ee94e1c6568b6aa58"/>
+  <file name="silk" path="/design/standard/images" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="blankstar.png" path="/design/standard/images/silk" md5sum="2f9281cee25640e07f594b0a869a743e"/>
+  <file name="halfstar.png" path="/design/standard/images/silk" md5sum="006fcab1b9a97b4a7815cd975d2878f0"/>
+  <file name="star.png" path="/design/standard/images/silk" md5sum="fbfc58b3b177fc211e755d0944bfa2e7"/>
+  <file name="templates" path="/design/standard" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="class" path="/design/standard/templates" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="datatype" path="/design/standard/templates/class" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="view" path="/design/standard/templates/class/datatype" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrrating.tpl" path="/design/standard/templates/class/datatype/view" md5sum="0a7aa5c3a174fc74aa64007e7afe7e8d"/>
+  <file name="edit" path="/design/standard/templates/class/datatype" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrrating.tpl" path="/design/standard/templates/class/datatype/edit" md5sum="0a7aa5c3a174fc74aa64007e7afe7e8d"/>
+  <file name="content" path="/design/standard/templates" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="datatype" path="/design/standard/templates/content" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="view" path="/design/standard/templates/content/datatype" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrrating.tpl" path="/design/standard/templates/content/datatype/view" md5sum="ce5e2b0f6212596a9539052538198f4b"/>
+  <file name="edit" path="/design/standard/templates/content/datatype" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrrating.tpl" path="/design/standard/templates/content/datatype/edit" md5sum="d48fdf8275a49ea433c717f58cf74611"/>
+  <file name="javascript" path="/design/standard" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezstarrating_yui3.js" path="/design/standard/javascript" md5sum="5b63eae351004f44205f748214bc5170"/>
+  <file name="ezstarrating_jquery.js" path="/design/standard/javascript" md5sum="fed1c4048029bd19bfe6ae09662729bc"/>
+  <file name="TODO" md5sum="f8f2eeffb4bfabc2994fe363dbfb6f25"/>
+  <file name="extension.xml" md5sum="0d82d475fb469d24803d7742adf438f8"/>
+  <file name="datatypes" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrrating" path="/datatypes" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="ezsrratingtype.php" path="/datatypes/ezsrrating" md5sum="cdf1a0c6025378ab1d413eee104966d3"/>
+  <file name="ezinfo.php" md5sum="005158d31d4b6b6a0759e0d446e76207"/>
+  <file name="settings" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="design.ini.append.php" path="/settings" md5sum="82f0bbe79e61706fdff6431e14b9bcb8"/>
+  <file name="ezjscore.ini.append.php" path="/settings" md5sum="e7f69f44313b4cf700f814e1b7059cca"/>
+  <file name="site.ini.append.php" path="/settings" md5sum="07cbc26e3867802b9f17c0ab0a7f0cc3"/>
+  <file name="content.ini.append.php" path="/settings" md5sum="109e1fb0be5a2fa2288cb2228bf6e2b9"/>
+  <file name="dbschema.ini.append.php" path="/settings" md5sum="7a6d1095d4e6c2be79c9bd2a58aecc70"/>
+  <file name="extendedattributefilter.ini.append.php" path="/settings" md5sum="75e3e75e87bd5952d5254d4194fc8f7e"/>
+  <file name="datatype.ini.append.php" path="/settings" md5sum="1d4625d1073d1552b62d121bc8d1bf8d"/>
+  <file name="share" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="db_schema.dba" path="/share" md5sum="774b7c77dbf123bb0b28b7b15f549200"/>
+  <file name="patch" md5sum="d41d8cd98f00b204e9800998ecf8427e" type="dir"/>
+  <file name="extended_attribute_group_by.diff" path="/patch" md5sum="b9209af3f7926583ee30734a8b37bc95"/>
+</extension>
