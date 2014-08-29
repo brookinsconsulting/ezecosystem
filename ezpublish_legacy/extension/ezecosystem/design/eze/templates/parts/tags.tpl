@@ -1,6 +1,4 @@
 {cache-block expiry=172800}
-{def $tags = ezkeywordlist()
-     $archives=ezarchive()}
 
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
@@ -13,13 +11,16 @@
     <div style="width: 200px">
 			<p>
                             {eztagcloud( hash( 'class_identifier', 'blog_post',
-                                               'parent_node_id', $used_node.node_id,
+                                               'parent_node_id', $current_node_id,
 					       'limit', 190,
 					       'sort_by', array( 'count', false() ) ) )}
                         </p>
     </div>
 
 {*
+{def $tags = ezkeywordlist()
+     $archives=ezarchive()}
+
     <div style="width: 200px">
     <ul>
                             {foreach $tags as $keyword}
