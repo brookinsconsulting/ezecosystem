@@ -109,7 +109,7 @@
 
 {include uri="design:parts/twitter.tpl"}
 
-{include uri="design:parts/tags.tpl"}
+{include uri="design:parts/tags.tpl" current_node_id=2}
 
             <!-- Content: END -->
             </div>
