@@ -1,0 +1,12 @@
+[submodule "ezpublish_legacy/extension/bcgooglesitemaps"]
+	path = ezpublish_legacy/extension/bcgooglesitemaps
+	url = git@github.com:brookinsconsulting/bcgooglesitemaps.git
+[submodule "ezpublish_legacy/extension/bcupdatecache"]
+	path = ezpublish_legacy/extension/bcupdatecache
+	url = git@github.com:brookinsconsulting/bcupdatecache.git
+[submodule "ezpublish_legacy/extension/sqliimport"]
+	path = ezpublish_legacy/extension/sqliimport
+	url = git@github.com:brookinsconsulting/SQLIImport.git
+[submodule "ezpublish_legacy/extension/ezsh"]
+	path = ezpublish_legacy/extension/ezsh
+	url = git@github.com:brookinsconsulting/ezgeshi.git
