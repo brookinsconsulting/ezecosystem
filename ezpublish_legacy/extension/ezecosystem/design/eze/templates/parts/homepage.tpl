@@ -64,6 +64,7 @@
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $classes,
+							     'language', 'eng-US',
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $sort_array,
 						             'depth', 2,
@@ -78,6 +79,7 @@
             {set $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $blogs_node.node_id,
                                                                        'class_filter_type', 'include',
                                                                        'class_filter_array', $classes,
+                                                                       'language', 'eng-US',
 								       'depth', 2 ) )}
 
             <div style="margin-top:6px;margin-bottom:8px;">
