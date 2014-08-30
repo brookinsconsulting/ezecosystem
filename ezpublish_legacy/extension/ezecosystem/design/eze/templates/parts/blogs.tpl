@@ -19,7 +19,8 @@
     {foreach $blogsObjects as $blogObject}
         {if $blogsObjectsUnique|contains( $blogObject.parent.node_id )|not}
         {set $blogsObjectsUnique = $blogsObjectsUnique|append( $blogObject.parent.node_id )}
-        <li><a href="{$blogObject.parent.data_map.blog.content}">{$blogObject.parent.name}</a></li>
+        {* <li><a href="{$blogObject.parent.data_map.blog.content}">{$blogObject.parent.name}</a></li> *}
+	<li><a href={$blogObject.parent.url|ezurl}>{$blogObject.parent.name}</a></li>
 	{/if}
     {/foreach}
     </ul>
