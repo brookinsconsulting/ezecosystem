@@ -6,10 +6,6 @@ php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --sourc
 
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=gggeekgithubatomimporthandler -vdc;
 
-php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=ezoegithubatomimporthandler -vdc;
-
-php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=gggeekgithubatomimporthandler -vdc;
-
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=jdespatisgithubatomimporthandler -vdc;
 
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=crevillogithubatomimporthandler -vdc;
@@ -29,7 +25,4 @@ php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --sourc
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=ezpublishjiraatomimporthandler -vdc;
 
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=ezcommunityjiraatomimporthandler -vdc;
-
-### php ./clr --clear-all;
-### php ./clr --clear-tag=content;
 
