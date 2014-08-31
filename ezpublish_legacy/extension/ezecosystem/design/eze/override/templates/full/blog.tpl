@@ -11,7 +11,7 @@
                 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
 
 
-                {if $node.data_map.inactive|eq( 1 )}<div style="position: relative; top: 10px; padding-bottom: 20px;">Note: <span style="text-decoration: underline;">This blog has become inactive. New content may not be posted in the future.</span></div>{/if}
+                {if $node.data_map.inactive.content|eq( 1 )}<div style="position: relative; top: 10px; padding-bottom: 20px;">Note: <span style="text-decoration: underline;">This blog has become inactive. New content may not be posted in the future.</span></div>{/if}
 {def $page_limit = 10
      $blogs_count = 0
      $uniq_id = 0
