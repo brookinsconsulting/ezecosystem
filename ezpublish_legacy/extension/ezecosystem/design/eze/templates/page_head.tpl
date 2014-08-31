@@ -64,6 +64,9 @@
 {/if}
 
 
+<link rel="search" type="application/opensearchdescription+xml" title="eZecosystem.org" href="https://raw.githubusercontent.com/brookinsconsulting/opensearch/master/ezc/ezecosystem_org.xml" />
+<link rel="search" type="application/opensearchdescription+xml" title="eZecosystem.org (via Google)" href="https://raw.githubusercontent.com/brookinsconsulting/opensearch/master/ezc/ezecosystem_org_via_google.xml" />
+
 <meta name="verify-v1" content="XuvrJqCAkKvOee3lZK8tmb+ZjAF5EiUSCB/WMaRfLbo=" />
 <meta name="robots" content="index,follow" />
 
