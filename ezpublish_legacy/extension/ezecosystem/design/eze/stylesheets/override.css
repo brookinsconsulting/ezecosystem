@@ -186,4 +186,8 @@ margin: 0 auto 0 auto;
 text-align: left;
 }
 
-/* end */
+pre {
+overflow: auto;
+}
+
+/* END */
