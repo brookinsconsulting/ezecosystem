@@ -14,6 +14,7 @@ AvailableSourceHandlers[]=ezpublish-communitygithubatomimporthandler
 AvailableSourceHandlers[]=ezpublish-kernelgithubatomimporthandler
 AvailableSourceHandlers[]=ezpublishjiraatomimporthandler
 AvailableSourceHandlers[]=ezcommunityjiraatomimporthandler
+AvailableSourceHandlers[]=fabienpotencieratomimporthandler
 
 [atomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
@@ -222,5 +223,23 @@ DefaultParentNodeID=9181
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://jira.ez.no/activity?maxResults=50&streams=key+IS+COM&providers=issues+thirdparty+dvcs-streams-provider+tempo-provider&title=undefined
+
+[fabienpotencieratomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=Fabien Potencier Symfony Blog Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=12357
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=http://feeds.fabien.potencier.org/aidedecamp
+
+
 
 */ ?>
