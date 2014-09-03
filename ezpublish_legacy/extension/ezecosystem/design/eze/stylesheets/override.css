@@ -190,4 +190,8 @@ pre {
 overflow: auto;
 }
 
+a img {
+max-width: 100%;
+}
+
 /* END */
