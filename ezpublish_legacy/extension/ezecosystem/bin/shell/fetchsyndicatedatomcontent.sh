@@ -27,3 +27,10 @@ php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --sourc
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=ezcommunityjiraatomimporthandler -vdc;
 
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=fabienpotencieratomimporthandler -vdc;
+
+php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=yannickrogergithubatomimporthandler -vdc;
+
+php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=lolautruchegithubatomimporthandler -vdc;
+
+php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=peterkeunggithubatomimporthandler -vdc;
+
