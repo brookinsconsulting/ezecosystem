@@ -12,7 +12,7 @@
                                                             'depth', 2,
                                                             'class_filter_type', 'include',
                                                             'class_filter_array', array( 'blog_post' ),
-                                                            'limit', 500 ) )}
+                                                            'limit', 1000 ) )}
 {*
          $currentTimestampMinusOneMonth = currentdate()|sub( 2678400 )
          $blogObjects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
