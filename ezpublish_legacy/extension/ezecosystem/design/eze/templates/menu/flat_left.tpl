@@ -9,7 +9,7 @@
 {if ne( $pagedata.class_identifier, 'documentation_page' )}
     {def $root_node=fetch( 'content', 'node', hash( 'node_id', $pagedata.path_array[$left_menu_depth].node_id ) )
          $left_menu_items = fetch( 'content', 'list', hash( 'parent_node_id', $root_node.node_id,
-                                                            'sort_by', $root_node.sort_array,
+                                                            'sort_by', array( 'modified_subnode', false() ),
                                                             'load_data_map', false(),
                                                             'class_filter_type', 'include',
                                                             'class_filter_array', ezini( 'MenuContentSettings', 'LeftIdentifierList', 'menu.ini' ) ) )
@@ -18,6 +18,25 @@
          $a_class = array()
          $current_node_in_path_2 = first_set( $pagedata.path_array[$left_menu_depth|inc].node_id,  0 )
          $current_node_in_path_3 = first_set( $pagedata.path_array[$left_menu_depth|sum(2)].node_id,  0 )}
+
+{* Sort snippets that we dont' use anymore *}
+{*
+'sort_by', array( array( 'modified_subnode', false() ),
+                                                                              array( 'attribute', false(), 350 ) ),
+ $root_node.sort_array,
+array( 'name', true() ),
+ *}
+{def $tmp_inactive_array=array()
+     $tmp_active_array=array()}
+{foreach $left_menu_items as $item}
+{if $item.data_map.inactive.content|eq( 1 )}
+{set $tmp_inactive_array=$tmp_inactive_array|append( $item )}
+{else}
+{set $tmp_active_array=$tmp_active_array|append( $item )}
+{/if}
+{/foreach}
+{set $left_menu_items=$tmp_active_array|merge( $tmp_inactive_array )}
+{* <h1>{$tmp_inactive_array|attribute(show,1)}</h1><hr /> *}
 
     {if $left_menu_items_count}
         <ul class="menu-list">
