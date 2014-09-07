@@ -28,11 +28,16 @@
     *}
 
     <div class="attribute-body float-break">
+    {if $node.data_map.blog_post_description_text_block.has_content|eq(true() )}
       {$node.data_map.blog_post_description_text_block.content}
+    {else}
+      {* <pre style="white-space:pre-wrap;width:81ex">{$node.data_map.title.content|trim}</pre> *}
+      {$node.data_map.title.content|trim}
+    {/if}
     </div>
 
     <div class="attribute-url">
-	<span>{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</span> &nbsp; <a href={$node.parent.data_map.blog.content|ezurl()}>{$node.parent.data_map.blog.data_text}</a> &nbsp; <a href="{$node.url_alias|ezurl(no)}">View mirror of item</a> &nbsp; <a href="{$node.data_map.blog_post_url.content}">View item</a>
+	<span>{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</span> &nbsp; <a href={$node.parent.data_map.blog.content|ezurl()}>{$node.parent.data_map.blog.data_text}</a> &nbsp; <a href="{$node.url_alias|ezurl(no)}">Mirror</a> &nbsp; <a href="{$node.data_map.blog_post_url.content}">Post</a>
     </div>
 
         {* if $node.data_map.enable_comments.data_int}
