@@ -40,7 +40,7 @@ margin-bottom: 1em;
 /* div#maincontent div.content-view-full div.class-blog-post div.attribute-url { */
 div.attribute-url {
 background-color: #F4F4F4;
-font-size: 10px;
+font-size: 12px;
 height: 16px;
 margin-top:8px;
 /* margin-top: 15px; */
@@ -263,6 +263,21 @@ div.attribute-body.float-break div.details div.message {
 margin-bottom: 8px;
 }
 
+div.attribute-body.float-break > div.jira-issue-key {
+display: inline;
+}
+div.attribute-body.float-break > div.jira-issue-key a.issue-link {
+display: inline;
+}
+div.attribute-body.float-break > div.jira-linking-text {
+display: inline;
+}
+div.attribute-body.float-break > div.linked-jira-issue-key {
+display: inline;
+}
+
+
+
 /* navigator styles */
 
 div.pagenavigator span.previous {
@@ -272,6 +287,5 @@ margin-right: 4px;
 div.pagenavigator span.next {
 margin-right: 4px;
 }
-
 
 /* END */
