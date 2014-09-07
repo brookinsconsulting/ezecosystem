@@ -14,7 +14,7 @@
 # defined in staticcache.ini.[CacheSettings].CachedSiteAccesses
 # This setting will be removed in future release
 HostName=
-StaticStorageDir=static
+StaticStorageDir=var/ezwebin_site/static
 MaxCacheDepth=4
 
 # A list of url's to cache. You can use the * wildcard to include a whole
