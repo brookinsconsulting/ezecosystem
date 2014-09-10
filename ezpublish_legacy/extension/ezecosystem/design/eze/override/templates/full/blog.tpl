@@ -17,14 +17,14 @@
      $uniq_id = 0
      $uniq_post = array()}
 
-{if $node.node_id|eq( 4198 )}
+{if or( $node.node_id|eq( 4198 ), $node.node_id|eq( 9181 ) )}
   {def $class_attribute_identifier='issue_post/publication_date'}
 {else}
   {def $class_attribute_identifier='blog_post/publication_date'}
 {/if}
 
 {if $view_parameters.tag}
-    {if $node.node_id|eq( 4198 )}
+    {if $node.node_id|eq( 4198, 9181 )}
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                      'classid', 'issue_post',
                                                      'parent_node_id', $node.node_id ) )}
