@@ -17,7 +17,32 @@
      $uniq_id = 0
      $uniq_post = array()}
 
+{if $node.node_id|eq( 4198 )}
+  {def $class_attribute_identifier='issue_post/publication_date'}
+{else}
+  {def $class_attribute_identifier='blog_post/publication_date'}
+{/if}
+
 {if $view_parameters.tag}
+    {if $node.node_id|eq( 4198 )}
+    {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
+                                                     'classid', 'issue_post',
+                                                     'parent_node_id', $node.node_id ) )}
+    {if $blogs_count}
+        {foreach fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
+                                                    'classid', 'issue_post',
+                                                    'parent_node_id', $node.node_id,
+                                                    'offset', $view_parameters.offset,
+                                                    'sort_by', array( 'attribute', false(), 'issue_post/publication_date' ),
+                                                    'limit', $page_limit ) ) as $blog}
+            {set $uniq_id = $blog.link_object.node_id}
+            {if $uniq_post|contains( $uniq_id )|not}
+                {node_view_gui view=line content_node=$blog.link_object}
+                {set $uniq_post = $uniq_post|append( $uniq_id )}
+            {/if}
+        {/foreach}
+    {/if}
+    {else}
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                      'classid', 'blog_post',
                                                      'parent_node_id', $node.node_id ) )}
@@ -35,6 +60,7 @@
             {/if}
         {/foreach}
     {/if}
+    {/if}
 {else}
     {if and( $view_parameters.month, $view_parameters.year )}
         {def $start_date = maketime( 0,0,0, $view_parameters.month, cond( ne( $view_parameters.day , ''), $view_parameters.day, '01' ), $view_parameters.year)
@@ -42,15 +68,15 @@
 
         {set $blogs_count = fetch( 'content', 'list_count', hash( 'parent_node_id', $node.node_id,
                                                                   'attribute_filter', array( and,
-                                                                         array( 'blog_post/publication_date', '>=', $start_date ),
-                                                                         array( 'blog_post/publication_date', '<=', $end_date) ) ) )}
+                                                                         array( $class_attribute_identifier, '>=', $start_date ),
+                                                                         array( $class_attribute_identifier, '<=', $end_date) ) ) )}
         {if $blogs_count}
             {foreach fetch( 'content', 'list', hash( 'parent_node_id', $node.node_id,
                                                      'offset', $view_parameters.offset,
                                                      'attribute_filter', array( and,
-                                                                                 array( 'blog_post/publication_date', '>=', $start_date ),
-                                                                                 array( 'blog_post/publication_date', '<=', $end_date ) ),
-                                                     'sort_by', array( 'attribute', false(), 'blog_post/publication_date' ),
+                                                                                 array( $class_attribute_identifier, '>=', $start_date ),
+                                                                                 array( $class_attribute_identifier, '<=', $end_date ) ),
+                                                     'sort_by', array( 'attribute', false(), $class_attribute_identifier ),
                                                      'limit', $page_limit ) ) as $blog}
                 {node_view_gui view=line content_node=$blog}
             {/foreach}
@@ -58,9 +84,17 @@
     {else}
         {set $blogs_count = fetch( 'content', 'list_count', hash( 'parent_node_id', $node.node_id ) )}
         {if $blogs_count}
+            {if or( $node.node_id|eq( 4198 ), $node.node_id|eq( 9181 ) )}
+            {include name=navigator
+                     uri='design:navigator/google.tpl'
+                     page_uri=$node.url_alias
+                     item_count=$blogs_count
+                     view_parameters=$view_parameters
+                     item_limit=$page_limit}
+            {/if}
             {foreach fetch( 'content', 'list', hash( 'parent_node_id', $node.node_id,
                                                      'offset', $view_parameters.offset,
-                                                     'sort_by', array( 'attribute', false(), 'blog_post/publication_date' ),
+                                                     'sort_by', array( 'attribute', false(), $class_attribute_identifier ),
                                                      'limit', $page_limit ) ) as $blog}
                 {node_view_gui view=line content_node=$blog}
             {/foreach}
