@@ -42,6 +42,12 @@ MatchFile=full/blog_post.tpl
 Subdir=templates
 Match[class_identifier]=blog_post
 
+[full_issue_post]
+Source=node/view/full.tpl
+MatchFile=full/issue_post.tpl
+Subdir=templates
+Match[class_identifier]=issue_post
+
 [full_comment]
 Source=node/view/full.tpl
 MatchFile=full/comment.tpl
@@ -227,6 +233,12 @@ Source=node/view/line.tpl
 MatchFile=line/blog_post.tpl
 Subdir=templates
 Match[class_identifier]=blog_post
+
+[line_issue_post]
+Source=node/view/line.tpl
+MatchFile=line/issue_post.tpl
+Subdir=templates
+Match[class_identifier]=issue_post
 
 [line_comment]
 Source=node/view/line.tpl
