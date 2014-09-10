@@ -37,9 +37,9 @@
     }
 
 {if $used_node.node_id|eq( 4198 )}
-  {def $class_identifier='issue_post'}
+  {def $calendar_class_identifier='issue_post'}
 {else}
-  {def $class_identifier='blog_post'}
+  {def $calendar_class_identifier='blog_post'}
 {/if}
 
 {if ne($temp_month, 12)}
@@ -50,12 +50,12 @@
 
 {def    $blog_items=fetch( 'content', 'list', hash(
             'parent_node_id', $blog_node_id,
-            'sort_by', array( 'attribute', true(), concat( $class_identifier, '/publication_date') ),
+            'sort_by', array( 'attribute', true(), concat( $calendar_class_identifier, '/publication_date') ),
             'class_filter_type',  'include',
-            'class_filter_array', array( $class_identifier ),
+            'class_filter_array', array( $calendar_class_identifier ),
             'main_node_only', true(),
              'attribute_filter',
-            array( array( concat( $class_identifier, '/publication_date' ), 'between', array( sum($first_ts,1), sub($last_ts,1)  )) )
+            array( array( concat( $calendar_class_identifier, '/publication_date' ), 'between', array( sum($first_ts,1), sub($last_ts,1)  )) )
                 ))
 
     $url_reload=concat( $blog_node.url_alias, "/(day)/", $temp_today, "/(month)/", $temp_month, "/(year)/", $temp_year, "/offset/2")
