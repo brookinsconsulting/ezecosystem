@@ -1,4 +1,4 @@
-{def $page_limit = 20
+{def $page_limit = 30
      $blogs_count = 0
      $uniq_id = 0
      $uniq_post = array()
