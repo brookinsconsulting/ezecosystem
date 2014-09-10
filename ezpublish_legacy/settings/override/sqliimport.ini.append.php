@@ -5,6 +5,7 @@ AvailableSourceHandlers[]=ezpublishjiraatomimporthandler
 AvailableSourceHandlers[]=ezcommunityjiraatomimporthandler
 AvailableSourceHandlers[]=ezpublish-legacygithubatomimporthandler
 AvailableSourceHandlers[]=brookinsconsultinggithubatomimporthandler
+AvailableSourceHandlers[]=brookinsconsultinggistgithubatomimporthandler
 AvailableSourceHandlers[]=gggeekgithubatomimporthandler
 AvailableSourceHandlers[]=jdespatisgithubatomimporthandler
 AvailableSourceHandlers[]=crevillogithubatomimporthandler
@@ -84,11 +85,27 @@ StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://github.com/brookinsconsulting.atom
 
-[gggeekgithubatomimporthandler-HandlerSettings]
+[brookinsconsultinggistgithubatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
 Enabled=true
 # Intelligible name
 Name=GitHub Brookins Consulting Activity Log Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIGistGitHubATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=4440
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://gist.github.com/brookinsconsulting.atom
+
+[gggeekgithubatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=GGGeek GitHub Activity Log Feed
 # Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
 ClassName=SQLIGitHubATOMImportHandler
 # Facultative. Indicates whether debug is enabled or not
@@ -184,7 +201,7 @@ ATOMFeed=https://github.com/pedroresende.atom
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
 Enabled=true
 # Intelligible name
-Name=GitHub Brookins Consulting Activity Log Feed
+Name=crevillo GitHub Activity Log Feed
 # Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
 ClassName=SQLIGitHubATOMImportHandler
 # Facultative. Indicates whether debug is enabled or not
