@@ -12,7 +12,7 @@
 
 
                 {if $node.data_map.inactive.content|eq( 1 )}<div style="position: relative; top: 10px; padding-bottom: 20px;">Note: <span style="text-decoration: underline;">This blog has become inactive. New content may not be posted in the future.</span></div>{/if}
-{def $page_limit = 10
+{def $page_limit = 30
      $blogs_count = 0
      $uniq_id = 0
      $uniq_post = array()}
