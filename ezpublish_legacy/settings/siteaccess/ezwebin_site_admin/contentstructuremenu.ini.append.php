@@ -10,4 +10,6 @@ ShowClasses[]=event_calendar
 ShowClasses[]=frontpage
 ShowClasses[]=forums
 ShowClasses[]=gallery
+ShowClasses[]=blog
+
 */ ?>
