@@ -10,3 +10,6 @@
 [submodule "ezpublish_legacy/extension/ezsh"]
 	path = ezpublish_legacy/extension/ezsh
 	url = git@github.com:brookinsconsulting/ezgeshi.git
+[submodule "ezpublish_legacy/extension/ezchangeclass"]
+	path = ezpublish_legacy/extension/ezchangeclass
+	url = git@github.com:brookinsconsulting/ezchangeclass.git
