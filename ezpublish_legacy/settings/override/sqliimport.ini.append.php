@@ -1,7 +1,9 @@
 <?php /* #?ini charset="utf-8"?
 
 [ImportSettings]
-AvailableSourceHandlers[]=atomimporthandler
+AvailableSourceHandlers[]=ezpublishjiraatomimporthandler
+AvailableSourceHandlers[]=ezcommunityjiraatomimporthandler
+AvailableSourceHandlers[]=ezpublish-legacygithubatomimporthandler
 AvailableSourceHandlers[]=brookinsconsultinggithubatomimporthandler
 AvailableSourceHandlers[]=gggeekgithubatomimporthandler
 AvailableSourceHandlers[]=jdespatisgithubatomimporthandler
@@ -12,14 +14,45 @@ AvailableSourceHandlers[]=bdunogiergithubatomimporthandler
 AvailableSourceHandlers[]=pedroresendegithubatomimporthandler
 AvailableSourceHandlers[]=ezpublish-communitygithubatomimporthandler
 AvailableSourceHandlers[]=ezpublish-kernelgithubatomimporthandler
-AvailableSourceHandlers[]=ezpublishjiraatomimporthandler
-AvailableSourceHandlers[]=ezcommunityjiraatomimporthandler
 AvailableSourceHandlers[]=fabienpotencieratomimporthandler
 AvailableSourceHandlers[]=yannickrogergithubatomimporthandler
 AvailableSourceHandlers[]=lolautruchegithubatomimporthandler
 AvailableSourceHandlers[]=peterkeunggithubatomimporthandler
+AvailableSourceHandlers[]=xrowgithubatomimporthandler
 
-[atomimporthandler-HandlerSettings]
+[ezpublishjiraatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=Jira eZ Publish Issues Feed (SQLIJiraATOMImportHandler)
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIJiraATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=4198
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://jira.ez.no/activity?maxResults=75&streams=key+IS+EZP&providers=issues+thirdparty+dvcs-streams-provider+tempo-provider&title=undefined
+
+[ezcommunityjiraatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=Jira eZ Community Issues Feed (SQLIJiraATOMImportHandler)
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIJiraATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=9181
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://jira.ez.no/activity?maxResults=50&streams=key+IS+COM&providers=issues+thirdparty+dvcs-streams-provider+tempo-provider&title=undefined
+
+[ezpublish-legacygithubatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
 Enabled=true
 # Intelligible name
@@ -195,38 +228,6 @@ StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://github.com/ezsystems/ezpublish-kernel/commits/master.atom
 
-[ezpublishjiraatomimporthandler-HandlerSettings]
-# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
-Enabled=true
-# Intelligible name
-Name=Jira eZ Publish Issues Feed (SQLIJiraATOMImportHandler)
-# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
-ClassName=SQLIJiraATOMImportHandler
-# Facultative. Indicates whether debug is enabled or not
-Debug=enabled
-# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
-DefaultParentNodeID=4198
-# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
-StreamTimeout=
-# Below you can add your own settings for your source handler
-ATOMFeed=https://jira.ez.no/activity?maxResults=50&streams=key+IS+EZP&providers=issues+thirdparty+dvcs-streams-provider+tempo-provider&title=undefined
-
-[ezcommunityjiraatomimporthandler-HandlerSettings]
-# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
-Enabled=true
-# Intelligible name
-Name=Jira eZ Community Issues Feed (SQLIJiraATOMImportHandler)
-# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
-ClassName=SQLIJiraATOMImportHandler
-# Facultative. Indicates whether debug is enabled or not
-Debug=enabled
-# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
-DefaultParentNodeID=9181
-# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
-StreamTimeout=
-# Below you can add your own settings for your source handler
-ATOMFeed=https://jira.ez.no/activity?maxResults=50&streams=key+IS+COM&providers=issues+thirdparty+dvcs-streams-provider+tempo-provider&title=undefined
-
 [fabienpotencieratomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
 Enabled=true
@@ -290,6 +291,22 @@ DefaultParentNodeID=12458
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://github.com/peterkeung.atom
+
+[xrowgithubatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=Xrow GitHub Activity Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIGitHubATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=12917
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://github.com/xrow.atom
 
 
 */ ?>
