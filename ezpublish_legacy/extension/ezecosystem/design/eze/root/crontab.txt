@@ -1,0 +1,67 @@
+# This must be set to the directory where eZ Publish is installed.
+EZPUBLISHROOT=/home/brookins/dev.grahambrookins
+
+# Location of the PHP Command Line Interface binary.
+PHP=/usr/bin/php
+
+# Instruct cron to run the main set of cronjobs
+# at 6:35am every day
+35 6 * * * cd $EZPUBLISHROOT && $PHP runcronjobs.php -q 2>&1
+
+# Instruct cron to run the "infrequent" set of cronjobs
+# at 5:20am every Monday
+20 5 * * 1 cd $EZPUBLISHROOT && $PHP runcronjobs.php infrequent -q 2>&1
+
+# Instruct cron to run the "frequent" set of cronjobs
+# every 15 minutes
+0,15,30,45 * * * * cd $EZPUBLISHROOT && $PHP runcronjobs.php frequent -q 2>&1
+
+
+###
+
+# This must be set to the directory where eZ Publish is installed.
+EZPUBLISHROOTB=/home/brookins/aaronschlosberg
+
+# Location of the PHP Command Line Interface binary.
+PHP=/usr/bin/php
+
+# Instruct cron to run the main set of cronjobs
+# at 6:35am every day
+35 6 * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php -q 2>&1
+
+# Instruct cron to run the "infrequent" set of cronjobs
+# at 5:20am every Monday
+20 5 * * 1 cd $EZPUBLISHROOTB && $PHP runcronjobs.php infrequent -q 2>&1
+
+# Instruct cron to run the "frequent" set of cronjobs
+# every 15 minutes
+0,15,30,45 * * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php frequent -q 2>&1
+
+
+
+###
+
+# This must be set to the directory where eZ Publish is installed.
+EZPUBLISHROOTB=/home/brookins/ezecosystem/doc/
+
+# Location of the PHP Command Line Interface binary.
+PHP=/usr/bin/php
+
+# Instruct cron to run the main set of cronjobs
+# at 6:35am every day
+35 6 * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php -q 2>&1
+
+# Instruct cron to run the "infrequent" set of cronjobs
+# at 5:20am every Monday
+20 5 * * 1 cd $EZPUBLISHROOTB && $PHP runcronjobs.php infrequent -q 2>&1
+
+# Instruct cron to run the "frequent" set of cronjobs
+# every 15 minutes
+0,15,30,45 * * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php frequent -q 2>&1
+
+##0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php rssimport -q 2>&1
+
+##0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh
+
+03,07,13,19,26,27,37,43,49,53,58 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/ezcache.php --clear-tag=content;
+
