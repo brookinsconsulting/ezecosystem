@@ -59,9 +59,9 @@ PHP=/usr/bin/php
 # every 15 minutes
 0,15,30,45 * * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php frequent -q 2>&1
 
-##0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php rssimport -q 2>&1
+0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && $PHP runcronjobs.php rssimport -q 2>&1
 
-##0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh
+0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh
 
 03,07,13,19,26,27,37,43,49,53,58 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/ezcache.php --clear-tag=content;
 
