@@ -84,9 +84,9 @@
     {else}
         {set $loop_daylast = $days}
     {/if}
-    {for $loop_dayone|int() to $loop_daylast|int() as $counter}
-        {set $day_array = concat($day_array, $counter, ', ')}
-        {if eq($counter,$temp_today)}
+    {for $loop_dayone|int() to $loop_daylast|int() as $loopCounter}
+        {set $day_array = concat($day_array, $loopCounter, ', ')}
+        {if eq($loopCounter,$temp_today)}
             {set $day_blogs = $day_blogs|append($event)}
         {/if}
     {/for}
