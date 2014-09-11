@@ -28,11 +28,12 @@
     *}
 
     <div class="attribute-body float-break">
+
+    {* <pre style="white-space:pre-wrap;width:81ex">{$node.data_map.title.content|trim}</pre> *}
+    <p>{$node.data_map.title.content|wash}</p>
+
     {if $node.data_map.blog_post_description_text_block.has_content|eq(true() )}
-      {$node.data_map.blog_post_description_text_block.content}
-    {else}
-      {* <pre style="white-space:pre-wrap;width:81ex">{$node.data_map.title.content|trim}</pre> *}
-      {$node.data_map.title.content|trim}
+        {$node.data_map.blog_post_description_text_block.content}
     {/if}
     </div>
 

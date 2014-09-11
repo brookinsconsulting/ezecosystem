@@ -43,10 +43,11 @@
 				*}
 
 				<div class="attribute-body float-break">
+
+                                <p>{$node.data_map.title.content|wash}</p>
+
                                 {if $node.data_map.blog_post_description_text_block.has_content|eq(true() )}
                                     {$node.data_map.blog_post_description_text_block.content}
-                                {else}
-                                    {$node.data_map.title.content}
                                 {/if}
 				</div>
 
