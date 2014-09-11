@@ -89,7 +89,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         ) );
         $content = SQLIContent::create( $contentOptions );
 
-        $content->fields->title = (string)$row->title;
+        $content->fields->title = 'Gist: ' . (string)$row->title;
         $content->fields->blog_post_author = (string)$row->author->name;
 
         $content->fields->blog_post_url = (string)$row->link["href"];
@@ -97,7 +97,20 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
 
         // Handle HTML content
         $content->fields->blog_post_description_text_block = (string)$row->content; // Proxy method to SQLIContentUtils::getRichContent()
-        
+
+        /*
+        if( preg_match( '/1624060/', $row->id[0] ) )
+        {
+        echo "\n\n\n"; 
+        print_r( $row->id[0] );
+        echo "\n\n\n";
+        // print_r( (string)$row->content );
+
+        print_r( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
+        echo "\n\n\n";
+        }
+        */
+
         // Now publish content
         $content->addLocation( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
 
