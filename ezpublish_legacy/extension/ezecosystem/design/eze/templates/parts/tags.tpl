@@ -1,5 +1,5 @@
 {cache-block expiry=172800}
-
+{def $tag_cloud_limit=290}
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
@@ -8,13 +8,26 @@
     <div class="class-folder">
     <h3>Tags<h3>
 
-    <div style="width: 200px">
-			<p>
+    <div style="width: 200px" class="attribute-tag-cloud">
+                       <ul>
+                            {* eztagcloud( hash( 'class_identifier', 'blog_post',
+                                               'parent_node_id', $current_node_id,
+					       'limit', $tag_cloud_limit,
+					       'sort_by', array( 'count', false() ) ) ) *}
+
                             {eztagcloud( hash( 'class_identifier', 'blog_post',
                                                'parent_node_id', $current_node_id,
-					       'limit', 190,
-					       'sort_by', array( 'count', false() ) ) )}
-                        </p>
+					       'limit', $tag_cloud_limit,
+					       'sort_by', array( 'count' ),
+                                               'post_sort_by', 'keyword' ) )}
+                        {*
+                            {eztagcloud_new( hash( 'class_identifier', false(),
+                                                   'parent_node_id', $data_map.parent_object.content.main_node_id,
+                                                   'limit', $tag_cloud_limit,
+                                                   'sort_by', array( 'count' ),
+                                                   'post_sort_by', 'keyword' ) )}
+                        *}
+                        </ul>
     </div>
 
 {*
