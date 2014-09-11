@@ -4,7 +4,7 @@
      $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
                                     'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
                                     'Thu', '社区委员会', 'wascou' )
-     $tag_cloud_exclude_string='EZP-'}
+     $tag_cloud_exclude_strings=array( 'EZP-', 'COM-' )}
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
@@ -32,7 +32,7 @@
                                                    'sort_by', array( 'count' ),
                                                    'post_sort_by', 'keyword',
                                                    'exclude_tags', $tag_cloud_exclude_tags,
-                                                   'exclude_string', $tag_cloud_exclude_string ) )}
+                                                   'exclude_strings', $tag_cloud_exclude_strings ) )}
                         </ul>
     </div>
 

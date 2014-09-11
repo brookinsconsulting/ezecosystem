@@ -442,7 +442,7 @@ class eZTagCloud
                     $tpl = eZTemplate::factory();
                     $tpl->setVariable( 'tag_cloud', $tagCloud );
                     $tpl->setVariable( 'tag_cloud_exclude', $params['exclude_tags'] );
-                    $tpl->setVariable( 'tag_cloud_string', $params['exclude_string'] );
+                    $tpl->setVariable( 'tag_cloud_strings', $params['exclude_strings'] );
                     $operatorValue = $tpl->fetch( 'design:tagcloud/tagcloud.tpl' );
                 } break;
         }
