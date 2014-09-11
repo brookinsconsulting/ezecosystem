@@ -7,7 +7,7 @@
 {if $tag['tag']|contains( '25 Aug 2009' )|not}
 {if $tag['tag']|contains( '30 Sep 2010' )|not}
 {if $tag['tag']|contains( 'Thu' )|not}
-<a href={concat( "/content/keyword/", $tag['tag']|rawurlencode )|ezurl()} style="font-size: {$tag['font_size']}%" title="{$tag['count']} objects tagged with '{$tag['tag']|wash()}'">{$tag['tag']|wash()}</a> 
+<a href={concat( "/content2/keyword/", $tag['tag']|rawurlencode, '/(limit)/90' )|ezurl()} style="font-size: {$tag['font_size']}%" title="{$tag['count']} objects tagged with '{$tag['tag']|wash()}'">{$tag['tag']|wash()}</a> 
 {/if}
 {/if}
 {/if}
