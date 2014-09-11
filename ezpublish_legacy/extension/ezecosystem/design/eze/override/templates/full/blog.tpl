@@ -24,6 +24,7 @@
 {/if}
 
 {if $view_parameters.tag}
+    <p><span class="underline">Selected tag</span>: <b>{$view_parameters.tag}</b></p>
     {if $node.node_id|eq( 4198, 9181 )}
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                      'classid', 'issue_post',
