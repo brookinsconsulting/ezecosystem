@@ -390,7 +390,7 @@ $ViewList['keyword'] = array(
     'default_navigation_part' => 'ezcontentnavigationpart',
     'script' => 'keyword.php',
     'params' => array( 'alphabet'=>'Alphabet' ),
-    'unordered_params' => array( 'offset' => 'Offset', 'classid' => 'ClassID' ) );
+    'unordered_params' => array( 'offset' => 'Offset', 'classid' => 'ClassID', 'limit' => 'Limit' ) );
 
 $ViewList['collectedinfo'] = array(
     'functions' => array( 'read' ),

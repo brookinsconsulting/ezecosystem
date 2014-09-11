@@ -11,7 +11,8 @@ $Alphabet = rawurldecode( $Params['Alphabet'] );
 
 $Offset = $Params['Offset'];
 $ClassID = $Params['ClassID'];
-$viewParameters = array( 'offset' => $Offset, 'classid' => $ClassID );
+$Limit = $Params['Limit'];
+$viewParameters = array( 'offset' => $Offset, 'classid' => $ClassID, 'limit' => $Limit );
 
 $tpl = eZTemplate::factory();
 
