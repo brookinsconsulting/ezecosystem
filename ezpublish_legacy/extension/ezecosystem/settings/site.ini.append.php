@@ -1,7 +1,7 @@
 <?php /*
 
-# [TemplateSettings]
-# ExtensionAutoloadPath[]=ezecosystem
+[TemplateSettings]
+ExtensionAutoloadPath[]=ezecosystem
 
 [RegionalSettings]
 TranslationExtensions[]=ezecosystem
