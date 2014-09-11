@@ -45,14 +45,21 @@
     {else}
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                      'classid', 'blog_post',
-                                                     'parent_node_id', $node.node_id ) )}
+                                                     'parent_node_id', $node.node_id ) )|sum( fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
+                                                     'classid', 'issue_post',
+                                                     'parent_node_id', 4198 ) ) )}
     {if $blogs_count}
         {foreach fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                     'classid', 'blog_post',
                                                     'parent_node_id', $node.node_id,
                                                     'offset', $view_parameters.offset,
                                                     'sort_by', array( 'attribute', false(), 'blog_post/publication_date' ),
-                                                    'limit', $page_limit ) ) as $blog}
+                                                    'limit', $page_limit ) )|merge( fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
+                                                    'classid', 'issue_post',
+                                                    'parent_node_id', 4198,
+                                                    'offset', $view_parameters.offset,
+                                                    'sort_by', array( 'attribute', false(), 'issue_post/publication_date' ),
+                                                    'limit', $page_limit ) ) ) as $blog}
             {set $uniq_id = $blog.link_object.node_id}
             {if $uniq_post|contains( $uniq_id )|not}
                 {node_view_gui view=line content_node=$blog.link_object}
