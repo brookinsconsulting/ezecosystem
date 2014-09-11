@@ -89,15 +89,22 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
         ) );
         $content = SQLIContent::create( $contentOptions );
 
-        $content->fields->title = (string)$row->title;
+        $title = (string)$row->title;
+        $content->fields->title = $title;
         $content->fields->blog_post_author = (string)$row->author->name;
 
         $content->fields->blog_post_url = (string)$row->link["href"];
         $content->fields->publication_date = strtotime( (string)$row->updated );
 
         // Handle HTML content
-        $content->fields->blog_post_description_text_block = str_replace( 'href="/', 'href="http://github.com/', (string)$row->content ); // Proxy method to SQLIContentUtils::getRichContent()
-        
+        $message = (string)$row->content;
+        $content->fields->blog_post_description_text_block = str_replace( 'href="/', 'href="http://github.com/', $message ); // Proxy method to SQLIContentUtils::getRichContent()
+
+        $issueTicketID = $this->getIssueFromGitCommitMessage( $title, strip_tags( $message ) );
+        // echo "\n\n"; print_r($issueTicketID); echo "\n\n";
+
+        $content->fields->tags = $issueTicketID;
+
         // Now publish content
         $content->addLocation( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
 
@@ -145,4 +152,94 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
     {
         return 'Currently importing : '.$this->currentGUID;
     }
+    
+    public function getIssueFromGitCommitMessage( $title, $message )
+    {
+      //given string $data, will return the first $issue string in that string
+      $ret = false;
+      $limit = 5;
+      $prefix = 'EZP-';
+
+      // test title first for 'EZP-'
+      $splitTitle = preg_split( "/EZP-/", $title );
+
+      if( isset( $splitTitle[1] ) )
+        $splitTitleTestForZero = preg_split( "/0/", $splitTitle[1] );
+        else
+          $splitTitleTestForZero = null;
+
+      if( $splitTitleTestForZero[0] == 0 ) { $limit = 6; } else { $limit = 5; }
+
+      if( $splitTitleTestForZero == null )
+      {
+        // test title first for 'COM-'
+        $splitTitle = preg_split( "/COM-/", $title );
+
+        //print_r($splitTitle); die();
+
+        if( isset( $splitTitle[1] ) )
+        {
+          $splitTitleTestForZero = preg_split( "/0/", $splitTitle[1] );
+          $prefix = 'COM-';
+        } else
+          $splitTitleTestForZero = null;
+
+        if( $splitTitleTestForZero[0] == 0 ) { $limit = 6; } else { $limit = 5; }
+      }
+
+      // test message second
+      $splitMessage = preg_split( "/EZP-/", $message );
+
+      if( isset( $splitMessage[1] ) )
+        $splitMessageTestForZero = preg_split( "/0/", $splitMessage[1] );
+        else
+          $splitMessageTestForZero = null;
+
+      if( $splitMessageTestForZero[0] == 0 ) { $limit = 6; } else { $limit = 5; }
+
+      if( $splitMessageTestForZero == null )
+        {
+          // test title first for 'COM-'
+          $splitMessage = preg_split( "/COM-/", $message );
+
+          //print_r($splitMessage); die();
+
+          if( isset( $splitMessage[1] ) )
+          {
+            $splitMessageTestForZero = preg_split( "/0/", $splitMessage[1] );
+            $prefix = 'COM-';
+          } else
+            $splitMessageTestForZero = null;
+
+          if( $splitMessageTestForZero[0] == 0 ) { $limit = 6; } else { $limit = 5; }
+        }
+
+      if( isset( $splitTitle[1] ) ) {
+        $match = $splitTitle[1];
+        $issue = (int) trim( substr( $match, 0, +$limit ) );
+        // echo var_dump( $issue ); echo "\n\n";
+        // echo strlen( $issue ); echo "\n\n";
+        /* if( strlen( $issue ) >= 5 )
+        {
+        echo "\n\n\n";       print_r( "'$issue'" ); echo "\n\n\n";        print_r( is_numeric( $issue ) ); echo "\n\n\n";
+        } */
+        if ( $issue != '' && strlen( $issue ) >= 5 && is_numeric( $issue ) )
+        {
+          $ret = $prefix . $issue;
+        }
+      }
+      elseif( isset( $splitMessage[1] ) ) {
+        $match = $splitMessage[1];
+        $issue = (int) trim( substr( $match, 0, +$limit ) );
+
+        if ( $issue != '' && strlen( $issue ) >= 5 && is_numeric( $issue ) )
+        {
+          $ret = $prefix . $issue;
+        }
+      }
+
+      //print_r($ret);
+      return $ret;
+    }
 }
+?>
