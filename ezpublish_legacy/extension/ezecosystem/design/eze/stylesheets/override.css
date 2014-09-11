@@ -323,11 +323,15 @@ padding-bottom: 0px;
 
 /* Tag Cloud styles */
 
+.attribute-tag-cloud {
+width: 200px;
+}
+
 .attribute-tag-cloud ul {
 margin: 0;
 padding: 0;
 list-style: none;
-line-height: 1.5em;
+line-height: 2.5em;
 /* text-align: center; */
 margin-left: 10px;
 }
@@ -340,7 +344,7 @@ padding-left: 4px;
 }
 
 .attribute-tag-cloud ul a {
-color: #333335;
+/* color: #333335; */
 outline: none;
 }
 
@@ -355,6 +359,8 @@ outline: none;
 .attribute-tag-cloud ul a.tag8 {font-size:1.8em; font-weight:800;}
 .attribute-tag-cloud ul a.tag9 {font-size:2.2em; font-weight:900;}
 .attribute-tag-cloud ul a.tag10 {font-size:2.5em; font-weight:900;}
+.attribute-tag-cloud ul a.tag11 {font-size:2.7em; font-weight:900;}
+
 
 
 /* END */

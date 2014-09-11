@@ -1,5 +1,10 @@
 {cache-block expiry=172800}
-{def $tag_cloud_limit=290}
+{def $tag_cloud_limit=200
+     $tag_cloud_class_identifier='blog_post'
+     $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
+                                    'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
+                                    'Thu', '社区委员会', 'wascou' )
+     $tag_cloud_exclude_string='EZP-'}
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
@@ -8,25 +13,26 @@
     <div class="class-folder">
     <h3>Tags<h3>
 
-    <div style="width: 200px" class="attribute-tag-cloud">
+    <div class="attribute-tag-cloud">
                        <ul>
                             {* eztagcloud( hash( 'class_identifier', 'blog_post',
                                                'parent_node_id', $current_node_id,
 					       'limit', $tag_cloud_limit,
 					       'sort_by', array( 'count', false() ) ) ) *}
-
+                            {*
                             {eztagcloud( hash( 'class_identifier', 'blog_post',
                                                'parent_node_id', $current_node_id,
 					       'limit', $tag_cloud_limit,
 					       'sort_by', array( 'count' ),
                                                'post_sort_by', 'keyword' ) )}
-                        {*
-                            {eztagcloud_new( hash( 'class_identifier', false(),
-                                                   'parent_node_id', $data_map.parent_object.content.main_node_id,
+                            *}
+                            {eztagcloud_new( hash( 'class_identifier', $tag_cloud_class_identifier,
+                                                   'parent_node_id', $current_node_id,
                                                    'limit', $tag_cloud_limit,
                                                    'sort_by', array( 'count' ),
-                                                   'post_sort_by', 'keyword' ) )}
-                        *}
+                                                   'post_sort_by', 'keyword',
+                                                   'exclude_tags', $tag_cloud_exclude_tags,
+                                                   'exclude_string', $tag_cloud_exclude_string ) )}
                         </ul>
     </div>
 

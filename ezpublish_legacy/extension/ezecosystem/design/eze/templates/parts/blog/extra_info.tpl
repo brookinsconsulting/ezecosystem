@@ -1,4 +1,7 @@
-{def $tag_cloud_limit=190}
+{def $tag_cloud_limit=190
+     $exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
+                          'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
+                          'Thu', '社区委员会', 'wascou', '' )}
 {if or( $used_node.node_id|eq( 4198 ), $used_node.node_id|eq( 9181 ) )}
   {def $class_identifier='issue_post'}
 {else}
@@ -12,12 +15,18 @@
                                                'parent_node_id', $used_node.node_id,
                                                'limit', $tag_cloud_limit,
                                                'sort_by', array( 'count', false() ) ) ) *}
+                            {* eztagcloud( hash( 'class_identifier', $class_identifier,
+                                                   'parent_node_id', $used_node.node_id,
+                                                   'limit', $tag_cloud_limit,
+                                                   'sort_by', array( 'count' ),
+                                                   'post_sort_by', 'keyword' ) ) *}
                         <ul>
-                            {eztagcloud( hash( 'class_identifier', $class_identifier,
-                                               'parent_node_id', $used_node.node_id,
-                                               'limit', $tag_cloud_limit,
-                                               'sort_by', array( 'count' ),
-                                               'post_sort_by', 'keyword' ) )}
+                            {eztagcloud_new( hash( 'class_identifier', $class_identifier,
+                                                   'parent_node_id', $used_node.node_id,
+                                                   'limit', $tag_cloud_limit,
+                                                   'sort_by', array( 'count' ),
+                                                   'post_sort_by', 'keyword',
+                                                   'exclude_tags', $exclude_tags ) )}
                         </ul>
                         </p>
                         </div>
