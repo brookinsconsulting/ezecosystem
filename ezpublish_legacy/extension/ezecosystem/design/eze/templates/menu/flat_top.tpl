@@ -29,10 +29,14 @@
                 {set $item_class = $item_class|append("current")}
             {/if}
 
+            {if and( $item.node_id|eq( 985 ), $current_node_id|eq( 2 ) )}
+                {set $item_class = $item_class|append("selected current")}
+            {/if}
+
             {if eq( $item.class_identifier, 'link')}
                 <li id="node_id_{$item.node_id}"{if $item_class} class="{$item_class|implode(" ")}"{/if}><div><a {if eq( $ui_context, 'browse' )}href={concat("content/browse/", $item.node_id)|ezurl}{else}href={$item.data_map.location.content|ezurl}{if and( is_set( $item.data_map.open_in_new_window ), $item.data_map.open_in_new_window.data_int )} target="_blank"{/if}{/if}{if $pagedata.is_edit} onclick="return false;"{/if} title="{$item.data_map.location.data_text|wash}" class="menu-item-link" rel={$item.url_alias|ezurl}><span>{if $item.data_map.location.data_text}{$item.data_map.location.data_text|wash()}{else}{if $item.node_id|eq( 4198 )}Issues{else}{$item.name|wash()}{/if}{/if}</span></a></div></li>
             {else}
-                <li id="node_id_{$item.node_id}"{if $item_class} class="{$item_class|implode(" ")}"{/if}><div><a href={if eq( $ui_context, 'browse' )}{concat("content/browse/", $item.node_id)|ezurl}{else}{$item.url_alias|ezurl}{/if}{if $pagedata.is_edit} onclick="return false;"{/if}><span>{if $item.node_id|eq( 4198 )}Issues{else}{$item.name|wash()}{/if}</span></a></div></li>
+                <li id="node_id_{$item.node_id}"{if $item_class} class="{$item_class|implode(" ")}"{/if}><div><a{if $item.node_id|eq( 4198 )} title="New feature! Check out our issues homepage!"{/if} href={if eq( $ui_context, 'browse' )}{concat("content/browse/", $item.node_id)|ezurl}{else}{$item.url_alias|ezurl}{/if}{if $pagedata.is_edit} onclick="return false;"{/if}><span>{if $item.node_id|eq( 4198 )}Issues{else}{$item.name|wash()}{/if}</span></a></div></li>
             {/if}
             {/if}
           {/foreach}
