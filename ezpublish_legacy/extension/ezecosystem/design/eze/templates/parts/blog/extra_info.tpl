@@ -52,7 +52,13 @@
                         <div class="attribute-tags">
                             <h1>{"Tags list"|i18n("design/ezwebin/blog/extra_info")}</h1>
                             <ul>
-                            {foreach ezkeywordlist( $class_identifier, $used_node.node_id )|reverse() as $index => $keyword}
+                            {def $keywordlist_filtered=array()}
+                            {foreach ezkeywordlist( $class_identifier, $used_node.node_id ) as $item}
+                            {if fetch( 'content', 'keyword_count', hash( 'alphabet', $item.keyword, 'classid', 'blog_post','parent_node_id', $used_node.node_id ) )|gt( 2 )}
+                            {set $keywordlist_filtered=$keywordlist_filtered|append( $item )}
+                            {/if}
+                            {/foreach}
+                            {foreach $keywordlist_filtered as $index => $keyword}
                                 {if $index|le( 150 )}
                                 <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', 'blog_post','parent_node_id', $used_node.node_id ) )})</a></li>
                                 {/if}
