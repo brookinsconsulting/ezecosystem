@@ -89,7 +89,10 @@
 	    {def $currentPageUri=concat( '/', $node.url )}
 	    {/if}
 
+            {* Site notice area *}
+            {if true()}
             <div style="padding-bottom: 10px;"><hr /><span class="underline">New</span>! Checkout our new issues homepage with the latest issue ticket changes. Click the 'Issues' menu item above to follow the progress of the latest changes to eZ Publish!<hr /></div>
+            {/if}
 
             {include name=navigator
                      uri='design:navigator/google.tpl'
