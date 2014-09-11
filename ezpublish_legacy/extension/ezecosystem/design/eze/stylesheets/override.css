@@ -218,7 +218,7 @@ display: inline;
 
 div.attribute-body.float-break div.details a img.gravatar {
 float:left;
-padding-right: 3px;
+padding-right: 0px;
 }
 
 div.attribute-body.float-break div.details {
@@ -231,8 +231,12 @@ left: 25px;
 }
 
 div.attribute-body.float-break div.details div.commits.pusher-is-only-committer {
-padding-left: 10px;
+padding-left: 0px;
 margin-top: 10px;
+}
+
+div.attribute-body.float-break div.details div.commits ul li:not(:first-child) {
+padding-left: 20px;
 }
 
 div.attribute-body.float-break div.details div.message blockquote {
@@ -261,6 +265,15 @@ display: inline;
 
 div.attribute-body.float-break div.details div.message {
 margin-bottom: 8px;
+position: relative;
+left: 10px;
+}
+
+div.attribute-body.float-break div.details strong {
+margin-bottom: 8px;
+position: relative;
+left: 10px;
+padding-right:10px;
 }
 
 div.attribute-body.float-break > div.jira-issue-key {
@@ -298,6 +311,10 @@ margin-bottom: 15px;
 background-color: rgba(255, 165, 0, 0.23);
 }
 
+/* Generic styles */
 
+.underline {
+text-decoration: underline;
+}
 
 /* END */
