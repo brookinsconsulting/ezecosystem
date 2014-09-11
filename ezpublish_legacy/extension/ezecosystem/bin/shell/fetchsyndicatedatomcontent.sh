@@ -12,6 +12,8 @@ php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --sourc
 
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=brookinsconsultinggithubatomimporthandler -vdc;
 
+php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=brookinsconsultinggistgithubatomimporthandler -vdc;
+
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=gggeekgithubatomimporthandler -vdc;
 
 php ./extension/sqliimport/bin/php/sqlidoimport.php -s ezwebin_site_user --source-handlers=jdespatisgithubatomimporthandler -vdc;
