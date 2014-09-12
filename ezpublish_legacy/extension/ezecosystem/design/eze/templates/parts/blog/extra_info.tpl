@@ -1,7 +1,6 @@
-{def $tag_cloud_limit=190
-     $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
-                          'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
-                          'Thu', '社区委员会', 'wascou' )
+{def $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
+                                    'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
+                                    'Thu', '社区委员会', 'wascou' )
      $tag_cloud_exclude_strings=array()}
 
 {if or( $used_node.node_id|eq( 4198 ), $used_node.node_id|eq( 9181 ) )}
@@ -9,6 +8,15 @@
 {else}
   {def $class_identifier='blog_post'}
 {/if}
+
+{if or( $current_node.node_id|eq( 4198 ), $current_node.node_id|eq( 9181 ) )}
+{def $tag_list_keyword_limit=150
+     $tag_cloud_limit=190}
+{else}
+{def $tag_list_keyword_limit=40
+     $tag_cloud_limit=30}
+{/if}
+
 
                         <div class="attribute-tag-cloud">
                         <h1>Tags</h1>
@@ -38,6 +46,7 @@
                             {attribute_view_gui attribute=$used_node.object.data_map.description}
                         </div>
 
+{if $extra_view}
                         <div class="attribute-archive">
                             <h1>{"Archive"|i18n("design/ezwebin/blog/extra_info")}</h1>
                             <ul>
@@ -59,10 +68,11 @@
                             {/if}
                             {/foreach}
                             {foreach $keywordlist_filtered as $index => $keyword}
-                                {if $index|le( 150 )}
+                                {if $index|le( $tag_list_keyword_limit )}
                                 <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', 'blog_post','parent_node_id', $used_node.node_id ) )})</a></li>
                                 {/if}
                             {/foreach}
                             </ul>
                         </div>
 
+{/if}

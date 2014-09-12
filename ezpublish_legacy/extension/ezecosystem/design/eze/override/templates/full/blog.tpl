@@ -128,7 +128,7 @@
                 <div class="border-box">
                 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
                 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
-                        {include uri='design:parts/blog/extra_info.tpl' used_node=$node}
+                        {include uri='design:parts/blog/extra_info.tpl' used_node=$node current_node=$node extra_view=true()}
                 </div></div></div>
                 <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
                 </div>
