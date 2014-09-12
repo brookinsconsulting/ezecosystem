@@ -1,21 +1,16 @@
 <?php /* #?ini charset="utf-8"?
 
 [DatabaseSettings]
-DatabaseImplementation=ezmysqli
 Server=127.0.0.1
-Port=
 User=db
 Password=db
-Database=ezecosystem
-Charset=
-Socket=disabled
 
 [InformationCollectionSettings]
 EmailReceiver=info@brookinsconsulting.com
 
 [SiteSettings]
 SiteName=eZ Ecosystem
-SiteURL=ezecosystem/
+SiteURL=ezecosystem
 DefaultPage=content/dashboard
 LoginPage=custom
 
@@ -25,8 +20,8 @@ RegistrationEmail=
 [SiteAccessSettings]
 RequireUserLogin=true
 RelatedSiteAccessList[]=ezwebin_site_user
-RelatedSiteAccessList[]=eng
 RelatedSiteAccessList[]=ezwebin_site_admin
+RelatedSiteAccessList[]=eng
 ShowHiddenNodes=true
 
 [DesignSettings]

@@ -1,15 +1,9 @@
 <?php /* #?ini charset="utf-8"?
 
 [DatabaseSettings]
-DatabaseImplementation=ezmysqli
 Server=127.0.0.1
-Port=
 User=db
 Password=db
-Database=ezecosystem
-Charset=
-Socket=disabled
-
 
 # If you disable some modules or part of a module you can use the
 # SiteAccessRules group, this defines a list of rules which are
@@ -37,9 +31,9 @@ SessionNamePerSiteAccess=disabled
 
 [SiteSettings]
 SiteName=eZ Ecosystem
-SiteURL=ezecosystem/
+SiteURL=ezecosystem
 LoginPage=embedded
-AdditionalLoginFormActionURL=http://admin.ezecosystem/index.php/user/login
+AdditionalLoginFormActionURL=http://admin.ezecosystem/user/login
 
 [UserSettings]
 RegistrationEmail=info@brookinsconsulting.com
@@ -48,8 +42,8 @@ RegistrationEmail=info@brookinsconsulting.com
 RequireUserLogin=false
 RelatedSiteAccessList[]
 RelatedSiteAccessList[]=ezwebin_site_user
-RelatedSiteAccessList[]=eng
 RelatedSiteAccessList[]=ezwebin_site_admin
+RelatedSiteAccessList[]=eng
 ShowHiddenNodes=false
 
 [DesignSettings]
