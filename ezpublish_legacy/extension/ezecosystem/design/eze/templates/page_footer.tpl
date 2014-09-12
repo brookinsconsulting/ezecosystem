@@ -6,9 +6,12 @@
     {* if $pagedesign.data_map.hide_powered_by.data_int|not *}
         Powered by <a href="http://share.ez.no" title="eZ Publish&#8482; CMS Open Source Web Content Management">eZ Publish&#8482;</a> &nbsp; <a href="#top"><img src={'bc-icon-footer-sm.png'|ezimage} border="0" width="37" height="27" style="position:relative;top:10px;padding-right:1px;" /></a>
     {* /if *}
+
     {if $pagedesign.data_map.footer_text.has_content}
         {$pagedesign.data_map.footer_text.content} 
     {/if}
+    
+    <div class="hosting-sponsor">Proudly hosted by <br /><a href="http://thinkcreative.com" title="Think Creative">Think Creative</a> <br /> <a href="http://thinkcreative.com"><img src={'tc/tc-icon.png'|ezimage} border="0" {*width="37" height="27"*} style="position:relative;top:3px;padding-right:1px;" /></a></div>
     </address>
   </div>
   <!-- Footer area: END -->
