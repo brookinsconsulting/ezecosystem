@@ -13,3 +13,6 @@
 [submodule "ezpublish_legacy/extension/ezchangeclass"]
 	path = ezpublish_legacy/extension/ezchangeclass
 	url = git@github.com:brookinsconsulting/ezchangeclass.git
+[submodule "ezpublish_legacy/extension/OWSimpleOperator"]
+	path = ezpublish_legacy/extension/OWSimpleOperator
+	url = git@github.com:brookinsconsulting/OWSimpleOperator.git
