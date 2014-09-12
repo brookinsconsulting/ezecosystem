@@ -20,7 +20,7 @@ class eZecosystemSimpleOperators extends OWSimpleOperator
   /** 
    * Callback helper 
    */
-  function chr_utf8_callback($matches)
+  static function chr_utf8_callback($matches)
   { 
     return $this->chr_utf8(hexdec($matches[1])); 
   }
@@ -37,7 +37,8 @@ class eZecosystemSimpleOperators extends OWSimpleOperator
       $charset = 'ISO-8859-1'; //ini_get("default_charset");
 
     $string = html_entity_decode($string, $quote_style, $charset);
-    $string = preg_replace_callback('~&#x([0-9a-fA-F]+);~i', $this->chr_utf8_callback("\\1"), $string);
+    //$string = preg_replace_callback('~&#x([0-9a-fA-F]+);~i', $this->chr_utf8_callback("\\1"), $string);
+    $string = preg_replace_callback('~&#x([0-9a-fA-F]+);~i', 'eZecosystemSimpleOperators::chr_utf8_callback', $string);
     $string = preg_replace('~&#([0-9]+);~e', '$this->chr_utf8("\\1")', $string);
     return $string; 
   }

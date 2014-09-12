@@ -93,11 +93,13 @@ class SQLIJiraATOMImportHandler extends SQLIImportAbstractHandler implements ISQ
         // $title = strip_tags( html_entity_decode( (string)$row->title ) );
         $classToDecode = new eZecosystemSimpleOperators();
         $title = strip_tags( $classToDecode->html_entity_decode_numeric( (string)$row->title ) );
+
         /*
         echo "\n\n";
         print_r( $title );
         echo "\n\n";
         */
+
         $content->fields->title = $title;
         $content->fields->blog_post_author = (string)$row->author->name;
 
