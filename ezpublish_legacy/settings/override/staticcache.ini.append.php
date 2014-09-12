@@ -21,6 +21,7 @@ MaxCacheDepth=4
 # subtree.
 CachedURLArray[]=/
 CachedURLArray[]=/Mirror*
+CachedURLArray[]=/Issues*
 CachedURLArray[]=/About*
 CachedURLArray[]=/About-eZ-Publish*
 CachedURLArray[]=/Contact-Us*
