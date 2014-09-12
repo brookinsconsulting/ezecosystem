@@ -30,3 +30,6 @@ PHP=/usr/bin/php
 0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOTB && $PHP ./runcronjobs.php googlesitemaps -q 2>&1
 
 7,27,37,57 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/makestaticcache.php -s ezwebin_site_user -v -f 2>&1
+
+7,27,37,57 * * * * cd $EZPUBLISHROOTB && $PHP ./runcronjobs.php updateviewcount -q 2>&1
+
