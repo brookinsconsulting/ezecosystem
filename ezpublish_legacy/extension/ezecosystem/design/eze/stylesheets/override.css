@@ -165,8 +165,8 @@ margin-bottom: 0.5em;
 
 input.button, input.defaultbutton {
 background-color: #F2F3F5;
-background-image: url(images/button_bg.jpg);
-background-repeat: repeat-x;
+/* background-image: url(images/button_bg.jpg);
+background-repeat: repeat-x; */
 border: 1px solid #C1C9CC;
 color: #000000;
 font-family: Tahoma,Arial,Helvetica,sans-serif;
