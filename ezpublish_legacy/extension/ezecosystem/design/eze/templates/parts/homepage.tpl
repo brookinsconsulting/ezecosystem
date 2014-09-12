@@ -2,7 +2,15 @@
      $blogs_count = 0
      $uniq_id = 0
      $uniq_post = array()
-     $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )}
+     $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )
+     $notifications_node_id=14353
+     $notifications_class=array( 'notification' )}
+
+{if $node.node_id|eq( 2 )}
+{def $currentPageUri=''}
+{else}
+{def $currentPageUri=concat( '/', $node.url )}
+{/if}
 
 {*   $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $blogs_node_id) ) *}
 
@@ -83,15 +91,20 @@
 								       'depth', 2 ) )}
 
             <div style="margin-top:6px;margin-bottom:8px;">
-	    {if $node.node_id|eq( 2 )}
-	    {def $currentPageUri=''}
-	    {else}
-	    {def $currentPageUri=concat( '/', $node.url )}
-	    {/if}
-
             {* Site notice area *}
-            {if true()}
-            <div style="padding-bottom: 10px;"><hr /><span class="underline">New</span>! Checkout our new issues homepage with the latest issue ticket changes. Click the 'Issues' menu item above to follow the progress of the latest changes to eZ Publish!<hr /></div>
+            {def $notifications=fetch( 'content', 'list', hash( 'parent_node_id', $notifications_node_id,
+                                                                'class_filter_type', 'include',
+                                                                'class_filter_array', $notifications_class,
+                                                                'order_by', array( 'published', false() ),
+                                                                'limit', 1 ) )}
+            {if $notifications|is_array}
+            <div style="padding-bottom: 10px;">
+            {foreach $notifications as $notification}
+            <hr />
+            {$notification.data_map.intro.content.output.output_text}
+            <hr />
+            {/foreach}
+            </div>
             {/if}
 
             {include name=navigator
