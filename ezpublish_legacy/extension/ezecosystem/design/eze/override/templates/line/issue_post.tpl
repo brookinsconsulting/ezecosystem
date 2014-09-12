@@ -6,7 +6,7 @@
         <h1><a href={$node.parent.url_alias|ezurl}>{$node.parent.name}</a></h1>
      </div>
     <div class="attribute-header">
-        <h2>> <a href="{$node.data_map.blog_post_url.content}" title="{$node.data_map.title.content|wash}">{if $node.data_map.title.content|count_chars|gt( 70 )}{$node.data_map.title.content|extract( 0, 66 )|append(' ...' )|wash}{else}{$node.data_map.title.content|wash}{/if}</a></h2>
+        <h2>> <a href="{$node.data_map.blog_post_url.content}" title="{$node.data_map.title.content}">{if $node.data_map.title.content|count_chars|gt( 70 )}{$node.data_map.title.content|extract( 0, 66 )|append(' ...' )|wash}{else}{$node.data_map.title.content}{/if}</a></h2>
      </div>
 
     <div class="attribute-byline">
@@ -30,7 +30,7 @@
     <div class="attribute-body float-break">
 
     {* <pre style="white-space:pre-wrap;width:81ex">{$node.data_map.title.content|trim}</pre> *}
-    <p>{$node.data_map.title.content|wash}</p>
+    <p>{$node.data_map.title.content}</p>
 
     {if $node.data_map.blog_post_description_text_block.has_content|eq(true() )}
         {$node.data_map.blog_post_description_text_block.content}

@@ -8,5 +8,6 @@
 # php function later on without doing template changes.
 PHPOperatorList[rawurldecode]=rawurldecode
 PHPOperatorList[rawurlencode]=rawurlencode
+PHPOperatorList[html_entity_decode]=html_entity_decode
 
 */ ?>

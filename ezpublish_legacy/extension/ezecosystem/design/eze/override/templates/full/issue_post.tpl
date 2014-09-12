@@ -14,7 +14,7 @@
                             <div class="class-blog-post float-break">
 
                                 <div class="attribute-header">
-                                    <h1>{$node.data_map.title.content|wash}</h1>
+                                    <h1>{$node.data_map.title.content}</h1>
                                 </div>
 
                                 <div class="attribute-byline">
@@ -44,7 +44,7 @@
 
 				<div class="attribute-body float-break">
 
-                                <p>{$node.data_map.title.content|wash}</p>
+                                <p>{$node.data_map.title.content}</p>
 
                                 {if $node.data_map.blog_post_description_text_block.has_content|eq(true() )}
                                     {$node.data_map.blog_post_description_text_block.content}
@@ -97,7 +97,7 @@
                 <div class="border-box">
                 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
                 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
-                        {include uri='design:parts/blog/extra_info.tpl' used_node=$node.parent}
+                        {include uri='design:parts/blog/extra_info.tpl' used_node=$node.parent current_node=$node extra_view=false()}
                 </div></div></div>
                 <div class="border-bl"><div class="border-br"><div class="border-bc"></div></div></div>
                 </div>
