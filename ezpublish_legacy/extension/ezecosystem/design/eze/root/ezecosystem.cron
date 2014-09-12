@@ -25,7 +25,7 @@ PHP=/usr/bin/php
 
 0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh
 
-# 03,07,13,19,26,27,37,43,49,53,58 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/ezcache.php --clear-tag=content;
+01,04,08,16,26,31,36,42,46,51,56,59 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/ezcache.php --clear-tag=content;
 
 0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOTB && $PHP ./runcronjobs.php googlesitemaps -q 2>&1
 
