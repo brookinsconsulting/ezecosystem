@@ -15,10 +15,11 @@
 # This setting will be removed in future release
 HostName=
 StaticStorageDir=var/ezwebin_site/static
-MaxCacheDepth=4
+MaxCacheDepth=8
 
 # A list of url's to cache. You can use the * wildcard to include a whole
 # subtree.
+CachedURLArray[]
 CachedURLArray[]=/
 CachedURLArray[]=/Mirror*
 CachedURLArray[]=/Issues*
@@ -29,11 +30,14 @@ CachedURLArray[]=/Contact-Us*
 # A list of site accesses to generate static content for
 CachedSiteAccesses[]
 CachedSiteAccesses[]=ezwebin_site_user
+#CachedSiteAccesses[]=eze_user_local
 
 # A list of locations that will be updated whenever an object is published. You
 # can NOT use a wildcard here.
 AlwaysUpdateArray[]
 AlwaysUpdateArray[]=/
+AlwaysUpdateArray[]=/Mirror
+AlwaysUpdateArray[]=/Issues
 
 # Defer cache generation to cronjob.
 CronjobCacheClear=disabled
