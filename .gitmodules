@@ -16,3 +16,6 @@
 [submodule "ezpublish_legacy/extension/OWSimpleOperator"]
 	path = ezpublish_legacy/extension/OWSimpleOperator
 	url = git@github.com:brookinsconsulting/OWSimpleOperator.git
+[submodule "ezpublish_legacy/extension/swark"]
+	path = ezpublish_legacy/extension/swark
+	url = git@github.com:brookinsconsulting/swark.git
