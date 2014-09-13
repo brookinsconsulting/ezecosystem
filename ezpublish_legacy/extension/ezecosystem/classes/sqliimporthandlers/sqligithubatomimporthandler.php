@@ -87,7 +87,10 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
             'class_identifier'      => 'blog_post',
             'remote_id'             => (string)$row->id
         ) );
+
         $content = SQLIContent::create( $contentOptions );
+
+        $defaultParentNodeID = $this->handlerConfArray['DefaultParentNodeID'];
 
         $title = (string)$row->title;
         $content->fields->title = $title;
@@ -106,11 +109,21 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
         $content->fields->tags = $issueTicketID;
 
         // Now publish content
-        $content->addLocation( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
+        $content->addLocation( SQLILocation::fromNodeID( $defaultParentNodeID ) );
 
         $publisher = SQLIContentPublisher::getInstance();
         $publisher->publish( $content );
-        
+
+        // Clear cache
+        $defaultParentNodeID = $this->handlerConfArray['DefaultParentNodeID'];
+        $parentNode = eZContentObjectTreeNode::fetch( $defaultParentNodeID, 'eng-US' );
+
+        if ( $parentNode != false )
+        {
+            $objectID = $parentNode->attribute( 'object' )->attribute( 'id' );
+            eZContentCacheManager::clearContentCacheIfNeeded( $objectID );
+        }
+
         // Free some memory. Internal methods eZContentObject::clearCache() and eZContentObject::resetDataMap() will be called
         // @see SQLIContent::__destruct()
         unset( $content );
