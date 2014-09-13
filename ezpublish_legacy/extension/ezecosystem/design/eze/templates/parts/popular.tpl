@@ -13,7 +13,7 @@
 
 <div class="content-view-full" style="width: 210px;">
     <div class="class-folder">
-    <h3>Most popular<h3>
+    <h3>Popular<h3>
     <div style="width: 200px">
     <ul>
         {foreach $popular_nodes as $popular_node}
