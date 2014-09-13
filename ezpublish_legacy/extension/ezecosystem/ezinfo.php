@@ -28,9 +28,9 @@ class ezecosystemInfo
 {
     static function info()
     {
-        return array( 'Name' => 'eZ Ecosystem : Site Design',
-                      'Version' => '0.3.0',
-                      'Copyright' => 'Copyright (C) 1999-2012 Brookins Consulting',
+        return array( 'Name' => 'eZ Ecosystem : Website Design and Functionality',
+                      'Version' => '0.5.1',
+                      'Copyright' => 'Copyright (C) 1999 - 2014 Brookins Consulting',
                       'License' => 'GNU General Public License'
                      );
     }
