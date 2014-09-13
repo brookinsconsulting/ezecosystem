@@ -1,9 +1,8 @@
-
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
 
-<div class="content-view-full" style="width: 210px;">
+<div class="content-view-full sidebar-content-container">
     <div class="class-folder">
     <h3>Planetarium<h3>
 
@@ -13,7 +12,7 @@
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', array( 'link' ),
                                                              'limit', 30 ) )}
-    <div style="width: 200px">
+    <div class="sidebar-content">
     <ul>
     {foreach $planetariumLinks as $link}
         <li><a href="{$link.data_map.location.content}">{$link.name}</a></li>
