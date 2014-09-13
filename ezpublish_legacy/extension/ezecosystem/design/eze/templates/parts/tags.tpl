@@ -1,5 +1,5 @@
 {cache-block expiry=172800}
-{def $tag_cloud_limit=200
+{def $tag_cloud_limit=140
      $tag_cloud_class_identifier='blog_post'
      $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
                                     'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
