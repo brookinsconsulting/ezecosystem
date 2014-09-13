@@ -69,13 +69,6 @@ ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
 ClearCacheMethod[]=siblings
 
-[blog_post]
-DependentClassIdentifier[]=frontpage
-DependentClassIdentifier[]=blog
-ClearCacheMethod[]=object
-ClearCacheMethod[]=parent
-ClearCacheMethod[]=relating
-
 [product]
 DependentClassIdentifier[]=folder
 DependentClassIdentifier[]=frontpage
@@ -109,9 +102,18 @@ ClearCacheMethod[]=relating
 
 [blog_post]
 DependentClassIdentifier[]=frontpage
+DependentClassIdentifier[]=blog
 DependentClassIdentifier[]=folder
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
-#ClearCacheMethod[]=relating
+ClearCacheMethod[]=relating
+
+[issue_post]
+DependentClassIdentifier[]=frontpage
+DependentClassIdentifier[]=blog
+DependentClassIdentifier[]=folder
+ClearCacheMethod[]=object
+ClearCacheMethod[]=parent
+ClearCacheMethod[]=relating
 
 */ ?>
