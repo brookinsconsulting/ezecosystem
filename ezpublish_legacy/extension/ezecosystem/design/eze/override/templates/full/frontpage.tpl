@@ -105,6 +105,8 @@
 
 {include uri="design:parts/planetarium.tpl" blogs_planetarium_id=$blogs_planetarium_id}
 
+{include uri="design:parts/popular.tpl" class_ids=array( 20, 45 )}
+
 {/cache-block}
 
 {include uri="design:parts/twitter.tpl"}
