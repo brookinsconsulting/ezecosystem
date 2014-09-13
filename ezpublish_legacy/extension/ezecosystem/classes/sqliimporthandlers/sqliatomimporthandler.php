@@ -103,6 +103,16 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
 
         $publisher = SQLIContentPublisher::getInstance();
         $publisher->publish( $content );
+
+        // Clear cache
+        $defaultParentNodeID = $this->handlerConfArray['DefaultParentNodeID'];
+        $parentNode = eZContentObjectTreeNode::fetch( $defaultParentNodeID, 'eng-US' );
+
+        if ( $parentNode != false )
+        {
+            $objectID = $parentNode->attribute( 'object' )->attribute( 'id' );
+            eZContentCacheManager::clearContentCacheIfNeeded( $objectID );
+        }
         
         // Free some memory. Internal methods eZContentObject::clearCache() and eZContentObject::resetDataMap() will be called
         // @see SQLIContent::__destruct()
