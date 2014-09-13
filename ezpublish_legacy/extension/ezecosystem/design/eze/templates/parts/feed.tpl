@@ -6,9 +6,11 @@
     <div class="class-folder">
     {* <h4>Syndication<h4> *}
 
-    {* <div style="width: 200px">
+    {* <div class="sidebar-content">
 	<p> *}
+
 	<div style="position:relative;top:-15px;left:28px;"><a href="/rss/feed/rss" style="" title="eZecosystem RSS Feed"><img src={'feed-icon-28x28.png'|ezimage} border=0 /></a>&nbsp;&nbsp;<a href="https://raw.github.com/brookinsconsulting/ezecosystemopml/master/index.opml" style="" title="eZecosystem OPML File"><img src={'opml-icon-24x24.png'|ezimage} border=0 /></a></div>
+
         {* </p>
     </div> *}
 

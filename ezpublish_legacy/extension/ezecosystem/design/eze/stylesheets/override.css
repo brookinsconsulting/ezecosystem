@@ -375,4 +375,12 @@ float: right;
 padding-right: 5px;
 }
 
+.sidebar-content {
+width: 200px;
+}
+
+.sidebar-content-container {
+width: 210px;
+
+}
 /* END */

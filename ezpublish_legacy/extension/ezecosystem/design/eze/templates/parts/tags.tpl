@@ -1,4 +1,3 @@
-{cache-block expiry=172800}
 {def $tag_cloud_limit=140
      $tag_cloud_class_identifier='blog_post'
      $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
@@ -9,7 +8,7 @@
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
 
-<div class="content-view-full" style="width: 210px;">
+<div class="content-view-full sidebar-content-container">
     <div class="class-folder">
     <h3>Tags<h3>
 
@@ -40,7 +39,7 @@
 {def $tags = ezkeywordlist()
      $archives=ezarchive()}
 
-    <div style="width: 200px">
+    <div class="sidebar-content">
     <ul>
                             {foreach $tags as $keyword}
                                 <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', 'blog_post','parent_node_id', $used_node.node_id ) )})</a></li>
@@ -49,7 +48,7 @@
     </div>
 
     <h3>Archive<h3>
-    <div style="width: 200px">
+    <div class="sidebar-content">
     <ul>
                             {foreach $archives as $archive}
                                 <li><a href={concat( $used_node.url_alias, "/(month)/", $archive.month, "/(year)/", $archive.year )|ezurl} title="">{$archive.timestamp|datetime( 'custom', '%F %Y' )}</a></li>
@@ -99,4 +98,4 @@
 
                         {include uri='design:parts/blog/calendar.tpl'}
 *}
-{/cache-block}
+
