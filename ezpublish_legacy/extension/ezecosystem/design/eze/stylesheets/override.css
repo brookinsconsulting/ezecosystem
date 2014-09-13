@@ -370,5 +370,9 @@ position: relative;
 left: 2.1%;
 }
 
+.views {
+float: right;
+padding-right: 5px;
+}
 
 /* END */
