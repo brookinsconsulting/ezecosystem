@@ -1,7 +1,6 @@
 <?php /* #?ini charset="utf-8"?
 
 [ContentSettings]
-StaticCache=enabled
 StaticCacheHandler=eZecosystemStaticCache
 
 [DatabaseSettings]
@@ -10,10 +9,13 @@ Database=ezecosystem
 Charset=
 
 [DebugSettings]
-DebugByIP=disabled
+#DebugOutput=enabled
+DebugByIP=enabled
 DebugIPList[]
 DebugIPList[]=172.7.240.131
-DebugIPList[]=::1
+DebugIPList[]=192.168.1.73
+DebugIPList[]=127.0.0.1
+DebugIPList[]=::1/32
 
 [ExtensionSettings]
 ActiveExtensions[]
@@ -22,6 +24,8 @@ ActiveExtensions[]=ezchangeclass
 ActiveExtensions[]=ezsh
 ActiveExtensions[]=swark
 ActiveExtensions[]=bcupdatecache
+ActiveExtensions[]=bcgeneratestaticcache
+ActiveExtensions[]=ggsysinfo
 ActiveExtensions[]=OWSimpleOperator
 ActiveExtensions[]=bcgooglesitemaps
 ActiveExtensions[]=sqliimport
@@ -48,8 +52,10 @@ SessionNamePerSiteAccess=enabled
 DefaultAccess=ezwebin_site_user
 SiteList[]
 SiteList[]=ezwebin_site_user
+SiteList[]=eze_user_nocache
 SiteList[]=ezwebin_site_admin
 SiteList[]=eze_user_local
+SiteList[]=eze_user_local_nocache
 SiteList[]=eze_user_admin
 SiteList[]=eng
 RootNodeDepth=1
@@ -57,7 +63,7 @@ SiteName=eZecosystem
 MetaDataArray[author]=eZecosystem
 MetaDataArray[copyright]=eZecosystem (except where otherwise noted.)
 MetaDataArray[description]=An eZ Publish Community Planet
-MetaDataArray[keywords]=ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem,blog, cms, publish, e-commerce, content management, development framework, share, echo, eco
+MetaDataArray[keywords]=ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem, blog, cms, publish, e-commerce, content management, development framework, share, echo, eco, syndication, syndicate, feeds, ecosystem, ezecosystem, eZecosystem
 
 [UserSettings]
 LogoutRedirect=/
@@ -69,14 +75,20 @@ AvailableSiteAccessList[]=ezwebin_site_user
 AvailableSiteAccessList[]=ezwebin_site_admin
 AvailableSiteAccessList[]=eze_user_local
 AvailableSiteAccessList[]=eze_admin_local
+AvailableSiteAccessList[]=eze_user_nocache
+AvailableSiteAccessList[]=eze_user_local_nocache
 AvailableSiteAccessList[]=eng
 MatchOrder=host
 HostMatchMapItems[]
 HostMatchMapItems[]=ezecosystem.org;ezwebin_site_user
 HostMatchMapItems[]=www.ezecosystem.org;ezwebin_site_user
 HostMatchMapItems[]=admin.ezecosystem.org;ezwebin_site_admin
+HostMatchMapItems[]=cache.ezecosystem.org;ezwebin_site_admin
+HostMatchMapItems[]=nocache.ezecosystem.org;eze_user_nocache
 HostMatchMapItems[]=ezecosystem;eze_user_local
 HostMatchMapItems[]=admin.ezecosystem;eze_admin_local
+HostMatchMapItems[]=cache.ezecosystem;eze_user_local
+HostMatchMapItems[]=nocache.ezecosystem;eze_user_local_nocache
 HostMatchMapItems[]=ezecosystem.ssd.thinkcreativeinternal.net;ezwebin_site_user
 HostMatchMapItems[]=admin.ezecosystem.ssd.thinkcreativeinternal.net;ezwebin_site_admin
 #HostMatchMapItems[]=ezecosystem.com;ezwebin_site_user

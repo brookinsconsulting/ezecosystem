@@ -1,7 +1,7 @@
 <?php /* #?ini charset="utf-8"?
 
 [ContentSettings]
-StaticCache=enabled
+StaticCache=disabled
 
 [DebugSettings]
 DebugOutput=disabled
@@ -26,9 +26,6 @@ Rules[]=moduleall
 # Set policy to denied
 Rules[]=access;disable
 Rules[]=module;user/register
-Rules[]=module;content/versionview
-Rules[]=module;content/history
-Rules[]=module;content/tipafriend
 
 [InformationCollectionSettings]
 EmailReceiver=info@brookinsconsulting.com
@@ -38,9 +35,9 @@ SessionNamePerSiteAccess=disabled
 
 [SiteSettings]
 SiteName=eZ Ecosystem
-SiteURL=ezecosystem.org
+SiteURL=ezecosystem
 LoginPage=embedded
-AdditionalLoginFormActionURL=http://admin.ezecosystem.org/user/login
+AdditionalLoginFormActionURL=http://admin.ezecosystem/user/login
 
 [UserSettings]
 RegistrationEmail=info@brookinsconsulting.com
@@ -50,6 +47,7 @@ RequireUserLogin=false
 RelatedSiteAccessList[]
 RelatedSiteAccessList[]=ezwebin_site_user
 RelatedSiteAccessList[]=ezwebin_site_admin
+RelatedSiteAccessList[]=eze_user_nocache
 RelatedSiteAccessList[]=eng
 ShowHiddenNodes=false
 
