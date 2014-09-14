@@ -10,13 +10,10 @@ Database=ezecosystem
 Charset=
 
 [DebugSettings]
-DebugOutput=disabled
 DebugByIP=disabled
 DebugIPList[]
 DebugIPList[]=172.7.240.131
-
-[TemplateSettings]
-ShowUsedTemplates=disabled
+DebugIPList[]=::1
 
 [ExtensionSettings]
 ActiveExtensions[]

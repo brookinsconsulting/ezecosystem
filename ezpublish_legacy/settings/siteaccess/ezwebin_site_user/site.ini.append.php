@@ -1,8 +1,10 @@
 <?php /* #?ini charset="utf-8"?
 
 [DebugSettings]
-DebugOutput=enabled
+DebugOutput=disabled
 
+[TemplateSettings]
+ShowUsedTemplates=disabled
 
 # If you disable some modules or part of a module you can use the
 # SiteAccessRules group, this defines a list of rules which are

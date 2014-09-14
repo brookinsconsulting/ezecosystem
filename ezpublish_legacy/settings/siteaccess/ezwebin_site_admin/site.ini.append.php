@@ -3,6 +3,9 @@
 [DebugSettings]
 DebugOutput=enabled
 
+[TemplateSettings]
+ShowUsedTemplates=enabled
+
 # If you disable some modules or part of a module you can use the
 # SiteAccessRules group, this defines a list of rules which are
 # run in order.
