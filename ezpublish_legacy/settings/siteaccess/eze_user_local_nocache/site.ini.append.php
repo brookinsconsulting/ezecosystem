@@ -1,13 +1,18 @@
 <?php /* #?ini charset="utf-8"?
 
 [ContentSettings]
-StaticCache=enabled
+StaticCache=disabled
 
 [DebugSettings]
 DebugOutput=disabled
 
 [TemplateSettings]
 ShowUsedTemplates=disabled
+
+[DatabaseSettings]
+Server=127.0.0.1
+User=db
+Password=db
 
 # If you disable some modules or part of a module you can use the
 # SiteAccessRules group, this defines a list of rules which are
@@ -26,9 +31,6 @@ Rules[]=moduleall
 # Set policy to denied
 Rules[]=access;disable
 Rules[]=module;user/register
-Rules[]=module;content/versionview
-Rules[]=module;content/history
-Rules[]=module;content/tipafriend
 
 [InformationCollectionSettings]
 EmailReceiver=info@brookinsconsulting.com
@@ -38,9 +40,9 @@ SessionNamePerSiteAccess=disabled
 
 [SiteSettings]
 SiteName=eZ Ecosystem
-SiteURL=ezecosystem.org
+SiteURL=ezecosystem
 LoginPage=embedded
-AdditionalLoginFormActionURL=http://admin.ezecosystem.org/user/login
+AdditionalLoginFormActionURL=http://admin.ezecosystem/user/login
 
 [UserSettings]
 RegistrationEmail=info@brookinsconsulting.com
