@@ -5,7 +5,7 @@
 {foreach $class_ids as $class_id}
 {set $popular_nodes=$popular_nodes|merge( fetch( 'content', 'view_top_list', hash( 'class_id', $class_id, 'limit', 7, 'offset', 0 ) ) )}
 {/foreach}
-{def 
+
 
 {* Sort popular nodes *}
 {foreach $popular_nodes as $index => $node}
