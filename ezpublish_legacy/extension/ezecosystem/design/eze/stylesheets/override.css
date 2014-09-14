@@ -381,6 +381,18 @@ width: 200px;
 
 .sidebar-content-container {
 width: 210px;
-
 }
+
+div.content-view-line div.class-blog-post div.attribute-header a {
+max-width: 575px;
+overflow: hidden;
+word-wrap: break-word;
+}
+
+div.content-view-line div.class-blog-post div.attribute-header {
+max-width: 575px;
+overflow: hidden;
+word-wrap: break-word;
+}
+
 /* END */
