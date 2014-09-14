@@ -25,11 +25,10 @@ PHP=/usr/bin/php
 
 0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh
 
-01,04,08,16,26,31,36,42,46,51,56,59 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/ezcache.php --clear-tag=content;
+# 0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOTB && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh && $PHP ./runcronjobs.php sqliimport_cleanup -q
 
 0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOTB && $PHP ./runcronjobs.php googlesitemaps -q 2>&1
 
-7,27,37,57 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/makestaticcache.php -s ezwebin_site_user -v -f 2>&1
+7,27,37,57 * * * * cd $EZPUBLISHROOTB && $PHP ./bin/php/makestaticcache.php -s ezwebin_site_user
 
 7,27,37,57 * * * * cd $EZPUBLISHROOTB && $PHP ./runcronjobs.php updateviewcount -q 2>&1
-
