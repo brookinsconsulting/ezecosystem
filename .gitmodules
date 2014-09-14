@@ -19,3 +19,9 @@
 [submodule "ezpublish_legacy/extension/swark"]
 	path = ezpublish_legacy/extension/swark
 	url = git@github.com:brookinsconsulting/swark.git
+[submodule "ezpublish_legacy/extension/ggsysinfo"]
+	path = ezpublish_legacy/extension/ggsysinfo
+	url = git@github.com:gggeek/ggsysinfo.git
+[submodule "ezpublish_legacy/extension/bcgeneratestaticcache"]
+	path = ezpublish_legacy/extension/bcgeneratestaticcache
+	url = git@github.com:brookinsconsulting/bcgeneratestaticcache.git
