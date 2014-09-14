@@ -119,10 +119,11 @@
         </div>
     </div>
 
+    {*
     <div class="attribute-bottom-column">
         {attribute_view_gui attribute=$node.object.data_map.bottom_column}
     </div>
-
+    *}
     </div>
 </div>
 
