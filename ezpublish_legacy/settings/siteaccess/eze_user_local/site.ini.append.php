@@ -1,5 +1,11 @@
 <?php /* #?ini charset="utf-8"?
 
+[DebugSettings]
+DebugOutput=enabled
+
+[TemplateSettings]
+ShowUsedTemplates=enabled
+
 [DatabaseSettings]
 Server=127.0.0.1
 User=db
