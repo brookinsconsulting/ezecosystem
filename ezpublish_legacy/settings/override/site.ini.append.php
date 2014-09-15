@@ -25,6 +25,7 @@ ActiveExtensions[]=ezsh
 ActiveExtensions[]=swark
 ActiveExtensions[]=bcupdatecache
 ActiveExtensions[]=bcgeneratestaticcache
+ActiveExtensions[]=git_manager
 ActiveExtensions[]=ggsysinfo
 ActiveExtensions[]=OWSimpleOperator
 ActiveExtensions[]=bcgooglesitemaps

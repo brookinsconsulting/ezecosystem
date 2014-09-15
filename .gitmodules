@@ -25,3 +25,6 @@
 [submodule "ezpublish_legacy/extension/bcgeneratestaticcache"]
 	path = ezpublish_legacy/extension/bcgeneratestaticcache
 	url = git@github.com:brookinsconsulting/bcgeneratestaticcache.git
+[submodule "ezpublish_legacy/extension/git_manager"]
+	path = ezpublish_legacy/extension/git_manager
+	url = git@bitbucket.org:thinkcreative/git_manager.git
