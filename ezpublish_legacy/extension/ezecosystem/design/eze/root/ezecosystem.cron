@@ -23,13 +23,15 @@ PHP=/usr/bin/php
 
 0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user rssimport -q 2>&1
 
-0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh ezwebin_site_user && $PHP ./runcronjobs.php -s ezwebin_site_user sqliimport_cleanup -q && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user index && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user blogindex
+0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh ezwebin_site_user && $PHP ./runcronjobs.php -s ezwebin_site_user sqliimport_cleanup -q && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user / && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user /Mirror
 
 0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user googlesitemaps -q 2>&1
 
 0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user staticcache_cleanup
 
-10,20,30,40,50,59 * * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user index '*'
+40 */3 * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user / '*'
+
+# 10,20,30,40,50,59 * * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user index '*'
 
 # 7,27,37,57 * * * * cd $EZPUBLISHROOT && $PHP ./bin/php/makestaticcache.php -s ezwebin_site_user
 
