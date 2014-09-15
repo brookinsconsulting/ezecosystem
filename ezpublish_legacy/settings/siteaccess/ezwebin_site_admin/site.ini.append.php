@@ -9,74 +9,48 @@ DebugOutput=enabled
 [TemplateSettings]
 ShowUsedTemplates=enabled
 
-# If you disable some modules or part of a module you can use the
-# SiteAccessRules group, this defines a list of rules which are
-# run in order.
-#
-# The following is an example of how to disable content/search
-# and the rss module
-
-[SiteAccessRules]
-Rules[]
-# Set access policy to allowed
-Rules[]=access;enable
-# Special syntax which means any module
-# This means that for now all modules are enabled
-Rules[]=moduleall
-# Set policy to denied
-Rules[]=access;disable
-Rules[]=module;user/register
-Rules[]=module;content/versionview
-Rules[]=module;content/history
-Rules[]=module;content/tipafriend
-
 [InformationCollectionSettings]
 EmailReceiver=info@brookinsconsulting.com
 
-[Session]
-SessionNamePerSiteAccess=disabled
-
 [SiteSettings]
-SiteName=eZ Ecosystem
-SiteURL=ezecosystem.org
-LoginPage=embedded
-AdditionalLoginFormActionURL=http://admin.ezecosystem.org/user/login
+SiteName=eZ Ecosystem - Admin
+SiteURL=admin.ezecosystem.org
+DefaultPage=content/dashboard
+LoginPage=custom
 
 [UserSettings]
 RegistrationEmail=info@brookinsconsulting.com
 
 [SiteAccessSettings]
-RequireUserLogin=false
-RelatedSiteAccessList[]
+RequireUserLogin=true
 RelatedSiteAccessList[]=ezwebin_site_user
 RelatedSiteAccessList[]=ezwebin_site_admin
+RelatedSiteAccessList[]=eze_user_nocache
 RelatedSiteAccessList[]=eng
-ShowHiddenNodes=false
+ShowHiddenNodes=true
 
 [DesignSettings]
-SiteDesign=eze
-AdditionalSiteDesignList[]
-AdditionalSiteDesignList[]=eze
-AdditionalSiteDesignList[]=ezwebin
-AdditionalSiteDesignList[]=base
+SiteDesign=ezwebin_site_admin
+AdditionalSiteDesignList[]=admin2
+AdditionalSiteDesignList[]=admin
 
 [RegionalSettings]
 Locale=eng-US
 ContentObjectLocale=eng-US
-ShowUntranslatedObjects=disabled
-SiteLanguageList[]
+ShowUntranslatedObjects=enabled
 SiteLanguageList[]=eng-US
+SiteLanguageList[]=eng-GB
 TextTranslation=disabled
 
 [FileSettings]
 VarDir=var/ezwebin_site
 
 [ContentSettings]
+CachedViewPreferences[full]=admin_navigation_content=1;admin_children_viewmode=list;admin_list_limit=1
 TranslationList=
 
 [MailSettings]
 AdminEmail=info@brookinsconsulting.com
-EmailSender=info@ezecosystem.org
-
+EmailSender=info@brookinsconsulting.com
 
 */ ?>
