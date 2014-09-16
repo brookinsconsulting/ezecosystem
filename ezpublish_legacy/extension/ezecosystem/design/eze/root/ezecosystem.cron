@@ -39,3 +39,4 @@ PHP=/usr/bin/php
 
 7,27,37,57 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user indexcontent -q 2>&1
 
+*/5 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php sqliimport_run 2>&1
