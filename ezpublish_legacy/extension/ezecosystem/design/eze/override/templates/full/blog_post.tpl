@@ -2,6 +2,9 @@
 {set scope=global persistent_variable=hash('left_menu', false(),
                                            'extra_menu', false())}
 
+{def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
+     $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')}
+
 <div class="class-blog extrainfo">
     <div class="columns-blog float-break">
         <div class="main-column-position">
@@ -24,7 +27,7 @@
                                 <div class="attribute-byline">
                                     <p class="date">{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</p>
                                     <p class="author">{$node.object.data_map.blog_post_author.content}</p>
-                                    {if $node.view_count|gt(2)}<p class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
+                                    {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
 
 				    {if $$node.data_map.tags.has_content}
                                     <p class="tags"> {"Tags:"|i18n("design/ezwebin/full/blog_post")}

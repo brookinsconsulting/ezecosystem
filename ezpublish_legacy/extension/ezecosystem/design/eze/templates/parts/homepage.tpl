@@ -1,12 +1,17 @@
-{def $page_limit = 30
+{def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
+     $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')
+     $homePageBlogPostPublicationDateAttributeName=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
+     $homePageBlogPostFetchClasses=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
+     $page_limit = 30
      $blogs_count = 0
      $uniq_id = 0
      $uniq_post = array()
      $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )
-     $notifications_node_id=14353
-     $notifications_class=array( 'notification' )}
+     $notifications_node_id=ezini('NodeIDSettings','NotificationNodeID','ezecosystem.ini')
+     $notifications_class=array( ezini('ClassIdentifierSettings','classNotification','ezecosystem.ini') )
+     $homePagePostFetchLanguage='eng-US'}
 
-{if $node.node_id|eq( 2 )}
+{if $node.node_id|eq( $root_node_id )}
 {def $currentPageUri=''}
 {else}
 {def $currentPageUri=concat( '/', $node.url )}
@@ -53,7 +58,7 @@
         {foreach fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                     'classid', 'blog_post',
                                                     'offset', $view_parameters.offset,
-                                                    'sort_by', array( 'attribute', false(), 'blog_post/publication_date' ),
+                                                    'sort_by', array( 'attribute', false(), $homePageBlogPostPublicationDateAttributeName ),
                                                     'limit', $page_limit ) ) as $blog}
             {set $uniq_id = $blog.link_object.node_id}
             {if $uniq_post|contains( $uniq_id )|not}
@@ -63,16 +68,14 @@
         {/foreach}
     {/if}
 {else}
-        {* if $blogs_node.object.data_map.show_children.data_int *}
-            {def $classes = array( 'blog_post' ) 
-                 $children_count = ''
-		 $sort_array_attribute = array( 'attribute', false(), 'blog_post/publication_date' )
+            {def $children_count = ''
+		 $sort_array_attribute = array( 'attribute', false(), $homePageBlogPostPublicationDateAttributeName )
 		 $sort_array_published = array( 'published', false() )
 		 $sort_array = $sort_array_attribute
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
                                                              'class_filter_type', 'include',
-                                                             'class_filter_array', $classes,
-							     'language', 'eng-US',
+                                                             'class_filter_array', $homePageBlogPostFetchClasses,
+							     'language', $homePagePostFetchLanguage,
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $sort_array,
 						             'depth', 2,
@@ -81,13 +84,13 @@
             {* ezini( 'MenuContentSettings', 'ExtraIdentifierList', 'menu.ini' ) *}
                  
             {* if le( $blogs_node.depth, '3')}
-                {set $classes = $classes|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
+                {set $homePageBlogPostFetchClasses = $homePageBlogPostFetchClasses|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
             {/if *}
 
             {set $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $blogs_node.node_id,
                                                                        'class_filter_type', 'include',
-                                                                       'class_filter_array', $classes,
-                                                                       'language', 'eng-US',
+                                                                       'class_filter_array', $homePageBlogPostFetchClasses,
+                                                                       'language', $homePagePostFetchLanguage,
 								       'depth', 2 ) )}
 
             <div style="margin-top:6px;margin-bottom:8px;">

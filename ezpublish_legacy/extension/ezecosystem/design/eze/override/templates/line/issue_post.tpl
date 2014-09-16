@@ -1,4 +1,8 @@
 {* Blog post - Line view *}
+
+{def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
+     $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')}
+
 <div class="content-view-line">
     <div class="class-blog-post float-break">
 
@@ -38,7 +42,7 @@
     </div>
 
     <div class="attribute-url">
-	<span>{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</span> &nbsp; <a href={$node.parent.data_map.blog.content|ezurl()}>{$node.parent.data_map.blog.data_text}</a> &nbsp; <a href="{$node.url_alias|ezurl(no)}">Mirror</a> &nbsp; <a href="{$node.data_map.blog_post_url.content}">Link</a> {if $node.view_count|gt(2)}<span class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">@{$node.view_count}</a></span>{/if}
+	<span>{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</span> &nbsp; <a href={$node.parent.data_map.blog.content|ezurl()}>{$node.parent.data_map.blog.data_text}</a> &nbsp; <a href="{$node.url_alias|ezurl(no)}">Mirror</a> &nbsp; <a href="{$node.data_map.blog_post_url.content}">Link</a> {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<span class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">@{$node.view_count}</a></span>{/if}
     </div>
 
         {* if $node.data_map.enable_comments.data_int}

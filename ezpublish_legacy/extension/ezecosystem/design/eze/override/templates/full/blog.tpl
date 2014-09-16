@@ -1,6 +1,15 @@
 {* Blog - Full view *}
 {set scope=global persistent_variable=hash('left_menu', false(),
                                            'extra_menu', false())}
+{def $page_limit = 30
+     $blogs_count = 0
+     $uniq_id = 0
+     $uniq_post = array()
+     $issue_node_id=ezini('NodeIDSettings','IssuesNodeID','ezecosystem.ini')
+     $community_issue_node_id=ezini('NodeIDSettings','CommunityIssuesNodeID','ezecosystem.ini')
+     $blog_post_fetch_publication_date_identifier=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
+     $issue_post_fetch_publication_date_identifier=ezini('AttributeIdentifierSettings','issuePostPublicationDate','ezecosystem.ini')
+     $issue_post_class_identifier=ezini('ClassIdentifierSettings','classIssuePost','ezecosystem.ini')}
 
 <div class="class-blog extrainfo">
     <div class="columns-blog float-break">
@@ -12,29 +21,25 @@
 
 
                 {if $node.data_map.inactive.content|eq( 1 )}<div style="position: relative; top: 10px; padding-bottom: 20px;">Note: <span style="text-decoration: underline;">This blog has become inactive. New content may not be posted in the future.</span></div>{/if}
-{def $page_limit = 30
-     $blogs_count = 0
-     $uniq_id = 0
-     $uniq_post = array()}
 
-{if or( $node.node_id|eq( 4198 ), $node.node_id|eq( 9181 ) )}
-  {def $class_attribute_identifier='issue_post/publication_date'}
+{if or( $node.node_id|eq( $issue_node_id ), $node.node_id|eq( $community_issue_node_id ) )}
+  {def $class_attribute_identifier=$issue_post_fetch_publication_date_identifier}
 {else}
-  {def $class_attribute_identifier='blog_post/publication_date'}
+  {def $class_attribute_identifier=$blog_post_fetch_publication_date_identifier}
 {/if}
 
 {if $view_parameters.tag}
     <p><span class="underline">Selected tag</span>: <b>{$view_parameters.tag}</b></p>
-    {if $node.node_id|eq( 4198, 9181 )}
+    {if $node.node_id|eq( $community_issue_node_id, $issue_node_id )}
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
-                                                     'classid', 'issue_post',
-                                                     'parent_node_id', $node.node_id ) )}
+                                                                 'classid', $issue_post_class_identifier,
+                                                                 'parent_node_id', $node.node_id ) )}
     {if $blogs_count}
         {foreach fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
-                                                    'classid', 'issue_post',
+                                                    'classid', $issue_post_class_identifier,
                                                     'parent_node_id', $node.node_id,
                                                     'offset', $view_parameters.offset,
-                                                    'sort_by', array( 'attribute', false(), 'issue_post/publication_date' ),
+                                                    'sort_by', array( 'attribute', false(), $issue_post_fetch_publication_date_identifier ),
                                                     'limit', $page_limit ) ) as $blog}
             {set $uniq_id = $blog.link_object.node_id}
             {if $uniq_post|contains( $uniq_id )|not}
@@ -47,19 +52,19 @@
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                      'classid', 'blog_post',
                                                      'parent_node_id', $node.node_id ) )|sum( fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
-                                                     'classid', 'issue_post',
-                                                     'parent_node_id', 4198 ) ) )}
+                                                     'classid', $issue_post_class_identifier,
+                                                     'parent_node_id', $issue_node_id ) ) )}
     {if $blogs_count}
         {foreach fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                     'classid', 'blog_post',
                                                     'parent_node_id', $node.node_id,
                                                     'offset', $view_parameters.offset,
-                                                    'sort_by', array( 'attribute', false(), 'blog_post/publication_date' ),
+                                                    'sort_by', array( 'attribute', false(), $blog_post_fetch_publication_date_identifier ),
                                                     'limit', $page_limit ) )|merge( fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
-                                                    'classid', 'issue_post',
-                                                    'parent_node_id', 4198,
+                                                    'classid', $issue_post_class_identifier,
+                                                    'parent_node_id', $issue_node_id,
                                                     'offset', $view_parameters.offset,
-                                                    'sort_by', array( 'attribute', false(), 'issue_post/publication_date' ),
+                                                    'sort_by', array( 'attribute', false(), $issue_post_fetch_publication_date_identifier ),
                                                     'limit', $page_limit ) ) ) as $blog}
             {set $uniq_id = $blog.link_object.node_id}
             {if $uniq_post|contains( $uniq_id )|not}
@@ -92,7 +97,7 @@
     {else}
         {set $blogs_count = fetch( 'content', 'list_count', hash( 'parent_node_id', $node.node_id ) )}
         {if $blogs_count}
-            {if or( $node.node_id|eq( 4198 ), $node.node_id|eq( 9181 ) )}
+            {if or( $node.node_id|eq( $issue_node_id ), $node.node_id|eq( $community_issue_node_id ) )}
             {include name=navigator
                      uri='design:navigator/google.tpl'
                      page_uri=$node.url_alias

@@ -1,10 +1,12 @@
 {cache-block subtree_expiry=$blogs_node_id}
 {def $blogPostObjectsUnique = array()
+     $blogsListPublicationDateAttributeName=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
+     $blogsListFetchClasses=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
      $blogPostObjects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
-                                                        'sort_by', array( 'attribute', false(), 'blog_post/publication_date' ),
+                                                        'sort_by', array( 'attribute', false(), $blogsListPublicationDateAttributeName ),
                                                         'depth', 2,
                                                         'class_filter_type', 'include',
-                                                        'class_filter_array', array( 'blog_post' ),
+                                                        'class_filter_array', $blogsListFetchClasses,
                                                         'limit', 1000 ) )}
 {*
          $currentTimestampMinusOneMonth = currentdate()|sub( 2678400 )

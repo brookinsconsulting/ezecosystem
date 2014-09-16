@@ -1,9 +1,8 @@
-{def $tag_cloud_limit=140
-     $tag_cloud_class_identifier='blog_post'
-     $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
-                                    'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
-                                    'Thu', '社区委员会', 'wascou' )
-     $tag_cloud_exclude_strings=array( 'EZP-', 'COM-' )}
+{def $tag_cloud_limit=ezini('TagSidebarSettings','TagCloudLimit','ezecosystem.ini')
+     $tag_cloud_class_identifier=ezini('TagSidebarSettings','TagCloudClassIdentifier','ezecosystem.ini')
+     $tag_cloud_exclude_tags=ezini('TagSidebarSettings','TagCloudExcludeTags','ezecosystem.ini')
+     $tag_cloud_exclude_strings=ezini('TagSidebarSettings','TagCloudExcludeTagStrings','ezecosystem.ini')}
+
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
@@ -14,12 +13,12 @@
 
     <div class="attribute-tag-cloud">
                        <ul>
-                            {* eztagcloud( hash( 'class_identifier', 'blog_post',
+                            {* eztagcloud( hash( 'class_identifier', $tag_cloud_class_identifier,
                                                'parent_node_id', $current_node_id,
 					       'limit', $tag_cloud_limit,
 					       'sort_by', array( 'count', false() ) ) ) *}
                             {*
-                            {eztagcloud( hash( 'class_identifier', 'blog_post',
+                            {eztagcloud( hash( 'class_identifier', $tag_cloud_class_identifier,
                                                'parent_node_id', $current_node_id,
 					       'limit', $tag_cloud_limit,
 					       'sort_by', array( 'count' ),
@@ -42,7 +41,7 @@
     <div class="sidebar-content">
     <ul>
                             {foreach $tags as $keyword}
-                                <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', 'blog_post','parent_node_id', $used_node.node_id ) )})</a></li>
+                                <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', $tag_cloud_class_identifier,'parent_node_id', $used_node.node_id ) )})</a></li>
                             {/foreach}
     </ul>
     </div>
@@ -69,7 +68,7 @@
 {*
                         <div class="attribute-tag-cloud">
                         <p>
-                            {eztagcloud( hash( 'class_identifier', 'blog_post',
+                            {eztagcloud( hash( 'class_identifier', $tag_cloud_class_identifier,
                                                'parent_node_id', $used_node.node_id ) )}
                         </p>
                         </div>
@@ -81,8 +80,8 @@
                         <div class="attribute-tags">
                             <h1>{"Tags"|i18n("design/ezwebin/blog/extra_info")}</h1>
                             <ul>
-                            {foreach ezkeywordlist( 'blog_post', $used_node.node_id ) as $keyword}
-                                <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', 'blog_post','parent_node_id', $used_node.node_id ) )})</a></li>
+                            {foreach ezkeywordlist( $tag_cloud_class_identifier, $used_node.node_id ) as $keyword}
+                                <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', $tag_cloud_class_identifier,'parent_node_id', $used_node.node_id ) )})</a></li>
                             {/foreach}
                             </ul>
                         </div>
@@ -90,7 +89,7 @@
                         <div class="attribute-archive">
                             <h1>{"Archive"|i18n("design/ezwebin/blog/extra_info")}</h1>
                             <ul>
-                            {foreach ezarchive( 'blog_post', $used_node.node_id ) as $archive}
+                            {foreach ezarchive( $tag_cloud_class_identifier, $used_node.node_id ) as $archive}
                                 <li><a href={concat( $used_node.url_alias, "/(month)/", $archive.month, "/(year)/", $archive.year )|ezurl} title="">{$archive.timestamp|datetime( 'custom', '%F %Y' )}</a></li>
                             {/foreach}
                             </ul>

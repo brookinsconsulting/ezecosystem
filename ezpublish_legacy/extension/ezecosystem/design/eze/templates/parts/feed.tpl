@@ -1,3 +1,8 @@
+{def $feed_main_rss_url=ezini('FeedSidebarSettings','MainRssUrl','ezecosystem.ini')
+     $feed_main_rss_title=ezini('FeedSidebarSettings','MainRssTitle','ezecosystem.ini')
+     $feed_main_opml_url=ezini('FeedSidebarSettings','MainOpmlUrl','ezecosystem.ini')
+     $feed_main_opml_title=ezini('FeedSidebarSettings','MainOpmlTitle','ezecosystem.ini')}
+
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc float-break">
@@ -9,7 +14,7 @@
     {* <div class="sidebar-content">
 	<p> *}
 
-	<div style="position:relative;top:-15px;left:28px;"><a href="/rss/feed/rss" style="" title="eZecosystem RSS Feed"><img src={'feed-icon-28x28.png'|ezimage} border=0 /></a>&nbsp;&nbsp;<a href="https://raw.github.com/brookinsconsulting/ezecosystemopml/master/index.opml" style="" title="eZecosystem OPML File"><img src={'opml-icon-24x24.png'|ezimage} border=0 /></a></div>
+	<div style="position:relative;top:-15px;left:28px;"><a href="{$feed_main_rss_url}" style="" title="{$feed_main_rss_title}"><img src={'feed-icon-28x28.png'|ezimage} border=0 /></a>&nbsp;&nbsp;{if $feed_main_opml_url|ne( false() )}<a href="{$feed_main_opml_url}" style="" title="{$feed_main_opml_title}"><img src={'opml-icon-24x24.png'|ezimage} border=0 /></a>{/if}</div>
 
         {* </p>
     </div> *}

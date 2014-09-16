@@ -1,3 +1,9 @@
+{def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
+     $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')
+     $blogs_planetarium_id=ezini('NodeIDSettings','SidebarPlanetariumNodeID','ezecosystem.ini')
+     $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')
+     $popular_class_ids=ezini('PopularSidebarSettings','ClassIDs','ezecosystem.ini')}
+
 {* set scope=global persistent_variable=hash('left_menu', false(),
                                            'extra_menu', false(),
                                            'show_path', false())}
@@ -60,12 +66,7 @@
     </div>
 </div>
 *}
-
-{def $blogs_node_id=216
-     $blogs_planetarium_id=970
-     $blogs_community_id=969}
-
-{* $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )
+{* def $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )
    $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $blogs_node_id) ) *}
 
 <div class="content-view-full" style="width: 100%">
@@ -107,12 +108,12 @@
 
 {/cache-block}
 
-{include uri="design:parts/popular.tpl" class_ids=array( 20, 45 )}
+{include uri="design:parts/popular.tpl" class_ids=$popular_class_ids}
 
 {cache-block expiry=172800}
 {include uri="design:parts/twitter.tpl"}
 
-{include uri="design:parts/tags.tpl" current_node_id=2}
+{include uri="design:parts/tags.tpl" current_node_id=$root_node_id}
 {/cache-block}
             <!-- Content: END -->
             </div>
@@ -126,6 +127,3 @@
     *}
     </div>
 </div>
-
-
-
