@@ -383,6 +383,14 @@ width: 200px;
 width: 210px;
 }
 
+div.class-blog-post.float-break div.attribute-header {
+word-wrap: break-word;
+}
+
+div.content-view-line div.class-blog-post div.attribute-header {
+word-wrap: break-word;
+}
+
 div.content-view-line div.class-blog-post div.attribute-header a {
 max-width: 575px;
 overflow: hidden;
