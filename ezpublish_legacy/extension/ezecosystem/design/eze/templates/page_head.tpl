@@ -16,7 +16,7 @@
   {/section}
 
 {set-block scope=root variable=site_title}
-{section loop=$Path:reverse_path}{$:item.text|wash}{delimiter} / {/delimiter}{/section} - {$site.title|wash}
+{if $current_node_id|eq( 2 )}{$:item.text|wash} - {ezini('SiteSettings','MetaDataArray','site.ini')['description']}{else}{section loop=$Path:reverse_path}{$:item.text|wash}{delimiter} / {/delimiter}{/section} - {$site.title|wash}{/if}
 {/set-block}
 
 {/let}
