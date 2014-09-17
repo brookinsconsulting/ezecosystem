@@ -2,6 +2,39 @@
 
 class eZecosystemSimpleOperators extends OWSimpleOperator
 {
+    static function popular_sidebar_fetch( $classIDs )
+    {
+        $count = array();
+        $results = array();
+        foreach( $classIDs as $classID )
+        {
+            $results[] = eZContentFunctionCollection::fetchMostViewedTopList( $classID, 1, 0, 7 );
+        }
+        foreach( $results as $result )
+        {
+            foreach( $result['result'] as $object )
+            {
+                $count[] = array( $object->attribute('view_count'), $object );
+            }
+        }
+        return self::sort_popular_desc( $count );
+    }
+
+    static function sort_popular_desc( $array )
+    {
+        $results = usort( $array, 'self::usort_sort_popular_desc' );
+        return $array;
+    }
+
+    static function usort_sort_popular_desc( $array1, $array2 )
+    {
+        if ( $array1['0'] == $array2['0'])
+        {
+            return 0;
+        }
+        return ( $array1['0'] < $array2['0']) ? 1 : -1;
+    }
+
   /**
    * Multi-byte chr(): Will turn a numeric argument into a UTF-8 string.
    * 

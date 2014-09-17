@@ -1,17 +1,18 @@
-{def $popular_nodes_combined_sorted=array()
-     $popular_nodes=array()}
-
+{* def $popular_nodes_combined_sorted=array()
+     $popular_nodes=array() *}
 {* Fetch popular content *}
-{foreach $class_ids as $class_id}
+{* foreach $class_ids as $class_id}
 {set $popular_nodes=$popular_nodes|merge( fetch( 'content', 'view_top_list', hash( 'class_id', $class_id, 'limit', 7, 'offset', 0 ) ) )}
-{/foreach}
-
-
+{/foreach *}
+{* $popular_nodes|attribute(show,2)}<hr /> *}
 {* Sort popular nodes *}
-{foreach $popular_nodes as $index => $node}
+{* foreach $popular_nodes as $index => $node}
 {set $popular_nodes_combined_sorted=$popular_nodes_combined_sorted|append( array( $node.view_count, $node ) )}
-{/foreach}
-{set $popular_nodes_combined_sorted=$popular_nodes_combined_sorted|ksort}
+{/foreach *}
+{* set $popular_nodes_combined_sorted=$popular_nodes_combined_sorted|popular_sidebar_fetch( $class_ids ) *}
+{* $popular_nodes_combined_sorted|attribute(show,2) *}
+
+{def $popular_nodes_combined_sorted=popular_sidebar_fetch( $class_ids )}
 
 {* Display popular node list *}
 {if $popular_nodes_combined_sorted|count|gt( 0 )}
