@@ -182,7 +182,7 @@ while ( $offset < $totalFileCount )
             {
                 $cli->warning( "\nFound! Object pending published and modified date normalization: " . $nodeUrl . ", NodeID " . $nodeID . "\n" );
 
-                $notice = "Object publication_date attribute content:  Current: " . date("F j, Y, g:i a", $objectPublishedDate ) . " vs Attribute: " .date("F j, Y, g:i a", $objectPublicationDate;
+                $notice = "Object publication_date attribute content:  Current: " . date("F j, Y, g:i a", $objectPublishedDate ) . " vs Attribute: " .date("F j, Y, g:i a", $objectPublicationDate );
 
                 if( date("Y", $objectPublicationDate ) < 2006 || date("Y", $objectPublicationDate ) > 2015 )
                 {
