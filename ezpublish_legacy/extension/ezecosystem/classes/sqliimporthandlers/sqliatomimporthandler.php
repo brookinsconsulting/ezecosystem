@@ -89,6 +89,10 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
         ) );
         $content = SQLIContent::create( $contentOptions );
 
+        $content->setAttribute( 'published', strtotime( (string)$row->published ) );
+        $content->setAttribute( 'modified', strtotime( (string)$row->updated ) );
+        $content->store();
+
         $content->fields->title = (string)$row->title;
         $content->fields->blog_post_author = (string)$row->author->name;
 

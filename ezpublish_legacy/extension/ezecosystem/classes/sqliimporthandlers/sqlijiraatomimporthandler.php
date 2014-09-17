@@ -90,6 +90,10 @@ class SQLIJiraATOMImportHandler extends SQLIImportAbstractHandler implements ISQ
         ) );
         $content = SQLIContent::create( $contentOptions );
 
+        $content->setAttribute( 'published', strtotime( (string)$row->published ) );
+        $content->setAttribute( 'modified', strtotime( (string)$row->updated ) );
+        $content->store();
+
         // $title = strip_tags( html_entity_decode( (string)$row->title ) );
         $classToDecode = new eZecosystemSimpleOperators();
         $title = strip_tags( $classToDecode->html_entity_decode_numeric( (string)$row->title ) );

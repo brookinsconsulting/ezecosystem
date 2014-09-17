@@ -90,6 +90,10 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
 
         $content = SQLIContent::create( $contentOptions );
 
+        $content->setAttribute( 'published', strtotime( (string)$row->published ) );
+        $content->setAttribute( 'modified', strtotime( (string)$row->updated ) );
+        $content->store();
+
         $defaultParentNodeID = $this->handlerConfArray['DefaultParentNodeID'];
 
         $title = (string)$row->title;
