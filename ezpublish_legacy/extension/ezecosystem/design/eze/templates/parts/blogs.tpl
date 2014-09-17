@@ -3,7 +3,7 @@
      $blogsListPublicationDateAttributeName=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $blogsListFetchClasses=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
      $blogPostObjects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
-                                                        'sort_by', array( 'attribute', false(), $blogsListPublicationDateAttributeName ),
+                                                        'sort_by', array( 'modified', false() ),
                                                         'depth', 2,
                                                         'class_filter_type', 'include',
                                                         'class_filter_array', $blogsListFetchClasses,
