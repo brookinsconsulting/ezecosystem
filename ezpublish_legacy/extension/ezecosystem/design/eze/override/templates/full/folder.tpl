@@ -1,7 +1,3 @@
-{def $blogs_node_id=216
-     $blogs_planetarium_id=970
-     $blogs_community_id=969}
-
 {def $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $node.node_id ) )}
 
 <div class="border-box">
