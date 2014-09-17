@@ -57,15 +57,15 @@ $publicationDateCount = 0;
 $publicationDatePublishCount = 0;
 $parentNodeID = 2;
 $offset = 0;
-$limit = 100;
+$limit = 1000;
 
 /** Display of execution time **/
 function executionTimeDisplay( $srcStartTime, $cli )
 {
     /** Add a stoping timing point tracking and calculating total script execution time **/
     $srcStopTime = microtime();
-    $startTime = next( explode( " ", $srcStartTime ) ) + current( explode( " ", $srcStartTime ) );
-    $stopTime = next( explode( " ", $srcStopTime ) ) + current( explode( " ", $srcStopTime ) );
+    $startTime = @next( explode( " ", $srcStartTime ) ) + current( explode( " ", $srcStartTime ) );
+    $stopTime = @next( explode( " ", $srcStopTime ) ) + current( explode( " ", $srcStopTime ) );
     $executionTime = round( $stopTime - $startTime, 2 );
 
     /** Alert the user to how long the script execution took place **/
@@ -82,9 +82,10 @@ $user->loginCurrent();
 /** Fetch total files count from content tree **/
 
 $totalFileCountParams = array( 'ClassFilterType' => 'include',
-                               'ClassFilterArray' => array( 'forum_topic', 'blog_post' ),
+                               'ClassFilterArray' => array( 'forum_topic', 'blog_post', 'issue_post' ),
                                'Depth' => 10,
                                'MainNodeOnly' => true,
+                               'SortBy' => array( 'published', false ),
                                'IgnoreVisibility' => true );
 
 /** Fetch total count for member content objects **/
@@ -104,7 +105,7 @@ if ( !$totalFileCount )
 }
 elseif( $verbose && $totalFileCount > 0 )
 {
-    $cli->warning( "Total member objects to be checked: " . $totalFileCount . "\n" );
+    $cli->warning( "Total number of objects to be checked: " . $totalFileCount . "\n" );
 }
 
 /** Setup script iteration details **/
@@ -168,12 +169,10 @@ while ( $offset < $totalFileCount )
         $objectDataMap = $object->dataMap();
 
         $objectPublicationDate = (string)$objectDataMap[ 'publication_date' ]->content()->timeStamp();
-        // print_r( $objectPublicationDate );die();
 
         /** Only iterate over objects with lng in the lat field **/
 
-        //if( $objectLatitude )
-        if( $objectPublicationDate != '' && $objectPublicationDate != 0 )
+        if( $objectPublicationDate != '' && $objectPublicationDate != 0 && ( $objectPublicationDate != $objectPublishedDate || $objectPublicationDate != $objectModifiedDate ) )
         {
             $publicationDateCount++;
 
@@ -181,54 +180,36 @@ while ( $offset < $totalFileCount )
 
             if( $troubleshoot && $scriptVerboseLevel >= 3 )
             {
-                $cli->warning( "\nFound! Member object pending attribute swap: " . $nodeUrl . ", NodeID " . $nodeID . "\n" );
-                $cli->warning( "Object publication_date attribute content:  " . date("F j, Y, g:i a", $objectPublicationDate ) );
-            }
+                $cli->warning( "\nFound! Object pending published and modified date normalization: " . $nodeUrl . ", NodeID " . $nodeID . "\n" );
 
-            /** Only modify object attributes when needed AND when not in test-only mode **/
-            if( !$test )
-            {
-                /** Modify member object and publish a new version with the published and modified attribute values modified **/
-                if( $objectPublicationDate != $objectPublishedDate || $objectPublicationDate != $objectModifiedDate )
+                $notice = "Object publication_date attribute content:  Current: " . date("F j, Y, g:i a", $objectPublishedDate ) . " vs Attribute: " .date("F j, Y, g:i a", $objectPublicationDate;
+
+                if( date("Y", $objectPublicationDate ) < 2006 || date("Y", $objectPublicationDate ) > 2015 )
                 {
-                    $object->setAttribute( 'published', strtotime( $objectPublicationDate ) );
-                    $object->setAttribute( 'modified', strtotime( $objectPublicationDate ) );
-                    $object->store();
+                    $cli->error( "Error: " . $notice );
                 }
                 else
                 {
-                    continue;
+                    $cli->warning( $notice );
                 }
-                
+            }
 
-                $updateParams = array();
-                $updateAttributeList = array( );
-                $updateParams['attributes'] = $updateAttributeList;
+            /** Only modify object attributes when needed AND when not in test-only mode **/
 
-                /** Optional debug output **/
+            if( !$test )
+            {
+                /** Modify objects and publish a new version with the published and modified attribute values modified **/
 
-                if( $troubleshoot && $scriptVerboseLevel >= 5 )
-                {
-                    $cli->output( "Objects update params: ");
-                    $cli->output( "Published and modified Date: " . date("F j, Y, g:i a", $objectPublicationDate ) );
-                }
+                $object->setAttribute( 'published', $objectPublicationDate );
+                $object->setAttribute( 'modified', $objectPublicationDate );
+                $object->store();
 
-                $updateResult = eZContentFunctions::updateAndPublishObject( $object, $updateParams );
-
-                if( $updateResult )
-                {
-                    $publicationDatePublishCount++;
-
-                    /** Debug verbose output **/
-
-                    if( $verbose )
-                    {
-                        $cli->output( "Fixed: Published new member object version with published and modifed date values normalized\n");
-                    }
-                }
+                $publicationDatePublishCount++;
 
                 /** Iterate cli script progress tracker **/
                 $script->iterate( $cli, $status );
+
+                continue;
             }
         }
         else
@@ -249,11 +230,11 @@ eZUser::cleanupCache();
 /** Inform the script user of the results **/
 if( $test )
 {
-    $cli->warning( "\n\nTotal objects found needing the attributes to be swapped: $publicationDateCount");
+    $cli->warning( "\n\nTotal objects found needing the published and modified date to be updated: $publicationDateCount");
 }
 else
 {
-    $cli->warning( "\n\nTotal objects re-published with the lat/lng attribute values swapped: $publicationDatePublishCount");
+    $cli->warning( "\n\nTotal objects re-published with the published and modified date updated: $publicationDatePublishCount");
 }
 
 /** Call for display of execution time **/
