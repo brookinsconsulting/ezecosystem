@@ -88,10 +88,31 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
             'remote_id'             => (string)$row->id
         ) );
         $content = SQLIContent::create( $contentOptions );
+        $skipUpdated = false;
 
-        $content->setAttribute( 'published', strtotime( (string)$row->published ) );
-        $content->setAttribute( 'modified', strtotime( (string)$row->updated ) );
-        $content->store();
+        if( $published && $published != '' && $published != 0 )
+        {
+            $content->setAttribute( 'published', strtotime( $published ) );
+            $content->store();
+        }
+        elseif( ( !$published || $$published == '' || $published == 0 ) && ( $updated && $updated != '' && $updated != 0 ) )
+        {
+            $content->setAttribute( 'published', strtotime( $updated ) );
+            $content->setAttribute( 'modified', strtotime( $updated ) );
+            $content->store();
+            $skipUpdated = true;
+        }
+        if( !$skipUpdated && $updated && $updated != '' && $updated != 0 )
+        {
+            $content->setAttribute( 'modified', strtotime( $updated ) );
+            $content->store();
+        }
+        elseif( !$skipUpdated && ( !$updated || $$updated == '' || $updated == 0 ) && ( $published && $published != '' && $published != 0 ) )
+        {
+            $content->setAttribute( 'published', strtotime( $published ) );
+            $content->setAttribute( 'modified', strtotime( $published ) );
+            $content->store();
+        }
 
         $content->fields->title = 'Gist: ' . (string)$row->title;
         $content->fields->blog_post_author = (string)$row->author->name;
