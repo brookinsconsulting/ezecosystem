@@ -1,3 +1,8 @@
+{if and( $blogs_node_id|is_set|not, $blogs_planetarium_id|is_set|not, $blogs_community_id|is_set|not )}
+{def $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')
+     $blogs_planetarium_id=ezini('NodeIDSettings','SidebarPlanetariumNodeID','ezecosystem.ini')
+     $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')
+{/if}
 {def $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $node.node_id ) )}
 
 <div class="border-box">
