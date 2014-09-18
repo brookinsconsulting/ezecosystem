@@ -1,6 +1,8 @@
+{if and( $root_node_id|is_set|not, $blogs_node_id|is_set|not )}
 {def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
-     $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')
-     $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
+     $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')}
+{/if}
+{def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $homePageBlogPostPublicationDateAttributeName=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $homePageFetchClasses=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
      $page_limit = 30
