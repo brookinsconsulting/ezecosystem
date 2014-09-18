@@ -85,7 +85,7 @@ $totalFileCountParams = array( 'ClassFilterType' => 'include',
                                'ClassFilterArray' => array( 'forum_topic', 'blog_post', 'issue_post' ),
                                'Depth' => 10,
                                'MainNodeOnly' => true,
-                               'SortBy' => array( 'published', false ),
+                               'SortBy' => array( 'published', true ),
                                'IgnoreVisibility' => true );
 
 /** Fetch total count for member content objects **/
@@ -182,7 +182,7 @@ while ( $offset < $totalFileCount )
             {
                 $cli->warning( "\nFound! Object pending published and modified date normalization: " . $nodeUrl . ", NodeID " . $nodeID . "\n" );
 
-                $notice = "Object publication_date attribute content:  Current: " . date("F j, Y, g:i a", $objectPublishedDate ) . " vs Attribute: " .date("F j, Y, g:i a", $objectPublicationDate );
+                $notice = "Object publication_date attribute content:  Current Published: " . date("F j, Y, g:i a", $objectPublishedDate ) . " && Current Modified: " . date("F j, Y, g:i a", $objectModifiedDate ) . " vs Attribute: " .date("F j, Y, g:i a", $objectPublicationDate );
 
                 if( date("Y", $objectPublicationDate ) < 2006 || date("Y", $objectPublicationDate ) > 2015 )
                 {
