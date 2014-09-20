@@ -40,7 +40,7 @@ ClassIDs[]=45
 
 [HomePageFetchSettings]
 ClassIdentifiers[]
-ClassIdentifiers[]=forum_topic
+#ClassIdentifiers[]=forum_topic
 ClassIdentifiers[]=blog_post
 
 [TagSidebarSettings]
