@@ -71,5 +71,11 @@ MainRssUrl=/rss/feed/rss
 MainRssTitle=eZecosystem RSS Feed
 MainOpmlUrl=https://raw.github.com/brookinsconsulting/ezecosystemopml/master/index.opml
 MainOpmlTitle=eZecosystem OPML File
+IssuesRssUrl=/rss/feed/issues
+IssuesRssTitle=eZecosystem Issues RSS Feed
+BlogsRssUrl=/rss/feed/blogs
+BlogsRssTitle=eZecosystem Blogs RSS Feed
+ForumRssUrl=/rss/feed/forum
+ForumRssTitle=eZecosystem Forum RSS Feed
 
 */ ?>
