@@ -370,6 +370,8 @@ position: relative;
 left: 2.25%;
 }
 
+/* content specific styles */
+
 .views {
 float: right;
 padding-right: 5px;
@@ -402,5 +404,17 @@ max-width: 575px;
 overflow: hidden;
 word-wrap: break-word;
 }
+
+/* derick's blog does not constrain picture img sizes with html */
+
+div.class-blog-post div.attribute-body.float-break div.article div.body div.articleListItem dl.head img {
+max-width: 575px;
+}
+
+div.class-blog-post div.attribute-body.float-break {
+max-width: 575px;
+}
+
+
 
 /* END */
