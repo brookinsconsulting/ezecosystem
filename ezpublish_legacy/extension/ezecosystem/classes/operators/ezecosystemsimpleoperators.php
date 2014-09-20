@@ -2,6 +2,18 @@
 
 class eZecosystemSimpleOperators extends OWSimpleOperator
 {
+    static function html5_iframe_append_closing_tag( $inputString )
+    {
+        $content = $inputString;
+        $content = html_entity_decode( $content );
+
+        // $content = str_replace( 'width=" ', 'width="', $content);
+        // $content = str_replace( 'height=" ', 'height="', $content);
+
+        $result = preg_replace('/\<iframe(.*?)(\/)>(.*?)/ims', '<iframe\1></iframe><hr/>HELLO<hr/>', $content);
+        return $result;
+    }
+
     static function popular_sidebar_fetch( $classIDs )
     {
         $count = array();

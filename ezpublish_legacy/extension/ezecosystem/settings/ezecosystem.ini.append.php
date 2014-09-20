@@ -11,6 +11,10 @@ CommunityIssuesNodeID=4198
 NotificationNodeID=14353
 SidebarCommunityNodeID=969
 SidebarPlanetariumNodeID=970
+BlogsWithIframeProblemsNodeIDs[]
+BlogsWithIframeProblemsNodeIDs[]=1726
+BlogsWithIframeProblemsNodeIDs[]=239
+BlogsWithIframeProblemsNodeIDs[]=220
 
 [ClassIdentifierSettings]
 classBlog=blog

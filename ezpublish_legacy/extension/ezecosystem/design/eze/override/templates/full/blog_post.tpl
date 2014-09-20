@@ -3,7 +3,8 @@
                                            'extra_menu', false())}
 
 {def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
-     $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')}
+     $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')
+     $blogs_ids_with_iframe_problems=ezini('NodeIDSettings','BlogsWithIframeProblemsNodeIDs','ezecosystem.ini')}
 
 <div class="class-blog extrainfo">
     <div class="columns-blog float-break">
@@ -49,7 +50,13 @@
 
 				<div class="attribute-body float-break">
                                 {if $node.data_map.blog_post_description_text_block.has_content|eq(true() )}
-                                    {$node.data_map.blog_post_description_text_block.content}
+                                    {if $blogs_ids_with_iframe_problems|contains( $node.parent.node_id )}
+                                      {def $blog_post_description=$node.data_map.blog_post_description_text_block.content
+                                           $blog_post_description_html5_iframe_replaced=$blog_post_description|html5_iframe_append_closing_tag)}
+                                      {$blog_post_description_html5_iframe_replaced}
+                                    {else}
+                                      {$node.data_map.blog_post_description_text_block.content}
+                                    {/if}
                                 {else}
                                     {$node.data_map.title.content}
                                 {/if}

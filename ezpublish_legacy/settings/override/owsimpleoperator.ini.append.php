@@ -12,7 +12,7 @@ PermittedFunctionList[]=str_replace
 PermittedFunctionList[]=ereg_replace
 PermittedFunctionList[]=str_rot13
 PermittedFunctionList[]=file_get_contents
-PermittedFunctionList[]=usort
+PermittedFunctionList[]=preg_replace
 
 # Class file path, Class Name, Class Method
 # that are useable as template operators
@@ -21,5 +21,6 @@ PermittedFunctionList[]=usort
 PermittedClassOperatorList[]
 PermittedClassOperatorList[]=extension/ezecosystem/classes/operators/ezecosystemsimpleoperators.php;eZecosystemSimpleOperators;html_entity_decode_numeric
 PermittedClassOperatorList[]=extension/ezecosystem/classes/operators/ezecosystemsimpleoperators.php;eZecosystemSimpleOperators;popular_sidebar_fetch
+PermittedClassOperatorList[]=extension/ezecosystem/classes/operators/ezecosystemsimpleoperators.php;eZecosystemSimpleOperators;html5_iframe_append_closing_tag
 
 */ ?>
