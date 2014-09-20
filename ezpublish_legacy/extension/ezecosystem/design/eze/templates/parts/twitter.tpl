@@ -10,7 +10,7 @@
     <h3>Twitter<h3>
     <a class="twitter-timeline" data-dnt="true" href="{$twitter_sidebar_search_url}" data-widget-id="503439438320394240" data-chrome="noheader nofooter" height="1000">{$twitter_sidebar_search_title}</a>
 
-    <script type="text/javascript">{literal}!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");{/literal}</script>
+    <script type="text/javascript">{literal}$(window).load(function(){ !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs"); });{/literal}</script>
 
     </div>
 </div>
