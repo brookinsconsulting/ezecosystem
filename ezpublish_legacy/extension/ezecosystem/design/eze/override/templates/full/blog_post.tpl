@@ -52,7 +52,7 @@
                                 {if $node.data_map.blog_post_description_text_block.has_content|eq(true() )}
                                     {if $blogs_ids_with_iframe_problems|contains( $node.parent.node_id )}
                                       {def $blog_post_description=$node.data_map.blog_post_description_text_block.content
-                                           $blog_post_description_html5_iframe_replaced=$blog_post_description|html5_iframe_append_closing_tag)}
+                                           $blog_post_description_html5_iframe_replaced=$blog_post_description|html5_iframe_append_closing_tag}
                                       {$blog_post_description_html5_iframe_replaced}
                                     {else}
                                       {$node.data_map.blog_post_description_text_block.content}
