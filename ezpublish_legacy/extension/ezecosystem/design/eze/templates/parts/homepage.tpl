@@ -3,8 +3,8 @@
      $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')}
 {/if}
 {def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
-     $homePageBlogPostPublicationDateAttributeName=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
-     $homePageFetchClasses=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
+     $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
+     $home_page_fetch_classes=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
      $page_limit = 30
      $blogs_count = 0
      $uniq_id = 0
@@ -12,7 +12,7 @@
      $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )
      $notifications_node_id=ezini('NodeIDSettings','NotificationNodeID','ezecosystem.ini')
      $notifications_class=array( ezini('ClassIdentifierSettings','classNotification','ezecosystem.ini') )
-     $homePagePostFetchLanguage='eng-US'}
+     $home_page_post_fetch_language='eng-US'}
 
 {if $node.node_id|eq( $root_node_id )}
 {def $currentPageUri=''}
@@ -61,7 +61,7 @@
         {foreach fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                     'classid', 'blog_post',
                                                     'offset', $view_parameters.offset,
-                                                    'sort_by', array( 'attribute', false(), $homePageBlogPostPublicationDateAttributeName ),
+                                                    'sort_by', array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ),
                                                     'limit', $page_limit ) ) as $blog}
             {set $uniq_id = $blog.link_object.node_id}
             {if $uniq_post|contains( $uniq_id )|not}
@@ -71,32 +71,31 @@
         {/foreach}
     {/if}
 {else}
+            {* ezini( 'MenuContentSettings', 'ExtraIdentifierList', 'menu.ini' ) *}
+            {* if le( $blogs_node.depth, '3')}
+                {set $home_page_fetch_classes = $home_page_fetch_classes|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
+            {/if *}
+
+            {set $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $blogs_node.node_id,
+                                                                       'class_filter_type', 'include',
+                                                                       'class_filter_array', $home_page_fetch_classes,
+                                                                       'language', $home_page_post_fetch_language,
+								       'depth', 2 ) )}
+
             {def $children_count = ''
-		 $sort_array_attribute_ext = array( array( 'attribute', false(), $homePageBlogPostPublicationDateAttributeName ), array( 'attribute', false(), $home_page_forum_topic_publication_date ) )
-		 $sort_array_attribute_blog_only = array( array( 'attribute', false(), $homePageBlogPostPublicationDateAttributeName ), array( 'published', false() ) )
+		 $sort_array_attribute_ext = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'attribute', false(), $home_page_forum_topic_publication_date ) )
+		 $sort_array_attribute_blog_only = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'published', false() ) )
 		 $sort_array_attribute_forum_only = array( array( 'attribute', false(), $home_page_forum_topic_publication_date ), array( 'published', false() ) )
 		 $sort_array_published = array( 'published', false() )
 		 $sort_array = $sort_array_published
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
                                                              'class_filter_type', 'include',
-                                                             'class_filter_array', $homePageFetchClasses,
-							     'language', $homePagePostFetchLanguage,
+                                                             'class_filter_array', $home_page_fetch_classes,
+							     'language', $home_page_post_fetch_language,
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $sort_array,
 						             'depth', 2,
                                                              'limit', $page_limit ) )}
-
-            {* ezini( 'MenuContentSettings', 'ExtraIdentifierList', 'menu.ini' ) *}
-            {* if le( $blogs_node.depth, '3')}
-                {set $homePageFetchClasses = $homePageFetchClasses|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
-            {/if *}
-
-            {set $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $blogs_node.node_id,
-                                                                       'class_filter_type', 'include',
-                                                                       'class_filter_array', $homePageFetchClasses,
-                                                                       'language', $homePagePostFetchLanguage,
-								       'depth', 2 ) )}
-
             <div style="margin-top:6px;margin-bottom:8px;">
             {* Site notice area *}
             {def $notifications=fetch( 'content', 'list', hash( 'parent_node_id', $notifications_node_id,
