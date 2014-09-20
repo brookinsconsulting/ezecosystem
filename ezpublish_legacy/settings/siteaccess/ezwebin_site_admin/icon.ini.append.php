@@ -7,7 +7,7 @@ Size=normal
 [ClassIcons]
 ClassMap[blog]=filesystems/folder_txt.png
 ClassMap[feedback_form]=mimetypes/txt2.png
-
+ClassMap[forums]=filesystems/folder_txt.png
 
 
 */ ?>
