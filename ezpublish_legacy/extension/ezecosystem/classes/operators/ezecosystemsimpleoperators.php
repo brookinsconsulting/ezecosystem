@@ -10,7 +10,7 @@ class eZecosystemSimpleOperators extends OWSimpleOperator
         // $content = str_replace( 'width=" ', 'width="', $content);
         // $content = str_replace( 'height=" ', 'height="', $content);
 
-        $result = preg_replace('/\<iframe(.*?)(\/)>(.*?)/ims', '<iframe\1></iframe><hr/>HELLO<hr/>', $content);
+        $result = preg_replace('/\<iframe(.*?)(\/)>(.*?)/ims', '<iframe\1></iframe>', $content);
         return $result;
     }
 
