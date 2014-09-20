@@ -1,12 +1,12 @@
 {cache-block subtree_expiry=$blogs_node_id}
-{def $blogPostObjectsUnique = array()
-     $blogsListPublicationDateAttributeName=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
-     $blogsListFetchClasses=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
-     $blogPostObjects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
+{def $blog_post_objects_unique = array()
+     $blogs_list_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
+     $blogs_list_fetch_classes=ezini('SourcesSidebarSettings','ClassIdentifiers','ezecosystem.ini')
+     $blog_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
                                                         'sort_by', array( 'modified', false() ),
-                                                        'depth', 2,
+                                                        'depth', 4,
                                                         'class_filter_type', 'include',
-                                                        'class_filter_array', $blogsListFetchClasses,
+                                                        'class_filter_array', $blogs_list_fetch_classes,
                                                         'limit', 1000 ) )}
 {*
          $currentTimestampMinusOneMonth = currentdate()|sub( 2678400 )
@@ -28,9 +28,9 @@
     <h3>Sources<h3>
     <div class="sidebar-content">
     <ul>
-    {foreach $blogPostObjects as $blogObject}
-        {if $blogPostObjectsUnique|contains( $blogObject.parent.node_id )|not}
-        {set $blogPostObjectsUnique = $blogPostObjectsUnique|append( $blogObject.parent.node_id )}
+    {foreach $blog_post_objects as $blogObject}
+        {if $blog_post_objects_unique|contains( $blogObject.parent.node_id )|not}
+        {set $blog_post_objects_unique = $blog_post_objects_unique|append( $blogObject.parent.node_id )}
         {* <li><a href="{$blogObject.parent.data_map.blog.content}">{$blogObject.parent.name}</a></li> *}
 	<li><a href={$blogObject.parent.url|ezurl}>{$blogObject.parent.name}</a></li>
 	{/if}

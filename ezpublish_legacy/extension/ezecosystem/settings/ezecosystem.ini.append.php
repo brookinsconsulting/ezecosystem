@@ -28,6 +28,11 @@ blogPostPublicationDate=blog_post/publication_date
 issuePostPublicationDate=issue_post/publication_date
 forumTopicPublicationDate=forum_topic/publication_date
 
+[SourcesSidebarSettings]
+ClassIdentifiers[]
+ClassIdentifiers[]=forum_topic
+ClassIdentifiers[]=blog_post
+
 [PopularSidebarSettings]
 ClassIDs[]
 ClassIDs[]=20
