@@ -96,7 +96,7 @@
             <div class="right-column" style="float:right">
             <!-- Content: START -->
 
-{include uri="design:parts/blogs.tpl" blogs_node_id=$blogs_node_id}
+{include uri="design:parts/sources.tpl" blogs_node_id=$blogs_node_id}
 
 {cache-block expiry=172800}
 
