@@ -7,8 +7,8 @@ else
 siteaccess="$1";
 fi
 
-./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh $1;
+./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh $siteaccess;
 
-./extension/ezecosystem/bin/shell/fetchrsscontent.sh $1;
+./extension/ezecosystem/bin/shell/fetchrsscontent.sh $siteaccess;
 
 exit;

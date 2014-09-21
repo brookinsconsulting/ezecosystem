@@ -8,9 +8,9 @@ siteaccess="$1";
 fi
 
 # Refresh static cache of the root node and it's children
-./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $1 /;
+./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /;
 
 # Refresh static cache of the /Mirror node and it's children
-./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $1 /Mirror;
+./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Mirror;
 
 exit;
