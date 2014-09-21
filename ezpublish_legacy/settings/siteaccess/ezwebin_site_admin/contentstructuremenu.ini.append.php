@@ -11,5 +11,6 @@ ShowClasses[]=frontpage
 ShowClasses[]=forums
 ShowClasses[]=gallery
 ShowClasses[]=blog
+ShowClasses[]=forum
 
 */ ?>
