@@ -88,6 +88,9 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
             'remote_id'             => (string)$row->id
         ) );
         $content = SQLIContent::create( $contentOptions );
+
+        $published = (string)$row->published;
+        $updated = (string)$row->updated;
         $skipUpdated = false;
 
         if( $published && $published != '' && $published != 0 )
