@@ -1,13 +1,18 @@
-{* Blog post - Line view *}
+{* Forum post - Line view *}
 
 {def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
-     $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')}
+     $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')
+     $sources_list_share_ez_no_forum_node_ids=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')}
 
 <div class="content-view-line">
     <div class="class-blog-post float-break">
 
     <div class="attribute-header">
-        <h1><a href={$node.parent.url_alias|ezurl}>{$node.parent.name}</a></h1>
+        {if $sources_list_share_ez_no_forum_node_ids|contains( $node.parent.node_id )}
+          <h1><a href={$node.parent.url_alias|ezurl}>{$node.parent.parent.name} : {$node.parent.name}</a></h1>
+        {else}
+          <h1><a href={$node.parent.url_alias|ezurl}>{$node.parent.name}</a></h1>
+        {/if}
      </div>
     <div class="attribute-header">
         <h2>> <a href="{$node.data_map.link.content}" title="{$node.data_map.subject.content}">{if $node.data_map.subject.content|count_chars|gt( 70 )}{$node.data_map.subject.content|extract( 0, 66 )|append(' ...' )|wash}{else}{$node.data_map.subject.content}{/if}</a></h2>
@@ -37,12 +42,20 @@
     <p>{$node.data_map.title.content}</p>
 
     {if $node.data_map.message.has_content|eq(true() )}
-        {$node.data_map.message.content|simpletags|wordtoimage|autolink}
+        {if $sources_list_share_ez_no_forum_node_ids|contains( $node.parent.node_id )}
+          {$node.data_map.message.content|autolink}
+        {else}
+          {$node.data_map.message.content|simpletags|autolink}
+        {/if}
     {/if}
     </div>
 
     <div class="attribute-url">
-	<span>{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</span> &nbsp; <a href={$node.parent.data_map.blog.content|ezurl()}>{$node.parent.data_map.blog.data_text}</a> &nbsp; <a href="{$node.url_alias|ezurl(no)}">Mirror</a> &nbsp; <a href="{$node.data_map.link.content}">Link</a> {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<span class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">@{$node.view_count}</a></span>{/if}
+        {if $sources_list_share_ez_no_forum_node_ids|contains( $node.parent.node_id )}
+	<span>{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</span> &nbsp; <a href={$node.parent.url|ezurl()}>{$node.parent.parent.name} : {$node.parent.name}</a> &nbsp; <a href="{$node.url_alias|ezurl(no)}">Mirror</a> &nbsp; <a href="{$node.data_map.link.content}">Link</a> {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<span class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">@{$node.view_count}</a></span>{/if}
+        {else}
+        <span>{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</span> &nbsp; <a href={$node.parent.url|ezurl()}>{$node.parent.name}</a> {if $node.object.data_map.link.content|contains('://projects.ez.no')}&nbsp; <a href="{concat( 'http://projects.ez.no/', $node.object.data_map.link.content|explode('://projects.ez.no/')[1]|explode('/')[0] )}">Project</a> &nbsp;{/if} <a href="{$node.url_alias|ezurl(no)}">Mirror</a> &nbsp; <a href="{$node.data_map.link.content}">Link</a> {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<span class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">@{$node.view_count}</a></span>{/if}
+        {/if}
     </div>
 
         {* if $node.data_map.enable_comments.data_int}
