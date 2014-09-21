@@ -9,7 +9,7 @@
  */
 
 // General cronjob part options
-$phpBin = '/usr/bin/php';
+$phpBin = '/usr/bin/env php';
 $generatorWorkerScript = 'bin/php/ezpgenerateautoloads.php';
 $options = '';
 $result = '';

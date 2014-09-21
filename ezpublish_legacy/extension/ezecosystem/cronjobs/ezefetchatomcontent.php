@@ -10,7 +10,8 @@
 
 // General cronjob part options
 $generatorWorkerScript = './extension/ezecosystem/bin/shell/fetchandrefeshsyndicatedcontent.sh';
-$options = '';
+$currentSiteAccess = $GLOBALS['eZCurrentAccess']['name'];
+$options = $currentSiteAccess;
 $result = '';
 
 passthru( "$generatorWorkerScript $options;", $result );
