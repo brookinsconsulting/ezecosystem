@@ -8,19 +8,20 @@ ClearRelationTypes[]=reverse_attribute
 SmartCacheClear=enabled
 
 [forum_reply]
+DependentClassIdentifier[]=frontpage
 DependentClassIdentifier[]=forum_topic
 DependentClassIdentifier[]=forum
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
-ClearCacheMethod[]=relating
-ClearCacheMethod[]=siblings
+#ClearCacheMethod[]=relating
+#ClearCacheMethod[]=siblings
 
 [forum_topic]
 DependentClassIdentifier[]=forum
-ClearCacheMethod[]=object
-ClearCacheMethod[]=parent
-ClearCacheMethod[]=relating
-ClearCacheMethod[]=siblings
+DependentClassIdentifier[]=frontpage
+#ClearCacheMethod[]=object
+#ClearCacheMethod[]=parent
+#ClearCacheMethod[]=relating
 
 [folder]
 DependentClassIdentifier[]=folder

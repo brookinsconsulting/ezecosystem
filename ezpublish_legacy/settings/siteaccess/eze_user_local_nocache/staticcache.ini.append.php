@@ -35,9 +35,9 @@ CachedSiteAccesses[]=eze_user_local
 # A list of locations that will be updated whenever an object is published. You
 # can NOT use a wildcard here.
 AlwaysUpdateArray[]
-AlwaysUpdateArray[]=/
-AlwaysUpdateArray[]=/Mirror
-AlwaysUpdateArray[]=/Issues
+#AlwaysUpdateArray[]=/
+#AlwaysUpdateArray[]=/Mirror
+#AlwaysUpdateArray[]=/Issues
 
 # Defer cache generation to cronjob.
 CronjobCacheClear=disabled
