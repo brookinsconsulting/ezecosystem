@@ -16,6 +16,7 @@ Scripts[]=indexcontent.php
 Scripts[]=ezefetchatomcontent.php
 
 [CronjobSettings]
+ExtensionDirectories[]=ezecosystem
 Scripts[]=staticcache_cleanup.php
 Scripts[]=updateviewcount.php
 Scripts[]=indexcontent.php

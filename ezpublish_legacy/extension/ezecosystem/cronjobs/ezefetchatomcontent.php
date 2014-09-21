@@ -9,12 +9,11 @@
  */
 
 // General cronjob part options
-$phpBin = '/usr/bin/php';
-$generatorWorkerScript = 'extension/ezecosystem/bin/shell/fetchandrefeshsyndicatedcontent.sh';
+$generatorWorkerScript = './extension/ezecosystem/bin/shell/fetchandrefeshsyndicatedcontent.sh ezwebin_site_user';
 $options = '';
-$result = false;
+$result = '';
 
-passthru( "$phpBin ./$generatorWorkerScript $options;", $result );
+passthru( "$generatorWorkerScript $options;", $result );
 
 print_r( $result );
 
