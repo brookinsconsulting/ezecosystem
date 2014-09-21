@@ -281,7 +281,7 @@ $FunctionList['list'] = array( 'name' => 'list',
                                                              'default' => null ) ) );
 $FunctionList['list_count'] = array( 'name' => 'list_count',
                                      'operation_types' => array( 'read' ),
-                                     'call_method' => array( 'class' => 'eZContentFunctionCollection',
+                                     'call_method' => array( 'class' => 'eZContentFunctionCollectionNoLanguage',
                                                              'method' => 'fetchObjectTreeCount' ),
                                      'parameter_type' => 'standard',
                                      'parameters' => array( array( 'name' => 'parent_node_id',

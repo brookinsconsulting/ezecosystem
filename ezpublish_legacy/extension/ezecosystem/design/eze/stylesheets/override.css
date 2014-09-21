@@ -370,6 +370,13 @@ position: relative;
 left: 2.25%;
 }
 
+/* HomePage Head Styles */
+
+.homepage-head {
+margin-top:6px;
+margin-bottom:8px;
+}
+
 /* content specific styles */
 
 .views {

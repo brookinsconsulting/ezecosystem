@@ -81,12 +81,12 @@
                 {set $home_page_fetch_classes = $home_page_fetch_classes|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
             {/if *}
 
-            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $current_node.node_id,
-                                                                       'class_filter_type', 'include',
-                                                                       'class_filter_array', $home_page_fetch_classes,
-                                                                       'language', $home_page_post_fetch_language,
-                                                                       'ignore_visibility', false(),
-								       'depth', $home_page_fetch_depth ) )}
+            {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $current_node.node_id,
+                                                                        'class_filter_type', 'include',
+                                                                        'class_filter_array', $home_page_fetch_classes,
+                                                                        'language', $home_page_post_fetch_language,
+                                                                        'ignore_visibility', false(),
+							                'depth', $home_page_fetch_depth ) )}
 
             {def $home_page_fetch_sort_array_attribute_ext = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'attribute', false(), $home_page_forum_topic_publication_date ) )
 		 $home_page_fetch_sort_array_attribute_blog_only = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'published', false() ) )
@@ -102,7 +102,7 @@
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
 
-            <div style="margin-top:6px;margin-bottom:8px;">
+            <div class="homepage-head">
             {* Site notice area *}
             {def $notifications=fetch( 'content', 'list', hash( 'parent_node_id', $notifications_node_id,
                                                                 'class_filter_type', 'include',

@@ -4,7 +4,7 @@
      $blogs_list_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $sources_list_fetch_classes=ezini('SourcesSidebarSettings','ClassIdentifiers','ezecosystem.ini')
      $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
-                                                        'sort_by', array( 'modified', false() ),
+                                                        'sort_by', array( 'published', false() ),
                                                         'depth', 4,
                                                         'class_filter_type', 'include',
                                                         'class_filter_array', $blogs_list_fetch_classes,
