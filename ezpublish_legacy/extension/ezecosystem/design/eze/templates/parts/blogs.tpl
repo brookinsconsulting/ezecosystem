@@ -1,8 +1,9 @@
 {cache-block subtree_expiry=$blogs_node_id}
-{def $blog_post_objects_unique = array()
+{def $source_post_objects_unique = array()
+     $sources_list_share_ez_no_forum_node_ids=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')
      $blogs_list_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
-     $blogs_list_fetch_classes=ezini('SourcesSidebarSettings','ClassIdentifiers','ezecosystem.ini')
-     $blog_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
+     $sources_list_fetch_classes=ezini('SourcesSidebarSettings','ClassIdentifiers','ezecosystem.ini')
+     $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
                                                         'sort_by', array( 'modified', false() ),
                                                         'depth', 4,
                                                         'class_filter_type', 'include',
@@ -10,7 +11,7 @@
                                                         'limit', 1000 ) )}
 {*
          $currentTimestampMinusOneMonth = currentdate()|sub( 2678400 )
-         $blogObjects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
+         $sourceObjects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
                                                         'attribute_filter', array( 'and', array( 'blog/inactive', '=', 0 ), array( 'modified_subnode', '>=', $currentTimestampMinusOneMonth ) ),
                                                         'class_filter_type', 'include',
                                                         'class_filter_array', array( 'blog' ),
@@ -28,12 +29,19 @@
     <h3>Sources<h3>
     <div class="sidebar-content">
     <ul>
-    {foreach $blog_post_objects as $blogObject}
-        {if $blog_post_objects_unique|contains( $blogObject.parent.node_id )|not}
-        {set $blog_post_objects_unique = $blog_post_objects_unique|append( $blogObject.parent.node_id )}
-        {* <li><a href="{$blogObject.parent.data_map.blog.content}">{$blogObject.parent.name}</a></li> *}
-	<li><a href={$blogObject.parent.url|ezurl}>{$blogObject.parent.name}</a></li>
-	{/if}
+    {foreach $source_post_objects as $sourceObject}
+        {if $sources_list_share_ez_no_forum_node_ids|contains( $sourceObject.parent.node_id )}
+          {if $source_post_objects_unique|contains( $sourceObject.parent.parent.node_id )|not}
+          {set $source_post_objects_unique = $source_post_objects_unique|append( $sourceObject.parent.parent.node_id )}
+	  <li><a href={$sourceObject.parent.parent.url|ezurl}>{$sourceObject.parent.parent.name}</a></li>
+	  {/if}
+        {else}
+          {if and( $sources_list_fetch_classes|contains( $sourceObject.class_identifier ), $source_post_objects_unique|contains( $sourceObject.parent.node_id )|not )}
+          {set $source_post_objects_unique = $source_post_objects_unique|append( $sourceObject.parent.node_id )}
+          {* <li><a href="{$sourceObject.parent.data_map.blog.content}">{$sourceObject.parent.name}</a></li> *}
+	  <li><a href={$sourceObject.parent.url|ezurl}>{$sourceObject.parent.name}</a></li>
+	  {/if}
+        {/if}        
     {/foreach}
     </ul>
     </div>
