@@ -74,8 +74,8 @@ TagCloudExcludeTagStrings[]=EZP-
 TagCloudExcludeTagStrings[]=COM-
 
 [TwitterSidebarSettings]
-TwitterSearchUrl=https://twitter.com/search?q=ezpublish+OR+ezcommunity+OR+ezfind+OR+ezsystems+OR+ezsummer
-TwitterSearchTitle=Tweets about "ezpublish OR ezcommunity OR ezfind OR ezsystems"
+TwitterSearchUrl=https://twitter.com/search?q=ezpublish+OR+ezcommunity+OR+ezfind+OR+ezsystems+OR+ezsummer+OR+ezconf
+TwitterSearchTitle=Tweets about "ezpublish OR ezcommunity OR ezfind OR ezsystems OR ezsummer OR ezconf"
 
 [FeedSidebarSettings]
 MainRssUrl=/rss/feed/rss
