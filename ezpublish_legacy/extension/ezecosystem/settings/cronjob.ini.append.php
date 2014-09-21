@@ -15,6 +15,9 @@ Scripts[]=indexcontent.php
 [CronjobPart-ezefetchatomcontent]
 Scripts[]=ezefetchatomcontent.php
 
+[CronjobPart-ezerefreshhomepagestaticcache]
+Scripts[]=ezerefreshhomepagestaticcache.php
+
 [CronjobSettings]
 ExtensionDirectories[]=ezecosystem
 Scripts[]=staticcache_cleanup.php
@@ -22,6 +25,7 @@ Scripts[]=updateviewcount.php
 Scripts[]=indexcontent.php
 Scripts[]=rssimport.php
 Scripts[]=ezefetchatomcontent.php
+Scripts[]=ezerefreshhomepagestaticcache.php
 
 
 
