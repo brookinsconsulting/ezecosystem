@@ -6,8 +6,8 @@ ViewCountThreshold=2
 
 [NodeIDSettings]
 MirrorNodeID=216
-IssuesNodeID=9281
-CommunityIssuesNodeID=4198
+IssuesNodeID=4198
+CommunityIssuesNodeID=9181
 NotificationNodeID=14353
 SidebarCommunityNodeID=969
 SidebarPlanetariumNodeID=970
