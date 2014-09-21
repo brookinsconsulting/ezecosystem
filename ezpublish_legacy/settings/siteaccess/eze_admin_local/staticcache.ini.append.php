@@ -26,6 +26,7 @@ CachedURLArray[]=/Issues*
 CachedURLArray[]=/About*
 CachedURLArray[]=/About-eZ-Publish*
 CachedURLArray[]=/Contact-Us*
+CachedURLArray[]=/Mirror/Share.ez.no-Forums*
 
 # A list of site accesses to generate static content for
 CachedSiteAccesses[]
@@ -38,6 +39,7 @@ AlwaysUpdateArray[]
 AlwaysUpdateArray[]=/
 AlwaysUpdateArray[]=/Mirror
 AlwaysUpdateArray[]=/Issues
+AlwaysUpdateArray[]=/Mirror/Share.ez.no-Forums
 
 # Defer cache generation to cronjob.
 CronjobCacheClear=disabled

@@ -13,4 +13,7 @@ fi
 # Refresh static cache of the /Mirror node and it's children
 ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Mirror;
 
+# Refresh static cache of the /Mirror node and it's children
+./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Mirror/Share.ez.no-Forums;
+
 exit;
