@@ -98,7 +98,7 @@ Match[class_identifier]=folder
 
 [full_forum]
 Source=node/view/full.tpl
-MatchFile=full/forum.tpl
+MatchFile=full/forum_folder.tpl
 Subdir=templates
 Match[class_identifier]=forum
 
@@ -110,13 +110,13 @@ Match[class_identifier]=forum_reply
 
 [full_forum_topic]
 Source=node/view/full.tpl
-MatchFile=full/forum_topic.tpl
+MatchFile=full/forum_topic_simple.tpl
 Subdir=templates
 Match[class_identifier]=forum_topic
 
 [full_forums]
 Source=node/view/full.tpl
-MatchFile=full/forums.tpl
+MatchFile=full/forum_folder.tpl
 Subdir=templates
 Match[class_identifier]=forums
 

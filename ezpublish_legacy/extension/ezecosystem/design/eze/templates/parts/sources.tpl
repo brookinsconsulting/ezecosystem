@@ -1,9 +1,9 @@
-{cache-block subtree_expiry=$blogs_node_id}
+{cache-block subtree_expiry=$mirror_node_id}
 {def $source_post_objects_unique = array()
      $sources_list_share_ez_no_forum_node_ids=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')
      $blogs_list_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $sources_list_fetch_classes=ezini('SourcesSidebarSettings','ClassIdentifiers','ezecosystem.ini')
-     $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
+     $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
                                                         'sort_by', array( 'modified', false() ),
                                                         'depth', 4,
                                                         'class_filter_type', 'include',
@@ -11,7 +11,7 @@
                                                         'limit', 1000 ) )}
 {*
          $currentTimestampMinusOneMonth = currentdate()|sub( 2678400 )
-         $sourceObjects = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
+         $sourceObjects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
                                                         'attribute_filter', array( 'and', array( 'blog/inactive', '=', 0 ), array( 'modified_subnode', '>=', $currentTimestampMinusOneMonth ) ),
                                                         'class_filter_type', 'include',
                                                         'class_filter_array', array( 'blog' ),

@@ -1,18 +1,23 @@
-{if and( $root_node_id|is_set|not, $blogs_node_id|is_set|not )}
+{if and( $root_node_id|is_set|not, $home_page_root_node_id|is_set|not )}
 {def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
-     $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')}
+     $home_page_root_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
+     $home_page_fetch_classes=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')}
 {/if}
 {def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
-     $home_page_fetch_classes=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
+     $home_page_fetch_depth=ezini('HomePageFetchSettings','FetchDepth','ezecosystem.ini')
      $page_limit = 30
      $blogs_count = 0
      $uniq_id = 0
      $uniq_post = array()
-     $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )
+     $current_node = fetch( 'content', 'node', hash( 'node_id', $home_page_root_node_id ) )
      $notifications_node_id=ezini('NodeIDSettings','NotificationNodeID','ezecosystem.ini')
      $notifications_class=array( ezini('ClassIdentifierSettings','classNotification','ezecosystem.ini') )
      $home_page_post_fetch_language='eng-US'}
+
+{if $mirror_node_id|is_set|not}
+{def $mirror_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')}
+{/if}
 
 {if $node.node_id|eq( $root_node_id )}
 {def $currentPageUri=''}
@@ -20,7 +25,7 @@
 {def $currentPageUri=concat( '/', $node.url )}
 {/if}
 
-{*   $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $blogs_node_id) ) *}
+{*   $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $home_page_root_node_id) ) *}
 
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
@@ -36,23 +41,23 @@
         {/if}
 
         <div class="attribute-header">
-            <h1>{attribute_view_gui attribute=$blogs_node.data_map.name}</h1>
+            <h1>{attribute_view_gui attribute=$current_node.data_map.name}</h1>
         </div>
 
         {if eq( ezini( 'folder', 'SummaryInFullView', 'content.ini' ), 'enabled' )}
-            {if $blogs_node.object.data_map.short_description.has_content}
+            {if $current_node.object.data_map.short_description.has_content}
                 <div class="attribute-short">
-                    {attribute_view_gui attribute=$blogs_node.data_map.short_description}
+                    {attribute_view_gui attribute=$current_node.data_map.short_description}
                 </div>
             {/if}
         {/if}
 	*}
 
-        {if $blogs_node.object.data_map.description.has_content}
-            <div class="attribute-long">
-                {attribute_view_gui attribute=$blogs_node.data_map.description}
+        {* if $current_node.object.data_map.description.has_content}
+            <div class="attribute-short">
+                {attribute_view_gui attribute=$current_node.data_map.description}
             </div>
-        {/if}
+        {/if *}
 
 {if $view_parameters.tag}
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
@@ -72,29 +77,31 @@
     {/if}
 {else}
             {* ezini( 'MenuContentSettings', 'ExtraIdentifierList', 'menu.ini' ) *}
-            {* if le( $blogs_node.depth, '3')}
+            {* if le( $current_node.depth, '3')}
                 {set $home_page_fetch_classes = $home_page_fetch_classes|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
             {/if *}
 
-            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $blogs_node.node_id,
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $current_node.node_id,
                                                                        'class_filter_type', 'include',
                                                                        'class_filter_array', $home_page_fetch_classes,
                                                                        'language', $home_page_post_fetch_language,
-								       'depth', 2 ) )}
+                                                                       'ignore_visibility', false(),
+								       'depth', $home_page_fetch_depth ) )}
 
-            {def $sort_array_attribute_ext = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'attribute', false(), $home_page_forum_topic_publication_date ) )
-		 $sort_array_attribute_blog_only = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'published', false() ) )
-		 $sort_array_attribute_forum_only = array( array( 'attribute', false(), $home_page_forum_topic_publication_date ), array( 'published', false() ) )
-		 $sort_array_published = array( 'published', false() )
-		 $sort_array = $sort_array_published
-                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $blogs_node_id,
+            {def $home_page_fetch_sort_array_attribute_ext = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'attribute', false(), $home_page_forum_topic_publication_date ) )
+		 $home_page_fetch_sort_array_attribute_blog_only = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'published', false() ) )
+		 $home_page_fetch_sort_array_attribute_forum_only = array( array( 'attribute', false(), $home_page_forum_topic_publication_date ), array( 'published', false() ) )
+		 $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
-							     'language', $home_page_post_fetch_language,
                                                              'offset', $view_parameters.offset,
-                                                             'sort_by', $sort_array,
-						             'depth', 2,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
+
             <div style="margin-top:6px;margin-bottom:8px;">
             {* Site notice area *}
             {def $notifications=fetch( 'content', 'list', hash( 'parent_node_id', $notifications_node_id,
@@ -102,7 +109,8 @@
                                                                 'class_filter_array', $notifications_class,
                                                                 'order_by', array( 'published', false() ),
                                                                 'limit', 1 ) )}
-            {if $notifications|is_array}
+
+            {if and( $notifications|is_array, or( $node.node_id|eq( $mirror_node_id ), $node.node_id|eq( $root_node_id ) ) )}
             <div style="padding-bottom: 10px;">
             {foreach $notifications as $notification}
             <hr />

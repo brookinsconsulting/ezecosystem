@@ -223,9 +223,7 @@
                         <p class="date">{$reply.object.published|l10n( datetime )}</p>
 
                         <a id="msg{$reply.node_id}"></a>
-                        <p>
-                            {$reply.object.data_map.message.content|simpletags|wordtoimage|autolink}
-                        </p>
+                            {$reply.object.data_map.message.content|simpletags|autolink}
 
                         {section show=$owner_map.signature.has_content}
                             <p class="author-signature">{$owner_map.signature.content|simpletags|autolink}</p>

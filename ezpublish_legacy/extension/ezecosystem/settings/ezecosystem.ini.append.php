@@ -5,7 +5,7 @@ ViewCountDisplay=enabled
 ViewCountThreshold=2
 
 [NodeIDSettings]
-BlogsNodeID=216
+MirrorNodeID=216
 IssuesNodeID=9281
 CommunityIssuesNodeID=4198
 NotificationNodeID=14353
@@ -52,6 +52,7 @@ ClassIDs[]=45
 ClassIdentifiers[]
 #ClassIdentifiers[]=forum_topic
 ClassIdentifiers[]=blog_post
+FetchDepth=4
 
 [TagSidebarSettings]
 TagCloudLimit=140

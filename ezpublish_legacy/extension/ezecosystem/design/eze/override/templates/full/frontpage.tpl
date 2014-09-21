@@ -1,5 +1,5 @@
 {def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
-     $blogs_node_id=ezini('NodeIDSettings','BlogsNodeID','ezecosystem.ini')
+     $mirror_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
      $blogs_planetarium_id=ezini('NodeIDSettings','SidebarPlanetariumNodeID','ezecosystem.ini')
      $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')
      $popular_class_ids=ezini('PopularSidebarSettings','ClassIDs','ezecosystem.ini')}
@@ -66,8 +66,8 @@
     </div>
 </div>
 *}
-{* def $blogs_node = fetch( 'content', 'node', hash( 'node_id', $blogs_node_id ) )
-   $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $blogs_node_id) ) *}
+{* def $blogs_node = fetch( 'content', 'node', hash( 'node_id', $mirror_node_id ) )
+   $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $mirror_node_id) ) *}
 
 <div class="content-view-full" style="width: 100%">
     <div class="class-frontpage {$frontpagestyle}">
@@ -76,7 +76,7 @@
             <div class="left-column" style="">
             <!-- Content: START -->
 
-{include uri="design:parts/homepage.tpl" blogs_node_id=$blogs_node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$mirror_node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
 
             <!-- Content: END -->
             </div>
@@ -96,11 +96,11 @@
             <div class="right-column" style="float:right">
             <!-- Content: START -->
 
-{include uri="design:parts/sources.tpl" blogs_node_id=$blogs_node_id}
+{include uri="design:parts/sources.tpl" mirror_node_id=$mirror_node_id}
 
 {cache-block expiry=172800}
 
-{include uri="design:parts/feed.tpl" blogs_node_id=$blogs_node_id}
+{include uri="design:parts/feed.tpl" mirror_node_id=$mirror_node_id}
 
 {include uri="design:parts/community.tpl" blogs_planetarium_id=$blogs_community_id}
 
