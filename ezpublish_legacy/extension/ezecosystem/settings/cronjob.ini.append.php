@@ -18,6 +18,9 @@ Scripts[]=ezefetchatomcontent.php
 [CronjobPart-ezerefreshhomepagestaticcache]
 Scripts[]=ezerefreshhomepagestaticcache.php
 
+[CronjobPart-ezeregenerateautoloads]
+Scripts[]=ezeregenerateautoloads.php
+
 [CronjobSettings]
 ExtensionDirectories[]=ezecosystem
 Scripts[]=staticcache_cleanup.php
@@ -26,7 +29,7 @@ Scripts[]=indexcontent.php
 Scripts[]=rssimport.php
 Scripts[]=ezefetchatomcontent.php
 Scripts[]=ezerefreshhomepagestaticcache.php
-
+Scripts[]=ezeregenerateautoloads.php
 
 
 */ ?>
