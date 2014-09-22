@@ -20,7 +20,7 @@
     
     <div class="attribute-byline">
 	{if $node.data_map.forum_topic_author.has_content}
-        {$node.data_map.forum_topic_author.content|autolink}
+        <p class="author">By: {$node.data_map.forum_topic_author.content|autolink}</p>
 	{/if}
     </div>
     {* <div class="attribute-byline">
