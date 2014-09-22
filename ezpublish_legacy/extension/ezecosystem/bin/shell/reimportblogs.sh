@@ -9,3 +9,5 @@ fi
 ./extension/ezecosystem/bin/php/ezsubtreeremoveallblogs.php;
 
 php ./runcronjobs.php --siteaccess=$siteaccess rssimport;
+
+exit;

@@ -7,3 +7,7 @@ siteaccess="$1";
 fi
 
 php ./runcronjobs.php --siteaccess=$siteaccess rssimport;
+
+php ./runcronjobs.php --siteaccess=$siteaccess staticcache_cleanup;
+
+exit;

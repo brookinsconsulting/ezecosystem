@@ -25,3 +25,5 @@ done
 
 # Clear view cache for all importated content
 php -d memory_limit=-1 ./runcronjobs.php -s $siteaccess sqliimport_cleanup;
+
+exit;
