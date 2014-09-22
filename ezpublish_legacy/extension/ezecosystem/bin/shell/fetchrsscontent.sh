@@ -6,4 +6,4 @@ else
 siteaccess="$1";
 fi
 
-php ./runcronjobs.php -s ezwebin_site_user rssimport -s $siteaccess -q;
+php ./runcronjobs.php --siteaccess=$siteaccess rssimport;
