@@ -11,7 +11,7 @@ fi
 ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess / ' ';
 
 # Refresh static cache of the /Mirror node and it's children
-./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Issues;
+./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Issues ' ';
 
 # Refresh static cache of the /Mirror node and it's children
 ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Mirror;
