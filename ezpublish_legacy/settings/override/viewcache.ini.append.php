@@ -18,15 +18,20 @@ ClearCacheMethod[]=relating
 ClearCacheMethod[]=siblings
 
 [forum_topic]
-DependentClassIdentifier[]=forum_topic
-DependentClassIdentifier[]=forums
 DependentClassIdentifier[]=forum
+DependentClassIdentifier[]=forums
+DependentClassIdentifier[]=folder
 DependentClassIdentifier[]=frontpage
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
+AdditionalObjectIDs[]
+AdditionalObjectIDs[]=65
+AdditionalObjectIDs[]=37252
+AdditionalObjectIDs[]=214
 
 [folder]
+DependentClassIdentifier[]=frontpage
 DependentClassIdentifier[]=folder
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
@@ -37,7 +42,6 @@ DependentClassIdentifier[]=folder
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
-ClearCacheMethod[]=children
 
 [image]
 DependentClassIdentifier[]=gallery
@@ -105,19 +109,23 @@ ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
 
 [blog_post]
-DependentClassIdentifier[]=frontpage
 DependentClassIdentifier[]=blog
 DependentClassIdentifier[]=folder
+DependentClassIdentifier[]=frontpage
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
+AdditionalObjectIDs[]
+AdditionalObjectIDs[]=65
 
 [issue_post]
-DependentClassIdentifier[]=frontpage
 DependentClassIdentifier[]=blog
 DependentClassIdentifier[]=folder
+DependentClassIdentifier[]=frontpage
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
+AdditionalObjectIDs[]
+AdditionalObjectIDs[]=65
 
 */ ?>
