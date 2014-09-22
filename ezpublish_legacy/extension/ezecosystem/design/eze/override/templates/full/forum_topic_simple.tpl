@@ -33,7 +33,7 @@
                                     <p class="date">{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</p>
                                     <p class="author">
                                     {if $node.data_map.forum_topic_author.has_content}
-                                        {$node.data_map.forum_topic_author.content|autolink}
+                                        By: {$node.data_map.forum_topic_author.content|autolink}
                                     {/if}
                                     </div>
 
