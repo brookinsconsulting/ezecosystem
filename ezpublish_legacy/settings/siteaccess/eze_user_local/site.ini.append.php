@@ -50,6 +50,8 @@ RegistrationEmail=info@brookinsconsulting.com
 [SiteAccessSettings]
 RequireUserLogin=false
 RelatedSiteAccessList[]
+RelatedSiteAccessList[]=eze_user_local
+RelatedSiteAccessList[]=eze_admin_local
 RelatedSiteAccessList[]=ezwebin_site_user
 RelatedSiteAccessList[]=ezwebin_site_admin
 RelatedSiteAccessList[]=eng

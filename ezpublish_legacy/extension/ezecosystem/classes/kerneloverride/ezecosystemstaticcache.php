@@ -184,8 +184,23 @@ class eZecosystemStaticCache implements ezpStaticCache
      *
      * @param array $nodeList An array with node entries, each entry is either the node ID or an associative array.
      */
-    public function generateNodeListCache( $nodeList )
+    public function generateNodeListCache( $nodeList, $delay = false )
     {
+        /*
+        foreach ($nodeList as $node)
+        {
+            $nodeID = (int)$node;
+            $elements = eZURLAliasML::fetchByAction( 'eznode', $nodeID, true, true, true );
+            foreach ( $elements as $element )
+            {
+                $path = $element->getPath();
+                $nodeListUrls[]='/' . $path;
+            }
+        }
+        echo '<pre>'; print_r($nodeListUrls); echo '</pre>';
+        die();
+        */
+
         $db = eZDB::instance();
 
         foreach ( $nodeList as $uri )
@@ -211,7 +226,7 @@ class eZecosystemStaticCache implements ezpStaticCache
             foreach ( $elements as $element )
             {
                 $path = $element->getPath();
-                $this->cacheURL( '/' . $path );
+                $this->cacheURL( '/' . $path, false, false, $delay );
             }
         }
     }
@@ -320,6 +335,8 @@ class eZecosystemStaticCache implements ezpStaticCache
         if ( substr_count( $url, "/") >= $this->maxCacheDepth )
             return false;
 
+        // print_r($this->cachedURLArray ); echo "\nin:cacheURL\n";
+
         $doCacheURL = false;
         foreach ( $this->cachedURLArray as $cacheURL )
         {
@@ -386,6 +403,8 @@ class eZecosystemStaticCache implements ezpStaticCache
                 $content = false;
                 foreach ( $cacheFiles as $file )
                 {
+                    // echo "\n\n"; print_r($file); echo "\nIn Store Cache Loop\n"; echo "Unlink?: " . (string)!$skipUnlink;
+
                     if ( !$skipUnlink || !file_exists( $file ) )
                     {
                         // Deprecated since 4.4, will be removed in future version
@@ -408,6 +427,8 @@ class eZecosystemStaticCache implements ezpStaticCache
                             // Generate content, if required
                             if ( $content === false )
                             {
+                                // echo "\n\n"; print_r( $fileName ); echo "\nIn Store Cache Content === false\n";
+
                                 if ( eZHTTPTool::getDataByURL( $fileName, true, eZecosystemStaticCache::USER_AGENT ) )
                                     $content = eZHTTPTool::getDataByURL( $fileName, false, eZecosystemStaticCache::USER_AGENT );
                             }

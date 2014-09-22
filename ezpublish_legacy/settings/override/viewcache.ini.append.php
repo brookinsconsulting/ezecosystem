@@ -10,18 +10,21 @@ SmartCacheClear=enabled
 [forum_reply]
 DependentClassIdentifier[]=frontpage
 DependentClassIdentifier[]=forum_topic
+DependentClassIdentifier[]=forums
 DependentClassIdentifier[]=forum
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
-#ClearCacheMethod[]=relating
-#ClearCacheMethod[]=siblings
+ClearCacheMethod[]=relating
+ClearCacheMethod[]=siblings
 
 [forum_topic]
+DependentClassIdentifier[]=forum_topic
+DependentClassIdentifier[]=forums
 DependentClassIdentifier[]=forum
 DependentClassIdentifier[]=frontpage
-#ClearCacheMethod[]=object
-#ClearCacheMethod[]=parent
-#ClearCacheMethod[]=relating
+ClearCacheMethod[]=object
+ClearCacheMethod[]=parent
+ClearCacheMethod[]=relating
 
 [folder]
 DependentClassIdentifier[]=folder
