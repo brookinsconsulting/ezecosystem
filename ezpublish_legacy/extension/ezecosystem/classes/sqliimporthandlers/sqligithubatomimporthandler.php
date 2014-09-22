@@ -136,6 +136,8 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
 
         $content->fields->tags = $issueTicketID;
 
+        //echo "\n\nCorrupt-ObjectID: "; print_r( $content->attribute( 'id' ) ); echo "\n\n";
+
         // Now publish content
         $content->addLocation( SQLILocation::fromNodeID( $defaultParentNodeID ) );
 
