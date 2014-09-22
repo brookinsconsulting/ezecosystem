@@ -187,6 +187,10 @@ class eZecosystemStaticCache implements ezpStaticCache
     public function generateNodeListCache( $nodeList, $delay = false )
     {
         /*
+        echo "\n\nNodeList:<br />\n\n";
+        print_r($nodeList); //die();
+        */
+        /*
         foreach ($nodeList as $node)
         {
             $nodeID = (int)$node;
@@ -197,7 +201,7 @@ class eZecosystemStaticCache implements ezpStaticCache
                 $nodeListUrls[]='/' . $path;
             }
         }
-        echo '<pre>'; print_r($nodeListUrls); echo '</pre>';
+        echo '<pre>'; print_r($nodeListUrls); echo '</pre>'."\n\n\n";
         die();
         */
 
@@ -226,9 +230,11 @@ class eZecosystemStaticCache implements ezpStaticCache
             foreach ( $elements as $element )
             {
                 $path = $element->getPath();
+                // print_r("cacheUrl: $path <hr/>\n\n");
                 $this->cacheURL( '/' . $path, false, false, $delay );
             }
         }
+        //die();
     }
 
     /**
@@ -335,7 +341,10 @@ class eZecosystemStaticCache implements ezpStaticCache
         if ( substr_count( $url, "/") >= $this->maxCacheDepth )
             return false;
 
-        // print_r($this->cachedURLArray ); echo "\nin:cacheURL\n";
+        /*
+        print_r($this->cachedURLArray );
+        echo "\n\n\n\nin:cacheURL: $url\n\n\n";
+        */
 
         $doCacheURL = false;
         foreach ( $this->cachedURLArray as $cacheURL )
@@ -354,6 +363,8 @@ class eZecosystemStaticCache implements ezpStaticCache
                 }
             }
         }
+
+        // echo "doCacheURL: ". $doCacheURL . "\n\n";
 
         if ( $doCacheURL == false )
         {
@@ -427,7 +438,7 @@ class eZecosystemStaticCache implements ezpStaticCache
                             // Generate content, if required
                             if ( $content === false )
                             {
-                                // echo "\n\n"; print_r( $fileName ); echo "\nIn Store Cache Content === false\n";
+                                // echo "\n\n"; print_r( $fileName ); echo "\nIn Store Cache Content === false\n\n\n";
 
                                 if ( eZHTTPTool::getDataByURL( $fileName, true, eZecosystemStaticCache::USER_AGENT ) )
                                     $content = eZHTTPTool::getDataByURL( $fileName, false, eZecosystemStaticCache::USER_AGENT );
