@@ -18,6 +18,11 @@
         <h2>> <a href="{$node.data_map.link.content}" title="{$node.data_map.subject.content}">{if $node.data_map.subject.content|count_chars|gt( 70 )}{$node.data_map.subject.content|extract( 0, 66 )|append(' ...' )|wash}{else}{$node.data_map.subject.content}{/if}</a></h2>
      </div>
     
+    <div class="attribute-byline">
+	{if $node.data_map.forum_topic_author.has_content}
+        {$node.data_map.forum_topic_author.content|autolink}
+	{/if}
+    </div>
     {* <div class="attribute-byline">
 	{if $node.data_map.tags.has_content}
         <p class="tags"> {"Tags:"|i18n("design/ezwebin/line/blog_post")} {foreach $node.data_map.tags.content.keywords as $keyword}
