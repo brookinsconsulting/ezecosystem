@@ -9,26 +9,28 @@ PHP=/usr/bin/php
 
 # Instruct cron to run the main set of cronjobs
 # at 6:35am every day
-35 6 * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user -q 2>&1
+35 6 * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user -q 2>&1
 
 # Instruct cron to run the "infrequent" set of cronjobs
 # at 5:20am every Monday
-20 5 * * 1 cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user infrequent -q 2>&1
+20 5 * * 1 cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user infrequent -q 2>&1
 
 # Instruct cron to run the "frequent" set of cronjobs
 # every 15 minutes
-0,15,30,45 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user frequent -q 2>&1
+0,15,30,45 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user frequent -q 2>&1
 
 # Frequent cron tasks
 
 0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh ezwebin_site_user && ./extension/ezecosystem/bin/shell/refreshhomepagestaticcache.sh ezwebin_site_user
 
-0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user -q googlesitemaps 2>&1
+0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user -q googlesitemaps 2>&1
 
 40 */3 * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh ezwebin_site_user / '*'
 
-7,27,37,57 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user updateviewcount -q 2>&1
+7,27,37,57 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user updateviewcount -q 2>&1
 
-7,27,37,57 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php -s ezwebin_site_user indexcontent -q 2>&1
+7,27,37,57 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user indexcontent -q 2>&1
 
-*/5 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php sqliimport_run 2>&1
+*/5 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user sqliimport_run 2>&1
+
+* * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user staticcache_cleanup 2>&1
