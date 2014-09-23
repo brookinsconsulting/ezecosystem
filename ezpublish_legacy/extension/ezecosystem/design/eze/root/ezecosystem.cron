@@ -21,7 +21,7 @@ PHP=/usr/bin/php
 
 # Frequent cron tasks
 
-0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh ezwebin_site_user && ./extension/ezecosystem/bin/shell/refreshhomepagestaticcache.sh ezwebin_site_user
+0,03,07,15,25,30,35,40,45,50,55,58 * * * * cd $EZPUBLISHROOT && ./extension/ezecosystem/bin/shell/fetchsyndicatedcontent.sh ezwebin_site_user && ./extension/ezecosystem/bin/shell/refreshhomepagestaticcache.sh ezwebin_site_user
 
 0,05,15,25,35,45,55,58 * * * * cd $EZPUBLISHROOT && $PHP ./runcronjobs.php --siteaccess=ezwebin_site_user -q googlesitemaps 2>&1
 
