@@ -7,6 +7,9 @@ StaticCacheHandler=eZecosystemStaticCache
 DatabaseImplementation=ezmysqli
 Database=ezecosystem
 Charset=
+QueryAnalysisOutput=disabled
+SQLOutput=disabled
+SlowQueriesOutput=40
 
 [DebugSettings]
 #DebugOutput=enabled
