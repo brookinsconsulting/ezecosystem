@@ -40,7 +40,7 @@ AlwaysUpdateArray[]
 #AlwaysUpdateArray[]=/Issues
 
 # Defer cache generation to cronjob.
-CronjobCacheClear=disabled
+CronjobCacheClear=enabled
 
 # Controls whenever <!-- Generated: YYY-MM-DD HH:MM:SS --> comment
 # should be appended into the generated static cache file.
