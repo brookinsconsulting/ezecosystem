@@ -9,6 +9,6 @@ fi
 
 ./extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh $siteaccess;
 
-./extension/ezecosystem/bin/shell/fetchrsscontent.sh $siteaccess;
+./extension/ezecosystem/bin/shell/fetchsyndicatedrsscontent.sh $siteaccess;
 
 exit;
