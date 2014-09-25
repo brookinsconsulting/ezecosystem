@@ -7,7 +7,8 @@
 
 <div class="content-view-full sidebar-content-container">
     <div class="class-folder">
-    <h3>Twitter<h3>
+    {* <h3>Twitter<h3> *}
+    <div class="twitter-logo"><a href="{$twitter_sidebar_search_url}" style="text-decoration:none"><img src={'logo-twitter.png'|ezimage} alt='Twitter Logo' /></a></div>
     <a class="twitter-timeline" data-dnt="true" href="{$twitter_sidebar_search_url}" data-widget-id="503439438320394240" data-chrome="noheader nofooter" height="1000">{$twitter_sidebar_search_title}</a>
 
     <script type="text/javascript">{literal}$(window).load(function(){ !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs"); });{/literal}</script>
