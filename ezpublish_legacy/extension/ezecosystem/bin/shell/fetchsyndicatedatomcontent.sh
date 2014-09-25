@@ -14,13 +14,13 @@ fi
 # Iterate throug jira sources and run atom content import
 for source in "${atom_jira_sources[@]}"
 do
-php ./extension/sqliimport/bin/php/sqlidoimport.php --siteaccess $siteaccess --source-handlers=$source;
+php ./extension/sqliimport/bin/php/sqlidoimport.php --siteaccess=$siteaccess --source-handlers=$source;
 done
 
 # Iterate throug github sources and run atom content import
 for source in "${atom_github_sources[@]}"
 do
-php ./extension/sqliimport/bin/php/sqlidoimport.php --siteaccess $siteaccess --source-handlers=$source;
+php ./extension/sqliimport/bin/php/sqlidoimport.php --siteaccess=$siteaccess --source-handlers=$source;
 done
 
 # Clear view cache for all importated content
