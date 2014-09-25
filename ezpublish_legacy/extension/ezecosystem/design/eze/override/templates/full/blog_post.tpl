@@ -4,7 +4,8 @@
 
 {def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
      $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')
-     $blogs_ids_with_iframe_problems=ezini('NodeIDSettings','BlogsWithIframeProblemsNodeIDs','ezecosystem.ini')}
+     $blogs_ids_with_iframe_problems=ezini('NodeIDSettings','BlogsWithIframeProblemsNodeIDs','ezecosystem.ini')
+     $projects_new_node_id=ezini('NodeIDSettings','ProjectsNewNodeID','ezecosystem.ini')}
 
 <div class="class-blog extrainfo">
     <div class="columns-blog float-break">
@@ -27,17 +28,12 @@
 
                                 <div class="attribute-byline">
                                     <p class="date">{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</p>
-                                    <p class="author">{$node.object.data_map.blog_post_author.content}</p>
+                                    {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $node.parent.node_id|ne( $projects_new_node_id ) )}<p class="author">{$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
                                     {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
 
 				    {if $$node.data_map.tags.has_content}
                                     <p class="tags"> {"Tags:"|i18n("design/ezwebin/full/blog_post")}
-                                         {foreach $node.data_map.tags.content.keywords as $keyword}
-                                             <a href={concat( $node.parent.url_alias, "/(id)/", $node.parent.node_id, "/(tag)/", $keyword|rawurlencode )|ezurl} title="{$keyword}">{$keyword}</a>
-                                             {delimiter}
-                                               ,
-                                             {/delimiter}
-                                         {/foreach}
+                                         {foreach $node.data_map.tags.content.keywords as $keyword} <a href={concat( $node.parent.url_alias, "/(id)/", $node.parent.node_id, "/(tag)/", $keyword|rawurlencode )|ezurl} title="{$keyword}">{$keyword}</a>{delimiter},{/delimiter}{/foreach}
                                     </p>
 				    {/if}
                                 </div>

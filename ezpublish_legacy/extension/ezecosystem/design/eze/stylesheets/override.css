@@ -417,6 +417,10 @@ overflow: hidden;
 word-wrap: break-word;
 }
 
+div.class-blog div.attribute-byline p.tags {
+display: block;
+}
+
 /* derick's blog does not constrain picture img sizes with html */
 
 div.class-blog-post div.attribute-body.float-break div.article div.body div.articleListItem dl.head img {
