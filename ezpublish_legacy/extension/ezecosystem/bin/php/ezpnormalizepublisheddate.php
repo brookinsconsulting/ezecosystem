@@ -58,6 +58,7 @@ $publicationDatePublishCount = 0;
 $parentNodeID = 2;
 $offset = 0;
 $limit = 1000;
+$classes = array( 'forum_topic', 'blog_post', 'issue_post' );
 
 /** Display of execution time **/
 function executionTimeDisplay( $srcStartTime, $cli )
@@ -82,7 +83,7 @@ $user->loginCurrent();
 /** Fetch total files count from content tree **/
 
 $totalFileCountParams = array( 'ClassFilterType' => 'include',
-                               'ClassFilterArray' => array( 'forum_topic', 'blog_post', 'issue_post' ),
+                               'ClassFilterArray' => $classes,
                                'Depth' => 10,
                                'MainNodeOnly' => true,
                                'SortBy' => array( 'published', true ),
@@ -103,10 +104,8 @@ if ( !$totalFileCount )
 
     $script->shutdown( 3 );
 }
-elseif( $verbose && $totalFileCount > 0 )
-{
-    $cli->warning( "Total number of objects to be checked: " . $totalFileCount . "\n" );
-}
+
+$cli->warning( "Total number of objects to be checked: " . $totalFileCount . "\n" );
 
 /** Setup script iteration details **/
 
@@ -122,7 +121,7 @@ while ( $offset < $totalFileCount )
     $subTreeParams = array( 'Limit' => $limit,
                             'Offset' => $offset,
                             'ClassFilterType' => 'include',
-                            'ClassFilterArray' => array( 'forum_topic', 'blog_post' ),
+                            'ClassFilterArray' => $classes,
                             'SortBy' => array( 'modified', false ),
                             'Depth' => 10,
                             'MainNodeOnly' => true,
@@ -170,6 +169,8 @@ while ( $offset < $totalFileCount )
 
         $objectPublicationDate = (string)$objectDataMap[ 'publication_date' ]->content()->timeStamp();
 
+        // $cli->output( "Key: $key\n" );
+
         /** Only iterate over objects with lng in the lat field **/
 
         if( $objectPublicationDate != '' && $objectPublicationDate != 0 && ( $objectPublicationDate != $objectPublishedDate || $objectPublicationDate != $objectModifiedDate ) )
@@ -211,6 +212,11 @@ while ( $offset < $totalFileCount )
 
                 continue;
             }
+            else
+            {
+                /** Iterate cli script progress tracker **/
+                $script->iterate( $cli, $status );
+            }
         }
         else
         {
@@ -218,6 +224,8 @@ while ( $offset < $totalFileCount )
             $script->iterate( $cli, $status );
         }
     }
+
+    // $cli->output( "\nOffset: " . $offset . " + SubTreeCount: " . $subTreeCount . " == " . ($offset + $subTreeCount) . " out of total: $totalFileCount\n" );
 
     /** Iterate fetch function offset and continue **/
     $offset = $offset + $subTreeCount;
