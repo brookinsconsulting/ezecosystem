@@ -1,5 +1,8 @@
 <?php /* #?ini charset="utf-8"?
 
+[CronjobPart-ezerssimport]
+Scripts[]=ezerssimport.php
+
 [CronjobPart-rssimport]
 Scripts[]=rssimport.php
 
@@ -30,6 +33,6 @@ Scripts[]=rssimport.php
 Scripts[]=ezefetchatomcontent.php
 Scripts[]=ezerefreshhomepagestaticcache.php
 Scripts[]=ezeregenerateautoloads.php
-
+Scripts[]=ezerssimport.php
 
 */ ?>
