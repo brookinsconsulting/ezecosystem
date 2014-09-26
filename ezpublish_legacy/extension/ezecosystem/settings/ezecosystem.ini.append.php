@@ -54,6 +54,10 @@ ClassIDs[]=45
 ClassIdentifiers[]
 ClassIdentifiers[]=forum_topic
 ClassIdentifiers[]=blog_post
+ExcludeAuthorParentIDs[]
+ExcludeAuthorParentIDs[]=14584
+ExcludeAuthorParentIDs[]=4258
+ExcludeAuthorParentIDs[]=230
 FetchDepth=4
 
 [TagSidebarSettings]

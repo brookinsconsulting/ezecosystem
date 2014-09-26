@@ -4,7 +4,8 @@
 
 {def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
      $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')
-     $sources_list_share_ez_no_forum_node_ids=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')}
+     $sources_list_share_ez_no_forum_node_ids=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')
+     $projects_forum_node_id=ezini('NodeIDSettings', 'ProjectsForumNodeID', 'ezecosystem.ini')}
 
 <div class="class-blog extrainfo">
     <div class="columns-blog float-break">
@@ -31,11 +32,8 @@
 
                                 <div class="attribute-byline">
                                     <p class="date">{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</p>
-                                    <p class="author">
-                                    {if $node.data_map.forum_topic_author.has_content}
-                                        By: {$node.data_map.forum_topic_author.content|autolink}
-                                    {/if}
-                                    </div>
+                                    <p class="author">By: {if $node.parent.node_id|eq( $projects_forum_node_id )}{$node.data_map.forum_topic_author.content|explode('community@ez.no (')|implode('')|explode(')')|implode('')|autolink}{else}{$node.data_map.forum_topic_author.content|autolink}{/if}</p>
+                                </div>
 
                                     {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
 
