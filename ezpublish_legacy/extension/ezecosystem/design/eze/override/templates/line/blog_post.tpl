@@ -3,7 +3,7 @@
 {def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
      $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')
      $blogs_ids_with_iframe_problems=ezini('NodeIDSettings','BlogsWithIframeProblemsNodeIDs','ezecosystem.ini')
-     $exclude_author_parent_node_ids=ezini('NodeIDSettings','ExcludeAuthorParentIDs','ezecosystem.ini')}
+     $exclude_author_parent_node_ids=ezini('HomePageFetchSettings','ExcludeAuthorParentIDs','ezecosystem.ini')}
 
 <div class="content-view-line">
     <div class="class-blog-post float-break">
