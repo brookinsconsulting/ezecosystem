@@ -15,6 +15,9 @@ Scripts[]=staticcache_cleanup.php
 [CronjobPart-indexcontent]
 Scripts[]=indexcontent.php
 
+[CronjobPart-ezefetchsyndicatedcontent]
+Scripts[]=ezefetchsyndicatedcontent.php
+
 [CronjobPart-ezefetchatomcontent]
 Scripts[]=ezefetchatomcontent.php
 
@@ -34,5 +37,6 @@ Scripts[]=ezefetchatomcontent.php
 Scripts[]=ezerefreshhomepagestaticcache.php
 Scripts[]=ezeregenerateautoloads.php
 Scripts[]=ezerssimport.php
+Scripts[]=ezefetchsyndicatedcontent.php
 
 */ ?>

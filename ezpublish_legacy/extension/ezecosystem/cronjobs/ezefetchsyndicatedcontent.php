@@ -1,6 +1,6 @@
 <?php
 /**
- * File containing the ezecosystem fetch syndicated atom content cronjob part
+ * File containing the ezecosystem fetch syndicated content cronjob part
  *
  * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
@@ -9,7 +9,7 @@
  */
 
 // General cronjob part options
-$generatorWorkerScript = './extension/ezecosystem/bin/shell/fetchsyndicatedatomcontent.sh';
+$generatorWorkerScript = './extension/ezecosystem/bin/shell/fetchsyndicatedcontent.sh';
 $currentSiteAccess = $GLOBALS['eZCurrentAccess']['name'];
 $options = $currentSiteAccess;
 $result = '';
