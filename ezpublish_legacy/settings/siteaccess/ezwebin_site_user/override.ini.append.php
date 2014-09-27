@@ -104,6 +104,12 @@ Match[node]=17294
 #Match[class_identifier]=folder
 #Match[node]=17294
 
+[full_release]
+Source=node/view/full.tpl
+MatchFile=full/release.tpl
+Subdir=templates
+Match[class_identifier]=release
+
 [full_folder]
 Source=node/view/full.tpl
 MatchFile=full/folder.tpl

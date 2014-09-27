@@ -425,6 +425,10 @@ overflow: hidden;
 word-wrap: break-word;
 }
 
+div.class-image div.attribute-image img {
+max-width:575px;
+}
+
 div.class-blog div.attribute-byline p.tags {
 display: block;
 }
@@ -439,6 +443,12 @@ div.class-blog-post div.attribute-body.float-break {
 max-width: 575px;
 }
 
+/* eZ Publish Legacy Styles */
 
+#logo-text {
+position: relative;
+top: 50px;
+z-index: 100000;
+}
 
 /* END */

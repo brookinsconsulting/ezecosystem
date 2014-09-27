@@ -37,14 +37,21 @@ EmailReceiver=info@brookinsconsulting.com
 SessionNamePerSiteAccess=disabled
 
 [SiteSettings]
-SiteName=eZecosystem
-SiteURL=ezecosystem.org
+SiteName=eZ Publish Legacy
+SiteURL=eZPublishLegacy.com
 LoginPage=embedded
 AdditionalLoginFormActionURL=http://admin.ezecosystem.org/user/login
+# Which page to show when the root index (/) is accessed
+IndexPage=/content/view/full/17312/
+# What to do when a module does not exists, use either defaultpage or displayerror
+# If defaultpage is used, the DefaultPage will be shown when an error occured
+ErrorHandler=displayerror
+# The default page to show, e.g. after user login this will be used for default redirection
+DefaultPage=/content/view/full/17312/
 MetaDataArray[author]=eZecosystem
 MetaDataArray[copyright]=eZecosystem (except where otherwise noted.)
-MetaDataArray[description]=An eZ Publish Community Planet
-MetaDataArray[keywords]=ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem, blog, cms, publish, e-commerce, content management, development framework, share, echo, eco, syndication, syndicate, feeds, ecosystem, ezecosystem, eZecosystem, mirror
+MetaDataArray[description]=An eZ Publish Download Mirror
+MetaDataArray[keywords]=ezpublish, eZ Publish, eZ, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem, cms, publish, e-commerce, content management, development framework, share, ezpl, ezpublishlegacy, eZ Publish Legacy, downloads, mirror, packages, files
 
 [UserSettings]
 RegistrationEmail=info@brookinsconsulting.com
@@ -52,13 +59,13 @@ RegistrationEmail=info@brookinsconsulting.com
 [SiteAccessSettings]
 RequireUserLogin=false
 RelatedSiteAccessList[]
-RelatedSiteAccessList[]=ezwebin_site_user
+RelatedSiteAccessList[]=ezpl_user
 RelatedSiteAccessList[]=ezwebin_site_admin
-RelatedSiteAccessList[]=eng
 ShowHiddenNodes=false
+PathPrefix=eZ-Publish-Legacy
 
 [DesignSettings]
-SiteDesign=eze
+SiteDesign=ezpl
 AdditionalSiteDesignList[]
 AdditionalSiteDesignList[]=eze
 AdditionalSiteDesignList[]=ezwebin

@@ -39,10 +39,14 @@ EmailReceiver=info@brookinsconsulting.com
 SessionNamePerSiteAccess=disabled
 
 [SiteSettings]
-SiteName=eZ Ecosystem
+SiteName=eZecosystem
 SiteURL=ezecosystem
 LoginPage=embedded
 AdditionalLoginFormActionURL=http://admin.ezecosystem/user/login
+MetaDataArray[author]=eZecosystem
+MetaDataArray[copyright]=eZecosystem (except where otherwise noted.)
+MetaDataArray[description]=An eZ Publish Community Planet
+MetaDataArray[keywords]=ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem, blog, cms, publish, e-commerce, content management, development framework, share, echo, eco, syndication, syndicate, feeds, ecosystem, ezecosystem, eZecosystem, mirror
 
 [UserSettings]
 RegistrationEmail=info@brookinsconsulting.com

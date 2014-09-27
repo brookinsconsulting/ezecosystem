@@ -13,10 +13,14 @@ ShowUsedTemplates=enabled
 EmailReceiver=info@brookinsconsulting.com
 
 [SiteSettings]
-SiteName=eZ Ecosystem - Admin
+SiteName=eZecosystem - Admin
 SiteURL=admin.ezecosystem.org
 DefaultPage=content/dashboard
 LoginPage=custom
+MetaDataArray[author]=eZecosystem
+MetaDataArray[copyright]=eZecosystem (except where otherwise noted.)
+MetaDataArray[description]=An eZ Publish Community Planet
+MetaDataArray[keywords]=ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem, blog, cms, publish, e-commerce, content management, development framework, share, echo, eco, syndication, syndicate, feeds, ecosystem, ezecosystem, eZecosystem, mirror
 
 [UserSettings]
 RegistrationEmail=info@brookinsconsulting.com

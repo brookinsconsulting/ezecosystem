@@ -62,13 +62,10 @@ SiteList[]=ezwebin_site_admin
 SiteList[]=eze_user_local
 SiteList[]=eze_user_local_nocache
 SiteList[]=eze_user_admin
+SiteList[]=ezpl_user
+SiteList[]=ezpl_user_local
 SiteList[]=eng
 RootNodeDepth=1
-SiteName=eZecosystem
-MetaDataArray[author]=eZecosystem
-MetaDataArray[copyright]=eZecosystem (except where otherwise noted.)
-MetaDataArray[description]=An eZ Publish Community Planet
-MetaDataArray[keywords]=ezpublish, eZ Publish, eZ, blogs, bloggers, planet, tag, community, ecosystem, developer, ezcommunity, ezecosystem, eZ Community, eZ Ecosystem, blog, cms, publish, e-commerce, content management, development framework, share, echo, eco, syndication, syndicate, feeds, ecosystem, ezecosystem, eZecosystem
 
 [UserSettings]
 LogoutRedirect=/
@@ -83,6 +80,8 @@ AvailableSiteAccessList[]=eze_admin_local
 AvailableSiteAccessList[]=eze_user_nocache
 AvailableSiteAccessList[]=eze_user_local_nocache
 AvailableSiteAccessList[]=eng
+AvailableSiteAccessList[]=ezpl_user
+AvailableSiteAccessList[]=ezpl_user_local
 MatchOrder=host
 HostMatchMapItems[]
 HostMatchMapItems[]=ezecosystem.org;ezwebin_site_user
@@ -96,6 +95,9 @@ HostMatchMapItems[]=cache.ezecosystem;eze_user_local
 HostMatchMapItems[]=nocache.ezecosystem;eze_user_local_nocache
 HostMatchMapItems[]=ezecosystem.ssd.thinkcreativeinternal.net;ezwebin_site_user
 HostMatchMapItems[]=admin.ezecosystem.ssd.thinkcreativeinternal.net;ezwebin_site_admin
+HostMatchMapItems[]=ezpublishlegacy.com;ezpl_user
+HostMatchMapItems[]=www.ezpublishlegacy.com;ezpl_user
+HostMatchMapItems[]=ezpublishlegacy;ezpl_user_local
 #HostMatchMapItems[]=ezecosystem.com;ezwebin_site_user
 #HostMatchMapItems[]=www.ezecosystem.com;ezwebin_site_user
 #HostMatchMapItems[]=admin.ezecosystem.com;ezwebin_site_admin
