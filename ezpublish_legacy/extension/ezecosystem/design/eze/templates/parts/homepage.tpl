@@ -134,7 +134,7 @@
             {def $notifications=fetch( 'content', 'list', hash( 'parent_node_id', $notifications_node_id,
                                                                 'class_filter_type', 'include',
                                                                 'class_filter_array', $notifications_class,
-                                                                'order_by', array( 'published', false() ),
+                                                                'sort_by', array( 'published', false() ),
                                                                 'limit', 1 ) )}
 
             {if and( $notifications|is_array, or( $node.node_id|eq( $mirror_node_id ), $node.node_id|eq( $root_node_id ) ) )}
