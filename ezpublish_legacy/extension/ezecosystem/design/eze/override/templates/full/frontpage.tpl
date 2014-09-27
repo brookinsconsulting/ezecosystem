@@ -77,7 +77,7 @@
             <div class="left-column" style="">
             <!-- Content: START -->
 
-{if $node.node_id|ne( $github_node_id )}
+{if $node.node_id|eq( $github_node_id )}
 {def $home_page_fetch_classes=ezini('GitHomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')}
 {include uri="design:parts/homepage.tpl" home_page_root_node_id=$github_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini') blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
 {else}
