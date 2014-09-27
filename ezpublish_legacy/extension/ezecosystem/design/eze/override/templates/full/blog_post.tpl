@@ -28,7 +28,7 @@
 
                                 <div class="attribute-byline">
                                     <p class="date">{$node.data_map.publication_date.content.timestamp|l10n(shortdatetime)}</p>
-                                    {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id ) )}<p class="author">{$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
+                                    {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id )|not )}<p class="author">{$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
                                     {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
 
 				    {if $$node.data_map.tags.has_content}
