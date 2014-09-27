@@ -10,6 +10,9 @@ fi
 # Refresh static cache of the root node
 ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess / ' ';
 
+# Refresh static cache of the /GitHub node
+./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /GitHub ' ';
+
 # Refresh static cache of the /Issues node
 ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Issues ' ';
 
@@ -19,7 +22,5 @@ fi
 # Refresh static cache of the /Mirror/Share.ez.no-Forums node and it's children
 ./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /Mirror/Share.ez.no-Forums;
 
-# Refresh static cache of the /GitHub node
-./extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh $siteaccess /GitHub ' ';
 
 exit;
