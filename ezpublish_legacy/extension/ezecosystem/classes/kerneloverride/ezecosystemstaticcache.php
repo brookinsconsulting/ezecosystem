@@ -184,8 +184,10 @@ class eZecosystemStaticCache implements ezpStaticCache
      *
      * @param array $nodeList An array with node entries, each entry is either the node ID or an associative array.
      */
-    public function generateNodeListCache( $nodeList, $delay = false )
+    public function generateNodeListCache( $nodeList )
     {
+        $delay = ( eZINI::instance( 'staticcache.ini' )->variable( 'CacheSettings', 'CronjobCacheClear' ) == 'enabled' );
+
         /*
         echo "\n\nNodeList:<br />\n\n";
         print_r($nodeList); //die();
@@ -395,6 +397,8 @@ class eZecosystemStaticCache implements ezpStaticCache
             $dirs[] = $this->buildCacheDirPath( $cachedSiteAccess );
         }
 
+        // print_r( $dirs );
+
         foreach ( $dirs as $dirParts )
         {
             foreach ( $dirParts as $dirPart )
@@ -431,6 +435,7 @@ class eZecosystemStaticCache implements ezpStaticCache
 
                         if ( $delay )
                         {
+                             // echo "\nDelay Action Url: "; print_r($fileName); echo "\n";
                             $this->addAction( 'store', array( $file, $fileName ) );
                         }
                         else
@@ -607,6 +612,8 @@ class eZecosystemStaticCache implements ezpStaticCache
      */
     static function executeActions()
     {
+        // echo "\nHit eZecosystemStaticCache::executeActions\n";
+
         if ( empty( self::$actionList ) )
         {
             return;
@@ -615,8 +622,12 @@ class eZecosystemStaticCache implements ezpStaticCache
         $fileContentCache = array();
         $doneDestList = array();
 
+        // echo "\nHit eZecosystemStaticCache::executeActions::pastActionListTest\n";
+
         $ini = eZINI::instance( 'staticcache.ini');
         $clearByCronjob = ( $ini->variable( 'CacheSettings', 'CronjobCacheClear' ) == 'enabled' );
+
+        // echo "\nHit eZecosystemStaticCache::executeActions::pastIniSettingEnabledTest\n";
 
         if ( $clearByCronjob )
         {
