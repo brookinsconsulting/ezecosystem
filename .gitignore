@@ -24,6 +24,7 @@
 .settings/
 
 ### eZp related //start
+ezpublish_legacy/downloads
 ezpublish_legacy/var
 ezpublish_legacy/extension/ezfind/java/logs
 ezpublish_legacy/sitemap_ezwebin_site_user.xml
