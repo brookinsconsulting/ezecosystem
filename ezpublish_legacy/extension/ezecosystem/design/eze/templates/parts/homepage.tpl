@@ -1,7 +1,11 @@
 {if and( $root_node_id|is_set|not, $home_page_root_node_id|is_set|not )}
 {def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
      $home_page_root_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
-     $home_page_fetch_classes=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')}
+     $home_page_fetch_classes=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
+     $home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini')}
+{/if}
+{if $github_node_id|is_set|not}
+{def $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
 {/if}
 {def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
@@ -81,9 +85,31 @@
                 {set $home_page_fetch_classes = $home_page_fetch_classes|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
             {/if *}
 
+            {if $home_page_root_node_id|eq( $github_node_id )}
+            {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $mirror_node_id,
+                                                                        'class_filter_type', 'include',
+                                                                        'class_filter_array', $home_page_fetch_classes,
+                                                                        'attribute_filter', array( array( 'section', '=', '7' ) ),
+                                                                        'language', $home_page_post_fetch_language,
+                                                                        'ignore_visibility', false(),
+							                'depth', $home_page_fetch_depth ) )}
+
+            {def $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                                                             'class_filter_type', 'include',
+                                                             'class_filter_array', $home_page_fetch_classes,
+                                                             'attribute_filter', array( 'and', array( 'section', '=', '7' ), array( 'path', 'not_like', $home_page_exclude_parent_content ) ),
+                                                             'offset', $view_parameters.offset,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
+                                                             'limit', $page_limit ) )}
+            {else}
             {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $current_node.node_id,
                                                                         'class_filter_type', 'include',
                                                                         'class_filter_array', $home_page_fetch_classes,
+                                                                        'attribute_filter', array( array( 'section', '!=', '7' ) ),
                                                                         'language', $home_page_post_fetch_language,
                                                                         'ignore_visibility', false(),
 							                'depth', $home_page_fetch_depth ) )}
@@ -96,13 +122,13 @@
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
-                                                             'attribute_filter', array( array( 'path', 'not_like', '*/220/*' ) ),
+                                                             'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'path', 'not_like', $home_page_exclude_parent_content ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
                                                              'ignore_visibility', false(),
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
-
+            {/if}
             <div class="homepage-head">
             {* Site notice area *}
             {def $notifications=fetch( 'content', 'list', hash( 'parent_node_id', $notifications_node_id,

@@ -90,6 +90,13 @@ MatchFile=full/flash.tpl
 Subdir=templates
 Match[class_identifier]=flash
 
+[full_folder_github]
+Source=node/view/full.tpl
+MatchFile=full/folder_github.tpl
+Subdir=templates
+#Match[class_identifier]=folder
+Match[node]=17294
+
 [full_folder]
 Source=node/view/full.tpl
 MatchFile=full/folder.tpl

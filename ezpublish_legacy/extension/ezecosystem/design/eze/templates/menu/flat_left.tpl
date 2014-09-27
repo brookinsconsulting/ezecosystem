@@ -1,3 +1,5 @@
+{def $home_page_root_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
+     $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
 <div class="border-ml"><div class="border-mr"><div class="border-mc">
@@ -7,13 +9,24 @@
     <h4><a href={if eq( $ui_context, 'browse' )}{concat("content/browse/", $pagedata.path_array[$left_menu_depth].node_id)|ezurl}{else}{$left_menu_root_url|ezurl}{/if}>{$pagedata.path_array[$left_menu_depth].text}</a></h4>
 
 {if ne( $pagedata.class_identifier, 'documentation_page' )}
-    {def $root_node=fetch( 'content', 'node', hash( 'node_id', $pagedata.path_array[$left_menu_depth].node_id ) )
-         $left_menu_items = fetch( 'content', 'list', hash( 'parent_node_id', $root_node.node_id,
+    {def $root_node=fetch( 'content', 'node', hash( 'node_id', $pagedata.path_array[$left_menu_depth].node_id ) )}
+
+    {if $current_node_id|eq( $github_node_id )}
+    {def $left_menu_items = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
+                                                            'sort_by', array( 'modified_subnode', false() ),
+                                                            'attribute_filter', array( array( 'section', '=', '7' ) ),
+                                                            'load_data_map', false(),
+                                                            'class_filter_type', 'include',
+                                                            'class_filter_array', ezini( 'MenuContentSettings', 'LeftIdentifierList', 'menu.ini' ) ) )}
+    {else}
+    {def $left_menu_items = fetch( 'content', 'list', hash( 'parent_node_id', $root_node.node_id,
                                                             'sort_by', array( 'modified_subnode', false() ),
                                                             'load_data_map', false(),
                                                             'class_filter_type', 'include',
-                                                            'class_filter_array', ezini( 'MenuContentSettings', 'LeftIdentifierList', 'menu.ini' ) ) )
-         $left_menu_items_count = $left_menu_items|count()
+                                                            'class_filter_array', ezini( 'MenuContentSettings', 'LeftIdentifierList', 'menu.ini' ) ) )}
+    {/if}
+
+    {def $left_menu_items_count = $left_menu_items|count()
          $li_class = array()
          $a_class = array()
          $current_node_in_path_2 = first_set( $pagedata.path_array[$left_menu_depth|inc].node_id,  0 )

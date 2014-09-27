@@ -10,6 +10,7 @@ IssuesNodeID=4198
 CommunityIssuesNodeID=9181
 ProjectsForumNodeID=14584
 ProjectsNewNodeID=230
+GitHubNodeID=17294
 NotificationNodeID=14353
 SidebarCommunityNodeID=969
 SidebarPlanetariumNodeID=970
@@ -58,7 +59,13 @@ ExcludeAuthorParentIDs[]
 ExcludeAuthorParentIDs[]=14584
 ExcludeAuthorParentIDs[]=4258
 ExcludeAuthorParentIDs[]=230
+ExcludeParentPathString=*/220/*
+
 FetchDepth=4
+
+[GitHomePageFetchSettings]
+ClassIdentifiers[]
+ClassIdentifiers[]=blog_post
 
 [TagSidebarSettings]
 TagCloudLimit=140
