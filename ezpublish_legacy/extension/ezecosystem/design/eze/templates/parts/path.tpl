@@ -1,4 +1,8 @@
-{if $current_node_id|ne( 2 )}
+{if or( $root_node_id|is_set|not, $github_node_id|is_set|not )}
+{def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
+     $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
+{/if}
+{if and( $current_node_id|ne( $root_node_id ), $current_node_id|ne( $github_node_id ) )}
   <!-- Path content: START -->
   <p>
   {foreach $pagedata.path_array as $path}

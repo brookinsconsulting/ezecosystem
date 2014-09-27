@@ -2,13 +2,14 @@
      $mirror_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
      $blogs_planetarium_id=ezini('NodeIDSettings','SidebarPlanetariumNodeID','ezecosystem.ini')
      $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')
-     $popular_class_ids=ezini('PopularSidebarSettings','ClassIDs','ezecosystem.ini')}
+     $popular_class_ids=ezini('PopularSidebarSettings','ClassIDs','ezecosystem.ini')
+     $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
 
-{* set scope=global persistent_variable=hash('left_menu', false(),
+{set scope=global persistent_variable=hash('left_menu', false(),
                                            'extra_menu', false(),
-                                           'show_path', false())}
+                                           'show_path', true())}
 
-{def $frontpagestyle='noleftcolumn norightcolumn'}
+{* def $frontpagestyle='noleftcolumn norightcolumn'}
 
 {if $node.object.data_map.left_column.has_content}
     {set $frontpagestyle='leftcolumn norightcolumn'}
@@ -76,8 +77,12 @@
             <div class="left-column" style="">
             <!-- Content: START -->
 
+{if $node.node_id|ne( $github_node_id )}
+{def $home_page_fetch_classes=ezini('GitHomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$github_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini') blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{else}
 {include uri="design:parts/homepage.tpl" home_page_root_node_id=$mirror_node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
-
+{/if}
             <!-- Content: END -->
             </div>
         </div>
@@ -96,7 +101,7 @@
             <div class="right-column" style="float:right">
             <!-- Content: START -->
 
-{include uri="design:parts/sources.tpl" mirror_node_id=$mirror_node_id}
+{include uri="design:parts/sources.tpl" mirror_node_id=$mirror_node_id current_node_id=$node.node_id}
 
 {cache-block expiry=172800}
 

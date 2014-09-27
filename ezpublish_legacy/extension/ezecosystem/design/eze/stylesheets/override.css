@@ -419,6 +419,12 @@ overflow: hidden;
 word-wrap: break-word;
 }
 
+div.content-view-line div.class-forum-post div.attribute-header {
+max-width: 575px;
+overflow: hidden;
+word-wrap: break-word;
+}
+
 div.class-blog div.attribute-byline p.tags {
 display: block;
 }
