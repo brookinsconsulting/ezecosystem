@@ -12,19 +12,27 @@ MultiuploadHandlers[]
 
 [FileTypeSettings_folder]
 FileType[]
-FileType[]=*.tar
-FileType[]=*.tar.gz
-FileType[]=*.zip
-FileType[]=*.tar.bz2
+FileType[]=tar
+FileType[]=tar.gz
+FileType[]=tgz
+FileType[]=gz
+FileType[]=bz2
+FileType[]=zip
+FileType[]=tar.bz2
+FileType[]=sit
 FileType[]=*.*
 
 
 [FileTypeSettings_release]
 FileType[]
-FileType[]=*.tar
-FileType[]=*.tar.gz
-FileType[]=*.zip
-FileType[]=*.tar.bz2
+FileType[]=tar
+FileType[]=tar.gz
+FileType[]=tgz
+FileType[]=gz
+FileType[]=bz2
+FileType[]=zip
+FileType[]=tar.bz2
+FileType[]=sit
 FileType[]=*.*
 
 [FileTypeSettings_gallery]
