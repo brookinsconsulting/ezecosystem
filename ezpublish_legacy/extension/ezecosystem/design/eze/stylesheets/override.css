@@ -429,6 +429,10 @@ div.class-image div.attribute-image img {
 max-width:575px;
 }
 
+div.class-image div.caption p {
+max-width:575px;
+}
+
 div.class-blog div.attribute-byline p.tags {
 display: block;
 }
