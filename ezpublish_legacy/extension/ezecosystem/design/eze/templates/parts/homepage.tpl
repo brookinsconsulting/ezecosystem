@@ -105,6 +105,24 @@
                                                              'ignore_visibility', false(),
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
+            {elseif $home_page_root_node_id|eq( $mirror_node_id )}
+            {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $mirror_node_id,
+                                                                        'class_filter_type', 'include',
+                                                                        'class_filter_array', $home_page_fetch_classes,
+                                                                        'language', $home_page_post_fetch_language,
+                                                                        'ignore_visibility', false(),
+							                'depth', $home_page_fetch_depth ) )}
+
+            {def $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                                                             'class_filter_type', 'include',
+                                                             'class_filter_array', $home_page_fetch_classes,
+                                                             'offset', $view_parameters.offset,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
+                                                             'limit', $page_limit ) )}
             {else}
             {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $current_node.node_id,
                                                                         'class_filter_type', 'include',
