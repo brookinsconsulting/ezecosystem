@@ -6,7 +6,8 @@ ViewCountThreshold=2
 
 [NodeIDSettings]
 MirrorNodeID=216
-IssuesNodeID=4198
+IssuesNodeID=17566
+eZPublishIssuesNodeID=4198
 CommunityIssuesNodeID=9181
 ProjectsForumNodeID=14584
 ProjectsNewNodeID=230
@@ -66,6 +67,12 @@ FetchDepth=4
 [GitHomePageFetchSettings]
 ClassIdentifiers[]
 ClassIdentifiers[]=blog_post
+
+[MirrorHomePageFetchSettings]
+ClassIdentifiers[]
+ClassIdentifiers[]=blog_post
+ClassIdentifiers[]=issue_post
+ClassIdentifiers[]=forum_topic
 
 [TagSidebarSettings]
 TagCloudLimit=140

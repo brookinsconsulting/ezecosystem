@@ -3,7 +3,8 @@
      $blogs_planetarium_id=ezini('NodeIDSettings','SidebarPlanetariumNodeID','ezecosystem.ini')
      $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')
      $popular_class_ids=ezini('PopularSidebarSettings','ClassIDs','ezecosystem.ini')
-     $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
+     $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )
+     $issues_node_id=ezini( 'NodeIDSettings', 'IssuesNodeID', 'ezecosystem.ini' )}
 
 {set scope=global persistent_variable=hash('left_menu', false(),
                                            'extra_menu', false(),
@@ -78,10 +79,14 @@
             <!-- Content: START -->
 
 {if $node.node_id|eq( $github_node_id )}
-{def $home_page_fetch_classes=ezini('GitHomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')}
-{include uri="design:parts/homepage.tpl" home_page_root_node_id=$github_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini') blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{def $home_page_fetch_classes=ezini('GitHomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
+     $home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini')}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$github_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=$home_page_exclude_parent_content current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{elseif $node.node_id|eq( $issues_node_id )}
+{def $home_page_fetch_classes=array( 'issue_post' )}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$issues_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=$home_page_exclude_parent_content current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
 {else}
-{include uri="design:parts/homepage.tpl" home_page_root_node_id=$mirror_node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$mirror_node_id current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
 {/if}
             <!-- Content: END -->
             </div>

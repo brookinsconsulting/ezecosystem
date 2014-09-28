@@ -3,7 +3,8 @@
      $blogs_planetarium_id=ezini('NodeIDSettings','SidebarPlanetariumNodeID','ezecosystem.ini')
      $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')}
 {/if}
-{def $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $node.node_id ) )}
+{def $home_page_fetch_classes=ezini('MirrorHomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
+     $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $node.node_id ) )}
 
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
@@ -38,7 +39,7 @@
 
         {if $node.object.data_map.show_children.data_int}
 
-{include uri="design:parts/homepage.tpl" home_page_root_node_id=$home_page_root_node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$home_page_root_node_id home_page_fetch_classes=$home_page_fetch_classes current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
 
 {*
             {def $page_limit = 10

@@ -1,13 +1,13 @@
-{if and( $root_node_id|is_set|not, $home_page_root_node_id|is_set|not )}
-{def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
-     $home_page_root_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
+{if $home_page_root_node_id|is_set|not}
+{def $home_page_root_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
      $home_page_fetch_classes=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
      $home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini')}
 {/if}
 {if $github_node_id|is_set|not}
 {def $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
 {/if}
-{def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
+{def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
+     $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $home_page_fetch_depth=ezini('HomePageFetchSettings','FetchDepth','ezecosystem.ini')
      $page_limit = 30
@@ -29,7 +29,7 @@
 {def $currentPageUri=concat( '/', $node.url )}
 {/if}
 
-{*   $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $home_page_root_node_id) ) *}
+{* $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $home_page_root_node_id) ) *}
 
 <div class="border-box">
 <div class="border-tl"><div class="border-tr"><div class="border-tc"></div></div></div>
@@ -105,7 +105,7 @@
                                                              'ignore_visibility', false(),
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
-            {elseif $home_page_root_node_id|eq( $mirror_node_id )}
+            {elseif $current_node_id|eq( $mirror_node_id )}
             {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $mirror_node_id,
                                                                         'class_filter_type', 'include',
                                                                         'class_filter_array', $home_page_fetch_classes,

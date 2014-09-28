@@ -90,6 +90,20 @@ MatchFile=full/flash.tpl
 Subdir=templates
 Match[class_identifier]=flash
 
+[full_folder_issues_blog]
+Source=node/view/full.tpl
+MatchFile=full/blog.tpl
+Subdir=templates
+Match[class_identifier]=folder
+Match[node]=17566
+
+#[full_folder_issues_frontpage]
+#Source=node/view/full.tpl
+#MatchFile=full/frontpage.tpl
+#Subdir=templates
+#Match[class_identifier]=folder
+#Match[node]=17386
+
 [full_folder_github_frontpage]
 Source=node/view/full.tpl
 MatchFile=full/frontpage.tpl
