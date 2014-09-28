@@ -54,7 +54,7 @@
                                       {$node.data_map.blog_post_description_text_block.content}
                                     {/if}
                                 {else}
-                                    {$node.data_map.title.content}
+                                    {$node.data_map.title.content|html_entity_decode|wash}
                                 {/if}
 				</div>
 
