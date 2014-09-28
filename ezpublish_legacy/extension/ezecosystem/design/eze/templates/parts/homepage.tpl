@@ -138,7 +138,7 @@
                                                                 'limit', 1 ) )}
 
             {if and( $notifications|is_array, or( $node.node_id|eq( $mirror_node_id ), $node.node_id|eq( $root_node_id ) ) )}
-            <div style="padding-bottom: 10px;">
+            <div class="notification-container">
             {foreach $notifications as $notification}
             <hr />
             {$notification.data_map.intro.content.output.output_text}

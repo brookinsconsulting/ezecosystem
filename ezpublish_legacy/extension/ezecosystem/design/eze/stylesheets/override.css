@@ -400,6 +400,10 @@ width: 200px;
 width: 210px;
 }
 
+.notification-container {
+padding-bottom: 10px;
+}
+
 div.attribute-url span.link a {
 float:right;
 margin-right: 10px;
