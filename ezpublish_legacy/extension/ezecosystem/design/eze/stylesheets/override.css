@@ -399,6 +399,10 @@ width: 200px;
 width: 210px;
 }
 
+div.content-view-line div.class-blog-post.float-break div.attribute-body.float-break {
+word-wrap: break-word;
+}
+
 div.class-blog-post.float-break div.attribute-header {
 word-wrap: break-word;
 }
@@ -425,17 +429,11 @@ overflow: hidden;
 word-wrap: break-word;
 }
 
-div.class-image div.attribute-image img {
-max-width:575px;
-}
-
-div.class-image div.caption p {
-max-width:575px;
-}
-
 div.class-blog div.attribute-byline p.tags {
 display: block;
 }
+
+
 
 /* derick's blog does not constrain picture img sizes with html */
 
@@ -445,6 +443,16 @@ max-width: 575px;
 
 div.class-blog-post div.attribute-body.float-break {
 max-width: 575px;
+}
+
+/* ezsystem's blog does not constrain image or caption html */
+
+div.class-image div.attribute-image img {
+max-width:575px;
+}
+
+div.class-image div.caption p {
+max-width:575px;
 }
 
 /* eZ Publish Legacy Styles */
