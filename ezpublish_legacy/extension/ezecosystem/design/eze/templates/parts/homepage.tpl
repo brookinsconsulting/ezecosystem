@@ -6,8 +6,7 @@
 {if $github_node_id|is_set|not}
 {def $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
 {/if}
-{def $root_node_id=ezini('TreeMenu','RootNodeID','contentstructuremenu.ini')
-     $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
+{def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $home_page_fetch_depth=ezini('HomePageFetchSettings','FetchDepth','ezecosystem.ini')
      $page_limit = 30

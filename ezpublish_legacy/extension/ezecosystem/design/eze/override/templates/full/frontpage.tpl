@@ -86,7 +86,8 @@
 {def $home_page_fetch_classes=array( 'issue_post' )}
 {include uri="design:parts/homepage.tpl" home_page_root_node_id=$issues_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=$home_page_exclude_parent_content current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
 {else}
-{include uri="design:parts/homepage.tpl" home_page_root_node_id=$mirror_node_id current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{def $home_page_fetch_classes=ezini('HomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$mirror_node_id home_page_fetch_classes=$home_page_fetch_classes current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
 {/if}
             <!-- Content: END -->
             </div>
