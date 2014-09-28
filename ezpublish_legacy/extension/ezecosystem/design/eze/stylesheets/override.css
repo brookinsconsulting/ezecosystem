@@ -462,7 +462,8 @@ div.class-image div.attribute-image img {
 max-width:575px;
 }
 
-div.class-image div.caption p {
+div.class-image div.attribute-caption {
+width:575px;
 max-width:575px;
 }
 
