@@ -1,38 +1,22 @@
 <?php
-//
-// ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
-// SOFTWARE NAME: ezecosystem
-// SOFTWARE RELEASE: 1.0.0
-// COPYRIGHT NOTICE: Copyright (C) 1999-2010 Brookins Consulting
-// SOFTWARE LICENSE: GNU General Public License v2.0 (or later)
-// NOTICE: >
-//   This program is free software; you can redistribute it and/or
-//   modify it under the terms of version 2.0  of the GNU General
-//   Public License as published by the Free Software Foundation.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//
-//   You should have received a copy of version 2.0 of the GNU General
-//   Public License along with this program; if not, write to the Free
-//   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-//   MA 02110-1301, USA.
-//
-//
-// ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
-//
+/**
+ * File containing the ezecosystem copyright information file
+ *
+ * @copyright Copyright (C) 1999 - 2014 Brookins Consutling and 2007 Damien POBEL
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
+ * @version //autogentag//
+ * @package ezecosystem
+ */
 
 class ezecosystemInfo
 {
     static function info()
     {
         return array( 'Name' => 'eZ Ecosystem : Website Design and Functionality',
-                      'Version' => '0.5.1',
+                      'Version' => '0.5.2',
                       'Copyright' => 'Copyright (C) 1999 - 2014 Brookins Consulting',
                       'License' => 'GNU General Public License'
-                     );
+                    );
     }
 }
 
