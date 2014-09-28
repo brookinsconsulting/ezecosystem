@@ -1,10 +1,13 @@
 <?php /* #?ini charset="utf-8"?
 
 [StylesheetSettings]
-SiteCSS=var/storage/packages/eZ-systems/ezwebin_design_grey/files/default/file/site-colors.css
-ClassesCSS=var/storage/packages/eZ-systems/ezwebin_design_grey/files/default/file/classes-colors.css
+SiteCSS=extension/ezecosystem/design/eze/stylesheets/site-colors.css
+ClassesCSS=extension/ezecosystem/design/eze/stylesheets/classes-colors.css
 CSSFileList[]
+#FrontendCSSFileList[]=ezecosystem.css
+#FrontendCSSFileList[]=override.css
 
 [JavaScriptSettings]
 JavaScriptList[]=insertmedia.js
+
 */ ?>
