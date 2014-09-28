@@ -34,12 +34,14 @@
 
     {if $node.data_map.short_description.has_content}
     <div class="attribute-{$node.data_map.short_description.contentclass_attribute_identifier}">
+        <a name="short_description"></a>
         {attribute_view_gui attribute=$node.data_map.short_description}
     </div>
     {/if}
 
     {if $node.data_map.requirements.has_content}
     <div class="attribute-{$node.data_map.requirements.contentclass_attribute_identifier}">
+        <a name="requirements"></a>
         <h2>{$node.data_map.requirements.contentclass_attribute_name}</h2>
         {attribute_view_gui attribute=$node.data_map.requirements}
     </div>
@@ -47,6 +49,7 @@
 
     {if $node.data_map.packages.has_content}
     <div class="attribute-{$node.data_map.packages.contentclass_attribute_identifier}">
+        <a name="packages"></a>
         <h2>{$node.data_map.packages.contentclass_attribute_name}</h2>
         {attribute_view_gui attribute=$node.data_map.packages}
     </div>
@@ -54,6 +57,7 @@
 
     {if $node.data_map.extensions.has_content}
     <div class="attribute-{$node.data_map.extensions.contentclass_attribute_identifier}">
+        <a name="extensions"></a>
         <h2>{$node.data_map.extensions.contentclass_attribute_name}</h2>
         {attribute_view_gui attribute=$node.data_map.extensions}
     </div>
@@ -67,6 +71,7 @@
 
     {if $node.data_map.description.has_content}
     <div class="attribute-{$node.data_map.description.contentclass_attribute_identifier}">
+        <a name="description"></a>
         <h2>{$node.data_map.description.contentclass_attribute_name}</h2>
         {attribute_view_gui attribute=$node.data_map.description}
     </div>
@@ -74,6 +79,7 @@
 
     {if $node.data_map.release_notes.has_content}
     <div class="attribute-{$node.data_map.release_notes.contentclass_attribute_identifier}">
+        <a name="release_notes"></a>
         <h2>{$node.data_map.release_notes.contentclass_attribute_name} - {$node.name}</h2>
         {attribute_view_gui attribute=$node.data_map.release_notes}
     </div>
@@ -81,6 +87,7 @@
 
     {if $node.data_map.upgrade_notes.has_content}
     <div class="attribute-{$node.data_map.upgrade_notes.contentclass_attribute_identifier}">
+        <a name="upgrade_notes"></a>
         <h2>{$node.data_map.upgrade_notes.contentclass_attribute_name}</h2>
         {attribute_view_gui attribute=$node.data_map.upgrade_notes}
     </div>
@@ -88,6 +95,7 @@
 
     {if $node.data_map.changelog.has_content}
     <div class="attribute-{$node.data_map.changelog.contentclass_attribute_identifier}">
+        <a name="changelog"></a>
         <h2>{$node.data_map.changelog.contentclass_attribute_name}</h2>
         {attribute_view_gui attribute=$node.data_map.changelog}
     </div>
@@ -95,6 +103,7 @@
 
     {if $node.data_map.tags.has_content}
     <div class="attribute-{$node.data_map.tags.contentclass_attribute_identifier}">
+        <a name="tags"></a>
         <h2>{$node.data_map.tags.contentclass_attribute_name}</h2>
         {attribute_view_gui attribute=$node.data_map.tags}
     </div>
