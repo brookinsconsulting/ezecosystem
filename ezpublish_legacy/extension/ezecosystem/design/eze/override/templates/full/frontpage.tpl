@@ -70,11 +70,11 @@
 {* def $blogs_node = fetch( 'content', 'node', hash( 'node_id', $mirror_node_id ) )
    $rss_export = fetch( 'rss', 'export_by_node', hash( 'node_id', $mirror_node_id) ) *}
 
-<div class="content-view-full" style="width: 100%">
+<div class="content-view-full">
     <div class="class-frontpage {$frontpagestyle}">
-    <div class="columns-frontpage float-break" style="padding: 0 200px 0 246px;">
-        <div class="left-column-position" style="width: 586px; margin-left: -246px;">
-            <div class="left-column" style="">
+    <div class="columns-frontpage float-break">
+        <div class="left-column-position">
+            <div class="left-column">
             <!-- Content: START -->
 
 {if $node.node_id|eq( $github_node_id )}
@@ -97,8 +97,8 @@
             </div>
         </div>
 *}
-        <div class="right-column-position" style="">
-            <div class="right-column" style="float:right">
+        <div class="right-column-position">
+            <div class="right-column">
             <!-- Content: START -->
 
 {include uri="design:parts/sources.tpl" mirror_node_id=$mirror_node_id current_node_id=$node.node_id}
