@@ -86,6 +86,13 @@
     </div>
     {/if}
 
+    {if $node.data_map.changelog.has_content}
+    <div class="attribute-{$node.data_map.changelog.contentclass_attribute_identifier}">
+        <h2>{$node.data_map.changelog.contentclass_attribute_name}</h2>
+        {attribute_view_gui attribute=$node.data_map.changelog}
+    </div>
+    {/if}
+
     {if $node.data_map.tags.has_content}
     <div class="attribute-{$node.data_map.tags.contentclass_attribute_identifier}">
         <h2>{$node.data_map.tags.contentclass_attribute_name}</h2>
