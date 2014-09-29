@@ -126,7 +126,7 @@ ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
 AdditionalObjectIDs[]
-AdditionalObjectIDs[]=65
+#AdditionalObjectIDs[]=65
 
 [release]
 DependentClassIdentifier[]=release
