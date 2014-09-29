@@ -33,6 +33,7 @@ ActiveExtensions[]=nl_cronjobs
 ActiveExtensions[]=ggsysinfo
 ActiveExtensions[]=OWSimpleOperator
 ActiveExtensions[]=bcgooglesitemaps
+ActiveExtensions[]=ezs3upload
 ActiveExtensions[]=sqliimport
 ActiveExtensions[]=ezmultiupload
 ActiveExtensions[]=ezautosave
