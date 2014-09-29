@@ -184,7 +184,8 @@ padding: 0 200px 0 246px;
 }
 
 div.content-view-full div.class-frontpage div.columns-frontpage div.left-column-position {
-width: 586px; margin-left: -246px;
+width: 586px;
+margin-left: -246px;
 }
 
 div.content-view-full div.class-frontpage div.columns-frontpage div.right-column-position {
@@ -485,6 +486,14 @@ max-width:575px;
 div.class-image div.attribute-caption {
 width:575px;
 max-width:575px;
+}
+
+/* symfony blog literal text styles */
+.literal-block {
+width:575px;
+max-width:575px;
+word-wrap: break-word;
+font-size: x-small;
 }
 
 /* eZ Publish Legacy Styles */
