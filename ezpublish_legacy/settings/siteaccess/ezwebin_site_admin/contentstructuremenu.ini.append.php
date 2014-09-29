@@ -13,5 +13,7 @@ ShowClasses[]=gallery
 ShowClasses[]=blog
 ShowClasses[]=forum
 ShowClasses[]=release
+ShowClasses[]=file
+ShowClasses[]=s3_file
 
 */ ?>
