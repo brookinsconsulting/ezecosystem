@@ -117,15 +117,17 @@ ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
 AdditionalObjectIDs[]
 AdditionalObjectIDs[]=65
+AdditionalObjectIDs[]=39345
 
 [issue_post]
 DependentClassIdentifier[]=blog
 DependentClassIdentifier[]=folder
-DependentClassIdentifier[]=frontpage
+#DependentClassIdentifier[]=frontpage
 ClearCacheMethod[]=object
 ClearCacheMethod[]=parent
 ClearCacheMethod[]=relating
 AdditionalObjectIDs[]
+AdditionalObjectIDs[]=39610
 #AdditionalObjectIDs[]=65
 
 [release]
