@@ -33,7 +33,8 @@ issuePostPublicationDate=issue_post/publication_date
 forumTopicPublicationDate=forum_topic/publication_date
 
 [SourcesSidebarSettings]
-FetchLimit=2000
+FetchLimit=900
+GitHubFetchLimit=2000
 ClassIdentifiers[]
 ClassIdentifiers[]=forum_topic
 ClassIdentifiers[]=blog_post

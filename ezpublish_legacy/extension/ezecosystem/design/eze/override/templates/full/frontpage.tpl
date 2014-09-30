@@ -107,7 +107,7 @@
             <div class="right-column">
             <!-- Content: START -->
 
-{include uri="design:parts/sources.tpl" mirror_node_id=$mirror_node_id current_node_id=$node.node_id}
+{include uri="design:parts/sources.tpl" mirror_node_id=$mirror_node_id current_node_id=$node.node_id github_node_id=$github_node_id}
 
 {cache-block expiry=172800}
 
