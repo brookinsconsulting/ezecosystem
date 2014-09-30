@@ -22,7 +22,8 @@ MaxCacheDepth=8
 CachedURLArray[]
 CachedURLArray[]=/
 CachedURLArray[]=/Mirror*
-CachedURLArray[]=/Issues*
+CachedURLArray[]=/GitHub
+CachedURLArray[]=/Issues
 CachedURLArray[]=/About*
 CachedURLArray[]=/About-eZ-Publish*
 CachedURLArray[]=/Contact-Us*
