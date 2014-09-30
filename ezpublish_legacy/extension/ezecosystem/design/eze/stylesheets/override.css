@@ -431,6 +431,10 @@ float:right;
 margin-right: 10px;
 }
 
+div.content-view-line div.class-blog-post.float-break div.attribute-body.float-break img {
+max-width: 575px;
+}
+
 div.content-view-line div.class-blog-post.float-break div.attribute-body.float-break {
 word-wrap: break-word;
 }
