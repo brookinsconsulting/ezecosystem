@@ -8,7 +8,7 @@
      $mirror_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
      $issues_node_id=ezini('NodeIDSettings','IssuesNodeID','ezecosystem.ini')
      $ezp_issues_node_id=ezini('NodeIDSettings','eZPublishIssuesNodeID','ezecosystem.ini')
-     $community_issue_node_id=ezini('NodeIDSettings','CommunityIssuesNodeID','ezecosystem.ini')
+     $community_issues_node_id=ezini('NodeIDSettings','CommunityIssuesNodeID','ezecosystem.ini')
      $blog_post_fetch_publication_date_identifier=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $issue_post_fetch_publication_date_identifier=ezini('AttributeIdentifierSettings','issuePostPublicationDate','ezecosystem.ini')
      $issue_post_class_identifier=ezini('ClassIdentifierSettings','classIssuePost','ezecosystem.ini')
@@ -24,7 +24,7 @@
 
                 {if and( $node.data_map.inactive|is_set, $node.data_map.inactive.content|eq( 1 ) )}<div style="position: relative; top: 10px; padding-bottom: 20px;">Note: <span style="text-decoration: underline;">This blog has become inactive. New content may not be posted in the future.</span></div>{/if}
 
-{if or( $node.node_id|eq( $issues_node_id ), $node.node_id|eq( $community_issue_node_id ) )}
+{if or( $node.node_id|eq( $issues_node_id ), $node.node_id|eq( $ezp_issues_node_id ), $node.node_id|eq( $community_issues_node_id ) )}
   {def $class_attribute_identifier=$issue_post_fetch_publication_date_identifier}
 {else}
   {def $class_attribute_identifier=$blog_post_fetch_publication_date_identifier}
@@ -50,14 +50,14 @@
             {/if}
         {/foreach}
     {/if}
-    {elseif $node.node_id|eq( $community_issue_node_id )}
+    {elseif $node.node_id|eq( $community_issues_node_id )}
     {set $blogs_count = fetch( 'content', 'keyword_count', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                                  'classid', $issue_post_class_identifier,
-                                                                 'parent_node_id', $community_issue_node_id ) )}
+                                                                 'parent_node_id', $community_issues_node_id ) )}
     {if $blogs_count}
         {foreach fetch( 'content', 'keyword', hash( 'alphabet', rawurldecode( $view_parameters.tag ),
                                                     'classid', $issue_post_class_identifier,
-                                                    'parent_node_id', $community_issue_node_id,
+                                                    'parent_node_id', $community_issues_node_id,
                                                     'offset', $view_parameters.offset,
                                                     'sort_by', array( 'attribute', false(), $issue_post_fetch_publication_date_identifier ),
                                                     'limit', $page_limit ) ) as $blog}
@@ -116,13 +116,13 @@
         {/if}
     {else}
         {if $node.node_id|eq( $issues_node_id )}
-        {set $blogs_count = fetch( 'content', 'list_count', hash( 'parent_node_id', $ezp_issues_node_id ) )|sum( fetch( 'content', 'list_count', hash( 'parent_node_id', $community_issue_node_id ) ) )}
+        {set $blogs_count = fetch( 'content', 'list_count', hash( 'parent_node_id', $ezp_issues_node_id ) )|sum( fetch( 'content', 'list_count', hash( 'parent_node_id', $community_issues_node_id ) ) )}
         {else}
         {set $blogs_count = fetch( 'content', 'list_count', hash( 'parent_node_id', $node.node_id ) )}
         {/if}
 
         {if $blogs_count}
-            {if or( $node.node_id|eq( $issues_node_id ), $node.node_id|eq( $community_issue_node_id ) )}
+            {if or( $node.node_id|eq( $issues_node_id ), $node.node_id|eq( $community_issues_node_id ) )}
             {include name=navigator
                      uri='design:navigator/google.tpl'
                      page_uri=$node.url_alias
