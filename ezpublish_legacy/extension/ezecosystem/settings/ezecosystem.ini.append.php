@@ -75,7 +75,7 @@ ClassIdentifiers[]=issue_post
 ClassIdentifiers[]=forum_topic
 
 [TagSidebarSettings]
-TagCloudLimit=140
+TagCloudLimit=60
 TagCloudClassIdentifier=blog_post
 TagCloudExcludeTags[]
 TagCloudExcludeTags[]=greg@granitehorizon.com (Greg McAvoy-Jensen)

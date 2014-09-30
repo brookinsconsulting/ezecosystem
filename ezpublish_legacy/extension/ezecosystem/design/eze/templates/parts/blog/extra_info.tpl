@@ -1,7 +1,9 @@
-{def $tag_cloud_exclude_tags=array( 'greg@granitehorizon.com (Greg McAvoy-Jensen)', 'greg@granitehorizon.com (Robert Rose)',
-                                    'ranitehorizon', '01 May 2008', '08 Mar 2011', '04 Nov 2009', '25 Aug 2009', '30 Sep 2010',
-                                    'Thu', '社区委员会', 'wascou' )
-     $tag_cloud_exclude_strings=array()}
+{def $tag_cloud_limit=ezini('TagSidebarSettings','TagCloudLimit','ezecosystem.ini')
+     $tag_cloud_class_identifier=ezini('TagSidebarSettings','TagCloudClassIdentifier','ezecosystem.ini')
+     $tag_cloud_exclude_tags=ezini('TagSidebarSettings','TagCloudExcludeTags','ezecosystem.ini')
+     $tag_cloud_exclude_strings=array()
+     $ezp_issues_node_id=ezini('NodeIDSettings','eZPublishIssuesNodeID','ezecosystem.ini')
+     $community_issues_node_id=ezini('NodeIDSettings','CommunityIssuesNodeID','ezecosystem.ini')}
 
 {if or( $used_node.node_id|eq( 4198 ), $used_node.node_id|eq( 9181 ) )}
   {def $class_identifier='issue_post'}
@@ -10,11 +12,11 @@
 {/if}
 
 {if or( $current_node.node_id|eq( 4198 ), $current_node.node_id|eq( 9181 ) )}
-{def $tag_list_keyword_limit=150
-     $tag_cloud_limit=190}
+{def $tag_list_keyword_limit=15
+     $tag_cloud_limit=15}
 {else}
-{def $tag_list_keyword_limit=40
-     $tag_cloud_limit=30}
+{def $tag_list_keyword_limit=15
+     $tag_cloud_limit=25}
 {/if}
 
 
@@ -57,7 +59,8 @@
                         </div>
 
                         {include uri='design:parts/blog/calendar.tpl'}
-
+                        {*
+                        Dissabled due to extream production performance requirements
                         <div class="attribute-tags">
                             <h1>{"Tags list"|i18n("design/ezwebin/blog/extra_info")}</h1>
                             <ul>
@@ -67,6 +70,7 @@
                             {set $keywordlist_filtered=$keywordlist_filtered|append( $item )}
                             {/if}
                             {/foreach}
+                            {if $used_node.node_id|eq( $ezp_issues_node_id, $community_issues_node_id )}{set $keywordlist_filtered=$keywordlist_filtered|reverse}{/if}
                             {foreach $keywordlist_filtered as $index => $keyword}
                                 {if $index|le( $tag_list_keyword_limit )}
                                 <li><a href={concat( $used_node.url_alias, "/(tag)/", $keyword.keyword|rawurlencode )|ezurl} title="{$keyword.keyword}">{$keyword.keyword} ({fetch( 'content', 'keyword_count', hash( 'alphabet', $keyword.keyword, 'classid', 'blog_post','parent_node_id', $used_node.node_id ) )})</a></li>
@@ -74,5 +78,6 @@
                             {/foreach}
                             </ul>
                         </div>
+                        *}
 
 {/if}
