@@ -33,6 +33,7 @@ issuePostPublicationDate=issue_post/publication_date
 forumTopicPublicationDate=forum_topic/publication_date
 
 [SourcesSidebarSettings]
+FetchLimit=2000
 ClassIdentifiers[]
 ClassIdentifiers[]=forum_topic
 ClassIdentifiers[]=blog_post
@@ -47,6 +48,7 @@ ShareForumNodeIDs[]=15220
 ShareForumNodeIDs[]=15218
 ShareForumNodeIDs[]=15224
 ShareForumNodeIDs[]=15226
+
 [PopularSidebarSettings]
 ClassIDs[]
 ClassIDs[]=20
@@ -61,7 +63,6 @@ ExcludeAuthorParentIDs[]=14584
 ExcludeAuthorParentIDs[]=4258
 ExcludeAuthorParentIDs[]=230
 ExcludeParentPathString=*/220/*
-
 FetchDepth=4
 
 [GitHomePageFetchSettings]

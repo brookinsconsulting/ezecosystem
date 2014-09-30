@@ -2,7 +2,8 @@
 {def $source_post_objects_unique = array()
      $sources_list_share_ez_no_forum_node_ids=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')
      $blogs_list_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
-     $sources_list_fetch_classes=ezini('SourcesSidebarSettings','ClassIdentifiers','ezecosystem.ini')}
+     $sources_list_fetch_classes=ezini('SourcesSidebarSettings','ClassIdentifiers','ezecosystem.ini')
+     $sources_list_fetch_limit=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')}
 
 {if $current_node_id|eq( $github_node_id )}
 {def $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
@@ -11,14 +12,15 @@
                                                             'attribute_filter', array( array( 'section', '=', '7' ) ),
                                                             'sort_by', array( 'published', false() ),
                                                             'depth', 4,
-                                                            'limit', 1000 ) )}
+                                                            'limit', $sources_list_fetch_limit ) )}
 {else}
 {def $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
                                                             'class_filter_type', 'include',
                                                             'class_filter_array', $blogs_list_fetch_classes,
+                                                            'attribute_filter', array( array( 'section', '!=', '7' ) ),
                                                             'sort_by', array( 'published', false() ),
                                                             'depth', 4,
-                                                            'limit', 1000 ) )}
+                                                            'limit', $sources_list_fetch_limit ) )}
 {/if}
 
 {*
