@@ -139,7 +139,7 @@
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
-                                                             'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'section', '!=', '8' ) ),
+                                                             'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'section', '!=', '9' ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
                                                              'ignore_visibility', false(),
