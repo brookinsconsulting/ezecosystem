@@ -98,7 +98,7 @@
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
-                                                             'attribute_filter', array( 'and', array( 'section', '=', '7' ), array( 'path', 'not_like', $home_page_exclude_parent_content ) ),
+                                                             'attribute_filter', array( array( 'section', '=', '7' ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
                                                              'ignore_visibility', false(),
@@ -139,12 +139,14 @@
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
-                                                             'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'path', 'not_like', $home_page_exclude_parent_content ) ),
+                                                             'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'section', '!=', '8' ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
                                                              'ignore_visibility', false(),
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
+
+            {* Deprecated path exclusion:                    'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'path', 'not_like', '*/220/*' --- "$home_page_exclude_parent_content*" ) ), *}
             {/if}
             <div class="homepage-head">
             {* Site notice area *}
