@@ -31,3 +31,6 @@
 [submodule "ezpublish_legacy/extension/ezs3upload"]
 	path = ezpublish_legacy/extension/ezs3upload
 	url = git@github.com:brookinsconsulting/ezs3upload.git
+[submodule "ezpublish_legacy/extension/git_manager"]
+	path = ezpublish_legacy/extension/git_manager
+	url = git@github.com:brookinsconsulting/git_manager.git
