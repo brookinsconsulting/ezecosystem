@@ -18,11 +18,14 @@
 {def $tag_list_keyword_limit=15
      $tag_cloud_limit=25}
 {/if}
+{def $tag_cloud_results=eztagcloud_new( hash( 'class_identifier', $class_identifier,
+                                              'parent_node_id', $used_node.node_id,
+                                              'limit', $tag_cloud_limit,
+                                              'sort_by', array( 'count' ),
+                                              'post_sort_by', 'keyword',
+                                              'exclude_tags', $tag_cloud_exclude_tags,
+                                              'exclude_strings', $tag_cloud_exclude_strings ) )}
 
-
-                        <div class="attribute-tag-cloud">
-                        <h1>Tags</h1>
-                        <p>
                             {* eztagcloud( hash( 'class_identifier', $class_identifier,
                                                'parent_node_id', $used_node.node_id,
                                                'limit', $tag_cloud_limit,
@@ -32,17 +35,15 @@
                                                    'limit', $tag_cloud_limit,
                                                    'sort_by', array( 'count' ),
                                                    'post_sort_by', 'keyword' ) ) *}
+
+                        {if $tag_cloud_results|ne( '' )}<div class="attribute-tag-cloud">
+                        <h1>Tags</h1>
+                        <p>
                         <ul>
-                            {eztagcloud_new( hash( 'class_identifier', $class_identifier,
-                                                   'parent_node_id', $used_node.node_id,
-                                                   'limit', $tag_cloud_limit,
-                                                   'sort_by', array( 'count' ),
-                                                   'post_sort_by', 'keyword',
-                                                   'exclude_tags', $tag_cloud_exclude_tags,
-                                                   'exclude_strings', $tag_cloud_exclude_strings ) )}
+                            {$tag_cloud_results}
                         </ul>
                         </p>
-                        </div>
+                        </div>{/if}
 
                         <div class="attribute-description">
                             {attribute_view_gui attribute=$used_node.object.data_map.description}
@@ -59,6 +60,7 @@
                         </div>
 
                         {include uri='design:parts/blog/calendar.tpl'}
+
                         {*
                         Dissabled due to extream production performance requirements
                         <div class="attribute-tags">
