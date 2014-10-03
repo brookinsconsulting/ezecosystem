@@ -2,9 +2,9 @@
 /**
  * File containing the eZModule class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -952,8 +952,59 @@ class eZModule
         if ( strlen( $originalURI ) != 0 and
              strlen( $uri ) == 0 )
             $uri = '/';
+
+        $urlComponents = parse_url( $uri );
+        // eZSys::hostname() can contain port if present.
+        // So parsing it with parse_url() as well to only get host.
+        $currentHostname = eZSys::hostname();
+        $currentHostnameParsed = parse_url( $currentHostname, PHP_URL_HOST );
+        $currentHostname = $currentHostnameParsed ? $currentHostnameParsed : $currentHostname;
+        if ( isset( $urlComponents['host'] ) && $urlComponents['host'] !== $currentHostname )
+        {
+            $allowedHosts = $this->getAllowedRedirectHosts();
+            if ( !isset( $allowedHosts[$urlComponents['host']] ) )
+            {
+                // Non-authorized host, return only the URI (without host) + query string and fragment if present.
+                eZDebug::writeError( "Redirection requested on non-authorized host '{$urlComponents['host']}'" );
+                header( $_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden' );
+                echo "Redirection requested on non-authorized host";
+                eZDB::checkTransactionCounter();
+                eZExecution::cleanExit();
+            }
+        }
+
         $this->RedirectURI = $uri;
         $this->setExitStatus( self::STATUS_REDIRECT );
+    }
+
+    /**
+     * Returns the set of hosts that are allowed for absolute redirection
+     *
+     * @return array
+     */
+    private function getAllowedRedirectHosts()
+    {
+        $ini = eZINI::instance();
+        $allowedHosts = array_fill_keys( $ini->variable( 'SiteSettings', 'AllowedRedirectHosts' ), true );
+        // Adding HostMatchMapItems from siteaccess match if present
+        if ( $ini->hasVariable( 'SiteAccessSettings', 'HostMatchMapItems' ) )
+        {
+            $hostMatchMapItems = $ini->variable( 'SiteAccessSettings', 'HostMatchMapItems' );
+            foreach ( $hostMatchMapItems as $item )
+            {
+                list( $host, $sa ) = explode( ';', $item );
+                $allowedHosts[$host] = true;
+            }
+        }
+
+        // Adding HostUriMatchMapItems
+        foreach ( $ini->variable( 'SiteAccessSettings', 'HostUriMatchMapItems' ) as $item )
+        {
+            list( $host, $uri, $sa ) = explode( ';', $item );
+            $allowedHosts[$host] = true;
+        }
+
+        return $allowedHosts;
     }
 
     /**

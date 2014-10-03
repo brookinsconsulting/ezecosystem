@@ -2,9 +2,9 @@
 /**
  * File containing a Io Handler test
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\IO\Tests\Handler;
@@ -12,7 +12,7 @@ namespace eZ\Publish\Core\IO\Tests\Handler;
 use eZ\Publish\Core\IO\Handler\Legacy as Legacy;
 use eZ\Publish\Core\IO\Tests\Handler\Base as BaseHandlerTest;
 use eZ\Publish\Core\MVC\Legacy\Kernel;
-use ezcBaseFile;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Handler test
@@ -49,7 +49,8 @@ class LegacyTest extends BaseHandlerTest
         chdir( $this->legacyPath );
         if ( file_exists( 'var/test' ) )
         {
-            ezcBaseFile::removeRecursive( 'var/test' );
+            $fs = new Filesystem();
+            $fs->remove( 'var/test' );
         }
         /** @var $legacyKernel Kernel */
         $legacyKernel = $_ENV['legacyKernel'];
@@ -69,7 +70,7 @@ class LegacyTest extends BaseHandlerTest
      */
     public function testUpdateMtime()
     {
-        self::markTestIncomplete( "Not supported by Legacy io handler, aka incomplete" );
+        self::markTestSkipped( "Not supported by Legacy io handler" );
     }
 
     /**
@@ -77,6 +78,6 @@ class LegacyTest extends BaseHandlerTest
      */
     public function testUpdateCtime()
     {
-        self::markTestIncomplete( "Not supported by Legacy io handler, aka incomplete" );
+        self::markTestSkipped( "Not supported by Legacy io handler" );
     }
 }

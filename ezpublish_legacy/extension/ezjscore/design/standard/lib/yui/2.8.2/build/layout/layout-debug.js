@@ -769,12 +769,12 @@ version: 2.8.2r1
         */
         STR_EXPAND: 'Click to expand this pane.',
         /**
-            * The class name applied to dynamic tabs while loading.
-            * @property LOADING_CLASSNAME
-            * @type String
-            * @default "disabled"
-            */
-            LOADING_CLASSNAME: 'loading',
+	    * The class name applied to dynamic tabs while loading.
+	    * @property LOADING_CLASSNAME
+	    * @type String
+	    * @default "disabled"
+	    */
+	    LOADING_CLASSNAME: 'loading',
         /**
         * @property browser
         * @description A modified version of the YAHOO.env.ua object
@@ -1364,68 +1364,68 @@ version: 2.8.2r1
             }
             return this.get('parent');
         },
-                /**
+		/**
         * @property loadHandler
         * @description Callback method for the YUI Connection Manager used for load the body using AJAX
         * @type Object
         */
-                loadHandler: {
+		loadHandler: {
             success: function(o) {
-                                this.body.innerHTML = o.responseText;
-                                this.resize (true);
+				this.body.innerHTML = o.responseText;
+				this.resize (true);
             },
             failure: function(o) {
             }
         },
-                /**
+		/**
         * @property dataConnection
         * @description YUI Connection Manager handler
         * @type Object
         */
-                dataConnection: null,
-                /**
+		dataConnection: null,
+		/**
         * @private
         * @property _loading
         * @description During the loading process this variable will be true
         * @type Number
         */
         _loading: false,
-                /**
+		/**
         * @method loadContent
         * @description Loading the content of the unit using the connection manager
         * @return {object} YUI Connection Manager handler
         */
         loadContent: function() {
-                        // load dynamic content unless already loading or loaded and caching
-                        if (YAHOO.util.Connect && this.get('dataSrc') && !this._loading && !this.get('dataLoaded')) {
-                        this._loading = true; 
-                        Dom.addClass(this.body, this.LOADING_CLASSNAME);
-                                this.dataConnection = YAHOO.util.Connect.asyncRequest(
-                            this.get('loadMethod'),
-                            this.get('dataSrc'), 
-                            {
-                                success: function(o) {
-                                    this.loadHandler.success.call(this, o);
-                                    this.set('dataLoaded', true);
-                                    this.dataConnection = null;
-                                    Dom.removeClass(this.body, this.LOADING_CLASSNAME);
-                                                        this._loading = false;
-                                                        this.fireEvent('load');
-                                },
-                                failure: function(o) {
-                                    this.loadHandler.failure.call(this, o);
-                                    this.dataConnection = null;
-                                    Dom.removeClass(this.body, this.LOADING_CLASSNAME);
-                                    this._loading = false;
-                                                        this.fireEvent('loadError', { error: o });
-                                },
-                                scope: this,
-                                timeout: this.get('dataTimeout')
-                            }
-                        );
-                                return this.dataConnection;
-                }
-                        return false;
+			// load dynamic content unless already loading or loaded and caching
+			if (YAHOO.util.Connect && this.get('dataSrc') && !this._loading && !this.get('dataLoaded')) {
+		        this._loading = true; 
+		        Dom.addClass(this.body, this.LOADING_CLASSNAME);
+				this.dataConnection = YAHOO.util.Connect.asyncRequest(
+		            this.get('loadMethod'),
+		            this.get('dataSrc'), 
+		            {
+		                success: function(o) {
+		                    this.loadHandler.success.call(this, o);
+		                    this.set('dataLoaded', true);
+		                    this.dataConnection = null;
+		                    Dom.removeClass(this.body, this.LOADING_CLASSNAME);
+							this._loading = false;
+							this.fireEvent('load');
+		                },
+		                failure: function(o) {
+		                    this.loadHandler.failure.call(this, o);
+		                    this.dataConnection = null;
+		                    Dom.removeClass(this.body, this.LOADING_CLASSNAME);
+		                    this._loading = false;
+							this.fireEvent('loadError', { error: o });
+		                },
+		                scope: this,
+		                timeout: this.get('dataTimeout')
+		            }
+		        );
+				return this.dataConnection;
+	        }
+			return false;
         },
         /**
         * @private
@@ -2114,44 +2114,44 @@ version: 2.8.2r1
                     }
                 }
             });
-                        /**
-                 * The unit data source, used for loading content dynamically.
-                 * @attribute dataSrc
-                 * @type String
-                 */
-                this.setAttributeConfig('dataSrc', {
-                    value: attr.dataSrc
-                });
-                /**
-                 * The method to use for the data request.
-                 * @attribute loadMethod
-                 * @type String
-                 * @default "GET"
-                 */
-                this.setAttributeConfig('loadMethod', {
-                    value: attr.loadMethod || 'GET',
-                    validator: YAHOO.lang.isString
-                });     
-                /**
-                 * Whether or not any data has been loaded from the server.
-                 * @attribute dataLoaded
-                 * @type Boolean
-                 */        
-                this.setAttributeConfig('dataLoaded', {
-                    value: false,
-                    validator: YAHOO.lang.isBoolean,
-                    writeOnce: true
-                });
-                /**
-                 * Number if milliseconds before aborting and calling failure handler.
-                 * @attribute dataTimeout
-                 * @type Number
-                 * @default null
-                 */
-                this.setAttributeConfig('dataTimeout', {
-                    value: attr.dataTimeout || null,
-                    validator: YAHOO.lang.isNumber
-                });
+			/**
+	         * The unit data source, used for loading content dynamically.
+	         * @attribute dataSrc
+	         * @type String
+	         */
+	        this.setAttributeConfig('dataSrc', {
+	            value: attr.dataSrc
+	        });
+	        /**
+	         * The method to use for the data request.
+	         * @attribute loadMethod
+	         * @type String
+	         * @default "GET"
+	         */
+	        this.setAttributeConfig('loadMethod', {
+	            value: attr.loadMethod || 'GET',
+	            validator: YAHOO.lang.isString
+	        });	
+	        /**
+	         * Whether or not any data has been loaded from the server.
+	         * @attribute dataLoaded
+	         * @type Boolean
+	         */        
+	        this.setAttributeConfig('dataLoaded', {
+	            value: false,
+	            validator: YAHOO.lang.isBoolean,
+	            writeOnce: true
+	        });
+	        /**
+	         * Number if milliseconds before aborting and calling failure handler.
+	         * @attribute dataTimeout
+	         * @type Number
+	         * @default null
+	         */
+	        this.setAttributeConfig('dataTimeout', {
+	            value: attr.dataTimeout || null,
+	            validator: YAHOO.lang.isNumber
+	        });
         },
         /**
         * @private

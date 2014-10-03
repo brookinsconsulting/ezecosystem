@@ -2,30 +2,25 @@
 /**
  * File containing the MediaTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content\FieldValue\Converter;
 
 use eZ\Publish\Core\FieldType\Media\Type as MediaType;
-use eZ\Publish\Core\FieldType\Media\Value as MediaTypeValue;
 use eZ\Publish\Core\FieldType\FieldSettings;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
-use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
 use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter\Media as MediaTypeConverter;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition as PersistenceFieldDefinition;
 use eZ\Publish\SPI\Persistence\Content\FieldTypeConstraints;
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\Core\IO\Handler\InMemory as InMemoryIOHandler;
-use eZ\Publish\Core\Persistence\InMemory\Handler as InMemoryPersistenceHandler;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Test case for MediaType converter in Legacy storage
  */
-class MediaTest extends \PHPUnit_Framework_TestCase
+class MediaTest extends PHPUnit_Framework_TestCase
 {
     protected $converter;
 

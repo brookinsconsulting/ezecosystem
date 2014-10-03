@@ -2,9 +2,9 @@
 /**
  * File containing the SectionService class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client;
@@ -17,7 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 
 use eZ\Publish\Core\REST\Common\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\REST\Common\Exceptions\ForbiddenException;
-use eZ\Publish\Core\REST\Common\UrlHandler;
+use eZ\Publish\Core\REST\Common\RequestParser;
 use eZ\Publish\Core\REST\Common\Input\Dispatcher;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
 use eZ\Publish\Core\REST\Common\Message;
@@ -47,22 +47,22 @@ class SectionService implements APISectionService, Sessionable
     private $outputVisitor;
 
     /**
-     * @var \eZ\Publish\Core\REST\Common\UrlHandler
+     * @var \eZ\Publish\Core\REST\Common\RequestParser
      */
-    private $urlHandler;
+    private $requestParser;
 
     /**
      * @param \eZ\Publish\Core\REST\Client\HttpClient $client
      * @param \eZ\Publish\Core\REST\Common\Input\Dispatcher $inputDispatcher
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
+     * @param \eZ\Publish\Core\REST\Common\RequestParser $requestParser
      */
-    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, UrlHandler $urlHandler )
+    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, RequestParser $requestParser )
     {
         $this->client          = $client;
         $this->inputDispatcher = $inputDispatcher;
         $this->outputVisitor   = $outputVisitor;
-        $this->urlHandler      = $urlHandler;
+        $this->requestParser   = $requestParser;
     }
 
     /**
@@ -101,7 +101,7 @@ class SectionService implements APISectionService, Sessionable
 
         $result = $this->client->request(
             'POST',
-            $this->urlHandler->generate( 'sections' ),
+            $this->requestParser->generate( 'sections' ),
             $inputMessage
         );
 
@@ -183,7 +183,7 @@ class SectionService implements APISectionService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'sections' ),
+            $this->requestParser->generate( 'sections' ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'SectionList' ) )
             )
@@ -205,7 +205,7 @@ class SectionService implements APISectionService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'sectionByIdentifier', array( 'section' => $sectionIdentifier ) ),
+            $this->requestParser->generate( 'sectionByIdentifier', array( 'section' => $sectionIdentifier ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'SectionList' ) )
             )
@@ -250,7 +250,7 @@ class SectionService implements APISectionService, Sessionable
         $inputMessage->headers['Accept'] = $this->outputVisitor->getMediaType( 'Content' );
         $inputMessage->headers['X-HTTP-Method-Override'] = 'PATCH';
 
-        $response = $this->client->request(
+        $this->client->request(
             'POST',
             $contentInfo->id,
             $inputMessage
@@ -259,7 +259,7 @@ class SectionService implements APISectionService, Sessionable
         // Will throw exception on error, no return value for method
         // @todo: Deactivated due to missing implementation of visitor for
         // content on the server side.
-        // $result = $this->inputDispatcher->parse( $response );
+        // Should be: $result = $this->inputDispatcher->parse( $response );
     }
 
     /**

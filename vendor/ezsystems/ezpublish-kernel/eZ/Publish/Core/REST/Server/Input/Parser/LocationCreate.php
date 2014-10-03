@@ -2,15 +2,15 @@
 /**
  * File containing the LocationCreate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\Core\REST\Common\Exceptions;
 use eZ\Publish\API\Repository\LocationService;
@@ -18,7 +18,7 @@ use eZ\Publish\API\Repository\LocationService;
 /**
  * Parser for LocationCreate
  */
-class LocationCreate extends Base
+class LocationCreate extends BaseParser
 {
     /**
      * Location service
@@ -37,13 +37,11 @@ class LocationCreate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\LocationService $locationService
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler, LocationService $locationService, ParserTools $parserTools )
+    public function __construct( LocationService $locationService, ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->locationService = $locationService;
         $this->parserTools = $parserTools;
     }
@@ -68,8 +66,7 @@ class LocationCreate extends Base
             throw new Exceptions\Parser( "Missing '_href' attribute for ParentLocation element in LocationCreate." );
         }
 
-        $locationHref = $this->urlHandler->parse( 'location', $data['ParentLocation']['_href'] );
-        $locationHrefParts = explode( '/', $locationHref['location'] );
+        $locationHrefParts = explode( '/', $this->requestParser->parseHref( $data['ParentLocation']['_href'], 'locationPath' ) );
 
         $locationCreateStruct = $this->locationService->newLocationCreateStruct(
             array_pop( $locationHrefParts )

@@ -2,9 +2,9 @@
 /**
  * File containing the eZContentObjectVersion class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -438,13 +438,16 @@ class eZContentObjectVersion extends eZPersistentObject
                 {
                     $mainNode = eZNodeAssignment::fetchForObject( $object->attribute( 'id' ), $object->attribute( 'current_version' ) );
                     $parentObj = $mainNode[0]->attribute( 'parent_contentobject' );
-                    $result = $parentObj->checkAccess( 'create', $object->attribute( 'contentclass_id' ),
-                                                       $parentObj->attribute( 'contentclass_id' ), false, $originalLanguage );
-                    return $result;
-                }
-                else
-                {
-                    return 0;
+                    if ( $parentObj instanceof eZContentObject )
+                    {
+                        $result = $parentObj->checkAccess( 'create', $object->attribute( 'contentclass_id' ),
+                                                           $parentObj->attribute( 'contentclass_id' ), false, $originalLanguage );
+                        return $result;
+                    }
+                    else
+                    {
+                        eZDebug::writeError( "Error retrieving parent object of main node for object id: " . $object->attribute( 'id' ), __METHOD__ );
+                    }
                 }
             }
 
@@ -631,6 +634,11 @@ class eZContentObjectVersion extends eZPersistentObject
                                 foreach( $this->attribute( 'node_assignments' ) as $nodeAssignment )
                                 {
                                     $parentNode = $nodeAssignment->attribute( 'parent_node_obj' );
+                                    if ( !$parentNode instanceof eZContentObjectTreeNode )
+                                    {
+                                        eZDebug::writeError( "Error retrieving parent of main node for object id: " . $this->attribute( 'contentobject_id' ), __METHOD__ );
+                                        return 0;
+                                    }
                                     $path = $parentNode->attribute( 'path_string' );
                                     $subtreeArray = $limitation;
                                     foreach ( $subtreeArray as $subtreeString )
@@ -684,6 +692,11 @@ class eZContentObjectVersion extends eZPersistentObject
                                 foreach( $this->attribute( 'node_assignments' ) as $nodeAssignment )
                                 {
                                     $parentNode = $nodeAssignment->attribute( 'parent_node_obj' );
+                                    if ( !$parentNode instanceof eZContentObjectTreeNode )
+                                    {
+                                        eZDebug::writeError( "Error retrieving parent of main node for object id: " . $this->attribute( 'contentobject_id' ), __METHOD__ );
+                                        return 0;
+                                    }
                                     $path = $parentNode->attribute( 'path_string' );
                                     $subtreeArray = $limitation;
                                     foreach ( $subtreeArray as $subtreeString )
@@ -758,7 +771,18 @@ class eZContentObjectVersion extends eZPersistentObject
         return eZNodeAssignment::fetchForObject( $this->attribute( 'contentobject_id' ), $this->attribute( 'version' ) );
     }
 
-    function assignToNode( $nodeID, $main = 0, $fromNodeID = 0, $sortField = null, $sortOrder = null, $remoteID = 0 )
+    /**
+     * @param int $nodeID
+     * @param int $main
+     * @param int $fromNodeID
+     * @param null|int $sortField
+     * @param null|int $sortOrder
+     * @param int|string $remoteID remote id of the node assignment
+     * @param null|string $parentRemoteId remote id of the assigned tree node (not the parent tree node!)
+     *
+     * @return eZNodeAssignment|null
+     */
+    function assignToNode( $nodeID, $main = 0, $fromNodeID = 0, $sortField = null, $sortOrder = null, $remoteID = 0, $parentRemoteId = null )
     {
         if ( $fromNodeID == 0 && ( $this->attribute( 'status' ) == eZContentObjectVersion::STATUS_DRAFT ||
                                    $this->attribute( 'status' ) == eZContentObjectVersion::STATUS_INTERNAL_DRAFT ) )
@@ -768,6 +792,7 @@ class eZContentObjectVersion extends eZPersistentObject
                           'parent_node' => $nodeID,
                           'is_main' => $main,
                           'remote_id' => $remoteID,
+                          'parent_remote_id' => $parentRemoteId,
                           'from_node_id' => $fromNodeID );
         if ( $sortField !== null )
             $nodeRow['sort_field'] = $sortField;
@@ -892,6 +917,7 @@ class eZContentObjectVersion extends eZPersistentObject
 
         foreach ( $contentObjectTranslations as $contentObjectTranslation )
         {
+            /** @var eZContentObjectAttribute $attribute */
             foreach ( $contentObjectTranslation->objectAttributes() as $attribute )
             {
                 $attribute->removeThis( $attribute->attribute( 'id' ), $versionNum );

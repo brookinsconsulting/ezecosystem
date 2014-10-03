@@ -493,10 +493,10 @@ YAHOO.util.Attribute.prototype = {
 // internal shorthand
 var Dom = YAHOO.util.Dom,
     AttributeProvider = YAHOO.util.AttributeProvider,
-        specialTypes = {
-                mouseenter: true,
-                mouseleave: true
-        };
+	specialTypes = {
+		mouseenter: true,
+		mouseleave: true
+	};
 
 /**
  * Element provides an wrapper object to simplify adding
@@ -554,7 +554,7 @@ Element.prototype = {
             el[key] = value;
         }
 
-                return value;
+		return value;
 
     },
 
@@ -662,38 +662,38 @@ Element.prototype = {
         scope = scope || this;
 
         var Event = YAHOO.util.Event,
-                        el = this.get('element') || this.get('id'),
-                self = this;
+			el = this.get('element') || this.get('id'),
+        	self = this;
 
 
-                if (specialTypes[type] && !Event._createMouseDelegate) {
-                return false;   
-                }
+		if (specialTypes[type] && !Event._createMouseDelegate) {
+	        return false;	
+		}
 
 
         if (!this._events[type]) { // create on the fly
 
             if (el && this.DOM_EVENTS[type]) {
-                                Event.on(el, type, function(e, matchedEl) {
+				Event.on(el, type, function(e, matchedEl) {
 
-                                        // Supplement IE with target, currentTarget relatedTarget
+					// Supplement IE with target, currentTarget relatedTarget
 
-                        if (e.srcElement && !e.target) { 
-                            e.target = e.srcElement;
-                        }
+	                if (e.srcElement && !e.target) { 
+	                    e.target = e.srcElement;
+	                }
 
-                                        if ((e.toElement && !e.relatedTarget) || (e.fromElement && !e.relatedTarget)) {
-                                                e.relatedTarget = Event.getRelatedTarget(e);
-                                        }
-                                        
-                                        if (!e.currentTarget) {
-                                                e.currentTarget = el;
-                                        }
+					if ((e.toElement && !e.relatedTarget) || (e.fromElement && !e.relatedTarget)) {
+						e.relatedTarget = Event.getRelatedTarget(e);
+					}
+					
+					if (!e.currentTarget) {
+						e.currentTarget = el;
+					}
 
-                                        //      Note: matchedEl el is passed back for delegated listeners
-                            self.fireEvent(type, e, matchedEl);
+					//	Note: matchedEl el is passed back for delegated listeners
+		            self.fireEvent(type, e, matchedEl);
 
-                        }, obj, scope);
+		        }, obj, scope);
             }
             this.createEvent(type, {scope: this});
         }

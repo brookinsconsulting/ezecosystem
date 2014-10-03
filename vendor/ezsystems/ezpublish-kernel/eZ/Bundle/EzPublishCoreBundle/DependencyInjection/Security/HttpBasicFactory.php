@@ -2,38 +2,22 @@
 /**
  * File containing the REST security Factory class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Security;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\HttpBasicFactory as BaseHttpBasicFactory;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
 /**
  * Basic auth based authentication provider, working with eZ Publish repository
+ *
+ * @deprecated Use http_basic in security.yml instead of ezpublish_http_basic
  */
 class HttpBasicFactory extends BaseHttpBasicFactory
 {
-    const AUTHENTICATION_PROVIDER_ID = 'ezpublish.security.authentication_provider.basic';
-
-    public function create( ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint )
-    {
-        list( $provider, $listenerId, $entryPointId ) = parent::create( $container, $id, $config, $userProvider, $defaultEntryPoint );
-
-        // We only need to redefine the authentication provider
-        unset( $provider );
-        $provider = self::AUTHENTICATION_PROVIDER_ID . ".$id";
-        $container
-            ->setDefinition( $provider, new DefinitionDecorator( self::AUTHENTICATION_PROVIDER_ID ) )
-            ->replaceArgument( 2, $id );
-
-        return array( $provider, $listenerId, $entryPointId );
-    }
-
     public function getKey()
     {
         return 'ezpublish_http_basic';

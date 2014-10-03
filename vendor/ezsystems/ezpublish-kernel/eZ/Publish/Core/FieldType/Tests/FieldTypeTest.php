@@ -2,13 +2,16 @@
 /**
  * File containing the eZ\Publish\Core\FieldType\Tests\FieldTypeTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
+
 use PHPUnit_Framework_TestCase;
+use Exception;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
 
 abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
 {
@@ -18,6 +21,29 @@ abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
      * @var FieldType
      */
     private $fieldTypeUnderTest;
+
+    /**
+     * @return \eZ\Publish\Core\Persistence\TransformationProcessor|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getTransformationProcessorMock()
+    {
+        return $this->getMockForAbstractClass(
+            "eZ\\Publish\\Core\\Persistence\\TransformationProcessor",
+            array(),
+            '',
+            false,
+            true,
+            true,
+            array( 'transform', 'transformByGroup' )
+        );
+    }
+
+    /**
+     * Returns the identifier of the field type under test.
+     *
+     * @return string
+     */
+    abstract protected function provideFieldTypeIdentifier();
 
     /**
      * Returns the field type under test.
@@ -182,6 +208,13 @@ abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
      * @return array
      */
     abstract public function provideInputForFromHash();
+
+    /**
+     * Provides data for the getName() test.
+     *
+     * @return array
+     */
+    abstract public function provideDataForGetName();
 
     /**
      * Provide data sets with field settings which are considered valid by the
@@ -349,6 +382,136 @@ abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Provides data sets with validator configuration and/or field settings and
+     * field value which are considered valid by the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten if
+     * a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "StringLengthValidator" => array(
+     *                      "minStringLength" => 2,
+     *                      "maxStringLength" => 10,
+     *                  ),
+     *              ),
+     *          ),
+     *          new TextLineValue( "lalalala" ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  'isMultiple' => true
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              array(
+     *                  "BE" => array(
+     *                      "Name" => "Belgium",
+     *                      "Alpha2" => "BE",
+     *                      "Alpha3" => "BEL",
+     *                      "IDC" => 32,
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideValidDataForValidate()
+    {
+        return array(
+            array(
+                array(),
+                $this->getMock( "eZ\\Publish\\SPI\\FieldType\\Value" ),
+            )
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings,
+     * field value and corresponding validation errors returned by
+     * the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten
+     * if a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "IntegerValueValidator" => array(
+     *                      "minIntegerValue" => 5,
+     *                      "maxIntegerValue" => 10
+     *                  ),
+     *              ),
+     *          ),
+     *          new IntegerValue( 3 ),
+     *          array(
+     *              new ValidationError(
+     *                  "The value can not be lower than %size%.",
+     *                  null,
+     *                  array(
+     *                      "size" => 5
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  "isMultiple" => false
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              "BE" => array(
+     *                  "Name" => "Belgium",
+     *                  "Alpha2" => "BE",
+     *                  "Alpha3" => "BEL",
+     *                  "IDC" => 32,
+     *              ),
+     *              "FR" => array(
+     *                  "Name" => "France",
+     *                  "Alpha2" => "FR",
+     *                  "Alpha3" => "FRA",
+     *                  "IDC" => 33,
+     *              ),
+     *          )
+     *      ),
+     *      array(
+     *          new ValidationError(
+     *              "Field definition does not allow multiple countries to be selected."
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideInvalidDataForValidate()
+    {
+        return array(
+            array(
+                array(),
+                $this->getMock( "eZ\\Publish\\SPI\\FieldType\\Value" ),
+                array(),
+            )
+        );
+    }
+
+    /**
      * Retrieves a test wide cached version of the field type under test.
      *
      * Uses {@link createFieldTypeUnderTest()} to create the instance
@@ -363,6 +526,28 @@ abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
             $this->fieldTypeUnderTest = $this->createFieldTypeUnderTest();
         }
         return $this->fieldTypeUnderTest;
+    }
+
+    public function testGetFieldTypeIdentifier()
+    {
+        self::assertSame(
+            $this->provideFieldTypeIdentifier(),
+            $this->getFieldTypeUnderTest()->getFieldTypeIdentifier()
+        );
+    }
+
+    /**
+     * @dataProvider provideDataForGetName
+     *
+     * @param SPIValue $spiValue
+     * @param string $expected
+     */
+    public function testGetName( SPIValue $value, $expected )
+    {
+        self::assertSame(
+            $expected,
+            $this->getFieldTypeUnderTest()->getName( $value )
+        );
     }
 
     public function testValidatorConfigurationSchema()
@@ -417,6 +602,23 @@ abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests that default empty value is unchanged by acceptValue() method.
+     */
+    public function testAcceptGetEmptyValue()
+    {
+        $fieldType = $this->getFieldTypeUnderTest();
+        $emptyValue = $fieldType->getEmptyValue();
+
+        $acceptedEmptyValue = $fieldType->acceptValue( $emptyValue );
+
+        $this->assertEquals(
+            $emptyValue,
+            $acceptedEmptyValue,
+            'acceptValue() did not convert properly.'
+        );
+    }
+
+    /**
      * @param mixed $inputValue
      * @param \Exception $expectedException
      *
@@ -436,7 +638,7 @@ abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
                 )
             );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             if ( $e instanceof \PHPUnit_Framework_Exception
                  || $e instanceof \PHPUnit_Framework_Error
@@ -729,6 +931,61 @@ abstract class FieldTypeTest extends PHPUnit_Framework_TestCase
                     )
                 );
         }
+    }
+
+    /**
+     * @dataProvider provideValidDataForValidate
+     */
+    public function testValidateValid( $fieldDefinitionData, $value )
+    {
+        $validationErrors = $this->doValidate( $fieldDefinitionData, $value );
+
+        $this->assertInternalType( "array", $validationErrors );
+        $this->assertEmpty( $validationErrors, "Got value:\n" . var_export( $validationErrors, true ) );
+    }
+
+    /**
+     * @dataProvider provideInvalidDataForValidate
+     */
+    public function testValidateInvalid( $fieldDefinitionData, $value, $errors )
+    {
+        $validationErrors = $this->doValidate( $fieldDefinitionData, $value );
+
+        $this->assertInternalType( "array", $validationErrors );
+        $this->assertEquals( $errors, $validationErrors );
+    }
+
+    protected function doValidate( $fieldDefinitionData, $value )
+    {
+        $fieldType = $this->getFieldTypeUnderTest();
+
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition|\PHPUnit_Framework_MockObject_MockObject $fieldDefinitionMock */
+        $fieldDefinitionMock = $this->getMock(
+            "eZ\\Publish\\API\\Repository\\Values\\ContentType\\FieldDefinition"
+        );
+
+        foreach ( $fieldDefinitionData as $method => $data )
+        {
+            if ( $method === "validatorConfiguration" )
+            {
+                $fieldDefinitionMock
+                    ->expects( $this->any() )
+                    ->method( "getValidatorConfiguration" )
+                    ->will( $this->returnValue( $data ) );
+            }
+
+            if ( $method === "fieldSettings" )
+            {
+                $fieldDefinitionMock
+                    ->expects( $this->any() )
+                    ->method( "getFieldSettings" )
+                    ->will( $this->returnValue( $data ) );
+            }
+        }
+
+        $validationErrors = $fieldType->validate( $fieldDefinitionMock, $value );
+
+        return $validationErrors;
     }
 
     // @todo: More test methods …

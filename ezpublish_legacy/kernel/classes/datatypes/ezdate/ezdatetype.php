@@ -2,9 +2,9 @@
 /**
  * File containing the eZDateType class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -99,21 +99,21 @@ class eZDateType extends eZDataType
             $year  = $http->postVariable( $base . '_date_year_' . $contentObjectAttribute->attribute( 'id' ) );
             $month = $http->postVariable( $base . '_date_month_' . $contentObjectAttribute->attribute( 'id' ) );
             $day   = $http->postVariable( $base . '_date_day_' . $contentObjectAttribute->attribute( 'id' ) );
-            $date = new eZDate();
             $contentClassAttribute = $contentObjectAttribute->contentClassAttribute();
 
             if ( ( $year == '' and $month == '' and $day == '' ) or
-                 !checkdate( $month, $day, $year ) or
-                 $year < 1970 )
+                 !checkdate( $month, $day, $year ) )
             {
-                $date->setTimeStamp( 0 );
+                $stamp = null;
             }
             else
             {
+                $date = new eZDate();
                 $date->setMDY( $month, $day, $year );
+                $stamp = $date->timeStamp();
             }
 
-            $contentObjectAttribute->setAttribute( 'data_int', $date->timeStamp() );
+            $contentObjectAttribute->setAttribute( 'data_int', $stamp );
             return true;
         }
         return false;
@@ -164,21 +164,21 @@ class eZDateType extends eZDataType
             $year  = $http->postVariable( $base . '_date_year_' . $contentObjectAttribute->attribute( 'id' ) );
             $month = $http->postVariable( $base . '_date_month_' . $contentObjectAttribute->attribute( 'id' ) );
             $day   = $http->postVariable( $base . '_date_day_' . $contentObjectAttribute->attribute( 'id' ) );
-            $date = new eZDate();
             $contentClassAttribute = $contentObjectAttribute->contentClassAttribute();
 
             if ( ( $year == '' and $month == '' and $day == '' ) or
-                 !checkdate( $month, $day, $year ) or
-                 $year < 1970 )
+                 !checkdate( $month, $day, $year ) )
             {
-                $date->setTimeStamp( 0 );
+                $stamp = null;
             }
             else
             {
+                $date = new eZDate();
                 $date->setMDY( $month, $day, $year );
+                $stamp = $date->timeStamp();
             }
 
-            $collectionAttribute->setAttribute( 'data_int', $date->timeStamp() );
+            $collectionAttribute->setAttribute( 'data_int', $stamp );
             return true;
         }
         return false;
@@ -259,11 +259,17 @@ class eZDateType extends eZDataType
     */
     function toString( $contentObjectAttribute )
     {
-        return $contentObjectAttribute->attribute( 'data_int' );
+        $stamp = $contentObjectAttribute->attribute( 'data_int' );
+        return $stamp === null ? '' : $stamp;
     }
 
     function fromString( $contentObjectAttribute, $string )
     {
+        if ( empty( $string ) )
+        {
+            $string = null;
+        }
+
         return $contentObjectAttribute->setAttribute( 'data_int', $string );
     }
 
@@ -273,13 +279,13 @@ class eZDateType extends eZDataType
     function title( $contentObjectAttribute, $name = null )
     {
         $locale = eZLocale::instance();
-        $retVal = $contentObjectAttribute->attribute( "data_int" ) == 0 ? '' : $locale->formatDate( $contentObjectAttribute->attribute( "data_int" ) );
+        $retVal = $contentObjectAttribute->attribute( "data_int" ) === null ? '' : $locale->formatDate( $contentObjectAttribute->attribute( "data_int" ) );
         return $retVal;
     }
 
     function hasObjectAttributeContent( $contentObjectAttribute )
     {
-        return $contentObjectAttribute->attribute( "data_int" ) != 0;
+        return $contentObjectAttribute->attribute( "data_int" ) !== null;
     }
 
     function sortKey( $contentObjectAttribute )

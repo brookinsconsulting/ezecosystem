@@ -2,9 +2,9 @@
 /**
  * LocationService class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\SignalSlot;
@@ -80,6 +80,7 @@ class LocationService implements LocationServiceInterface
                 array(
                     'subtreeId' => $subtree->id,
                     'targetParentLocationId' => $targetParentLocation->id,
+                    'targetNewSubtreeId' => $returnValue->id,
                 )
             )
         );
@@ -92,7 +93,7 @@ class LocationService implements LocationServiceInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException If the current user user is not allowed to read this location
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If the specified location is not found
      *
-     * @param int $locationId
+     * @param mixed $locationId
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location
      */
@@ -253,6 +254,8 @@ class LocationService implements LocationServiceInterface
             new HideLocationSignal(
                 array(
                     'locationId' => $location->id,
+                    'contentId' => $location->contentId,
+                    'currentVersionNo' => $returnValue->getContentInfo()->currentVersionNo,
                 )
             )
         );
@@ -278,6 +281,8 @@ class LocationService implements LocationServiceInterface
             new UnhideLocationSignal(
                 array(
                     'locationId' => $location->id,
+                    'contentId' => $location->contentId,
+                    'currentVersionNo' => $returnValue->getContentInfo()->currentVersionNo,
                 )
             )
         );
@@ -318,7 +323,7 @@ class LocationService implements LocationServiceInterface
      */
     public function deleteLocation( Location $location )
     {
-        $returnValue = $this->service->deleteLocation( $location );
+        $this->service->deleteLocation( $location );
         $this->signalDispatcher->emit(
             new DeleteLocationSignal(
                 array(
@@ -327,7 +332,6 @@ class LocationService implements LocationServiceInterface
                 )
             )
         );
-        return $returnValue;
     }
 
     /**

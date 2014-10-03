@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\SPI\Tests\FieldType\UrlIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
@@ -53,26 +53,19 @@ class UrlIntegrationTest extends BaseIntegrationTest
      */
     public function getCustomHandler()
     {
-        $handler = $this->getHandler();
+        $fieldType = new FieldType\Url\Type();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessor() );
 
-        $handler->getFieldTypeRegistry()->register(
+        return $this->getHandler(
             'ezurl',
-            new FieldType\Url\Type()
-        );
-        $handler->getStorageRegistry()->register(
-            'ezurl',
+            $fieldType,
+            new Legacy\Content\FieldValue\Converter\Url(),
             new FieldType\Url\UrlStorage(
                 array(
                     'LegacyStorage' => new FieldType\Url\UrlStorage\Gateway\LegacyStorage(),
                 )
             )
         );
-        $handler->getFieldValueConverterRegistry()->register(
-            'ezurl',
-            new Legacy\Content\FieldValue\Converter\Url()
-        );
-
-        return $handler;
     }
 
     /**

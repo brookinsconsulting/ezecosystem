@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher interface
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\SiteAccess;
@@ -20,8 +20,6 @@ interface Matcher
      * Injects the request object to match against.
      *
      * @param \eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest $request
-     *
-     * @return void
      */
     public function setRequest( SimplifiedRequest $request );
 

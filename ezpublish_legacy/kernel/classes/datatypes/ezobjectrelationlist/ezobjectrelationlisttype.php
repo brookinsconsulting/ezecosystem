@@ -2,9 +2,9 @@
 /**
  * File containing the eZObjectRelationListType class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -42,7 +42,7 @@ class eZObjectRelationListType extends eZDataType
     function validateObjectAttributeHTTPInput( $http, $base, $contentObjectAttribute )
     {
         $postVariableName = $base . "_data_object_relation_list_" . $contentObjectAttribute->attribute( "id" );
-        if ( $http->hasPostVariable( $postVariableName ) && !( $contentObjectAttribute->validateIsRequired() && $http->postVariable( $postVariableName ) == array( "no_relation" ) ) )
+        if ( $http->hasPostVariable( $postVariableName ) && !$contentObjectAttribute->validateIsRequired() && $http->postVariable( $postVariableName ) == array( "no_relation" ) )
         {
             return eZInputValidator::STATE_ACCEPTED;
         }
@@ -68,6 +68,15 @@ class eZObjectRelationListType extends eZDataType
                 return eZInputValidator::STATE_INVALID;
             }
             return eZInputValidator::STATE_ACCEPTED;
+        }
+        else
+        {
+            // If in browse mode and relations have been added using the search field
+            // items are stored in the post variable
+            if ( count( $http->postVariable( $postVariableName ) ) > 0  )
+            {
+                return eZInputValidator::STATE_ACCEPTED;
+            }
         }
 
         // The following code is only there for the support of [BackwardCompatibilitySettings]/AdvancedObjectRelationList
@@ -202,6 +211,11 @@ class eZObjectRelationListType extends eZDataType
             $contentObjectAttribute->setContent( $content );
             $contentObjectAttribute->store();
             return true;
+        }
+        // Type is browse and we have no http input
+        else if ( $selectedObjectIDArray === false )
+        {
+            return false;
         }
 
         // Check if selection type is not browse
@@ -826,6 +840,11 @@ class eZObjectRelationListType extends eZDataType
             }
             $db->commit();
         }
+    }
+
+    function deleteNotVersionedStoredClassAttribute( eZContentClassAttribute $classAttribute )
+    {
+        eZContentObjectAttribute::removeRelationsByContentClassAttributeId( $classAttribute->attribute( 'id' ) );
     }
 
     function customObjectAttributeHTTPAction( $http, $action, $contentObjectAttribute, $parameters )

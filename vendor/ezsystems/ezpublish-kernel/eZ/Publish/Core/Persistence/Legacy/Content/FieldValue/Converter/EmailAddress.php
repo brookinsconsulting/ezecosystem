@@ -2,9 +2,9 @@
 /**
  * File containing the Mail converter
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
@@ -24,7 +24,7 @@ class EmailAddress implements Converter
      *
      * @note Class should instead be configured as service if it gains dependencies.
      *
-     * @return Mail
+     * @return \eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter\EmailAddress
      */
     public static function create()
     {
@@ -77,6 +77,7 @@ class EmailAddress implements Converter
         $validatorConstraints = array( self::VALIDATOR_IDENTIFIER => array() );
         $fieldDef->fieldTypeConstraints->validators = $validatorConstraints;
         $fieldDef->defaultValue->data = isset( $storageDef->dataText1 ) ? $storageDef->dataText1 : '';
+        $fieldDef->defaultValue->sortKey = $fieldDef->defaultValue->data;
     }
 
     /**

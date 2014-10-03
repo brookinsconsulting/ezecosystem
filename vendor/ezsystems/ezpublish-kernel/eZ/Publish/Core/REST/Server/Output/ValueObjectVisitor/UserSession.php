@@ -2,9 +2,9 @@
 /**
  * File containing the UserSession ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -27,21 +27,19 @@ class UserSession extends ValueObjectVisitor
      */
     public function visit( Visitor $visitor, Generator $generator, $data )
     {
+        $status = $data->created ? 201 : 200;
+        $visitor->setStatus( $status );
+
         $visitor->setHeader( 'Content-Type', $generator->getMediaType( 'Session' ) );
-        // @deprecated Since 5.0, this cookie is used for legacy until Static cache support is removed along with this cookie
-        $visitor->setHeader( 'Set-Cookie', 'is_logged_in=true; path=/' );
+
+        $sessionHref = $this->router->generate( 'ezpublish_rest_deleteSession', array( 'sessionId' => $data->sessionId ) );
 
         //@todo Needs refactoring, disabling certain headers should not be done this way
         $visitor->setHeader( 'Accept-Patch', false );
 
-        $visitor->setStatus( 201 );
-
         $generator->startObjectElement( 'Session' );
 
-        $generator->startAttribute(
-            'href',
-            $this->urlHandler->generate( 'userSession', array( 'sessionId' => $data->sessionId ) )
-        );
+        $generator->startAttribute( 'href', $sessionHref );
         $generator->endAttribute( 'href' );
 
         $generator->startValueElement( 'name', $data->sessionName );
@@ -56,8 +54,7 @@ class UserSession extends ValueObjectVisitor
         $generator->startObjectElement( 'User', 'User' );
         $generator->startAttribute(
             'href',
-            // @todo check URL generator entry
-            $this->urlHandler->generate( 'user', array( 'user' => $data->user->id ) )
+            $this->router->generate( 'ezpublish_rest_loadUser', array( 'userId' => $data->user->id ) )
         );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'User' );

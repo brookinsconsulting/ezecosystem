@@ -2,9 +2,9 @@
 /**
  * File containing the BinaryBaseStorage Gateway
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\BinaryBase\BinaryBaseStorage\Gateway;
@@ -12,6 +12,8 @@ namespace eZ\Publish\Core\FieldType\BinaryBase\BinaryBaseStorage\Gateway;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\Core\FieldType\BinaryBase\BinaryBaseStorage\Gateway;
+use eZ\Publish\Core\Persistence\Database\SelectQuery;
+use eZ\Publish\Core\Persistence\Database\InsertQuery;
 
 abstract class LegacyStorage extends Gateway
 {
@@ -32,13 +34,13 @@ abstract class LegacyStorage extends Gateway
     /**
      * Returns a column to property mapping for the storage table.
      *
-     * @return void
+     * @return array
      */
     protected function getPropertyMapping()
     {
         return array(
             'filename' => array(
-                'name' => 'path',
+                'name' => 'id',
                 'cast' => 'strval',
             ),
             'mime_type' => array(
@@ -59,13 +61,13 @@ abstract class LegacyStorage extends Gateway
      * add additional columns to be fetched from the database. Please do not
      * forget to call the parent when overwriting this method.
      *
-     * @param \ezcQuerySelect $selectQuery
+     * @param \eZ\Publish\Core\Persistence\Database\SelectQuery $selectQuery
      * @param int $fieldId
      * @param int $versionNo
      *
      * @return void
      */
-    protected function setFetchColumns( \ezcQuerySelect $selectQuery, $fieldId, $versionNo )
+    protected function setFetchColumns( SelectQuery $selectQuery, $fieldId, $versionNo )
     {
         $connection = $this->getConnection();
 
@@ -83,13 +85,13 @@ abstract class LegacyStorage extends Gateway
      * add additional columns to be set in the database. Please do not forget
      * to call the parent when overwriting this method.
      *
-     * @param \ezcQueryInsert $insertQuery
+     * @param \eZ\Publish\Core\Persistence\Database\InsertQuery $insertQuery
      * @param VersionInfo $versionInfo
      * @param Field $field
      *
      * @return void
      */
-    protected function setInsertColumns( \ezcQueryInsert $insertQuery, VersionInfo $versionInfo, Field $field )
+    protected function setInsertColumns( InsertQuery $insertQuery, VersionInfo $versionInfo, Field $field )
     {
         $connection = $this->getConnection();
 
@@ -99,7 +101,7 @@ abstract class LegacyStorage extends Gateway
         )->set(
             $connection->quoteColumn( 'filename' ),
             $insertQuery->bindValue(
-                $this->removeMimeFromPath( $field->value->externalData['path'] )
+                $this->removeMimeFromPath( $field->value->externalData['id'] )
             )
         )->set(
             $connection->quoteColumn( 'mime_type' ),
@@ -120,7 +122,7 @@ abstract class LegacyStorage extends Gateway
      *
      * @return void
      * @throws \RuntimeException if $dbHandler is not an instance of
-     *         {@link \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler}
+     *         {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler}
      */
     public function setConnection( $dbHandler )
     {
@@ -128,7 +130,7 @@ abstract class LegacyStorage extends Gateway
         // the given class design there is no sane other option. Actually the
         // dbHandler *should* be passed to the constructor, and there should
         // not be the need to post-inject it.
-        if ( !$dbHandler instanceof \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler )
+        if ( !$dbHandler instanceof \eZ\Publish\Core\Persistence\Database\DatabaseHandler )
         {
             throw new \RuntimeException( "Invalid dbHandler passed" );
         }
@@ -141,7 +143,7 @@ abstract class LegacyStorage extends Gateway
      *
      * @throws \RuntimeException if no connection has been set, yet.
      *
-     * @return \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler
+     * @return \eZ\Publish\Core\Persistence\Database\DatabaseHandler
      */
     protected function getConnection()
     {
@@ -232,15 +234,13 @@ abstract class LegacyStorage extends Gateway
             return null;
         }
 
-        $propertyMap = $this->getPropertyMapping();
-
         $convertedResult = array();
         foreach ( reset( $result ) as $column => $value )
         {
             $convertedResult[$this->toPropertyName( $column )] = $this->castToPropertyValue( $value, $column );
         }
-        $convertedResult['path'] = $this->prependMimeToPath(
-            $convertedResult['path'],
+        $convertedResult['id'] = $this->prependMimeToPath(
+            $convertedResult['id'],
             $convertedResult['mimeType']
         );
 
@@ -300,6 +300,11 @@ abstract class LegacyStorage extends Gateway
      */
     public function removeFileReferences( array $fieldIds, $versionNo )
     {
+        if ( empty( $fieldIds ) )
+        {
+            return;
+        }
+
         $connection = $this->getConnection();
 
         $deleteQuery = $connection->createDeleteQuery();
@@ -361,6 +366,11 @@ abstract class LegacyStorage extends Gateway
      */
     public function getReferencedFiles( array $fieldIds, $versionNo )
     {
+        if ( empty( $fieldIds ) )
+        {
+            return array();
+        }
+
         $connection = $this->getConnection();
 
         $selectQuery = $connection->createSelectQuery();
@@ -404,6 +414,11 @@ abstract class LegacyStorage extends Gateway
      */
     public function countFileReferences( array $files )
     {
+        if ( empty( $files ) )
+        {
+            return array();
+        }
+
         $connection = $this->getConnection();
 
         $selectQuery = $connection->createSelectQuery();

@@ -2,9 +2,9 @@
 /**
  * File containing the ContentHandler implementation
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Cache;
@@ -25,6 +25,8 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
 {
     const FIELD_VALUE_DOM_DOCUMENT_KEY = '§:DomDocument:§';
 
+    const ALL_TRANSLATIONS_KEY = '0';
+
     /**
      * @see \eZ\Publish\SPI\Persistence\Content\Handler::create
      */
@@ -32,7 +34,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     {
         // Cached on demand when published or loaded
         $this->logger->logCall( __METHOD__, array( 'struct' => $struct ) );
-        return $this->persistenceFactory->getContentHandler()->create( $struct );
+        return $this->persistenceHandler->contentHandler()->create( $struct );
     }
 
     /**
@@ -41,7 +43,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function createDraftFromVersion( $contentId, $srcVersion, $userId )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $srcVersion, 'user' => $userId ) );
-        return $this->persistenceFactory->getContentHandler()->createDraftFromVersion( $contentId, $srcVersion, $userId );
+        return $this->persistenceHandler->contentHandler()->createDraftFromVersion( $contentId, $srcVersion, $userId );
     }
 
     /**
@@ -50,26 +52,21 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function copy( $contentId, $versionNo = null )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo ) );
-        return $this->persistenceFactory->getContentHandler()->copy( $contentId, $versionNo );
+        return $this->persistenceHandler->contentHandler()->copy( $contentId, $versionNo );
     }
 
     /**
      * @see \eZ\Publish\SPI\Persistence\Content\Handler::load
      */
-    public function load( $contentId, $version, $translations = null )
+    public function load( $contentId, $version, array $translations = null )
     {
-        if ( null !== $translations )
-        {
-            $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $version, 'translations' => $translations ) );
-            return $this->persistenceFactory->getContentHandler()->load( $contentId, $version, $translations );
-        }
-
-        $cache = $this->cache->getItem( 'content', $contentId, $version );
+        $translationsKey = empty( $translations ) ? self::ALL_TRANSLATIONS_KEY : implode( '|', $translations );
+        $cache = $this->cache->getItem( 'content', $contentId, $version, $translationsKey );
         $content = $cache->get();
         if ( $cache->isMiss() )
         {
-            $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $version ) );
-            $content = $this->persistenceFactory->getContentHandler()->load( $contentId, $version );
+            $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $version, 'translations' => $translations ) );
+            $content = $this->persistenceHandler->contentHandler()->load( $contentId, $version, $translations );
             $cache->set( $this->cloneAndSerializeXMLFields( $content ) );
         }
         else
@@ -90,7 +87,22 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
         if ( $cache->isMiss() )
         {
             $this->logger->logCall( __METHOD__, array( 'content' => $contentId ) );
-            $cache->set( $contentInfo = $this->persistenceFactory->getContentHandler()->loadContentInfo( $contentId ) );
+            $cache->set( $contentInfo = $this->persistenceHandler->contentHandler()->loadContentInfo( $contentId ) );
+        }
+        return $contentInfo;
+    }
+
+    /**
+     * @see \eZ\Publish\SPI\Persistence\Content\Handler::loadContentInfoByRemoteId
+     */
+    public function loadContentInfoByRemoteId( $remoteId )
+    {
+        $cache = $this->cache->getItem( 'content', 'info', 'remoteId', $remoteId );
+        $contentInfo = $cache->get();
+        if ( $cache->isMiss() )
+        {
+            $this->logger->logCall( __METHOD__, array( 'content' => $remoteId ) );
+            $cache->set( $contentInfo = $this->persistenceHandler->contentHandler()->loadContentInfoByRemoteId( $remoteId ) );
         }
         return $contentInfo;
     }
@@ -101,7 +113,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function loadVersionInfo( $contentId, $versionNo )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo ) );
-        return $this->persistenceFactory->getContentHandler()->loadVersionInfo( $contentId, $versionNo );
+        return $this->persistenceHandler->contentHandler()->loadVersionInfo( $contentId, $versionNo );
     }
 
     /**
@@ -110,7 +122,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function loadDraftsForUser( $userId )
     {
         $this->logger->logCall( __METHOD__, array( 'user' => $userId ) );
-        return $this->persistenceFactory->getContentHandler()->loadDraftsForUser( $userId );
+        return $this->persistenceHandler->contentHandler()->loadDraftsForUser( $userId );
     }
 
     /**
@@ -119,11 +131,14 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function setStatus( $contentId, $status, $version )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'status' => $status, 'version' => $version ) );
-        $return = $this->persistenceFactory->getContentHandler()->setStatus( $contentId, $status, $version );
+        $return = $this->persistenceHandler->contentHandler()->setStatus( $contentId, $status, $version );
 
         $this->cache->clear( 'content', $contentId, $version );
         if ( $status === VersionInfo::STATUS_PUBLISHED )
+        {
             $this->cache->clear( 'content', 'info', $contentId );
+            $this->cache->clear( 'content', 'info', 'remoteId' );
+        }
 
         return $return;
     }
@@ -137,7 +152,9 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
 
         $this->cache
             ->getItem( 'content', 'info', $contentId )
-            ->set( $contentInfo = $this->persistenceFactory->getContentHandler()->updateMetadata( $contentId, $struct ) );
+            ->set( $contentInfo = $this->persistenceHandler->contentHandler()->updateMetadata( $contentId, $struct ) );
+
+        $this->cache->clear( 'content', $contentId, $contentInfo->currentVersionNo );
 
         return $contentInfo;
     }
@@ -148,9 +165,10 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function updateContent( $contentId, $versionNo, UpdateStruct $struct )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo, 'struct' => $struct ) );
-        $content = $this->persistenceFactory->getContentHandler()->updateContent( $contentId, $versionNo, $struct );
+        $content = $this->persistenceHandler->contentHandler()->updateContent( $contentId, $versionNo, $struct );
+        $this->cache->clear( 'content', $contentId, $versionNo );
         $this->cache
-            ->getItem( 'content', $contentId, $versionNo )
+            ->getItem( 'content', $contentId, $versionNo, self::ALL_TRANSLATIONS_KEY )
             ->set( $this->cloneAndSerializeXMLFields( $content ) );
         return $content;
     }
@@ -161,10 +179,12 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function deleteContent( $contentId )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId ) );
-        $return = $this->persistenceFactory->getContentHandler()->deleteContent( $contentId );
+        $return = $this->persistenceHandler->contentHandler()->deleteContent( $contentId );
 
         $this->cache->clear( 'content', $contentId );
         $this->cache->clear( 'content', 'info', $contentId );
+        $this->cache->clear( 'content', 'info', 'remoteId' );
+        $this->cache->clear( 'location', 'subtree' );
 
         return $return;
     }
@@ -175,10 +195,12 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function deleteVersion( $contentId, $versionNo )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo ) );
-        $return = $this->persistenceFactory->getContentHandler()->deleteVersion( $contentId, $versionNo );
+        $return = $this->persistenceHandler->contentHandler()->deleteVersion( $contentId, $versionNo );
 
         $this->cache->clear( 'content', $contentId, $versionNo );
         $this->cache->clear( 'content', 'info', $contentId );
+        $this->cache->clear( 'content', 'info', 'remoteId' );
+        $this->cache->clear( 'location', 'subtree' );
 
         return $return;
     }
@@ -189,7 +211,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function listVersions( $contentId )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId ) );
-        return $this->persistenceFactory->getContentHandler()->listVersions( $contentId );
+        return $this->persistenceHandler->contentHandler()->listVersions( $contentId );
     }
 
     /**
@@ -198,7 +220,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function addRelation( RelationCreateStruct $relation )
     {
         $this->logger->logCall( __METHOD__, array( 'struct' => $relation ) );
-        return $this->persistenceFactory->getContentHandler()->addRelation( $relation );
+        return $this->persistenceHandler->contentHandler()->addRelation( $relation );
     }
 
     /**
@@ -207,7 +229,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function removeRelation( $relationId, $type )
     {
         $this->logger->logCall( __METHOD__, array( 'relation' => $relationId, 'type' => $type ) );
-        $this->persistenceFactory->getContentHandler()->removeRelation( $relationId, $type );
+        $this->persistenceHandler->contentHandler()->removeRelation( $relationId, $type );
     }
 
     /**
@@ -223,7 +245,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
                 'type' => $type
             )
         );
-        return $this->persistenceFactory->getContentHandler()->loadRelations( $sourceContentId, $sourceContentVersionNo, $type );
+        return $this->persistenceHandler->contentHandler()->loadRelations( $sourceContentId, $sourceContentVersionNo, $type );
     }
 
     /**
@@ -232,7 +254,7 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function loadReverseRelations( $destinationContentId, $type = null )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $destinationContentId, 'type' => $type ) );
-        return $this->persistenceFactory->getContentHandler()->loadReverseRelations( $destinationContentId, $type );
+        return $this->persistenceHandler->contentHandler()->loadReverseRelations( $destinationContentId, $type );
     }
 
     /**
@@ -241,14 +263,16 @@ class ContentHandler extends AbstractHandler implements ContentHandlerInterface
     public function publish( $contentId, $versionNo, MetadataUpdateStruct $struct )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentId, 'version' => $versionNo, 'struct' => $struct ) );
-        $content = $this->persistenceFactory->getContentHandler()->publish( $contentId, $versionNo, $struct );
+        $content = $this->persistenceHandler->contentHandler()->publish( $contentId, $versionNo, $struct );
 
         $this->cache->clear( 'content', $contentId );
+        $this->cache->clear( 'content', 'info', 'remoteId' );
+        $this->cache->clear( 'location', 'subtree' );
 
         // warm up cache
         $contentInfo = $content->versionInfo->contentInfo;
         $this->cache
-            ->getItem( 'content', $contentInfo->id, $content->versionInfo->versionNo )
+            ->getItem( 'content', $contentInfo->id, $content->versionInfo->versionNo, self::ALL_TRANSLATIONS_KEY )
             ->set( $this->cloneAndSerializeXMLFields( $content ) );
         $this->cache->getItem( 'content', 'info', $contentInfo->id )->set( $contentInfo );
 

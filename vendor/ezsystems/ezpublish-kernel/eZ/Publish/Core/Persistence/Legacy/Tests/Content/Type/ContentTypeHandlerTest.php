@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\Content\Type\ContentTypeHandlerTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content\Type;
@@ -18,11 +18,12 @@ use eZ\Publish\SPI\Persistence\Content\Type\Group\CreateStruct as GroupCreateStr
 use eZ\Publish\SPI\Persistence\Content\Type\Group\UpdateStruct as GroupUpdateStruct;
 use eZ\Publish\Core\Persistence\Legacy\Exception;
 use eZ\Publish\Core\Persistence\Legacy\Content\Type\Handler;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Test case for Content Type Handler.
  */
-class ContentTypeHandlerTest extends \PHPUnit_Framework_TestCase
+class ContentTypeHandlerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Gateway mock
@@ -492,7 +493,7 @@ class ContentTypeHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        $createStructFix = $this->getContenTypeCreateStructFixture();
+        $createStructFix = $this->getContentTypeCreateStructFixture();
         $createStructClone = clone $createStructFix;
 
         $mapperMock = $this->getMapperMock(
@@ -795,7 +796,7 @@ class ContentTypeHandlerTest extends \PHPUnit_Framework_TestCase
                     'eZ\\Publish\\SPI\\Persistence\\Content\\Type'
                 )
             )->will(
-                $this->returnValue( new CreateStruct() )
+                $this->returnValue( new CreateStruct( array( 'identifier' => 'testCopy' ) ) )
             );
 
         $handlerMock = $this->getMock(
@@ -833,6 +834,10 @@ class ContentTypeHandlerTest extends \PHPUnit_Framework_TestCase
                             time()
                         ),
                         'created'
+                    ),
+                    $this->attribute(
+                        $this->matchesRegularExpression( "/^copy_of_testCopy_([a-z0-9]+)$/" ),
+                        'identifier'
                     )
                 )
             )->will(
@@ -1011,6 +1016,30 @@ class ContentTypeHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             42,
             $fieldDef->id
+        );
+    }
+
+    /**
+     * @covers eZ\Publish\Core\Persistence\Legacy\Content\Type\Handler::getContentCount
+     *
+     * @return void
+     */
+    public function testGetContentCount()
+    {
+        $gatewayMock = $this->getGatewayMock();
+        $gatewayMock->expects( $this->once() )
+            ->method( 'countInstancesOfType' )
+            ->with(
+                $this->equalTo( 23 )
+            )->will(
+                $this->returnValue( 42 )
+            );
+
+        $handler = $this->getHandler();
+
+        $this->assertEquals(
+            42,
+            $handler->getContentCount( 23 )
         );
     }
 
@@ -1258,7 +1287,7 @@ class ContentTypeHandlerTest extends \PHPUnit_Framework_TestCase
      *
      * @return \eZ\Publish\SPI\Persistence\Content\Type\CreateStruct
      */
-    protected function getContenTypeCreateStructFixture()
+    protected function getContentTypeCreateStructFixture()
     {
         $struct = new CreateStruct();
         $struct->status = 1;

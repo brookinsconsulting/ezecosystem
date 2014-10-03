@@ -2,9 +2,9 @@
 /**
  * UserService class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\SignalSlot;
@@ -14,6 +14,17 @@ use eZ\Publish\API\Repository\Values\User\UserGroupCreateStruct;
 use eZ\Publish\API\Repository\Values\User\UserGroupUpdateStruct;
 use eZ\Publish\API\Repository\Values\User\UserCreateStruct;
 use eZ\Publish\API\Repository\Values\User\UserGroup;
+use eZ\Publish\API\Repository\Values\User\User;
+use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\CreateUserGroupSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\DeleteUserGroupSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\MoveUserGroupSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\UpdateUserGroupSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\CreateUserSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\DeleteUserSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\UpdateUserSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\AssignUserToUserGroupSignal;
+use eZ\Publish\Core\SignalSlot\Signal\UserService\UnAssignUserFromUserGroupSignal;
 
 /**
  * UserService class
@@ -71,7 +82,7 @@ class UserService implements UserServiceInterface
     {
         $returnValue = $this->service->createUserGroup( $userGroupCreateStruct, $parentGroup );
         $this->signalDispatcher->emit(
-            new Signal\UserService\CreateUserGroupSignal(
+            new CreateUserGroupSignal(
                 array(
                     'userGroupId' => $returnValue->id,
                 )
@@ -83,7 +94,7 @@ class UserService implements UserServiceInterface
     /**
      * Loads a user group for the given id
      *
-     * @param int $id
+     * @param mixed $id
      *
      * @return \eZ\Publish\API\Repository\Values\User\UserGroup
      *
@@ -122,7 +133,7 @@ class UserService implements UserServiceInterface
     {
         $returnValue = $this->service->deleteUserGroup( $userGroup );
         $this->signalDispatcher->emit(
-            new Signal\UserService\DeleteUserGroupSignal(
+            new DeleteUserGroupSignal(
                 array(
                     'userGroupId' => $userGroup->id,
                 )
@@ -143,7 +154,7 @@ class UserService implements UserServiceInterface
     {
         $returnValue = $this->service->moveUserGroup( $userGroup, $newParent );
         $this->signalDispatcher->emit(
-            new Signal\UserService\MoveUserGroupSignal(
+            new MoveUserGroupSignal(
                 array(
                     'userGroupId' => $userGroup->id,
                     'newParentId' => $newParent->id,
@@ -173,7 +184,7 @@ class UserService implements UserServiceInterface
     {
         $returnValue = $this->service->updateUserGroup( $userGroup, $userGroupUpdateStruct );
         $this->signalDispatcher->emit(
-            new Signal\UserService\UpdateUserGroupSignal(
+            new UpdateUserGroupSignal(
                 array(
                     'userGroupId' => $userGroup->id,
                 )
@@ -200,7 +211,7 @@ class UserService implements UserServiceInterface
     {
         $returnValue = $this->service->createUser( $userCreateStruct, $parentGroups );
         $this->signalDispatcher->emit(
-            new Signal\UserService\CreateUserSignal(
+            new CreateUserSignal(
                 array(
                     'userId' => $returnValue->id,
                 )
@@ -212,7 +223,7 @@ class UserService implements UserServiceInterface
     /**
      * Loads a user
      *
-     * @param int $userId
+     * @param mixed $userId
      *
      * @return \eZ\Publish\API\Repository\Values\User\User
      *
@@ -225,6 +236,8 @@ class UserService implements UserServiceInterface
 
     /**
      * Loads anonymous user
+     *
+     * @deprecated since 5.3, use loadUser( $anonymousUserId ) instead
      *
      * @uses loadUser()
      *
@@ -251,17 +264,46 @@ class UserService implements UserServiceInterface
     }
 
     /**
+     * Loads a user for the given login
+     *
+     * @param string $login
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException if a user with the given credentials was not found
+     */
+    public function loadUserByLogin( $login )
+    {
+        return $this->service->loadUserByLogin( $login );
+    }
+
+    /**
+     * Loads a user for the given email
+     *
+     * Returns an array of Users since eZ Publish has under certain circumstances allowed
+     * several users having same email in the past (by means of a configuration option).
+     *
+     * @param string $email
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User[]
+     */
+    public function loadUsersByEmail( $email )
+    {
+        return $this->service->loadUsersByEmail( $email );
+    }
+
+    /**
      * This method deletes a user
      *
      * @param \eZ\Publish\API\Repository\Values\User\User $user
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the authenticated user is not allowed to delete the user
      */
-    public function deleteUser( \eZ\Publish\API\Repository\Values\User\User $user )
+    public function deleteUser( User $user )
     {
         $returnValue = $this->service->deleteUser( $user );
         $this->signalDispatcher->emit(
-            new Signal\UserService\DeleteUserSignal(
+            new DeleteUserSignal(
                 array(
                     'userId' => $user->id,
                 )
@@ -286,11 +328,11 @@ class UserService implements UserServiceInterface
      *
      * @return \eZ\Publish\API\Repository\Values\User\User
      */
-    public function updateUser( \eZ\Publish\API\Repository\Values\User\User $user, \eZ\Publish\API\Repository\Values\User\UserUpdateStruct $userUpdateStruct )
+    public function updateUser( User $user, UserUpdateStruct $userUpdateStruct )
     {
         $returnValue = $this->service->updateUser( $user, $userUpdateStruct );
         $this->signalDispatcher->emit(
-            new Signal\UserService\UpdateUserSignal(
+            new UpdateUserSignal(
                 array(
                     'userId' => $user->id,
                 )
@@ -308,11 +350,11 @@ class UserService implements UserServiceInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the authenticated user is not allowed to assign the user group to the user
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the user is already in the given user group
      */
-    public function assignUserToUserGroup( \eZ\Publish\API\Repository\Values\User\User $user, UserGroup $userGroup )
+    public function assignUserToUserGroup( User $user, UserGroup $userGroup )
     {
         $returnValue = $this->service->assignUserToUserGroup( $user, $userGroup );
         $this->signalDispatcher->emit(
-            new Signal\UserService\AssignUserToUserGroupSignal(
+            new AssignUserToUserGroupSignal(
                 array(
                     'userId' => $user->id,
                     'userGroupId' => $userGroup->id,
@@ -331,11 +373,11 @@ class UserService implements UserServiceInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the authenticated user is not allowed to remove the user group from the user
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the user is not in the given user group
      */
-    public function unAssignUserFromUserGroup( \eZ\Publish\API\Repository\Values\User\User $user, UserGroup $userGroup )
+    public function unAssignUserFromUserGroup( User $user, UserGroup $userGroup )
     {
         $returnValue = $this->service->unAssignUserFromUserGroup( $user, $userGroup );
         $this->signalDispatcher->emit(
-            new Signal\UserService\UnAssignUserFromUserGroupSignal(
+            new UnAssignUserFromUserGroupSignal(
                 array(
                     'userId' => $user->id,
                     'userGroupId' => $userGroup->id,
@@ -354,7 +396,7 @@ class UserService implements UserServiceInterface
      *
      * @return \eZ\Publish\API\Repository\Values\User\UserGroup[]
      */
-    public function loadUserGroupsOfUser( \eZ\Publish\API\Repository\Values\User\User $user )
+    public function loadUserGroupsOfUser( User $user )
     {
         return $this->service->loadUserGroupsOfUser( $user );
     }

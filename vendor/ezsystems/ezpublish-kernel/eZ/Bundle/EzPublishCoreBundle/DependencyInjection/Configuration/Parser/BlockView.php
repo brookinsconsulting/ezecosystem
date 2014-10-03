@@ -2,16 +2,14 @@
 /**
  * File containing the BlockView class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class BlockView extends View
 {
@@ -30,17 +28,31 @@ class BlockView extends View
         $nodeBuilder
             ->arrayNode( static::NODE_KEY )
                 ->info( static::INFO )
-                ->useAttributeAsKey( "key" )
-                ->normalizeKeys( false )
-                ->prototype( "array" )
-                    ->children()
-                        ->scalarNode( "template" )->isRequired()->info( "Your template path, as MyBundle:subdir:my_template.html.twig" )->end()
-                        ->arrayNode( "match" )
-                            ->info( "Condition matchers configuration" )
-                            ->useAttributeAsKey( "key" )
-                            ->prototype( "variable" )->end()
+                ->children()
+                    ->arrayNode( 'block' )
+                        ->useAttributeAsKey( "key" )
+                        ->normalizeKeys( false )
+                        ->prototype( "array" )
+                            ->children()
+                                ->scalarNode( "template" )->isRequired()->info( "Your template path, as MyBundle:subdir:my_template.html.twig" )->end()
+                                ->arrayNode( "match" )
+                                    ->info( "Condition matchers configuration" )
+                                    ->useAttributeAsKey( "key" )
+                                    ->prototype( "variable" )->end()
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
+                ->end()
+                ->beforeNormalization()
+                ->always()
+                    ->then(
+                        // Adding one 'block' level in order to match the other view internal config structure.
+                        function ( $v )
+                        {
+                            return array( 'block' => $v );
+                        }
+                    )
                 ->end()
             ->end();
     }

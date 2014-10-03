@@ -2,16 +2,16 @@
 /**
  * File containing the FloatTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\Float\Type as Float;
 use eZ\Publish\Core\FieldType\Float\Value as FloatValue;
-use ReflectionObject;
+use eZ\Publish\Core\FieldType\ValidationError;
 
 /**
  * @group fieldType
@@ -32,7 +32,10 @@ class FloatTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new Float();
+        $fieldType = new Float();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -69,7 +72,7 @@ class FloatTest extends FieldTypeTest
     /**
      * Returns the empty value expected from the field type.
      *
-     * @return void
+     * @return FloatValue
      */
     protected function getEmptyValueExpectation()
     {
@@ -207,7 +210,7 @@ class FloatTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new FloatValue,
                 null,
             ),
             array(
@@ -257,7 +260,7 @@ class FloatTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null,
+                new FloatValue,
             ),
             array(
                 23.42,
@@ -409,6 +412,218 @@ class FloatTest extends FieldTypeTest
                         'maxFloatValue' => 'bar',
                     ),
                 )
+            ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezfloat';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), "" ),
+            array( new FloatValue( 23.42 ), "23.42" )
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings and
+     * field value which are considered valid by the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten if
+     * a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "StringLengthValidator" => array(
+     *                      "minStringLength" => 2,
+     *                      "maxStringLength" => 10,
+     *                  ),
+     *              ),
+     *          ),
+     *          new TextLineValue( "lalalala" ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  'isMultiple' => true
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              array(
+     *                  "BE" => array(
+     *                      "Name" => "Belgium",
+     *                      "Alpha2" => "BE",
+     *                      "Alpha3" => "BEL",
+     *                      "IDC" => 32,
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideValidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'FloatValueValidator' => array(
+                            'minFloatValue' => 5.1,
+                            'maxFloatValue' => 10.5
+                        ),
+                    ),
+                ),
+                new FloatValue( 7.5 ),
+            ),
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings,
+     * field value and corresponding validation errors returned by
+     * the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten
+     * if a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "IntegerValueValidator" => array(
+     *                      "minIntegerValue" => 5,
+     *                      "maxIntegerValue" => 10
+     *                  ),
+     *              ),
+     *          ),
+     *          new IntegerValue( 3 ),
+     *          array(
+     *              new ValidationError(
+     *                  "The value can not be lower than %size%.",
+     *                  null,
+     *                  array(
+     *                      "size" => 5
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  "isMultiple" => false
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              "BE" => array(
+     *                  "Name" => "Belgium",
+     *                  "Alpha2" => "BE",
+     *                  "Alpha3" => "BEL",
+     *                  "IDC" => 32,
+     *              ),
+     *              "FR" => array(
+     *                  "Name" => "France",
+     *                  "Alpha2" => "FR",
+     *                  "Alpha3" => "FRA",
+     *                  "IDC" => 33,
+     *              ),
+     *          )
+     *      ),
+     *      array(
+     *          new ValidationError(
+     *              "Field definition does not allow multiple countries to be selected."
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideInvalidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'FloatValueValidator' => array(
+                            'minFloatValue' => 5.1,
+                            'maxFloatValue' => 10.5
+                        ),
+                    ),
+                ),
+                new FloatValue( 3.2 ),
+                array(
+                    new ValidationError(
+                        "The value can not be lower than %size%.",
+                        null,
+                        array(
+                            "size" => 5.1
+                        )
+                    ),
+                ),
+            ),
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'FloatValueValidator' => array(
+                            'minFloatValue' => 5.1,
+                            'maxFloatValue' => 10.5
+                        ),
+                    ),
+                ),
+                new FloatValue( 13.2 ),
+                array(
+                    new ValidationError(
+                        "The value can not be higher than %size%.",
+                        null,
+                        array(
+                            "size" => 10.5
+                        )
+                    ),
+                ),
+            ),
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'FloatValueValidator' => array(
+                            'minFloatValue' => 10.5,
+                            'maxFloatValue' => 5.1
+                        ),
+                    ),
+                ),
+                new FloatValue( 7.5 ),
+                array(
+                    new ValidationError(
+                        "The value can not be higher than %size%.",
+                        null,
+                        array(
+                            "size" => 5.1
+                        )
+                    ),
+                    new ValidationError(
+                        "The value can not be lower than %size%.",
+                        null,
+                        array(
+                            "size" => 10.5
+                        )
+                    ),
+                ),
             ),
         );
     }

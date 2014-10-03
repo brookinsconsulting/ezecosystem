@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\User\Limitation class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Values\User;
@@ -28,9 +28,11 @@ abstract class Limitation extends ValueObject
     const NEWSECTION = "NewSection";
     const SITEACCESS = "SiteAccess";
     const STATE = "State";
+    const NEWSTATE = "NewState";
     const SUBTREE = "Subtree";
     const USERGROUP = "Group";
     const PARENTUSERGROUP = "ParentGroup";
+    const STATUS = "Status";
 
     /**
      * Returns the limitation identifier (one of the defined constants) or a custom limitation

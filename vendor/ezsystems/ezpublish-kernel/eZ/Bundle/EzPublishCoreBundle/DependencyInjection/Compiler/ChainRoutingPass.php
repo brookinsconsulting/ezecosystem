@@ -2,9 +2,9 @@
 /**
  * File containing the ChainRoutingPass class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Compiler;
@@ -33,6 +33,20 @@ class ChainRoutingPass implements CompilerPassInterface
         if ( $container->hasDefinition( 'router.default' ) )
         {
             $defaultRouter = $container->getDefinition( 'router.default' );
+            $defaultRouter->addMethodCall( 'setSiteAccess', array( new Reference( 'ezpublish.siteaccess' ) ) );
+            $defaultRouter->addMethodCall( 'setConfigResolver', array( new Reference( 'ezpublish.config.resolver' ) ) );
+            $defaultRouter->addMethodCall(
+                'setNonSiteAccessAwareRoutes',
+                array( '%ezpublish.default_router.non_siteaccess_aware_routes%' )
+            );
+            $defaultRouter->addMethodCall(
+                'setLegacyAwareRoutes',
+                array( '%ezpublish.default_router.legacy_aware_routes%' )
+            );
+            $defaultRouter->addMethodCall(
+                'setSiteAccessRouter',
+                array( new Reference( 'ezpublish.siteaccess_router' ) )
+            );
             if ( !$defaultRouter->hasTag( 'router' ) )
             {
                 $defaultRouter->addTag(

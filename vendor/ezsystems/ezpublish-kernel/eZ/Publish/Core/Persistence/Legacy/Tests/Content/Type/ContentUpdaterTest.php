@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\Content\Type\ContentTypeUpdaterTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content\Type;
@@ -16,11 +16,12 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeId as Cr
 use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Test case for Content Type Updater.
  */
-class ContentUpdaterTest extends \PHPUnit_Framework_TestCase
+class ContentUpdaterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Content gateway mock
@@ -176,7 +177,7 @@ class ContentUpdaterTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     new Query(
                         array(
-                            'criterion' => new CriterionContentTypeId( 23 )
+                            'filter' => new CriterionContentTypeId( 23 )
                         )
                     )
                 )

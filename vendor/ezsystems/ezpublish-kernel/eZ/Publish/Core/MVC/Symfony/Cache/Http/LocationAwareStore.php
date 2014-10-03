@@ -2,9 +2,9 @@
 /**
  * File containing the LocationAwareStore class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\Cache\Http;
@@ -93,6 +93,7 @@ class LocationAwareStore extends Store implements ContentPurger
             $key = substr( $key, $pos + 1 );
 
             list( $locationCacheDir, $locationId ) = explode( '/', $prefix );
+            unset( $locationCacheDir );
             // If cache purge is in progress, serve stale cache instead of regular cache.
             // We first check for a global cache purge, then for the current location.
             foreach ( array( $this->getLocationCacheLockName(), $this->getLocationCacheLockName( $locationId ) ) as $cacheLockFile )

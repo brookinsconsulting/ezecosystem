@@ -3,8 +3,8 @@
 // Definition of ezsrRatingObject class
 //
 // SOFTWARE NAME: eZ Star Rating
-// SOFTWARE RELEASE: 5.0.0
-// COPYRIGHT NOTICE: Copyright (C) 2008 Bruce Morrison, 2009-2012 eZ Systems AS
+// SOFTWARE RELEASE: 2.x
+// COPYRIGHT NOTICE: Copyright (C) 2008 Bruce Morrison, 2009-2014 eZ Systems AS
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
 //   This program is free software; you can redistribute it and/or
@@ -444,12 +444,12 @@ class ezsrRatingObject extends eZPersistentObject
                             FROM
                              ezcontentobject_tree,
                              ezcontentobject_tree owner_tree,
-                             ezcontentclass
+                             ezcontentclass,
+                             ezcontentobject
                              $fromSql
                              $versionNameTables
                              $extendedAttributeFilter[tables]
                              $sqlPermissionChecking[from]
-                             ,ezcontentobject
                              $ratingFromSql
                             WHERE
                              $extendedAttributeFilter[joins]
@@ -480,7 +480,7 @@ class ezsrRatingObject extends eZPersistentObject
 
         unset($db);
 
-        if ( isset( $rows[0] ) && is_array( $rows ) )
+        if ( is_array( $rows ) && !empty( $rows ) )
         {
             if ( $asObject )
             {

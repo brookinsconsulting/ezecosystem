@@ -26,8 +26,6 @@ class Configuration implements ConfigurationInterface
      * Generates the configuration tree builder.
      *
      * @return TreeBuilder The tree builder
-     *
-     * @throws \RuntimeException When using the deprecated 'charset' setting
      */
     public function getConfigTreeBuilder()
     {
@@ -36,31 +34,33 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('charset')
-                    ->defaultNull()
-                    ->beforeNormalization()
-                        ->ifTrue(function($v) { return null !== $v; })
-                        ->then(function($v) {
-                            $message = 'The charset setting is deprecated. Just remove it from your configuration file.';
-
-                            if ('UTF-8' !== $v) {
-                                $message .= sprintf('You need to define a getCharset() method in your Application Kernel class that returns "%s".', $v);
-                            }
-
-                            throw new \RuntimeException($message);
-                        })
-                    ->end()
-                ->end()
                 ->scalarNode('secret')->end()
-                ->scalarNode('trust_proxy_headers')->defaultFalse()->end() // @deprecated, to be removed in 2.3
+                ->scalarNode('http_method_override')
+                    ->info("Set true to enable support for the '_method' request parameter to determine the intended HTTP method on POST requests.")
+                    ->defaultTrue()
+                ->end()
                 ->arrayNode('trusted_proxies')
                     ->beforeNormalization()
-                        ->ifTrue(function($v) { return !is_array($v) && !is_null($v); })
-                        ->then(function($v) { return is_bool($v) ? array() : preg_split('/\s*,\s*/', $v); })
+                        ->ifTrue(function ($v) { return !is_array($v) && !is_null($v); })
+                        ->then(function ($v) { return is_bool($v) ? array() : preg_split('/\s*,\s*/', $v); })
                     ->end()
                     ->prototype('scalar')
                         ->validate()
-                            ->ifTrue(function($v) { return !empty($v) && !filter_var($v, FILTER_VALIDATE_IP); })
+                            ->ifTrue(function ($v) {
+                                if (empty($v)) {
+                                    return false;
+                                }
+
+                                if (false !== strpos($v, '/')) {
+                                    list($v, $mask) = explode('/', $v, 2);
+
+                                    if (strcmp($mask, (int) $mask) || $mask < 1 || $mask > (false !== strpos($v, ':') ? 128 : 32)) {
+                                        return true;
+                                    }
+                                }
+
+                                return !filter_var($v, FILTER_VALIDATE_IP);
+                            })
                             ->thenInvalid('Invalid proxy IP "%s"')
                         ->end()
                     ->end()
@@ -68,6 +68,13 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('ide')->defaultNull()->end()
                 ->booleanNode('test')->end()
                 ->scalarNode('default_locale')->defaultValue('en')->end()
+                ->arrayNode('trusted_hosts')
+                    ->beforeNormalization()
+                        ->ifTrue(function ($v) { return is_string($v); })
+                        ->then(function ($v) { return array($v); })
+                    ->end()
+                    ->prototype('scalar')->end()
+                ->end()
             ->end()
         ;
 
@@ -81,6 +88,7 @@ class Configuration implements ConfigurationInterface
         $this->addTranslatorSection($rootNode);
         $this->addValidationSection($rootNode);
         $this->addAnnotationsSection($rootNode);
+        $this->addSerializerSection($rootNode);
 
         return $treeBuilder;
     }
@@ -138,6 +146,7 @@ class Configuration implements ConfigurationInterface
                     ->info('profiler configuration')
                     ->canBeEnabled()
                     ->children()
+                        ->booleanNode('collect')->defaultTrue()->end()
                         ->booleanNode('only_exceptions')->defaultFalse()->end()
                         ->booleanNode('only_master_requests')->defaultFalse()->end()
                         ->scalarNode('dsn')->defaultValue('file:%kernel.cache_dir%/profiler')->end()
@@ -197,16 +206,6 @@ class Configuration implements ConfigurationInterface
                     ->info('session configuration')
                     ->canBeUnset()
                     ->children()
-                        ->booleanNode('auto_start')
-                            ->info('DEPRECATED! Session starts on demand')
-                            ->defaultFalse()
-                            ->beforeNormalization()
-                                ->ifTrue(function($v) { return null !== $v; })
-                                ->then(function($v) {
-                                    throw new \RuntimeException('The auto_start setting is deprecated. Just remove it from your configuration file.');
-                                })
-                            ->end()
-                        ->end()
                         ->scalarNode('storage_id')->defaultValue('session.storage.native')->end()
                         ->scalarNode('handler_id')->defaultValue('session.handler.native_file')->end()
                         ->scalarNode('name')->end()
@@ -219,11 +218,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('gc_probability')->end()
                         ->scalarNode('gc_maxlifetime')->end()
                         ->scalarNode('save_path')->defaultValue('%kernel.cache_dir%/sessions')->end()
-                        ->scalarNode('lifetime')->info('DEPRECATED! Please use: cookie_lifetime')->end()
-                        ->scalarNode('path')->info('DEPRECATED! Please use: cookie_path')->end()
-                        ->scalarNode('domain')->info('DEPRECATED! Please use: cookie_domain')->end()
-                        ->booleanNode('secure')->info('DEPRECATED! Please use: cookie_secure')->end()
-                        ->booleanNode('httponly')->info('DEPRECATED! Please use: cookie_httponly')->end()
                     ->end()
                 ->end()
             ->end()
@@ -232,7 +226,7 @@ class Configuration implements ConfigurationInterface
 
     private function addTemplatingSection(ArrayNodeDefinition $rootNode)
     {
-        $organizeUrls = function($urls) {
+        $organizeUrls = function ($urls) {
             $urls += array(
                 'http' => array(),
                 'ssl'  => array(),
@@ -269,8 +263,8 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultChildrenIfNoneSet()
                                     ->prototype('scalar')->defaultValue('FrameworkBundle:Form')->end()
                                     ->validate()
-                                        ->ifTrue(function($v) {return !in_array('FrameworkBundle:Form', $v); })
-                                        ->then(function($v){
+                                        ->ifTrue(function ($v) {return !in_array('FrameworkBundle:Form', $v); })
+                                        ->then(function ($v) {
                                             return array_merge(array('FrameworkBundle:Form'), $v);
                                         })
                                     ->end()
@@ -284,8 +278,8 @@ class Configuration implements ConfigurationInterface
                             ->performNoDeepMerging()
                             ->addDefaultsIfNotSet()
                             ->beforeNormalization()
-                                ->ifTrue(function($v) { return !is_array($v); })
-                                ->then(function($v) { return array($v); })
+                                ->ifTrue(function ($v) { return !is_array($v); })
+                                ->then(function ($v) { return array($v); })
                             ->end()
                             ->beforeNormalization()
                                 ->always()
@@ -309,8 +303,8 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->requiresAtLeastOneElement()
                             ->beforeNormalization()
-                                ->ifTrue(function($v){ return !is_array($v); })
-                                ->then(function($v){ return array($v); })
+                                ->ifTrue(function ($v) { return !is_array($v); })
+                                ->then(function ($v) { return array($v); })
                             ->end()
                             ->prototype('scalar')->end()
                         ->end()
@@ -319,8 +313,8 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('loaders')
                             ->beforeNormalization()
-                                ->ifTrue(function($v){ return !is_array($v); })
-                                ->then(function($v){ return array($v); })
+                                ->ifTrue(function ($v) { return !is_array($v); })
+                                ->then(function ($v) { return array($v); })
                              ->end()
                             ->prototype('scalar')->end()
                         ->end()
@@ -338,8 +332,8 @@ class Configuration implements ConfigurationInterface
                                         ->performNoDeepMerging()
                                         ->addDefaultsIfNotSet()
                                         ->beforeNormalization()
-                                            ->ifTrue(function($v) { return !is_array($v); })
-                                            ->then(function($v) { return array($v); })
+                                            ->ifTrue(function ($v) { return !is_array($v); })
+                                            ->then(function ($v) { return array($v); })
                                         ->end()
                                         ->beforeNormalization()
                                             ->always()
@@ -407,6 +401,18 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('file_cache_dir')->defaultValue('%kernel.cache_dir%/annotations')->end()
                         ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
                     ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    private function addSerializerSection(ArrayNodeDefinition $rootNode)
+    {
+        $rootNode
+            ->children()
+                ->arrayNode('serializer')
+                    ->info('serializer configuration')
+                    ->canBeEnabled()
                 ->end()
             ->end()
         ;

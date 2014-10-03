@@ -2,9 +2,9 @@
 /**
  * File containing the eZURI class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -258,8 +258,7 @@ class eZURI
             }
             else if ( isset( $paramName ) )
             {
-                if ( !empty( $this->URIArray[$key] ) )
-                    $this->UserArray[ $paramName ] .= '/' . $this->URIArray[$key];
+                $this->UserArray[ $paramName ] .= '/' . $this->URIArray[$key];
                 unset( $this->URIArray[$key] );
             }
         }
@@ -592,10 +591,26 @@ class eZURI
      * @param string &$href
      * @param boolean $ignoreIndexDir
      * @param string $serverURL full|relative
+     * @param boolean $htmlEscape true to html escape the result for HTML
      * @return string the link to use
      */
-    public static function transformURI( &$href, $ignoreIndexDir = false, $serverURL = null )
+    public static function transformURI( &$href, $ignoreIndexDir = false, $serverURL = null, $htmlEscape = true )
     {
+        // When using ezroot, immediately stop if the linked element is external
+        if ( $ignoreIndexDir )
+        {
+            // The initial / needs to be removed as it is not expected by the cluster handler,
+            // but we must use a temp variable since $href is required later
+            $trimmedHref = ltrim( $href, '/' );
+            $modifiedHref = eZClusterFileHandler::instance()->applyServerUri( $trimmedHref );
+            if ( $modifiedHref != $trimmedHref )
+            {
+                $href = $htmlEscape ? self::escapeHtmlTransformUri( $href ) : $href;
+                return true;
+            }
+            unset( $modifiedHref );
+        }
+
         if ( $serverURL === null )
         {
             $serverURL = self::$transformURIMode;
@@ -608,7 +623,7 @@ class eZURI
             $href = '/';
         else if ( $href[0] == '#' )
         {
-            $href = htmlspecialchars( $href );
+            $href = $htmlEscape ? htmlspecialchars( $href ) : $href;
             return true;
         }
         else if ( $href[0] != '/' )
@@ -625,12 +640,25 @@ class eZURI
             $href = preg_replace( "#^(//)#", "/", $href );
             $href = preg_replace( "#(^.*)(/+)$#", "\$1", $href );
         }
-        $href = str_replace( '&amp;amp;', '&amp;', htmlspecialchars( $href ) );
+        $href = $htmlEscape ? self::escapeHtmlTransformUri( $href ) : $href;
 
         if ( $href == "" )
             $href = "/";
 
         return true;
+    }
+
+    /**
+     * Encoding cleanup used by transformURI.
+     * Extracted in a private method to avoid duplicated code.
+     *
+     * @param string $href
+     *
+     * @return string
+     */
+    private static function escapeHtmlTransformUri( $href )
+    {
+        return str_replace( '&amp;amp;', '&amp;', htmlspecialchars( $href ) );
     }
 
     /**

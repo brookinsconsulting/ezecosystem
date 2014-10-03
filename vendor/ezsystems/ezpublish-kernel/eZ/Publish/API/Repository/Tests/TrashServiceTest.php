@@ -2,9 +2,9 @@
 /**
  * File containing the TrashServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
@@ -12,6 +12,7 @@ namespace eZ\Publish\API\Repository\Tests;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
  * Test case for operations in the TrashService using in memory storage.
@@ -131,7 +132,7 @@ class TrashServiceTest extends BaseTrashServiceTest
                 $locationService->loadLocationByRemoteId( $remoteId );
                 $this->fail( "Location '{$remoteId}' should exist.'" );
             }
-            catch ( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+            catch ( NotFoundException $e )
             {
                 // echo $e->getFile(), ' +', $e->getLine(), PHP_EOL;
             }
@@ -258,6 +259,16 @@ class TrashServiceTest extends BaseTrashServiceTest
             $location->pathString,
             $locationReloaded->pathString
         );
+
+        try
+        {
+            $trashService->loadTrashItem( $trashItem->id );
+            $this->fail( "Trash item was not removed after being recovered." );
+        }
+        catch ( NotFoundException $e )
+        {
+            // All well
+        }
     }
 
     /**
@@ -301,10 +312,20 @@ class TrashServiceTest extends BaseTrashServiceTest
                     )
                 );
             }
-            catch ( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+            catch ( NotFoundException $e )
             {
                 // All well
             }
+        }
+
+        try
+        {
+            $trashService->loadTrashItem( $trashItem->id );
+            $this->fail( "Trash item was not removed after being recovered." );
+        }
+        catch ( NotFoundException $e )
+        {
+            // All well
         }
     }
 
@@ -351,6 +372,55 @@ class TrashServiceTest extends BaseTrashServiceTest
             ),
             $location
         );
+
+        try
+        {
+            $trashService->loadTrashItem( $trashItem->id );
+            $this->fail( "Trash item was not removed after being recovered." );
+        }
+        catch ( NotFoundException $e )
+        {
+            // All well
+        }
+    }
+
+    /**
+     * Test for the recover() method.
+     *
+     * @see \eZ\Publish\API\Repository\TrashService::recover($trashItem)
+     * @depends eZ\Publish\API\Repository\Tests\TrashServiceTest::testRecover
+     */
+    public function testRecoverIncrementsChildCountOnOriginalParent()
+    {
+        $repository = $this->getRepository();
+        $trashService = $repository->getTrashService();
+        $locationService = $repository->getLocationService();
+
+        $location = $locationService->loadLocation( $this->generateId( 'location', 1 ) );
+
+        $trashItem = $this->createTrashItem();
+
+        /* BEGIN: Use Case */
+        $childCount = $locationService->getLocationChildCount( $location );
+
+        // Recover location with new location
+        $trashService->recover( $trashItem );
+        /* END: Use Case */
+
+        $this->assertEquals(
+            $childCount + 1,
+            $locationService->getLocationChildCount( $location )
+        );
+
+        try
+        {
+            $trashService->loadTrashItem( $trashItem->id );
+            $this->fail( "Trash item was not removed after being recovered." );
+        }
+        catch ( NotFoundException $e )
+        {
+            // All well
+        }
     }
 
     /**
@@ -389,6 +459,16 @@ class TrashServiceTest extends BaseTrashServiceTest
             $childCount + 1,
             $locationService->getLocationChildCount( $location )
         );
+
+        try
+        {
+            $trashService->loadTrashItem( $trashItem->id );
+            $this->fail( "Trash item was not removed after being recovered." );
+        }
+        catch ( NotFoundException $e )
+        {
+            // All well
+        }
     }
 
     /**
@@ -408,7 +488,7 @@ class TrashServiceTest extends BaseTrashServiceTest
 
         // Create a search query for all trashed items
         $query = new Query();
-        $query->criterion = new Criterion\LogicalAnd(
+        $query->filter = new Criterion\LogicalAnd(
             array(
                 new Criterion\Field( 'title', Criterion\Operator::LIKE, '*' )
             )
@@ -447,7 +527,7 @@ class TrashServiceTest extends BaseTrashServiceTest
 
         // Create a search query for all trashed items
         $query = new Query();
-        $query->criterion = new Criterion\LogicalAnd(
+        $query->filter = new Criterion\LogicalAnd(
             array(
                 new Criterion\Field( 'title', Criterion\Operator::LIKE, '*' )
             )
@@ -490,7 +570,7 @@ class TrashServiceTest extends BaseTrashServiceTest
 
         // Create a search query for all trashed items
         $query = new Query();
-        $query->criterion = new Criterion\LogicalAnd(
+        $query->filter = new Criterion\LogicalAnd(
             array(
                 new Criterion\Field( 'title', Criterion\Operator::LIKE, '*' )
             )

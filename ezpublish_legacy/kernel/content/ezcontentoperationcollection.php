@@ -2,9 +2,9 @@
 /**
  * File containing the eZContentOperationCollection class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -16,6 +16,11 @@
 
 class eZContentOperationCollection
 {
+    /**
+     * Use by {@see beginTransaction()} and {@see commitTransaction()} to handle nested publish operations
+     */
+    private static $operationsStack = 0;
+
     /*!
      Constructor
     */
@@ -109,7 +114,11 @@ class eZContentOperationCollection
      */
     static public function beginTransaction()
     {
-        eZDB::instance()->begin();
+        // We only start a transaction if another content publish operation hasn't been started
+        if ( ++self::$operationsStack === 1 )
+        {
+            eZDB::instance()->begin();
+        }
     }
 
     /**
@@ -117,7 +126,10 @@ class eZContentOperationCollection
      */
     static public function commitTransaction()
     {
-        eZDB::instance()->commit();
+        if ( --self::$operationsStack === 0 )
+        {
+            eZDB::instance()->commit();
+        }
     }
 
     static public function setVersionStatus( $objectID, $versionNum, $status )
@@ -350,6 +362,12 @@ class eZContentOperationCollection
             {
                 $existingNode->setAttribute( 'remote_id', $nodeAssignment->attribute( 'parent_remote_id' ) );
             }
+            if ( $nodeAssignment->attribute( 'is_hidden' ) )
+            {
+                $existingNode->setAttribute( 'is_hidden', 1 );
+                $existingNode->setAttribute( 'is_invisible', 1 );
+            }
+            $existingNode->setAttribute( 'priority', $nodeAssignment->attribute( 'priority' ) );
             $existingNode->setAttribute( 'sort_field', $nodeAssignment->attribute( 'sort_field' ) );
             $existingNode->setAttribute( 'sort_order', $nodeAssignment->attribute( 'sort_order' ) );
         }
@@ -472,9 +490,19 @@ class eZContentOperationCollection
     static public function removeOldNodes( $objectID, $versionNum )
     {
         $object = eZContentObject::fetch( $objectID );
-
+        if ( !$object instanceof eZContentObject )
+        {
+            eZDebug::writeError( 'Unable to find object #' . $objectID, __METHOD__ );
+            return;
+        }
 
         $version = $object->version( $versionNum );
+        if ( !$version instanceof eZContentObjectVersion )
+        {
+            eZDebug::writeError( 'Unable to find version #' . $versionNum . ' for object #' . $objectID, __METHOD__ );
+            return;
+        }
+
         $moveToTrash = true;
 
         $assignedExistingNodes = $object->attribute( 'assigned_nodes' );
@@ -575,7 +603,7 @@ class eZContentOperationCollection
         if ( eZSearch::needRemoveWithUpdate() )
         {
             eZDebug::accumulatorStart( 'remove_object', 'search_total', 'remove object' );
-            eZSearch::removeObject( $object, $needCommit );
+            eZSearch::removeObjectById( $objectID );
             eZDebug::accumulatorStop( 'remove_object' );
         }
 
@@ -871,6 +899,8 @@ class eZContentOperationCollection
             }
         }
 
+        // Triggering content/cache filter for Http cache purge
+        ezpEvent::getInstance()->filter( 'content/cache', $removeNodeIdList );
         // we don't clear template block cache here since it's cleared in eZContentObjectTreeNode::removeNode()
 
         return array( 'status' => true );
@@ -887,6 +917,12 @@ class eZContentOperationCollection
     static public function deleteObject( $deleteIDArray, $moveToTrash = false )
     {
         $ini = eZINI::instance();
+        $aNodes = eZContentObjectTreeNode::fetch( $deleteIDArray );
+        if( !is_array( $aNodes ) )
+        {
+            $aNodes = array( $aNodes );
+        }
+
         $delayedIndexingValue = $ini->variable( 'SearchSettings', 'DelayedIndexing' );
         if ( $delayedIndexingValue === 'enabled' || $delayedIndexingValue === 'classbased' )
         {
@@ -894,9 +930,6 @@ class eZContentOperationCollection
             $classList = $ini->variable( 'SearchSettings', 'DelayedIndexingClassList' ); // Will be used below if DelayedIndexing is classbased
             $assignedNodesByObject = array();
             $nodesToDeleteByObject = array();
-            $aNodes = eZContentObjectTreeNode::fetch( $deleteIDArray );
-            if( !is_array( $aNodes ) )
-                $aNodes = array( $aNodes );
 
             foreach ( $aNodes as $node )
             {
@@ -944,6 +977,14 @@ class eZContentOperationCollection
             }
         }
 
+        // Add assigned nodes to the clear cache list
+        // This allows to clear assigned nodes separately (e.g. in reverse proxies)
+        // as once content is removed, there is no more assigned nodes, and http cache clear is not possible any more.
+        // See https://jira.ez.no/browse/EZP-22447
+        foreach ( $aNodes as $node )
+        {
+            eZContentCacheManager::addAdditionalNodeIDPerObject( $node->attribute( 'contentobject_id' ), $node->attribute( 'node_id' ) );
+        }
         eZContentObjectTreeNode::removeSubtrees( $deleteIDArray, $moveToTrash );
         return array( 'status' => true );
     }
@@ -1157,7 +1198,7 @@ class eZContentOperationCollection
      *
      * @param int $parentNodeID
      * @param array $priorityArray
-     * @param array $priorityArray
+     * @param array $priorityIDArray
      *
      * @return array An array with operation status, always true
      */
@@ -1198,6 +1239,8 @@ class eZContentOperationCollection
     {
         eZContentObjectTreeNode::updateMainNodeID( $mainAssignmentID, $ObjectID, false, $mainAssignmentParentID );
         eZContentCacheManager::clearContentCacheIfNeeded( $ObjectID );
+        eZContentOperationCollection::registerSearchObject( $ObjectID );
+
         return array( 'status' => true );
     }
 

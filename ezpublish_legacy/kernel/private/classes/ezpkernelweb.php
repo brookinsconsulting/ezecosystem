@@ -2,9 +2,9 @@
 /**
  * File containing the ezpKernelWeb class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 /**
@@ -12,7 +12,7 @@
  *
  * Allows kernel to be executed as Controller via run()
  */
-class ezpKernelWeb implements ezpKernelHandler
+class ezpKernelWeb implements ezpWebBasedKernelHandler
 {
     /**
      * @var ezpMobileDeviceDetect
@@ -122,6 +122,20 @@ class ezpKernelWeb implements ezpKernelHandler
             // their overrides
             eZINI::injectSettings( $injectedSettings );
         }
+
+        if ( isset( $settings['injected-merge-settings'] ) )
+        {
+            $injectedSettings = array();
+            foreach ( $settings["injected-merge-settings"] as $keySetting => $injectedSetting )
+            {
+                list( $file, $section, $setting ) = explode( "/", $keySetting );
+                $injectedSettings[$file][$section][$setting] = $injectedSetting;
+            }
+            // those settings override anything else in local .ini files and
+            // their overrides
+            eZINI::injectMergeSettings( $injectedSettings );
+        }
+
         $this->settings = $settings + array(
             'siteaccess'            => null,
             'use-exceptions'        => false,
@@ -277,12 +291,6 @@ class ezpKernelWeb implements ezpKernelHandler
 
         $this->mobileDeviceDetect = new ezpMobileDeviceDetect( ezpMobileDeviceDetectFilter::getFilter() );
         // eZSession::setSessionArray( $mainRequest->session );
-
-        /**
-         * Check for activating Debug by user ID (Final checking. The first was in eZDebug::updateSettings())
-         * @uses eZUser::instance() So needs to be executed after eZSession::start()|lazyStart()
-         */
-        eZDebug::checkDebugByUser();
     }
 
     /**
@@ -359,7 +367,8 @@ class ezpKernelWeb implements ezpKernelHandler
 
         if ( $this->module->exitStatus() == eZModule::STATUS_REDIRECT )
         {
-            $this->redirect();
+            $this->shutdown();
+            return $this->redirect();
         }
 
         $uiContextName = $this->module->uiContextName();
@@ -389,7 +398,7 @@ class ezpKernelWeb implements ezpKernelHandler
 
             // Update last accessed view page
             if ( $currentURI != $lastAccessedViewURI &&
-                 !in_array( $uiContextName, array( 'edit', 'administration', 'browse', 'authentication' ) ) )
+                 !in_array( $uiContextName, array( 'edit', 'administration', 'ajax', 'browse', 'authentication' ) ) )
             {
                 $http->setSessionVariable( "LastAccessesURI", $currentURI );
             }
@@ -947,6 +956,9 @@ class ezpKernelWeb implements ezpKernelHandler
             }
         }
 
+        // After the module redirect url is completed, add the queryString params so they carry over the redirect operation
+        $redirectURI .= eZSys::queryString();
+
         if ( $ini->variable( 'ContentSettings', 'StaticCache' ) == 'enabled' )
         {
             $staticCacheHandlerClassName = $ini->variable( 'ContentSettings', 'StaticCacheHandler' );
@@ -955,11 +967,7 @@ class ezpKernelWeb implements ezpKernelHandler
 
         eZDB::checkTransactionCounter();
 
-        if ( $automaticRedirect )
-        {
-            eZHTTPTool::redirect( $redirectURI, array(), $this->module->redirectStatus() );
-        }
-        else
+        if ( !$automaticRedirect )
         {
             // Make sure any errors or warnings are reported
             if ( $ini->variable( 'DebugSettings', 'DisplayDebugWarnings' ) === 'enabled' )
@@ -1004,9 +1012,10 @@ class ezpKernelWeb implements ezpKernelHandler
             eZDebug::addTimingPoint( "Script end" );
 
             eZDisplayResult( $templateResult );
+            eZExecution::cleanExit();
         }
 
-        eZExecution::cleanExit();
+        return eZHTTPTool::redirect( $redirectURI, array(), $this->module->redirectStatus(), true, true );
     }
 
     /**
@@ -1180,6 +1189,12 @@ class ezpKernelWeb implements ezpKernelHandler
         );
 
         $this->isInitialized = true;
+
+        /**
+         * Check for activating Debug by user ID (Final checking. The first was in eZDebug::updateSettings())
+         * @uses eZUser::instance() So needs to be executed after eZSession::start()|lazyStart()
+         */
+        eZDebug::checkDebugByUser();
     }
 
     /**
@@ -1189,7 +1204,15 @@ class ezpKernelWeb implements ezpKernelHandler
     {
         $this->requestInit();
 
-        $return = $callback();
+        try
+        {
+            $return = $callback();
+        }
+        catch ( Exception $e )
+        {
+            $this->shutdown( $postReinitialize );
+            throw $e;
+        }
 
         $this->shutdown( $postReinitialize );
 
@@ -1203,6 +1226,7 @@ class ezpKernelWeb implements ezpKernelHandler
     {
         eZExecution::cleanup();
         eZExecution::setCleanExit();
+        eZExpiryHandler::shutdown();
         if ( $reInitialize )
             $this->isInitialized = false;
     }
@@ -1245,5 +1269,15 @@ class ezpKernelWeb implements ezpKernelHandler
     public function getServiceContainer()
     {
         return $this->settings['service-container'];
+    }
+
+    /**
+     * Allows user to avoid executing the pagelayout template when running the kernel
+     *
+     * @param bool $usePagelayout
+     */
+    public function setUsePagelayout( $usePagelayout )
+    {
+        $this->siteBasics['show-page-layout'] = (bool)$usePagelayout;
     }
 }

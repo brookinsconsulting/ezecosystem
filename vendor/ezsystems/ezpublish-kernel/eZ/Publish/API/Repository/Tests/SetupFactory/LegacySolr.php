@@ -2,22 +2,16 @@
 /**
  * File containing the Test Setup Factory base class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests\SetupFactory;
 
-use eZ\Publish\Core\Persistence\Solr;
-use eZ\Publish\Core\Persistence\Solr\Content\Search;
-use eZ\Publish\Core\Persistence\Solr\Content\Search\CriterionVisitor;
-use eZ\Publish\Core\Persistence\Solr\Content\Search\FacetBuilderVisitor;
-use eZ\Publish\Core\Persistence\Solr\Content\Search\FieldNameGenerator;
-use eZ\Publish\Core\Persistence\Solr\Content\Search\FieldRegistry;
-use eZ\Publish\Core\Persistence\Solr\Content\Search\FieldValueMapper;
-use eZ\Publish\Core\Persistence\Solr\Content\Search\SortClauseVisitor;
-use eZ\Publish\Core\FieldType;
+use eZ\Publish\Core\Base\ServiceContainer;
+use eZ\Publish\Core\Base\Container\Compiler;
+use PDO;
 
 /**
  * A Test Factory is used to setup the infrastructure for a tests, based on a
@@ -28,162 +22,94 @@ class LegacySolr extends Legacy
     /**
      * Returns a configured repository for testing.
      *
+     * @param bool $initializeFromScratch
+     *
      * @return \eZ\Publish\API\Repository\Repository
      */
     public function getRepository( $initializeFromScratch = true )
     {
+        // Load repository first so all initialization steps are done
         $repository = parent::getRepository( $initializeFromScratch );
-
-        // @HACK: This is a hack to inject a different search handler -- is
-        // there a well supported way to do this? I don't think so.
-        $persistenceProperty = new \ReflectionProperty( $repository, 'persistenceHandler' );
-        $persistenceProperty->setAccessible( true );
-        $persistenceHandler = $persistenceProperty->getValue( $repository );
-
-        $searchProperty = new \ReflectionProperty( $persistenceHandler, 'searchHandler' );
-        $searchProperty->setAccessible( true );
-        $searchProperty->setValue(
-            $persistenceHandler,
-            $searchHandler = $this->getSearchHandler( $persistenceHandler )
-        );
 
         if ( $initializeFromScratch )
         {
-            $this->indexAll( $persistenceHandler, $searchHandler );
+            $this->indexAll();
         }
 
         return $repository;
     }
 
-    protected function getSearchHandler( $persistenceHandler )
+    protected function getServiceContainer()
     {
-        $nameGenerator = new FieldNameGenerator();
-        $fieldRegistry = new FieldRegistry(
-            array(
-                'ezstring'              => new FieldType\TextLine\SearchField(),
-                'ezprice'               => new FieldType\Price\SearchField(),
-                // @todo: These two need proper custom search field definitions
-                'eztext'                => new FieldType\TextLine\SearchField(),
-                'ezxmltext'             => new FieldType\TextLine\SearchField(),
-                // @todo: Define proper types for these:
-                'ezuser'                => new FieldType\Unindexed(),
-                'ezimage'               => new FieldType\Unindexed(),
-                'ezboolean'             => new FieldType\Unindexed(),
-                'ezkeyword'             => new FieldType\Unindexed(),
-                'ezdatetime'            => new FieldType\Unindexed(),
-                'ezinisetting'          => new FieldType\Unindexed(),
-                'ezpackage'             => new FieldType\Unindexed(),
-                'ezurl'                 => new FieldType\Unindexed(),
-                'ezobjectrelation'      => new FieldType\Unindexed(),
-                'ezmultioption'         => new FieldType\Unindexed(),
-                'ezauthor'              => new FieldType\Unindexed(),
-                'ezsrrating'            => new FieldType\Unindexed(),
-                'ezselection'           => new FieldType\Unindexed(),
-                'ezsubtreesubscription' => new FieldType\Unindexed(),
-                'ezobjectrelationlist'  => new FieldType\Unindexed(),
-                'ezemail'               => new FieldType\Unindexed(),
-                'ezoption'              => new FieldType\Unindexed(),
-                'ezgmaplocation'        => new FieldType\Unindexed(),
-                'ezbinaryfile'          => new FieldType\Unindexed(),
-                'ezmedia'               => new FieldType\Unindexed(),
-                'ezpage'                => new FieldType\Unindexed(),
-                'ezcomcomments'         => new FieldType\Unindexed(),
-            )
-        );
+        if ( !isset( self::$serviceContainer ) )
+        {
+            $config = include __DIR__ . "/../../../../../../config.php";
+            $installDir = $config['install_dir'];
 
-        return new Search\Handler(
-            new Search\Gateway\Native(
-                new Search\Gateway\HttpClient\Stream( getenv( "solrServer" ) ),
-                new CriterionVisitor\Aggregate(
-                    array(
-                        new CriterionVisitor\ContentIdIn(),
-                        new CriterionVisitor\LogicalAnd(),
-                        new CriterionVisitor\LogicalOr(),
-                        new CriterionVisitor\LogicalNot(),
-                        new CriterionVisitor\SubtreeIn(),
-                        new CriterionVisitor\ContentTypeIdIn(),
-                        new CriterionVisitor\ContentTypeGroupIdIn(),
-                        new CriterionVisitor\LocationIdIn(),
-                        new CriterionVisitor\ParentLocationIdIn(),
-                        new CriterionVisitor\SectionIn(),
-                        new CriterionVisitor\RemoteIdIn(),
-                        new CriterionVisitor\LanguageCodeIn(),
-                        new CriterionVisitor\ObjectStateIdIn(),
-                        new CriterionVisitor\LocationRemoteIdIn(),
-                        new CriterionVisitor\DateMetadata\ModifiedIn(),
-                        new CriterionVisitor\DateMetadata\PublishedIn(),
-                        new CriterionVisitor\DateMetadata\ModifiedBetween(),
-                        new CriterionVisitor\DateMetadata\PublishedBetween(),
-                        new CriterionVisitor\StatusIn(),
-                        new CriterionVisitor\FullText(),
-                        new CriterionVisitor\Field\FieldIn(
-                            $fieldRegistry,
-                            $persistenceHandler->contentTypeHandler(),
-                            $nameGenerator
-                        ),
-                        new CriterionVisitor\Field\FieldRange(
-                            $fieldRegistry,
-                            $persistenceHandler->contentTypeHandler(),
-                            $nameGenerator
-                        ),
-                    )
-                ),
-                new SortClauseVisitor\Aggregate(
-                    array(
-                        new SortClauseVisitor\ContentId(),
-                        new SortClauseVisitor\LocationPathString(),
-                        new SortClauseVisitor\LocationDepth(),
-                        new SortClauseVisitor\LocationPriority(),
-                    )
-                ),
-                new FacetBuilderVisitor\Aggregate(
-                    array(
-                        new FacetBuilderVisitor\ContentType(),
-                        new FacetBuilderVisitor\Section(),
-                        new FacetBuilderVisitor\User(),
-                    )
-                ),
-                new FieldValueMapper\Aggregate(
-                    array(
-                        new FieldValueMapper\IdentifierMapper(),
-                        new FieldValueMapper\MultipleIdentifierMapper(),
-                        new FieldValueMapper\StringMapper(),
-                        new FieldValueMapper\IntegerMapper(),
-                        new FieldValueMapper\DateMapper(),
-                        new FieldValueMapper\PriceMapper(),
-                    )
-                ),
-                $persistenceHandler->contentHandler(),
-                $nameGenerator
-            ),
-            $fieldRegistry,
-            $persistenceHandler->locationHandler(),
-            $persistenceHandler->contentTypeHandler(),
-            $persistenceHandler->objectStateHandler()
-        );
+            /** @var \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder */
+            $containerBuilder = include $config['container_builder_path'];
+
+            /** @var \Symfony\Component\DependencyInjection\Loader\YamlFileLoader $loader */
+            $loader->load( 'tests/integration_legacy_solr.yml' );
+
+            $containerBuilder->addCompilerPass( new Compiler\Storage\Solr\AggregateCriterionVisitorPass() );
+            $containerBuilder->addCompilerPass( new Compiler\Storage\Solr\AggregateFacetBuilderVisitorPass() );
+            $containerBuilder->addCompilerPass( new Compiler\Storage\Solr\AggregateFieldValueMapperPass() );
+            $containerBuilder->addCompilerPass( new Compiler\Storage\Solr\AggregateSortClauseVisitorPass() );
+            $containerBuilder->addCompilerPass( new Compiler\Storage\Solr\FieldRegistryPass() );
+            $containerBuilder->addCompilerPass( new Compiler\Storage\Solr\SignalSlotPass() );
+
+            $containerBuilder->setParameter(
+                "legacy_dsn",
+                self::$dsn
+            );
+
+            self::$serviceContainer = new ServiceContainer(
+                $containerBuilder,
+                $installDir,
+                $config['cache_dir'],
+                true,
+                true
+            );
+        }
+
+        return self::$serviceContainer;
     }
 
-    protected function indexAll( $persistenceHandler, $searchHandler )
+    /**
+     * Indexes all Content objects.
+     */
+    protected function indexAll()
     {
         // @todo: Is there a nicer way to get access to all content objects? We
         // require this to run a full index here.
-        $dbHandlerProperty = new \ReflectionProperty( $persistenceHandler, 'dbHandler' );
-        $dbHandlerProperty->setAccessible( true );
-        $db = $dbHandlerProperty->getValue( $persistenceHandler );
+        /** @var \eZ\Publish\SPI\Persistence\Handler $persistenceHandler */
+        $persistenceHandler = $this->getServiceContainer()->get( 'ezpublish.spi.persistence.legacy_solr' );
+        /** @var \eZ\Publish\Core\Persistence\Database\DatabaseHandler $databaseHandler */
+        $databaseHandler = $this->getServiceContainer()->get( 'ezpublish.api.storage_engine.legacy.dbhandler' );
 
-        $query = $db->createSelectQuery()
+        $query = $databaseHandler
+            ->createSelectQuery()
             ->select( 'id', 'current_version' )
             ->from( 'ezcontentobject' );
 
         $stmt = $query->prepare();
         $stmt->execute();
 
-        $searchHandler->purgeIndex();
-        while ( $row = $stmt->fetch( \PDO::FETCH_ASSOC ) )
+        $contentObjects = array();
+        while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) )
         {
-            $searchHandler->indexContent(
-                $persistenceHandler->contentHandler()->load( $row['id'], $row['current_version'] )
+            $contentObjects[] = $persistenceHandler->contentHandler()->load(
+                $row['id'],
+                $row['current_version']
             );
         }
+
+        /** @var \eZ\Publish\Core\Persistence\Solr\Content\Search\Handler $searchHandler */
+        $searchHandler = $persistenceHandler->searchHandler();
+        $searchHandler->setCommit( false );
+        $searchHandler->purgeIndex();
+        $searchHandler->setCommit( true );
+        $searchHandler->bulkIndexContent( $contentObjects );
     }
 }

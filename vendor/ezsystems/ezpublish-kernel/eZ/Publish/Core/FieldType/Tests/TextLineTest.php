@@ -2,16 +2,16 @@
 /**
  * File containing the TextLineTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\TextLine\Type as TextLineType;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
-use ReflectionObject;
+use eZ\Publish\Core\FieldType\ValidationError;
 
 /**
  * @group fieldType
@@ -32,7 +32,10 @@ class TextLineTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new TextLineType();
+        $fieldType = new TextLineType();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -166,6 +169,11 @@ class TextLineTest extends FieldTypeTest
                 new TextLineValue( ' sindelfingen ' ),
             ),
             array(
+                // 11+ numbers - EZP-21771
+                '12345678901',
+                new TextLineValue( '12345678901' ),
+            ),
+            array(
                 new TextLineValue( '' ),
                 new TextLineValue,
             ),
@@ -219,7 +227,7 @@ class TextLineTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new TextLineValue,
                 null
             ),
             array(
@@ -273,7 +281,7 @@ class TextLineTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null,
+                new TextLineValue,
             ),
             array(
                 '',
@@ -429,6 +437,228 @@ class TextLineTest extends FieldTypeTest
                         'maxStringLength' => .42,
                     ),
                 )
+            ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezstring';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), '' ),
+            array( new TextLineValue( 'This is a line of text' ), 'This is a line of text' )
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings and
+     * field value which are considered valid by the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten if
+     * a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "StringLengthValidator" => array(
+     *                      "minStringLength" => 2,
+     *                      "maxStringLength" => 10,
+     *                  ),
+     *              ),
+     *          ),
+     *          new TextLineValue( "lalalala" ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  'isMultiple' => true
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              array(
+     *                  "BE" => array(
+     *                      "Name" => "Belgium",
+     *                      "Alpha2" => "BE",
+     *                      "Alpha3" => "BEL",
+     *                      "IDC" => 32,
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideValidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'StringLengthValidator' => array(
+                            'minStringLength' => 2,
+                            'maxStringLength' => 10,
+                        ),
+                    ),
+                ),
+                new TextLineValue( "lalalala" ),
+            ),
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'StringLengthValidator' => array(
+                            'maxStringLength' => 10,
+                        ),
+                    ),
+                ),
+                new TextLineValue( "lililili" ),
+            ),
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings,
+     * field value and corresponding validation errors returned by
+     * the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten
+     * if a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "IntegerValueValidator" => array(
+     *                      "minIntegerValue" => 5,
+     *                      "maxIntegerValue" => 10
+     *                  ),
+     *              ),
+     *          ),
+     *          new IntegerValue( 3 ),
+     *          array(
+     *              new ValidationError(
+     *                  "The value can not be lower than %size%.",
+     *                  null,
+     *                  array(
+     *                      "size" => 5
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  "isMultiple" => false
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              "BE" => array(
+     *                  "Name" => "Belgium",
+     *                  "Alpha2" => "BE",
+     *                  "Alpha3" => "BEL",
+     *                  "IDC" => 32,
+     *              ),
+     *              "FR" => array(
+     *                  "Name" => "France",
+     *                  "Alpha2" => "FR",
+     *                  "Alpha3" => "FRA",
+     *                  "IDC" => 33,
+     *              ),
+     *          )
+     *      ),
+     *      array(
+     *          new ValidationError(
+     *              "Field definition does not allow multiple countries to be selected."
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideInvalidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'StringLengthValidator' => array(
+                            'minStringLength' => 5,
+                            'maxStringLength' => 10,
+                        ),
+                    ),
+                ),
+                new TextLineValue( "aaa" ),
+                array(
+                    new ValidationError(
+                        "The string can not be shorter than %size% character.",
+                        "The string can not be shorter than %size% characters.",
+                        array(
+                            "size" => 5
+                        )
+                    ),
+                ),
+            ),
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'StringLengthValidator' => array(
+                            'minStringLength' => 5,
+                            'maxStringLength' => 10,
+                        ),
+                    ),
+                ),
+                new TextLineValue( "0123456789012345" ),
+                array(
+                    new ValidationError(
+                        "The string can not exceed %size% character.",
+                        "The string can not exceed %size% characters.",
+                        array(
+                            "size" => 10
+                        )
+                    ),
+                ),
+            ),
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        'StringLengthValidator' => array(
+                            'minStringLength' => 10,
+                            'maxStringLength' => 5,
+                        ),
+                    ),
+                ),
+                new TextLineValue( "1234567" ),
+                array(
+                    new ValidationError(
+                        "The string can not exceed %size% character.",
+                        "The string can not exceed %size% characters.",
+                        array(
+                            "size" => 5
+                        )
+                    ),
+                    new ValidationError(
+                        "The string can not be shorter than %size% character.",
+                        "The string can not be shorter than %size% characters.",
+                        array(
+                            "size" => 10
+                        )
+                    ),
+                ),
             ),
         );
     }

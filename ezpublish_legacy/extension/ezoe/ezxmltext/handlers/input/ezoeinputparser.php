@@ -4,24 +4,26 @@
 // Forked on: <20-Des-2007 13:02:06 ar> from eZDHTMLInputParser class
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
-// SOFTWARE NAME: eZ Publish Community Project
-// SOFTWARE RELEASE:  2013.5
-// COPYRIGHT NOTICE: Copyright (C) 1999-2013 eZ Systems AS
-// SOFTWARE LICENSE: GNU General Public License v2
+// SOFTWARE NAME: eZ Online Editor extension for eZ Publish
+// SOFTWARE RELEASE: 5.0
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
+// SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of version 2.0  of the GNU General
 //   Public License as published by the Free Software Foundation.
-// 
+//
 //   This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
 //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //   GNU General Public License for more details.
-// 
+//
 //   You should have received a copy of version 2.0 of the GNU General
 //   Public License along with this program; if not, write to the Free
 //   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 //   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -203,6 +205,99 @@ class eZOEInputParser extends eZXMLInputParser
         $text = preg_replace( '#<!--.*?-->#s', '', $text ); // remove HTML comments
         $text = str_replace( array( '&nbsp;', '&#160;', '&#xa0;' ), "\xC2\xA0", $text );
         return parent::process( $text, $createRootNode );
+    }
+
+    /**
+     * Sets the attributes for the given element. This method overrides the
+     * eZXMLInputParser::setAttributes to make sure the parser correctly
+     * recognizes attributes with different case variations (for IE8 which adds
+     * "colSpan" instead of "colspan" for instance).
+     *
+     * @param DOMElement $element
+     * @param array $attributes
+     */
+    function setAttributes( $element, $attributes )
+    {
+        $thisOutputTag = $this->OutputTags[$element->nodeName];
+
+        foreach( $attributes as $key => $value )
+        {
+            // Convert attribute names
+            $qualifiedName = $key;
+            if ( isset( $thisOutputTag['attributes'] ) )
+            {
+                foreach ( $thisOutputTag['attributes'] as $outputKey => $outputAttr )
+                {
+                    // make sure to recognize attributes with different case
+                    // variations. for instance IE8 generate "colSpan" instead
+                    // of "colspan" in Online Editor...
+                    if ( strcasecmp( $key, $outputKey ) === 0 )
+                    {
+                        $qualifiedName = $outputAttr;
+                        break;
+                    }
+                }
+
+            }
+
+            // Filter classes
+            if ( $qualifiedName == 'class' )
+            {
+                $classesList = $this->XMLSchema->getClassesList( $element->nodeName );
+                if ( !in_array( $value, $classesList ) )
+                {
+                    $this->handleError( self::ERROR_DATA,
+                                        ezpI18n::tr( 'kernel/classes/datatypes/ezxmltext', "Class '%1' is not allowed for element &lt;%2&gt; (check content.ini).",
+                                        false, array( $value, $element->nodeName ) ) );
+                    continue;
+                }
+            }
+
+            // Create attribute nodes
+            if ( $qualifiedName )
+            {
+                if ( strpos( $qualifiedName, ':' ) )
+                {
+                    list( $prefix, $name ) = explode( ':', $qualifiedName );
+                    if ( isset( $this->Namespaces[$prefix] ) )
+                    {
+                        $URI = $this->Namespaces[$prefix];
+                        $element->setAttributeNS( $URI, $qualifiedName, $value );
+                    }
+                    else
+                    {
+                        eZDebug::writeWarning( "No namespace defined for prefix '$prefix'.", 'eZXML input parser' );
+                    }
+                }
+                else
+                {
+                    $element->setAttribute( $qualifiedName, $value );
+                }
+            }
+        }
+
+        // Check for required attrs are present
+        if ( isset( $this->OutputTags[$element->nodeName]['requiredInputAttributes'] ) )
+        {
+            foreach( $this->OutputTags[$element->nodeName]['requiredInputAttributes'] as $reqAttrName )
+            {
+                $presented = false;
+                foreach( $attributes as $key => $value )
+                {
+                    if ( $key == $reqAttrName )
+                    {
+                        $presented = true;
+                        break;
+                    }
+                }
+                if ( !$presented )
+                {
+                    $this->handleError( self::ERROR_SCHEMA,
+                                        ezpI18n::tr( 'kernel/classes/datatypes/ezxmltext', "Required attribute '%1' is not presented in tag &lt;%2&gt;.",
+                                        false, array( $reqAttrName, $element->nodeName ) ) );
+                }
+            }
+        }
     }
 
      /**
@@ -648,6 +743,21 @@ class eZOEInputParser extends eZXMLInputParser
             $newParent->appendChild( $element );
             $ret['result'] = $newParent;
         }
+        else if (
+            $parentName === 'header'
+            && (
+                $parent->getElementsByTagName( 'line' )->length
+                || $parent->getElementsByTagName( 'br' )->length
+            )
+        )
+        {
+            // by default the header element does not need a line element
+            // unless it contains a <br> or a previously created <line>
+            $newLine = $this->createAndPublishElement( 'line', $ret );
+            $element = $parent->replaceChild( $newLine, $element );
+            $newLine->appendChild( $element );
+            $ret['result'] = $newLine;
+        }
         elseif ( $parentName === 'paragraph' )
         {
             $newLine = $this->createAndPublishElement( 'line', $ret );
@@ -939,6 +1049,11 @@ class eZOEInputParser extends eZXMLInputParser
                         --$newLevel;
                 }
                 $elementToMove = $element;
+                while ( $elementToMove->parentNode->nodeName === 'custom' )
+                {
+                    $elementToMove = $elementToMove->parentNode;
+                    $parent = $elementToMove->parentNode;
+                }
                 while( $elementToMove &&
                        $elementToMove->nodeName !== 'section' )
                 {
@@ -1374,12 +1489,10 @@ class eZOEInputParser extends eZXMLInputParser
      */
     public static function customTagIsEnabled( $name )
     {
-        if ( self::$customTagList === null )
-        {
-            $ini = eZINI::instance( 'content.ini' );
-            self::$customTagList = $ini->variable( 'CustomTagSettings', 'AvailableCustomTags' );
-        }
-        return in_array( $name, self::$customTagList );
+        return in_array(
+            $name,
+            eZINI::instance( 'content.ini' )->variable( 'CustomTagSettings', 'AvailableCustomTags' )
+        );
     }
 
      /**
@@ -1400,7 +1513,7 @@ class eZOEInputParser extends eZXMLInputParser
                     continue;
 
                 list( $name, $value ) = explode( ':', $style );
-                $name  = trim( $name );
+                $name  = strtolower( trim( $name ) );
                 $value = trim( $value );
 
                 if ( $name === 'float' || $name === 'text-align' )
@@ -1421,8 +1534,6 @@ class eZOEInputParser extends eZXMLInputParser
 
 
     protected $anchorAsAttribute = false;
-
-    protected static $customTagList = null;
 }
 
 ?>

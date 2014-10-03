@@ -2,16 +2,15 @@
 /**
  * File containing the UserTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\User\Type as UserType;
 use eZ\Publish\Core\FieldType\User\Value as UserValue;
-use ReflectionObject;
 
 /**
  * @group fieldType
@@ -32,7 +31,10 @@ class UserTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new UserType();
+        $fieldType = new UserType();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -214,7 +216,7 @@ class UserTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new UserValue,
                 null
             ),
             array(
@@ -277,7 +279,7 @@ class UserTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null
+                new UserValue,
             ),
             array(
                 $userData = array(
@@ -292,6 +294,19 @@ class UserTest extends FieldTypeTest
                 ),
                 new UserValue( $userData ),
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezuser';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), '' ),
+            array( new UserValue( array( 'login' => 'johndoe' ) ), 'johndoe' )
         );
     }
 }

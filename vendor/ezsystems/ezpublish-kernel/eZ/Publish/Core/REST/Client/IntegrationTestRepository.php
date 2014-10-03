@@ -2,16 +2,16 @@
 /**
  * File containing the IntegrationTestRepository class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client;
 
 use eZ\Publish\API\Repository\Values\User\User;
 
-use eZ\Publish\Core\REST\Common\UrlHandler;
+use eZ\Publish\Core\REST\Common\RequestParser;
 use eZ\Publish\Core\REST\Common\Input\Dispatcher;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
 use eZ\Publish\Core\REST\Client\HttpClient\Authentication\IntegrationTestAuthenticator;
@@ -25,13 +25,6 @@ use eZ\Publish\Core\REST\Client\HttpClient\Authentication\IntegrationTestAuthent
  */
 class IntegrationTestRepository extends Repository implements Sessionable
 {
-    /**
-     * Optional session identifier
-     *
-     * @var string
-     */
-    private $session;
-
     /**
      * Integration test authenticator
      *
@@ -62,9 +55,9 @@ class IntegrationTestRepository extends Repository implements Sessionable
      * @param \eZ\Publish\SPI\FieldType\FieldType[] $fieldTypes
      * @param \eZ\Publish\Core\REST\Client\HttpClient\Authentication\IntegrationTestAuthentication $authenticator
      */
-    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, UrlHandler $urlHandler, array $fieldTypes, IntegrationTestAuthenticator $authenticator )
+    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, RequestParser $requestParser, array $fieldTypes, IntegrationTestAuthenticator $authenticator )
     {
-        parent::__construct( $client, $inputDispatcher, $outputVisitor, $urlHandler, $fieldTypes );
+        parent::__construct( $client, $inputDispatcher, $outputVisitor, $requestParser, $fieldTypes );
         $this->client        = $client;
         $this->authenticator = $authenticator;
     }

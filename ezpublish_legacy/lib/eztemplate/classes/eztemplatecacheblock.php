@@ -2,9 +2,9 @@
 /**
  * File containing the eZTemplateCacheBlock class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -49,9 +49,36 @@ class eZTemplateCacheBlock
      */
     static function retrieve( $keys, $subtreeExpiry, $ttl, $useGlobalExpiry = true )
     {
+        $keys = (array)$keys;
+        self::filterKeys( $keys );
         $nodeID = $subtreeExpiry ? eZTemplateCacheBlock::decodeNodeID( $subtreeExpiry ) : false;
         $cachePath = eZTemplateCacheBlock::cachePath( eZTemplateCacheBlock::keyString( $keys ), $nodeID );
         return eZTemplateCacheBlock::handle( $cachePath, $nodeID, $ttl, $useGlobalExpiry );
+    }
+
+    /**
+     * Filters cache keys when needed.
+     * Useful to avoid having current URI as a cache key if an error has occurred and has been caught by error module.
+     *
+     * @param array $keys
+     */
+    static private function filterKeys( array &$keys )
+    {
+        if ( isset( $GLOBALS['eZRequestError'] ) && $GLOBALS['eZRequestError'] === true )
+        {
+            $requestUri = eZSys::requestURI();
+            foreach ( $keys as $i => &$key )
+            {
+                if ( is_array( $key ) )
+                {
+                    self::filterKeys( $key );
+                }
+                else if ( $key === $requestUri )
+                {
+                    unset( $keys[$i] );
+                }
+            }
+        }
     }
 
     /*!
@@ -61,7 +88,6 @@ class eZTemplateCacheBlock
     static function handle( $cachePath, $nodeID, $ttl, $useGlobalExpiry = true )
     {
         $globalExpiryTime = -1;
-        eZExpiryHandler::registerShutdownFunction();
         if ( $useGlobalExpiry )
         {
             $globalExpiryTime = eZExpiryHandler::getTimestamp( 'template-block-cache', -1 );

@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -26,7 +26,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getTrashItemVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -53,6 +53,22 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             ),
             // Dummy value for ChildCount
             0
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadTrashItem',
+            array( 'trashItemId' => $trashItem->trashItem->id ),
+            "/content/trash/{$trashItem->trashItem->id}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocation',
+            array( 'locationPath' => '1/2/21' ),
+            "/content/locations/1/2/21"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContent',
+            array( 'contentId' => $trashItem->trashItem->contentInfo->id ),
+            "/content/objects/{$trashItem->trashItem->contentInfo->id}"
         );
 
         $visitor->visit(
@@ -402,10 +418,8 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\RestTrashItem
      */
-    protected function getTrashItemVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\RestTrashItem(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\RestTrashItem;
     }
 }

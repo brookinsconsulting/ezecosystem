@@ -3,8 +3,8 @@
 // Definition of ezsrRatingObjectTreeNode class
 //
 // SOFTWARE NAME: eZ Star Rating
-// SOFTWARE RELEASE: 5.0.0
-// COPYRIGHT NOTICE: Copyright (C) 2008 Bruce Morrison, 2009-2012 eZ Systems AS
+// SOFTWARE RELEASE: 2.x
+// COPYRIGHT NOTICE: Copyright (C) 2008 Bruce Morrison, 2009-2014 eZ Systems AS
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
 //   This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
  * Only to be used by {@link ezsrRatingObject::fetchNodeByRating()}
  * As other fetch functions won't have the needed rating values in the returned data.
  * 
- * @author Andr??? R.
+ * @author Andr� R.
  *
  */
 

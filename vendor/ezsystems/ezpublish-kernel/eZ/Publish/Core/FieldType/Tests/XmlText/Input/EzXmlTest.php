@@ -2,12 +2,12 @@
 /**
  * File containing the XmlText EzXml test
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
-namespace eZ\Publish\Core\Repository\Tests\FieldType\XmlText\Input;
+namespace eZ\Publish\Core\FieldType\Tests\XmlText\Input;
 
 use eZ\Publish\Core\FieldType\XmlText\Input\EzXml;
 use PHPUnit_Framework_TestCase;
@@ -32,6 +32,11 @@ class EzXmlTest extends PHPUnit_Framework_TestCase
 <section xmlns:image="http://ez.no/namespaces/ezpublish3/image/" xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/" xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph>&lt;test&gt;</paragraph></section>
 ',
             ),
+            array(
+                '<?xml version="1.0" encoding="utf-8"?>
+<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/" xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/" xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph><link href="" url="" url_id="1" object_remote_id="" object_id="1" node_id="1">test</link></paragraph></section>
+',
+            ),
         );
     }
 
@@ -44,7 +49,7 @@ class EzXmlTest extends PHPUnit_Framework_TestCase
         {
             $input = new EzXml( $xmlString );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->assertEquals( $exceptionMessage, $e->getMessage() );
             return;

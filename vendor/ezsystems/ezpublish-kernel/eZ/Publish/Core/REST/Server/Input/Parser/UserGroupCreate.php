@@ -2,15 +2,15 @@
 /**
  * File containing the UserGroupCreate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\FieldTypeParser;
 use eZ\Publish\Core\REST\Common\Exceptions;
 use eZ\Publish\API\Repository\UserService;
@@ -19,7 +19,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 /**
  * Parser for UserGroupCreate
  */
-class UserGroupCreate extends Base
+class UserGroupCreate extends BaseParser
 {
     /**
      * User service
@@ -45,14 +45,12 @@ class UserGroupCreate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\REST\Common\Input\FieldTypeParser $fieldTypeParser
      */
-    public function __construct( UrlHandler $urlHandler, UserService $userService, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser )
+    public function __construct( UserService $userService, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser )
     {
-        parent::__construct( $urlHandler );
         $this->userService = $userService;
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
@@ -76,9 +74,8 @@ class UserGroupCreate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for ContentType element in UserGroupCreate." );
             }
 
-            $contentTypeValues = $this->urlHandler->parse( 'type', $data['ContentType']['_href'] );
             $contentType = $this->contentTypeService->loadContentType(
-                $contentTypeValues['type']
+                $this->requestParser->parseHref( $data['ContentType']['_href'], 'contentTypeId' )
             );
         }
 
@@ -96,8 +93,7 @@ class UserGroupCreate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for Section element in UserGroupCreate." );
             }
 
-            $sectionValues = $this->urlHandler->parse( 'section', $data['Section']['_href'] );
-            $userGroupCreateStruct->sectionId = $sectionValues['section'];
+            $userGroupCreateStruct->sectionId = $this->requestParser->parseHref( $data['Section']['_href'], 'sectionId' );
         }
 
         if ( array_key_exists( 'remoteId', $data ) )

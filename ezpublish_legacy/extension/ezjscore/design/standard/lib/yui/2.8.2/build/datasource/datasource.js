@@ -2722,12 +2722,12 @@ var xPad=function (x, pad, r)
                 return (o>0?'-':'+') + H + M;
             },
         Z: function (d) {
-                var tz = d.toString().replace(/^.*:\d\d( GMT[+-]\d+)? \(?([A-Za-z ]+)\)?\d*$/, '$2').replace(/[a-z ]/g, '');
-                if(tz.length > 4) {
-                        tz = Dt.formats.z(d);
-                }
-                return tz;
-        },
+		var tz = d.toString().replace(/^.*:\d\d( GMT[+-]\d+)? \(?([A-Za-z ]+)\)?\d*$/, '$2').replace(/[a-z ]/g, '');
+		if(tz.length > 4) {
+			tz = Dt.formats.z(d);
+		}
+		return tz;
+	},
         '%': function (d) { return '%'; }
     },
 

@@ -2,40 +2,39 @@
 /**
  * File containing the RepositoryFactory class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\ApiLoader;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Persistence\Handler as PersistenceHandler;
-use eZ\Publish\SPI\IO\Handler as IoHandler;
 use eZ\Publish\SPI\Limitation\Type as SPILimitationType;
 use eZ\Publish\API\Repository\Repository;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use eZ\Publish\Core\Base\Container\ApiLoader\FieldTypeCollectionFactory;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 
-class RepositoryFactory
+class RepositoryFactory extends ContainerAware
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
-    protected $container;
+    private $configResolver;
 
     /**
      * Collection of fieldTypes, lazy loaded via a closure
      *
-     * @var \Closure[]
+     * @var \eZ\Publish\Core\Base\Container\ApiLoader\FieldTypeCollectionFactory
      */
-    protected $fieldTypes;
+    protected $fieldTypeCollectionFactory;
 
     /**
-     * Collection of external storage handlers for field types that need them
-     *
-     * @var \Closure[]
+     * @var string
      */
-    protected $externalStorages = array();
+    private $repositoryClass;
 
     /**
      * Collection of limitation types for the RoleService.
@@ -44,9 +43,15 @@ class RepositoryFactory
      */
     protected $roleLimitations = array();
 
-    public function __construct( ContainerInterface $container )
+    public function __construct(
+        ConfigResolverInterface $configResolver,
+        FieldTypeCollectionFactory $fieldTypeCollectionFactory,
+        $repositoryClass
+    )
     {
-        $this->container = $container;
+        $this->configResolver = $configResolver;
+        $this->fieldTypeCollectionFactory = $fieldTypeCollectionFactory;
+        $this->repositoryClass = $repositoryClass;
     }
 
     /**
@@ -56,57 +61,29 @@ class RepositoryFactory
      * directly to make sure you get an instance wrapped inside Signal / Cache / * functionality.
      *
      * @param \eZ\Publish\SPI\Persistence\Handler $persistenceHandler
-     * @param \eZ\Publish\SPI\IO\Handler $ioHandler
      *
      * @return \eZ\Publish\API\Repository\Repository
      */
     public function buildRepository( PersistenceHandler $persistenceHandler )
     {
-        /** @var $configResolver \eZ\Publish\Core\MVC\ConfigResolverInterface */
-        $configResolver = $this->container->get( 'ezpublish.config.resolver' );
-        $repositoryClass = $this->container->getParameter( 'ezpublish.api.inner_repository.class' );
-        return new $repositoryClass(
+        $repository = new $this->repositoryClass(
             $persistenceHandler,
             array(
-                'fieldType'     => $this->fieldTypes,
+                'fieldType'     => $this->fieldTypeCollectionFactory->getFieldTypes(),
                 'role'          => array(
                     'limitationTypes'   => $this->roleLimitations
                 ),
-                'languages'     => $configResolver->getParameter( 'languages' )
+                'languages'     => $this->configResolver->getParameter( 'languages' )
             )
         );
-    }
 
-    /**
-     * Registers an eZ Publish field type.
-     * Field types are being registered as a closure so that they will be lazy loaded.
-     *
-     * @param string $fieldTypeServiceId The field type service Id
-     * @param string $fieldTypeAlias The field type alias (e.g. "ezstring")
-     */
-    public function registerFieldType( $fieldTypeServiceId, $fieldTypeAlias )
-    {
-        $container = $this->container;
-        $this->fieldTypes[$fieldTypeAlias] = function () use ( $container, $fieldTypeServiceId )
-        {
-            return $container->get( $fieldTypeServiceId );
-        };
-    }
+        /** @var \eZ\Publish\API\Repository\Repository $repository */
+        $anonymousUser = $repository->getUserService()->loadUser(
+            $this->configResolver->getParameter( "anonymous_user_id" )
+        );
+        $repository->setCurrentUser( $anonymousUser );
 
-    /**
-     * Registers an external storage handler for a field type, identified by $fieldTypeAlias.
-     * They are being registered as closures so that they will be lazy loaded.
-     *
-     * @param string $serviceId The external storage handler service Id
-     * @param string $fieldTypeAlias The field type alias (e.g. "ezstring")
-     */
-    public function registerExternalStorageHandler( $serviceId, $fieldTypeAlias )
-    {
-        $container = $this->container;
-        $this->externalStorages[$fieldTypeAlias] = function () use ( $container, $serviceId )
-        {
-            return $container->get( $serviceId );
-        };
+        return $repository;
     }
 
     /**
@@ -118,26 +95,6 @@ class RepositoryFactory
     public function registerLimitationType( $limitationName, SPILimitationType $limitationType )
     {
         $this->roleLimitations[$limitationName] = $limitationType;
-    }
-
-    /**
-     * Returns registered external storage handlers for field types (as closures to be lazy loaded in the public API)
-     *
-     * @return \Closure[]
-     */
-    public function getExternalStorageHandlers()
-    {
-        return $this->externalStorages;
-    }
-
-    /**
-     * Returns registered field types (as closures to be lazy loaded in the public API)
-     *
-     * @return \Closure[]
-     */
-    public function getFieldTypes()
-    {
-        return $this->fieldTypes;
     }
 
     /**

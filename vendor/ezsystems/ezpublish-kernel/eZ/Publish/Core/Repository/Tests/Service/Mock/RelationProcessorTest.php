@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Repository\Tests\Service\Mock\RelationProcessorTest class
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Repository\Tests\Service\Mock;
@@ -29,7 +29,6 @@ class RelationProcessorTest extends BaseServiceMockTest
      */
     public function testConstructor()
     {
-        $this->markTestSkipped( "This test in some cases with PHP 5.3.3 causes segmentation fault" );
         $relationProcessor = $this->getPartlyMockedRelationProcessor();
 
         $this->assertAttributeSame(

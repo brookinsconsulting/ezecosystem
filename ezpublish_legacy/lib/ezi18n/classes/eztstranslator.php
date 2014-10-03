@@ -2,9 +2,9 @@
 /**
  * File containing the eZTSTranslator class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  * @subpackage i18n
  */
@@ -732,8 +732,6 @@ class eZTSTranslator extends eZTranslatorHandler
      */
     public static function expireCache( $timestamp = false, $locale = null )
     {
-        eZExpiryHandler::registerShutdownFunction();
-
         if ( $timestamp === false )
             $timestamp = time();
 

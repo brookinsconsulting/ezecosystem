@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
@@ -24,7 +24,7 @@ class SectionInputTest extends BaseTest
             'identifier' => 'Identifier Bar',
         );
 
-        $sectionInput = $this->getSectionInput();
+        $sectionInput = $this->getParser();
         $result = $sectionInput->parse( $inputArray, $this->getParsingDispatcherMock() );
 
         $this->assertEquals(
@@ -46,7 +46,7 @@ class SectionInputTest extends BaseTest
             'name'       => 'Name Foo',
         );
 
-        $sectionInput = $this->getSectionInput();
+        $sectionInput = $this->getParser();
         $sectionInput->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -62,7 +62,7 @@ class SectionInputTest extends BaseTest
             'identifier' => 'Identifier Bar',
         );
 
-        $sectionInput = $this->getSectionInput();
+        $sectionInput = $this->getParser();
         $sectionInput->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -71,9 +71,11 @@ class SectionInputTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\SectionInput
      */
-    protected function getSectionInput()
+    protected function internalGetParser()
     {
-        return new SectionInput( $this->getUrlHandler(), $this->getSectionServiceMock() );
+        return new SectionInput(
+            $this->getSectionServiceMock()
+        );
     }
 
     /**

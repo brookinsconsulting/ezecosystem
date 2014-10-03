@@ -2,51 +2,62 @@
 /**
  * File containing the RequestEventListener class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\EventListener;
 
+use eZ\Bundle\EzPublishCoreBundle\Kernel;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use eZ\Publish\SPI\HashGenerator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess\URILexer;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
 
 class RequestEventListener implements EventSubscriberInterface
 {
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\HttpKernel
-     */
-    private $httpKernel;
-
     /**
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
-    private $container;
+    private $configResolver;
+
+    /**
+     * @var string
+     */
+    private $defaultSiteAccess;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
     private $router;
 
-    public function __construct( ContainerInterface $container, LoggerInterface $logger = null )
+    /**
+     * @var \eZ\Publish\SPI\HashGenerator
+     */
+    private $hashGenerator;
+
+    public function __construct( ConfigResolverInterface $configResolver, RouterInterface $router, $defaultSiteAccess, HashGenerator $hashGenerator, LoggerInterface $logger = null )
     {
-        $this->httpKernel = $container->get( 'http_kernel' );
-        $this->container = $container;
+        $this->configResolver = $configResolver;
+        $this->defaultSiteAccess = $defaultSiteAccess;
+        $this->router = $router;
         $this->logger = $logger;
-        $this->router = $container->get( 'router' );
+        $this->hashGenerator = $hashGenerator;
     }
 
     public static function getSubscribedEvents()
@@ -55,9 +66,37 @@ class RequestEventListener implements EventSubscriberInterface
             KernelEvents::REQUEST => array(
                 array( 'onKernelRequestSetup', 190 ),
                 array( 'onKernelRequestForward', 10 ),
-                array( 'onKernelRequestRedirect', 0 )
+                array( 'onKernelRequestRedirect', 0 ),
+                // onKernelRequestUserHash needs to be just after Firewall (prio 8), so that user is already logged in the repository.
+                array( 'onKernelRequestUserHash', 7 ),
+                // onKernelRequestIndex needs to be before the router (prio 32)
+                array( 'onKernelRequestIndex', 40 ),
             )
         );
+    }
+
+    /**
+     * Checks if the IndexPage is configured and which page must be shown
+     *
+     * @param GetResponseEvent $event
+     */
+    public function onKernelRequestIndex( GetResponseEvent $event )
+    {
+        $request = $event->getRequest();
+        $semanticPathinfo = $request->attributes->get( 'semanticPathinfo' ) ?: '/';
+        if (
+            $event->getRequestType() === HttpKernelInterface::MASTER_REQUEST
+            && $semanticPathinfo === '/'
+        )
+        {
+            $indexPage = $this->configResolver->getParameter( 'index_page' );
+            if ( $indexPage !== null )
+            {
+                $indexPage = '/' . ltrim( $indexPage, '/' );
+                $request->attributes->set( 'semanticPathinfo', $indexPage );
+                $request->attributes->set( 'needsForward', true );
+            }
+        }
     }
 
     /**
@@ -67,16 +106,13 @@ class RequestEventListener implements EventSubscriberInterface
      */
     public function onKernelRequestSetup( GetResponseEvent $event )
     {
-        if (
-            $event->getRequestType() == HttpKernelInterface::MASTER_REQUEST
-            && $this->container->hasParameter( 'ezpublish.siteaccess.default' )
-        )
+        if ( $event->getRequestType() == HttpKernelInterface::MASTER_REQUEST )
         {
-            if ( $this->container->getParameter( 'ezpublish.siteaccess.default' ) !== 'setup' )
+            if ( $this->defaultSiteAccess !== 'setup' )
                 return;
 
             $request = $event->getRequest();
-            $requestContext = $this->container->get( 'router.request_context' );
+            $requestContext = $this->router->getContext();
             $requestContext->fromRequest( $request );
             $this->router->setContext( $requestContext );
             $setupURI = $this->router->generate( 'ezpublishSetup' );
@@ -93,15 +129,26 @@ class RequestEventListener implements EventSubscriberInterface
      */
     public function onKernelRequestForward( GetResponseEvent $event )
     {
-        if ( $event->getRequestType() == HttpKernelInterface::MASTER_REQUEST )
+        if ( $event->getRequestType() === HttpKernelInterface::MASTER_REQUEST )
         {
             $request = $event->getRequest();
             if ( $request->attributes->get( 'needsForward' ) && $request->attributes->has( 'semanticPathinfo' ) )
             {
                 $semanticPathinfo = $request->attributes->get( 'semanticPathinfo' );
-                $event->setResponse(
-                    $this->httpKernel->render( $semanticPathinfo )
+                $request->attributes->remove( 'needsForward' );
+                $forwardRequest = Request::create(
+                    $semanticPathinfo,
+                    $request->getMethod(),
+                    $request->getMethod() === 'POST' ? $request->request->all() : $request->query->all(),
+                    $request->cookies->all(),
+                    $request->files->all(),
+                    $request->server->all(),
+                    $request->getContent()
                 );
+                $forwardRequest->attributes->add( $request->attributes->all() );
+                // Not forcing HttpKernelInterface::SUB_REQUEST on purpose since we're very early here
+                // and we need to bootstrap essential stuff like sessions.
+                $event->setResponse( $event->getKernel()->handle( $forwardRequest ) );
                 $event->stopPropagation();
 
                 if ( isset( $this->logger ) )
@@ -132,6 +179,7 @@ class RequestEventListener implements EventSubscriberInterface
             {
                 $siteaccess = $request->attributes->get( 'siteaccess' );
                 $semanticPathinfo = $request->attributes->get( 'semanticPathinfo' );
+                $queryString = $request->getQueryString();
                 if (
                     $request->attributes->get( 'prependSiteaccessOnRedirect', true )
                     && $siteaccess instanceof SiteAccess
@@ -143,7 +191,7 @@ class RequestEventListener implements EventSubscriberInterface
 
                 $event->setResponse(
                     new RedirectResponse(
-                        $semanticPathinfo,
+                        $semanticPathinfo . ( $queryString ? "?$queryString" : '' ),
                         301
                     )
                 );
@@ -156,5 +204,40 @@ class RequestEventListener implements EventSubscriberInterface
                     );
             }
         }
+    }
+
+    /**
+     * Returns a Response containing the current user hash if needed.
+     *
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+     */
+    public function onKernelRequestUserHash( GetResponseEvent $event )
+    {
+        $request = $event->getRequest();
+
+        if (
+            $request->headers->get( 'X-HTTP-Override' ) !== 'AUTHENTICATE'
+            || $request->headers->get( 'Accept' ) !== Kernel::USER_HASH_ACCEPT_HEADER
+        )
+        {
+            return;
+        }
+
+        // We must have a session at that point since we're supposed to be connected
+        if ( !$request->hasSession() )
+        {
+            $event->setResponse( new Response( '', 400 ) );
+            $event->stopPropagation();
+            return;
+        }
+
+        $userHash = $this->hashGenerator->generate();
+        if ( $this->logger )
+            $this->logger->debug( "UserHash: $userHash" );
+
+        $response = new Response();
+        $response->headers->set( 'X-User-Hash', $userHash );
+        $event->setResponse( $response );
+        $event->stopPropagation();
     }
 }

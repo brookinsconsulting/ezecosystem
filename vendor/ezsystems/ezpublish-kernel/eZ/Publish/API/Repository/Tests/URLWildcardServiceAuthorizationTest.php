@@ -2,9 +2,9 @@
 /**
  * File containing the URLWildcardServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
@@ -30,12 +30,15 @@ class URLWildcardServiceAuthorizationTest extends BaseTest
     {
         $repository = $this->getRepository();
 
+        $anonymousUserId = $this->generateId( 'user', 10 );
         /* BEGIN: Use Case */
+        // $anonymousUserId is the ID of the "Anonymous" user in a eZ
+        // Publish demo installation.
 
         $userService = $repository->getUserService();
         $urlWildcardService = $repository->getURLWildcardService();
 
-        $repository->setCurrentUser( $userService->loadAnonymousUser() );
+        $repository->setCurrentUser( $userService->loadUser( $anonymousUserId ) );
 
         // This call will fail with an UnauthorizedException
         $urlWildcardService->create( '/articles/*', '/content/{1}' );
@@ -54,14 +57,17 @@ class URLWildcardServiceAuthorizationTest extends BaseTest
     {
         $repository = $this->getRepository();
 
+        $anonymousUserId = $this->generateId( 'user', 10 );
         /* BEGIN: Use Case */
+        // $anonymousUserId is the ID of the "Anonymous" user in a eZ
+        // Publish demo installation.
         $userService = $repository->getUserService();
         $urlWildcardService = $repository->getURLWildcardService();
 
         // Create a new url wildcard
         $urlWildcardId = $urlWildcardService->create( '/articles/*', '/content/{1}' )->id;
 
-        $repository->setCurrentUser( $userService->loadAnonymousUser() );
+        $repository->setCurrentUser( $userService->loadUser( $anonymousUserId ) );
 
         // Load newly created url wildcard
         $urlWildcard = $urlWildcardService->load( $urlWildcardId );

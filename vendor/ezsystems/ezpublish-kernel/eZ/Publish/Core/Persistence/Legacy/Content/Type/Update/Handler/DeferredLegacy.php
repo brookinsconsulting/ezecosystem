@@ -2,15 +2,16 @@
 /**
  * File containing the DeferredLegacy Type Update Handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Type\Update\Handler;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\Type\Update\Handler;
 use eZ\Publish\Core\Persistence\Legacy\Content\Type\Gateway;
+use eZ\Publish\SPI\Persistence\Content\Type;
 
 /**
  * DeferredLegacy based type update handler
@@ -40,7 +41,7 @@ class DeferredLegacy extends Handler
      *
      * @return void
      */
-    public function updateContentObjects( $fromType, $toType )
+    public function updateContentObjects( Type $fromType, Type $toType )
     {
     }
 
@@ -51,7 +52,7 @@ class DeferredLegacy extends Handler
      *
      * @return void
      */
-    public function deleteOldType( $fromType )
+    public function deleteOldType( Type $fromType )
     {
     }
 
@@ -63,7 +64,7 @@ class DeferredLegacy extends Handler
      *
      * @return void
      */
-    public function publishNewType( $toType, $newStatus )
+    public function publishNewType( Type $toType, $newStatus )
     {
         $this->contentTypeGateway->publishTypeAndFields(
             $toType->id,
@@ -71,11 +72,11 @@ class DeferredLegacy extends Handler
             Type::STATUS_MODIFIED
         );
 
-        $script = eZScheduledScript::create(
+        $script = \eZScheduledScript::create(
             'syncobjectattributes.php',
-            eZINI::instance( 'ezscriptmonitor.ini' )->variable( 'GeneralSettings', 'PhpCliCommand' ) .
-            ' extension/ezscriptmonitor/bin/' . eZScheduledScript::SCRIPT_NAME_STRING .
-            ' -s ' . eZScheduledScript::SITE_ACCESS_STRING . ' --classid=' . $toType->id
+            \eZINI::instance( 'ezscriptmonitor.ini' )->variable( 'GeneralSettings', 'PhpCliCommand' ) .
+            ' extension/ezscriptmonitor/bin/' . \eZScheduledScript::SCRIPT_NAME_STRING .
+            ' -s ' . \eZScheduledScript::SITE_ACCESS_STRING . ' --classid=' . $toType->id
         );
         $script->store();
     }

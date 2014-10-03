@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -24,7 +24,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testVisitWithoutEmbeddedVersion()
     {
-        $visitor   = $this->getContentVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -33,6 +33,52 @@ class RestContentTest extends ValueObjectVisitorBaseTest
 
         $this->getVisitorMock()->expects( $this->never() )
             ->method( 'visitValueObject' );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContent',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentType',
+            array( 'contentTypeId' => $restContent->contentInfo->contentTypeId ),
+            "/content/types/{$restContent->contentInfo->contentTypeId}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentVersions',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}/versions"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_redirectCurrentVersion',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}/currentversion"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadSection',
+            array( 'sectionId' => $restContent->contentInfo->sectionId ),
+            "/content/sections/{$restContent->contentInfo->sectionId}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocation',
+            array( 'locationPath' => $locationPath = trim( $restContent->mainLocation->pathString, '/' ) ),
+            "/content/locations/{$locationPath}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocationsForContent',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}/locations"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadUser',
+            array( 'userId' => $restContent->contentInfo->ownerId ),
+            "/user/users/{$restContent->contentInfo->ownerId}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_getObjectStatesForContent',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}/objectstates"
+        );
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -304,7 +350,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testVisitWithEmbeddedVersion()
     {
-        $visitor   = $this->getContentVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -312,6 +358,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
         $restContent = $this->getBasicRestContent();
         $restContent->currentVersion = new Values\Content\Content(
             array(
+                'versionInfo' => new Values\Content\VersionInfo( array( 'versionNo' => 5 ) ),
                 'internalFields' => array()
             )
         );
@@ -323,6 +370,48 @@ class RestContentTest extends ValueObjectVisitorBaseTest
         $this->getVisitorMock()->expects( $this->once() )
             ->method( 'visitValueObject' )
             ->with( $this->isInstanceOf( 'eZ\\Publish\\Core\\REST\\Server\\Values\\Version' ) );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContent',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentType',
+            array( 'contentTypeId' => $restContent->contentInfo->contentTypeId ),
+            "/content/types/{$restContent->contentInfo->contentTypeId}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentVersions',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}/versions"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_redirectCurrentVersion',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}/currentversion"
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadSection',
+            array( 'sectionId' => $restContent->contentInfo->sectionId ),
+            "/content/sections/{$restContent->contentInfo->sectionId}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocation',
+            array( 'locationPath' => $locationPath = trim( $restContent->mainLocation->pathString, '/' ) ),
+            "/content/locations/{$locationPath}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocationsForContent',
+            array( 'contentId' => $restContent->contentInfo->id ),
+            "/content/objects/{$restContent->contentInfo->id}/locations"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadUser',
+            array( 'userId' => $restContent->contentInfo->ownerId ),
+            "/user/users/{$restContent->contentInfo->ownerId}"
+        );
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -375,10 +464,8 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\RestContent
      */
-    protected function getContentVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\RestContent(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\RestContent;
     }
 }

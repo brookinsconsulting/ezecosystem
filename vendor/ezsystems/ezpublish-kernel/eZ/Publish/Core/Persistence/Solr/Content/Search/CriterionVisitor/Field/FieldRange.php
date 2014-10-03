@@ -2,9 +2,9 @@
 /**
  * File containing the Content Search handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search\CriterionVisitor\Field;
@@ -60,7 +60,7 @@ class FieldRange extends Field
             $start = null;
         }
 
-        $fieldTypes = $this->getFieldTypes();
+        $fieldTypes = $this->getFieldTypes( $criterion );
         $criterion->value = (array)$criterion->value;
 
         if ( !isset( $fieldTypes[$criterion->target] ) )
@@ -72,9 +72,12 @@ class FieldRange extends Field
         }
 
         $queries = array();
-        foreach ( $fieldTypes[$criterion->target] as $name )
+        foreach ( $fieldTypes[$criterion->target] as $names )
         {
-            $queries[] = $name . ':' . $this->getRange( $criterion->operator, $start, $end );
+            foreach ( $names as $name )
+            {
+                $queries[] = $name . ':' . $this->getRange( $criterion->operator, $start, $end );
+            }
         }
 
         return '(' . implode( ' OR ', $queries ) . ')';

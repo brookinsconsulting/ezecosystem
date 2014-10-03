@@ -2,18 +2,16 @@
 /**
  * File containing the ConfigurationConverter class.
  *
- * @copyright Copyright (C) 2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 namespace eZ\Bundle\EzPublishLegacyBundle\SetupWizard;
 
 use eZ\Bundle\EzPublishLegacyBundle\DependencyInjection\Configuration\LegacyConfigResolver;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\MVC\Legacy\Kernel as LegacyKernel;
 use eZINI;
 use eZSiteAccess;
-use Stash\Driver\Apc as APCDriver;
 use Stash\Driver\FileSystem as FileSystemDriver;
 
 /**
@@ -73,32 +71,26 @@ class ConfigurationConverter
         $groupName = $sitePackage . '_group';
         $settings['ezpublish']['siteaccess']['groups'][$groupName] = $siteList;
         $settings['ezpublish']['siteaccess']['match'] = $this->resolveMatching();
-
-        $databaseMapping = array(
-            'ezmysqli' => 'mysql',
-            'eZMySQLiDB' => 'mysql',
-            'ezmysql' => 'mysql',
-            'eZMySQLDB' => 'mysql',
-        );
-
-        $databaseSettings = $this->getGroup( 'DatabaseSettings', 'site.ini', $defaultSiteaccess );
-
-        $databaseType = $databaseSettings['DatabaseImplementation'];
-        if ( isset( $databaseMapping[$databaseType] ) )
-            $databaseType = $databaseMapping[$databaseType];
-
         $settings['ezpublish']['system'] = array();
         $settings['ezpublish']['system'][$groupName] = array();
-        $databasePassword = $databaseSettings['Password'] != '' ? $databaseSettings['Password'] : null;
-        $settings['ezpublish']['system'][$groupName]['database'] = array(
-            'type' => $this->mapDatabaseType( $databaseType ),
-            'user' => $databaseSettings['User'],
-            'password' => $databasePassword,
-            'server' => $databaseSettings['Server'],
-            'database_name' => $databaseSettings['Database'],
-        );
+
         $settings['ezpublish']['system'][$defaultSiteaccess] = array();
         $settings['ezpublish']['system'][$adminSiteaccess] = array();
+
+        // Database settings
+        $databaseSettings = $this->getGroup( 'DatabaseSettings', 'site.ini', $defaultSiteaccess );
+        $repositoryName = "{$defaultSiteaccess}_repository";
+        $settings['doctrine'] = array(
+            'dbal' => array(
+                'connections' => array(
+                    "{$repositoryName}_connection" => $this->getDoctrineSettings( $databaseSettings )
+                )
+            )
+        );
+        $settings['ezpublish']['repositories'] = array(
+            $repositoryName => array( 'engine' => 'legacy', 'connection' => "{$repositoryName}_connection" )
+        );
+        $settings['ezpublish']['system'][$groupName]['repository'] = $repositoryName;
 
         // If package is not supported, all siteaccesses will have individually legacy_mode to true, forcing legacy fallback
         if ( !isset( $this->supportedPackages[$sitePackage] ) )
@@ -160,13 +152,58 @@ class ConfigurationConverter
                 $this->getParameter( "Session", "SessionNamePerSiteAccess", "site.ini", $siteaccess ) !== "enabled"
             )
             {
-                $settings['ezpublish']['system'][$siteaccess]['session_name'] = $this->getParameter( "Session", "SessionNamePrefix", "site.ini" );
+                $settings['ezpublish']['system'][$siteaccess]['session'] = array( 'name' => $this->getParameter( "Session", "SessionNamePrefix", "site.ini" ) );
             }
         }
 
-        $settings['stash'] = $this->getStashCacheSettings( $databaseSettings['Database'] );
+        $settings['stash'] = $this->getStashCacheSettings();
 
+        ksort( $settings );
+        ksort( $settings['ezpublish'] );
         return $settings;
+    }
+
+    /**
+     * Returns settings for Doctrine in respect to database settings coming from legacy.
+     *
+     * @param array $databaseSettings
+     *
+     * @return array
+     */
+    protected function getDoctrineSettings( array $databaseSettings )
+    {
+        $databaseMapping = array(
+            'ezmysqli' => 'pdo_mysql',
+            'eZMySQLiDB' => 'pdo_mysql',
+            'ezmysql' => 'pdo_mysql',
+            'eZMySQLDB' => 'pdo_mysql',
+            'ezpostgresql' => 'pdo_pgsql',
+            'eZPostgreSQL' => 'pdo_pgsql',
+            'postgresql' => 'pdo_pgsql',
+            'pgsql' => 'pdo_pgsql',
+            'oracle' => 'oci8',
+            'ezoracle' => 'oci8'
+        );
+
+        $databaseType = $databaseSettings['DatabaseImplementation'];
+        if ( isset( $databaseMapping[$databaseType] ) )
+            $databaseType = $databaseMapping[$databaseType];
+
+        $databasePassword = $databaseSettings['Password'] != '' ? $databaseSettings['Password'] : null;
+        $doctrineSettings = array(
+            'driver' => $databaseType,
+            'host' => $databaseSettings['Server'],
+            'user' => $databaseSettings['User'],
+            'password' => $databasePassword,
+            'dbname' => $databaseSettings['Database'],
+            'charset' => 'UTF8'
+        );
+        if ( isset( $databaseSettings['Port'] ) && !empty( $databaseSettings['Port'] ) )
+            $doctrineSettings['port'] = $databaseSettings['Port'];
+        if ( isset( $databaseSettings['Socket'] ) && $databaseSettings['Socket'] !== 'disabled' )
+            $doctrineSettings['unix_socket'] = $databaseSettings['Socket'];
+
+        return $doctrineSettings;
     }
 
     /**
@@ -179,11 +216,9 @@ class ConfigurationConverter
      * - Xcache  [DISABLED, SEE INLINE]
      * - variable instance cache  [DISABLED, SEE INLINE]
      *
-     * @param string $databaseName
-     *
      * @return array
      */
-    protected function getStashCacheSettings( $databaseName )
+    protected function getStashCacheSettings()
     {
         // Should only contain one out of the box
         $handlers = array();
@@ -193,32 +228,14 @@ class ConfigurationConverter
         {
             $handlers[] = 'FileSystem';
             $inMemory = true;
+            // If running on Windows, use "crc32" keyHashFunction
+            if ( stripos( php_uname(), 'win' ) === 0 )
+            {
+                $handlerSetting['FileSystem'] = array(
+                    'keyHashFunction' => 'crc32'
+                );
+            }
         }
-        else if ( APCDriver::isAvailable() )
-        {
-            $handlers[] = 'Apc';
-            $handlerSetting['Apc'] = array(
-                'ttl' => 500,
-                'namespace' => $databaseName
-            );
-        }
-        /* Disabled for installer, as this should be manually configured
-        else if ( \Stash\Driver\Memcache::isAvailable() )
-        {
-            $handlers[] = 'Memcache';
-            $handlerSetting['Memcache'] = array(
-                'prefix_key' => $databaseName,
-                'servers' => array(
-                    array( 'server' => '127.0.0.1', 'port' => '11211' )
-                )
-            );
-            $inMemory = true;
-        }*/
-        /* Disabled for installer, not tested, and stash-bundle does not provide a way to set settings
-        else if ( \Stash\Driver\Xcache::isAvailable() )
-        {
-            $handlers[] = 'Xcache';
-        }*/
         else
         {
             // '/dev/null' fallback driver, no cache at all
@@ -229,7 +246,7 @@ class ConfigurationConverter
         return array(
             'caches' => array(
                 'default' => array(
-                    'handlers' => $handlers,
+                    'drivers' => $handlers,
                     // inMemory will enable/disable "Ephemeral", not allowed as separate handler in stash-bundle
                     'inMemory' => $inMemory,
                     'registerDoctrineAdapter' => false
@@ -382,22 +399,12 @@ class ConfigurationConverter
         return $filters;
     }
 
-    protected function mapDatabaseType( $databaseType )
-    {
-        $map = array(
-            'ezpostgresql' => 'pgsql',
-            'postgresql' => 'pgsql'
-        );
-
-        return isset( $map[$databaseType] ) ? $map[$databaseType] : $databaseType;
-    }
-
     /**
      * Returns the contents of the legacy group $groupName. If $file and
      * $siteaccess are null, the global value is fetched with the legacy resolver.
      *
      * @param string $groupName
-     * @param string|null $namespace
+     * @param string|null $file
      * @param string|null $siteaccess
      *
      * @return array
@@ -469,7 +476,6 @@ class ConfigurationConverter
                     $match = $this->resolveHostMatching( $siteaccessSettings );
                     break;
                 case 'host_uri':
-                    // @todo Not implemented yet
                     $match = false;
                     break;
                 case 'port':

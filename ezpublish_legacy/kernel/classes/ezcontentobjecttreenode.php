@@ -2,9 +2,9 @@
 /**
  * File containing the eZContentObjectTreeNode class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version //autogentag//
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -3833,8 +3833,6 @@ class eZContentObjectTreeNode extends eZPersistentObject
         $db = eZDB::instance();
         $db->begin();
 
-        $userClassIDArray = eZUser::contentClassIDs();
-
         foreach ( $deleteIDArray as $deleteID )
         {
             $node = eZContentObjectTreeNode::fetch( $deleteID );
@@ -3859,12 +3857,8 @@ class eZContentObjectTreeNode extends eZPersistentObject
 
             if ( $canRemove )
             {
-                $isUserClass = in_array( $class->attribute( 'id' ), $userClassIDArray );
+                $moveToTrashAllowed = $node->isNodeTrashAllowed();
 
-                if ( $moveToTrashAllowed and $isUserClass )
-                {
-                    $moveToTrashAllowed = false;
-                }
                 $readableChildCount = $node->subTreeCount( array( 'Limitation' => array() ) );
                 $childCount = $node->subTreeCount( array( 'IgnoreVisibility' => true ) );
                 $totalChildCount += $childCount;
@@ -3965,7 +3959,6 @@ class eZContentObjectTreeNode extends eZPersistentObject
 
                         foreach ( $children as $child )
                         {
-                            $childObject = $child->attribute( 'object' );
                             $child->removeNodeFromTree( $moveToTrashTemp );
                             eZContentObject::clearCache();
                         }
@@ -6377,6 +6370,38 @@ class eZContentObjectTreeNode extends eZPersistentObject
             return json_encode( $classList );
 
         return $falseValue;
+    }
+
+
+    /**
+     * Figure out if a node can be sent to trash or if it should be directly deleted as objects
+     * containing ezuser attributes can not be sent to trash.
+     *
+     * @return bool true if it can go to trash, false if it should be deleted
+     */
+    public function isNodeTrashAllowed()
+    {
+        $userClassIDArray = eZUser::contentClassIDs();
+
+        $class = $this->attribute( 'object' )->attribute( 'content_class' );
+
+        // If current object has ezuser attributes, it can't be sent to trash
+        if ( in_array( $class->attribute( 'id' ), $userClassIDArray ) )
+        {
+            return false;
+        }
+
+        // Checking for children using classes with ezuser attribute. Using == because subTreecount returns strings
+        return $this->subTreeCount(
+                    array(
+                        'Limitation' => array(),
+                        'SortBy' => array( 'path' , false ),
+                        'IgnoreVisibility' => true,
+                        'ClassFilterType' => 'include',
+                        'ClassFilterArray' => $userClassIDArray,
+                        'AsObject' => false
+                    )
+                ) == 0 ;
     }
 
     /**

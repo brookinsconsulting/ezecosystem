@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\Content\Location class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Values\Content;
@@ -47,12 +47,25 @@ abstract class Location extends ValueObject
     const SORT_ORDER_DESC = 0;
     const SORT_ORDER_ASC = 1;
 
+    const STATUS_DRAFT = 0;
+    const STATUS_PUBLISHED = 1;
+
     /**
      * Location ID.
      *
      * @var mixed Location ID.
      */
     protected $id;
+
+    /**
+     * the status of the location
+     *
+     * a location gets the status DRAFT on newly created content which is not published. When content is published the
+     * location gets the status STATUS_PUBLISHED
+     *
+     * @var int
+     */
+    public $status = self::STATUS_PUBLISHED;
 
     /**
      * Location priority
@@ -94,6 +107,16 @@ abstract class Location extends ValueObject
      * @return \eZ\Publish\API\Repository\Values\Content\ContentInfo
      */
     abstract public function getContentInfo();
+
+    /**
+     * Returns true if current location is a draft
+     *
+     * @return bool
+     */
+    public function isDraft()
+    {
+        return $this->status === self::STATUS_DRAFT;
+    }
 
     /**
      * Parent ID.

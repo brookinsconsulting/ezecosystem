@@ -2,9 +2,9 @@
 /**
  * File containing the CreatedContentTypeGroup ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -14,6 +14,7 @@ use eZ\Publish\Core\REST\Common\Output\Visitor;
 
 /**
  * CreatedContentTypeGroup value object visitor
+ * @todo coverage add test
  */
 class CreatedContentTypeGroup extends ContentTypeGroup
 {
@@ -29,9 +30,9 @@ class CreatedContentTypeGroup extends ContentTypeGroup
         parent::visit( $visitor, $generator, $data->contentTypeGroup );
         $visitor->setHeader(
             'Location',
-            $this->urlHandler->generate(
-                'typegroup',
-                array( 'typegroup' => $data->contentTypeGroup->id )
+            $this->router->generate(
+                'ezpublish_rest_loadContentTypeGroup',
+                array( 'contentTypeGroupId' => $data->contentTypeGroup->id )
             )
         );
         $visitor->setStatus( 201 );

@@ -2,9 +2,9 @@
 /**
  * File containing the View\Provider\Block interface.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\View\Provider;
@@ -17,7 +17,7 @@ use eZ\Publish\Core\FieldType\Page\Parts\Block as PageBlock;
  * Block view providers select a view for a given page block, depending on its own internal rules.
  * Such provider is meant to work along with Page field type.
  */
-interface Block extends ViewProviderInterface
+interface Block
 {
     /**
      * Returns a ContentView object corresponding to $block, or null if not applicable

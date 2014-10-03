@@ -2,9 +2,9 @@
 /**
  * File containing the Media Type class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Media;
@@ -13,6 +13,8 @@ use eZ\Publish\Core\FieldType\BinaryBase\Type as BaseType;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\Core\FieldType\ValidationError;
+use eZ\Publish\Core\FieldType\Value as BaseValue;
+use eZ\Publish\SPI\fieldType\Value as SPIValue;
 
 /**
  * The TextLine field type.
@@ -21,7 +23,6 @@ use eZ\Publish\Core\FieldType\ValidationError;
  */
 class Type extends BaseType
 {
-
     /**
      * List of possible media type settings
      */
@@ -136,99 +137,90 @@ class Type extends BaseType
     }
 
     /**
-     * Implements the core of {@see acceptValue()}.
+     * Throws an exception if value structure is not of expected format.
      *
-     * @param mixed $inputValue
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure.
      *
-     * @return \eZ\Publish\Core\FieldType\Media\Value The potentially converted and structurally plausible value.
+     * @param \eZ\Publish\Core\FieldType\Media\Value $value
+     *
+     * @return void
      */
-    protected function internalAcceptValue( $inputValue )
+    protected function checkValueStructure( BaseValue $value )
     {
-        $inputValue = parent::internalAcceptValue( $inputValue );
+        parent::checkValueStructure( $value );
 
-        if ( !$inputValue instanceof Value )
+        if ( !is_bool( $value->hasController ) )
         {
             throw new InvalidArgumentType(
-                '$inputValue',
-                'eZ\\Publish\\Core\\FieldType\\Media\\Value',
-                $inputValue
+                '$value->hasController',
+                'bool',
+                $value->hasController
             );
         }
-
-        if ( !is_bool( $inputValue->hasController ) )
+        if ( !is_bool( $value->autoplay ) )
         {
             throw new InvalidArgumentType(
-                '$inputValue->hasController',
+                '$value->autoplay',
                 'bool',
-                $inputValue->hasController
+                $value->autoplay
             );
         }
-        if ( !is_bool( $inputValue->autoplay ) )
+        if ( !is_bool( $value->loop ) )
         {
             throw new InvalidArgumentType(
-                '$inputValue->autoplay',
+                '$value->loop',
                 'bool',
-                $inputValue->autoplay
-            );
-        }
-        if ( !is_bool( $inputValue->loop ) )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue->loop',
-                'bool',
-                $inputValue->loop
+                $value->loop
             );
         }
 
-        if ( !is_int( $inputValue->height ) )
+        if ( !is_int( $value->height ) )
         {
             throw new InvalidArgumentType(
-                '$inputValue->height',
+                '$value->height',
                 'int',
-                $inputValue->height
+                $value->height
             );
         }
-        if ( !is_int( $inputValue->width ) )
+        if ( !is_int( $value->width ) )
         {
             throw new InvalidArgumentType(
-                '$inputValue->width',
+                '$value->width',
                 'int',
-                $inputValue->width
+                $value->width
             );
         }
-
-        return $inputValue;
     }
 
     /**
      * Attempts to complete the data in $value
      *
-     * @param Value $value
+     * @param \eZ\Publish\Core\FieldType\Media\Value|\eZ\Publish\Core\FieldType\Value $value
      *
      * @return void
      */
-    protected function completeValue( $value )
+    protected function completeValue( BaseValue $value )
     {
         parent::completeValue( $value );
 
-        if ( !isset( $value->hasController ) )
+        if ( isset( $value->hasController ) && $value->hasController === null )
         {
             $value->hasController = false;
         }
-        if ( !isset( $value->autoplay ) )
+        if ( isset( $value->autoplay ) && $value->autoplay === null )
         {
             $value->autoplay = false;
         }
-        if ( !isset( $value->loop ) )
+        if ( isset( $value->loop ) && $value->loop === null )
         {
             $value->loop = false;
         }
 
-        if ( !isset( $value->height ) )
+        if ( isset( $value->height ) && $value->height === null )
         {
             $value->height = 0;
         }
-        if ( !isset( $value->width ) )
+        if ( isset( $value->width ) && $value->width === null )
         {
             $value->width = 0;
         }
@@ -241,14 +233,14 @@ class Type extends BaseType
      *
      * @return mixed
      */
-    public function toHash( $value )
+    public function toHash( SPIValue $value )
     {
-        $hash = parent::toHash( $value );
-
-        if ( $hash === null )
+        if ( $this->isEmptyValue( $value ) )
         {
-            return $hash;
+            return null;
         }
+
+        $hash = parent::toHash( $value );
 
         $hash['hasController'] = $value->hasController;
         $hash['autoplay'] = $value->autoplay;
@@ -266,17 +258,16 @@ class Type extends BaseType
      *
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
      *
-     * @return mixed
+     * @return \eZ\Publish\Core\FieldType\Media\Value
      */
     public function fromPersistenceValue( FieldValue $fieldValue )
     {
-        $result = parent::fromPersistenceValue( $fieldValue );
-
-        if ( $result === null )
+        if ( $fieldValue->externalData === null )
         {
-            // empty value
-            return null;
+            return $this->getEmptyValue();
         }
+
+        $result = parent::fromPersistenceValue( $fieldValue );
 
         $result->hasController = ( isset( $fieldValue->externalData['hasController'] )
             ? $fieldValue->externalData['hasController']

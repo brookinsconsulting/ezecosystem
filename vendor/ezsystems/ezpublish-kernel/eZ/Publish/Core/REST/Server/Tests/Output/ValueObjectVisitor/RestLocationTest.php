@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -26,7 +26,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getLocationVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -55,6 +55,30 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             0
         );
 
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocation',
+            array( 'locationPath' => '1/2/21/42' ),
+            '/content/locations/1/2/21/42'
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocation',
+            array( 'locationPath' => '1/2/21' ),
+            '/content/locations/1/2/21'
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadLocationChildren',
+            array( 'locationPath' => '1/2/21/42' ),
+            '/content/locations/1/2/21/42/children'
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContent', array( 'contentId' => $location->location->contentId ),
+            "/content/objects/{$location->location->contentId}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_listLocationURLAliases', array( 'locationPath' => '1/2/21/42' ),
+            "/content/objects/1/2/21/42/urlaliases"
+        );
+
         $visitor->visit(
             $this->getVisitorMock(),
             $generator,
@@ -81,7 +105,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             array(
                 'tag'      => 'Location',
                 'children' => array(
-                    'count' => 13
+                    'count' => 14
                 )
             ),
             $result,
@@ -440,14 +464,54 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
+     * Test if result contains Content element
+     *
+     * @param string $result
+     *
+     * @depends testVisit
+     */
+    public function testResultContainsUrlAliasesTag( $result )
+    {
+        $this->assertTag(
+            array(
+                'tag' => 'UrlAliases'
+            ),
+            $result,
+            'Invalid <UrlAliases> element.',
+            false
+        );
+    }
+
+    /**
+     * Test if result contains Content element attributes
+     *
+     * @param string $result
+     *
+     * @depends testVisit
+     */
+    public function testResultContainsUrlAliasesTagAttributes( $result )
+    {
+        $this->assertTag(
+            array(
+                'tag' => 'UrlAliases',
+                'attributes' => array(
+                    'media-type' => 'application/vnd.ez.api.UrlAliasRefList+xml',
+                    'href'       => '/content/objects/1/2/21/42/urlaliases',
+                )
+            ),
+            $result,
+            'Invalid <UrlAliases> attributes.',
+            false
+        );
+    }
+
+    /**
      * Get the Location visitor
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\RestLocation
      */
-    protected function getLocationVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\RestLocation(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\RestLocation;
     }
 }

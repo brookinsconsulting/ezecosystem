@@ -2,15 +2,15 @@
 /**
  * File containing the StorageEngineFactory class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\ApiLoader;
 
 use eZ\Bundle\EzPublishCoreBundle\ApiLoader\Exception\InvalidStorageEngine;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use eZ\Publish\SPI\Persistence\Handler as PersistenceHandler;
 
 /**
  * The storage engine factory.
@@ -18,53 +18,67 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class StorageEngineFactory
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \eZ\Bundle\EzPublishCoreBundle\ApiLoader\StorageRepositoryProvider
      */
-    protected $container;
+    private $storageRepositoryProvider;
 
     /**
      * Hash of registered storage engines.
-     * Key is the storage engine identifier, value is its corresponding service Id
+     * Key is the storage engine identifier, value persistence handler itself.
      *
-     * @var array
+     * @var \eZ\Publish\SPI\Persistence\Handler[]
      */
     protected $storageEngines = array();
 
-    public function __construct( ContainerInterface $container )
+    public function __construct( StorageRepositoryProvider $storageRepositoryProvider )
     {
-        $this->container = $container;
+        $this->storageRepositoryProvider = $storageRepositoryProvider;
     }
 
     /**
-     * Registers $storageEngineServiceId as a service Id to be used as a valid storage engine, with identifier $storageEngineIdentifier
+     * Registers $persistenceHandler as a valid storage engine, with identifier $storageEngineIdentifier.
      *
-     * @param string $storageEngineServiceId
+     * @note It is strongly recommenced to register a lazy persistent handler.
+     *
+     * @param \eZ\Publish\SPI\Persistence\Handler $persistenceHandler
      * @param string $storageEngineIdentifier
      */
-    public function registerStorageEngine( $storageEngineServiceId, $storageEngineIdentifier )
+    public function registerStorageEngine( PersistenceHandler $persistenceHandler, $storageEngineIdentifier )
     {
-        $this->storageEngines[$storageEngineIdentifier] = $storageEngineServiceId;
+        $this->storageEngines[$storageEngineIdentifier] = $persistenceHandler;
     }
 
     /**
-     * Builds storage engine identified by $storageEngineIdentifier (the "alias" attribute in the service tag)
-     *
-     * @param string $storageEngineIdentifier The storage engine identifier
+     * @return \eZ\Publish\SPI\Persistence\Handler[]
+     */
+    public function getStorageEngines()
+    {
+        return $this->storageEngines;
+    }
+
+    /**
+     * Builds storage engine identified by $storageEngineIdentifier (the "alias" attribute in the service tag).
      *
      * @throws \eZ\Bundle\EzPublishCoreBundle\ApiLoader\Exception\InvalidStorageEngine
      *
      * @return \eZ\Publish\SPI\Persistence\Handler
      */
-    public function buildStorageEngine( $storageEngineIdentifier )
+    public function buildStorageEngine()
     {
-        if ( !isset( $this->storageEngines[$storageEngineIdentifier] ) )
+        $repositoryConfig = $this->storageRepositoryProvider->getRepositoryConfig();
+
+        if (
+        !(
+            isset( $repositoryConfig['engine'] )
+            && isset( $this->storageEngines[$repositoryConfig['engine']] )
+        )
+        )
         {
             throw new InvalidStorageEngine(
-                "Invalid storage engine '$storageEngineIdentifier'. Could not find any service tagged as ezpublish.storageEngine with alias $storageEngineIdentifier."
+                "Invalid storage engine '{$repositoryConfig['engine']}'. Could not find any service tagged as ezpublish.storageEngine with alias {$repositoryConfig['engine']}."
             );
         }
 
-        $serviceId = $this->storageEngines[$storageEngineIdentifier];
-        return $this->container->get( $serviceId );
+        return $this->storageEngines[$repositoryConfig['engine']];
     }
 }

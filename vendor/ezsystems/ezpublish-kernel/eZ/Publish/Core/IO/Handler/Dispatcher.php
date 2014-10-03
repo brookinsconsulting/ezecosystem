@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\IO\Handler\Dispatcher class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\IO\Handler;
@@ -97,7 +97,7 @@ class Dispatcher implements IoHandlerInterface
      */
     public function create( BinaryFileCreateStruct $createStruct )
     {
-        return $this->getHandler( $createStruct->uri )->create( $createStruct );
+        return $this->getHandler( $createStruct->id )->create( $createStruct );
     }
 
     /**
@@ -107,9 +107,9 @@ class Dispatcher implements IoHandlerInterface
      *
      * @param string $path
      */
-    public function delete( $path )
+    public function delete( $binaryFileId )
     {
-        $this->getHandler( $path )->delete( $path );
+        $this->getHandler( $binaryFileId )->delete( $binaryFileId );
     }
 
     /**
@@ -118,46 +118,36 @@ class Dispatcher implements IoHandlerInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If the source path doesn't exist
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the target path already exists
      *
-     * @param string $path
+     * @param mixed $spiBinaryFileId
      * @param \eZ\Publish\SPI\IO\BinaryFileUpdateStruct $updateFileStruct
      *
      * @return \eZ\Publish\SPI\IO\BinaryFile The updated BinaryFile
      */
-    public function update( $path, BinaryFileUpdateStruct $updateFileStruct )
+    public function update( $spiBinaryFileId, BinaryFileUpdateStruct $updateFileStruct )
     {
-        if ( $path === $updateFileStruct->uri )
-            return $this->getHandler( $path )->update( $path, $updateFileStruct );
+        if ( $spiBinaryFileId === $updateFileStruct->uri )
+            return $this->getHandler( $spiBinaryFileId )->update( $spiBinaryFileId, $updateFileStruct );
 
         // When file path has changed, check if we should move from one handler to another
-        $oldHandler = $this->getHandler( $path );
+        $oldHandler = $this->getHandler( $spiBinaryFileId );
         $newHandler = $this->getHandler( $updateFileStruct->uri );
         if ( $oldHandler === $newHandler )
-            return $oldHandler->update( $path, $updateFileStruct );
+            return $oldHandler->update( $spiBinaryFileId, $updateFileStruct );
 
         // Move file from old to new handler
         throw new \Exception( '@todo: Moving from one io handler to another one is not implemented!' );
-        /*$newHandler->create( $updateFile );
-        try
-        {
-            $oldHandler->delete( $path );
-        }
-        catch ( \Exception $e )
-        {
-            $newHandler->delete( $updateFile->uri );
-            throw $e;
-        }*/
     }
 
     /**
      * Checks if the BinaryFile with path $path exists
      *
-     * @param string $path
+     * @param mixed $spiBinaryFileId
      *
      * @return boolean
      */
-    public function exists( $path )
+    public function exists( $spiBinaryFileId )
     {
-        return $this->getHandler( $path )->exists( $path );
+        return $this->getHandler( $spiBinaryFileId )->exists( $spiBinaryFileId );
     }
 
     /**
@@ -165,13 +155,13 @@ class Dispatcher implements IoHandlerInterface
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If no file identified by $path exists
      *
-     * @param string $uri
+     * @param mixed $spiBinaryFileId
      *
      * @return \eZ\Publish\SPI\IO\BinaryFile
      */
-    public function load( $uri )
+    public function load( $spiBinaryFileId )
     {
-        return $this->getHandler( $uri )->load( $uri );
+        return $this->getHandler( $spiBinaryFileId )->load( $spiBinaryFileId );
     }
 
     /**
@@ -179,13 +169,13 @@ class Dispatcher implements IoHandlerInterface
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If no file identified by $path exists
      *
-     * @param string $uri
+     * @param mixed $spiBinaryFileId
      *
      * @return resource
      */
-    public function getFileResource( $uri )
+    public function getFileResource( $spiBinaryFileId )
     {
-        return $this->getHandler( $uri )->getFileResource( $uri );
+        return $this->getHandler( $spiBinaryFileId )->getFileResource( $spiBinaryFileId );
     }
 
     /**
@@ -193,13 +183,13 @@ class Dispatcher implements IoHandlerInterface
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException if the file couldn't be found
      *
-     * @param string $uri
+     * @param mixed $spiBinaryFileId
      *
      * @return string
      */
-    public function getFileContents( $uri )
+    public function getFileContents( $spiBinaryFileId )
     {
-        return $this->getHandler( $uri )->getFileContents( $uri );
+        return $this->getHandler( $spiBinaryFileId )->getFileContents( $spiBinaryFileId );
     }
 
     /**
@@ -207,21 +197,21 @@ class Dispatcher implements IoHandlerInterface
      *
      * @internal Depends on {@link $config} being validated by {@link __construct()}!
      *
-     * @param string $path
+     * @param mixed $binaryFileId
      *
-     * @return \eZ\Publish\SPI\IO\Handler
+     * @return \eZ\Publish\Core\IO\Handler
      */
-    private function getHandler( $path )
+    private function getHandler( $binaryFileId )
     {
         foreach ( $this->alternativeHandlers as $handlerConfig )
         {
             // Match handler using strpos & strstr for speed, and to avoid having regex in ini files
-            if ( !empty( $handlerConfig['contains'] ) && strpos( $path, $handlerConfig['contains'] ) === false )
+            if ( !empty( $handlerConfig['contains'] ) && strpos( $binaryFileId, $handlerConfig['contains'] ) === false )
             {
                 continue;
             }
 
-            if ( !empty( $handlerConfig['prefix'] ) && strpos( $path, $handlerConfig['prefix'] ) !== 0 )
+            if ( !empty( $handlerConfig['prefix'] ) && strpos( $binaryFileId, $handlerConfig['prefix'] ) !== 0 )
             {
                 continue;
             }
@@ -231,7 +221,7 @@ class Dispatcher implements IoHandlerInterface
                 $suffixMatch = false;
                 foreach ( explode( ',', $handlerConfig['suffix'] ) as $suffix )
                 {
-                    if ( strstr( $path, $suffix ) === $suffix )
+                    if ( strstr( $binaryFileId, $suffix ) === $suffix )
                     {
                         $suffixMatch = true;
                         break;
@@ -249,12 +239,12 @@ class Dispatcher implements IoHandlerInterface
         return $this->defaultHandler;
     }
 
-    public function getInternalPath( $path )
+    public function getInternalPath( $spiBinaryFileId )
     {
         // TODO: Implement getInternalPath() method.
     }
 
-    public function getMetadata( MetadataHandler $metadataHandler, $path )
+    public function getMetadata( MetadataHandler $metadataHandler, $spiBinaryFileId )
     {
         // TODO: Implement getMetadata() method.
     }
@@ -262,5 +252,10 @@ class Dispatcher implements IoHandlerInterface
     public function getExternalPath( $path )
     {
         // TODO: Implement getExternalPath() method
+    }
+
+    public function getUri( $spiBinaryFileId )
+    {
+        return $this->getHandler( $spiBinaryFileId )->getUri( $spiBinaryFileId );
     }
 }

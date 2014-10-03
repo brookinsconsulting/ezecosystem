@@ -2,9 +2,9 @@
 /**
  * File containing the Content Gateway base class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content;
@@ -54,10 +54,11 @@ abstract class Gateway
      *
      * @param int $contentId
      * @param \eZ\Publish\SPI\Persistence\Content\MetadataUpdateStruct $struct
+     * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $prePublishVersionInfo Provided on publish
      *
      * @return void
      */
-    abstract public function updateContent( $contentId, MetadataUpdateStruct $struct );
+    abstract public function updateContent( $contentId, MetadataUpdateStruct $struct, VersionInfo $prePublishVersionInfo = null );
 
     /**
      * Updates version $versionNo for content identified by $contentId, in respect to $struct
@@ -109,7 +110,7 @@ abstract class Gateway
     /**
      * Inserts an existing field.
      *
-     * Used to insert a field with an exsting ID but a new version number.
+     * Used to insert a field with an existing ID but a new version number.
      *
      * @param Content $content
      * @param Field $field
@@ -154,7 +155,18 @@ abstract class Gateway
      *
      * @return array
      */
-    abstract public function load( $contentId, $version, $translations = null );
+    abstract public function load( $contentId, $version, array $translations = null );
+
+    /**
+     * Loads info for a content object identified by its remote ID
+     *
+     * Returns an array with the relevant data.
+     *
+     * @param mixed $remoteId
+     *
+     * @return array
+     */
+    abstract public function loadContentInfoByRemoteId( $remoteId );
 
     /**
      * Loads info for content identified by $contentId.
@@ -204,6 +216,15 @@ abstract class Gateway
     abstract public function listVersions( $contentId );
 
     /**
+     * Returns all version numbers for the given $contentId
+     *
+     * @param mixed $contentId
+     *
+     * @return int[]
+     */
+    abstract public function listVersionNumbers( $contentId );
+
+    /**
      * Returns last version number for content identified by $contentId
      *
      * @param int $contentId
@@ -247,11 +268,10 @@ abstract class Gateway
      * Deletes the field with the given $fieldId
      *
      * @param int $fieldId
-     * @param int $version
      *
      * @return void
      */
-    abstract public function deleteField( $fieldId, $version );
+    abstract public function deleteField( $fieldId );
 
     /**
      * Deletes all fields of $contentId in all versions.

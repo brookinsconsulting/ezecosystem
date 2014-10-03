@@ -41,7 +41,7 @@ version: 2.8.2r1
 
 .yui-skin-sam .yuimenubaritemlabel:visited {
 
-        color: #000;
+	color: #000;
 
 }
 
@@ -129,13 +129,13 @@ version: 2.8.2r1
 
 .yui-skin-sam .yuimenu .bd {
 
-        /*
-                The following application of zoom:1 prevents first tier submenus of a MenuBar from hiding 
-                when the mouse is moving from an item in a MenuBar to a submenu in IE 7.
-        */
+	/*
+		The following application of zoom:1 prevents first tier submenus of a MenuBar from hiding 
+		when the mouse is moving from an item in a MenuBar to a submenu in IE 7.
+	*/
 
-        *zoom: 1;
-        _zoom: normal;  /* Remove this rule for IE 6. */
+	*zoom: 1;
+	_zoom: normal;	/* Remove this rule for IE 6. */
     border: solid 1px #808080;
     background-color: #fff;
     
@@ -143,7 +143,7 @@ version: 2.8.2r1
 
 .yui-skin-sam .yuimenu .yuimenu .bd {
 
-        *zoom: normal;
+	*zoom: normal;
 
 }
 
@@ -256,7 +256,7 @@ version: 2.8.2r1
 .yui-skin-sam .yuimenuitemlabel:visited {
 
     color: #000;
-        
+	
 }
 
 .yui-skin-sam .yuimenuitemlabel .helptext {

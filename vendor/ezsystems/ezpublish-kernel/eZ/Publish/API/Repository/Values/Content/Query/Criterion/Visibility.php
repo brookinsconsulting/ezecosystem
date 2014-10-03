@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\Content\Query\Criterion\Visibility class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Values\Content\Query\Criterion;
@@ -16,6 +16,10 @@ use InvalidArgumentException;
 
 /**
  * A criterion that matches content based on its visibility
+ *
+ * @warning This Criterion acts on all locations of a Content, so it will include hidden
+ * content within the tree you are searching for if content has visible location elsewhere.
+ * This is intentional and you should rather use LocationSearch if this is not the behaviour you want.
  */
 class Visibility extends Criterion implements CriterionInterface
 {

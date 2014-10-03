@@ -2,9 +2,9 @@
 /**
  * File containing the Content Search FieldNameGenerator class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search;
@@ -29,21 +29,24 @@ class FieldNameGenerator
         "ez_id"       => "id",
         "ez_mid"      => "mid",
         "ez_string"   => "s",
+        "ez_mstring"  => "ms",
         "ez_long"     => "l",
         "ez_text"     => "t",
         "ez_html"     => "h",
         "ez_boolean"  => "b",
+        "ez_mboolean" => "mb",
         "ez_float"    => "f",
         "ez_double"   => "d",
         "ez_date"     => "dt",
         "ez_point"    => "p",
         "ez_currency" => "c",
+        "ez_geolocation" => "gl",
     );
 
     /**
      * Get name for Solr document field
      *
-     * Consists of a name, and optionally field anem and a content type name.
+     * Consists of a name, and optionally field name and a content type name.
      *
      * @param string $name
      * @param string $field
@@ -53,7 +56,7 @@ class FieldNameGenerator
      */
     public function getName( $name, $field = null, $type = null )
     {
-        return implode( '/', array_filter( array( $type, $field, $name ) ) );
+        return implode( '_', array_filter( array( $type, $field, $name ) ) );
     }
 
     /**

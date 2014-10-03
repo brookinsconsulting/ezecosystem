@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\API\Repository\Tests\FieldType\UserIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests\FieldType;
@@ -376,6 +376,11 @@ class UserIntegrationTest extends BaseIntegrationTest
         return $contentService->createContentDraft( $user->content->contentInfo, $user->content->versionInfo );
     }
 
+    public function testCreateContentWithEmptyFieldValue()
+    {
+        $this->markTestSkipped( "User field will never be created empty" );
+    }
+
     public function providerForTestIsEmptyValue()
     {
         return array(
@@ -390,6 +395,48 @@ class UserIntegrationTest extends BaseIntegrationTest
             array(
                 $this->getValidCreationFieldData()
             ),
+        );
+    }
+
+    public function testRemoveFieldDefinition()
+    {
+        $repository = $this->getRepository();
+        $contentService = $repository->getContentService();
+        $contentTypeService = $repository->getContentTypeService();
+        $content = $this->testPublishContent();
+        $countBeforeRemoval = count( $content->getFields() );
+
+        $contentType = $contentTypeService->loadContentType( $content->contentInfo->contentTypeId );
+        $contentTypeDraft = $contentTypeService->createContentTypeDraft( $contentType );
+
+        $userFieldDefinition = null;
+        foreach ( $contentTypeDraft->getFieldDefinitions() as $fieldDefinition )
+        {
+            if ( $fieldDefinition->fieldTypeIdentifier === "ezuser" )
+            {
+                $userFieldDefinition = $fieldDefinition;
+                break;
+            }
+        }
+
+        if ( $userFieldDefinition === null )
+        {
+            $this->fail( "'ezuser' field definition was not found" );
+        }
+
+        $contentTypeService->removeFieldDefinition( $contentTypeDraft, $userFieldDefinition );
+        $contentTypeService->publishContentTypeDraft( $contentTypeDraft );
+
+        $content = $contentService->loadContent( $content->id );
+
+        $this->assertCount( $countBeforeRemoval - 1, $content->getFields() );
+        $this->assertNull( $content->getFieldValue( $userFieldDefinition->identifier ) );
+    }
+
+    public function testAddFieldDefinition()
+    {
+        $this->markTestIncomplete(
+            "Currently cannot be tested since user can be properly created only through UserService"
         );
     }
 }

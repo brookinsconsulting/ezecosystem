@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator\Specifications class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  *
  * @package eZ\Publish\API\Repository\Values\Content\Query
  */
@@ -39,17 +39,18 @@ class Specifications
     public $operator;
 
     /**
-     * Format supported for the Criterion value, either single (INPUT_TYPE_SINGLE) or multiple (INPUT_TYPE_ARRAY)
+     * Format supported for the Criterion value, either {@see self::FORMAT_SINGLE} for single
+     * or {@see self::FORMAT_ARRAY} for multiple
      *
-     * @see self::INPUT_TYPE_*
-     * @param self::INPUT_VALUE_*
+     * @see self::FORMAT_*
+     * @var string
      */
     public $valueFormat;
 
     /**
      * Accepted values types, specifying what type of variables are accepted as a value
      *
-     * @see self::INPUT_VALUE_*
+     * @see self::TYPE_*
      * @var int
      */
     public $valueTypes;
@@ -57,7 +58,7 @@ class Specifications
     /**
      * Limitation on the number of items as the value
      *
-     * Only usable if {@see $parameterInputType} is {@see self::INPUT_TYPE_ARRAY}.
+     * Only usable if {@see $valueFormat} is {@see self::FORMAT_ARRAY}.
      * Not setting it means that 1...n will be required
      * @var int
      */
@@ -68,7 +69,7 @@ class Specifications
      *
      * @param string $operator The specified operator, as one of the Operator::* constants
      * @param string $valueFormat The accepted value format, either {@see self::FORMAT_ARRAY} or {@see self::FORMAT_SINGLE}
-     * @param int $valueTypes The supported value types, as a bit field of the {@see self::TYPES_*} constants
+     * @param int $valueTypes The supported value types, as a bit field of the {@see self::TYPE_*} constants
      * @param int $valueCount The required number of values, when the accepted format is {@see self::FORMAT_ARRAY}
      */
     public function __construct( $operator, $valueFormat, $valueTypes = null, $valueCount = null )

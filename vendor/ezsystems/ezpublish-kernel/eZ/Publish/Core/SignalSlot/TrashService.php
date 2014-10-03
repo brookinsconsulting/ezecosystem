@@ -2,9 +2,9 @@
 /**
  * TrashService class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\SignalSlot;
@@ -61,7 +61,7 @@ class TrashService implements TrashServiceInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to read the trashed location
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException - if the location with the given id does not exist
      *
-     * @param int $trashItemId
+     * @param mixed $trashItemId
      *
      * @return \eZ\Publish\API\Repository\Values\Content\TrashItem
      */
@@ -108,16 +108,17 @@ class TrashService implements TrashServiceInterface
      */
     public function recover( TrashItem $trashItem, Location $newParentLocation = null )
     {
-        $returnValue = $this->service->recover( $trashItem, $newParentLocation );
+        $newLocation = $this->service->recover( $trashItem, $newParentLocation );
         $this->signalDispatcher->emit(
             new RecoverSignal(
                 array(
                     'trashItemId' => $trashItem->id,
                     'newParentLocationId' => $newParentLocation !== null ? $newParentLocation->id : null,
+                    'newLocationId' => $newLocation->id,
                 )
             )
         );
-        return $returnValue;
+        return $newLocation;
     }
 
     /**

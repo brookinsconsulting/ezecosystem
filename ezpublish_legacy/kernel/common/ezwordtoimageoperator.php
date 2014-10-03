@@ -2,9 +2,9 @@
 /**
  * File containing the eZWordtoimageoperator class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -53,8 +53,8 @@ class eZWordToImageOperator
                 {
                     // Issue 015718, constructing alt text from icon name
                     $aReplaceIconName = explode( '.', $icon );
-                    $altText = $aReplaceIconName[0];
-                    $icons[] = '<img src="' . $wwwDirPrefix . $iconRoot .'/' . $icon . '" alt="'.$altText.'"/>';
+                    $altText = htmlspecialchars( $aReplaceIconName[0], ENT_COMPAT, 'UTF-8' );
+                    $icons[] = '<img src="' . htmlspecialchars( $wwwDirPrefix . $iconRoot .'/' . $icon, ENT_COMPAT, 'UTF-8' ) . '" alt="'.$altText.'"/>';
                 }
 
                 $operatorValue = str_replace( $replaceText, $icons, $operatorValue );
@@ -204,7 +204,7 @@ class eZWordToImageOperator
                     $iconPath = $repository . '/' . $theme . '/' . $defaultIcon . '.' . $iconFormat;
                 }
                 if ( strlen( eZSys::wwwDir() ) > 0 )
-                    $wwwDirPrefix = eZSys::wwwDir() . '/';
+                    $wwwDirPrefix = htmlspecialchars( eZSys::wwwDir(), ENT_COMPAT, 'UTF-8' ) . '/';
                 else
                     $wwwDirPrefix = '/';
                 $operatorValue = $wwwDirPrefix . $iconPath;
@@ -357,7 +357,7 @@ class eZWordToImageOperator
                 if ( $returnURIOnly )
                     $operatorValue = $wwwDirPrefix . $iconPath;
                 else
-                    $operatorValue = '<img ' . $class . 'src="' . $wwwDirPrefix . $iconPath . '"' . $sizeText . ' alt="' .  htmlspecialchars( $altText ) . '" title="' . htmlspecialchars( $altText ) . '" />';
+                    $operatorValue = '<img ' . $class . 'src="' . htmlspecialchars( $wwwDirPrefix . $iconPath, ENT_COMPAT, 'UTF-8' ) . '"' . $sizeText . ' alt="' .  htmlspecialchars( $altText, ENT_COMPAT, 'UTF-8' ) . '" title="' . htmlspecialchars( $altText ) . '" />';
             } break;
 
             default:

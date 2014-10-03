@@ -74,6 +74,10 @@ class YamlDumper extends Dumper
             $code .= sprintf("        class: %s\n", $definition->getClass());
         }
 
+        if (!$definition->isPublic()) {
+            $code .= "        public: false\n";
+        }
+
         $tagsCode = '';
         foreach ($definition->getTags() as $name => $tags) {
             foreach ($tags as $attributes) {
@@ -92,6 +96,22 @@ class YamlDumper extends Dumper
 
         if ($definition->getFile()) {
             $code .= sprintf("        file: %s\n", $definition->getFile());
+        }
+
+        if ($definition->isSynthetic()) {
+            $code .= sprintf("        synthetic: true\n");
+        }
+
+        if ($definition->isSynchronized()) {
+            $code .= sprintf("        synchronized: true\n");
+        }
+
+        if ($definition->getFactoryClass()) {
+            $code .= sprintf("        factory_class: %s\n", $definition->getFactoryClass());
+        }
+
+        if ($definition->isLazy()) {
+            $code .= sprintf("        lazy: true\n");
         }
 
         if ($definition->getFactoryMethod()) {
@@ -166,7 +186,11 @@ class YamlDumper extends Dumper
             $code .= $this->addService($id, $definition);
         }
 
-        foreach ($this->container->getAliases() as $alias => $id) {
+        $aliases = $this->container->getAliases();
+        foreach ($aliases as $alias => $id) {
+            while (isset($aliases[(string) $id])) {
+                $id = $aliases[(string) $id];
+            }
             $code .= $this->addServiceAlias($alias, $id);
         }
 
@@ -248,9 +272,10 @@ class YamlDumper extends Dumper
     }
 
     /**
-     * Prepares parameters
+     * Prepares parameters.
      *
-     * @param array $parameters
+     * @param array   $parameters
+     * @param bool    $escape
      *
      * @return array
      */

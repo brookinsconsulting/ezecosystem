@@ -2,9 +2,9 @@
 /**
  * File contains Test class
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Cache\Tests;
@@ -23,7 +23,7 @@ class ContentLanguageHandlerTest extends HandlerTest
     public function testCreate()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -31,9 +31,9 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getContentLanguageHandler' )
+            ->method( 'contentLanguageHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -57,7 +57,7 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'get' );
 
-        $handler = $this->persistenceHandler->contentLanguageHandler();
+        $handler = $this->persistenceCacheHandler->contentLanguageHandler();
         $handler->create( new SPILanguageCreateStruct );
     }
 
@@ -74,9 +74,9 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getContentLanguageHandler' )
+            ->method( 'contentLanguageHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -87,7 +87,7 @@ class ContentLanguageHandlerTest extends HandlerTest
                 $this->returnValue( true )
             );
 
-        $handler = $this->persistenceHandler->contentLanguageHandler();
+        $handler = $this->persistenceCacheHandler->contentLanguageHandler();
         $handler->delete( 2 );
     }
 
@@ -97,7 +97,7 @@ class ContentLanguageHandlerTest extends HandlerTest
     public function testLoadCacheIsMiss()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -115,9 +115,9 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getContentLanguageHandler' )
+            ->method( 'contentLanguageHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -137,7 +137,7 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( $this->isInstanceOf( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language' ) );
 
-        $handler = $this->persistenceHandler->contentLanguageHandler();
+        $handler = $this->persistenceCacheHandler->contentLanguageHandler();
         $handler->load( 2 );
     }
 
@@ -147,7 +147,7 @@ class ContentLanguageHandlerTest extends HandlerTest
     public function testLoadHasCache()
     {
         $this->loggerMock->expects( $this->never() )->method( $this->anything() );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -170,15 +170,15 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->method( 'isMiss' )
             ->will( $this->returnValue( false ) );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
-            ->method( 'getContentLanguageHandler' );
+            ->method( 'contentLanguageHandler' );
 
         $cacheItemMock
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->contentLanguageHandler();
+        $handler = $this->persistenceCacheHandler->contentLanguageHandler();
         $handler->load( 2 );
     }
 
@@ -193,9 +193,9 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->method( $this->anything() );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getContentLanguageHandler' )
+            ->method( 'contentLanguageHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -203,7 +203,7 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->method( 'loadAll' )
             ->will( $this->returnValue( array() ) );
 
-        $handler = $this->persistenceHandler->contentLanguageHandler();
+        $handler = $this->persistenceCacheHandler->contentLanguageHandler();
         $handler->loadAll();
     }
 
@@ -218,9 +218,9 @@ class ContentLanguageHandlerTest extends HandlerTest
             ->method( $this->anything() );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getContentLanguageHandler' )
+            ->method( 'contentLanguageHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -235,7 +235,7 @@ class ContentLanguageHandlerTest extends HandlerTest
                 )
             );
 
-        $handler = $this->persistenceHandler->contentLanguageHandler();
+        $handler = $this->persistenceCacheHandler->contentLanguageHandler();
         $handler->loadByLanguageCode( 'eng-GB' );
     }
 
@@ -245,17 +245,16 @@ class ContentLanguageHandlerTest extends HandlerTest
     public function testUpdate()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
         $this->cacheMock
             ->expects( $this->once() )
-            ->method( 'getItem' )
+            ->method( 'clear' )
             ->with( 'language', 2 )
-            ->will( $this->returnValue( $cacheItemMock ) );
+            ->will( $this->returnValue( true ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getContentLanguageHandler' )
+            ->method( 'contentLanguageHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -270,16 +269,7 @@ class ContentLanguageHandlerTest extends HandlerTest
                 )
             );
 
-        $cacheItemMock
-            ->expects( $this->once() )
-            ->method( 'set' )
-            ->with( $this->isInstanceOf( 'eZ\\Publish\\SPI\\Persistence\\Content\\Language' ) );
-
-        $cacheItemMock
-            ->expects( $this->never() )
-            ->method( 'get' );
-
-        $handler = $this->persistenceHandler->contentLanguageHandler();
+        $handler = $this->persistenceCacheHandler->contentLanguageHandler();
         $handler->update( new SPILanguage( array( 'id' => 2 ) ) );
     }
 }

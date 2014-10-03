@@ -2,9 +2,9 @@
 /**
  * File containing the eZHTTPHeader class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -113,7 +113,10 @@ class eZHTTPHeader
 
                 if ( strpos( $uriString, $path ) === 0 )
                 {
-                    @list( $headerValue, $depth, $level ) = explode( ';', $value );
+                    $config = eZStringUtils::explodeStr( $value, ';' );
+                    $headerValue = $config[0];
+                    $depth = isset( $config[1] ) ? $config[1] : null;
+                    $level = isset( $config[2] ) ? $config[2] : null;
 
                     if ( $header == 'Expires' )
                     {

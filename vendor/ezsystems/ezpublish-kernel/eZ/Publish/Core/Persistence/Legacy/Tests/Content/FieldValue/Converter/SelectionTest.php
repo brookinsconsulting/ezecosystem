@@ -2,9 +2,9 @@
 /**
  * File containing the SelectionTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content\FieldValue\Converter;
@@ -250,7 +250,12 @@ EOT;
                         )
                     )
                 ),
-                'defaultValue' => new FieldValue( array( 'data' => array() ) )
+                'defaultValue' => new FieldValue(
+                    array(
+                        'data' => array(),
+                        'sortKey' => ''
+                    )
+                )
             )
         );
 
@@ -266,7 +271,38 @@ EOT;
      * @group selection
      * @covers \eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter\Selection::toFieldDefinition
      */
-    public function testToFieldDefinitionSingle()
+    public function testToFieldDefinitionSingleEmpty()
     {
+        $storageFieldDefinition = new StorageFieldDefinition();
+        $storageFieldDefinition->dataInt1 = 0;
+        $storageFieldDefinition->dataText5 = <<<EOT
+<?xml version="1.0" encoding="utf-8"?>
+<ezselection>
+  <options>
+  </options>
+</ezselection>
+EOT;
+
+        $expectedFieldDefinition = new PersistenceFieldDefinition(
+            array(
+                'fieldTypeConstraints' => new FieldTypeConstraints(
+                    array(
+                        'fieldSettings' => new FieldSettings(
+                            array(
+                                'isMultiple' => false,
+                                'options' => array()
+                            )
+                        )
+                    )
+                ),
+                'defaultValue' => new FieldValue( array( 'data' => array() ) )
+            )
+        );
+
+        $actualFieldDefinition = new PersistenceFieldDefinition();
+
+        $this->converter->toFieldDefinition( $storageFieldDefinition, $actualFieldDefinition );
+
+        $this->assertEquals( $expectedFieldDefinition, $actualFieldDefinition );
     }
 }

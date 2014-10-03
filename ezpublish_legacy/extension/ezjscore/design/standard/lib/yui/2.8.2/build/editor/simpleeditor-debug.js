@@ -2932,9 +2932,9 @@ var Dom = YAHOO.util.Dom,
                 }
             } else if (this.browser.webkit) {
                 if (collapse) {
-                                    sel.setBaseAndExtent(node, 1, node, node.innerText.length);
+				    sel.setBaseAndExtent(node, 1, node, node.innerText.length);
                 } else {
-                                    sel.setBaseAndExtent(node, 0, node, node.innerText.length);
+				    sel.setBaseAndExtent(node, 0, node, node.innerText.length);
                 }
             } else if (this.browser.opera) {
                 sel = this._getWindow().getSelection();
@@ -3455,9 +3455,9 @@ var Dom = YAHOO.util.Dom,
         */
         _getDomPath: function(el) {
             if (!el) {
-                            el = this._getSelectedElement();
+			    el = this._getSelectedElement();
             }
-                        var domPath = [];
+			var domPath = [];
             while (el !== null) {
                 if (el.ownerDocument != this._getDoc()) {
                     el = null;
@@ -6809,19 +6809,19 @@ var Dom = YAHOO.util.Dom,
             //Filter MS Word
             html = this.filter_msword(html);
 
-                    html = html.replace(/<img([^>]*)\/>/gi, '<YUI_IMG$1>');
-                    html = html.replace(/<img([^>]*)>/gi, '<YUI_IMG$1>');
+		    html = html.replace(/<img([^>]*)\/>/gi, '<YUI_IMG$1>');
+		    html = html.replace(/<img([^>]*)>/gi, '<YUI_IMG$1>');
 
-                    html = html.replace(/<input([^>]*)\/>/gi, '<YUI_INPUT$1>');
-                    html = html.replace(/<input([^>]*)>/gi, '<YUI_INPUT$1>');
+		    html = html.replace(/<input([^>]*)\/>/gi, '<YUI_INPUT$1>');
+		    html = html.replace(/<input([^>]*)>/gi, '<YUI_INPUT$1>');
 
-                    html = html.replace(/<ul([^>]*)>/gi, '<YUI_UL$1>');
-                    html = html.replace(/<\/ul>/gi, '<\/YUI_UL>');
-                    html = html.replace(/<blockquote([^>]*)>/gi, '<YUI_BQ$1>');
-                    html = html.replace(/<\/blockquote>/gi, '<\/YUI_BQ>');
+		    html = html.replace(/<ul([^>]*)>/gi, '<YUI_UL$1>');
+		    html = html.replace(/<\/ul>/gi, '<\/YUI_UL>');
+		    html = html.replace(/<blockquote([^>]*)>/gi, '<YUI_BQ$1>');
+		    html = html.replace(/<\/blockquote>/gi, '<\/YUI_BQ>');
 
-                    html = html.replace(/<embed([^>]*)>/gi, '<YUI_EMBED$1>');
-                    html = html.replace(/<\/embed>/gi, '<\/YUI_EMBED>');
+		    html = html.replace(/<embed([^>]*)>/gi, '<YUI_EMBED$1>');
+		    html = html.replace(/<\/embed>/gi, '<\/YUI_EMBED>');
 
             //Convert b and i tags to strong and em tags
             if ((markup == 'semantic') || (markup == 'xhtml')) {
@@ -6849,10 +6849,10 @@ var Dom = YAHOO.util.Dom,
                     re = new RegExp('src="' + url, 'gi');
                 html = html.replace(re, 'src="');
             }
-                    html = html.replace(/<font/gi, '<font');
-                    html = html.replace(/<\/font>/gi, '</font>');
-                    html = html.replace(/<span/gi, '<span');
-                    html = html.replace(/<\/span>/gi, '</span>');
+		    html = html.replace(/<font/gi, '<font');
+		    html = html.replace(/<\/font>/gi, '</font>');
+		    html = html.replace(/<span/gi, '<span');
+		    html = html.replace(/<\/span>/gi, '</span>');
             if ((markup == 'semantic') || (markup == 'xhtml') || (markup == 'css')) {
                 html = html.replace(new RegExp('<font([^>]*)face="([^>]*)">(.*?)<\/font>', 'gi'), '<span $1 style="font-family: $2;">$3</span>');
                 html = html.replace(/<u/gi, '<span style="text-decoration: underline;"');
@@ -6873,13 +6873,13 @@ var Dom = YAHOO.util.Dom,
                 }
                 html = html.replace(/  /gi, ' '); //Replace all double spaces and replace with a single
             } else {
-                        html = html.replace(/<u/gi, '<u');
-                        html = html.replace(/\/u>/gi, '/u>');
+		        html = html.replace(/<u/gi, '<u');
+		        html = html.replace(/\/u>/gi, '/u>');
             }
-                    html = html.replace(/<ol([^>]*)>/gi, '<ol$1>');
-                    html = html.replace(/\/ol>/gi, '/ol>');
-                    html = html.replace(/<li/gi, '<li');
-                    html = html.replace(/\/li>/gi, '/li>');
+		    html = html.replace(/<ol([^>]*)>/gi, '<ol$1>');
+		    html = html.replace(/\/ol>/gi, '/ol>');
+		    html = html.replace(/<li/gi, '<li');
+		    html = html.replace(/\/li>/gi, '/li>');
             html = this.filter_safari(html);
 
             html = this.filter_internals(html);
@@ -6890,22 +6890,22 @@ var Dom = YAHOO.util.Dom,
             html = this.post_filter_linebreaks(html, markup);
 
             if (markup == 'xhtml') {
-                        html = html.replace(/<YUI_IMG([^>]*)>/g, '<img $1 />');
-                        html = html.replace(/<YUI_INPUT([^>]*)>/g, '<input $1 />');
+		        html = html.replace(/<YUI_IMG([^>]*)>/g, '<img $1 />');
+		        html = html.replace(/<YUI_INPUT([^>]*)>/g, '<input $1 />');
             } else {
-                        html = html.replace(/<YUI_IMG([^>]*)>/g, '<img $1>');
-                        html = html.replace(/<YUI_INPUT([^>]*)>/g, '<input $1>');
+		        html = html.replace(/<YUI_IMG([^>]*)>/g, '<img $1>');
+		        html = html.replace(/<YUI_INPUT([^>]*)>/g, '<input $1>');
             }
-                    html = html.replace(/<YUI_UL([^>]*)>/g, '<ul$1>');
-                    html = html.replace(/<\/YUI_UL>/g, '<\/ul>');
+		    html = html.replace(/<YUI_UL([^>]*)>/g, '<ul$1>');
+		    html = html.replace(/<\/YUI_UL>/g, '<\/ul>');
 
             html = this.filter_invalid_lists(html);
 
-                    html = html.replace(/<YUI_BQ([^>]*)>/g, '<blockquote$1>');
-                    html = html.replace(/<\/YUI_BQ>/g, '<\/blockquote>');
+		    html = html.replace(/<YUI_BQ([^>]*)>/g, '<blockquote$1>');
+		    html = html.replace(/<\/YUI_BQ>/g, '<\/blockquote>');
 
-                    html = html.replace(/<YUI_EMBED([^>]*)>/g, '<embed$1>');
-                    html = html.replace(/<\/YUI_EMBED>/g, '<\/embed>');
+		    html = html.replace(/<YUI_EMBED([^>]*)>/g, '<embed$1>');
+		    html = html.replace(/<\/YUI_EMBED>/g, '<\/embed>');
             
             //This should fix &amp;'s in URL's
             html = html.replace(/ &amp; /gi, ' YUI_AMP ');
@@ -7030,7 +7030,7 @@ var Dom = YAHOO.util.Dom,
         */
         filter_safari: function(html) {
             if (this.browser.webkit) {
-                //<span class="Apple-tab-span" style="white-space:pre"> </span>
+                //<span class="Apple-tab-span" style="white-space:pre">	</span>
                 html = html.replace(/<span class="Apple-tab-span" style="white-space:pre">([^>])<\/span>/gi, '&nbsp;&nbsp;&nbsp;&nbsp;');
                 html = html.replace(/Apple-style-span/gi, '');
                 html = html.replace(/style="line-height: normal;"/gi, '');
@@ -7044,12 +7044,12 @@ var Dom = YAHOO.util.Dom,
                 html = html.replace(/<li>  <\/li>/gi, '');
                 //Remove bogus DIV's - updated from just removing the div's to replacing /div with a break
                 if (this.get('ptags')) {
-                            html = html.replace(/<div([^>]*)>/g, '<p$1>');
-                                    html = html.replace(/<\/div>/gi, '</p>');
+		            html = html.replace(/<div([^>]*)>/g, '<p$1>');
+				    html = html.replace(/<\/div>/gi, '</p>');
                 } else {
                     //html = html.replace(/<div>/gi, '<br>');
                     html = html.replace(/<div([^>]*)>([ tnr]*)<\/div>/gi, '<br>');
-                                    html = html.replace(/<\/div>/gi, '');
+				    html = html.replace(/<\/div>/gi, '');
                 }
             }
             return html;
@@ -7061,27 +7061,27 @@ var Dom = YAHOO.util.Dom,
         * @return String
         */
         filter_internals: function(html) {
-                    html = html.replace(/\r/g, '');
+		    html = html.replace(/\r/g, '');
             //Fix stuff we don't want
-                html = html.replace(/<\/?(body|head|html)[^>]*>/gi, '');
+	        html = html.replace(/<\/?(body|head|html)[^>]*>/gi, '');
             //Fix last BR in LI
-                    html = html.replace(/<YUI_BR><\/li>/gi, '</li>');
+		    html = html.replace(/<YUI_BR><\/li>/gi, '</li>');
 
-                    html = html.replace(/yui-tag-span/gi, '');
-                    html = html.replace(/yui-tag/gi, '');
-                    html = html.replace(/yui-non/gi, '');
-                    html = html.replace(/yui-img/gi, '');
-                    html = html.replace(/ tag="span"/gi, '');
-                    html = html.replace(/ class=""/gi, '');
-                    html = html.replace(/ style=""/gi, '');
-                    html = html.replace(/ class=" "/gi, '');
-                    html = html.replace(/ class="  "/gi, '');
-                    html = html.replace(/ target=""/gi, '');
-                    html = html.replace(/ title=""/gi, '');
+		    html = html.replace(/yui-tag-span/gi, '');
+		    html = html.replace(/yui-tag/gi, '');
+		    html = html.replace(/yui-non/gi, '');
+		    html = html.replace(/yui-img/gi, '');
+		    html = html.replace(/ tag="span"/gi, '');
+		    html = html.replace(/ class=""/gi, '');
+		    html = html.replace(/ style=""/gi, '');
+		    html = html.replace(/ class=" "/gi, '');
+		    html = html.replace(/ class="  "/gi, '');
+		    html = html.replace(/ target=""/gi, '');
+		    html = html.replace(/ title=""/gi, '');
 
             if (this.browser.ie) {
-                        html = html.replace(/ class= /gi, '');
-                        html = html.replace(/ class= >/gi, '');
+		        html = html.replace(/ class= /gi, '');
+		        html = html.replace(/ class= >/gi, '');
             }
             
             return html;
@@ -7138,23 +7138,23 @@ var Dom = YAHOO.util.Dom,
         */
         pre_filter_linebreaks: function(html, markup) {
             if (this.browser.webkit) {
-                        html = html.replace(/<br class="khtml-block-placeholder">/gi, '<YUI_BR>');
-                        html = html.replace(/<br class="webkit-block-placeholder">/gi, '<YUI_BR>');
+		        html = html.replace(/<br class="khtml-block-placeholder">/gi, '<YUI_BR>');
+		        html = html.replace(/<br class="webkit-block-placeholder">/gi, '<YUI_BR>');
             }
-                    html = html.replace(/<br>/gi, '<YUI_BR>');
-                    html = html.replace(/<br (.*?)>/gi, '<YUI_BR>');
-                    html = html.replace(/<br\/>/gi, '<YUI_BR>');
-                    html = html.replace(/<br \/>/gi, '<YUI_BR>');
-                    html = html.replace(/<div><YUI_BR><\/div>/gi, '<YUI_BR>');
-                    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');            
-                    html = html.replace(/<p><br>&nbsp;<\/p>/gi, '<YUI_BR>');
-                    html = html.replace(/<p>&nbsp;<\/p>/gi, '<YUI_BR>');
+		    html = html.replace(/<br>/gi, '<YUI_BR>');
+		    html = html.replace(/<br (.*?)>/gi, '<YUI_BR>');
+		    html = html.replace(/<br\/>/gi, '<YUI_BR>');
+		    html = html.replace(/<br \/>/gi, '<YUI_BR>');
+		    html = html.replace(/<div><YUI_BR><\/div>/gi, '<YUI_BR>');
+		    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');            
+		    html = html.replace(/<p><br>&nbsp;<\/p>/gi, '<YUI_BR>');
+		    html = html.replace(/<p>&nbsp;<\/p>/gi, '<YUI_BR>');
             //Fix last BR
-                html = html.replace(/<YUI_BR>$/, '');
+	        html = html.replace(/<YUI_BR>$/, '');
             //Fix last BR in P
-                html = html.replace(/<YUI_BR><\/p>/g, '</p>');
+	        html = html.replace(/<YUI_BR><\/p>/g, '</p>');
             if (this.browser.ie) {
-                    html = html.replace(/&nbsp;&nbsp;&nbsp;&nbsp;/g, '\t');
+	            html = html.replace(/&nbsp;&nbsp;&nbsp;&nbsp;/g, '\t');
             }
             return html;
         },
@@ -7167,9 +7167,9 @@ var Dom = YAHOO.util.Dom,
         */
         post_filter_linebreaks: function(html, markup) {
             if (markup == 'xhtml') {
-                        html = html.replace(/<YUI_BR>/g, '<br />');
+		        html = html.replace(/<YUI_BR>/g, '<br />');
             } else {
-                        html = html.replace(/<YUI_BR>/g, '<br>');
+		        html = html.replace(/<YUI_BR>/g, '<br>');
             }
             return html;
         },

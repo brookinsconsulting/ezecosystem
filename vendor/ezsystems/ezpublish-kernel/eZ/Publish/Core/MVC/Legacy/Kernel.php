@@ -2,15 +2,17 @@
 /**
  * File containing the LegacyKernel class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Legacy;
 
+use Exception;
 use ezpKernel;
 use ezpKernelHandler;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 
 /**
@@ -35,14 +37,29 @@ class Kernel extends ezpKernel
     private $runningCallback = false;
 
     /**
+     * Directory where kernel was originally running from.
+     * @see self::runCallback()
+     *
+     * @var string
+     */
+    private $previousRunningDir;
+
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @param \ezpKernelHandler $kernelHandler
      * @param string $legacyRootDir Must be a absolute dir
      * @param string $webRootDir Must be a absolute dir
+     * @param \Psr\Log\LoggerInterface $logger
      */
-    public function __construct( ezpKernelHandler $kernelHandler, $legacyRootDir, $webRootDir )
+    public function __construct( ezpKernelHandler $kernelHandler, $legacyRootDir, $webRootDir, LoggerInterface $logger = null )
     {
         $this->legacyRootDir = $legacyRootDir;
         $this->webRootDir = $webRootDir;
+        $this->logger = $logger;
 
         $this->enterLegacyRootDir();
         parent::__construct( $kernelHandler );
@@ -51,26 +68,63 @@ class Kernel extends ezpKernel
     }
 
     /**
+     * Checks if LegacyKernel has already been instantiated.
+     *
+     * @return bool
+     */
+    public static function hasInstance()
+    {
+        return static::$instance !== null;
+    }
+
+    public static function resetInstance()
+    {
+        static::$instance = null;
+    }
+
+    /**
      * Changes the current working directory to the legacy root dir.
      * Calling this method is mandatory to use legacy kernel since a lot of resources in eZ Publish 4.x relatively defined.
      */
     public function enterLegacyRootDir()
     {
+        $this->previousRunningDir = getcwd();
+        if ( $this->logger )
+        {
+            $this->logger->debug( "Legacy kernel: Leaving '$this->previousRunningDir' for '$this->legacyRootDir'" );
+        }
         chdir( $this->legacyRootDir );
     }
 
     /**
-     * Leaves the legacy root dir and switches back to the initial webroot dir.
+     * Leaves the legacy root dir and switches back to the dir where execution was happening before we entered LegacyRootDir.
      */
     public function leaveLegacyRootDir()
     {
-        chdir( $this->webRootDir );
+        $previousDir = $this->previousRunningDir;
+        if ( !$previousDir )
+        {
+            if ( $this->logger )
+            {
+                $this->logger->warning(
+                    "Trying to leave legacy root dir without a previously executing dir. Falling back to '$this->webRootDir'"
+                );
+            }
+            $previousDir = $this->webRootDir;
+        }
+
+        $this->previousRunningDir = null;
+        if ( $this->logger )
+        {
+            $this->logger->debug( "Legacy kernel: Leaving '$this->legacyRootDir' for '$previousDir'" );
+        }
+        chdir( $previousDir );
     }
 
     /**
      * Runs current request through legacy kernel.
      *
-     * @return array
+     * @return \ezpKernelResult
      */
     public function run()
     {
@@ -103,7 +157,16 @@ class Kernel extends ezpKernel
 
         $this->runningCallback = true;
         $this->enterLegacyRootDir();
-        $return = parent::runCallback( $callback, $postReinitialize );
+        try
+        {
+            $return = parent::runCallback( $callback, $postReinitialize );
+        }
+        catch ( Exception $e )
+        {
+            $this->leaveLegacyRootDir();
+            $this->runningCallback = false;
+            throw $e;
+        }
         $this->leaveLegacyRootDir();
         $this->runningCallback = false;
         return $return;

@@ -2,9 +2,9 @@
 /**
  * File containing the RestTrashItem ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -32,7 +32,7 @@ class RestTrashItem extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'trash', array( 'trash' => $data->trashItem->id ) )
+            $this->router->generate( 'ezpublish_rest_loadTrashItem', array( 'trashItemId' => $data->trashItem->id ) )
         );
         $generator->endAttribute( 'href' );
 
@@ -42,10 +42,16 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startValueElement( 'priority', $data->trashItem->priority );
         $generator->endValueElement( 'priority' );
 
-        $generator->startValueElement( 'hidden', $data->trashItem->hidden ? 'true' : 'false' );
+        $generator->startValueElement(
+            'hidden',
+            $this->serializeBool( $generator, $data->trashItem->hidden )
+        );
         $generator->endValueElement( 'hidden' );
 
-        $generator->startValueElement( 'invisible', $data->trashItem->invisible ? 'true' : 'false' );
+        $generator->startValueElement(
+            'invisible',
+            $this->serializeBool( $generator, $data->trashItem->invisible )
+        );
         $generator->endValueElement( 'invisible' );
 
         $pathStringParts = explode( '/', trim( $data->trashItem->pathString, '/' ) );
@@ -54,10 +60,10 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startObjectElement( 'ParentLocation', 'Location' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate(
-                'location',
+            $this->router->generate(
+                'ezpublish_rest_loadLocation',
                 array(
-                    'location' => '/' . implode( '/', $pathStringParts )
+                    'locationPath' => implode( '/', $pathStringParts )
                 )
             )
         );
@@ -77,7 +83,10 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->endValueElement( 'remoteId' );
 
         $generator->startObjectElement( 'Content' );
-        $generator->startAttribute( 'href', $this->urlHandler->generate( 'object', array( 'object' => $data->trashItem->contentId ) ) );
+        $generator->startAttribute(
+            'href',
+            $this->router->generate( 'ezpublish_rest_loadContent', array( 'contentId' => $data->trashItem->contentId ) )
+        );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'Content' );
 

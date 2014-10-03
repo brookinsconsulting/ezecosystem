@@ -2,17 +2,15 @@
 /**
  * File containing the BinaryBaseTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
-use eZ\Publish\Core\FieldType\BinaryBase\Type as BinaryBaseType;
-use eZ\Publish\Core\FieldType\BinaryBase\Value as BinaryBaseValue;
 use eZ\Publish\SPI\FieldType\BinaryBase\MimeTypeDetector;
-use \eZ\Publish\SPI\FieldType\FileService;
+use eZ\Publish\SPI\FieldType\FileService;
 
 /**
  * Base class for binary field types
@@ -21,12 +19,6 @@ use \eZ\Publish\SPI\FieldType\FileService;
  */
 abstract class BinaryBaseTest extends FieldTypeTest
 {
-    /** @var FileService */
-    private $IOServiceMock;
-
-    /** @var MimeTypeDetector */
-    private $mimeTypeDetectorMock;
-
     protected function getValidatorConfigurationSchemaExpectation()
     {
         return array(
@@ -44,70 +36,15 @@ abstract class BinaryBaseTest extends FieldTypeTest
         return array();
     }
 
-    /**
-     * @param mixed  $inputValue
-     * @param mixed  $expectedOutputValue
-     * @param array  $IOServiceExpectations
-     *        An array indexed by {@see FileService} method name, with for each method one value that will be returned
-     * @param null   $mimeTypeDetectorExpectations
-     *        An array indexed by {@see MimeTypeDetectorr} method name, with for each method one value that will be returned
-     *
-     * @return void
-     *
-     * @dataProvider provideValidInputForAcceptValue
-     */
-    public function testAcceptValue( $inputValue, $expectedOutputValue, $IOServiceExpectations = null, $mimeTypeDetectorExpectations = null )
-    {
-        /** @var $fieldType BinaryBaseType */
-        $fieldType = $this->createFieldTypeUnderTest();
-
-        // add custom expectations to the FileService mock
-        if ( count( $IOServiceExpectations ) )
-        {
-            /** @var $fieldType BinaryBaseType */
-            $fieldType = $this->createFieldTypeUnderTest();
-
-            /** @var $fileServiceMock \PHPUnit_Framework_MockObject_MockObject */
-            $IOServiceMock = $this->getIOServiceMock();
-
-            foreach ( $IOServiceExpectations as $method => $value )
-            {
-                $IOServiceMock->expects( $this->once() )
-                    ->method( $method )
-                    ->will( $this->returnValue( $value ) );
-            }
-        }
-
-        // add custom expectations to the MimeTypeDetector mock
-        if ( count( $mimeTypeDetectorExpectations ) )
-        {
-            /** @var $mimeTypeDetectorMock \PHPUnit_Framework_MockObject_MockObject */
-            $mimeTypeDetectorMock = $this->getMimeTypeDetectorMock();
-
-            foreach ( $mimeTypeDetectorExpectations as $method => $value )
-            {
-                $mimeTypeDetectorMock->expects( $this->once() )
-                    ->method( $method )
-                    ->will( $this->returnValue( $value ) );
-            }
-        }
-
-        parent::testAcceptValue( $inputValue, $expectedOutputValue );
-    }
-
     public function provideInvalidInputForAcceptValue()
     {
         return array(
             array(
-                new \stdClass(),
+                $this->getMockForAbstractClass( 'eZ\Publish\Core\FieldType\Value' ),
                 'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
             ),
             array(
-                array(),
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
-            ),
-            array(
-                array( 'path' => '/foo/bar' ),
+                array( 'id' => '/foo/bar' ),
                 'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
             ),
         );
@@ -229,43 +166,5 @@ abstract class BinaryBaseTest extends FieldTypeTest
                 )
             ),
         );
-    }
-
-    /**
-     * @return MimeTypeDetector
-     */
-    protected function getMimeTypeDetectorMock()
-    {
-        if ( !isset( $this->mimeTypeDetectorMock ) )
-        {
-            $this->mimeTypeDetectorMock = $this->getMock(
-                'eZ\\Publish\\SPI\\FieldType\\BinaryBase\\MimeTypeDetector',
-                array(),
-                array(),
-                '',
-                false
-            );
-        }
-        return $this->mimeTypeDetectorMock;
-    }
-
-    /**
-     * Returns a mock for the FileService
-     *
-     * @return \eZ\Publish\Core\FieldType\FileService
-     */
-    protected function getIOServiceMock()
-    {
-        if ( !isset( $this->IOServiceMock ) )
-        {
-            $this->IOServiceMock = $this->getMock(
-                'eZ\\Publish\\Core\\IO\\IOService',
-                array(),
-                array(),
-                '',
-                false
-            );
-        }
-        return $this->IOServiceMock;
     }
 }

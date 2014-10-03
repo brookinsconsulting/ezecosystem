@@ -2,15 +2,18 @@
 /**
  * File containing the User Gateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\User\Gateway;
 
 use eZ\Publish\Core\Persistence\Legacy\User\Gateway;
 use eZ\Publish\SPI\Persistence\User;
+use Doctrine\DBAL\DBALException;
+use PDOException;
+use RuntimeException;
 
 /**
  * Base class for user gateways.
@@ -47,13 +50,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->createUser( $user );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -68,13 +71,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteUser( $userId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -91,39 +94,61 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->load( $userId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
     /**
-     * Loads user with user ID.
+     * Loads user with user login.
      *
      * @param string $login
-     * @param string|null $email
      *
      * @return array
      */
-    public function loadByLoginOrMail( $login, $email = null )
+    public function loadByLogin( $login )
     {
         try
         {
-            return $this->innerGateway->loadByLoginOrMail( $login, $email );
+            return $this->innerGateway->loadByLogin( $login );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
+
+    /**
+     * Loads user with user email.
+     *
+     * @param string $email
+     *
+     * @return array
+     */
+     public function loadByEmail( $email )
+     {
+         try
+         {
+             return $this->innerGateway->loadByEmail( $email );
+         }
+         catch ( \DBALException $e )
+         {
+             throw new \RuntimeException( 'Database error', 0, $e );
+         }
+         catch ( \PDOException $e )
+         {
+             throw new \RuntimeException( 'Database error', 0, $e );
+         }
+     }
 
     /**
      * Update the user information specified by the user struct
@@ -136,13 +161,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->updateUser( $user );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -159,18 +184,18 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->assignRole( $contentId, $roleId, $limitation );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
     /**
-     * Remove role from user
+     * Remove role from user or user group
      *
      * @param mixed $contentId
      * @param mixed $roleId
@@ -181,13 +206,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->removeRole( $contentId, $roleId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 }

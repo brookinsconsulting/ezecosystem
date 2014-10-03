@@ -26,7 +26,7 @@ abstract class MemberMetadata extends ElementMetadata implements PropertyMetadat
     public $cascaded = false;
     public $collectionCascaded = false;
     public $collectionCascadedDeeply = false;
-    private $reflMember;
+    private $reflMember = array();
 
     /**
      * Constructor.
@@ -52,7 +52,7 @@ abstract class MemberMetadata extends ElementMetadata implements PropertyMetadat
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function addConstraint(Constraint $constraint)
     {
@@ -86,7 +86,9 @@ abstract class MemberMetadata extends ElementMetadata implements PropertyMetadat
             'class',
             'name',
             'property',
-            'cascaded', // TESTME
+            'cascaded',
+            'collectionCascaded',
+            'collectionCascadedDeeply',
         ));
     }
 
@@ -123,37 +125,43 @@ abstract class MemberMetadata extends ElementMetadata implements PropertyMetadat
     /**
      * Returns whether this member is public
      *
-     * @return Boolean
+     * @param object|string $objectOrClassName The object or the class name
+     *
+     * @return bool
      */
-    public function isPublic()
+    public function isPublic($objectOrClassName)
     {
-        return $this->getReflectionMember()->isPublic();
+        return $this->getReflectionMember($objectOrClassName)->isPublic();
     }
 
     /**
      * Returns whether this member is protected
      *
-     * @return Boolean
+     * @param object|string $objectOrClassName The object or the class name
+     *
+     * @return bool
      */
-    public function isProtected()
+    public function isProtected($objectOrClassName)
     {
-        return $this->getReflectionMember()->isProtected();
+        return $this->getReflectionMember($objectOrClassName)->isProtected();
     }
 
     /**
      * Returns whether this member is private
      *
-     * @return Boolean
+     * @param object|string $objectOrClassName The object or the class name
+     *
+     * @return bool
      */
-    public function isPrivate()
+    public function isPrivate($objectOrClassName)
     {
-        return $this->getReflectionMember()->isPrivate();
+        return $this->getReflectionMember($objectOrClassName)->isPrivate();
     }
 
     /**
      * Returns whether objects stored in this member should be validated
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCascaded()
     {
@@ -164,7 +172,7 @@ abstract class MemberMetadata extends ElementMetadata implements PropertyMetadat
      * Returns whether arrays or traversable objects stored in this member
      * should be traversed and validated in each entry
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCollectionCascaded()
     {
@@ -175,7 +183,7 @@ abstract class MemberMetadata extends ElementMetadata implements PropertyMetadat
      * Returns whether arrays or traversable objects stored in this member
      * should be traversed recursively for inner arrays/traversable objects
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCollectionCascadedDeeply()
     {
@@ -183,40 +191,28 @@ abstract class MemberMetadata extends ElementMetadata implements PropertyMetadat
     }
 
     /**
-     * Returns the value of this property in the given object
-     *
-     * @param object $object The object
-     *
-     * @return mixed The property value
-     *
-     * @deprecated Deprecated since version 2.2, to be removed in 2.3. Use the
-     *             method {@link getPropertyValue} instead.
-     */
-    public function getValue($object)
-    {
-        trigger_error('getValue() is deprecated since version 2.2 and will be removed in 2.3. Use getPropertyValue() instead.', E_USER_DEPRECATED);
-
-        return $this->getPropertyValue($object);
-    }
-
-    /**
      * Returns the Reflection instance of the member
+     *
+     * @param object|string $objectOrClassName The object or the class name
      *
      * @return object
      */
-    public function getReflectionMember()
+    public function getReflectionMember($objectOrClassName)
     {
-        if (!$this->reflMember) {
-            $this->reflMember = $this->newReflectionMember();
+        $className = is_string($objectOrClassName) ? $objectOrClassName : get_class($objectOrClassName);
+        if (!isset($this->reflMember[$className])) {
+            $this->reflMember[$className] = $this->newReflectionMember($objectOrClassName);
         }
 
-        return $this->reflMember;
+        return $this->reflMember[$className];
     }
 
     /**
      * Creates a new Reflection instance for the member
      *
-     * @return object
+     * @param object|string $objectOrClassName The object or the class name
+     *
+     * @return mixed Reflection class
      */
-    abstract protected function newReflectionMember();
+    abstract protected function newReflectionMember($objectOrClassName);
 }

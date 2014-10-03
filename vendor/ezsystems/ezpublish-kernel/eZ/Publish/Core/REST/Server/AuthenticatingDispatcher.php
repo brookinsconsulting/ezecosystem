@@ -5,14 +5,15 @@
  * ATTENTION: This is a test setup for the REST server. DO NOT USE IT IN
  * PRODUCTION!
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server;
 
 use Qafoo\RMF;
+use Exception;
 
 /**
  * MVC dispatcher with integrated authentication
@@ -50,7 +51,7 @@ class AuthenticatingDispatcher extends RMF\Dispatcher\Simple
         {
             $this->authenticator->authenticate( $request );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->view->display( $request, $e );
         }

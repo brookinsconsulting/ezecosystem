@@ -211,7 +211,7 @@ version: 2.8.2r1
 }
 /* When not showing the h3 group labels, add some margin to make up for them*/
 .yui-skin-sam .yui-toolbar-container .yui-toolbar-nogrouplabels .yui-toolbar-group {
-        margin-top: .75em;
+	margin-top: .75em;
 }
 
 

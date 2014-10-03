@@ -2,14 +2,15 @@
 /**
  * File containing the Templates class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -41,28 +42,25 @@ class Templates extends AbstractParser
             ->end();
     }
 
-    /**
-     * Translates parsed semantic config values from $config to internal key/value pairs
-     *
-     * @param array $config
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     *
-     * @return void
-     */
-    public function registerInternalConfig( array $config, ContainerBuilder $container )
+    public function preMap( array $config, ContextualizerInterface $contextualizer )
     {
         foreach ( $config['siteaccess']['groups'] as $group => $saArray )
         {
-            if ( isset( $config[$this->baseKey][$group][static::NODE_KEY] ) )
+            if ( isset( $config['system'][$group][static::NODE_KEY] ) )
             {
-                $container->setParameter(
-                    "ezsettings.$group." . static::NODE_KEY,
-                    $config[$this->baseKey][$group][static::NODE_KEY]
+                $contextualizer->setContextualParameter(
+                    static::NODE_KEY,
+                    $group,
+                    $config[$contextualizer->getSiteAccessNodeName()][$group][static::NODE_KEY]
                 );
             }
-        };
-        $this->registerInternalConfigArray(
-            static::NODE_KEY, $config, $container
-        );
+        }
+
+        $contextualizer->mapConfigArray( static::NODE_KEY, $config );
+    }
+
+    public function mapConfig( array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer )
+    {
+        // Nothing to do here.
     }
 }

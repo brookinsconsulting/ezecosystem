@@ -2,9 +2,9 @@
 /**
  * File containing the ContentTypeGateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\User\Role;
@@ -72,6 +72,15 @@ abstract class Gateway
     abstract public function loadRoleAssignmentsByGroupId( $groupId, $inherited = false );
 
     /**
+     * Loads role assignments for given role ID
+     *
+     * @param mixed $roleId
+     *
+     * @return array
+     */
+    abstract public function loadRoleAssignmentsByRoleId( $roleId );
+
+    /**
      * Returns the user policies associated with the user
      *
      * @param mixed $userId
@@ -83,12 +92,14 @@ abstract class Gateway
     /**
      * Update role
      *
+     * @throws \eZ\Publish\Core\Base\Exceptions\NotFoundException
+     *
      * @param RoleUpdateStruct $role
      */
     abstract public function updateRole( RoleUpdateStruct $role );
 
     /**
-     * Delete the specified role
+     * Delete the specified role including all of its assignments
      *
      * @param mixed $roleId
      */

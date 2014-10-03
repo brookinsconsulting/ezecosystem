@@ -2,17 +2,17 @@
 /**
  * File containing the LocaleListener class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\EventListener;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\LocaleConverterInterface;
 use Symfony\Component\HttpKernel\EventListener\LocaleListener as BaseRequestListener;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Enhanced LocaleListener, injecting the converted locale extracted from eZ Publish configuration.
@@ -20,9 +20,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class LocaleListener extends BaseRequestListener
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
-    private $container;
+    private $configResolver;
 
     /**
      * @var \eZ\Publish\Core\MVC\Symfony\Locale\LocaleConverterInterface
@@ -30,11 +30,11 @@ class LocaleListener extends BaseRequestListener
     private $localeConverter;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      */
-    public function setServiceContainer( ContainerInterface $container )
+    public function setConfigResolver( ConfigResolverInterface $configResolver )
     {
-        $this->container = $container;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -45,23 +45,12 @@ class LocaleListener extends BaseRequestListener
         $this->localeConverter = $localeConverter;
     }
 
-    /**
-     * Returns the config resolver.
-     * It uses the service container for lazy loading purpose.
-     *
-     * @return \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private function getConfigResolver()
-    {
-        return $this->container->get( 'ezpublish.config.resolver' );
-    }
-
     public function onKernelRequest( GetResponseEvent $event )
     {
         $request = $event->getRequest();
         if ( !$request->attributes->has( '_locale' ) )
         {
-            foreach ( $this->getConfigResolver()->getParameter( 'languages' ) as $locale )
+            foreach ( $this->configResolver->getParameter( 'languages' ) as $locale )
             {
                 $convertedLocale = $this->localeConverter->convertToPOSIX( $locale );
                 if ( $convertedLocale !== null )

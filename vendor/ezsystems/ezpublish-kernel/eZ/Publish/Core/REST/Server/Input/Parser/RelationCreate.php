@@ -2,21 +2,21 @@
 /**
  * File containing the RelationCreate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Exceptions;
 
 /**
  * Parser for RelationCreate
  */
-class RelationCreate extends Base
+class RelationCreate extends BaseParser
 {
     /**
      * Parse input structure
@@ -38,7 +38,6 @@ class RelationCreate extends Base
             throw new Exceptions\Parser( "Missing '_href' attribute for Destination element in RelationCreate." );
         }
 
-        $destinationParts = $this->urlHandler->parse( 'object', $data['Destination']['_href'] );
-        return $destinationParts['object'];
+        return $this->requestParser->parseHref( $data['Destination']['_href'], 'contentId' );
     }
 }

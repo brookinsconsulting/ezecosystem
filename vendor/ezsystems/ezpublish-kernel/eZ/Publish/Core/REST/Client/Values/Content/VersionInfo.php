@@ -2,14 +2,15 @@
 /**
  * File containing the VersionInfo class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client\Values\Content;
 
 use eZ\Publish\Core\REST\Client\ContentService;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo as APIVersionInfo;
 
 /**
  * This class holds version information data. It also contains the corresponding {@link Content} to
@@ -27,7 +28,7 @@ use eZ\Publish\Core\REST\Client\ContentService;
  * @property-read string $initialLanguageCode the language code of the version. This value is used to flag a version as a translation to specific language
  * @property-read array $languageCodes a collection of all languages which exist in this version.
  */
-class VersionInfo extends \eZ\Publish\API\Repository\Values\Content\VersionInfo
+class VersionInfo extends APIVersionInfo
 {
     /**
      * @var \eZ\Publish\Core\REST\Client\ContentService

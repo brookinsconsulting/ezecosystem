@@ -2,16 +2,16 @@
 /**
  * File containing the EmailAddressValueTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\EmailAddress\Type as EmailAddressType;
 use eZ\Publish\Core\FieldType\EmailAddress\Value as EmailAddressValue;
-use ReflectionObject;
+use eZ\Publish\Core\FieldType\ValidationError;
 
 /**
  * @group fieldType
@@ -32,7 +32,24 @@ class EmailAddressTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new EmailAddressType();
+        $transformationProcessorMock = $this->getTransformationProcessorMock();
+
+        $transformationProcessorMock->expects( $this->any() )
+            ->method( 'transformByGroup' )
+            ->with( $this->anything(), 'lowercase' )
+            ->will(
+                $this->returnCallback(
+                    function( $value, $group )
+                    {
+                        return strtolower( $value );
+                    }
+                )
+            );
+
+        $fieldType = new EmailAddressType();
+        $fieldType->setTransformationProcessor( $transformationProcessorMock );
+
+        return $fieldType;
     }
 
     /**
@@ -190,10 +207,6 @@ class EmailAddressTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
-                null
-            ),
-            array(
                 new EmailAddressValue(),
                 '',
             ),
@@ -244,7 +257,7 @@ class EmailAddressTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null,
+                new EmailAddressValue(),
             ),
             array(
                 '',
@@ -376,6 +389,163 @@ class EmailAddressTest extends FieldTypeTest
                         'Extent' => '\\http\\',
                     ),
                 )
+            ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezemail';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array(
+                new EmailAddressValue( 'john.doe@example.com' ),
+                'john.doe@example.com'
+            ),
+            array(
+                new EmailAddressValue( 'JANE.DOE@EXAMPLE.COM' ),
+                'jane.doe@example.com'
+            )
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings and
+     * field value which are considered valid by the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten if
+     * a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "StringLengthValidator" => array(
+     *                      "minStringLength" => 2,
+     *                      "maxStringLength" => 10,
+     *                  ),
+     *              ),
+     *          ),
+     *          new TextLineValue( "lalalala" ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  'isMultiple' => true
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              array(
+     *                  "BE" => array(
+     *                      "Name" => "Belgium",
+     *                      "Alpha2" => "BE",
+     *                      "Alpha3" => "BEL",
+     *                      "IDC" => 32,
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideValidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "validatorConfiguration" => array()
+                ),
+                new EmailAddressValue( "jane.doe@example.com" ),
+            ),
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings,
+     * field value and corresponding validation errors returned by
+     * the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten
+     * if a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "IntegerValueValidator" => array(
+     *                      "minIntegerValue" => 5,
+     *                      "maxIntegerValue" => 10
+     *                  ),
+     *              ),
+     *          ),
+     *          new IntegerValue( 3 ),
+     *          array(
+     *              new ValidationError(
+     *                  "The value can not be lower than %size%.",
+     *                  null,
+     *                  array(
+     *                      "size" => 5
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  "isMultiple" => false
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              "BE" => array(
+     *                  "Name" => "Belgium",
+     *                  "Alpha2" => "BE",
+     *                  "Alpha3" => "BEL",
+     *                  "IDC" => 32,
+     *              ),
+     *              "FR" => array(
+     *                  "Name" => "France",
+     *                  "Alpha2" => "FR",
+     *                  "Alpha3" => "FRA",
+     *                  "IDC" => 33,
+     *              ),
+     *          )
+     *      ),
+     *      array(
+     *          new ValidationError(
+     *              "Field definition does not allow multiple countries to be selected."
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideInvalidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "validatorConfiguration" => array()
+                ),
+                new EmailAddressValue( "jane.doe.example.com" ),
+                array(
+                    new ValidationError(
+                        "The value must be a valid email address."
+                    ),
+                ),
             ),
         );
     }

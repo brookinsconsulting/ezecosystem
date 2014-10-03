@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
@@ -26,7 +26,7 @@ class FieldDefinitionUpdateTest extends BaseTest
     {
         $inputArray = $this->getInputArray();
 
-        $fieldDefinitionUpdate = $this->getFieldDefinitionUpdate();
+        $fieldDefinitionUpdate = $this->getParser();
         $result = $fieldDefinitionUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
 
         $this->assertInstanceOf(
@@ -124,7 +124,7 @@ class FieldDefinitionUpdateTest extends BaseTest
         $inputArray = $this->getInputArray();
         unset( $inputArray['names']['value'] );
 
-        $fieldDefinitionUpdate = $this->getFieldDefinitionUpdate();
+        $fieldDefinitionUpdate = $this->getParser();
         $fieldDefinitionUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -139,7 +139,7 @@ class FieldDefinitionUpdateTest extends BaseTest
         $inputArray = $this->getInputArray();
         unset( $inputArray['descriptions']['value'] );
 
-        $fieldDefinitionUpdate = $this->getFieldDefinitionUpdate();
+        $fieldDefinitionUpdate = $this->getParser();
         $fieldDefinitionUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -148,10 +148,9 @@ class FieldDefinitionUpdateTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\FieldDefinitionUpdate
      */
-    protected function getFieldDefinitionUpdate()
+    protected function internalGetParser()
     {
         return new FieldDefinitionUpdate(
-            $this->getUrlHandler(),
             $this->getContentTypeServiceMock(),
             $this->getFieldTypeParserMock(),
             $this->getParserTools()
@@ -285,6 +284,14 @@ class FieldDefinitionUpdateTest extends BaseTest
                     'maxStringLength' => '24'
                 )
             ),
+        );
+    }
+
+    public function getParseHrefExpectationsMap()
+    {
+        return array(
+            array( '/content/types/42/draft/fieldDefinitions/24', 'contentTypeId', 42 ),
+            array( '/content/types/42/draft/fieldDefinitions/24', 'fieldDefinitionId', 24 ),
         );
     }
 }

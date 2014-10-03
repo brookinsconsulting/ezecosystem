@@ -2,9 +2,9 @@
 /**
  * File containing the Content Search handler class
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Cache;
@@ -24,17 +24,17 @@ class SearchHandler extends AbstractHandler implements SearchHandlerInterface
      */
     function findContent( Query $query, array $fieldFilters = array() )
     {
-        $this->logger->logCall( __METHOD__, array( 'query' => $query, 'fieldFilters' => $fieldFilters ) );
-        return $this->persistenceFactory->getSearchHandler()->findContent( $query, $fieldFilters );
+        $this->logger->logCall( __METHOD__, array( 'query' => get_class( $query ), 'fieldFilters' => $fieldFilters ) );
+        return $this->persistenceHandler->searchHandler()->findContent( $query, $fieldFilters );
     }
 
     /**
      * @see eZ\Publish\SPI\Persistence\Content\Search\Handler::findSingle
      */
-    public function findSingle( Criterion $criterion, array $fieldFilters = array() )
+    public function findSingle( Criterion $filter, array $fieldFilters = array() )
     {
-        $this->logger->logCall( __METHOD__, array( 'criterion' => $criterion, 'fieldFilters' => $fieldFilters ) );
-        return $this->persistenceFactory->getSearchHandler()->findSingle( $criterion, $fieldFilters );
+        $this->logger->logCall( __METHOD__, array( 'filter' => get_class( $filter ), 'fieldFilters' => $fieldFilters ) );
+        return $this->persistenceHandler->searchHandler()->findSingle( $filter, $fieldFilters );
     }
 
     /**
@@ -48,11 +48,11 @@ class SearchHandler extends AbstractHandler implements SearchHandlerInterface
                 'prefix' => $prefix,
                 'fieldPaths' => $fieldPaths,
                 'limit' => $limit,
-                'filter' => $filter
+                'filter' => ( $filter === null ? 'null' : get_class( $filter ) )
             )
         );
 
-        return $this->persistenceFactory->getSearchHandler()->suggest( $prefix, $fieldPaths, $limit, $filter );
+        return $this->persistenceHandler->searchHandler()->suggest( $prefix, $fieldPaths, $limit, $filter );
     }
 
     /**
@@ -61,7 +61,7 @@ class SearchHandler extends AbstractHandler implements SearchHandlerInterface
     public function indexContent( Content $content )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $content->versionInfo->contentInfo->id ) );
-        $this->persistenceFactory->getSearchHandler()->indexContent( $content );
+        $this->persistenceHandler->searchHandler()->indexContent( $content );
     }
 
     /**
@@ -70,6 +70,55 @@ class SearchHandler extends AbstractHandler implements SearchHandlerInterface
     public function deleteContent( $contentID, $versionID = null )
     {
         $this->logger->logCall( __METHOD__, array( 'content' => $contentID, 'version' => $versionID ) );
-        $this->persistenceFactory->getSearchHandler()->deleteContent( $contentID, $versionID );
+        $this->persistenceHandler->searchHandler()->deleteContent( $contentID, $versionID );
+    }
+
+    /**
+     * @see eZ\Publish\SPI\Persistence\Content\Search\Handler::deleteLocation
+     */
+    public function deleteLocation( $locationId )
+    {
+        $this->logger->logCall( __METHOD__, array( 'location' => $locationId ) );
+        $this->persistenceHandler->searchHandler()->deleteLocation( $locationId );
+    }
+
+    /**
+     * Indexes several content objects at once
+     *
+     * @todo: This function and setCommit() is needed for Persistence\Solr for test speed but not part
+     *       of interface for the reason described in Solr\Content\Search\Gateway\Native::bulkIndexContent
+     *       Short: Bulk handling should be properly designed before added to the interface.
+     *
+     * @param \eZ\Publish\SPI\Persistence\Content[] $contentObjects
+     *
+     * @return void
+     */
+    public function bulkIndexContent( array $contentObjects )
+    {
+        $this->persistenceHandler->searchHandler()->bulkIndexContent( $contentObjects );
+    }
+
+    /**
+     * Purges all contents from the index
+     *
+     * @todo: Make this public API?
+     *
+     * @return void
+     */
+    public function purgeIndex()
+    {
+        $this->persistenceHandler->searchHandler()->purgeIndex();
+    }
+
+    /**
+     * Set if index/delete actions should commit or if several actions is to be expected
+     *
+     * This should be set to false before group of actions and true before the last one
+     * (also, see note on bulkIndexContent())
+     * @param bool $commit
+     */
+    public function setCommit( $commit )
+    {
+       $this->persistenceHandler->searchHandler()->setCommit( $commit );
     }
 }

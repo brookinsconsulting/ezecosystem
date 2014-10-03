@@ -2,15 +2,15 @@
 /**
  * File containing the UserCreate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\FieldTypeParser;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\Core\REST\Common\Exceptions;
@@ -20,7 +20,7 @@ use eZ\Publish\API\Repository\ContentTypeService;
 /**
  * Parser for UserCreate
  */
-class UserCreate extends Base
+class UserCreate extends BaseParser
 {
     /**
      * User service
@@ -53,15 +53,13 @@ class UserCreate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\REST\Common\Input\FieldTypeParser $fieldTypeParser
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler, UserService $userService, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
+    public function __construct( UserService $userService, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->userService = $userService;
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
@@ -86,9 +84,8 @@ class UserCreate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for ContentType element in UserCreate." );
             }
 
-            $contentTypeValues = $this->urlHandler->parse( 'type', $data['ContentType']['_href'] );
             $contentType = $this->contentTypeService->loadContentType(
-                $contentTypeValues['type']
+                $this->requestParser->parseHref( $data['ContentType']['_href'], 'contentTypeId' )
             );
         }
 
@@ -127,8 +124,7 @@ class UserCreate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for Section element in UserCreate." );
             }
 
-            $sectionValues = $this->urlHandler->parse( 'section', $data['Section']['_href'] );
-            $userCreateStruct->sectionId = $sectionValues['section'];
+            $userCreateStruct->sectionId = $this->requestParser->parseHref( $data['Section']['_href'], 'sectionId' );
         }
 
         if ( array_key_exists( 'remoteId', $data ) )

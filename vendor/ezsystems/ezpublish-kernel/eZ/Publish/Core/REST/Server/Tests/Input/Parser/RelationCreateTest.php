@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
@@ -24,7 +24,7 @@ class RelationCreateTest extends BaseTest
             ),
         );
 
-        $relationCreate = $this->getRelationCreate();
+        $relationCreate = $this->getParser();
         $result = $relationCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
 
         $this->assertEquals(
@@ -44,7 +44,7 @@ class RelationCreateTest extends BaseTest
     {
         $inputArray = array();
 
-        $relationCreate = $this->getRelationCreate();
+        $relationCreate = $this->getParser();
         $relationCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -60,7 +60,7 @@ class RelationCreateTest extends BaseTest
             'Destination' => array()
         );
 
-        $relationCreate = $this->getRelationCreate();
+        $relationCreate = $this->getParser();
         $relationCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -69,8 +69,17 @@ class RelationCreateTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\RelationCreate
      */
-    protected function getRelationCreate()
+    protected function internalGetParser()
     {
-        return new RelationCreate( $this->getUrlHandler() );
+        $parser = new RelationCreate();
+        $parser->setRequestParser( $this->getRequestParserMock() );
+        return $parser;
+    }
+
+    public function getParseHrefExpectationsMap()
+    {
+        return array(
+            array( '/content/objects/42', 'contentId', 42 )
+        );
     }
 }

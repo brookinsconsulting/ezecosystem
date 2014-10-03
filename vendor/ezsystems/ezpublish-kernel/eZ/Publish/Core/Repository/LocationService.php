@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\Repository\LocationService class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\Core\Repository
  */
 
@@ -13,27 +13,26 @@ namespace eZ\Publish\Core\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\Core\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
 use eZ\Publish\API\Repository\Values\Content\LocationList;
 use eZ\Publish\SPI\Persistence\Content\Location as SPILocation;
-use eZ\Publish\SPI\Persistence\Content\Location\CreateStruct;
 use eZ\Publish\SPI\Persistence\Content\Location\UpdateStruct;
 use eZ\Publish\API\Repository\LocationService as LocationServiceInterface;
 use eZ\Publish\API\Repository\Repository as RepositoryInterface;
 use eZ\Publish\SPI\Persistence\Handler;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\LocationQuery;
+use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd as CriterionLogicalAnd;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot as CriterionLogicalNot;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree as CriterionSubtree;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Status as CriterionStatus;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId as CriterionParentLocationId;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException as APINotFoundException;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentValue;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
-use DateTime;
+use Exception;
 
 /**
  * Location service, used for complex subtree operations
@@ -45,7 +44,7 @@ use DateTime;
 class LocationService implements LocationServiceInterface
 {
     /**
-     * @var \eZ\Publish\API\Repository\Repository
+     * @var \eZ\Publish\Core\Repository\Repository
      */
     protected $repository;
 
@@ -60,20 +59,48 @@ class LocationService implements LocationServiceInterface
     protected $settings;
 
     /**
+     * @var \eZ\Publish\Core\Repository\DomainMapper
+     */
+    protected $domainMapper;
+
+    /**
+     * @var \eZ\Publish\Core\Repository\NameSchemaService
+     */
+    protected $nameSchemaService;
+
+    /**
+     * @var \eZ\Publish\Core\Repository\PermissionsCriterionHandler
+     */
+    protected $permissionsCriterionHandler;
+
+    /**
      * Setups service with reference to repository object that created it & corresponding handler
      *
      * @param \eZ\Publish\API\Repository\Repository $repository
      * @param \eZ\Publish\SPI\Persistence\Handler $handler
+     * @param \eZ\Publish\Core\Repository\DomainMapper $domainMapper
+     * @param \eZ\Publish\Core\Repository\NameSchemaService $nameSchemaService
+     * @param \eZ\Publish\Core\Repository\PermissionsCriterionHandler $permissionsCriterionHandler
      * @param array $settings
      */
-    public function __construct( RepositoryInterface $repository, Handler $handler, array $settings = array() )
+    public function __construct(
+        RepositoryInterface $repository,
+        Handler $handler,
+        DomainMapper $domainMapper,
+        NameSchemaService $nameSchemaService,
+        PermissionsCriterionHandler $permissionsCriterionHandler,
+        array $settings = array()
+    )
     {
         $this->repository = $repository;
         $this->persistenceHandler = $handler;
+        $this->domainMapper = $domainMapper;
+        $this->nameSchemaService = $nameSchemaService;
         // Union makes sure default settings are ignored if provided in argument
         $this->settings = $settings + array(
             //'defaultSetting' => array(),
         );
+        $this->permissionsCriterionHandler = $permissionsCriterionHandler;
     }
 
     /**
@@ -92,12 +119,6 @@ class LocationService implements LocationServiceInterface
      */
     public function copySubtree( APILocation $subtree, APILocation $targetParentLocation )
     {
-        if ( !is_numeric( $subtree->id ) )
-            throw new InvalidArgumentValue( "id", $subtree->id, "Location" );
-
-        if ( !is_numeric( $targetParentLocation->id ) )
-            throw new InvalidArgumentValue( "id", $targetParentLocation->id, "Location" );
-
         $loadedSubtree = $this->loadLocation( $subtree->id );
         $loadedTargetLocation = $this->loadLocation( $targetParentLocation->id );
 
@@ -111,7 +132,7 @@ class LocationService implements LocationServiceInterface
         /** Check read access to whole source subtree
          * @var boolean|\eZ\Publish\API\Repository\Values\Content\Query\Criterion $contentReadCriterion
          */
-        $contentReadCriterion = $this->repository->getSearchService()->getPermissionsCriterion();
+        $contentReadCriterion = $this->permissionsCriterionHandler->getPermissionsCriterion();
         if ( $contentReadCriterion === false )
         {
             throw new UnauthorizedException( 'content', 'read' );
@@ -122,7 +143,7 @@ class LocationService implements LocationServiceInterface
             $query = new Query(
                 array(
                     'limit' => 0,
-                    'criterion' => new CriterionLogicalAnd(
+                    'filter' => new CriterionLogicalAnd(
                         new CriterionSubtree( $loadedSubtree->pathString ),
                         new CriterionLogicalNot( $contentReadCriterion )
                     )
@@ -144,7 +165,7 @@ class LocationService implements LocationServiceInterface
             );
 
             $content = $this->repository->getContentService()->loadContent( $newLocation->contentId );
-            $urlAliasNames = $this->repository->getNameSchemaService()->resolveUrlAliasSchema( $content );
+            $urlAliasNames = $this->nameSchemaService->resolveUrlAliasSchema( $content );
             foreach ( $urlAliasNames as $languageCode => $name )
             {
                 $this->persistenceHandler->urlAliasHandler()->publishUrlAliasForLocation(
@@ -164,13 +185,13 @@ class LocationService implements LocationServiceInterface
 
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
         }
 
-        return $this->buildDomainLocationObject( $newLocation );
+        return $this->domainMapper->buildLocationDomainObject( $newLocation );
     }
 
     /**
@@ -179,17 +200,14 @@ class LocationService implements LocationServiceInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException If the current user user is not allowed to read this location
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If the specified location is not found
      *
-     * @param int $locationId
+     * @param mixed $locationId
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location
      */
     public function loadLocation( $locationId )
     {
-        if ( !is_numeric( $locationId ) )
-            throw new InvalidArgumentValue( "locationId", $locationId );
-
         $spiLocation = $this->persistenceHandler->locationHandler()->load( $locationId );
-        $location = $this->buildDomainLocationObject( $spiLocation );
+        $location = $this->domainMapper->buildLocationDomainObject( $spiLocation );
         if ( !$this->repository->canUser( 'content', 'read', $location->getContentInfo(), $location ) )
             throw new UnauthorizedException( 'content', 'read' );
 
@@ -213,7 +231,7 @@ class LocationService implements LocationServiceInterface
             throw new InvalidArgumentValue( "remoteId", $remoteId );
 
         $spiLocation = $this->persistenceHandler->locationHandler()->loadByRemoteId( $remoteId );
-        $location = $this->buildDomainLocationObject( $spiLocation );
+        $location = $this->domainMapper->buildLocationDomainObject( $spiLocation );
         if ( !$this->repository->canUser( 'content', 'read', $location->getContentInfo(), $location ) )
             throw new UnauthorizedException( 'content', 'read' );
 
@@ -226,6 +244,8 @@ class LocationService implements LocationServiceInterface
      * If a $rootLocation is given, only locations that belong to this location are returned.
      * The location list is also filtered by permissions on reading locations.
      *
+     * @todo permissions check is missing
+     *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException if there is no published version yet
      *
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
@@ -235,16 +255,6 @@ class LocationService implements LocationServiceInterface
      */
     public function loadLocations( ContentInfo $contentInfo, APILocation $rootLocation = null )
     {
-        if ( !is_numeric( $contentInfo->id ) )
-        {
-            throw new InvalidArgumentValue( "id", $contentInfo->id, "ContentInfo" );
-        }
-
-        if ( $rootLocation !== null && !is_numeric( $rootLocation->id ) )
-        {
-            throw new InvalidArgumentValue( "pathString", $rootLocation->pathString, "Location" );
-        }
-
         if ( !$contentInfo->published )
         {
             throw new BadStateException( "\$contentInfo", "ContentInfo has no published versions" );
@@ -252,13 +262,13 @@ class LocationService implements LocationServiceInterface
 
         $spiLocations = $this->persistenceHandler->locationHandler()->loadLocationsByContent(
             $contentInfo->id,
-            isset( $rootLocation ) ? $rootLocation->id : null
+            $rootLocation !== null ? $rootLocation->id : null
         );
 
         $locations = array();
         foreach ( $spiLocations as $spiLocation )
         {
-            $locations[] = $this->buildDomainLocationObject( $spiLocation );
+            $locations[] = $this->domainMapper->buildLocationDomainObject( $spiLocation );
         }
 
         return $locations;
@@ -276,21 +286,19 @@ class LocationService implements LocationServiceInterface
      */
     public function loadLocationChildren( APILocation $location, $offset = 0, $limit = -1 )
     {
-        if ( !is_numeric( $location->id ) )
-            throw new InvalidArgumentValue( "id", $location->id, "Location" );
-
-        if ( !is_numeric( $location->sortField ) )
+        if ( !$this->domainMapper->isValidLocationSortField( $location->sortField ) )
             throw new InvalidArgumentValue( "sortField", $location->sortField, "Location" );
 
-        if ( !is_numeric( $location->sortOrder ) )
+        if ( !$this->domainMapper->isValidLocationSortOrder( $location->sortOrder ) )
             throw new InvalidArgumentValue( "sortOrder", $location->sortOrder, "Location" );
 
-        if ( !is_numeric( $offset ) )
+        if ( !is_int( $offset ) )
             throw new InvalidArgumentValue( "offset", $offset );
 
-        if ( !is_numeric( $limit ) )
+        if ( !is_int( $limit ) )
             throw new InvalidArgumentValue( "limit", $limit );
 
+        $childLocations = array();
         $searchResult = $this->searchChildrenLocations(
             $location->id,
             $location->sortField,
@@ -298,31 +306,15 @@ class LocationService implements LocationServiceInterface
             $offset,
             $limit
         );
-
-        $childLocations = array();
-        foreach ( $searchResult->searchHits as $spiSearchHit )
+        foreach ( $searchResult->searchHits as $searchHit )
         {
-            $spiContentLocations = $this->persistenceHandler->locationHandler()->loadLocationsByContent(
-                $spiSearchHit->valueObject->versionInfo->contentInfo->id,
-                $location->id
-            );
-            foreach ( $spiContentLocations as $spiLocation )
-            {
-                if ( $spiLocation->parentId == $location->id )
-                {
-                    $childLocation = $this->buildDomainLocationObject( $spiLocation );
-                    if ( $this->repository->canUser( 'content', 'read', $childLocation->getContentInfo(), $childLocation ) )
-                    {
-                        $childLocations[] = $childLocation;
-                    }
-                }
-            }
+            $childLocations[] = $searchHit->valueObject;
         }
 
         return new LocationList(
             array(
                 "locations" => $childLocations,
-                "totalCount" => (int)$searchResult->totalCount
+                "totalCount" => $searchResult->totalCount
             )
         );
     }
@@ -336,22 +328,21 @@ class LocationService implements LocationServiceInterface
      */
     public function getLocationChildCount( APILocation $location )
     {
-        if ( !is_numeric( $location->id ) )
-            throw new InvalidArgumentValue( "id", $location->id, "Location" );
-
-        return $this->searchChildrenLocations(
+        $searchResult = $this->searchChildrenLocations(
             $location->id,
-            null,
-            APILocation::SORT_ORDER_ASC,
+            $location->sortField,
+            $location->sortOrder,
             0,
             0
-        )->totalCount;
+        );
+
+        return $searchResult->totalCount;
     }
 
     /**
      * Searches children locations of the provided parent location id
      *
-     * @param int $parentLocationId
+     * @param mixed $parentLocationId
      * @param int $sortField
      * @param int $sortOrder
      * @param int $offset
@@ -359,34 +350,33 @@ class LocationService implements LocationServiceInterface
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Search\SearchResult
      */
-    protected function searchChildrenLocations( $parentLocationId, $sortField = null, $sortOrder = APILocation::SORT_ORDER_ASC, $offset = 0, $limit = -1 )
+    protected function searchChildrenLocations(
+        $parentLocationId,
+        $sortField = null,
+        $sortOrder = APILocation::SORT_ORDER_ASC,
+        $offset = 0,
+        $limit = -1
+    )
     {
-        $query = new Query(
+        $query = new LocationQuery(
             array(
-                'criterion' => new CriterionLogicalAnd(
-                    array(
-                        new CriterionParentLocationId( $parentLocationId ),
-                        new CriterionStatus( CriterionStatus::STATUS_PUBLISHED ),
-                    )
-                ),
-                'offset' => ( $offset >= 0 ? (int)$offset : 0 ),
-                'limit' => ( $limit >= 0 ? (int)$limit  : null )
+                "filter" => new Criterion\ParentLocationId( $parentLocationId ),
+                "offset" => $offset >= 0 ? (int)$offset : 0,
+                "limit" => $limit >= 0 ? (int)$limit : null
             )
         );
 
         if ( $sortField !== null )
-            $query->sortClauses = array( $this->getSortClauseBySortField( $sortField, $sortOrder ) );
-
-        if ( !$this->repository->getSearchService()->addPermissionsCriterion( $query->criterion ) )
         {
-            return array();
+            $query->sortClauses = array( $this->getSortClauseBySortField( $sortField, $sortOrder ) );
         }
 
-        return $this->persistenceHandler->searchHandler()->findContent( $query );
+        return $this->repository->getSearchService()->findLocations( $query );
     }
 
     /**
      * Creates the new $location in the content repository for the given content
+     *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException If the current user user is not allowed to create this location
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the content is already below the specified parent
      *                                        or the parent is a sub location of the location of the content
@@ -397,105 +387,56 @@ class LocationService implements LocationServiceInterface
      * @param \eZ\Publish\API\Repository\Values\Content\LocationCreateStruct $locationCreateStruct
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location the newly created Location
-     *
      */
     public function createLocation( ContentInfo $contentInfo, LocationCreateStruct $locationCreateStruct )
     {
-        if ( !is_numeric( $contentInfo->id ) )
-            throw new InvalidArgumentValue( "id", $contentInfo->id, "ContentInfo" );
+        $content = $this->repository->getContentService()->loadContent( $contentInfo->id );
+        $parentLocation = $this->loadLocation( $locationCreateStruct->parentLocationId );
 
-        if ( !is_numeric( $contentInfo->currentVersionNo ) )
-            throw new InvalidArgumentValue( "currentVersionNo", $contentInfo->currentVersionNo, "ContentInfo" );
-
-        if ( !is_numeric( $locationCreateStruct->parentLocationId ) )
-            throw new InvalidArgumentValue( "parentLocationId", $locationCreateStruct->parentLocationId, "LocationCreateStruct" );
-
-        if ( $locationCreateStruct->priority !== null && !is_numeric( $locationCreateStruct->priority ) )
-            throw new InvalidArgumentValue( "priority", $locationCreateStruct->priority, "LocationCreateStruct" );
-
-        if ( !is_bool( $locationCreateStruct->hidden ) )
-            throw new InvalidArgumentValue( "hidden", $locationCreateStruct->hidden, "LocationCreateStruct" );
-
-        if ( $locationCreateStruct->remoteId !== null && ( !is_string( $locationCreateStruct->remoteId ) || empty( $locationCreateStruct->remoteId ) ) )
-            throw new InvalidArgumentValue( "remoteId", $locationCreateStruct->remoteId, "LocationCreateStruct" );
-
-        if ( $locationCreateStruct->sortField !== null && !is_numeric( $locationCreateStruct->sortField ) )
-            throw new InvalidArgumentValue( "sortField", $locationCreateStruct->sortField, "LocationCreateStruct" );
-
-        if ( $locationCreateStruct->sortOrder !== null && !is_numeric( $locationCreateStruct->sortOrder ) )
-            throw new InvalidArgumentValue( "sortOrder", $locationCreateStruct->sortOrder, "LocationCreateStruct" );
-
-        // check for existence of location with provided remote ID
-        if ( $locationCreateStruct->remoteId !== null )
+        if ( !$this->repository->canUser( 'content', 'create', $content->contentInfo, $parentLocation ) )
         {
-            try
-            {
-                $existingLocation = $this->loadLocationByRemoteId( $locationCreateStruct->remoteId );
-                if ( $existingLocation !== null )
-                    throw new InvalidArgumentException( "locationCreateStruct", "location with provided remote ID already exists" );
-            }
-            catch ( APINotFoundException $e )
-            {
-            }
+            throw new UnauthorizedException( 'content', 'create' );
         }
-        else
-        {
-            $locationCreateStruct->remoteId = md5( uniqid( get_class( $this ), true ) );
-        }
-
-        $loadedParentLocation = $this->loadLocation( $locationCreateStruct->parentLocationId );
 
         // Check if the parent is a sub location of one of the existing content locations (this also solves the
         // situation where parent location actually one of the content locations),
         // or if the content already has location below given location create struct parent
-        $existingContentLocations = $this->loadLocations( $contentInfo );
+        $existingContentLocations = $this->loadLocations( $content->contentInfo );
         if ( !empty( $existingContentLocations ) )
         {
             foreach ( $existingContentLocations as $existingContentLocation )
             {
-                if ( stripos( $loadedParentLocation->pathString, $existingContentLocation->pathString ) !== false )
-                    throw new InvalidArgumentException( "locationCreateStruct", "specified parent is a sub location of one of the existing content locations" );
-                if ( $loadedParentLocation->id == $existingContentLocation->parentLocationId )
-                    throw new InvalidArgumentException( "locationCreateStruct", "content is already below the specified parent" );
+                if ( stripos( $parentLocation->pathString, $existingContentLocation->pathString ) !== false )
+                {
+                    throw new InvalidArgumentException(
+                        "\$locationCreateStruct",
+                        "Specified parent is a sub location of one of the existing content locations."
+                    );
+                }
+                if ( $parentLocation->id == $existingContentLocation->parentLocationId )
+                {
+                    throw new InvalidArgumentException(
+                        "\$locationCreateStruct",
+                        "Content is already below the specified parent."
+                    );
+                }
             }
         }
 
-        if ( !$this->repository->canUser( 'content', 'create', $contentInfo, $loadedParentLocation ) )
-            throw new UnauthorizedException( 'content', 'create' );
-
-        $createStruct = new CreateStruct();
-        $createStruct->priority = $locationCreateStruct->priority !== null ? (int)$locationCreateStruct->priority : null;
-
-        // if we declare the new location as hidden, it is automatically invisible
-        // otherwise, it remains unhidden, and picks up visibility from parent
-        if ( $locationCreateStruct->hidden === true )
-        {
-            $createStruct->hidden = true;
-            $createStruct->invisible = true;
-        }
-        else if ( $loadedParentLocation->hidden || $loadedParentLocation->invisible )
-        {
-            $createStruct->invisible = true;
-        }
-
-        $createStruct->remoteId = trim( $locationCreateStruct->remoteId );
-        $createStruct->contentId = (int)$contentInfo->id;
-        $createStruct->contentVersion = (int)$contentInfo->currentVersionNo;
-
-        if ( $contentInfo->mainLocationId !== null )
-            $createStruct->mainLocationId = $contentInfo->mainLocationId;
-
-        $createStruct->sortField = $locationCreateStruct->sortField !== null ? (int)$locationCreateStruct->sortField : APILocation::SORT_FIELD_NAME;
-        $createStruct->sortOrder = $locationCreateStruct->sortOrder !== null ? (int)$locationCreateStruct->sortOrder : APILocation::SORT_ORDER_ASC;
-        $createStruct->parentId = $loadedParentLocation->id;
+        $spiLocationCreateStruct = $this->domainMapper->buildSPILocationCreateStruct(
+            $locationCreateStruct,
+            $parentLocation,
+            $content->contentInfo->mainLocationId !== null ? $content->contentInfo->mainLocationId : true,
+            $content->contentInfo->id,
+            $content->contentInfo->currentVersionNo
+        );
 
         $this->repository->beginTransaction();
         try
         {
-            $newLocation = $this->persistenceHandler->locationHandler()->create( $createStruct );
-            $content = $this->repository->getContentService()->loadContent( $newLocation->contentId );
+            $newLocation = $this->persistenceHandler->locationHandler()->create( $spiLocationCreateStruct );
 
-            $urlAliasNames = $this->repository->getNameSchemaService()->resolveUrlAliasSchema( $content );
+            $urlAliasNames = $this->nameSchemaService->resolveUrlAliasSchema( $content );
             foreach ( $urlAliasNames as $languageCode => $name )
             {
                 $this->persistenceHandler->urlAliasHandler()->publishUrlAliasForLocation(
@@ -511,13 +452,13 @@ class LocationService implements LocationServiceInterface
 
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
         }
 
-        return $this->buildDomainLocationObject( $newLocation );
+        return $this->domainMapper->buildLocationDomainObject( $newLocation );
     }
 
     /**
@@ -533,19 +474,16 @@ class LocationService implements LocationServiceInterface
      */
     public function updateLocation( APILocation $location, LocationUpdateStruct $locationUpdateStruct )
     {
-        if ( !is_numeric( $location->id ) )
-            throw new InvalidArgumentValue( "id", $location->id, "Location" );
-
-        if ( $locationUpdateStruct->priority !== null && !is_numeric( $locationUpdateStruct->priority ) )
+        if ( $locationUpdateStruct->priority !== null && !is_int( $locationUpdateStruct->priority ) )
             throw new InvalidArgumentValue( "priority", $locationUpdateStruct->priority, "LocationUpdateStruct" );
 
         if ( $locationUpdateStruct->remoteId !== null && ( !is_string( $locationUpdateStruct->remoteId ) || empty( $locationUpdateStruct->remoteId ) ) )
             throw new InvalidArgumentValue( "remoteId", $locationUpdateStruct->remoteId, "LocationUpdateStruct" );
 
-        if ( $locationUpdateStruct->sortField !== null && !is_numeric( $locationUpdateStruct->sortField ) )
+        if ( $locationUpdateStruct->sortField !== null && !$this->domainMapper->isValidLocationSortField( $locationUpdateStruct->sortField ) )
             throw new InvalidArgumentValue( "sortField", $locationUpdateStruct->sortField, "LocationUpdateStruct" );
 
-        if ( $locationUpdateStruct->sortOrder !== null && !is_numeric( $locationUpdateStruct->sortOrder ) )
+        if ( $locationUpdateStruct->sortOrder !== null && !$this->domainMapper->isValidLocationSortOrder( $locationUpdateStruct->sortOrder ) )
             throw new InvalidArgumentValue( "sortOrder", $locationUpdateStruct->sortOrder, "LocationUpdateStruct" );
 
         $loadedLocation = $this->loadLocation( $location->id );
@@ -567,10 +505,10 @@ class LocationService implements LocationServiceInterface
             throw new UnauthorizedException( 'content', 'edit' );
 
         $updateStruct = new UpdateStruct();
-        $updateStruct->priority = $locationUpdateStruct->priority !== null ? (int)$locationUpdateStruct->priority : $loadedLocation->priority;
+        $updateStruct->priority = $locationUpdateStruct->priority !== null ? $locationUpdateStruct->priority : $loadedLocation->priority;
         $updateStruct->remoteId = $locationUpdateStruct->remoteId !== null ? trim( $locationUpdateStruct->remoteId ) : $loadedLocation->remoteId;
-        $updateStruct->sortField = $locationUpdateStruct->sortField !== null ? (int)$locationUpdateStruct->sortField : $loadedLocation->sortField;
-        $updateStruct->sortOrder = $locationUpdateStruct->sortOrder !== null ? (int)$locationUpdateStruct->sortOrder : $loadedLocation->sortOrder;
+        $updateStruct->sortField = $locationUpdateStruct->sortField !== null ? $locationUpdateStruct->sortField : $loadedLocation->sortField;
+        $updateStruct->sortOrder = $locationUpdateStruct->sortOrder !== null ? $locationUpdateStruct->sortOrder : $loadedLocation->sortOrder;
 
         $this->repository->beginTransaction();
         try
@@ -578,7 +516,7 @@ class LocationService implements LocationServiceInterface
             $this->persistenceHandler->locationHandler()->update( $updateStruct, $loadedLocation->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -597,12 +535,6 @@ class LocationService implements LocationServiceInterface
      */
     public function swapLocation( APILocation $location1, APILocation $location2 )
     {
-        if ( !is_numeric( $location1->id ) )
-            throw new InvalidArgumentValue( "id", $location1->id, "Location" );
-
-        if ( !is_numeric( $location2->id ) )
-            throw new InvalidArgumentValue( "id", $location2->id, "Location" );
-
         $loadedLocation1 = $this->loadLocation( $location1->id );
         $loadedLocation2 = $this->loadLocation( $location2->id );
 
@@ -617,7 +549,7 @@ class LocationService implements LocationServiceInterface
             $this->persistenceHandler->locationHandler()->swap( $loadedLocation1->id, $loadedLocation2->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -635,9 +567,6 @@ class LocationService implements LocationServiceInterface
      */
     public function hideLocation( APILocation $location )
     {
-        if ( !is_numeric( $location->id ) )
-            throw new InvalidArgumentValue( "id", $location->id, "Location" );
-
         if ( !$this->repository->canUser( 'content', 'hide', $location->getContentInfo(), $location ) )
             throw new UnauthorizedException( 'content', 'hide' );
 
@@ -647,7 +576,7 @@ class LocationService implements LocationServiceInterface
             $this->persistenceHandler->locationHandler()->hide( $location->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -670,9 +599,6 @@ class LocationService implements LocationServiceInterface
      */
     public function unhideLocation( APILocation $location )
     {
-        if ( !is_numeric( $location->id ) )
-            throw new InvalidArgumentValue( "id", $location->id, "Location" );
-
         if ( !$this->repository->canUser( 'content', 'hide', $location->getContentInfo(), $location ) )
             throw new UnauthorizedException( 'content', 'hide' );
 
@@ -682,7 +608,7 @@ class LocationService implements LocationServiceInterface
             $this->persistenceHandler->locationHandler()->unHide( $location->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -716,7 +642,7 @@ class LocationService implements LocationServiceInterface
         /** Check read access to whole source subtree
          * @var boolean|\eZ\Publish\API\Repository\Values\Content\Query\Criterion $contentReadCriterion
          */
-        $contentReadCriterion = $this->repository->getSearchService()->getPermissionsCriterion();
+        $contentReadCriterion = $this->permissionsCriterionHandler->getPermissionsCriterion();
         if ( $contentReadCriterion === false )
         {
             throw new UnauthorizedException( 'content', 'read' );
@@ -727,7 +653,7 @@ class LocationService implements LocationServiceInterface
             $query = new Query(
                 array(
                     'limit' => 0,
-                    'criterion' => new CriterionLogicalAnd(
+                    'filter' => new CriterionLogicalAnd(
                         new CriterionSubtree( $location->pathString ),
                         new CriterionLogicalNot( $contentReadCriterion )
                     )
@@ -754,7 +680,7 @@ class LocationService implements LocationServiceInterface
             $this->persistenceHandler->locationHandler()->move( $location->id, $newParentLocation->id );
 
             $content = $this->repository->getContentService()->loadContent( $location->contentId );
-            $urlAliasNames = $this->repository->getNameSchemaService()->resolveUrlAliasSchema( $content );
+            $urlAliasNames = $this->nameSchemaService->resolveUrlAliasSchema( $content );
             foreach ( $urlAliasNames as $languageCode => $name )
             {
                 $this->persistenceHandler->urlAliasHandler()->publishUrlAliasForLocation(
@@ -774,7 +700,7 @@ class LocationService implements LocationServiceInterface
 
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -790,8 +716,7 @@ class LocationService implements LocationServiceInterface
      */
     public function deleteLocation( APILocation $location )
     {
-        if ( !is_numeric( $location->id ) )
-            throw new InvalidArgumentValue( "id", $location->id, "Location" );
+        $location = $this->loadLocation( $location->id );
 
         if ( !$this->repository->canUser( 'content', 'manage_locations', $location->getContentInfo() ) )
             throw new UnauthorizedException( 'content', 'manage_locations' );
@@ -801,7 +726,7 @@ class LocationService implements LocationServiceInterface
         /** Check remove access to descendants
          * @var boolean|\eZ\Publish\API\Repository\Values\Content\Query\Criterion $contentReadCriterion
          */
-        $contentReadCriterion = $this->repository->getSearchService()->getPermissionsCriterion( 'content', 'remove' );
+        $contentReadCriterion = $this->permissionsCriterionHandler->getPermissionsCriterion( 'content', 'remove' );
         if ( $contentReadCriterion === false )
         {
             throw new UnauthorizedException( 'content', 'remove' );
@@ -812,9 +737,11 @@ class LocationService implements LocationServiceInterface
             $query = new Query(
                 array(
                     'limit' => 0,
-                    'criterion' => new CriterionLogicalAnd(
-                        new CriterionSubtree( $location->pathString ),
-                        new CriterionLogicalNot( $contentReadCriterion )
+                    'filter' => new CriterionLogicalAnd(
+                        array(
+                            new CriterionSubtree( $location->pathString ),
+                            new CriterionLogicalNot( $contentReadCriterion )
+                        )
                     )
                 )
             );
@@ -832,7 +759,7 @@ class LocationService implements LocationServiceInterface
             $this->persistenceHandler->urlAliasHandler()->locationDeleted( $location->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -850,7 +777,7 @@ class LocationService implements LocationServiceInterface
     {
         return new LocationCreateStruct(
             array(
-                'parentLocationId' => (int)$parentLocationId
+                'parentLocationId' => $parentLocationId
             )
         );
     }
@@ -863,57 +790,6 @@ class LocationService implements LocationServiceInterface
     public function newLocationUpdateStruct()
     {
         return new LocationUpdateStruct();
-    }
-
-    /**
-     * Builds domain location object from provided persistence location
-     *
-     * @param \eZ\Publish\SPI\Persistence\Content\Location $spiLocation
-     *
-     * @return \eZ\Publish\API\Repository\Values\Content\Location
-     */
-    protected function buildDomainLocationObject( SPILocation $spiLocation )
-    {
-        if ( $spiLocation->id == 1 )// Workaround for missing ContentInfo on root location
-            $contentInfo = new ContentInfo(
-                array(
-                    'id' => 0,
-                    'name' => 'Top Level Nodes',
-                    'sectionId' => 1,
-                    'mainLocationId' => 1,
-                    'contentTypeId' => 1,
-                )
-            );
-        else
-            $contentInfo = $this->repository->getContentService()->internalLoadContentInfo( $spiLocation->contentId );
-
-        return new Location(
-            array(
-                'contentInfo' => $contentInfo,
-                'id' => (int)$spiLocation->id,
-                'priority' => (int)$spiLocation->priority,
-                'hidden' => (bool)$spiLocation->hidden,
-                'invisible' => (bool)$spiLocation->invisible,
-                'remoteId' => $spiLocation->remoteId,
-                'parentLocationId' => (int)$spiLocation->parentId,
-                'pathString' => $spiLocation->pathString,
-                'depth' => (int)$spiLocation->depth,
-                'sortField' => (int)$spiLocation->sortField,
-                'sortOrder' => (int)$spiLocation->sortOrder,
-            )
-        );
-    }
-
-    /**
-     * @param int|null $timestamp
-     *
-     * @return \DateTime|null
-     */
-    protected function getDateTime( $timestamp )
-    {
-        $dateTime = new DateTime();
-        $dateTime->setTimestamp( $timestamp );
-        return $dateTime;
     }
 
     /**
@@ -930,43 +806,43 @@ class LocationService implements LocationServiceInterface
         switch ( $sortField )
         {
             case APILocation::SORT_FIELD_PATH:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPathString( $sortOrder );
+                return new SortClause\Location\Path( $sortOrder );
 
             case APILocation::SORT_FIELD_PUBLISHED:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished( $sortOrder );
+                return new SortClause\DatePublished( $sortOrder );
 
             case APILocation::SORT_FIELD_MODIFIED:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\DateModified( $sortOrder );
+                return new SortClause\DateModified( $sortOrder );
 
             case APILocation::SORT_FIELD_SECTION:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\SectionIdentifier( $sortOrder );
+                return new SortClause\SectionIdentifier( $sortOrder );
 
             case APILocation::SORT_FIELD_DEPTH:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationDepth( $sortOrder );
+                return new SortClause\Location\Depth( $sortOrder );
 
-            //@todo: enable
+            //@todo: sort clause not yet implemented
             // case APILocation::SORT_FIELD_CLASS_IDENTIFIER:
 
-            //@todo: enable
+            //@todo: sort clause not yet implemented
             // case APILocation::SORT_FIELD_CLASS_NAME:
 
             case APILocation::SORT_FIELD_PRIORITY:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPriority( $sortOrder );
+                return new SortClause\Location\Priority( $sortOrder );
 
             case APILocation::SORT_FIELD_NAME:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName( $sortOrder );
+                return new SortClause\ContentName( $sortOrder );
 
-            //@todo: enable
+            //@todo: sort clause not yet implemented
             // case APILocation::SORT_FIELD_MODIFIED_SUBNODE:
 
-            //@todo: enable
-            // case APILocation::SORT_FIELD_NODE_ID:
+            case APILocation::SORT_FIELD_NODE_ID:
+                return new SortClause\Location\Id( $sortOrder );
 
-            //@todo: enable
-            // case APILocation::SORT_FIELD_CONTENTOBJECT_ID:
+            case APILocation::SORT_FIELD_CONTENTOBJECT_ID:
+                return new SortClause\ContentId( $sortOrder );
 
             default:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPathString( $sortOrder );
+                return new SortClause\Location\Path( $sortOrder );
         }
     }
 }

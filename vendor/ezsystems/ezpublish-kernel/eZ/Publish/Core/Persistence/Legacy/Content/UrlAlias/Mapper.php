@@ -2,9 +2,9 @@
 /**
  * File containing the UrlAlias Mapper class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\UrlAlias;
@@ -47,9 +47,7 @@ class Mapper
 
         list( $type, $destination ) = $this->matchTypeAndDestination( $data["action"] );
         $urlAlias->id = $data["parent"] . "-" . $data["text_md5"];
-        $urlAlias->pathData = isset( $data["raw_path_data"] )
-            ? $this->normalizePathData( $data["raw_path_data"] )
-            : null;
+        $urlAlias->pathData = $this->normalizePathData( $data["raw_path_data"] );
         $urlAlias->languageCodes = $this->languageMaskGenerator->extractLanguageCodesFromMask( $data["lang_mask"] );
         $urlAlias->alwaysAvailable = $this->languageMaskGenerator->isAlwaysAvailable( $data["lang_mask"] );
         $urlAlias->isHistory = isset( $data["is_path_history"] ) ? $data["is_path_history"] : !$data["is_original"];
@@ -129,7 +127,7 @@ class Mapper
      *
      * @return array
      */
-    protected function normalizePathData( $pathData )
+    protected function normalizePathData( array $pathData )
     {
         $normalizedPathData = array();
         foreach ( $pathData as $level => $rows )

@@ -2,32 +2,47 @@
 /**
  * File containing the SiteAccessListener class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\Event\PostSiteAccessMatchEvent;
+use eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess\URILexer;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Http\HttpUtils;
 
 /**
  * SiteAccess match listener.
  */
-class SiteAccessListener implements EventSubscriberInterface
+class SiteAccessListener extends ContainerAware implements EventSubscriberInterface
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $container;
+    private $defaultRouter;
 
-    public function __construct( ContainerInterface $container )
+    /**
+     * @var \eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator
+     */
+    private $urlAliasGenerator;
+
+    /**
+     * @var \Symfony\Component\Security\Http\HttpUtils
+     */
+    private $httpUtils;
+
+    public function __construct( RouterInterface $defaultRouter, UrlAliasGenerator $urlAliasGenerator, HttpUtils $httpUtils )
     {
-        $this->container = $container;
+        $this->defaultRouter = $defaultRouter;
+        $this->urlAliasGenerator = $urlAliasGenerator;
+        $this->httpUtils = $httpUtils;
     }
 
     public static function getSubscribedEvents()
@@ -41,8 +56,9 @@ class SiteAccessListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         $siteAccess = $event->getSiteAccess();
+        // Injecting matched SiteAccess in the ServiceContainer.
+        // All services depending on it will be "synchronized" with it.
         $this->container->set( 'ezpublish.siteaccess', $siteAccess );
-        $this->container->get( 'ezpublish.urlalias_generator' )->setSiteAccess( $siteAccess );
 
         // We already have semanticPathinfo (sub-request)
         if ( $request->attributes->has( 'semanticPathinfo' ) )

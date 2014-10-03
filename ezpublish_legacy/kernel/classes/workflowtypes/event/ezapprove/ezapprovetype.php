@@ -2,9 +2,9 @@
 /**
  * File containing the eZApproveType class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -378,6 +378,14 @@ class eZApproveType extends eZWorkflowEventType
         return $returnState;
     }
 
+    /**
+     * @param eZHTTPTool $http
+     * @param $base
+     * @param eZWorkflowEvent $workflowEvent
+     * @param $validation
+     *
+     * @return bool|int
+     */
     function validateHTTPInput( $http, $base, $workflowEvent, &$validation )
     {
         $returnState = eZInputValidator::STATE_ACCEPTED;
@@ -385,6 +393,15 @@ class eZApproveType extends eZWorkflowEventType
 
         if ( !$http->hasSessionVariable( 'BrowseParameters' ) )
         {
+            // No validation when deleting to avoid blocking deletion of invalid items
+            if (
+                $http->hasPostVariable( 'DeleteApproveUserIDArray_' . $workflowEvent->attribute( 'id' ) ) ||
+                $http->hasPostVariable( 'DeleteApproveGroupIDArray_' . $workflowEvent->attribute( 'id' ) )
+            )
+            {
+                return eZInputValidator::STATE_ACCEPTED;
+            }
+
             // check approve-users
             $approversIDs = array_unique( $this->attributeDecoder( $workflowEvent, 'approve_users' ) );
             if ( is_array( $approversIDs ) and

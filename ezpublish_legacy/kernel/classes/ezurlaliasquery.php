@@ -2,9 +2,9 @@
 /**
  * File containing the eZURLAliasFilter class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -101,9 +101,7 @@ class eZURLAliasQuery
 
     function hasAttribute( $name )
     {
-        return in_array( $name,
-                         array_diff( get_object_vars( $this ),
-                                     array( 'query' ) ) );
+        return $name !== "query" && array_key_exists( $name, get_object_vars( $this ) );
     }
 
     function attribute( $name )
@@ -317,11 +315,12 @@ class eZURLAliasQuery
         if ( !is_array( $rows ) || count( $rows ) == 0 )
             return array();
         $list = array();
+        $maxNumberOfLanguages = eZContentLanguage::maxCount();
         foreach ( $rows as $row )
         {
             $row['always_available'] = $row['lang_mask'] % 2;
             $mask = $row['lang_mask'] & ~1;
-            for ( $i = 1; $i < 30; ++$i )
+            for ( $i = 1; $i < $maxNumberOfLanguages; ++$i )
             {
                 $newMask = (1 << $i);
                 if ( ($newMask & $mask) > 0 )

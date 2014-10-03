@@ -2,19 +2,21 @@
 /**
  * File containing the ImageStorage Converter class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Image;
 
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use eZ\Publish\SPI\Persistence\Content\Field;
-use eZ\Publish\Core\IO\IOService;
+use eZ\Publish\Core\IO\IOServiceInterface;
 use eZ\Publish\Core\FieldType\GatewayBasedStorage;
 use eZ\Publish\Core\IO\MetadataHandler;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
+use Psr\Log\LoggerInterface;
+use eZ\Publish\Core\Base\Utils\DeprecationWarnerInterface as DeprecationWarner;
 
 /**
  * Converter for Image field type external storage
@@ -26,9 +28,14 @@ use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 class ImageStorage extends GatewayBasedStorage
 {
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * The IO Service used to manipulate data
      *
-     * @var IOService
+     * @var IOServiceInterface
      */
     protected $IOService;
 
@@ -39,23 +46,29 @@ class ImageStorage extends GatewayBasedStorage
      */
     protected $pathGenerator;
 
-    /** @var  */
+    /** @var MetadataHandler */
     protected $imageSizeMetadataHandler;
 
     /**
-     * Construct from gateways
-     *
-     * @param \eZ\Publish\Core\FieldType\StorageGateway[] $gateways
-     * @param IOService $IOService
-     * @param PathGenerator $imageSizeMetadataHandler
-     * @param MetadataHandler $pathGenerator
+     * @var DeprecationWarner
      */
-    public function __construct( array $gateways, IOService $IOService, PathGenerator $pathGenerator, MetadataHandler $imageSizeMetadataHandler )
+    private $deprecationWarner;
+
+    public function __construct(
+        array $gateways,
+        IOServiceInterface $IOService,
+        PathGenerator $pathGenerator,
+        MetadataHandler $imageSizeMetadataHandler,
+        DeprecationWarner $deprecationWarner,
+        LoggerInterface $logger = null
+    )
     {
         parent::__construct( $gateways );
         $this->IOService = $IOService;
         $this->pathGenerator = $pathGenerator;
         $this->imageSizeMetadataHandler = $imageSizeMetadataHandler;
+        $this->logger = $logger;
+        $this->deprecationWarner = $deprecationWarner;
     }
 
     /**
@@ -110,23 +123,42 @@ class ImageStorage extends GatewayBasedStorage
         // new image
         if ( isset( $field->value->externalData ) )
         {
-            $targetPath = $this->getFieldPath(
-                $field->id,
-                $versionInfo->versionNo,
-                $field->languageCode,
-                $this->getGateway( $context )->getNodePathString( $versionInfo, $field->id )
-            ) . '/' . $field->value->externalData['fileName'];
+            $targetPath = sprintf(
+                '%s/%s',
+                $this->pathGenerator->getStoragePathForField(
+                    $field->id,
+                    $versionInfo->versionNo,
+                    $field->languageCode
+                ),
+                $field->value->externalData['fileName']
+            );
 
-            if ( !$binaryFile = $this->IOService->loadBinaryFile( $targetPath ) )
+            if ( $this->IOService->exists( $targetPath ) )
             {
-                $binaryFileCreateStruct = $this->IOService->newBinaryCreateStructFromLocalFile(
-                    $field->value->externalData['path']
-                );
-                $binaryFileCreateStruct->uri = $targetPath;
+                $binaryFile = $this->IOService->loadBinaryFile( $targetPath );
+            }
+            else
+            {
+                if ( isset( $field->value->externalData['inputUri'] ) )
+                {
+                    $localFilePath = $field->value->externalData['inputUri'];
+                    unset( $field->value->externalData['inputUri'] );
+                }
+                else
+                {
+                    $this->deprecationWarner->log(
+                        "Using the Image\\Value::\$id property to create images is deprecated. Use 'inputUri'"
+                    );
+                    $localFilePath = $field->value->externalData['id'];
+                }
+                $binaryFileCreateStruct = $this->IOService->newBinaryCreateStructFromLocalFile( $localFilePath );
+                $binaryFileCreateStruct->id = $targetPath;
                 $binaryFile = $this->IOService->createBinaryFile( $binaryFileCreateStruct );
             }
-            $field->value->externalData['path'] = $this->IOService->getInternalPath( $binaryFile->uri );
             $field->value->externalData['mimeType'] = $binaryFile->mimeType;
+            $field->value->externalData['imageId'] = $versionInfo->contentInfo->id . '-' . $field->id;
+            $field->value->externalData['uri'] = $binaryFile->uri;
+            $field->value->externalData['id'] = ltrim( $binaryFile->uri, '/' );
 
             $field->value->data = array_merge(
                 $field->value->externalData,
@@ -143,42 +175,35 @@ class ImageStorage extends GatewayBasedStorage
             {
                 // Store empty value only with content meta data
                 $field->value->data = $contentMetaData;
-                return true;
+                return false;
             }
 
-            $binaryFile = $this->IOService->loadBinaryFile( $this->IOService->getExternalPath( $field->value->data['path'] ) );
+            try
+            {
+                $binaryFile = $this->IOService->loadBinaryFile( $field->value->data['id'] );
+                $metadata = $this->IOService->getMetadata( $this->imageSizeMetadataHandler, $binaryFile );
+            }
+            catch ( NotFoundException $e )
+            {
+                if ( isset( $this->logger ) )
+                {
+                    $this->logger->error( "Image with ID {$field->value->data['id']} not found" );
+                }
+                return false;
+            }
+
             $field->value->data = array_merge(
                 $field->value->data,
-                $this->IOService->getMetadata( $this->imageSizeMetadataHandler, $binaryFile ),
+                $metadata,
                 $contentMetaData
             );
             $field->value->externalData = null;
         }
 
-        $this->getGateway( $context )->storeImageReference( $field->value->data['path'], $field->id );
+        $this->getGateway( $context )->storeImageReference( $field->value->data['uri'], $field->id );
 
         // Data has been updated and needs to be stored!
         return true;
-    }
-
-    /**
-     * Returns the path where images for the defined $fieldId are stored
-     *
-     * @param mixed $fieldId
-     * @param int $versionNo
-     * @param string $languageCode
-     * @param string $nodePathString
-     *
-     * @return string
-     */
-    protected function getFieldPath( $fieldId, $versionNo, $languageCode, $nodePathString )
-    {
-        return $this->pathGenerator->getStoragePathForField(
-            $fieldId,
-            $versionNo,
-            $languageCode,
-            $nodePathString
-        );
     }
 
     /**
@@ -199,13 +224,23 @@ class ImageStorage extends GatewayBasedStorage
     {
         if ( $field->value->data !== null )
         {
-            $path = $this->IOService->getExternalPath( $field->value->data['path'] );
-            if ( ( $binaryFile = $this->IOService->loadBinaryFile( $path ) ) === false )
+            $field->value->data['imageId'] = $versionInfo->contentInfo->id . '-' . $field->id;
+
+            try
             {
-                throw new NotFoundException( '$field->value->data[path]', $path );
+                $binaryFile = $this->IOService->loadBinaryFile( $field->value->data['id'] );
+            }
+            catch ( NotFoundException $e )
+            {
+                if ( isset( $this->logger ) )
+                {
+                    $this->logger->error( "Image with id {$field->value->data['id']} not found" );
+                }
+                return;
             }
 
             $field->value->data['fileSize'] = $binaryFile->size;
+            $field->value->data['uri'] = $binaryFile->uri;
         }
     }
 
@@ -235,12 +270,17 @@ class ImageStorage extends GatewayBasedStorage
                 $gateway->removeImageReferences( $storedFilePath, $versionInfo->versionNo, $fieldId );
                 if ( $gateway->countImageReferences( $storedFilePath ) === 0 )
                 {
-                    $localPath = $this->IOService->getExternalPath( $storedFilePath );
-                    $binaryFile = $this->IOService->loadBinaryFile( $localPath );
-                    // If file can't be loaded it might be already deleted for some other language
-                    if ( $binaryFile !== false )
+                    try
                     {
+                        $binaryFile = $this->IOService->loadBinaryFile( $storedFilePath );
                         $this->IOService->deleteBinaryFile( $binaryFile );
+                    }
+                    catch ( NotFoundException $e )
+                    {
+                        if ( isset( $this->logger ) )
+                        {
+                            $this->logger->error( "Image with id $storedFilePath not found" );
+                        }
                     }
                 }
             }

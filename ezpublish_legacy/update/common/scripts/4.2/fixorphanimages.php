@@ -3,10 +3,10 @@
 //
 // Created on: <15-Nov-2009 bd>
 //
-// SOFTWARE NAME: eZ Publish Community Project
-// SOFTWARE RELEASE:  2013.5
-// COPYRIGHT NOTICE: Copyright (C) 1999-2013 eZ Systems AS
-// SOFTWARE LICENSE: GNU General Public License v2
+// SOFTWARE NAME: eZ Publish
+// SOFTWARE RELEASE: 4.2
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
+// SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of version 2.0  of the GNU General

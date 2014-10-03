@@ -2593,7 +2593,7 @@ version: 2.8.2r1
             delta = 0 - item;
 
             if (itemsPerCol) {
-                // offset calculations for multirow Carousel
+            	// offset calculations for multirow Carousel
                 if (isVertical) {
                     delta = parseInt(delta / itemsPerRow, 10);
                 } else {

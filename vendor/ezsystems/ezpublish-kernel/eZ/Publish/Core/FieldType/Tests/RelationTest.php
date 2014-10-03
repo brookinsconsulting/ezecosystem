@@ -2,19 +2,18 @@
 /**
  * File containing the RelationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\Relation\Type as RelationType;
 use eZ\Publish\Core\FieldType\Relation\Value;
-use eZ\Publish\Core\FieldType\Tests\FieldTypeTest;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
 
 class RelationTest extends FieldTypeTest
 {
@@ -31,7 +30,10 @@ class RelationTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new RelationType();
+        $fieldType = new RelationType();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -58,7 +60,7 @@ class RelationTest extends FieldTypeTest
             ),
             'selectionRoot' => array(
                 'type' => 'string',
-                'default' => '',
+                'default' => null,
             ),
         );
     }
@@ -66,11 +68,10 @@ class RelationTest extends FieldTypeTest
     /**
      * Returns the empty value expected from the field type.
      *
-     * @return void
+     * @return Value
      */
     protected function getEmptyValueExpectation()
     {
-        // @todo FIXME: Is this correct?
         return new Value();
     }
 
@@ -327,18 +328,6 @@ class RelationTest extends FieldTypeTest
                 )
             ),
             array(
-                // Missing selectionMethod
-                array(
-                    'selectionRoot' => 42
-                )
-            ),
-            array(
-                // Missing selectionRoot
-                array(
-                    'selectionMethod' => RelationType::SELECTION_BROWSE,
-                )
-            ),
-            array(
                 // Invalid selectionMethod
                 array(
                     'selectionMethod' => 2342,
@@ -366,6 +355,27 @@ class RelationTest extends FieldTypeTest
                 Relation::FIELD => array( 70 ),
             ),
             $ft->getRelations( $ft->acceptValue( 70 ) )
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezobjectrelation';
+    }
+
+    /**
+     * @dataProvider provideDataForGetName
+     * @expectedException \RuntimeException
+     */
+    public function testGetName( SPIValue $value, $expected )
+    {
+        $this->getFieldTypeUnderTest()->getName( $value );
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), '' )
         );
     }
 }

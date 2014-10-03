@@ -2,9 +2,9 @@
 /**
  * File containing the eZNodeAssignment class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -48,8 +48,9 @@ class eZNodeAssignment extends eZPersistentObject
                                                         'datatype' => 'integer',
                                                         'default' => 0,
                                                         'required' => true ),
+                                         // Used for the remote id of the node assignment itself
                                          'remote_id' => array( 'name' => 'RemoteID',
-                                                               'datatype' => 'integer',
+                                                               'datatype' => 'string',
                                                                'default' => 0,
                                                                'required' => true ),
                                          'contentobject_id' => array( 'name' => 'ContentobjectID',
@@ -89,10 +90,19 @@ class eZNodeAssignment extends eZPersistentObject
                                                                   'foreign_class' => 'eZContentObjectTreeNode',
                                                                   'foreign_attribute' => 'node_id',
                                                                   'multiplicity' => '1..*' ),
+                                         // Used for the remote id of the corresponding tree node (not the parent tree node!)
                                          'parent_remote_id' => array( 'name' => 'ParentRemoteID',
                                                                       'datatype' => 'string',
                                                                       'default' => '',
                                                                       'required' => false ),
+                                         'is_hidden' => array( 'name' => 'Hidden',
+                                                               'datatype' => 'integer',
+                                                               'default' => 0,
+                                                               'required' => false ),
+                                         'priority' => array( 'name' => 'Priority',
+                                                               'datatype' => 'integer',
+                                                               'default' => 0,
+                                                               'required' => false ),
                                          'op_code' => array( 'name' => 'OpCode',
                                                              'datatype' => 'int',
                                                              'default' => 0, // eZNodeAssignment::OP_CODE_NOP
@@ -205,6 +215,14 @@ class eZNodeAssignment extends eZPersistentObject
         {
             $parameters['is_main'] = 0;
         }
+        if ( !isset( $parameters['is_hidden'] ) )
+        {
+            $parameters['is_hidden'] = 0;
+        }
+        if ( !isset( $parameters['priority'] ) )
+        {
+            $parameters['priority'] = 0;
+        }
         if ( !isset( $parameters['sort_field'] ) )
         {
             $parameters['sort_field'] = eZContentObjectTreeNode::SORT_FIELD_PUBLISHED;
@@ -217,9 +235,9 @@ class eZNodeAssignment extends eZPersistentObject
         {
             $parameters['from_node_id'] = 0;
         }
-        if ( !isset( $parameters['parent_remote_id'] ) )
+        if ( !isset( $parameters['parent_remote_id'] ) || empty( $parameters['parent_remote_id'] ) )
         {
-            $parameters['parent_remote_id'] = '';
+            $parameters['parent_remote_id'] = eZRemoteIdUtility::generate( 'node' );
         }
         if ( !isset( $parameters['op_code'] ) )
         {
@@ -502,6 +520,8 @@ class eZNodeAssignment extends eZPersistentObject
                                 'sort_field' => $this->attribute( 'sort_field' ),
                                 'sort_order' => $this->attribute( 'sort_order' ),
                                 'is_main' => $this->attribute( 'is_main' ),
+                                'is_hidden' => $this->attribute( 'is_hidden' ),
+                                'priority' => $this->attribute( 'priority' ),
                                 'parent_remote_id' => $this->attribute( 'parent_remote_id' ) );
         if ( $contentObjectID !== false )
             $assignmentRow['contentobject_id'] = $contentObjectID;
@@ -576,6 +596,7 @@ class eZNodeAssignment extends eZPersistentObject
     /// Used for giving unique values to an assignment which can later be checked.
     /// This is often used in templates to provide limited choices for assignments.
     public $RemoteID;
+    // Used for the remote id of the corresponding tree node (not the parent tree node!)
     public $ParentRemoteID;
     public $ContentobjectID;
     public $ContentObjectVersion;
@@ -584,6 +605,8 @@ class eZNodeAssignment extends eZPersistentObject
     public $SortOrder;
     public $Main;
     public $FromNodeID;
+    public $Hidden;
+    public $Priority;
 }
 
 ?>

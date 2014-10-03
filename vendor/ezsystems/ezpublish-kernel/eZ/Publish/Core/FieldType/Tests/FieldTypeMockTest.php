@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\FieldType\Tests\FieldTypeMockTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
@@ -14,17 +14,34 @@ use PHPUnit_Framework_TestCase;
 class FieldTypeMockTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @expectedException \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function testApplyDefaultSettingsThrowsInvalidArgumentException()
+    {
+        /** @var \eZ\Publish\Core\FieldType\FieldType|\PHPUnit_Framework_MockObject_MockObject $stub */
+        $stub = $this->getMockForAbstractClass(
+            "\\eZ\\Publish\\Core\\FieldType\\FieldType",
+            array(),
+            "",
+            false
+        );
+
+        $stub->applyDefaultSettings( new \DateTime );
+    }
+
+    /**
      * @dataProvider providerForTestApplyDefaultSettings
      *
      * @covers \eZ\Publish\Core\FieldType\FieldType::applyDefaultSettings
      */
     public function testApplyDefaultSettings( $initialSettings, $expectedSettings )
     {
+        /** @var \eZ\Publish\Core\FieldType\FieldType|\PHPUnit_Framework_MockObject_MockObject $stub */
         $stub = $this->getMockForAbstractClass(
             "\\eZ\\Publish\\Core\\FieldType\\FieldType",
             array(),
             "",
-            true,
+            false,
             true,
             true,
             array( "getSettingsSchema" )
@@ -140,6 +157,126 @@ class FieldTypeMockTest extends PHPUnit_Framework_TestCase
                 ),
                 $array
             ),
+        );
+    }
+
+    /**
+     * @expectedException \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function testApplyDefaultValidatorConfigurationEmptyThrowsInvalidArgumentException()
+    {
+        /** @var \eZ\Publish\Core\FieldType\FieldType|\PHPUnit_Framework_MockObject_MockObject $stub */
+        $stub = $this->getMockForAbstractClass(
+            "\\eZ\\Publish\\Core\\FieldType\\FieldType",
+            array(),
+            "",
+            false
+        );
+
+        $stub->applyDefaultValidatorConfiguration( new \DateTime );
+    }
+
+    public function testApplyDefaultValidatorConfigurationEmpty()
+    {
+        /** @var \eZ\Publish\Core\FieldType\FieldType|\PHPUnit_Framework_MockObject_MockObject $stub */
+        $stub = $this->getMockForAbstractClass(
+            "\\eZ\\Publish\\Core\\FieldType\\FieldType",
+            array(),
+            "",
+            false,
+            true,
+            true,
+            array( "getValidatorConfigurationSchema" )
+        );
+
+        $stub
+            ->expects( $this->any() )
+            ->method( "getValidatorConfigurationSchema" )
+            ->will(
+                $this->returnValue( array() )
+            );
+
+        $validatorConfiguration = null;
+        $stub->applyDefaultValidatorConfiguration( $validatorConfiguration );
+        $this->assertSame(
+            null,
+            $validatorConfiguration
+        );
+    }
+
+    /**
+     * @dataProvider providerForTestApplyDefaultValidatorConfiguration
+     */
+    public function testApplyDefaultValidatorConfiguration( $initialConfiguration, $expectedConfiguration )
+    {
+        /** @var \eZ\Publish\Core\FieldType\FieldType|\PHPUnit_Framework_MockObject_MockObject $stub */
+        $stub = $this->getMockForAbstractClass(
+            "\\eZ\\Publish\\Core\\FieldType\\FieldType",
+            array(),
+            "",
+            false,
+            true,
+            true,
+            array( "getValidatorConfigurationSchema" )
+        );
+
+        $stub
+            ->expects( $this->any() )
+            ->method( "getValidatorConfigurationSchema" )
+            ->will(
+                $this->returnValue(
+                    array(
+                        "TestValidator" => array(
+                            "valueClick" => array(
+                                "default" => 1
+                            ),
+                            "valueClack" => array(
+                                "default" => 0
+                            ),
+                        )
+                    )
+                )
+            );
+
+        $validatorConfiguration = $initialConfiguration;
+        $stub->applyDefaultValidatorConfiguration( $validatorConfiguration );
+        $this->assertSame(
+            $expectedConfiguration,
+            $validatorConfiguration
+        );
+    }
+
+    public function providerForTestApplyDefaultValidatorConfiguration()
+    {
+        $defaultConfiguration = array(
+            "TestValidator" => array(
+                "valueClick" => 1,
+                "valueClack" => 0
+            )
+        );
+
+        return array(
+            array(
+                null,
+                $defaultConfiguration,
+            ),
+            array(
+                array(),
+                $defaultConfiguration,
+            ),
+            array(
+                array(
+                    "TestValidator" => array(
+                        "valueClick" => 100
+                    )
+                ),
+                array(
+                    "TestValidator" => array(
+                        "valueClick" => 100,
+                        "valueClack" => 0
+                    )
+                ),
+            )
         );
     }
 }

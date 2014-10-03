@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\API\Repository\Tests\FieldType\BaseIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests\FieldType;
@@ -13,6 +13,8 @@ use eZ\Publish\API\Repository\Tests;
 use eZ\Publish\API\Repository;
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use Exception;
+use PHPUnit_Framework_AssertionFailedError;
 
 /**
  * Integration test for legacy storage field types
@@ -236,27 +238,6 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
     abstract public function provideFromHashData();
 
     /**
-     * Marks FieldType integration tests skipped against memory stub
-     *
-     * Since the FieldType integration tests rely on multiple factors which are
-     * hard to mimic by the memory stub, these can only be run against a real
-     * core implementation with a real persistence back end.
-     *
-     * @return void
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        if ( $this->getRepository() instanceof \eZ\Publish\API\Repository\Tests\Stubs\RepositoryStub )
-        {
-            $this->markTestSkipped(
-                'FieldType integration tests cannot be run against memory stub.'
-            );
-        }
-    }
-
-    /**
      * Method called after content creation
      *
      * Useful, if additional stuff should be executed (like creating the actual
@@ -386,14 +367,6 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
     }
 
     abstract public function providerForTestIsNotEmptyValue();
-
-    /**
-     * @covers \eZ\Publish\Core\FieldType\FieldType::isEmptyValue
-     */
-    public function testIsEmptyValueWithNull()
-    {
-        $this->assertTrue( $this->getRepository()->getFieldTypeService()->buildFieldType( $this->getTypeName() )->isEmptyValue( null ) );
-    }
 
     /**
      * @depends testCreateContentType
@@ -632,6 +605,74 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
         $this->assertFieldDataLoadedCorrect( $this->testLoadFieldType() );
     }
 
+    public function testCreateContentWithEmptyFieldValue()
+    {
+        /** @var \eZ\Publish\Core\FieldType\FieldType $fieldType */
+        $fieldType = $this->getRepository()->getFieldTypeService()->buildFieldType( $this->getTypeName() );
+
+        return $this->createContent( $fieldType->getEmptyValue() );
+    }
+
+    /**
+     * @depends testCreateContentWithEmptyFieldValue
+     */
+    public function testCreatedEmptyFieldValue( $content )
+    {
+        foreach ( $content->getFields() as $field )
+        {
+            if ( $field->fieldDefIdentifier === $this->customFieldIdentifier )
+            {
+                return $field;
+            }
+        }
+
+        $this->fail( "Custom field not found." );
+    }
+
+    /**
+     * @dep_ends eZ\Publish\API\Repository\Tests\ContentServiceTest::testLoadContent
+     * @depends testCreateContentWithEmptyFieldValue
+     * @group xx
+     */
+    public function testLoadEmptyFieldValue()
+    {
+        $content = $this->testCreateContentWithEmptyFieldValue();
+
+        $repository = $this->getRepository();
+        $contentService = $repository->getContentService();
+        return $contentService->loadContent( $content->contentInfo->id );
+    }
+
+    /**
+     * @depends testLoadEmptyFieldValue
+     */
+    public function testLoadEmptyFieldValueType( $content )
+    {
+        foreach ( $content->getFields() as $field )
+        {
+            if ( $field->fieldDefIdentifier === $this->customFieldIdentifier )
+            {
+                return $field;
+            }
+        }
+
+        $this->fail( "Custom field not found." );
+    }
+
+    /**
+     * @depends testLoadEmptyFieldValueType
+     */
+    public function testLoadEmptyFieldValueData( $field )
+    {
+        /** @var \eZ\Publish\Core\FieldType\FieldType $fieldType */
+        $fieldType = $this->getRepository()->getFieldTypeService()->buildFieldType( $this->getTypeName() );
+
+        $this->assertEquals(
+            $fieldType->getEmptyValue(),
+            $fieldType->acceptValue( $field->value )
+        );
+    }
+
     /**
      * @dep_ends eZ\Publish\API\Repository\Tests\ContentServiceTest::testUpdateContent
      * @depends testLoadFieldType
@@ -642,13 +683,24 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
     }
 
     /**
+     * Tests creeating a new version keeps the existing value
+     * @dep_ends eZ\Publish\API\Repository\Tests\ContentServiceTest::testUpdateContent
+     * @depends testLoadFieldType
+     */
+    public function testUpdateFieldNoNewContent()
+    {
+        return $this->updateContent( null, false );
+    }
+
+    /**
      * Updates the standard published content object with $fieldData
      *
      * @param mixed $fieldData
+     * @param boolean $setField If false the update struct will be empty (field value will not be set)
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content
      */
-    public function updateContent( $fieldData )
+    public function updateContent( $fieldData, $setField = true )
     {
         $content = $this->testPublishContent();
 
@@ -658,10 +710,13 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
         $draft = $contentService->createContentDraft( $content->contentInfo );
 
         $updateStruct = $contentService->newContentUpdateStruct();
-        $updateStruct->setField(
-            $this->customFieldIdentifier,
-            $fieldData
-        );
+        if ( $setField )
+        {
+            $updateStruct->setField(
+                $this->customFieldIdentifier,
+                $fieldData
+            );
+        }
 
         return $contentService->updateContent( $draft->versionInfo, $updateStruct );
     }
@@ -683,11 +738,35 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
     }
 
     /**
+     * @depends testUpdateFieldNoNewContent
+     */
+    public function testUpdateNoNewContentTypeFieldStillAvailable( $content )
+    {
+        foreach ( $content->getFields() as $field )
+        {
+            if ( $field->fieldDefIdentifier === $this->customFieldIdentifier )
+            {
+                return $field;
+            }
+        }
+
+        $this->fail( "Custom field not found." );
+    }
+
+    /**
      * @depends testUpdateTypeFieldStillAvailable
      */
     public function testUpdatedDataCorrect( Field $field )
     {
         $this->assertUpdatedFieldDataLoadedCorrect( $field );
+    }
+
+    /**
+     * @depends testUpdateNoNewContentTypeFieldStillAvailable
+     */
+    public function testUpdatedNoNewContentDataCorrect( Field $field )
+    {
+        $this->assertFieldDataLoadedCorrect( $field );
     }
 
     /**
@@ -775,11 +854,11 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
 
             $this->fail( 'Expected exception not thrown.' );
         }
-        catch ( \PHPUnit_Framework_AssertionFailedError $e )
+        catch ( PHPUnit_Framework_AssertionFailedError $e )
         {
             throw $e;
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->assertInstanceOf(
                 $expectedException,
@@ -807,17 +886,88 @@ abstract class BaseIntegrationTest extends Tests\BaseTest
 
             $this->fail( 'Expected exception not thrown.' );
         }
-        catch ( \PHPUnit_Framework_AssertionFailedError $e )
+        catch ( PHPUnit_Framework_AssertionFailedError $e )
         {
             throw $e;
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->assertInstanceOf(
                 $expectedException,
-                $e
+                $e,
+                get_class( $e ) . ": " . $e->getMessage()
             );
         }
+    }
+
+    protected function removeFieldDefinition()
+    {
+        $repository = $this->getRepository();
+        $contentService = $repository->getContentService();
+        $contentTypeService = $repository->getContentTypeService();
+        $content = $this->testPublishContent();
+
+        $contentType = $contentTypeService->loadContentType( $content->contentInfo->contentTypeId );
+        $contentTypeDraft = $contentTypeService->createContentTypeDraft( $contentType );
+        $fieldDefinition = $contentTypeDraft->getFieldDefinition( "data" );
+
+        $contentTypeService->removeFieldDefinition( $contentTypeDraft, $fieldDefinition );
+        $contentTypeService->publishContentTypeDraft( $contentTypeDraft );
+
+        return $contentService->loadContent( $content->id );
+    }
+
+    /**
+     * Tests removal of field definition from the ContentType of the Content.
+     */
+    public function testRemoveFieldDefinition()
+    {
+        $content = $this->removeFieldDefinition();
+
+        $this->assertCount( 1, $content->getFields() );
+        $this->assertNull( $content->getFieldValue( "data" ) );
+    }
+
+    protected function addFieldDefinition()
+    {
+        $repository = $this->getRepository();
+        $contentService = $repository->getContentService();
+        $contentTypeService = $repository->getContentTypeService();
+        $content = $this->removeFieldDefinition();
+
+        $contentType = $contentTypeService->loadContentType( $content->contentInfo->contentTypeId );
+        $contentTypeDraft = $contentTypeService->createContentTypeDraft( $contentType );
+
+        $fieldDefinitionCreateStruct = $contentTypeService->newFieldDefinitionCreateStruct(
+            "data",
+            $this->getTypeName()
+        );
+        $fieldDefinitionCreateStruct->validatorConfiguration = $this->getValidValidatorConfiguration();
+        $fieldDefinitionCreateStruct->fieldSettings = $this->getValidFieldSettings();
+        $fieldDefinitionCreateStruct->defaultValue = null;
+
+        $contentTypeService->addFieldDefinition( $contentTypeDraft, $fieldDefinitionCreateStruct );
+        $contentTypeService->publishContentTypeDraft( $contentTypeDraft );
+
+        return $contentService->loadContent( $content->id );
+    }
+
+    /**
+     * Tests addition of field definition from the ContentType of the Content.
+     */
+    public function testAddFieldDefinition()
+    {
+        $content = $this->addFieldDefinition();
+
+        $this->assertCount( 2, $content->getFields() );
+
+        $this->assertTrue(
+            $this->getRepository()->getFieldTypeService()->buildFieldType(
+                $this->getTypeName()
+            )->isEmptyValue(
+                $content->getFieldValue( "data" )
+            )
+        );
     }
 
     /**

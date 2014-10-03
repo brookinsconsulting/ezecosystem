@@ -2,9 +2,9 @@
 /**
  * File containing the Image converter
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
@@ -97,7 +97,7 @@ class Image implements Converter
      */
     protected function createLegacyXml( array $data )
     {
-        $pathInfo = pathinfo( $data['path'] );
+        $pathInfo = pathinfo( ltrim( $data['uri'], '/' ) );
         return $this->fillXml( $data, $pathInfo, time() );
     }
 
@@ -136,7 +136,7 @@ EOT;
             htmlspecialchars( $pathInfo['extension'] ), // suffix="%s"
             htmlspecialchars( $pathInfo['filename'] ), // basename="%s"
             htmlspecialchars( $pathInfo['dirname'] ), // dirpath
-            htmlspecialchars( $imageData['path'] ), // url
+            htmlspecialchars( ltrim( $imageData['uri'], '/' ) ), // url
             htmlspecialchars( $pathInfo['basename'] ), // @todo: Needs original file name, for whatever reason?
             htmlspecialchars( $imageData['mime'] ), // mime_type
             htmlspecialchars( $imageData['width'] ), // width
@@ -200,7 +200,7 @@ EOT;
             return null;
         }
 
-        $extractedData['path'] = $url;
+        $extractedData['id'] = $url;
 
         if ( !$ezimageTag->hasAttribute( 'filename' ) )
         {

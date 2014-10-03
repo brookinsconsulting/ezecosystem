@@ -2,16 +2,15 @@
 /**
  * File containing the FieldType interface
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\FieldType;
 
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
-use eZ\Publish\SPI\FieldType\Event;
 
 /**
  * The field type interface which all field types have to implement.
@@ -54,11 +53,11 @@ interface FieldType
      * The used $value can be assumed to be already accepted by {@link
      * acceptValue()}.
      *
-     * @param mixed $value
+     * @param \eZ\Publish\SPI\FieldType\Value $value
      *
      * @return string
      */
-    public function getName( $value );
+    public function getName( Value $value );
 
     /**
      * Returns a schema for the settings expected by the FieldType
@@ -128,11 +127,11 @@ interface FieldType
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      *
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDef The field definition of the field
-     * @param \eZ\Publish\Core\FieldType\Value $fieldValue The field value for which an action is performed
+     * @param \eZ\Publish\SPI\FieldType\Value $value The field value for which an action is performed
      *
      * @return \eZ\Publish\SPI\FieldType\ValidationError[]
      */
-    public function validate( FieldDefinition $fieldDef, $fieldValue );
+    public function validate( FieldDefinition $fieldDef, Value $value );
 
     /**
      * Validates the validatorConfiguration of a FieldDefinitionCreateStruct or FieldDefinitionUpdateStruct
@@ -146,6 +145,15 @@ interface FieldType
      * @return \eZ\Publish\SPI\FieldType\ValidationError[]
      */
     public function validateValidatorConfiguration( $validatorConfiguration );
+
+    /**
+     * Applies the default values to the given $validatorConfiguration of a FieldDefinitionCreateStruct
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     *
+     * @param mixed $validatorConfiguration
+     */
+    public function applyDefaultValidatorConfiguration( &$validatorConfiguration );
 
     /**
      * Validates the fieldSettings of a FieldDefinitionCreateStruct or FieldDefinitionUpdateStruct
@@ -163,6 +171,8 @@ interface FieldType
     /**
      * Applies the default values to the fieldSettings of a FieldDefinitionCreateStruct
      *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     *
      * @param mixed $fieldSettings
      */
     public function applyDefaultSettings( &$fieldSettings );
@@ -175,6 +185,20 @@ interface FieldType
     public function isSearchable();
 
     /**
+     * Indicates if the field definition of this type can appear only once in the same ContentType.
+     *
+     * @return boolean
+     */
+    public function isSingular();
+
+    /**
+     * Indicates if the field definition of this type can be added to a ContentType with Content instances.
+     *
+     * @return boolean
+     */
+    public function onlyEmptyInstance();
+
+    /**
      * Returns the empty value for this field type.
      *
      * This value will be used, if no value was provided for a field of this
@@ -182,7 +206,7 @@ interface FieldType
      * also used to determine that a user intentionally (or unintentionally) did not
      * set a non-empty value.
      *
-     * @return mixed
+     * @return \eZ\Publish\SPI\FieldType\Value
      */
     public function getEmptyValue();
 
@@ -193,11 +217,11 @@ interface FieldType
      * considered empty. The given $value can be safely assumed to have already
      * been processed by {@link acceptValue()}.
      *
-     * @param mixed $value
+     * @param \eZ\Publish\SPI\FieldType\Value $value
      *
      * @return boolean
      */
-    public function isEmptyValue( $value );
+    public function isEmptyValue( Value $value );
 
     /**
      * Potentially builds and checks the type and structure of the $inputValue.
@@ -218,7 +242,7 @@ interface FieldType
      *
      * @param mixed $inputValue
      *
-     * @return \eZ\Publish\Core\FieldType\Value The potentially converted and structurally plausible value.
+     * @return \eZ\Publish\SPI\FieldType\Value The potentially converted and structurally plausible value.
      */
     public function acceptValue( $inputValue );
 
@@ -232,7 +256,7 @@ interface FieldType
      *
      * @param mixed $hash
      *
-     * @return mixed
+     * @return \eZ\Publish\SPI\FieldType\Value
      */
     public function fromHash( $hash );
 
@@ -244,11 +268,11 @@ interface FieldType
      * support complex structures like objects. See the class level doc block
      * for additional information. See the class description for more details on a hash format.
      *
-     * @param mixed $value
+     * @param \eZ\Publish\SPI\FieldType\Value $value
      *
      * @return mixed
      */
-    public function toHash( $value );
+    public function toHash( Value $value );
 
     /**
      * Converts the given $fieldSettings to a simple hash format
@@ -314,20 +338,20 @@ interface FieldType
      *
      * @see \eZ\Publish\SPI\Persistence\Content\FieldValue
      *
-     * @param mixed $value The value of the field type
+     * @param \eZ\Publish\SPI\FieldType\Value $value The value of the field type
      *
      * @return \eZ\Publish\SPI\Persistence\Content\FieldValue the value processed by the storage engine
      */
-    public function toPersistenceValue( $value );
+    public function toPersistenceValue( Value $value );
 
     /**
-     * Converts a persistence $fieldValue to a Value
+     * Converts a persistence $value to a Value
      *
      * This method builds a field type value from the $data and $externalData properties.
      *
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
      *
-     * @return mixed
+     * @return \eZ\Publish\SPI\FieldType\Value
      */
     public function fromPersistenceValue( FieldValue $fieldValue );
 
@@ -337,7 +361,7 @@ interface FieldType
      * Not intended for \eZ\Publish\API\Repository\Values\Content\Relation::COMMON type relations,
      * there is an API for handling those.
      *
-     * @param mixed $fieldValue
+     * @param \eZ\Publish\SPI\FieldType\Value $value
      *
      * @return array Hash with relation type as key and array of destination content ids as value.
      *
@@ -356,5 +380,5 @@ interface FieldType
      *  )
      * </code>
      */
-    public function getRelations( $fieldValue );
+    public function getRelations( Value $value );
 }

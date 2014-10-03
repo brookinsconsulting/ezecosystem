@@ -14,7 +14,7 @@ namespace Symfony\Component\HttpFoundation\Tests;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ResponseTest extends \PHPUnit_Framework_TestCase
+class ResponseTest extends ResponseTestCase
 {
     public function testCreate()
     {
@@ -284,6 +284,16 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = new Response();
         $response->headers->set('Vary', 'Accept-Language,User-Agent,    X-Foo');
         $this->assertEquals(array('Accept-Language', 'User-Agent', 'X-Foo'), $response->getVary(), '->getVary() parses multiple header name values separated by commas');
+
+        $vary = array('Accept-Language', 'User-Agent', 'X-foo');
+
+        $response = new Response();
+        $response->headers->set('Vary', $vary);
+        $this->assertEquals($vary, $response->getVary(), '->getVary() parses multiple header name values in arrays');
+
+        $response = new Response();
+        $response->headers->set('Vary', 'Accept-Language, User-Agent, X-foo');
+        $this->assertEquals($vary, $response->getVary(), '->getVary() parses multiple header name values in arrays');
     }
 
     public function testSetVary()
@@ -296,7 +306,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('Accept-Language', 'User-Agent'), $response->getVary(), '->setVary() replace the vary header by default');
 
         $response->setVary('X-Foo', false);
-        $this->assertEquals(array('Accept-Language', 'User-Agent'), $response->getVary(), '->setVary() doesn\'t change the Vary header if replace is set to false');
+        $this->assertEquals(array('Accept-Language', 'User-Agent', 'X-Foo'), $response->getVary(), '->setVary() doesn\'t wipe out earlier Vary headers if replace is set to false');
     }
 
     public function testDefaultContentType()
@@ -324,75 +334,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response->prepare(new Request());
 
         $this->assertEquals('text/css; charset=UTF-8', $response->headers->get('Content-Type'));
-    }
-
-    public function testNoCacheControlHeaderOnAttachmentUsingHTTPSAndMSIE()
-    {
-        // Check for HTTPS and IE 8
-        $request = new Request();
-        $request->server->set('HTTPS', true);
-        $request->server->set('HTTP_USER_AGENT', 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)');
-
-        $response = new Response();
-        $response->headers->set('Content-Disposition', 'attachment; filename="fname.ext"');
-        $response->prepare($request);
-
-        $this->assertFalse($response->headers->has('Cache-Control'));
-
-        // Check for IE 10 and HTTPS
-        $request->server->set('HTTP_USER_AGENT', 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)');
-
-        $response = new Response();
-        $response->headers->set('Content-Disposition', 'attachment; filename="fname.ext"');
-        $response->prepare($request);
-
-        $this->assertTrue($response->headers->has('Cache-Control'));
-
-        // Check for IE 9 and HTTPS
-        $request->server->set('HTTP_USER_AGENT', 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)');
-
-        $response = new Response();
-        $response->headers->set('Content-Disposition', 'attachment; filename="fname.ext"');
-        $response->prepare($request);
-
-        $this->assertTrue($response->headers->has('Cache-Control'));
-
-        // Check for IE 9 and HTTP
-        $request->server->set('HTTPS', false);
-
-        $response = new Response();
-        $response->headers->set('Content-Disposition', 'attachment; filename="fname.ext"');
-        $response->prepare($request);
-
-        $this->assertTrue($response->headers->has('Cache-Control'));
-
-        // Check for IE 8 and HTTP
-        $request->server->set('HTTP_USER_AGENT', 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)');
-
-        $response = new Response();
-        $response->headers->set('Content-Disposition', 'attachment; filename="fname.ext"');
-        $response->prepare($request);
-
-        $this->assertTrue($response->headers->has('Cache-Control'));
-
-        // Check for non-IE and HTTPS
-        $request->server->set('HTTPS', true);
-        $request->server->set('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.60 Safari/537.17');
-
-        $response = new Response();
-        $response->headers->set('Content-Disposition', 'attachment; filename="fname.ext"');
-        $response->prepare($request);
-
-        $this->assertTrue($response->headers->has('Cache-Control'));
-
-        // Check for non-IE and HTTP
-        $request->server->set('HTTPS', false);
-
-        $response = new Response();
-        $response->headers->set('Content-Disposition', 'attachment; filename="fname.ext"');
-        $response->prepare($request);
-
-        $this->assertTrue($response->headers->has('Cache-Control'));
     }
 
     public function testPrepareDoesNothingIfContentTypeIsSet()
@@ -433,6 +374,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response->prepare($request);
 
         $this->assertEquals('', $response->getContent());
+        $this->assertTrue($response->headers->has('Content-Type'));
+        $this->assertFalse($response->headers->has('Content-Length'));
     }
 
     public function testPrepareSetsPragmaOnHttp10Only()
@@ -637,7 +580,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testIsEmpty()
     {
-        foreach (array(201, 204, 304) as $code) {
+        foreach (array(204, 304) as $code) {
             $response = new Response('', $code);
             $this->assertTrue($response->isEmpty());
         }
@@ -703,7 +646,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException UnexpectedValueException
+     * @expectedException \UnexpectedValueException
      * @dataProvider invalidContentProvider
      */
     public function testSetContentInvalid($content)
@@ -721,7 +664,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             'setCharset' => 'UTF-8',
             'setPublic' => null,
             'setPrivate' => null,
-            'setDate' => new \DateTime,
+            'setDate' => new \DateTime(),
             'expire' => null,
             'setMaxAge' => 1,
             'setSharedMaxAge' => 1,
@@ -769,6 +712,11 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     protected function createDateTimeNow()
     {
         return new \DateTime();
+    }
+
+    protected function provideResponse()
+    {
+        return new Response();
     }
 }
 

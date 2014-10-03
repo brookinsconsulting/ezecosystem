@@ -2,15 +2,16 @@
 /**
  * SearchService class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\SignalSlot;
 
 use eZ\Publish\API\Repository\SearchService as SearchServiceInterface;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 
 /**
@@ -75,16 +76,16 @@ class SearchService implements SearchServiceInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if there is more than than one result matching the criterions
      *
      * @todo define structs for the field filters
-     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $criterion
+     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $filter
      * @param array $fieldFilters - a map of filters for the returned fields.
      *        Currently supported: <code>array("languages" => array(<language1>,..))</code>.
      * @param boolean $filterOnUserPermissions if true only the objects which is the user allowed to read are returned.
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content
      */
-    public function findSingle( Criterion $criterion, array $fieldFilters = array(), $filterOnUserPermissions = true )
+    public function findSingle( Criterion $filter, array $fieldFilters = array(), $filterOnUserPermissions = true )
     {
-        return $this->service->findSingle( $criterion, $fieldFilters, $filterOnUserPermissions );
+        return $this->service->findSingle( $filter, $fieldFilters, $filterOnUserPermissions );
     }
 
     /**
@@ -98,5 +99,20 @@ class SearchService implements SearchServiceInterface
     public function suggest( $prefix, $fieldPaths = array(), $limit = 10, Criterion $filter = null )
     {
         return $this->service->suggest( $prefix, $fieldPaths, $limit, $filter );
+    }
+
+    /**
+     * Finds Locations for the given query.
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if query is not valid
+     *
+     * @param \eZ\Publish\API\Repository\Values\Content\LocationQuery $query
+     * @param boolean $filterOnUserPermissions if true only the objects which is the user allowed to read are returned.
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Search\SearchResult
+     */
+    public function findLocations( LocationQuery $query, $filterOnUserPermissions = true )
+    {
+        return $this->service->findLocations( $query, $filterOnUserPermissions );
     }
 }

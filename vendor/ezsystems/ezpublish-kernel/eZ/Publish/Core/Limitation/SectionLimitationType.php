@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Limitation;
@@ -16,6 +16,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation as APISectionLimitation;
@@ -114,18 +115,32 @@ class SectionLimitationType extends AbstractPersistenceLimitationType implements
      * @param \eZ\Publish\API\Repository\Values\User\Limitation $value
      * @param \eZ\Publish\API\Repository\Values\User\User $currentUser
      * @param \eZ\Publish\API\Repository\Values\ValueObject $object
-     * @param \eZ\Publish\API\Repository\Values\ValueObject[] $targets An array of location, parent or "assignment" value objects
+     * @param \eZ\Publish\API\Repository\Values\ValueObject[]|null $targets The context of the $object, like Location of Content, if null none where provided by caller
      *
      * @return boolean
      */
-    public function evaluate( APILimitationValue $value, APIUser $currentUser, ValueObject $object, array $targets = array() )
+    public function evaluate( APILimitationValue $value, APIUser $currentUser, ValueObject $object, array $targets = null )
     {
         if ( !$value instanceof APISectionLimitation )
         {
             throw new InvalidArgumentException( '$value', 'Must be of type: APISectionLimitation' );
         }
 
-        if ( $object instanceof Content )
+        if ( empty( $value->limitationValues ) )
+        {
+            return false;
+        }
+
+        /**
+         * Two cases supported:
+         * 1. $object is Section, for possible future support on Section limitations, i.e. be able to limit section/edit
+         * 2. $object is Content[Info]/VersionInfo, for all existing content policies, to limit by Section
+         */
+        if ( $object instanceof Section )
+        {
+            return in_array( $object->id, $value->limitationValues );
+        }
+        else if ( $object instanceof Content )
         {
             $object = $object->getVersionInfo()->getContentInfo();
         }
@@ -135,18 +150,14 @@ class SectionLimitationType extends AbstractPersistenceLimitationType implements
         }
         else if ( !$object instanceof ContentInfo && !$object instanceof ContentCreateStruct )
         {
-            throw new InvalidArgumentException(
-                '$object',
-                'Must be of type: ContentCreateStruct, Content, VersionInfo or ContentInfo'
-            );
-        }
-
-        if ( empty( $value->limitationValues ) )
-        {
-            return false;
+            // As this is Role limitation we need to signal abstain on unsupported $object
+            return self::ACCESS_ABSTAIN;
         }
 
         /**
+         * We ignore Targets here, they are only interesting in NewState limitation as we on this one is more interested
+         * the section already assigned to object.
+         *
          * @var $object ContentInfo|ContentCreateStruct
          */
         return in_array( $object->sectionId, $value->limitationValues );

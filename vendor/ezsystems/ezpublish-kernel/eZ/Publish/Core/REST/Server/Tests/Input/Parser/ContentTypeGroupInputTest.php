@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
@@ -27,7 +27,7 @@ class ContentTypeGroupInputTest extends BaseTest
             'modificationDate' => '2012-12-31T12:00:00'
         );
 
-        $contentTypeGroupInput = $this->getContentTypeGroupInput();
+        $contentTypeGroupInput = $this->getParser();
         $result = $contentTypeGroupInput->parse( $inputArray, $this->getParsingDispatcherMock() );
 
         $this->assertInstanceOf(
@@ -69,7 +69,7 @@ class ContentTypeGroupInputTest extends BaseTest
             'modificationDate' => '2012-12-31T12:00:00'
         );
 
-        $contentTypeGroupInput = $this->getContentTypeGroupInput();
+        $contentTypeGroupInput = $this->getParser();
         $contentTypeGroupInput->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -78,10 +78,9 @@ class ContentTypeGroupInputTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\ContentTypeGroupInput
      */
-    protected function getContentTypeGroupInput()
+    protected function internalGetParser()
     {
         return new ContentTypeGroupInput(
-            $this->getUrlHandler(),
             $this->getContentTypeServiceMock(),
             $this->getParserTools()
         );
@@ -110,5 +109,12 @@ class ContentTypeGroupInputTest extends BaseTest
             );
 
         return $contentTypeServiceMock;
+    }
+
+    public function getParseHrefExpectationsMap()
+    {
+        return array(
+            array( '/user/users/14', 'userId', 14 )
+        );
     }
 }

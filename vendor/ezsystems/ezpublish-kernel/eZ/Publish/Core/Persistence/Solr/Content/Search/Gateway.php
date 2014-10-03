@@ -2,9 +2,9 @@
 /**
  * File containing the Content Search Gateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search;
@@ -33,11 +33,11 @@ abstract class Gateway
     /**
      * Indexes a content object
      *
-     * @param \eZ\Publish\SPI\Persistence\Content\Search\Field[] $document
+     * @param \eZ\Publish\SPI\Persistence\Content\Search\Field[][] $documents
      *
      * @return void
      */
-    abstract public function indexContent( array $document );
+    abstract public function bulkIndexContent( array $documents );
 
     /**
      * Deletes a content object from the index
@@ -50,10 +50,28 @@ abstract class Gateway
     abstract public function deleteContent( $contentId, $versionId = null );
 
     /**
+     * Deletes a location from the index
+     *
+     * @param mixed $locationId
+     *
+     * @return void
+     */
+    abstract public function deleteLocation( $locationId );
+
+    /**
      * Purges all contents from the index
      *
      * @return void
      */
     abstract public function purgeIndex();
+
+    /**
+     * Set if index/delete actions should commit or if several actions is to be expected
+     *
+     * This should be set to false before group of actions and true before the last one
+     *
+     * @param bool $commit
+     */
+    abstract public function setCommit( $commit );
 }
 

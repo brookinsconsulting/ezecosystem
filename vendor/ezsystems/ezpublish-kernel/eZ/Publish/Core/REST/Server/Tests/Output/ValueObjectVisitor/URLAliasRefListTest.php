@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -24,7 +24,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getURLAliasRefListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -38,6 +38,12 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
                 )
             ),
             '/some/path'
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadURLAlias',
+            array( 'urlAliasId' => $urlAliasRefList->urlAliases[0]->id ),
+            "/content/urlaliases/{$urlAliasRefList->urlAliases[0]->id}"
         );
 
         $visitor->visit(
@@ -101,10 +107,8 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\URLAliasRefList
      */
-    protected function getURLAliasRefListVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\URLAliasRefList(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\URLAliasRefList;
     }
 }

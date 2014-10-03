@@ -2,9 +2,9 @@
 /**
  * File containing the ObjectState controller class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Controller;
@@ -56,6 +56,7 @@ class ObjectState extends RestController
     /**
      * Creates a new object state group
      *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\CreatedObjectStateGroup
      */
     public function createObjectStateGroup()
@@ -65,8 +66,8 @@ class ObjectState extends RestController
             $createdStateGroup = $this->objectStateService->createObjectStateGroup(
                 $this->inputDispatcher->parse(
                     new Message(
-                        array( 'Content-Type' => $this->request->contentType ),
-                        $this->request->body
+                        array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                        $this->request->getContent()
                     )
                 )
             );
@@ -86,13 +87,14 @@ class ObjectState extends RestController
     /**
      * Creates a new object state
      *
+     * @param $objectStateGroupId
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\CreatedObjectState
      */
-    public function createObjectState()
+    public function createObjectState( $objectStateGroupId )
     {
-        $values = $this->urlHandler->parse( 'objectstates', $this->request->path );
-
-        $objectStateGroup = $this->objectStateService->loadObjectStateGroup( $values['objectstategroup'] );
+        $objectStateGroup = $this->objectStateService->loadObjectStateGroup( $objectStateGroupId );
 
         try
         {
@@ -100,8 +102,8 @@ class ObjectState extends RestController
                 $objectStateGroup,
                 $this->inputDispatcher->parse(
                     new Message(
-                        array( 'Content-Type' => $this->request->contentType ),
-                        $this->request->body
+                        array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                        $this->request->getContent()
                     )
                 )
             );
@@ -124,25 +126,28 @@ class ObjectState extends RestController
     /**
      * Loads an object state group
      *
+     * @param $objectStateGroupId
+     *
      * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup
      */
-    public function loadObjectStateGroup()
+    public function loadObjectStateGroup( $objectStateGroupId )
     {
-        $values = $this->urlHandler->parse( 'objectstategroup', $this->request->path );
-        return $this->objectStateService->loadObjectStateGroup( $values['objectstategroup'] );
+        return $this->objectStateService->loadObjectStateGroup( $objectStateGroupId );
     }
 
     /**
      * Loads an object state
      *
+     * @param $objectStateGroupId
+     * @param $objectStateId
+     *
      * @return \eZ\Publish\Core\REST\Common\Values\RestObjectState
      */
-    public function loadObjectState()
+    public function loadObjectState( $objectStateGroupId, $objectStateId )
     {
-        $values = $this->urlHandler->parse( 'objectstate', $this->request->path );
         return new RestObjectState(
-            $this->objectStateService->loadObjectState( $values['objectstate'] ),
-            $values['objectstategroup']
+            $this->objectStateService->loadObjectState( $objectStateId ),
+            $objectStateGroupId
         );
     }
 
@@ -161,13 +166,13 @@ class ObjectState extends RestController
     /**
      * Returns a list of all object states of the given group
      *
+     * @param $objectStateGroupId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\ObjectStateList
      */
-    public function loadObjectStates()
+    public function loadObjectStates( $objectStateGroupId )
     {
-        $values = $this->urlHandler->parse( 'objectstates', $this->request->path );
-
-        $objectStateGroup = $this->objectStateService->loadObjectStateGroup( $values['objectstategroup'] );
+        $objectStateGroup = $this->objectStateService->loadObjectStateGroup( $objectStateGroupId );
         return new Values\ObjectStateList(
             $this->objectStateService->loadObjectStates( $objectStateGroup ),
             $objectStateGroup->id
@@ -177,13 +182,14 @@ class ObjectState extends RestController
     /**
      * The given object state group including the object states is deleted
      *
+     * @param $objectStateGroupId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\NoContent
      */
-    public function deleteObjectStateGroup()
+    public function deleteObjectStateGroup( $objectStateGroupId )
     {
-        $values = $this->urlHandler->parse( 'objectstategroup', $this->request->path );
         $this->objectStateService->deleteObjectStateGroup(
-            $this->objectStateService->loadObjectStateGroup( $values['objectstategroup'] )
+            $this->objectStateService->loadObjectStateGroup( $objectStateGroupId )
         );
 
         return new Values\NoContent();
@@ -192,13 +198,14 @@ class ObjectState extends RestController
     /**
      * The given object state is deleted
      *
+     * @param $objectStateId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\NoContent
      */
-    public function deleteObjectState()
+    public function deleteObjectState( $objectStateId )
     {
-        $values = $this->urlHandler->parse( 'objectstate', $this->request->path );
         $this->objectStateService->deleteObjectState(
-            $this->objectStateService->loadObjectState( $values['objectstate'] )
+            $this->objectStateService->loadObjectState( $objectStateId )
         );
 
         return new Values\NoContent();
@@ -207,19 +214,21 @@ class ObjectState extends RestController
     /**
      * Updates an object state group
      *
+     * @param $objectStateGroupId
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup
      */
-    public function updateObjectStateGroup()
+    public function updateObjectStateGroup( $objectStateGroupId )
     {
-        $values = $this->urlHandler->parse( 'objectstategroup', $this->request->path );
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
-                array( 'Content-Type' => $this->request->contentType ),
-                $this->request->body
+                array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                $this->request->getContent()
             )
         );
 
-        $objectStateGroup = $this->objectStateService->loadObjectStateGroup( $values['objectstategroup'] );
+        $objectStateGroup = $this->objectStateService->loadObjectStateGroup( $objectStateGroupId );
 
         try
         {
@@ -235,24 +244,27 @@ class ObjectState extends RestController
     /**
      * Updates an object state
      *
+     * @param $objectStateGroupId
+     * @param $objectStateId
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Common\Values\RestObjectState
      */
-    public function updateObjectState()
+    public function updateObjectState( $objectStateGroupId, $objectStateId )
     {
-        $values = $this->urlHandler->parse( 'objectstate', $this->request->path );
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
-                array( 'Content-Type' => $this->request->contentType ),
-                $this->request->body
+                array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                $this->request->getContent()
             )
         );
 
-        $objectState = $this->objectStateService->loadObjectState( $values['objectstate'] );
+        $objectState = $this->objectStateService->loadObjectState( $objectStateId );
 
         try
         {
             $updatedObjectState = $this->objectStateService->updateObjectState( $objectState, $updateStruct );
-            return new RestObjectState( $updatedObjectState, $values['objectstategroup'] );
+            return new RestObjectState( $updatedObjectState, $objectStateGroupId );
         }
         catch ( InvalidArgumentException $e )
         {
@@ -263,13 +275,14 @@ class ObjectState extends RestController
     /**
      * Returns the object states of content
      *
+     * @param $contentId
+     *
      * @return \eZ\Publish\Core\REST\Common\Values\ContentObjectStates
      */
-    public function getObjectStatesForContent()
+    public function getObjectStatesForContent( $contentId )
     {
-        $values = $this->urlHandler->parse( 'objectObjectStates', $this->request->path );
         $groups = $this->objectStateService->loadObjectStateGroups();
-        $contentInfo = $this->contentService->loadContentInfo( $values['object'] );
+        $contentInfo = $this->contentService->loadContentInfo( $contentId );
 
         $contentObjectStates = array();
 
@@ -293,15 +306,17 @@ class ObjectState extends RestController
      * Updates object states of content
      * An object state in the input overrides the state of the object state group
      *
+     * @param $contentId
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Common\Values\ContentObjectStates
      */
-    public function setObjectStatesForContent()
+    public function setObjectStatesForContent( $contentId)
     {
-        $values = $this->urlHandler->parse( 'objectObjectStates', $this->request->path );
         $newObjectStates = $this->inputDispatcher->parse(
             new Message(
-                array( 'Content-Type' => $this->request->contentType ),
-                $this->request->body
+                array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                $this->request->getContent()
             )
         );
 
@@ -327,7 +342,7 @@ class ObjectState extends RestController
             }
         }
 
-        $contentInfo = $this->contentService->loadContentInfo( $values['object'] );
+        $contentInfo = $this->contentService->loadContentInfo( $contentId );
 
         $contentObjectStates = array();
         foreach ( $newObjectStates as $newObjectState )

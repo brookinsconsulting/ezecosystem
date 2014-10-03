@@ -2,9 +2,9 @@
 /**
  * File containing the Integer field type
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Integer;
@@ -13,6 +13,8 @@ use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\ValidationError;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
+use eZ\Publish\Core\FieldType\Value as BaseValue;
 
 /**
  * Integer field types
@@ -25,11 +27,11 @@ class Type extends FieldType
         'IntegerValueValidator' => array(
             'minIntegerValue' => array(
                 'type' => 'int',
-                'default' => 0
+                'default' => null
             ),
             'maxIntegerValue' => array(
                 'type' => 'int',
-                'default' => false
+                'default' => null
             )
         )
     );
@@ -45,7 +47,7 @@ class Type extends FieldType
     {
         $validationErrors = array();
 
-        foreach ( (array)$validatorConfiguration as $validatorIdentifier => $constraints )
+        foreach ( $validatorConfiguration as $validatorIdentifier => $constraints )
         {
             if ( $validatorIdentifier !== 'IntegerValueValidator' )
             {
@@ -97,21 +99,32 @@ class Type extends FieldType
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      *
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
-     * @param \eZ\Publish\Core\FieldType\Value $fieldValue The field value for which an action is performed
+     * @param \eZ\Publish\Core\FieldType\Integer\Value $fieldValue The field value for which an action is performed
      *
      * @return \eZ\Publish\SPI\FieldType\ValidationError[]
      */
-    public function validate( FieldDefinition $fieldDefinition, $fieldValue )
+    public function validate( FieldDefinition $fieldDefinition, SPIValue $fieldValue )
     {
+        $validationErrors = array();
+
+        if ( $this->isEmptyValue( $fieldValue ) )
+        {
+            return $validationErrors;
+        }
+
         $validatorConfiguration = $fieldDefinition->getValidatorConfiguration();
-        $constraints = isset($validatorConfiguration['IntegerValueValidator']) ?
+        $constraints = isset( $validatorConfiguration['IntegerValueValidator'] ) ?
             $validatorConfiguration['IntegerValueValidator'] :
             array();
 
         $validationErrors = array();
 
+        // 0 and False are unlimited value for maxIntegerValue
         if ( isset( $constraints['maxIntegerValue'] ) &&
-            $constraints['maxIntegerValue'] !== false && $fieldValue->value > $constraints['maxIntegerValue'] )
+            $constraints['maxIntegerValue'] !== 0 &&
+            $constraints['maxIntegerValue'] !== false &&
+            $fieldValue->value > $constraints['maxIntegerValue']
+        )
         {
             $validationErrors[] = new ValidationError(
                 "The value can not be higher than %size%.",
@@ -153,14 +166,12 @@ class Type extends FieldType
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
      *
-     * @param mixed $value
+     * @param \eZ\Publish\Core\FieldType\Integer\Value $value
      *
-     * @return mixed
+     * @return string
      */
-    public function getName( $value )
+    public function getName( SPIValue $value )
     {
-        $value = $this->acceptValue( $value );
-
         return (string)$value->value;
     }
 
@@ -182,56 +193,58 @@ class Type extends FieldType
      *
      * @return boolean
      */
-    public function isEmptyValue( $value )
+    public function isEmptyValue( SPIValue $value )
     {
-        return $value === null || $value->value === null;
+        return $value->value === null;
     }
 
     /**
-     * Implements the core of {@see acceptValue()}.
+     * Inspects given $inputValue and potentially converts it into a dedicated value object.
      *
-     * @param mixed $inputValue
+     * @param int|\eZ\Publish\Core\FieldType\Integer\Value $inputValue
      *
      * @return \eZ\Publish\Core\FieldType\Integer\Value The potentially converted and structurally plausible value.
      */
-    protected function internalAcceptValue( $inputValue )
+    protected function createValueFromInput( $inputValue )
     {
         if ( is_int( $inputValue ) )
         {
             $inputValue = new Value( $inputValue );
-        }
-        else if ( !$inputValue instanceof Value )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue',
-                'eZ\\Publish\\Core\\FieldType\\Integer\\Value',
-                $inputValue
-            );
-        }
-
-        if ( !is_integer( $inputValue->value ) )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue->value',
-                'integer',
-                $inputValue->value
-            );
         }
 
         return $inputValue;
     }
 
     /**
+     * Throws an exception if value structure is not of expected format.
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure.
+     *
+     * @param \eZ\Publish\Core\FieldType\Integer\Value $value
+     *
+     * @return void
+     */
+    protected function checkValueStructure( BaseValue $value )
+    {
+        if ( !is_int( $value->value ) )
+        {
+            throw new InvalidArgumentType(
+                '$value->value',
+                'integer',
+                $value->value
+            );
+        }
+    }
+
+    /**
      * Returns information for FieldValue->$sortKey relevant to the field type.
+     *
+     * @param \eZ\Publish\Core\FieldType\Integer\Value $value
      *
      * @return array
      */
-    protected function getSortInfo( $value )
+    protected function getSortInfo( BaseValue $value )
     {
-        if ( $value === null )
-        {
-            return null;
-        }
         return $value->value;
     }
 
@@ -246,7 +259,7 @@ class Type extends FieldType
     {
         if ( $hash === null )
         {
-            return null;
+            return $this->getEmptyValue();
         }
         return new Value( $hash );
     }
@@ -258,7 +271,7 @@ class Type extends FieldType
      *
      * @return mixed
      */
-    public function toHash( $value )
+    public function toHash( SPIValue $value )
     {
         if ( $this->isEmptyValue( $value ) )
         {

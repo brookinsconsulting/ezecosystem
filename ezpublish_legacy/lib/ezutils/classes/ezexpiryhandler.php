@@ -2,9 +2,9 @@
 /**
  * File containing the eZExpiryHandler class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -167,19 +167,11 @@ class eZExpiryHandler
     /**
      * Registers the shutdown function.
      * @see eZExpiryHandler::shutdown()
+     * @deprecated See EZP-22749
      */
     public static function registerShutdownFunction(){
-        if ( !eZExpiryHandler::$isShutdownFunctionRegistered ) {
-            register_shutdown_function( array('eZExpiryHandler', 'shutdown') );
-            eZExpiryHandler::$isShutdownFunctionRegistered = true;
-        }
+        eZDebug::writeStrict( __METHOD__ . " is deprecated. See EZP-22749.", __METHOD__ . " is deprecated" );
     }
-
-    /**
-     * Indicates if thre shutdown function has been registered
-     * @var bool
-     */
-    private static $isShutdownFunctionRegistered = false;
 
     /**
      * Holds the expiry timestamps array

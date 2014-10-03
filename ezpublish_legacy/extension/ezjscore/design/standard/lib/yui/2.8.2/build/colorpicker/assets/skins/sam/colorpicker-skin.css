@@ -11,13 +11,13 @@ version: 2.8.2r1
 }
 
 .yui-picker-panel .hd {
-        background-color:#ccc;
-        font-size:100%;
-        line-height:100%;
-        border:1px solid #e3e3e3;
-        font-weight:bold;
-        overflow:hidden;
-        padding: 6px;
+	background-color:#ccc;
+	font-size:100%;
+	line-height:100%;
+	border:1px solid #e3e3e3;
+	font-weight:bold;
+	overflow:hidden;
+	padding: 6px;
     color: #000;
 }
 

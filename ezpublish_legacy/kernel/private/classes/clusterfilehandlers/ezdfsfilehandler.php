@@ -2,9 +2,9 @@
 /**
  * File containing the eZDFSFileHandler class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -237,12 +237,13 @@ class eZDFSFileHandler implements eZClusterFileHandlerInterface, ezpDatabaseBase
         eZDebugSetting::writeDebug( 'kernel-clustering', "dfs::storeContents( '$filePath' )" );
 
         // the file is stored with the current time as mtime
-        self::$dbbackend->_storeContents( $filePath, $contents, $scope, $datatype );
-
-        if ( $storeLocally )
+        $result = self::$dbbackend->_storeContents( $filePath, $contents, $scope, $datatype );
+        if ( $result && $storeLocally )
         {
             eZFile::create( basename( $filePath ), dirname( $filePath ), $contents, true );
         }
+
+        return $result;
     }
 
     /**
@@ -712,7 +713,7 @@ class eZDFSFileHandler implements eZClusterFileHandlerInterface, ezpDatabaseBase
      *                    disable TTL.
      * @return bool
      */
-    public function isFileExpired( $fname, $mtime, $expiry, $curtime, $ttl )
+    public static function isFileExpired( $fname, $mtime, $expiry, $curtime, $ttl )
     {
         if ( $mtime == false or $mtime < 0 )
         {
@@ -860,22 +861,20 @@ class eZDFSFileHandler implements eZClusterFileHandlerInterface, ezpDatabaseBase
             return $result;
         }
 
-        // the .generating file is stored to DFS. $storeLocally is set to false
-        // since we don't want to store the .generating file locally, only
-        // the final file.
-        $this->storeContents( $binaryData, $scope, $datatype, $storeLocally = false );
+        // Distinguish bool from eZClusterFileFailure, and call abortCacheGeneration()
+        $storeContentsResult = $this->storeContents( $binaryData, $scope, $datatype, $storeLocally = false );
 
-        // we end the cache generation process, so that the .generating file
-        // is removed (we don't need to rename since contents was already stored
-        // above, using fileStoreContents
-        $this->endCacheGeneration();
-
-        if ( self::LOCAL_CACHE )
+        // Cache was stored, we end cache generation
+        if ( $storeContentsResult === true )
         {
-            eZDebugSetting::writeDebug( 'kernel-clustering',
-                "Creating local copy of the file", "dfs::storeCache( '{$this->filePath}' )" );
-            eZFile::create( basename( $this->filePath ), dirname( $this->filePath ), $binaryData, true );
+            $this->endCacheGeneration();
         }
+        // An unexpected error occured, we abort generation
+        else if ( $storeContentsResult instanceof eZMySQLBackendError )
+        {
+            $this->abortCacheGeneration();
+        }
+        // We don't do anything if false (not stored for known reasons) has been returned
 
         return $result;
     }
@@ -1441,6 +1440,11 @@ class eZDFSFileHandler implements eZClusterFileHandlerInterface, ezpDatabaseBase
     public function hasStaleCacheSupport()
     {
         return true;
+    }
+
+    public function applyServerUri( $filePath )
+    {
+        return self::$dbbackend->applyServerUri( $filePath );
     }
 
     /**

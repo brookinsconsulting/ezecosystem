@@ -173,6 +173,76 @@
         init : function(ed, url) {
             var t = this, s, v, o;
 
+            // eZ: form token aware version of tinymce.util.XHR
+            // it's almost the same as the default one, the only difference
+            // is that we set the X-Csrf-Token header when a POST request
+            // is done. See https://jira.ez.no/browse/EZP-21656
+            tinymce.util.XHR.send = function (o) {
+                var x, t, w = window, c = 0;
+
+                function ready() {
+                    if (!o.async || x.readyState == 4 || c++ > 10000) {
+                        if (o.success && c < 10000 && x.status == 200)
+                            o.success.call(o.success_scope, '' + x.responseText, x, o);
+                        else if (o.error)
+                            o.error.call(o.error_scope, c > 10000 ? 'TIMED_OUT' : 'GENERAL', x, o);
+
+                        x = null;
+                    } else
+                        w.setTimeout(ready, 10);
+                };
+
+                // Default settings
+                o.scope = o.scope || this;
+                o.success_scope = o.success_scope || o.scope;
+                o.error_scope = o.error_scope || o.scope;
+                o.async = o.async === false ? false : true;
+                o.data = o.data || '';
+
+                function get(s) {
+                    x = 0;
+
+                    try {
+                        x = new ActiveXObject(s);
+                    } catch (ex) {
+                    }
+
+                    return x;
+                };
+
+                x = w.XMLHttpRequest ? new XMLHttpRequest() : get('Microsoft.XMLHTTP') || get('Msxml2.XMLHTTP');
+
+                if (x) {
+                    if (x.overrideMimeType)
+                        x.overrideMimeType(o.content_type);
+
+                    // here is the change for the eZ Publish form token
+                    var method = o.type || (o.data ? 'POST' : 'GET');
+                    x.open(method, o.url, o.async);
+
+                    if (method.toLowerCase() === 'post') {
+                        x.setRequestHeader('X-Csrf-Token', ed.settings.ez_form_token);
+                    }
+                    // end form token change
+
+                    if (o.content_type)
+                        x.setRequestHeader('Content-Type', o.content_type);
+
+                    x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+                    x.send(o.data);
+
+                    // Syncronous request
+                    if (!o.async)
+                        return ready();
+
+                    // Wait for response, onReadyStateChange can not be used since it leaks memory in IE
+                    t = w.setTimeout(ready, 10);
+                }
+
+            };
+            // end tinymce.util.XHR
+
             t.editor = ed;
             t.url = url;
             t.onResolveName = new tinymce.util.Dispatcher(this);
@@ -269,9 +339,9 @@
                 ed.addShortcut('ctrl+9', '', ['FormatBlock', false, '<pre>']);
 
                 // eZ : underline is represented with a custom tag
-                // ie: <span class="ezoeItemCustomTag underline" type="custom">foo bar</span>
+                // ie: <u class="ezoeItemCustomTag underline" type="custom">foo bar</u>
                 ed.formatter.register({
-                    underline : {inline : 'span',
+                    underline : {inline : 'u',
                                  classes : 'ezoeItemCustomTag underline',
                                  attributes : {'type': 'custom'},
                                  exact: true,
@@ -306,6 +376,15 @@
                         textarea.fireEvent('onblur');
                     }
                 });
+            });
+
+            // eZ: make sure we are pasting as plain text inside literal tag
+            ed.onNodeChange.add(function (ed, cm, e) {
+                if ( e.tagName.toLowerCase() === 'pre' || e.parentNode.tagName.toLowerCase() === 'pre' ) {
+                    ed.pasteAsPlainText = true;
+                } else {
+                    ed.pasteAsPlainText = false;
+                }
             });
 
             // eZ: regularly update the textarea
@@ -368,6 +447,14 @@
                         jQuery(node).html('ezembed');
                     else if ( node && node.className.indexOf('ezoeItemTempSpan') !== -1 && node.innerHTML.indexOf('&nbsp;') === 0 )
                         node.firstChild.replaceData( 0, 1, ' ' );
+                });
+
+                // replaces ezoeAlign* class so that the PHP parser does not ignore
+                // an other class see https://jira.ez.no/browse/EZP-22487
+                $f.find('.ezoeAligncenter, .ezoeAlignjustify, .ezoeAlignleft, .ezoeAlignright').each(function (i, node) {
+                    var $node = jQuery(node);
+
+                    $node.removeClass('ezoeAlign' + $node.attr('align'));
                 });
 
                 o.content = $f.html();
@@ -2002,11 +2089,16 @@
             }
             else if ( k === 13 && !this.__recursion )// user clicks enter, create paragraph after embed block
             {
-                var n = this.__getParentByTag( ed.selection.getNode(), 'DIV', 'ezoeItemNonEditable', '', true );
+                var n = this.__getParentByTag( ed.selection.getNode(), 'DIV,SPAN', 'ezoeItemNonEditable', '', true );
                 if ( n !== undefined && n.parentNode )
                 {
-                    var newNode, pos;
+                    var newNode, pos, p;
                     this.__recursion = true;
+                    if ( n.nodeName === 'SPAN' && n.parentNode.nodeName !== 'LI' && ( p = this.__getParentByTag( n, 'P' ) ) )
+                    {
+                        n = p;
+                    }
+
                     if ( n.parentNode.nodeName.toLowerCase() === 'li' )
                     {
                         newNode = ed.dom.create('li', false, tinymce.isIE ? '&nbsp;' : '<br data-mce-bogus="1" _mce_bogus="1" />' );
@@ -2019,8 +2111,8 @@
                     }
                     newNode = ed.dom.insertAfter( newNode, pos );
                     setTimeout(BIND( function(){ this.__recursion = false; }, this ), 150);
-                    ed.nodeChanged();
                     ed.selection.select( newNode, true );
+                    ed.nodeChanged();
                 }
             }
             else if ( k === 32 && !this.__recursion )// user clicks space, create space after embed inline

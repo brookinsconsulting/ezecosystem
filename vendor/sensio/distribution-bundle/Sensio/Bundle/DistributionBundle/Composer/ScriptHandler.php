@@ -117,6 +117,8 @@ class ScriptHandler
 
         $webDir = $options['symfony-web-dir'];
 
+        // if the user has already removed the config.php file, do nothing
+        // as the file must be removed for production use
         if (is_file($webDir.'/config.php')) {
             copy(__DIR__.'/../Resources/skeleton/web/config.php', $webDir.'/config.php');
         }
@@ -130,6 +132,14 @@ class ScriptHandler
         }
 
         $classes = array(
+            'Symfony\\Component\\HttpFoundation\\ParameterBag',
+            'Symfony\\Component\\HttpFoundation\\HeaderBag',
+            'Symfony\\Component\\HttpFoundation\\FileBag',
+            'Symfony\\Component\\HttpFoundation\\ServerBag',
+            'Symfony\\Component\\HttpFoundation\\Request',
+            'Symfony\\Component\\HttpFoundation\\Response',
+            'Symfony\\Component\\HttpFoundation\\ResponseHeaderBag',
+
             'Symfony\\Component\\DependencyInjection\\ContainerAwareInterface',
             // Cannot be included because annotations will parse the big compiled class file
             //'Symfony\\Component\\DependencyInjection\\ContainerAware',

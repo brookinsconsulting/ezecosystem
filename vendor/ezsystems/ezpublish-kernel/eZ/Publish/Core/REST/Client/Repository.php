@@ -2,9 +2,9 @@
 /**
  * File containing the Repository class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client;
@@ -22,16 +22,6 @@ use eZ\Publish\Core\REST\Common;
  */
 class Repository implements APIRepository
 {
-    /**
-     * @var int
-     */
-    private $version;
-
-    /**
-     * @var \eZ\Publish\API\Repository\Values\User\User
-     */
-    private $currentUser;
-
     /**
      * @var \eZ\Publish\Core\REST\Client\SectionService
      */
@@ -112,9 +102,9 @@ class Repository implements APIRepository
     private $outputVisitor;
 
     /**
-     * @var \eZ\Publish\Core\REST\Common\UrlHandler
+     * @var \eZ\Publish\Core\REST\Common\RequestParser
      */
-    private $urlHandler;
+    private $requestParser;
 
     /**
      * @var \eZ\Publish\SPI\FieldType\FieldType[]
@@ -127,15 +117,15 @@ class Repository implements APIRepository
      * @param \eZ\Publish\Core\REST\Client\HttpClient $client
      * @param \eZ\Publish\Core\REST\Common\Input\Dispatcher $inputDispatcher
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
+     * @param \eZ\Publish\Core\REST\Common\RequestParser $requestParser
      * @param \eZ\Publish\SPI\FieldType\FieldType[] $fieldTypes
      */
-    public function __construct( HttpClient $client, Common\Input\Dispatcher $inputDispatcher, Common\Output\Visitor $outputVisitor, Common\UrlHandler $urlHandler, array $fieldTypes )
+    public function __construct( HttpClient $client, Common\Input\Dispatcher $inputDispatcher, Common\Output\Visitor $outputVisitor, Common\RequestParser $requestParser, array $fieldTypes )
     {
         $this->client          = $client;
         $this->inputDispatcher = $inputDispatcher;
         $this->outputVisitor   = $outputVisitor;
-        $this->urlHandler      = $urlHandler;
+        $this->requestParser   = $requestParser;
         $this->fieldTypes      = $fieldTypes;
     }
 
@@ -209,7 +199,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler,
+                $this->requestParser,
                 $this->getContentTypeService()
             );
         }
@@ -233,7 +223,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->languageService;
@@ -255,7 +245,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->contentTypeService;
@@ -276,7 +266,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->locationService;
@@ -299,7 +289,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->trashService;
@@ -320,7 +310,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->sectionService;
@@ -335,7 +325,7 @@ class Repository implements APIRepository
      */
     public function getSearchService()
     {
-        throw new \RuntimeException( '@todo: Implememt.' );
+        throw new \RuntimeException( '@todo: Implement.' );
     }
 
     /**
@@ -353,7 +343,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->userService;
@@ -374,7 +364,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->ioService;
@@ -394,7 +384,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->roleService;
@@ -413,7 +403,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->urlAliasService;
@@ -442,7 +432,7 @@ class Repository implements APIRepository
                 $this->client,
                 $this->inputDispatcher,
                 $this->outputVisitor,
-                $this->urlHandler
+                $this->requestParser
             );
         }
         return $this->objectStateService;
@@ -470,7 +460,7 @@ class Repository implements APIRepository
      */
     public function beginTransaction()
     {
-        ++$this->transactionDepth;
+        // @todo: Implement / discuss
     }
 
     /**
@@ -495,5 +485,16 @@ class Repository implements APIRepository
     public function rollback()
     {
         // @todo: Implement / discuss
+    }
+
+    /**
+     * Enqueue an event to be triggered at commit or directly if no transaction has started
+     *
+     * @deprecated In 5.3.3, to be removed. Signals are emitted after transaction instead of being required to use this.
+     * @param Callable $event
+     */
+    public function commitEvent( $event )
+    {
+        $event();
     }
 }

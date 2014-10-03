@@ -880,19 +880,6 @@ CREATE SEQUENCE ezsearch_object_word_link_s
 
 
 
-CREATE SEQUENCE ezsearch_return_count_s
-    START 1
-    INCREMENT 1
-    MAXVALUE 9223372036854775807
-    MINVALUE 1
-    CACHE 1;
-
-
-
-
-
-
-
 CREATE SEQUENCE ezsearch_search_phrase_s
     START 1
     INCREMENT 1
@@ -2018,7 +2005,9 @@ CREATE TABLE eznode_assignment (
     parent_remote_id character varying(100) DEFAULT ''::character varying NOT NULL,
     remote_id character varying(100) DEFAULT '0'::character varying NOT NULL,
     sort_field integer DEFAULT 1,
-    sort_order integer DEFAULT 1
+    sort_order integer DEFAULT 1,
+    priority integer DEFAULT 0 NOT NULL,
+    is_hidden integer DEFAULT 0 NOT NULL
 );
 
 
@@ -2530,19 +2519,6 @@ CREATE TABLE ezsearch_object_word_link (
     published integer DEFAULT 0 NOT NULL,
     section_id integer DEFAULT 0 NOT NULL,
     word_id integer DEFAULT 0 NOT NULL
-);
-
-
-
-
-
-
-
-CREATE TABLE ezsearch_return_count (
-    count integer DEFAULT 0 NOT NULL,
-    id integer DEFAULT nextval('ezsearch_return_count_s'::text) NOT NULL,
-    phrase_id integer DEFAULT 0 NOT NULL,
-    "time" integer DEFAULT 0 NOT NULL
 );
 
 
@@ -3196,6 +3172,14 @@ CREATE INDEX ezcontentobject_attribute_language_code ON ezcontentobject_attribut
 
 
 
+CREATE INDEX ezcontentobject_classattr_id ON ezcontentobject_attribute USING btree (contentclassattribute_id);
+
+
+
+
+
+
+
 CREATE INDEX sort_key_int ON ezcontentobject_attribute USING btree (sort_key_int);
 
 
@@ -3797,14 +3781,6 @@ CREATE INDEX ezsearch_object_word_link_object ON ezsearch_object_word_link USING
 
 
 CREATE INDEX ezsearch_object_word_link_word ON ezsearch_object_word_link USING btree (word_id);
-
-
-
-
-
-
-
-CREATE INDEX ezsearch_return_cnt_ph_id_cnt ON ezsearch_return_count USING btree (phrase_id, count);
 
 
 
@@ -4859,15 +4835,6 @@ ALTER TABLE ONLY ezscheduled_script
 
 ALTER TABLE ONLY ezsearch_object_word_link
     ADD CONSTRAINT ezsearch_object_word_link_pkey PRIMARY KEY (id);
-
-
-
-
-
-
-
-ALTER TABLE ONLY ezsearch_return_count
-    ADD CONSTRAINT ezsearch_return_count_pkey PRIMARY KEY (id);
 
 
 

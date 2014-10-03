@@ -2,16 +2,17 @@
 /**
  * File containing the ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\Output;
 
-use eZ\Publish\Core\REST\Common\UrlHandler;
+use eZ\Publish\Core\REST\Common\RequestParser;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Basic ValueObjectVisitor
@@ -21,19 +22,19 @@ abstract class ValueObjectVisitor
     /**
      * URL handler for URL generation
      *
-     * @var \eZ\Publish\Core\REST\Common\UrlHandler
+     * @var \eZ\Publish\Core\REST\Common\RequestParser
      */
-    protected $urlHandler;
+    protected $requestParser;
 
     /**
-     * Construct from used URL handler
-     *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
+     * @var \Symfony\Component\Routing\RouterInterface
      */
-    public function __construct( UrlHandler $urlHandler )
-    {
-        $this->urlHandler = $urlHandler;
-    }
+    protected $router;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    protected $templateRouter;
 
     /**
      * Visit struct returned by controllers
@@ -45,15 +46,34 @@ abstract class ValueObjectVisitor
     abstract public function visit( Visitor $visitor, Generator $generator, $data );
 
     /**
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     */
+    public function setRouter( RouterInterface $router )
+    {
+        $this->router = $router;
+    }
+
+    public function setTemplateRouter( RouterInterface $templateRouter )
+    {
+        $this->templateRouter = $templateRouter;
+    }
+
+    public function setRequestParser( RequestParser $requestParser )
+    {
+        $this->requestParser = $requestParser;
+    }
+
+    /**
      * Returns a string representation for the given $boolValue
      *
+     * @param \eZ\Publish\Core\REST\Common\Output\Generator $generator
      * @param boolean $boolValue
      *
-     * @return string
+     * @return mixed
      */
-    protected function serializeBool( $boolValue )
+    protected function serializeBool( Generator $generator, $boolValue )
     {
-        return ( $boolValue ? 'true' : 'false' );
+        return $generator->serializeBool( $boolValue );
     }
 
     /**

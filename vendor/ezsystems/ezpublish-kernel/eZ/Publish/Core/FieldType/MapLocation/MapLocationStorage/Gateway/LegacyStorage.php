@@ -2,9 +2,9 @@
 /**
  * File containing the MapLocationStorage Gateway
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\MapLocation\MapLocationStorage\Gateway;
@@ -29,7 +29,7 @@ class LegacyStorage extends Gateway
      *
      * @return void
      * @throws \RuntimeException if $dbHandler is not an instance of
-     *         {@link \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler}
+     *         {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler}
      */
     public function setConnection( $dbHandler )
     {
@@ -37,7 +37,7 @@ class LegacyStorage extends Gateway
         // the given class design there is no sane other option. Actually the
         // dbHandler *should* be passed to the constructor, and there should
         // not be the need to post-inject it.
-        if ( !$dbHandler instanceof \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler )
+        if ( !$dbHandler instanceof \eZ\Publish\Core\Persistence\Database\DatabaseHandler )
         {
             throw new \RuntimeException( "Invalid dbHandler passed" );
         }
@@ -50,7 +50,7 @@ class LegacyStorage extends Gateway
      *
      * @throws \RuntimeException if no connection has been set, yet.
      *
-     * @return \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler
+     * @return \eZ\Publish\Core\Persistence\Database\DatabaseHandler
      */
     protected function getConnection()
     {
@@ -225,7 +225,16 @@ class LegacyStorage extends Gateway
 
         $rows = $statement->fetchAll( \PDO::FETCH_ASSOC );
 
-        return ( isset( $rows[0] ) ? $rows[0] : null );
+        if ( !isset( $rows[0] ) )
+        {
+            return null;
+        }
+
+        // Cast coordinates as the DB can return them as strings
+        $rows[0]["latitude"] = (float)$rows[0]["latitude"];
+        $rows[0]["longitude"] = (float)$rows[0]["longitude"];
+
+        return $rows[0];
     }
 
     /**

@@ -2,9 +2,9 @@
 /**
  * File containing the Content Type Handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Persistence\Content\Type;
@@ -75,6 +75,8 @@ interface Handler
     /**
      * Loads a content type by id and status
      *
+     * Note: This method is responsible of having the Field Definitions of the loaded ContentType sorted by placement.
+     *
      * @param mixed $contentTypeId
      * @param int $status One of Type::STATUS_DEFINED|Type::STATUS_DRAFT|Type::STATUS_MODIFIED
      *
@@ -87,6 +89,8 @@ interface Handler
     /**
      * Loads a (defined) content type by identifier
      *
+     * Note: This method is responsible of having the Field Definitions of the loaded ContentType sorted by placement.
+     *
      * @param string $identifier
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If defined type is not found
@@ -97,6 +101,8 @@ interface Handler
 
     /**
      * Loads a (defined) content type by remote id
+     *
+     * Note: This method is responsible of having the Field Definitions of the loaded ContentType sorted by placement.
      *
      * @param mixed $remoteId
      *
@@ -147,7 +153,7 @@ interface Handler
      * Copy a Type incl fields and group-relations from a given status to a new Type with status {@link Type::STATUS_DRAFT}
      *
      * New Content Type will have $userId as creator / modifier, created / modified should be updated, new remoteId created
-     * and identifier should be appended with '_' + the new remoteId or another unique number.
+     * and identifier should be 'copy_of_<identifier>_' + the new remoteId or another unique number.
      *
      * @param mixed $userId
      * @param mixed $contentTypeId
@@ -195,6 +201,15 @@ interface Handler
      * @return \eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition
      */
     public function getFieldDefinition( $id, $status );
+
+    /**
+     * Counts the number of Content instances of the ContentType identified by given $contentTypeId.
+     *
+     * @param mixed $contentTypeId
+     *
+     * @return int
+     */
+    public function getContentCount( $contentTypeId );
 
     /**
      * Adds a new field definition to an existing Type.

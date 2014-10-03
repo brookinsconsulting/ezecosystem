@@ -158,8 +158,8 @@ $schema = array (
     array (
       'default_language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -184,8 +184,8 @@ $schema = array (
       ),
       'language_mask' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -241,8 +241,8 @@ $schema = array (
     array (
       'default_language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -260,8 +260,8 @@ $schema = array (
       ),
       'language_mask' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -314,8 +314,8 @@ $schema = array (
       ),
       'language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -328,8 +328,8 @@ $schema = array (
       ),
       'real_language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -367,8 +367,8 @@ $schema = array (
       ),
       'language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -1136,8 +1136,8 @@ $schema = array (
       ),
       'id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -1333,8 +1333,8 @@ $schema = array (
       ),
       'initial_language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -1347,8 +1347,8 @@ $schema = array (
       ),
       'language_mask' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -1699,8 +1699,8 @@ $schema = array (
       ),
       'language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -1815,15 +1815,15 @@ $schema = array (
       ),
       'initial_language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
       'language_mask' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -2003,8 +2003,8 @@ $schema = array (
       ),
       'language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -2057,6 +2057,14 @@ $schema = array (
         'fields' => 
         array (
           0 => 'language_code',
+        ),
+      ),
+      'ezcontentobject_classattr_id' =>
+      array (
+        'type' => 'non-unique',
+        'fields' => 
+        array (
+          0 => 'contentclassattribute_id',
         ),
       ),
       'sort_key_int' => 
@@ -2181,8 +2189,8 @@ $schema = array (
       ),
       'language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -2607,15 +2615,15 @@ $schema = array (
       ),
       'initial_language_id' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
       'language_mask' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),
@@ -3994,6 +4002,20 @@ $schema = array (
         'length' => 11,
         'type' => 'int',
         'default' => 1,
+      ),
+      'priority' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'not_null' => '1',
+        'default' => 0,
+      ),
+      'is_hidden' => 
+      array (
+        'length' => 11,
+        'type' => 'int',
+        'not_null' => '1',
+        'default' => 0,
       ),
     ),
     'indexes' => 
@@ -6287,59 +6309,6 @@ $schema = array (
       ),
     ),
   ),
-  'ezsearch_return_count' => 
-  array (
-    'name' => 'ezsearch_return_count',
-    'fields' => 
-    array (
-      'count' => 
-      array (
-        'length' => 11,
-        'type' => 'int',
-        'not_null' => '1',
-        'default' => 0,
-      ),
-      'id' => 
-      array (
-        'type' => 'auto_increment',
-        'default' => false,
-      ),
-      'phrase_id' => 
-      array (
-        'length' => 11,
-        'type' => 'int',
-        'not_null' => '1',
-        'default' => 0,
-      ),
-      'time' => 
-      array (
-        'length' => 11,
-        'type' => 'int',
-        'not_null' => '1',
-        'default' => 0,
-      ),
-    ),
-    'indexes' => 
-    array (
-      'PRIMARY' => 
-      array (
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      'ezsearch_return_cnt_ph_id_cnt' => 
-      array (
-        'type' => 'non-unique',
-        'fields' => 
-        array (
-          0 => 'phrase_id',
-          1 => 'count',
-        ),
-      ),
-    ),
-  ),
   'ezsearch_search_phrase' => 
   array (
     'name' => 'ezsearch_search_phrase',
@@ -7096,8 +7065,8 @@ $schema = array (
       ),
       'lang_mask' => 
       array (
-        'length' => 11,
-        'type' => 'int',
+        'length' => 20,
+        'type' => 'bigint',
         'not_null' => '1',
         'default' => 0,
       ),

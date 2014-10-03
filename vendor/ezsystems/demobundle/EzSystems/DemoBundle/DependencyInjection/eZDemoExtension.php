@@ -2,30 +2,28 @@
 /**
  * File containing the eZDemoExtension class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version //autogentag//
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace EzSystems\DemoBundle\DependencyInjection;
 
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\Yaml\Yaml;
 
 class eZDemoExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * Loads a specific configuration.
      *
-     * @param array            $config    An array of configuration values
-     * @param ContainerBuilder $container A ContainerBuilder instance
-     *
-     * @throws InvalidArgumentException When provided tag is not defined in this extension
-     *
-     * @api
+     * @param array $config    An array of configuration values
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function load( array $config, ContainerBuilder $container )
     {
@@ -36,33 +34,30 @@ class eZDemoExtension extends Extension implements PrependExtensionInterface
 
         // Base services override
         $loader->load( 'services.yml' );
+        // Default settings
+        $loader->load( 'default_settings.yml' );
     }
 
     /**
-     * Automatically imports the layouts and the blocks
+     * Loads DemoBundle configuration.
      *
      * @param ContainerBuilder $container
      */
     public function prepend( ContainerBuilder $container )
     {
-        $loader = new YamlFileLoader(
-            $container,
-            new FileLocator( __DIR__ . '/../Resources/config' )
-        );
-        $loader->load( 'ezpage.yml' );
+        $configFile = __DIR__ . '/../Resources/config/ezdemo.yml';
+        $config = Yaml::parse( file_get_contents( $configFile ) );
+        $container->prependExtensionConfig( 'ezpublish', $config );
+        $container->addResource( new FileResource( $configFile ) );
 
-        $container->prependExtensionConfig(
-            'ezpublish',
-            array(
-                'ezpage' => array(
-                    'layouts' => $container->getParameter( 'ezdemo.ezpage.layouts' ),
-                    'blocks' => $container->getParameter( 'ezdemo.ezpage.blocks' ),
-                    // by default, all layouts and blocks are enabled when
-                    // DemoBundle is enabled
-                    'enabledLayouts' => array_keys( $container->getParameter( 'ezdemo.ezpage.layouts' ) ),
-                    'enabledBlocks' => array_keys( $container->getParameter( 'ezdemo.ezpage.blocks' ) )
-                )
-            )
-        );
+        $ezpageConfigFile = __DIR__ . '/../Resources/config/ezpage.yml';
+        $ezpageConfig = Yaml::parse( file_get_contents( $ezpageConfigFile ) );
+        $container->prependExtensionConfig( 'ezpublish', $ezpageConfig );
+        $container->addResource( new FileResource( $ezpageConfigFile ) );
+
+        $ezCommentsConfigFile = __DIR__ . '/../Resources/config/ezcomments.yml';
+        $ezCommentsConfig = Yaml::parse( file_get_contents( $ezCommentsConfigFile ) );
+        $container->prependExtensionConfig( 'ez_comments', $ezCommentsConfig );
+        $container->addResource( new FileResource( $ezCommentsConfigFile ) );
     }
 }

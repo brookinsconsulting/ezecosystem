@@ -12,7 +12,7 @@
 namespace Symfony\Bridge\Doctrine\Tests\Form\Type;
 
 use Symfony\Component\Form\Tests\FormPerformanceTestCase;
-use Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIdentEntity;
+use Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdEntity;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bridge\Doctrine\Tests\DoctrineOrmTestCase;
 use Symfony\Component\Form\Extension\Core\CoreExtension;
@@ -23,7 +23,7 @@ use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
  */
 class EntityTypePerformanceTest extends FormPerformanceTestCase
 {
-    const ENTITY_CLASS = 'Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIdentEntity';
+    const ENTITY_CLASS = 'Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdEntity';
 
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -89,7 +89,7 @@ class EntityTypePerformanceTest extends FormPerformanceTestCase
 
         foreach ($ids as $id) {
             $name = 65 + chr($id % 57);
-            $this->em->persist(new SingleIdentEntity($id, $name));
+            $this->em->persist(new SingleIntIdEntity($id, $name));
         }
 
         $this->em->flush();
@@ -120,7 +120,7 @@ class EntityTypePerformanceTest extends FormPerformanceTestCase
      */
     public function testCollapsedEntityFieldWithChoices()
     {
-        $choices = $this->em->createQuery('SELECT c FROM ' . self::ENTITY_CLASS . ' c')->getResult();
+        $choices = $this->em->createQuery('SELECT c FROM '.self::ENTITY_CLASS.' c')->getResult();
         $this->setMaxRunningTime(1);
 
         for ($i = 0; $i < 40; ++$i) {
@@ -139,7 +139,7 @@ class EntityTypePerformanceTest extends FormPerformanceTestCase
      */
     public function testCollapsedEntityFieldWithPreferredChoices()
     {
-        $choices = $this->em->createQuery('SELECT c FROM ' . self::ENTITY_CLASS . ' c')->getResult();
+        $choices = $this->em->createQuery('SELECT c FROM '.self::ENTITY_CLASS.' c')->getResult();
         $this->setMaxRunningTime(1);
 
         for ($i = 0; $i < 40; ++$i) {

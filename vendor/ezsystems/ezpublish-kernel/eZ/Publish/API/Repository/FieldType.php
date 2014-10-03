@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\FieldType class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\API\Repository
  */
 
@@ -104,11 +104,40 @@ interface FieldType
     public function isSearchable();
 
     /**
+     * Indicates if the field definition of this type can appear only once in the same ContentType.
+     *
+     * @return boolean
+     */
+    public function isSingular();
+
+    /**
+     * Indicates if the field definition of this type can be added to a ContentType with Content instances.
+     *
+     * @return boolean
+     */
+    public function onlyEmptyInstance();
+
+    /**
      * Returns the empty value for this field type.
      *
      * @return mixed
      */
     public function getEmptyValue();
+
+    /**
+     * Returns if the given $value is considered empty by the field type
+     *
+     * Usually, only the value returned by {@link getEmptyValue()} is
+     * considered empty but that is not always the case.
+     *
+     * Note: This function assumes that $value is valid so this function can only
+     * be used reliably on $values that came from the API, not from the user.
+     *
+     * @param mixed $value
+     *
+     * @return boolean
+     */
+    public function isEmptyValue( $value );
 
     /**
      * Converts an $hash to the Value defined by the field type

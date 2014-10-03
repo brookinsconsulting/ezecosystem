@@ -2,9 +2,9 @@
 /**
  * File containing the LegacyEmbedScriptCommand class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\Command;
@@ -14,9 +14,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
-use ezcPhpGenerator;
-use ezcPhpGeneratorParameter;
 
 class LegacyEmbedScriptCommand extends ContainerAwareCommand
 {
@@ -62,6 +59,13 @@ EOT
         {
             $_SERVER['argv'][] = '--help';
             $GLOBALS['argv'][] = '--help';
+        }
+
+        $siteAccess = $input->getOption( 'siteaccess' );
+        if ( $siteAccess && !in_array( "--siteaccess=$siteAccess", $_SERVER['argv'] ) )
+        {
+            $_SERVER['argv'][] = "--siteaccess=$siteAccess";
+            $GLOBALS['argv'][] = "--siteaccess=$siteAccess";
         }
 
         $output->writeln( "<comment>Running script '$legacyScript' in eZ Publish legacy context</comment>" );

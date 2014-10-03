@@ -242,7 +242,7 @@ YAHOO.util.Color = function() {
             el = this._createHostElement(attr);
         }
 
-        ColorPicker.superclass.constructor.call(this, el, attr); 
+    	ColorPicker.superclass.constructor.call(this, el, attr); 
 
         this.initPicker();
     }

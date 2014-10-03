@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -24,7 +24,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getContentTypeGroupVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -49,6 +49,32 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
                 'mainLanguageCode' => 'eng-GB'
                 */
             )
+        );
+
+        $routerMock = $this->getRouterMock();
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentTypeGroup',
+            array( 'contentTypeGroupId' => $contentTypeGroup->id ),
+            "/content/typegroups/{$contentTypeGroup->id}"
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadUser',
+            array( 'userId' => $contentTypeGroup->creatorId ),
+            "/user/users/{$contentTypeGroup->creatorId}"
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadUser',
+            array( 'userId' => $contentTypeGroup->modifierId ),
+            "/user/users/{$contentTypeGroup->modifierId}"
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_listContentTypesForGroup',
+            array( 'contentTypeGroupId' => $contentTypeGroup->id ),
+            "/content/typegroups/{$contentTypeGroup->id}/types"
         );
 
         $visitor->visit(
@@ -200,7 +226,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     {
         $this->assertTag(
             array(
-                'tag'      => 'Creator'
+                'tag'  => 'Creator',
             ),
             $result,
             'Invalid <Creator> element.',
@@ -242,7 +268,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     {
         $this->assertTag(
             array(
-                'tag'      => 'Modifier'
+                'tag' => 'Modifier'
             ),
             $result,
             'Invalid <Modifier> element.',
@@ -284,7 +310,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     {
         $this->assertTag(
             array(
-                'tag'      => 'ContentTypes'
+                'tag' => 'ContentTypes'
             ),
             $result,
             'Invalid <ContentTypes> element.',
@@ -320,10 +346,8 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeGroup
      */
-    protected function getContentTypeGroupVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\ContentTypeGroup(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\ContentTypeGroup;
     }
 }

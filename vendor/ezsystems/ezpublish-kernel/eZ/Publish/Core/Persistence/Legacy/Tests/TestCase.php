@@ -2,20 +2,24 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\TestCase class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests;
 
-use eZ\Publish\Core\Persistence\Legacy\EzcDbHandler;
-use ezcQuerySelect;
+use eZ\Publish\Core\Persistence\Doctrine\ConnectionHandler;
+use eZ\Publish\Core\Persistence\Database\SelectQuery;
+use PHPUnit_Framework_TestCase;
+use InvalidArgumentException;
+use PDOException;
+use Exception;
 
 /**
  * Base test case for database related tests
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends PHPUnit_Framework_TestCase
 {
     /**
      * DSN used for the DB backend
@@ -34,7 +38,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Database handler -- to not be constructed twice for one test
      *
-     * @var \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler
+     * @var \eZ\Publish\Core\Persistence\Database\DatabaseHandler
      */
     protected $handler;
 
@@ -67,20 +71,21 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get a ezcDbHandler
+     * Get a Doctrine database connection handler
      *
-     * Get a ezcDbHandler, which can be used to interact with the configured
+     * Get a ConnectionHandler, which can be used to interact with the configured
      * database. The database connection string is read from an optional
      * environment variable "DATABASE" and defaults to an in-memory SQLite
      * database.
      *
-     * @return \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler
+     * @return \eZ\Publish\Core\Persistence\Doctrine\ConnectionHandler
      */
     public function getDatabaseHandler()
     {
         if ( !$this->handler )
         {
-            $this->handler = EzcDbHandler::create( $this->getDsn() );
+            $this->handler = ConnectionHandler::createFromDSN( $this->getDsn() );
+            $this->db = $this->handler->getName();
         }
 
         return $this->handler;
@@ -94,16 +99,11 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if ( !class_exists( 'ezcBase' ) )
-        {
-            $this->markTestSkipped( 'Missing Apache Zeta Components.' );
-        }
-
         try
         {
             $handler = $this->getDatabaseHandler();
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
             $this->markTestSkipped(
                 'PDO session could not be created: ' . $e->getMessage()
@@ -202,7 +202,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
                     $stmt->execute();
                 }
-                catch ( \Exception $e )
+                catch ( Exception $e )
                 {
                     echo "$table ( ", implode( ', ', $row ), " )\n";
                     throw $e;
@@ -238,7 +238,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      * Assert query result as correct
      *
      * Builds text representations of the asserted and fetched query result,
-     * based on a ezcQuerySelect object. Compares them using classic diff for
+     * based on a eZ\Publish\Core\Persistence\Database\SelectQuery object. Compares them using classic diff for
      * maximum readability of the differences between expectations and real
      * results.
      *
@@ -246,12 +246,12 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      * rows of columns.
      *
      * @param array $expectation
-     * @param \ezcQuerySelect $query
+     * @param \eZ\Publish\Core\Persistence\Database\SelectQuery $query
      * @param string $message
      *
      * @return void
      */
-    public static function assertQueryResult( array $expectation, ezcQuerySelect $query, $message = null )
+    public static function assertQueryResult( array $expectation, SelectQuery $query, $message = null )
     {
         $statement = $query->prepare();
         $statement->execute();
@@ -284,7 +284,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     {
         if ( !is_object( $object ) )
         {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Expected object as second parameter, received ' . gettype( $object )
             );
         }
@@ -354,7 +354,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         if ( $installDir === null )
         {
             $config = require 'config.php';
-            $installDir = $config['service']['parameters']['install_dir'];
+            $installDir = $config['install_dir'];
         }
         return $installDir;
     }

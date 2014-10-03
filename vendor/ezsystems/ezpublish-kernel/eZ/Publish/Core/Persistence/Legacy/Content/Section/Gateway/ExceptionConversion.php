@@ -2,14 +2,17 @@
 /**
  * File containing the Section Gateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Section\Gateway;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\Section\Gateway;
+use Doctrine\DBAL\DBALException;
+use PDOException;
+use RuntimeException;
 
 /**
  * Section Handler
@@ -47,13 +50,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->insertSection( $name, $identifier );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -72,13 +75,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->updateSection( $id, $name, $identifier );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -95,13 +98,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadSectionData( $id );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -116,13 +119,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadAllSectionData();
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -139,13 +142,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadSectionDataByIdentifier( $identifier );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -162,13 +165,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->countContentObjectsInSection( $id );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -185,13 +188,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteSection( $id );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -209,13 +212,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->assignSectionToContent( $sectionId, $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 }

@@ -2,9 +2,9 @@
 /**
  * File containing the eZSiteInstaller class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -1035,6 +1035,20 @@ class eZSiteInstaller
         if( !$selectedNode->canSwap() )
         {
             $this->reportError( "Cannot use node $selectedNodeID as the exchanging node for $nodeID, the current user does not have edit permission for it",
+                                'eZSiteInstaller::swapNodes' );
+            return false;
+        }
+
+        // verify one of the nodes contains children and the other is not a container.
+        if ( !$node->classIsContainer() && $selectedNode->childrenCount() > 0 )
+        {
+            $this->reportError( "Cannot use node $selectedNodeID as the exchanging node for $nodeID, as it contains sub items (node is not container)",
+                                'eZSiteInstaller::swapNodes' );
+            return false;
+        }
+        if ( !$selectedNode->classIsContainer() && $node->childrenCount() > 0 )
+        {
+            $this->reportError( "Cannot use node $selectedNodeID as the exchanging node for $nodeID, as it is not container (node contains sub items)",
                                 'eZSiteInstaller::swapNodes' );
             return false;
         }

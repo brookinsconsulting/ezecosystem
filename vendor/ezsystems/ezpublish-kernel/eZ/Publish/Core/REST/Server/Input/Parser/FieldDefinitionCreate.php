@@ -2,24 +2,25 @@
 /**
  * File containing the FieldDefinitionCreate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\FieldTypeParser;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\Core\REST\Common\Exceptions;
+use Exception;
 
 /**
  * Parser for FieldDefinitionCreate
  */
-class FieldDefinitionCreate extends Base
+class FieldDefinitionCreate extends BaseParser
 {
     /**
      * ContentType service
@@ -45,14 +46,12 @@ class FieldDefinitionCreate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\REST\Common\Input\FieldTypeParser $fieldTypeParser
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
+    public function __construct( ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
         $this->parserTools = $parserTools;
@@ -64,6 +63,7 @@ class FieldDefinitionCreate extends Base
      * @param array $data
      * @param \eZ\Publish\Core\REST\Common\Input\ParsingDispatcher $parsingDispatcher
      *
+     * @throws \eZ\Publish\Core\REST\Common\Exceptions\Parser If an error is found while parsing
      * @return \eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCreateStruct
      */
     public function parse( array $data, ParsingDispatcher $parsingDispatcher )
@@ -144,10 +144,17 @@ class FieldDefinitionCreate extends Base
         // @todo XSD says that defaultValue is mandatory, but content type can be created without it
         if ( array_key_exists( 'defaultValue', $data ) )
         {
-            $fieldDefinitionCreate->defaultValue = $this->fieldTypeParser->parseValue(
-                $data['fieldType'],
-                $data['defaultValue']
-            );
+            try
+            {
+                $fieldDefinitionCreate->defaultValue = $this->fieldTypeParser->parseValue(
+                    $data['fieldType'],
+                    $data['defaultValue']
+                );
+            }
+            catch ( Exception $e )
+            {
+                throw new Exceptions\Parser( "Invalid 'defaultValue' element for FieldDefinitionCreate.", 0, $e );
+            }
         }
 
         if ( array_key_exists( 'validatorConfiguration', $data ) )

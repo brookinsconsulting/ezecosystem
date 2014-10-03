@@ -57,7 +57,7 @@ class Route implements \Serializable
     private $options = array();
 
     /**
-     * @var null|RouteCompiler
+     * @var null|CompiledRoute
      */
     private $compiled;
 
@@ -171,7 +171,7 @@ class Route implements \Serializable
     {
         // A pattern must start with a slash and must not have multiple slashes at the beginning because the
         // generated path for this route would be confused with a network path, e.g. '//domain.com/path'.
-        $this->path = '/' . ltrim(trim($pattern), '/');
+        $this->path = '/'.ltrim(trim($pattern), '/');
         $this->compiled = null;
 
         return $this;
@@ -358,11 +358,11 @@ class Route implements \Serializable
     }
 
     /**
-     * Checks if a an option has been set
+     * Checks if an option has been set
      *
      * @param string $name An option name
      *
-     * @return Boolean true if the option is set, false otherwise
+     * @return bool    true if the option is set, false otherwise
      */
     public function hasOption($name)
     {
@@ -431,7 +431,7 @@ class Route implements \Serializable
      *
      * @param string $name A variable name
      *
-     * @return Boolean true if the default value is set, false otherwise
+     * @return bool    true if the default value is set, false otherwise
      */
     public function hasDefault($name)
     {
@@ -518,7 +518,7 @@ class Route implements \Serializable
      *
      * @param string $key A variable name
      *
-     * @return Boolean true if a requirement is specified, false otherwise
+     * @return bool    true if a requirement is specified, false otherwise
      */
     public function hasRequirement($key)
     {

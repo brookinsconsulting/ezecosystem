@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\Content\VersionInfo class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Values\Content;
@@ -29,7 +29,7 @@ abstract class VersionInfo extends ValueObject
 {
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
-    const STATUS_ARCHIVED = 2;
+    const STATUS_ARCHIVED = 3;
 
     /**
      * Version ID.
@@ -81,6 +81,8 @@ abstract class VersionInfo extends ValueObject
 
     /**
      * Creator user ID.
+     *
+     * Creator of the version, in the search API this is referred to as the modifier of the published content.
      *
      * @var mixed
      */

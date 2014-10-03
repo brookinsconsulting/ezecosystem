@@ -2,27 +2,35 @@
 /**
  * File containing the Configuration class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ParserInterface;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Suggestion\Collector\SuggestionCollectorInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-class Configuration implements ConfigurationInterface
+class Configuration extends SiteAccessConfiguration
 {
     /**
-     * @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser[]
+     * @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ParserInterface
      */
-    private $configParsers;
+    private $mainConfigParser;
 
-    public function __construct( array $configParsers )
+    /**
+     * @var Configuration\Suggestion\Collector\SuggestionCollectorInterface
+     */
+    private $suggestionCollector;
+
+    public function __construct( ParserInterface $mainConfigParser, SuggestionCollectorInterface $suggestionCollector )
     {
-        $this->configParsers = $configParsers;
+        $this->suggestionCollector = $suggestionCollector;
+        $this->mainConfigParser = $mainConfigParser;
     }
 
     /**
@@ -35,13 +43,60 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root( 'ezpublish' );
 
+        $this->addRepositoriesSection( $rootNode );
         $this->addSiteaccessSection( $rootNode );
         $this->addImageMagickSection( $rootNode );
         $this->addHttpCacheSection( $rootNode );
-        $this->addSystemSection( $rootNode );
         $this->addPageSection( $rootNode );
+        $this->addRouterSection( $rootNode );
+
+        // Delegate SiteAccess config to configuration parsers
+        $this->mainConfigParser->addSemanticConfig( $this->generateScopeBaseNode( $rootNode ) );
 
         return $treeBuilder;
+    }
+
+    public function addRepositoriesSection( ArrayNodeDefinition $rootNode )
+    {
+        $rootNode
+            ->children()
+                ->arrayNode( 'repositories' )
+                    ->info( 'Content repositories configuration' )
+                    ->example(
+                        array(
+                            'main' => array(
+                                'engine' => 'legacy',
+                                'connection' => 'my_doctrine_connection_name'
+                            )
+                        )
+                    )
+                    ->useAttributeAsKey( 'alias' )
+                    ->prototype( 'array' )
+                        ->beforeNormalization()
+                            // If set to null, use default values.
+                            // %ezpublish.api.storage_engine.default% as engine, and default connection (if applicable).
+                            ->ifNull()
+                            ->then(
+                                function ()
+                                {
+                                    return array( 'engine' => '%ezpublish.api.storage_engine.default%', 'connection' => null );
+                                }
+                            )
+                        ->end()
+                        ->children()
+                            ->scalarNode( 'engine' )->isRequired()->info( 'The storage engine to use' )->end()
+                            ->scalarNode( 'connection' )
+                                ->info( 'The connection name, if applicable (e.g. Doctrine connection name). If not set, the default connection will be used.' )
+                            ->end()
+                            ->arrayNode( 'config' )
+                                ->info( 'Arbitrary configuration options, supported by your storage engine' )
+                                ->useAttributeAsKey( 'key' )
+                                ->prototype( 'variable' )->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 
     public function addSiteaccessSection( ArrayNodeDefinition $rootNode )
@@ -93,19 +148,32 @@ class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey( 'key' )
                             ->normalizeKeys( false )
                             ->prototype( 'array' )
+                                ->useAttributeAsKey( 'key' )
                                 ->beforeNormalization()
-                                    // Value passed to the matcher should always be an array.
-                                    // If value is not an array, we transform it to a hash, with 'value' as key.
-                                    ->ifTrue(
+                                    ->always(
                                         function ( $v )
                                         {
-                                            return !is_array( $v );
-                                        }
-                                    )
-                                    ->then(
-                                        function ( $v )
-                                        {
-                                            return array( 'value' => $v );
+                                            // Value passed to the matcher should always be an array.
+                                            // If value is not an array, we transform it to a hash, with 'value' as key.
+                                            if ( !is_array( $v ) )
+                                            {
+                                                return array( 'value' => $v );
+                                            }
+
+                                            // If passed value is a numerically indexed array, we must convert it into a hash.
+                                            // See https://jira.ez.no/browse/EZP-21876
+                                            if ( array_keys( $v ) === range( 0, count( $v ) - 1 ) )
+                                            {
+                                                $final = array();
+                                                foreach ( $v as $i => $val )
+                                                {
+                                                    $final["i$i"] = $val;
+                                                }
+
+                                                return $final;
+                                            }
+
+                                            return $v;
                                         }
                                     )
                                 ->end()
@@ -123,46 +191,6 @@ class Configuration implements ConfigurationInterface
                     ->prototype( 'scalar' )->end()
                 ->end()
             ->end();
-    }
-
-    private function addSystemSection( ArrayNodeDefinition $rootNode )
-    {
-        $systemNodeBuilder = $rootNode
-            ->children()
-                ->arrayNode( 'system' )
-                    ->info( 'System configuration. First key is always a siteaccess or siteaccess group name' )
-                    ->example(
-                        array(
-                            'ezdemo_site'      => array(
-                                'languages'        => array( 'eng-GB', 'fre-FR' ),
-                                'content'          => array(
-                                    'view_cache'   => true,
-                                    'ttl_cache'    => true,
-                                    'default_ttl'  => 30
-                                )
-                            ),
-                            'ezdemo_group'     => array(
-                                'database' => array(
-                                    'type'             => 'mysql',
-                                    'server'           => 'localhost',
-                                    'port'             => 3306,
-                                    'user'             => 'root',
-                                    'password'         => 'root',
-                                    'database_name'    => 'ezdemo'
-                                )
-                            )
-                        )
-                    )
-                    ->useAttributeAsKey( 'key' )
-                    ->requiresAtLeastOneElement()
-                    ->prototype( 'array' )
-                        ->children();
-
-        // Delegate to configuration parsers
-        foreach ( $this->configParsers as $parser )
-        {
-            $parser->addSemanticConfig( $systemNodeBuilder );
-        }
     }
 
     private function addImageMagickSection( ArrayNodeDefinition $rootNode )
@@ -292,5 +320,36 @@ EOT;
                 ->end()
             ->end();
 
+    }
+
+    private function addRouterSection( ArrayNodeDefinition $rootNode )
+    {
+        $nonSAAwareInfo = <<<EOT
+Route names that are not supposed to be SiteAccess aware, i.e. Routes pointing to asset generation (like assetic).
+Note that you can just specify a prefix to match a selection of routes.
+e.g. "_assetic_" will match "_assetic_*"
+Defaults to ['_assetic_', '_wdt', '_profiler', '_configurator_']
+EOT;
+        $rootNode
+            ->children()
+                ->arrayNode( 'router' )
+                    ->children()
+                        ->arrayNode( 'default_router' )
+                            ->children()
+                                ->arrayNode( 'non_siteaccess_aware_routes' )
+                                    ->prototype( 'scalar' )->end()
+                                    ->info( $nonSAAwareInfo )
+                                    ->example( array( 'my_route_name', 'some_prefix_' ) )
+                                ->end()
+                                ->arrayNode( 'legacy_aware_routes' )
+                                    ->prototype( 'scalar' )->end()
+                                    ->info( 'Routes that are allowed when legacy_mode is true. Must be routes identifiers (e.g. "my_route_name"). Can be a prefix, so that all routes beginning with given prefix will be taken into account.' )
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                    ->info( 'Router related settings' )
+                ->end()
+            ->end();
     }
 }

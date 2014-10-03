@@ -2,23 +2,27 @@
 /**
  * File containing the PersistenceCachePurger class.
  *
- * @copyright Copyright (C) 2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\Cache;
 
-use Tedivm\StashBundle\Service\CacheService;
+use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 use eZ\Publish\SPI\Persistence\Content\Location\Handler as LocationHandlerInterface;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
+use eZ\Publish\Core\Persistence\Cache\CacheServiceDecorator;
 use Psr\Log\LoggerInterface;
 
-class PersistenceCachePurger
+/**
+ * Class PersistenceCachePurger
+ */
+class PersistenceCachePurger implements CacheClearerInterface
 {
     /**
-     * @var \Tedivm\StashBundle\Service\CacheService
+     * @var \eZ\Publish\Core\Persistence\Cache\CacheServiceDecorator
      */
     protected $cache;
 
@@ -39,20 +43,21 @@ class PersistenceCachePurger
      *
      * @var bool
      */
-    protected $isEnabled = true;
+    protected $enabled = true;
 
     /**
-     * @var Psr\Log\LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
      * Setups current handler with everything needed
      *
-     * @param \Tedivm\StashBundle\Service\CacheService $cache
+     * @param \eZ\Publish\Core\Persistence\Cache\CacheServiceDecorator $cache
      * @param \eZ\Publish\SPI\Persistence\Content\Location\Handler $locationHandler
+     * @param \Psr\Log\LoggerInterface $logger
      */
-    public function __construct( CacheService $cache, LocationHandlerInterface $locationHandler, LoggerInterface $logger )
+    public function __construct( CacheServiceDecorator $cache, LocationHandlerInterface $locationHandler, LoggerInterface $logger )
     {
         $this->cache = $cache;
         $this->locationHandler = $locationHandler;
@@ -66,7 +71,7 @@ class PersistenceCachePurger
      */
     public function all()
     {
-        if ( $this->isEnabled === false )
+        if ( $this->enabled === false )
             return;
 
         $this->cache->clear();
@@ -102,9 +107,9 @@ class PersistenceCachePurger
      *
      * @param bool $isEnabled
      */
-    public function setIsEnabled( $isEnabled )
+    public function setEnabled( $isEnabled )
     {
-        $this->isEnabled = (bool)$isEnabled;
+        $this->enabled = (bool)$isEnabled;
     }
 
     /**
@@ -114,7 +119,7 @@ class PersistenceCachePurger
      */
     public function isEnabled()
     {
-        return $this->isEnabled;
+        return $this->enabled;
     }
 
     /**
@@ -130,7 +135,7 @@ class PersistenceCachePurger
      */
     public function content( $locationIds = null )
     {
-        if ( $this->allCleared === true || $this->isEnabled === false )
+        if ( $this->allCleared === true || $this->enabled === false )
             return;
 
         if ( $locationIds === null )
@@ -153,6 +158,9 @@ class PersistenceCachePurger
                 $location = $this->locationHandler->load( $id );
                 $this->cache->clear( 'content', $location->contentId );
                 $this->cache->clear( 'content', 'info', $location->contentId );
+                $this->cache->clear( 'content', 'locations', $location->contentId );
+                $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', $location->contentId );
+                $this->cache->clear( 'user', 'role', 'assignments', 'byGroup', 'inherited', $location->contentId );
             }
             catch ( NotFoundException $e )
             {
@@ -178,7 +186,7 @@ class PersistenceCachePurger
      */
     public function contentType( $id = null )
     {
-        if ( $this->allCleared === true || $this->isEnabled === false )
+        if ( $this->allCleared === true || $this->enabled === false )
             return;
 
         if ( $id === null )
@@ -205,7 +213,7 @@ class PersistenceCachePurger
      */
     public function contentTypeGroup( $id = null )
     {
-        if ( $this->allCleared === true || $this->isEnabled === false )
+        if ( $this->allCleared === true || $this->enabled === false )
             return;
 
         if ( $id === null )
@@ -233,7 +241,7 @@ class PersistenceCachePurger
      */
     public function section( $id = null )
     {
-        if ( $this->allCleared === true || $this->isEnabled === false )
+        if ( $this->allCleared === true || $this->enabled === false )
             return;
 
         if ( $id === null )
@@ -257,7 +265,7 @@ class PersistenceCachePurger
      */
     public function languages( $ids )
     {
-        if ( $this->allCleared === true || $this->isEnabled === false )
+        if ( $this->allCleared === true || $this->enabled === false )
             return;
 
         $ids = (array)$ids;
@@ -273,7 +281,7 @@ class PersistenceCachePurger
      */
     public function user( $id = null )
     {
-        if ( $this->allCleared === true || $this->isEnabled === false )
+        if ( $this->allCleared === true || $this->enabled === false )
             return;
 
         if ( $id === null )
@@ -288,5 +296,15 @@ class PersistenceCachePurger
         {
             throw new InvalidArgumentType( "\$id", "int|null", $id );
         }
+    }
+
+    /**
+     * Clears any caches necessary.
+     *
+     * @param string $cacheDir The cache directory.
+     */
+    public function clear( $cacheDir )
+    {
+        $this->all();
     }
 }

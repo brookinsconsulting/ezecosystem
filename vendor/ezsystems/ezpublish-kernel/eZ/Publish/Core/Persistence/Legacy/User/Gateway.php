@@ -2,9 +2,9 @@
 /**
  * File containing the User Gateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\User;
@@ -42,14 +42,22 @@ abstract class Gateway
     abstract public function load( $userId );
 
     /**
-     * Loads user with user ID.
+     * Loads user with user login.
      *
      * @param string $login
-     * @param string|null $email
      *
      * @return array
      */
-     abstract public function loadByLoginOrMail( $login, $email = null );
+     abstract public function loadByLogin( $login );
+
+    /**
+     * Loads user with user email.
+     *
+     * @param string $email
+     *
+     * @return array
+     */
+     abstract public function loadByEmail( $email );
 
     /**
      * Update the user information specified by the user struct
@@ -68,7 +76,7 @@ abstract class Gateway
     abstract public function assignRole( $contentId, $roleId, array $limitation );
 
     /**
-     * Remove role from user
+     * Remove role from user or user group
      *
      * @param mixed $contentId
      * @param mixed $roleId

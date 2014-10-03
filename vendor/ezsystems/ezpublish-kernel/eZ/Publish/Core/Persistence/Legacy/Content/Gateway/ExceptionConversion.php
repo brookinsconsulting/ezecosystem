@@ -2,9 +2,9 @@
 /**
  * File containing the Content Gateway base class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Gateway;
@@ -18,6 +18,9 @@ use eZ\Publish\SPI\Persistence\Content\MetadataUpdateStruct;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\Relation\CreateStruct as RelationCreateStruct;
+use Doctrine\DBAL\DBALException;
+use PDOException;
+use RuntimeException;
 
 /**
  * Base class for content gateways
@@ -52,13 +55,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->getContext();
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -76,13 +79,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->insertContentObject( $struct, $currentVersionNo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -100,13 +103,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->insertVersion( $versionInfo, $fields );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -115,22 +118,23 @@ class ExceptionConversion extends Gateway
      *
      * @param int $contentId
      * @param \eZ\Publish\SPI\Persistence\Content\MetadataUpdateStruct $struct
+     * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $prePublishVersionInfo Provided on publish
      *
      * @return void
      */
-    public function updateContent( $contentId, MetadataUpdateStruct $struct )
+    public function updateContent( $contentId, MetadataUpdateStruct $struct, VersionInfo $prePublishVersionInfo = null )
     {
         try
         {
-            return $this->innerGateway->updateContent( $contentId, $struct );
+            return $this->innerGateway->updateContent( $contentId, $struct, $prePublishVersionInfo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -149,13 +153,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->updateVersion( $contentId, $versionNo, $struct );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -171,13 +175,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->updateAlwaysAvailableFlag( $contentId, $newAlwaysAvailable );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -198,13 +202,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->setStatus( $contentId, $version, $status );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -227,13 +231,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->insertNewField( $content, $field, $value );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -254,15 +258,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->insertExistingField( $content, $field, $value );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw $e;
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw $e;
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -280,13 +282,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->updateField( $field, $value );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -308,13 +310,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->updateNonTranslatableField( $field, $value, $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -329,13 +331,38 @@ class ExceptionConversion extends Gateway
      *
      * @return array
      */
-    public function load( $contentId, $version, $translations = null )
+    public function load( $contentId, $version, array $translations = null )
     {
         try
         {
             return $this->innerGateway->load( $contentId, $version, $translations );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
+        {
+            throw new RuntimeException( 'Database error', 0, $e );
+        }
+        catch ( PDOException $e )
+        {
+            throw new RuntimeException( 'Database error', 0, $e );
+        }
+    }
+
+    /**
+     * Loads data for a content object identified by its remote ID
+     *
+     * Returns an array with the relevant data.
+     *
+     * @param mixed $remoteId
+     *
+     * @return array
+     */
+    public function loadContentInfoByRemoteId( $remoteId )
+    {
+        try
+        {
+            return $this->innerGateway->loadContentInfoByRemoteId( $remoteId );
+        }
+        catch ( DBALException $e )
         {
             throw new \RuntimeException( 'Database error', 0, $e );
         }
@@ -363,13 +390,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadContentInfo( $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -391,13 +418,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadVersionInfo( $contentId, $versionNo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -415,13 +442,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->listVersionsForUser( $userId, $status );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -438,13 +465,36 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->listVersions( $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
+        }
+    }
+
+    /**
+     * Returns all version numbers for the given $contentId
+     *
+     * @param mixed $contentId
+     *
+     * @return int[]
+     */
+    public function listVersionNumbers( $contentId )
+    {
+        try
+        {
+            return $this->innerGateway->listVersionNumbers( $contentId );
+        }
+        catch ( DBALException $e )
+        {
+            throw new RuntimeException( 'Database error', 0, $e );
+        }
+        catch ( PDOException $e )
+        {
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -461,13 +511,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->getLastVersionNumber( $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -484,13 +534,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->getAllLocationIds( $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -509,13 +559,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->getFieldIdsByType( $contentId, $versionNo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -534,13 +584,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteRelations( $contentId, $versionNo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -548,23 +598,22 @@ class ExceptionConversion extends Gateway
      * Deletes the field with the given $fieldId
      *
      * @param int $fieldId
-     * @param int $version
      *
      * @return void
      */
-    public function deleteField( $fieldId, $version )
+    public function deleteField( $fieldId )
     {
         try
         {
-            return $this->innerGateway->deleteField( $fieldId, $version );
+            return $this->innerGateway->deleteField( $fieldId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -583,13 +632,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteFields( $contentId, $versionNo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -608,13 +657,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteVersions( $contentId, $versionNo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -633,13 +682,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteNames( $contentId, $versionNo );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -659,13 +708,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->setName( $contentId, $version, $name, $language );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -682,13 +731,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteContent( $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -706,13 +755,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadLatestPublishedData( $contentId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -731,13 +780,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadRelations( $contentId, $contentVersionNo, $relationType );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -757,13 +806,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadReverseRelations( $contentId, $relationType );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -784,13 +833,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteRelation( $relationId, $type );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -807,13 +856,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->insertRelation( $struct );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 }

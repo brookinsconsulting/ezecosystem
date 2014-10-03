@@ -2,14 +2,13 @@
 /**
  * File containing the view Manager class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\View;
 
-use eZ\Publish\Core\MVC\Symfony\View\ViewManagerInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\FieldType\Page\Parts\Block;
@@ -19,6 +18,7 @@ use eZ\Publish\Core\MVC\Symfony\View\Provider\Block as BlockViewProvider;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\API\Repository\Repository;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -90,11 +90,24 @@ class Manager implements ViewManagerInterface
      */
     protected $viewBaseLayout;
 
-    public function __construct( EngineInterface $templateEngine, EventDispatcherInterface $eventDispatcher, Repository $repository, $viewBaseLayout, LoggerInterface $logger = null )
+    /**
+     * @var ConfigResolverInterface
+     */
+    protected $configResolver;
+
+    public function __construct(
+        EngineInterface $templateEngine,
+        EventDispatcherInterface $eventDispatcher,
+        Repository $repository,
+        ConfigResolverInterface $configResolver,
+        $viewBaseLayout,
+        LoggerInterface $logger = null
+    )
     {
         $this->templateEngine = $templateEngine;
         $this->eventDispatcher = $eventDispatcher;
         $this->repository = $repository;
+        $this->configResolver = $configResolver;
         $this->viewBaseLayout = $viewBaseLayout;
         $this->logger = $logger;
     }
@@ -248,15 +261,21 @@ class Manager implements ViewManagerInterface
      */
     public function renderLocation( Location $location, $viewType = ViewManagerInterface::VIEW_TYPE_FULL, $parameters = array() )
     {
-        $content = $this->repository->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
         foreach ( $this->getAllLocationViewProviders() as $viewProvider )
         {
             $view = $viewProvider->getView( $location, $viewType );
             if ( $view instanceof ContentViewInterface )
             {
                 $parameters['location'] = $location;
-                $parameters['content'] = $content;
-                return $this->renderContentView( $view, $parameters );
+                return $this->renderContentView(
+                    $view,
+                    $parameters + array(
+                        'content' => $this->repository->getContentService()->loadContentByContentInfo(
+                            $location->getContentInfo(),
+                            $this->configResolver->getParameter( 'languages' )
+                        )
+                    )
+                );
             }
         }
 

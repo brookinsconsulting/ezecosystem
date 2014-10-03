@@ -2,9 +2,9 @@
 /**
  * Repository class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\SignalSlot;
@@ -12,6 +12,7 @@ namespace eZ\Publish\Core\SignalSlot;
 use eZ\Publish\API\Repository\Repository as RepositoryInterface;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\API\Repository\Values\User\User;
+use eZ\Publish\SPI\Persistence\TransactionHandler;
 
 /**
  * Repository class
@@ -116,13 +117,6 @@ class Repository implements RepositoryInterface
      * @var \eZ\Publish\API\Repository\FieldTypeService
      */
     protected $fieldTypeService;
-
-    /**
-     * Instance of name schema resolver service
-     *
-     * @var \eZ\Publish\Core\Repository\NameSchemaService
-     */
-    protected $nameSchemaService;
 
     /**
      * Instance of URL alias service
@@ -396,19 +390,6 @@ class Repository implements RepositoryInterface
     }
 
     /**
-     * Get IO Service
-     *
-     * Get service object to perform operations on binary files
-     *
-     * @return \eZ\Publish\API\Repository\IOService
-     */
-    public function getIOService()
-    {
-        // @todo FIXME: IOService is to be deprecated
-        return $this->repository->getIOService();
-    }
-
-    /**
      * Get RoleService
      *
      * @return \eZ\Publish\API\Repository\RoleService
@@ -451,20 +432,6 @@ class Repository implements RepositoryInterface
     }
 
     /**
-     * Get NameSchemaResolverService
-     *
-     * @access private Internal service for the Core Services
-     *
-     * @todo Move out from this & other repo instances when services becomes proper services in DIC terms using factory.
-     *
-     * @return \eZ\Publish\Core\Repository\NameSchemaService
-     */
-    public function getNameSchemaService()
-    {
-        return $this->repository->getNameSchemaService();
-    }
-
-    /**
      * Begin transaction
      *
      * Begins an transaction, make sure you'll call commit or rollback when done,
@@ -472,7 +439,14 @@ class Repository implements RepositoryInterface
      */
     public function beginTransaction()
     {
-        return $this->repository->beginTransaction();
+        $return = $this->repository->beginTransaction();
+
+        if ( $this->signalDispatcher instanceof TransactionHandler )
+        {
+            $this->signalDispatcher->beginTransaction();
+        }
+
+        return $return;
     }
 
     /**
@@ -484,7 +458,14 @@ class Repository implements RepositoryInterface
      */
     public function commit()
     {
-        return $this->repository->commit();
+        $return = $this->repository->commit();
+
+        if ( $this->signalDispatcher instanceof TransactionHandler )
+        {
+            $this->signalDispatcher->commit();
+        }
+
+        return $return;
     }
 
     /**
@@ -496,7 +477,23 @@ class Repository implements RepositoryInterface
      */
     public function rollback()
     {
+        if ( $this->signalDispatcher instanceof TransactionHandler )
+        {
+            $this->signalDispatcher->rollback();
+        }
+
         return $this->repository->rollback();
+    }
+
+    /**
+     * Enqueue an event to be triggered at commit or directly if no transaction has started
+     *
+     * @deprecated In 5.3.3, to be removed. Signals are emitted after transaction instead of being required to use this.
+     * @param Callable $event
+     */
+    public function commitEvent( $event )
+    {
+        return $this->repository->commitEvent( $event );
     }
 
     /**

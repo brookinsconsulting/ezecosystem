@@ -1,12 +1,10 @@
 <?php
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
-
-eZExpiryHandler::registerShutdownFunction();
 
 if ( !defined( 'MAX_AGE' ) )
 {
@@ -171,6 +169,8 @@ else
     $response['children_count'] = count( $children );
     $response['children'] = array();
 
+    $httpCharset = eZTextCodec::httpCharset();
+
     foreach ( $children as $child )
     {
         $childObject = $child->object();
@@ -180,7 +180,7 @@ else
         $object = $child->object();
         $childResponse['class_id'] = (int)$object->ClassID;
         $childResponse['has_children'] = $child->subTreeCount( $conditions ) > 0;
-        $childResponse['name'] = $child->getName();
+        $childResponse['name'] = htmlentities( $child->getName(), ENT_COMPAT, $httpCharset );
         $childResponse['url'] = $child->url();
         // force system url on empty urls (root node)
         if ( $childResponse['url'] === '' )
@@ -203,8 +203,6 @@ else
         unset( $object );
         eZContentObject::clearCache();
     }
-
-    $httpCharset = eZTextCodec::httpCharset();
 
     $jsonText= json_encode( $response );
 
@@ -229,8 +227,8 @@ else
         header( 'Cache-Control: cache, max-age=' . MAX_AGE . ', post-check=' . MAX_AGE . ', pre-check=' . MAX_AGE );
         header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $node->ModifiedSubNode ) . ' GMT' );
         header( 'Pragma: cache' );
-        header( 'Content-Type: application/json' );
-        header( 'Content-Length: '.strlen( $jsonText ) );
+        header( 'Content-Type: application/json; charset=' . $httpCharset );
+        header( 'Content-Length: '. mb_strlen( $jsonText ) );
     }
 
     $Result['lastModified'] = new DateTime( "@$node->ModifiedSubNode" );

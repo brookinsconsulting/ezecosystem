@@ -2,9 +2,9 @@
 /**
  * File containing the eZNodeviewfunctions class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -147,6 +147,15 @@ class eZNodeviewfunctions
         $tpl->setVariable( 'node', $node );
         $tpl->setVariable( 'viewmode', $viewMode );
         $tpl->setVariable( 'language_code', $languageCode );
+        if ( isset( $viewParameters['_custom'] ) )
+        {
+            foreach ( $viewParameters['_custom'] as $customVarName => $customValue )
+            {
+                $tpl->setVariable( $customVarName, $customValue );
+            }
+
+            unset( $viewParameters['_custom'] );
+        }
         $tpl->setVariable( 'view_parameters', $viewParameters );
         $tpl->setVariable( 'collection_attributes', $collectionAttributes );
         $tpl->setVariable( 'validation', $validation );
@@ -175,6 +184,9 @@ class eZNodeviewfunctions
                               'url_alias' => false );
 
         $tpl->setVariable( 'node_path', $path );
+
+        $event = ezpEvent::getInstance();
+        $event->notify( 'content/pre_rendering', array( $node, $tpl, $viewMode ) );
 
         $Result = array();
         $Result['content']         = $tpl->fetch( 'design:node/view/' . $viewMode . '.tpl' );
@@ -339,7 +351,7 @@ class eZNodeviewfunctions
             ksort( $viewParameters );
             foreach ( $viewParameters as $key => $value )
             {
-                if ( !$key )
+                if ( !$key || $key === '_custom' )
                     continue;
                 $vpString .= 'vp:' . $key . '=' . $value;
             }
@@ -466,6 +478,17 @@ class eZNodeviewfunctions
             {
                 if ( !isset( $Result['content_info'] ) )
                 {
+                    // set error type & number for kernel errors (see https://jira.ez.no/browse/EZP-23046)
+                    if ( isset( $Result['errorType'] ) && isset( $Result['errorNumber'] ) )
+                    {
+                        $res = eZTemplateDesignResource::instance();
+                        $res->setKeys(
+                            array(
+                                array( 'error_type', $Result['errorType'] ),
+                                array( 'error_number', $Result['errorNumber'] )
+                            )
+                        );
+                    }
                     return $Result;
                 }
                 $keyArray = array( array( 'object', $Result['content_info']['object_id'] ),
@@ -597,13 +620,15 @@ class eZNodeviewfunctions
      */
     static protected function contentViewGenerateError( eZModule $Module, $error, $store = true, array $errorParameters = array() )
     {
+        $content = $Module->handleError(
+            $error,
+            'kernel',
+            $errorParameters
+        );
+
         return array(
-            'content' =>
-                $content = $Module->handleError(
-                    $error,
-                    'kernel',
-                    $errorParameters
-                ),
+            'content' => $content,
+            'scope' => 'viewcache',
             'store' => $store,
             'binarydata' => serialize( $content ),
         );

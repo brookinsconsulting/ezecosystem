@@ -36,7 +36,7 @@
 {* Address. *}
 <div class="block">
     <label>{'Address'|i18n( 'design/admin/url/view' )}:</label>
-    <a href="{$full_url}">{$full_url}</a>
+    <a href="{$full_url|wash}">{$full_url|wash}</a>
 </div>
 
 {* Address. *}
@@ -148,7 +148,7 @@
 </tr>
 {section var=Objects loop=$object_list sequence=array( bglight, bgdark )}
 
-{let object_version_status=$Objects.item.contentobject.versions[sub($Objects.item.version,1)].status}
+{let object_version_status = $Objects.item.status}
 
 {if or(or(eq($view_filter_type,''),eq($view_filter_type,'all')),and(eq($view_filter_type,'published'),eq($object_version_status,1),eq($Objects.item.contentobject.status,1)))}
 <tr class="{$Objects.sequence}">

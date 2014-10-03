@@ -2,14 +2,15 @@
 /**
  * File containing the LanguageServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Exception;
 
 /**
  * Test case for operations in the LanguageService using in memory storage.
@@ -544,7 +545,7 @@ class LanguageServiceTest extends BaseTest
             // Create new language
             $languageService->createLanguage( $languageCreate );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -600,7 +601,7 @@ class LanguageServiceTest extends BaseTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -640,7 +641,7 @@ class LanguageServiceTest extends BaseTest
             // Update the language name
             $languageService->updateLanguageName( $language, 'My English' );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -686,7 +687,7 @@ class LanguageServiceTest extends BaseTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();

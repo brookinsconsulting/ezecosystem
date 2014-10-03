@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\User\User class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Values\User;
@@ -17,7 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
  * @property-read string $login
  * @property-read string $email
  * @property-read string $passwordHash
- * @property-read string $hashAlgorithm Hash algorithm used to has the password
+ * @property-read string $hashAlgorithm Hash algorithm used to hash the password
  * @property-read boolean $enabled User can not login if false
  * @property-read int $maxLogin Max number of time user is allowed to login
  */

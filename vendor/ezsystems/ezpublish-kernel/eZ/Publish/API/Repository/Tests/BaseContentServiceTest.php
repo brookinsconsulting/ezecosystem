@@ -2,9 +2,9 @@
 /**
  * File containing the BaseContentServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
@@ -21,11 +21,58 @@ abstract class BaseContentServiceTest extends BaseTest
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content
      */
-    protected function createContentDraftVersion1()
+    protected function createContentVersion1EmptyBinaryField()
     {
         $repository = $this->getRepository();
 
         $parentLocationId = $this->generateId( 'location', 56 );
+        $sectionId = $this->generateId( 'section', 1 );
+        /* BEGIN: Inline */
+        // $parentLocationId is the id of the /Design/eZ-publish node
+
+        $contentService = $repository->getContentService();
+        $contentTypeService = $repository->getContentTypeService();
+        $locationService = $repository->getLocationService();
+
+        // Configure new location
+        $locationCreate = $locationService->newLocationCreateStruct( $parentLocationId );
+
+        $locationCreate->priority = 23;
+        $locationCreate->hidden = true;
+        $locationCreate->remoteId = '0123456789abcdef0123456789abcdefgh';
+        $locationCreate->sortField = Location::SORT_FIELD_NODE_ID;
+        $locationCreate->sortOrder = Location::SORT_ORDER_DESC;
+
+        // Load content type
+        $contentType = $contentTypeService->loadContentTypeByIdentifier( 'video' );
+
+        // Configure new content object
+        $contentCreate = $contentService->newContentCreateStruct( $contentType, 'eng-US' );
+
+        $contentCreate->setField( 'name', 'An empty file' );
+        $contentCreate->remoteId = 'abcdef0123456789abcdef0123456789gh';
+        // $sectionId is the ID of section 1
+        $contentCreate->sectionId = $sectionId;
+        $contentCreate->alwaysAvailable = true;
+
+        // Create a draft
+        $draft = $contentService->createContent( $contentCreate, array( $locationCreate ) );
+
+        $content = $contentService->publishVersion( $draft->getVersionInfo() );
+        /* END: Inline */
+
+        return $content;
+    }
+    /**
+     * Creates a fresh clean content draft.
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Content
+     */
+    protected function createContentDraftVersion1( $locationId = 56, $contentTypeIdentifier = 'forum', $contentFieldNameIdentifier = 'name' )
+    {
+        $repository = $this->getRepository();
+
+        $parentLocationId = $this->generateId( 'location', $locationId );
         $sectionId = $this->generateId( 'section', 1 );
         /* BEGIN: Inline */
         // $parentLocationId is the id of the /Design/eZ-publish node
@@ -44,12 +91,12 @@ abstract class BaseContentServiceTest extends BaseTest
         $locationCreate->sortOrder = Location::SORT_ORDER_DESC;
 
         // Load content type
-        $contentType = $contentTypeService->loadContentTypeByIdentifier( 'forum' );
+        $contentType = $contentTypeService->loadContentTypeByIdentifier( $contentTypeIdentifier );
 
         // Configure new content object
         $contentCreate = $contentService->newContentCreateStruct( $contentType, 'eng-US' );
 
-        $contentCreate->setField( 'name', 'An awesome forum' );
+        $contentCreate->setField( $contentFieldNameIdentifier, "An awesome {$contentTypeIdentifier}" );
         $contentCreate->remoteId = 'abcdef0123456789abcdef0123456789';
         // $sectionId is the ID of section 1
         $contentCreate->sectionId = $sectionId;

@@ -2,9 +2,9 @@
 /**
  * File containing the ContentViewInterface interface.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\View;
@@ -73,4 +73,22 @@ interface ContentViewInterface
      * @return mixed
      */
     public function getParameter( $parameterName );
+
+    /**
+     * Injects the config hash that was used to match and generate the current view.
+     * Typically, the hash would have as keys:
+     *  - template : The template that has been matched
+     *  - match : The matching configuration, including the matcher "identifier" and what has been passed to it.
+     *  - matcher : The matcher object
+     *
+     * @param array $config
+     */
+    public function setConfigHash( array $config );
+
+    /**
+     * Returns the config hash.
+     *
+     * @return array|null
+     */
+    public function getConfigHash();
 }

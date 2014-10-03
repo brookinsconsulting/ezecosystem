@@ -2,12 +2,14 @@
 /**
  * File containing the Type Update Handler base class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Type\Update;
+
+use eZ\Publish\SPI\Persistence\Content\Type;
 
 /**
  * Base class for update handlers
@@ -22,7 +24,7 @@ abstract class Handler
      *
      * @return void
      */
-    abstract public function updateContentObjects( $fromType, $toType );
+    abstract public function updateContentObjects( Type $fromType, Type $toType );
 
     /**
      * Deletes $fromType and all of its field definitions
@@ -31,7 +33,7 @@ abstract class Handler
      *
      * @return void
      */
-    abstract public function deleteOldType( $fromType );
+    abstract public function deleteOldType( Type $fromType );
 
     /**
      * Publishes $toType to $newStatus
@@ -41,5 +43,5 @@ abstract class Handler
      *
      * @return void
      */
-    abstract public function publishNewType( $toType, $newStatus );
+    abstract public function publishNewType( Type $toType, $newStatus );
 }

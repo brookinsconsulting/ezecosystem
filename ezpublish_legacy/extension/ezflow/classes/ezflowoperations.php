@@ -2,23 +2,25 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 // SOFTWARE NAME: eZ Flow
-// SOFTWARE RELEASE: 5.0.0
-// COPYRIGHT NOTICE: Copyright (C) 1999-2012 eZ Systems AS
+// SOFTWARE RELEASE: 2.2.0
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
-//  This program is free software; you can redistribute it and/or
-//  modify it under the terms of version 2.0  of the GNU General
-//  Public License as published by the Free Software Foundation.
+//   This program is free software; you can redistribute it and/or
+//   modify it under the terms of version 2.0  of the GNU General
+//   Public License as published by the Free Software Foundation.
 //
-//  This program is distributed in the hope that it will be useful,
+//   This program is distributed in the hope that it will be useful,
 //   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
 //
-//  You should have received a copy of version 2.0 of the GNU General
-//  Public License along with this program; if not, write to the Free
-//  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-//  MA 02110-1301, USA.
+//   You should have received a copy of version 2.0 of the GNU General
+//   Public License along with this program; if not, write to the Free
+//   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+//   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -107,13 +109,22 @@ class eZFlowOperations
             );
         }
 
-        if ( !empty( $newItems ) )
+        $itemsToRemove = 0;
+        if ( isset( $parameters['Limit'] ) ) {
+            $count = $db->arrayQuery( "SELECT count(*) as count FROM ezm_pool WHERE block_id='".$block['id']."'" );
+            $itemsToRemove = (int)$count[0]['count'] + count($newItems) - (int)$parameters['Limit'];
+        }
+
+        if ( !empty( $newItems ) || ( $itemsToRemove > 0 ) )
         {
             $db->begin();
 
-            eZFlowPool::insertItems( $newItems );
-            $db->query( "UPDATE ezm_block SET last_update=$publishedBeforeOrAt WHERE id='" . $block['id'] . "'" );
+            if ( $itemsToRemove > 0 )
+                $db->query( "DELETE FROM ezm_pool WHERE block_id='".$block['id']."' ORDER BY ts_publication ASC LIMIT " . $itemsToRemove);
+            if ( !empty( $newItems ) )
+                eZFlowPool::insertItems( $newItems );
 
+            $db->query( "UPDATE ezm_block SET last_update=$publishedBeforeOrAt WHERE id='" . $block['id'] . "'" );
             $db->commit();
         }
 
@@ -129,14 +140,13 @@ class eZFlowOperations
     public static function update( $nodeArray = array() )
     {
         // log in user as anonymous if another user is logged in
-        $currentUser = eZUser::currentUser();
-        if ( $currentUser->isLoggedIn() )
+        if ( eZUser::isCurrentUserRegistered() )
         {
-            $loggedInUser = $currentUser;
+            $loggedInUser = eZUser::currentUser();
             $anonymousUserId = eZUser::anonymousId();
-            $anonymousUser = eZUser::instance( $anonymousUserId );
+            $anonymousUser = eZUser::fetch( $anonymousUserId );
             eZUser::setCurrentlyLoggedInUser( $anonymousUser, $anonymousUserId );
-            unset( $currentUser, $anonymousUser, $anonymousUserId );
+            unset( $anonymousUser, $anonymousUserId );
         }
 
         include_once( 'kernel/classes/ezcontentcache.php' );
@@ -172,7 +182,10 @@ class eZFlowOperations
 
         foreach ( $nodeArray as $nodeID )
         {
-            $time = time() - 5; // a safety margin
+            // a safety margin
+            $delay = intval( eZINI::instance( 'ezflow.ini' )->variable( 'SafetyDelay', 'DelayInSeconds' ) );
+
+            $time = time() - $delay;
 
             $nodeChanged = false;
 
@@ -512,16 +525,15 @@ class eZFlowOperations
         $limit = 50;
         do
         {
-            $items = $db->arrayQuery( 'SELECT object_id FROM ezm_pool', array( 'offset' => $offset, 'limit' => $limit ) );
+            $items = $db->arrayQuery( 'SELECT node_id FROM ezm_pool', array( 'offset' => $offset, 'limit' => $limit ) );
             if ( empty( $items ) )
                 break;
 
             foreach( $items as $item )
             {
-                $rows = $db->arrayQuery( 'SELECT id, status FROM ezcontentobject WHERE id = ' . $item['object_id'] );
-                if ( empty( $rows ) or // deleted
-                     ( count( $rows ) == 1 and $rows[0]['status'] == 2 ) ) // trashed
-                    $itemArray[] = $item['object_id'];
+                $rows = $db->arrayQuery( 'SELECT node_id FROM ezcontentobject_tree WHERE node_id = ' . $item['node_id'] );
+                if ( empty( $rows ) )
+                    $itemArray[] = $item['node_id'];
             }
 
             $offset += $limit;
@@ -532,7 +544,7 @@ class eZFlowOperations
         if ( $itemArrayCount > 0 )
         {
             $db->begin();
-            $db->query( 'DELETE FROM ezm_pool WHERE ' . $db->generateSQLINStatement( $itemArray, 'object_id' ) );
+            $db->query( 'DELETE FROM ezm_pool WHERE ' . $db->generateSQLINStatement( $itemArray, 'node_id' ) );
             $db->commit();
         }
 

@@ -2,9 +2,9 @@
 /**
  * File containing the eZXMLSchema class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -75,7 +75,7 @@ class eZXMLSchema
                               'isInline' => false,
                               'attributes' => array( 'class' ) ),
 
-        'header'    => array( 'blockChildrenAllowed' => false,
+        'header'    => array( 'blockChildrenAllowed' => array( 'line' ),
                               'inlineChildrenAllowed' => true,
                               'childrenRequired' => true,
                               'isInline' => false,

@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\HandlerTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
@@ -52,37 +52,30 @@ class CountryIntegrationTest extends BaseIntegrationTest
      */
     public function getCustomHandler()
     {
-        $handler = $this->getHandler();
-
-        $handler->getFieldTypeRegistry()->register(
-            'ezcountry',
-            new FieldType\Country\Type(
-                array(
-                    "BE" => array(
-                        "Name" => "Belgium",
-                        "Alpha2" => "BE",
-                        "Alpha3" => "BEL",
-                        "IDC" => "32",
-                    ),
-                    "FR" => array(
-                        "Name" => "France",
-                        "Alpha2" => "FR",
-                        "Alpha3" => "FRA",
-                        "IDC" => "33",
-                    ),
-                )
+        $fieldType = new FieldType\Country\Type(
+            array(
+                "BE" => array(
+                    "Name" => "Belgium",
+                    "Alpha2" => "BE",
+                    "Alpha3" => "BEL",
+                    "IDC" => "32",
+                ),
+                "FR" => array(
+                    "Name" => "France",
+                    "Alpha2" => "FR",
+                    "Alpha3" => "FRA",
+                    "IDC" => "33",
+                ),
             )
         );
-        $handler->getStorageRegistry()->register(
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessor() );
+
+        return $this->getHandler(
             'ezcountry',
+            $fieldType,
+            new Legacy\Content\FieldValue\Converter\Country(),
             new FieldType\NullStorage()
         );
-        $handler->getFieldValueConverterRegistry()->register(
-            'ezcountry',
-            new Legacy\Content\FieldValue\Converter\Country()
-        );
-
-        return $handler;
     }
 
     /**

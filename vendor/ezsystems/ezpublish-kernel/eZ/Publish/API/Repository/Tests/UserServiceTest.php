@@ -2,15 +2,17 @@
 /**
  * File containing the UserServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
 
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\User\User;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Exception;
 
 /**
  * Test case for operations in the UserService using in memory storage.
@@ -395,7 +397,7 @@ class UserServiceTest extends BaseTest
                 $parentUserGroup
             )->id;
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -409,7 +411,7 @@ class UserServiceTest extends BaseTest
             // Throws exception since creation of user group was rolled back
             $loadedGroup = $userService->loadUserGroup( $createdUserGroupId );
         }
-        catch ( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+        catch ( NotFoundException $e )
         {
             return;
         }
@@ -1015,7 +1017,7 @@ class UserServiceTest extends BaseTest
         {
             $user = $this->createUserVersion1();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -1029,7 +1031,7 @@ class UserServiceTest extends BaseTest
             // Throws exception since creation of user was rolled back
             $loadedUser = $userService->loadUser( $user->id );
         }
-        catch ( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+        catch ( NotFoundException $e )
         {
             return;
         }
@@ -1094,11 +1096,14 @@ class UserServiceTest extends BaseTest
     {
         $repository = $this->getRepository();
 
+        $anonymousUserId = $this->generateId( 'user', 10 );
         /* BEGIN: Use Case */
+        // $anonymousUserId is the ID of the "Anonymous" user in a eZ
+        // Publish demo installation.
         $userService = $repository->getUserService();
 
         // Load default anonymous user available in each eZ Publish installation
-        $anonymousUser = $userService->loadAnonymousUser();
+        $anonymousUser = $userService->loadUser( $anonymousUserId );
         /* END: Use Case */
 
         $this->assertInstanceOf(
@@ -1176,6 +1181,113 @@ class UserServiceTest extends BaseTest
         // login/password combination does not exist.
         $userService->loadUserByCredentials( 'USER', 'secret' );
         /* END: Use Case */
+    }
+
+    /**
+     * Test for the loadUserByLogin() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\UserService::loadUserByLogin()
+     * @depends eZ\Publish\API\Repository\Tests\UserServiceTest::testCreateUser
+     */
+    public function testLoadUserByLogin()
+    {
+        $repository = $this->getRepository();
+
+        $userService = $repository->getUserService();
+
+        /* BEGIN: Use Case */
+        $user = $this->createUserVersion1();
+
+        // Load the newly created user
+        $userReloaded = $userService->loadUserByLogin( 'user' );
+        /* END: Use Case */
+
+        $this->assertPropertiesCorrect(
+            array(
+                "login" => $user->login,
+                "email" => $user->email,
+                "passwordHash" => $user->passwordHash,
+                "hashAlgorithm" => $user->hashAlgorithm,
+                "enabled" => $user->enabled,
+                "maxLogin" => $user->maxLogin,
+                "id" => $user->id,
+                "contentInfo" => $user->contentInfo,
+                "versionInfo" => $user->versionInfo,
+                "fields" => $user->fields
+            ),
+            $userReloaded
+        );
+    }
+
+    /**
+     * Test for the loadUserByLogin() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\UserService::loadUserByLogin()
+     * @expectedException \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @depends eZ\Publish\API\Repository\Tests\UserServiceTest::testLoadUserByLogin
+     */
+    public function testLoadUserByLoginThrowsNotFoundExceptionForUnknownLogin()
+    {
+        $repository = $this->getRepository();
+
+        $userService = $repository->getUserService();
+
+        /* BEGIN: Use Case */
+        $this->createUserVersion1();
+
+        // This call will fail with a "NotFoundException", because the given
+        // login/password combination does not exist.
+        $userService->loadUserByLogin( 'user42' );
+        /* END: Use Case */
+    }
+
+    /**
+     * Test for the loadUsersByEmail() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\UserService::loadUsersByEmail()
+     * @depends eZ\Publish\API\Repository\Tests\UserServiceTest::testCreateUser
+     */
+    public function testLoadUserByEmail()
+    {
+        $repository = $this->getRepository();
+
+        $userService = $repository->getUserService();
+
+        /* BEGIN: Use Case */
+        $user = $this->createUserVersion1();
+
+        // Load the newly created user
+        $usersReloaded = $userService->loadUsersByEmail( 'user@example.com' );
+        /* END: Use Case */
+
+        $this->assertEquals( array( $user ), $usersReloaded );
+    }
+
+    /**
+     * Test for the loadUsersByEmail() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\UserService::loadUsersByEmail()
+     * @depends eZ\Publish\API\Repository\Tests\UserServiceTest::testLoadUserByEmail
+     */
+    public function testLoadUserByEmailReturnsEmptyInUnknownEmail()
+    {
+        $repository = $this->getRepository();
+
+        $userService = $repository->getUserService();
+
+        /* BEGIN: Use Case */
+        $this->createUserVersion1();
+
+        // This call will return empty array, because the given
+        // login/password combination does not exist.
+        $emptyUserList = $userService->loadUsersByEmail( 'user42@example.com' );
+        /* END: Use Case */
+
+        $this->assertEquals( array(), $emptyUserList );
     }
 
     /**

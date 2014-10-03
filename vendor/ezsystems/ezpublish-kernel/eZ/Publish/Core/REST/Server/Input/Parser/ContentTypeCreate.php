@@ -2,15 +2,15 @@
 /**
  * File containing the ContentTypeCreate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\Core\REST\Common\Exceptions;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -19,7 +19,7 @@ use DateTime;
 /**
  * Parser for ContentTypeCreate
  */
-class ContentTypeCreate extends Base
+class ContentTypeCreate extends BaseParser
 {
     /**
      * ContentType service
@@ -45,17 +45,14 @@ class ContentTypeCreate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\REST\Server\Input\Parser\FieldDefinitionCreate $fieldDefinitionCreateParser
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler,
-                                 ContentTypeService $contentTypeService,
+    public function __construct( ContentTypeService $contentTypeService,
                                  FieldDefinitionCreate $fieldDefinitionCreateParser,
                                  ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->contentTypeService = $contentTypeService;
         $this->fieldDefinitionCreateParser = $fieldDefinitionCreateParser;
         $this->parserTools = $parserTools;
@@ -71,7 +68,6 @@ class ContentTypeCreate extends Base
      */
     public function parse( array $data, ParsingDispatcher $parsingDispatcher )
     {
-        // @todo XSD says that minOccurs = 0 for identifier, but identifier is required
         if ( !array_key_exists( 'identifier', $data ) )
         {
             throw new Exceptions\Parser( "Missing 'identifier' element for ContentTypeCreate." );
@@ -126,7 +122,6 @@ class ContentTypeCreate extends Base
             $contentTypeCreateStruct->defaultAlwaysAvailable = $this->parserTools->parseBooleanValue( $data['defaultAlwaysAvailable'] );
         }
 
-        // @todo XSD says that names is mandatory, but content type can be created without names
         if ( array_key_exists( 'names', $data ) )
         {
             if ( !is_array( $data['names'] ) || !array_key_exists( 'value', $data['names'] ) || !is_array( $data['names']['value'] ) )
@@ -162,18 +157,37 @@ class ContentTypeCreate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for User element in ContentTypeCreate." );
             }
 
-            $userValues = $this->urlHandler->parse( 'user', $data['User']['_href'] );
-            $contentTypeCreateStruct->creatorId = $userValues['user'];
+            $contentTypeCreateStruct->creatorId = $this->requestParser->parseHref( $data['User']['_href'], 'userId' );
         }
 
-        if ( !array_key_exists( 'FieldDefinitions', $data ) || !is_array( $data['FieldDefinitions'] ) ||
-             !array_key_exists( 'FieldDefinition', $data['FieldDefinitions'] ) || !is_array( $data['FieldDefinitions']['FieldDefinition'] ) )
+        if ( !array_key_exists( 'FieldDefinitions', $data ) )
         {
-            throw new Exceptions\Parser( "Missing or invalid 'FieldDefinitions' element for ContentTypeCreate." );
+            throw new Exceptions\Parser( "Missing 'FieldDefinitions' element for ContentTypeCreate." );
+        }
+
+        if (
+            !is_array( $data['FieldDefinitions'] ) ||
+            !array_key_exists( 'FieldDefinition', $data['FieldDefinitions'] ) ||
+            !is_array( $data['FieldDefinitions']['FieldDefinition'] )
+        )
+        {
+            throw new Exceptions\Parser( "Invalid 'FieldDefinitions' element for ContentTypeCreate." );
+        }
+
+        // With no field definitions given and when ContentType is immediately published we must return HTTP 400 BadRequest,
+        // instead of relying on service to throw InvalidArgumentException
+        if ( isset( $data["__publish"] ) && $data["__publish"] === true && empty( $data['FieldDefinitions']['FieldDefinition'] ) )
+        {
+            throw new Exceptions\Parser( "ContentTypeCreate should provide at least one field definition." );
         }
 
         foreach ( $data['FieldDefinitions']['FieldDefinition'] as $fieldDefinitionData )
         {
+            if ( !is_array( $fieldDefinitionData ) )
+            {
+                throw new Exceptions\Parser( "Invalid 'FieldDefinition' element for ContentTypeCreate." );
+            }
+
             $contentTypeCreateStruct->addFieldDefinition(
                 $this->fieldDefinitionCreateParser->parse( $fieldDefinitionData, $parsingDispatcher )
             );

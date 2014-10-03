@@ -2,11 +2,11 @@
 /**
  * File containing the eZSys class.
  *
- * Portions are modifications of patches by Andreas B??ckler and Francis Nart
+ * Portions are modifications of patches by Andreas Böckler and Francis Nart
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -286,17 +286,15 @@ class eZSys
     public static function escapeShellArgument( $argument )
     {
         $escapeChar = self::instance()->ShellEscapeCharacter;
-        $argument = str_replace( "\\", "\\\\", $argument );
         if ( $escapeChar == "'" )
         {
-            $argument = str_replace( $escapeChar, $escapeChar . "\\" . $escapeChar . $escapeChar, $argument );
+            $argument = str_replace( "'", "'\\''", $argument );
         }
         else
         {
-            $argument = str_replace( $escapeChar, "\\" . $escapeChar, $argument );
+            $argument = str_replace( $escapeChar, "\\" . $escapeChar, addcslashes( $argument, '\\' ) );
         }
-        $argument = $escapeChar . $argument . $escapeChar;
-        return $argument;
+        return $escapeChar . $argument . $escapeChar;
     }
 
     /**
@@ -1208,7 +1206,7 @@ class eZSys
      */
     protected static function getValidwwwDir( $phpSelf, $scriptFileName, $index )
     {
-        if ( !isset( $phpSelf[1] ) || strpos( $phpSelf, $index ) === false )
+        if ( !isset( $phpSelf[1] ) || empty($index) || strpos( $phpSelf, $index ) === false )
             return false;
 
         // validate $index straight away
@@ -1225,11 +1223,18 @@ class eZSys
         if ( $phpSelf[1] === '~' )
         {
             $uri = explode( '/', ltrim( $validateDir, '/' ) );
-            array_shift( $uri );
+            $userName = ltrim( array_shift( $uri ), "~" );
+
+            // validating that we have user/ in path
+            if ( !strpos( $scriptFileName, $userName ."/" ) )
+            {
+                return null;
+            }
+
             $validateDir = '/' . implode( '/', $uri );
         }
 
-        // validate direclty with phpself part
+        // validate directly with phpself part
         if ( strpos( $scriptFileName, $validateDir ) !== false )
             return trim( $phpSelfParts[0], '/' );
 

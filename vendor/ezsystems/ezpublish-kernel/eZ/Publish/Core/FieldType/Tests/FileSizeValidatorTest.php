@@ -2,9 +2,9 @@
 /**
  * File containing the FileSizeValidatorTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
@@ -142,7 +142,7 @@ class FileSizeValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateCorrectValues( $size )
     {
-        $this->markTestIncomplete( 'BinaryFile field type does not use this validator anymore.' );
+        $this->markTestSkipped( 'BinaryFile field type does not use this validator anymore.' );
         $validator = new FileSizeValidator;
         $validator->maxFileSize = 4096;
         $this->assertTrue( $validator->validate( $this->getBinaryFileValue( $size ) ) );
@@ -156,8 +156,8 @@ class FileSizeValidatorTest extends PHPUnit_Framework_TestCase
      */
     protected function getBinaryFileValue( $size )
     {
-        $this->markTestIncomplete( 'BinaryFile field type does not use this validator anymore.' );
-        $value = new BinaryFileValue( $this->getMock( 'eZ\\Publish\\API\\Repository\\IOService' ) );
+        $this->markTestSkipped( 'BinaryFile field type does not use this validator anymore.' );
+        $value = new BinaryFileValue( $this->getMock( 'eZ\\Publish\\API\\Repository\\IOServiceInterface' ) );
         $value->file = new BinaryFile( array( "size" => $size ) );
 
         return $value;
@@ -180,7 +180,7 @@ class FileSizeValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateWrongValues( $size, $message, $values )
     {
-        $this->markTestIncomplete( 'BinaryFile field type does not use this validator anymore.' );
+        $this->markTestSkipped( 'BinaryFile field type does not use this validator anymore.' );
         $validator = new FileSizeValidator;
         $validator->maxFileSize = $this->getMaxFileSize();
         $this->assertFalse( $validator->validate( $this->getBinaryFileValue( $size ) ) );

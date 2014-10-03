@@ -2,27 +2,38 @@
 /**
  * File containing the EzPublishKernel class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version //autogentag//
  */
 
-use eZ\Bundle\EzPublishCoreBundle\EzPublishCoreBundle;
 use Egulias\ListenersDebugCommandBundle\EguliasListenersDebugCommandBundle;
+use eZ\Bundle\EzPublishCoreBundle\EzPublishCoreBundle;
+use eZ\Bundle\EzPublishDebugBundle\EzPublishDebugBundle;
 use eZ\Bundle\EzPublishLegacyBundle\EzPublishLegacyBundle;
 use eZ\Bundle\EzPublishRestBundle\EzPublishRestBundle;
+use EzSystems\CommentsBundle\EzSystemsCommentsBundle;
 use EzSystems\DemoBundle\EzSystemsDemoBundle;
-use Symfony\Component\HttpKernel\Kernel;
+use EzSystems\BehatBundle\EzSystemsBehatBundle;
+use eZ\Bundle\EzPublishCoreBundle\Kernel;
+use EzSystems\NgsymfonytoolsBundle\EzSystemsNgsymfonytoolsBundle;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Bundle\AsseticBundle\AsseticBundle;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle;
-use Tedivm\StashBundle\TedivmStashBundle;
 use Sensio\Bundle\DistributionBundle\SensioDistributionBundle;
+use Tedivm\StashBundle\TedivmStashBundle;
+use WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle;
+use WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle;
+use Nelmio\CorsBundle\NelmioCorsBundle;
+use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 
 class EzPublishKernel extends Kernel
 {
@@ -40,20 +51,35 @@ class EzPublishKernel extends Kernel
             new SecurityBundle(),
             new TwigBundle(),
             new MonologBundle(),
+            new SwiftmailerBundle(),
             new AsseticBundle(),
-            new SensioGeneratorBundle(),
+            new DoctrineBundle(),
             new TedivmStashBundle(),
+            new HautelookTemplatedUriBundle(),
             new EzPublishCoreBundle(),
-            new EzPublishLegacyBundle(),
+            new EzPublishLegacyBundle( $this ),
             new EzSystemsDemoBundle(),
             new EzPublishRestBundle(),
-            new SensioDistributionBundle(),
+            new EzSystemsCommentsBundle(),
+            new EzSystemsNgsymfonytoolsBundle(),
+            new WhiteOctoberPagerfantaBundle(),
+            new WhiteOctoberBreadcrumbsBundle(),
+            new NelmioCorsBundle(),
+            new KnpMenuBundle()
         );
 
-        if ( $this->getEnvironment() === 'dev' )
+        switch ( $this->getEnvironment() )
         {
-            $bundles[] = new WebProfilerBundle();
-            $bundles[] = new EguliasListenersDebugCommandBundle();
+            case "test":
+            case "behat":
+                $bundles[] = new EzSystemsBehatBundle();
+                // No break, test also needs dev bundles
+            case "dev":
+                $bundles[] = new EzPublishDebugBundle();
+                $bundles[] = new WebProfilerBundle();
+                $bundles[] = new SensioDistributionBundle();
+                $bundles[] = new SensioGeneratorBundle();
+                $bundles[] = new EguliasListenersDebugCommandBundle();
         }
 
         return $bundles;

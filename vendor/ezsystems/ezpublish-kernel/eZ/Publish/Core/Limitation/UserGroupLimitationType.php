@@ -2,14 +2,13 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\User\Limitation\UserGroupLimitation class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Limitation;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException as APINotFoundException;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\API\Repository\Values\User\User as APIUser;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -121,11 +120,11 @@ class UserGroupLimitationType extends AbstractPersistenceLimitationType implemen
      * @param \eZ\Publish\API\Repository\Values\User\Limitation $value
      * @param \eZ\Publish\API\Repository\Values\User\User $currentUser
      * @param \eZ\Publish\API\Repository\Values\ValueObject $object
-     * @param \eZ\Publish\API\Repository\Values\ValueObject[] $targets An array of location, parent or "assignment" value objects
+     * @param \eZ\Publish\API\Repository\Values\ValueObject[]|null $targets The context of the $object, like Location of Content, if null none where provided by caller
      *
      * @return boolean
      */
-    public function evaluate( APILimitationValue $value, APIUser $currentUser, ValueObject $object, array $targets = array() )
+    public function evaluate( APILimitationValue $value, APIUser $currentUser, ValueObject $object, array $targets = null )
     {
         if ( !$value instanceof APIUserGroupLimitation )
         {
@@ -209,7 +208,6 @@ class UserGroupLimitationType extends AbstractPersistenceLimitationType implemen
         }
 
         $groupIds = array();
-        // @todo Needs to take care of inherited groups as well when UserHandler gets knowledge about user groups
         $currentUserLocations = $this->persistence->locationHandler()->loadLocationsByContent( $currentUser->id );
         if ( !empty( $currentUserLocations ) )
         {

@@ -2,16 +2,22 @@
 /**
  * File containing the LegacyKernelController class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\EngineInterface;
+use eZ\Bundle\EzPublishLegacyBundle\LegacyResponse;
+use eZ\Bundle\EzPublishLegacyBundle\LegacyResponse\LegacyResponseManager;
+use eZ\Publish\Core\MVC\Legacy\Kernel\URIHelper;
+use eZ\Publish\Core\MVC\Legacy\Templating\LegacyHelper;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use ezpKernelRedirect;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Controller embedding legacy kernel.
@@ -19,11 +25,9 @@ use eZ\Publish\Core\MVC\ConfigResolverInterface;
 class LegacyKernelController
 {
     /**
-     * The legacy kernel instance (eZ Publish 4)
-     *
-     * @var \eZ\Publish\Core\MVC\Legacy\Kernel
+     * @var \Closure
      */
-    private $kernel;
+    private $kernelClosure;
 
     /**
      * Template declaration to wrap legacy responses in a Twig pagelayout (optional)
@@ -35,73 +39,108 @@ class LegacyKernelController
     private $legacyLayout;
 
     /**
-     * @todo Maybe following dependencies should be mutualized in an abstract controller
-     *       Injection can be done through "parent service" feature for DIC : http://symfony.com/doc/master/components/dependency_injection/parentservices.html
-     * @param \Closure $kernelClosure
-     * @param \Symfony\Component\Templating\EngineInterface $templateEngine
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     * @param mixed $legacyLayout
+     * @var \eZ\Publish\Core\MVC\Legacy\Kernel\URIHelper
      */
-    public function __construct( \Closure $kernelClosure, EngineInterface $templateEngine, ConfigResolverInterface $configResolver )
-    {
-        $this->kernel = $kernelClosure();
-        $this->templateEngine = $templateEngine;
-        $this->legacyLayout = $configResolver->getParameter( 'module_default_layout', 'ezpublish_legacy' );
-        $this->configResolver = $configResolver;
-    }
+    private $uriHelper;
 
     /**
-     * Renders a view and returns a Response.
-     *
-     * @param string $view The view name
-     * @param array $parameters An array of parameters to pass to the view
-     *
-     * @return Response A Response instance
+     * @var \Symfony\Component\HttpFoundation\Request
      */
-    public function render( $view, array $parameters = array() )
+    private $request;
+
+    /**
+     * @var \eZ\Bundle\EzPublishLegacyBundle\LegacyResponse\LegacyResponseManager
+     */
+    private $legacyResponseManager;
+
+    /** @var  \eZ\Publish\Core\MVC\Legacy\Templating\LegacyHelper; */
+    private $legacyHelper;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(
+        \Closure $kernelClosure,
+        ConfigResolverInterface $configResolver,
+        URIHelper $uriHelper,
+        LegacyResponseManager $legacyResponseManager,
+        LegacyHelper $legacyHelper,
+        RouterInterface $router
+    )
     {
-        $response = new Response();
-        $response->setContent( $this->templateEngine->render( $view, $parameters ) );
-        return $response;
+        $this->kernelClosure = $kernelClosure;
+        $this->legacyLayout = $configResolver->getParameter( 'module_default_layout', 'ezpublish_legacy' );
+        $this->configResolver = $configResolver;
+        $this->uriHelper = $uriHelper;
+        $this->legacyResponseManager = $legacyResponseManager;
+        $this->legacyHelper = $legacyHelper;
+        $this->router = $router;
+    }
+
+    public function setRequest( Request $request = null )
+    {
+        $this->request = $request;
     }
 
     /**
      * Base fallback action.
      * Will be basically used for every legacy module.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \eZ\Bundle\EzPublishLegacyBundle\LegacyResponse
      */
     public function indexAction()
     {
+        $kernelClosure = $this->kernelClosure;
+        /** @var \eZ\Publish\Core\MVC\Legacy\Kernel $kernel */
+        $kernel = $kernelClosure();
+
         $legacyMode = $this->configResolver->getParameter( 'legacy_mode' );
+        $kernel->setUseExceptions( false );
+        // Fix up legacy URI with current request since we can be in a sub-request here.
+        $this->uriHelper->updateLegacyURI( $this->request );
 
-        $this->kernel->setUseExceptions( false );
-        $result = $this->kernel->run();
-        $this->kernel->setUseExceptions( true );
-
-        $moduleResult = $result->getAttribute( 'module_result' );
-
+        // If we have a layout for legacy AND we're not in legacy mode, we ask the legacy kernel not to generate layout.
         if ( isset( $this->legacyLayout ) && !$legacyMode )
         {
-            $response = $this->render(
-                $this->legacyLayout,
-                array( 'module_result' => $moduleResult )
-            );
-        }
-        else
-        {
-            $response = new Response( $result->getContent() );
+            $kernel->setUsePagelayout( false );
         }
 
-        // Handling error codes sent from the legacy stack
-        if ( isset( $moduleResult['errorCode'] ) )
+        $result = $kernel->run();
+
+        $kernel->setUseExceptions( true );
+
+        if ( $result instanceof ezpKernelRedirect )
         {
-            $response->setStatusCode(
-                $moduleResult['errorCode'],
-                isset( $moduleResult['errorMessage'] ) ? $moduleResult['errorMessage'] : null
-            );
+            return $this->legacyResponseManager->generateRedirectResponse( $result );
         }
+
+        $this->legacyHelper->loadDataFromModuleResult( $result->getAttribute( 'module_result' ) );
+
+        $response = $this->legacyResponseManager->generateResponseFromModuleResult( $result );
+        $this->legacyResponseManager->mapHeaders( headers_list(), $response );
 
         return $response;
+    }
+
+    /**
+     * Generates a RedirectResponse to the appropriate login route.
+     *
+     * @return RedirectResponse
+     */
+    public function loginAction()
+    {
+        return new RedirectResponse( $this->router->generate( 'login' ) );
+    }
+
+    /**
+     * Generates a RedirectResponse to the appropriate logout route.
+     *
+     * @return RedirectResponse
+     */
+    public function logoutAction()
+    {
+        return new RedirectResponse( $this->router->generate( 'logout' ) );
     }
 }

@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
@@ -14,7 +14,6 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\REST\Server\Input\Parser\ContentCreate;
-use eZ\Publish\Core\REST\Server\Input\Parser\LocationCreate;
 
 class ContentCreateTest extends BaseTest
 {
@@ -51,7 +50,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $result = $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
 
         $this->assertInstanceOf(
@@ -159,7 +158,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -196,7 +195,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -234,7 +233,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -273,7 +272,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -311,7 +310,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -349,7 +348,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -377,7 +376,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -416,7 +415,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -456,7 +455,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -495,7 +494,7 @@ class ContentCreateTest extends BaseTest
             )
         );
 
-        $contentCreate = $this->getContentCreate();
+        $contentCreate = $this->getParser();
         $contentCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -504,10 +503,9 @@ class ContentCreateTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\ContentCreate
      */
-    protected function getContentCreate()
+    protected function internalGetParser()
     {
         return new ContentCreate(
-            $this->getUrlHandler(),
             $this->getContentServiceMock(),
             $this->getContentTypeServiceMock(),
             $this->getFieldTypeParserMock(),
@@ -629,6 +627,15 @@ class ContentCreateTest extends BaseTest
             ->will( $this->returnValue( $this->getContentType() ) );
 
         return $contentTypeServiceMock;
+    }
+
+    public function getParseHrefExpectationsMap()
+    {
+        return array(
+            array( '/content/types/13', 'contentTypeId', 13 ),
+            array( '/content/sections/4', 'sectionId', 4 ),
+            array( '/user/users/14', 'userId', 14 ),
+        );
     }
 
     /**

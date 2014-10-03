@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\SPI\Tests\FieldType\ImageIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
@@ -40,24 +40,16 @@ use FileSystemIterator;
  */
 class ImageIntegrationTest extends FileBaseIntegrationTest
 {
-    /**
-     * Returns the storage dir used by the file service
-     *
-     * @return string
-     */
-    protected function getStorageDir()
-    {
-        return self::$storageDir;
-    }
+    private $deprecationWarnerMock;
 
     /**
      * Returns the storage identifier prefix used by the file service
      *
-     * @return void
+     * @return string
      */
     protected function getStoragePrefix()
     {
-        return 'images';
+        return self::$container->getParameter( 'image_storage_prefix' );
     }
 
     /**
@@ -77,29 +69,32 @@ class ImageIntegrationTest extends FileBaseIntegrationTest
      */
     public function getCustomHandler()
     {
-        $handler = $this->getHandler();
+        $fieldType = new FieldType\Image\Type();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessor() );
 
-        $handler->getFieldTypeRegistry()->register(
+        return $this->getHandler(
             'ezimage',
-            new FieldType\Image\Type( $this->getIOService() )
-        );
-        $handler->getStorageRegistry()->register(
-            'ezimage',
+            $fieldType,
+            new Legacy\Content\FieldValue\Converter\Image(),
             new FieldType\Image\ImageStorage(
                 array(
                     'LegacyStorage' => new FieldType\Image\ImageStorage\Gateway\LegacyStorage(),
                 ),
-                $this->getIOService(),
+                self::$container->get( "ezpublish.fieldType.ezimage.io" ),
                 new FieldType\Image\PathGenerator\LegacyPathGenerator(),
-                new IO\MetadataHandler\ImageSize()
+                new IO\MetadataHandler\ImageSize(),
+                $this->getDeprecationWarnerMock()
             )
         );
-        $handler->getFieldValueConverterRegistry()->register(
-            'ezimage',
-            new Legacy\Content\FieldValue\Converter\Image()
-        );
+    }
 
-        return $handler;
+    public function getDeprecationWarnerMock()
+    {
+        if ( !isset( $this->deprecationWarnerMock ) )
+        {
+            $this->deprecationWarnerMock = $this->getMock( 'eZ\Publish\Core\Base\Utils\DeprecationWarnerInterface' );
+        }
+        return $this->deprecationWarnerMock;
     }
 
     /**
@@ -160,7 +155,7 @@ class ImageIntegrationTest extends FileBaseIntegrationTest
             array(
                 'data'         => null,
                 'externalData' => array(
-                    'path' => __DIR__ . '/_fixtures/image.jpg',
+                    'inputUri' => ( $path = __DIR__ . '/_fixtures/image.jpg' ),
                     'fileName' => 'Ice-Flower.jpg',
                     'alternativeText' => 'An icy flower.',
                 ),
@@ -182,15 +177,9 @@ class ImageIntegrationTest extends FileBaseIntegrationTest
     {
         $this->assertNotNull( $field->value->data );
 
-        $this->assertTrue(
-            file_exists( $path = $this->getStorageDir() . '/' . $field->value->data['path'] ),
-            "Stored file $path doesn't exist"
-        );
-
+        $this->assertIOUriExists( $field->value->data['uri'] );
         $this->assertEquals( 'Ice-Flower.jpg', $field->value->data['fileName'] );
-
         $this->assertEquals( 'An icy flower.', $field->value->data['alternativeText'] );
-
         $this->assertNull( $field->value->externalData );
     }
 
@@ -207,9 +196,9 @@ class ImageIntegrationTest extends FileBaseIntegrationTest
             array(
                 'data'         => null,
                 'externalData' => array(
-                    'path' => __DIR__ . '/_fixtures/image.png',
+                    'inputUri' => ( $path = __DIR__ . '/_fixtures/image.png' ),
                     'fileName' => 'Blueish-Blue.jpg',
-                    'alternativeText' => 'This blue is so blueish.',
+                    'alternativeText' => 'This blue is so blueish.'
                 ),
                 'sortKey'      => '',
             )
@@ -231,23 +220,10 @@ class ImageIntegrationTest extends FileBaseIntegrationTest
     public function assertUpdatedFieldDataCorrect( Field $field )
     {
         $this->assertNotNull( $field->value->data );
-
-        $this->assertTrue(
-            file_exists( ( $path = $this->getStorageDir() . '/' . $field->value->data['path'] ) ),
-            "Stored file $path exists"
-        );
-
-        // Check old files not removed before update
-        // need to stay there for reference integrity
-        $this->assertEquals(
-            2,
-            count( glob( dirname( $path ) . '/*' ) )
-        );
+        $this->assertIOUriExists( $field->value->data['uri'] );
 
         $this->assertEquals( 'Blueish-Blue.jpg', $field->value->data['fileName'] );
-
         $this->assertEquals( 'This blue is so blueish.', $field->value->data['alternativeText'] );
-
         $this->assertNull( $field->value->externalData );
     }
 
@@ -273,6 +249,7 @@ class ImageIntegrationTest extends FileBaseIntegrationTest
         /*foreach ( $iterator as $path => $fileInfo )
         {
             if ( $fileInfo->isFile() )
+
             {
                 $this->fail(
                     sprintf(
@@ -282,6 +259,38 @@ class ImageIntegrationTest extends FileBaseIntegrationTest
                 );
             }
         }*/
+    }
+
+    public function testCreateContentUsingIdPropertyWorksAndThrowsWarning()
+    {
+        $this->testCreateContentType();
+        $contentType = $this->testLoadContentTypeField();
+        $this->getDeprecationWarnerMock()
+            ->expects( $this->once() )
+            ->method( 'log' )
+            ->with( $this->stringContains( 'id property' ) );
+
+        $this->createContent( $contentType, $this->getDeprecatedIdPropertyValue() );
+    }
+
+    /**
+     * Get initial field value
+     *
+     * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+     */
+    public function getDeprecatedIdPropertyValue()
+    {
+        return new Content\FieldValue(
+            array(
+                'data' => null,
+                'externalData' => array(
+                    'id' => ( $path = __DIR__ . '/_fixtures/image.jpg' ),
+                    'fileName' => 'Ice-Flower.jpg',
+                    'alternativeText' => 'An icy flower.',
+                ),
+                'sortKey' => '',
+            )
+        );
     }
 }
 

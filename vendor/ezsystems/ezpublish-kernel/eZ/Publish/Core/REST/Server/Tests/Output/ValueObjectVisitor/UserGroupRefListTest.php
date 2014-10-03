@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -28,7 +28,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getUserGroupRefListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -62,6 +62,30 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
             ),
             '/some/path',
             14
+        );
+
+        $groupPath = trim( $UserGroupRefList->userGroups[0]->mainLocation->pathString, '/' );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadUserGroup',
+            array( 'groupPath' => $groupPath ),
+            "/user/groups/{$groupPath}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_unassignUserFromUserGroup',
+            array( 'userId' => $UserGroupRefList->userId, 'groupPath' => 14 ),
+            '/user/users/14/groups/14'
+        );
+
+        $groupPath = trim( $UserGroupRefList->userGroups[1]->mainLocation->pathString, '/' );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadUserGroup',
+            array( 'groupPath' => '1/5/13' ),
+            "/user/groups/{$groupPath}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_unassignUserFromUserGroup',
+            array( 'userId' => $UserGroupRefList->userId, 'groupPath' => 13 ),
+            '/user/users/14/groups/13'
         );
 
         $visitor->visit(
@@ -185,10 +209,8 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\UserGroupRefList
      */
-    protected function getUserGroupRefListVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\UserGroupRefList(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\UserGroupRefList;
     }
 }

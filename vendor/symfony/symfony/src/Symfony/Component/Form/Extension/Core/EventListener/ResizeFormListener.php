@@ -35,13 +35,13 @@ class ResizeFormListener implements EventSubscriberInterface
 
     /**
      * Whether children could be added to the group
-     * @var Boolean
+     * @var bool
      */
     protected $allowAdd;
 
     /**
      * Whether children could be removed from the group
-     * @var Boolean
+     * @var bool
      */
     protected $allowDelete;
 
@@ -57,9 +57,9 @@ class ResizeFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_BIND => 'preBind',
+            FormEvents::PRE_SUBMIT => 'preSubmit',
             // (MergeCollectionListener, MergeDoctrineCollectionListener)
-            FormEvents::BIND => array('onBind', 50),
+            FormEvents::SUBMIT => array('onSubmit', 50),
         );
     }
 
@@ -89,7 +89,7 @@ class ResizeFormListener implements EventSubscriberInterface
         }
     }
 
-    public function preBind(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $form = $event->getForm();
         $data = $event->getData();
@@ -123,7 +123,7 @@ class ResizeFormListener implements EventSubscriberInterface
         }
     }
 
-    public function onBind(FormEvent $event)
+    public function onSubmit(FormEvent $event)
     {
         $form = $event->getForm();
         $data = $event->getData();
@@ -139,13 +139,41 @@ class ResizeFormListener implements EventSubscriberInterface
         // The data mapper only adds, but does not remove items, so do this
         // here
         if ($this->allowDelete) {
+            $toDelete = array();
+
             foreach ($data as $name => $child) {
                 if (!$form->has($name)) {
-                    unset($data[$name]);
+                    $toDelete[] = $name;
                 }
+            }
+
+            foreach ($toDelete as $name) {
+                unset($data[$name]);
             }
         }
 
         $event->setData($data);
+    }
+
+    /**
+     * Alias of {@link preSubmit()}.
+     *
+     * @deprecated Deprecated since version 2.3, to be removed in 3.0. Use
+     *             {@link preSubmit()} instead.
+     */
+    public function preBind(FormEvent $event)
+    {
+        $this->preSubmit($event);
+    }
+
+    /**
+     * Alias of {@link onSubmit()}.
+     *
+     * @deprecated Deprecated since version 2.3, to be removed in 3.0. Use
+     *             {@link onSubmit()} instead.
+     */
+    public function onBind(FormEvent $event)
+    {
+        $this->onSubmit($event);
     }
 }

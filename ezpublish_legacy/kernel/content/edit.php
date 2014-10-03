@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -389,13 +389,16 @@ if ( !is_numeric( $EditVersion ) )
                 }
             }
 
+            $section = eZSection::fetch( $obj->attribute( 'section_id' ) );
             $tpl = eZTemplate::factory();
             $res = eZTemplateDesignResource::instance();
             $res->setKeys( array( array( 'object', $obj->attribute( 'id' ) ),
                                 array( 'remote_id', $obj->attribute( 'remote_id' ) ),
                                 array( 'class', $class->attribute( 'id' ) ),
                                 array( 'class_identifier', $class->attribute( 'identifier' ) ),
-                                array( 'class_group', $class->attribute( 'match_ingroup_id_list' ) ) ) );
+                                array( 'class_group', $class->attribute( 'match_ingroup_id_list' ) ),
+                                array( 'section', $obj->attribute( 'section_id' ) ),
+                                array( 'section_identifier', $section->attribute( 'identifier' ) ) ) );
 
             $tpl->setVariable( 'edit_language', $EditLanguage );
             $tpl->setVariable( 'from_language', $FromLanguage );
@@ -406,7 +409,6 @@ if ( !is_numeric( $EditVersion ) )
 
             $Result = array();
             $Result['content'] = $tpl->fetch( 'design:content/edit_draft.tpl' );
-            $section = eZSection::fetch( $obj->attribute( 'section_id' ) );
             if ( $section )
             {
                 $Result['navigation_part'] = $section->attribute( 'navigation_part_identifier' );
@@ -432,13 +434,16 @@ if ( !is_numeric( $EditVersion ) )
                 }
             }
 
+            $section = eZSection::fetch( $obj->attribute( 'section_id' ) );
             $tpl = eZTemplate::factory();
             $res = eZTemplateDesignResource::instance();
             $res->setKeys( array( array( 'object', $obj->attribute( 'id' ) ),
                                 array( 'remote_id', $obj->attribute( 'remote_id' ) ),
                                 array( 'class', $class->attribute( 'id' ) ),
                                 array( 'class_identifier', $class->attribute( 'identifier' ) ),
-                                array( 'class_group', $class->attribute( 'match_ingroup_id_list' ) ) ) );
+                                array( 'class_group', $class->attribute( 'match_ingroup_id_list' ) ),
+                                array( 'section', $obj->attribute( 'section_id' ) ),
+                                array( 'section_identifier', $section->attribute( 'identifier' ) ) ) );
 
             $tpl->setVariable( 'edit_language', $EditLanguage );
             $tpl->setVariable( 'from_language', $FromLanguage );
@@ -449,7 +454,6 @@ if ( !is_numeric( $EditVersion ) )
 
             $Result = array();
             $Result['content'] = $tpl->fetch( 'design:content/edit_draft.tpl' );
-            $section = eZSection::fetch( $obj->attribute( 'section_id' ) );
             if ( $section )
             {
                 $Result['navigation_part'] = $section->attribute( 'navigation_part_identifier' );
@@ -635,12 +639,51 @@ if ( !function_exists( 'checkContentActions' ) )
                 }
                 else if ( $node !== null )
                 {
-                    $parentNode = $node->attribute( 'parent_node_id' );
-                    if ( $parentNode == 1 )
+                    $ini = eZINI::instance( 'site.ini' );
+                    $redirection = $ini->variable( "ContentSettings", "RedirectAfterPublish" );
+
+                    switch ( $redirection )
                     {
-                        $parentNode = $node->attribute( 'node_id' );
+                        case 'node':
+                            $nodeNode = $node->attribute( 'node_id' );
+                            $module->redirectToView( 'view', array( 'full', $nodeNode ) );
+                            break;
+
+                        case 'mainNode':
+                            $mainNode = $node->attribute( 'main_node_id' );
+                            $module->redirectToView( 'view', array( 'full', $mainNode ) );
+                            break;
+
+                        case 'rootNode':
+                            $contentINI = eZINI::instance( 'content.ini' );
+                            $rootNodeID = $contentINI->variable( 'NodeSettings', 'RootNode' );
+                            $module->redirectToView( 'view', array( 'full', $rootNodeID ) );
+                            break;
+
+                        case 'uri':
+                            $http = eZHTTPTool::instance();
+                            $uri = $http->postVariable(
+                                'RedirectAfterPublishUri',
+                                $ini->variable( 'ContentSettings', 'RedirectAfterPublishUri' )
+                            );
+
+                            if ( !empty( $uri ) )
+                            {
+                                $module->redirectTo( $uri );
+                                // Intentionally break inside the if condition block. Will fallback to the next case if $uri is empty.
+                                break;
+                            }
+
+                        case 'parentNode':
+                        default:
+                            $parentNode = $node->attribute( 'parent_node_id' );
+                            if ( $parentNode == 1 )
+                            {
+                                $parentNode = $node->attribute( 'node_id' );
+                            }
+                            $module->redirectToView( 'view', array( 'full', $parentNode ) );
+                            break;
                     }
-                    $module->redirectToView( 'view', array( 'full', $parentNode ) );
                 }
                 else
                 {
@@ -686,15 +729,12 @@ if ( !function_exists( 'checkContentActions' ) )
 
             eZDebug::accumulatorStart( 'publish', '', 'publish' );
             $oldObjectName = $object->name();
-            $db = eZDB::instance();
 
             $behaviour = new ezpContentPublishingBehaviour();
             $behaviour->isTemporary = true;
             $behaviour->disableAsynchronousPublishing = false;
             ezpContentPublishingBehaviour::setBehaviour( $behaviour );
 
-            // Getting the current transaction counter to check if all transactions are committed during content/publish operation (see below)
-            $transactionCounter = $db->transactionCounter();
             $operationResult = eZOperationHandler::execute( 'content', 'publish', array( 'object_id' => $object->attribute( 'id' ),
                                                                                          'version' => $version->attribute( 'version' ) ) );
             eZDebug::accumulatorStop( 'publish' );
@@ -702,17 +742,6 @@ if ( !function_exists( 'checkContentActions' ) )
             if ( ( array_key_exists( 'status', $operationResult ) && $operationResult['status'] != eZModuleOperationInfo::STATUS_CONTINUE ) )
             {
                 eZDebug::writeDebug( $operationResult, __FILE__ );
-
-                // Check if publication related transaction counter is clean.
-                // If not, operation is probably in STATUS_CANCELLED, STATUS_HALTED, STATUS_REPEAT or STATUS_QUEUED
-                // and final commit was not done as it's part of the operation body (see commit-transaction action in content/publish operation definition).
-                // Important note: Will only be committed transactions that weren't closed during the content/publish operation
-                $transactionDiff = $db->transactionCounter() - $transactionCounter;
-                for ( $i = 0; $i < $transactionDiff; ++$i )
-                {
-                    $db->commit();
-                }
-
                 switch( $operationResult['status'] )
                 {
                     case eZModuleOperationInfo::STATUS_REPEAT:

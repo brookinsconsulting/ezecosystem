@@ -563,7 +563,7 @@ YAHOO.util.AnimMgr = new function() {
     
     /**
      * Starts the animation thread.
-        * Only one thread can run at a time.
+	* Only one thread can run at a time.
      * @method start
      */    
     this.start = function() {
@@ -859,7 +859,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     easeNone: function (t, b, c, d) {
-        return c*t/d + b;
+    	return c*t/d + b;
     },
     
     /**
@@ -872,7 +872,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     easeIn: function (t, b, c, d) {
-        return c*(t/=d)*t + b;
+    	return c*(t/=d)*t + b;
     },
 
     /**
@@ -885,7 +885,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     easeOut: function (t, b, c, d) {
-        return -c *(t/=d)*(t-2) + b;
+    	return -c *(t/=d)*(t-2) + b;
     },
     
     /**
@@ -898,11 +898,11 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     easeBoth: function (t, b, c, d) {
-        if ((t/=d/2) < 1) {
+    	if ((t/=d/2) < 1) {
             return c/2*t*t + b;
         }
         
-        return -c/2 * ((--t)*(t-2) - 1) + b;
+    	return -c/2 * ((--t)*(t-2) - 1) + b;
     },
     
     /**
@@ -915,7 +915,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     easeInStrong: function (t, b, c, d) {
-        return c*(t/=d)*t*t*t + b;
+    	return c*(t/=d)*t*t*t + b;
     },
     
     /**
@@ -928,7 +928,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     easeOutStrong: function (t, b, c, d) {
-        return -c * ((t=t/d-1)*t*t*t - 1) + b;
+    	return -c * ((t=t/d-1)*t*t*t - 1) + b;
     },
     
     /**
@@ -941,11 +941,11 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     easeBothStrong: function (t, b, c, d) {
-        if ((t/=d/2) < 1) {
+    	if ((t/=d/2) < 1) {
             return c/2*t*t*t*t + b;
         }
         
-        return -c/2 * ((t-=2)*t*t*t - 2) + b;
+    	return -c/2 * ((t-=2)*t*t*t - 2) + b;
     },
 
     /**
@@ -961,7 +961,7 @@ YAHOO.util.Easing = {
      */
 
     elasticIn: function (t, b, c, d, a, p) {
-        if (t == 0) {
+    	if (t == 0) {
             return b;
         }
         if ( (t /= d) == 1 ) {
@@ -971,15 +971,15 @@ YAHOO.util.Easing = {
             p=d*.3;
         }
         
-        if (!a || a < Math.abs(c)) {
+    	if (!a || a < Math.abs(c)) {
             a = c; 
             var s = p/4;
         }
-        else {
+    	else {
             var s = p/(2*Math.PI) * Math.asin (c/a);
         }
         
-        return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+    	return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
     },
 
     /**
@@ -994,7 +994,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     elasticOut: function (t, b, c, d, a, p) {
-        if (t == 0) {
+    	if (t == 0) {
             return b;
         }
         if ( (t /= d) == 1 ) {
@@ -1004,15 +1004,15 @@ YAHOO.util.Easing = {
             p=d*.3;
         }
         
-        if (!a || a < Math.abs(c)) {
+    	if (!a || a < Math.abs(c)) {
             a = c;
             var s = p / 4;
         }
-        else {
+    	else {
             var s = p/(2*Math.PI) * Math.asin (c/a);
         }
         
-        return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+    	return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
     },
     
     /**
@@ -1027,7 +1027,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     elasticBoth: function (t, b, c, d, a, p) {
-        if (t == 0) {
+    	if (t == 0) {
             return b;
         }
         
@@ -1039,19 +1039,19 @@ YAHOO.util.Easing = {
             p = d*(.3*1.5);
         }
         
-        if ( !a || a < Math.abs(c) ) {
+    	if ( !a || a < Math.abs(c) ) {
             a = c; 
             var s = p/4;
         }
-        else {
+    	else {
             var s = p/(2*Math.PI) * Math.asin (c/a);
         }
         
-        if (t < 1) {
+    	if (t < 1) {
             return -.5*(a*Math.pow(2,10*(t-=1)) * 
                     Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
         }
-        return a*Math.pow(2,-10*(t-=1)) * 
+    	return a*Math.pow(2,-10*(t-=1)) * 
                 Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
     },
 
@@ -1067,10 +1067,10 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     backIn: function (t, b, c, d, s) {
-        if (typeof s == 'undefined') {
+    	if (typeof s == 'undefined') {
             s = 1.70158;
         }
-        return c*(t/=d)*t*((s+1)*t - s) + b;
+    	return c*(t/=d)*t*((s+1)*t - s) + b;
     },
 
     /**
@@ -1084,10 +1084,10 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     backOut: function (t, b, c, d, s) {
-        if (typeof s == 'undefined') {
+    	if (typeof s == 'undefined') {
             s = 1.70158;
         }
-        return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+    	return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
     },
     
     /**
@@ -1102,14 +1102,14 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     backBoth: function (t, b, c, d, s) {
-        if (typeof s == 'undefined') {
+    	if (typeof s == 'undefined') {
             s = 1.70158; 
         }
         
-        if ((t /= d/2 ) < 1) {
+    	if ((t /= d/2 ) < 1) {
             return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
         }
-        return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+    	return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
     },
 
     /**
@@ -1122,7 +1122,7 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     bounceIn: function (t, b, c, d) {
-        return c - YAHOO.util.Easing.bounceOut(d-t, 0, c, d) + b;
+    	return c - YAHOO.util.Easing.bounceOut(d-t, 0, c, d) + b;
     },
     
     /**
@@ -1135,13 +1135,13 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     bounceOut: function (t, b, c, d) {
-        if ((t/=d) < (1/2.75)) {
-                return c*(7.5625*t*t) + b;
-        } else if (t < (2/2.75)) {
-                return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
-        } else if (t < (2.5/2.75)) {
-                return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
-        }
+    	if ((t/=d) < (1/2.75)) {
+    		return c*(7.5625*t*t) + b;
+    	} else if (t < (2/2.75)) {
+    		return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+    	} else if (t < (2.5/2.75)) {
+    		return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+    	}
         return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
     },
     
@@ -1155,10 +1155,10 @@ YAHOO.util.Easing = {
      * @return {Number} The computed value for the current animation frame
      */
     bounceBoth: function (t, b, c, d) {
-        if (t < d/2) {
+    	if (t < d/2) {
             return YAHOO.util.Easing.bounceIn(t*2, 0, c, d) * .5 + b;
         }
-        return YAHOO.util.Easing.bounceOut(t*2-d, 0, c, d) * .5 + c*.5 + b;
+    	return YAHOO.util.Easing.bounceOut(t*2-d, 0, c, d) * .5 + c*.5 + b;
     }
 };
 
@@ -1231,7 +1231,7 @@ YAHOO.util.Easing = {
         var val = null;
 
         if ( this.patterns.points.test(attr) ) {
-            var t = this.method(this.currentFrame, 0, 100, this.totalFrames) / 100;                             
+            var t = this.method(this.currentFrame, 0, 100, this.totalFrames) / 100;				
             val = Y.Bezier.getPosition(this.runtimeAttributes[attr], t);
         } else {
             val = superclass.doMethod.call(this, attr, start, end);

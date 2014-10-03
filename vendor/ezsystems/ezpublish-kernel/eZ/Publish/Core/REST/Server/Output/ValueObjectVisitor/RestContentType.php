@@ -2,9 +2,9 @@
 /**
  * File containing the RestContentType ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -44,10 +44,10 @@ class RestContentType extends RestContentTypeBase
 
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate(
-                'type' . $urlTypeSuffix,
+            $this->router->generate(
+                'ezpublish_rest_loadContentType' . $urlTypeSuffix,
                 array(
-                    'type' => $contentType->id,
+                    'contentTypeId' => $contentType->id,
                 )
             )
         );
@@ -79,9 +79,9 @@ class RestContentType extends RestContentTypeBase
         $generator->startObjectElement( 'Creator', 'User' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate(
-                'user',
-                array( 'user' => $contentType->creatorId )
+            $this->router->generate(
+                'ezpublish_rest_loadUser',
+                array( 'userId' => $contentType->creatorId )
             )
         );
         $generator->endAttribute( 'href' );
@@ -90,13 +90,35 @@ class RestContentType extends RestContentTypeBase
         $generator->startObjectElement( 'Modifier', 'User' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate(
-                'user',
-                array( 'user' => $contentType->modifierId )
+            $this->router->generate(
+                'ezpublish_rest_loadUser',
+                array( 'userId' => $contentType->modifierId )
             )
         );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'Modifier' );
+
+        $generator->startObjectElement( 'Groups', 'ContentTypeGroupRefList' );
+        $generator->startAttribute(
+            'href',
+            $this->router->generate(
+                'ezpublish_rest_loadGroupsOfContentType',
+                array( 'contentTypeId' => $contentType->id )
+            )
+        );
+        $generator->endAttribute( 'href' );
+        $generator->endObjectElement( 'Groups' );
+
+        $generator->startObjectElement( 'Draft', 'ContentType' );
+        $generator->startAttribute(
+            'href',
+            $this->router->generate(
+                'ezpublish_rest_loadContentTypeDraft',
+                array( 'contentTypeId' => $contentType->id )
+            )
+        );
+        $generator->endAttribute( 'href' );
+        $generator->endObjectElement( 'Draft' );
 
         $generator->startValueElement( 'remoteId', $contentType->remoteId );
         $generator->endValueElement( 'remoteId' );
@@ -107,13 +129,19 @@ class RestContentType extends RestContentTypeBase
         $generator->startValueElement( 'nameSchema', $contentType->nameSchema );
         $generator->endValueElement( 'nameSchema' );
 
-        $generator->startValueElement( 'isContainer', ( $contentType->isContainer ? 'true' : 'false' ) );
+        $generator->startValueElement(
+            'isContainer',
+            $this->serializeBool( $generator, $contentType->isContainer )
+        );
         $generator->endValueElement( 'isContainer' );
 
         $generator->startValueElement( 'mainLanguageCode', $contentType->mainLanguageCode );
         $generator->endValueElement( 'mainLanguageCode' );
 
-        $generator->startValueElement( 'defaultAlwaysAvailable', ( $contentType->defaultAlwaysAvailable ? 'true' : 'false' ) );
+        $generator->startValueElement(
+            'defaultAlwaysAvailable',
+            $this->serializeBool( $generator, $contentType->defaultAlwaysAvailable )
+        );
         $generator->endValueElement( 'defaultAlwaysAvailable' );
 
         $generator->startValueElement( 'defaultSortField', $this->serializeSortField( $contentType->defaultSortField ) );

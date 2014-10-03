@@ -98,6 +98,7 @@ pre
   color: #000;
   margin: 8px;
   font-size: 1.1em;
+  white-space: pre-line;
 }
 
 /* general block tags (embed and custom) */
@@ -182,6 +183,34 @@ div.ezoeItemNonEditable, span.ezoeItemNonEditable
     min-height: 18px;
     padding-left: 16px;
 }
+
+span.ezoeItemNonEditable[align="right"]
+{
+    float: right;
+}
+
+span.ezoeItemNonEditable[align="left"]
+{
+    float: left;
+}
+
+img[inline="false"]
+{
+    display: block;
+}
+
+img[inline="false"][align="right"]
+{
+    float: right;
+    clear: both;
+}
+
+img[inline="false"][align="left"]
+{
+    float: left;
+    clear: both;
+}
+
 /* core.css ez layout styles for embed tags */
 
 div.ezoeItemNonEditable div.block /* Used around groups of objects which are connected in some way, and requires extra margins to the surroundings */

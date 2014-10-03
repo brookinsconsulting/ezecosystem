@@ -32,7 +32,10 @@ security:
 
         ezpublish_front:
             pattern: ^/
-            ezpublish: true
+            anonymous: ~
+            form_login:
+                require_previous_session: false
+            logout: ~
 
 #        secured_area:
 #            pattern:    ^/demo/secured/
@@ -48,3 +51,4 @@ security:
 
     access_control:
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

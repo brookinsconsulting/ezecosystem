@@ -2,16 +2,17 @@
 /**
  * File containing the BinaryFile Type class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\BinaryFile;
 
 use eZ\Publish\Core\FieldType\BinaryBase\Type as BinaryBaseType;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
+use eZ\Publish\Core\FieldType\Value as BaseValue;
 
 /**
  * The TextLine field type.
@@ -54,42 +55,17 @@ class Type extends BinaryBaseType
     }
 
     /**
-     * Implements the core of {@see acceptValue()}.
-     *
-     * @param mixed $inputValue
-     *
-     * @return \eZ\Publish\Core\FieldType\BinaryFile\Value The potentially converted and structurally plausible value.
-     *
-     * @throws InvalidArgumentType If $inputValue isn't structurally acceptable
-     */
-    protected function internalAcceptValue( $inputValue )
-    {
-        $inputValue = parent::internalAcceptValue( $inputValue );
-
-        if ( !$inputValue instanceof Value )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue',
-                'eZ\\Publish\\Core\\FieldType\\BinaryFile\\Value',
-                $inputValue
-            );
-        }
-
-        return $inputValue;
-    }
-
-    /**
      * Attempts to complete the data in $value
      *
-     * @param Value $value
+     * @param \eZ\Publish\Core\FieldType\BinaryFile\Value|\eZ\Publish\Core\FieldType\Value $value
      *
      * @return void
      */
-    protected function completeValue( $value )
+    protected function completeValue( Basevalue $value )
     {
         parent::completeValue( $value );
 
-        if ( !isset( $value->downloadCount ) )
+        if ( isset( $value->downloadCount ) && $value->downloadCount === null )
         {
             $value->downloadCount = 0;
         }
@@ -102,14 +78,14 @@ class Type extends BinaryBaseType
      *
      * @return mixed
      */
-    public function toHash( $value )
+    public function toHash( SPIValue $value )
     {
-        $hash = parent::toHash( $value );
-
-        if ( $hash === null )
+        if ( $this->isEmptyValue( $value ) )
         {
-            return $hash;
+            return null;
         }
+
+        $hash = parent::toHash( $value );
 
         $hash['downloadCount'] = $value->downloadCount;
 
@@ -123,17 +99,16 @@ class Type extends BinaryBaseType
      *
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
      *
-     * @return mixed
+     * @return \eZ\Publish\Core\FieldType\BinaryFile\Value
      */
     public function fromPersistenceValue( FieldValue $fieldValue )
     {
-        $result = parent::fromPersistenceValue( $fieldValue );
-
-        if ( $result === null )
+        if ( $fieldValue->externalData === null )
         {
-            // empty value
-            return null;
+            return $this->getEmptyValue();
         }
+
+        $result = parent::fromPersistenceValue( $fieldValue );
 
         $result->downloadCount = ( isset( $fieldValue->externalData['downloadCount'] )
             ? $fieldValue->externalData['downloadCount']

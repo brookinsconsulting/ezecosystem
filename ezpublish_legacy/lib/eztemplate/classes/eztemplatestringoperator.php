@@ -2,9 +2,9 @@
 /**
  * File containing the eZTemplateStringOperator class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -394,11 +394,11 @@ class eZTemplateStringOperator
                 $ini = $tpl->ini();
                 $dotText = $ini->variable( 'WashSettings', 'EmailDotText' );
                 $atText = $ini->variable( 'WashSettings', 'EmailAtText' );
-                $operatorValue = str_replace( array( '.',
-                                                     '@' ),
-                                              array( $dotText,
-                                                     $atText ),
-                                              $operatorValue );
+                $operatorValue = str_replace(
+                    array( '.', '@' ),
+                    array( $dotText, $atText ),
+                    htmlspecialchars( $operatorValue )
+                );
             } break;
 
             case 'pdf':
@@ -483,7 +483,7 @@ class eZTemplateStringOperator
             $atText = addcslashes( $ini->variable( 'WashSettings', 'EmailAtText' ), "'" );
 
             $values[] = $parameters[0];
-            $code = "%output% = str_replace( array( '.', '@' ), array( '$dotText', '$atText' ), %1% );\n";
+            $code = "%output% = str_replace( array( '.', '@' ), array( '$dotText', '$atText' ), htmlspecialchars( %1% ) );\n";
         }
         /* JAVASCRIPT: Type is static, input is not static */
         else if ( ( $paramCount == 2 ) && isset( $staticValues[1] ) && ( $staticValues[1] == 'javascript' ) )

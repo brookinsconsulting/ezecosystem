@@ -39,7 +39,7 @@ class ReferenceDumper
 
     /**
      * @param NodeInterface $node
-     * @param integer       $depth
+     * @param int           $depth
      */
     private function writeNode(NodeInterface $node, $depth = 0)
     {
@@ -115,12 +115,12 @@ class ReferenceDumper
         $default = (string) $default != '' ? ' '.$default : '';
         $comments = count($comments) ? '# '.implode(', ', $comments) : '';
 
-        $text = rtrim(sprintf('%-20s %s %s', $node->getName() . ':', $default, $comments), ' ');
+        $text = rtrim(sprintf('%-20s %s %s', $node->getName().':', $default, $comments), ' ');
 
         if ($info = $node->getInfo()) {
             $this->writeLine('');
             // indenting multi-line info
-            $info = str_replace("\n", sprintf("\n%" . $depth * 4 . "s# ", ' '), $info);
+            $info = str_replace("\n", sprintf("\n%".$depth * 4 . "s# ", ' '), $info);
             $this->writeLine('# '.$info, $depth * 4);
         }
 

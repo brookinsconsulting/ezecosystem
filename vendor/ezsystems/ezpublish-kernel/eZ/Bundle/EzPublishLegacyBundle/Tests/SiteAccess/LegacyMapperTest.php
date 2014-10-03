@@ -2,9 +2,9 @@
 /**
  * File containing the LegacyMapperTest class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\Tests\SiteAccess;
@@ -18,8 +18,6 @@ class LegacyMapperTest extends LegacyBasedTestCase
 {
     /**
      * @dataProvider siteAccessMatchProvider
-     * @covers \eZ\Bundle\EzPublishLegacyBundle\LegacyMapper\SiteAccess::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\EventListener\SiteAccessListener::onSiteAccessMatch
      */
     public function testOnSiteAccessMatch( $pathinfo, $semanticPathinfo, SiteAccess $siteaccess, $expectedAccess )
     {
@@ -37,7 +35,8 @@ class LegacyMapperTest extends LegacyBasedTestCase
             ->will( $this->returnValue( $pathinfo ) );
         $request->attributes->set( 'semanticPathinfo', $semanticPathinfo );
 
-        $mapper = new LegacyMapper( $container );
+        $mapper = new LegacyMapper();
+        $mapper->setContainer( $container );
         $bag = new \Symfony\Component\HttpFoundation\ParameterBag();
         $mapper->onBuildKernelWebHandler(
             new PreBuildKernelWebHandlerEvent(

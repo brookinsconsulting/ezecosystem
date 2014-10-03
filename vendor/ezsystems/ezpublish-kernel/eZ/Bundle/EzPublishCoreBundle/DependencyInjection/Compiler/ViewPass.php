@@ -2,9 +2,9 @@
 /**
  * File containing the ViewPass class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Compiler;
@@ -33,17 +33,20 @@ abstract class ViewPass implements CompilerPassInterface
         $viewManagerDef = $container->getDefinition( "ezpublish.view_manager" );
         foreach ( $container->findTaggedServiceIds( static::VIEW_PROVIDER_IDENTIFIER ) as $id => $attributes )
         {
-            $priority = isset( $attributes[0]["priority"] ) ? (int)$attributes[0]["priority"] : 0;
-            // Priority range is between -255 (the lowest) and 255 (the highest)
-            $priority = max( min( $priority, 255 ), -255 );
+            foreach ( $attributes as $attribute )
+            {
+                $priority = isset( $attribute["priority"] ) ? (int)$attribute["priority"] : 0;
+                // Priority range is between -255 (the lowest) and 255 (the highest)
+                $priority = max( min( $priority, 255 ), -255 );
 
-            $viewManagerDef->addMethodCall(
-                static::ADD_VIEW_PROVIDER_METHOD,
-                array(
-                    new Reference( $id ),
-                    $priority
-                )
-            );
+                $viewManagerDef->addMethodCall(
+                    static::ADD_VIEW_PROVIDER_METHOD,
+                    array(
+                        new Reference( $id ),
+                        $priority
+                    )
+                );
+            }
         }
     }
 }

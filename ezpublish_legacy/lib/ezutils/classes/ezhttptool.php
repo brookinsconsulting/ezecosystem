@@ -2,9 +2,9 @@
 /**
  * File containing the eZHTTPTool class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -543,20 +543,11 @@ class eZHTTPTool
             $host = eZSys::hostname();
         if ( !is_string( $protocol ) )
         {
-            $protocol = 'http';
+            $protocol = eZSys::serverProtocol();
+
             // Default to https if SSL is enabled
-
-            // Check if SSL port is defined in site.ini
-            $ini = eZINI::instance();
-            $sslPort = 443;
-            if ( $ini->hasVariable( 'SiteSettings', 'SSLPort' ) )
+            if ( eZSys::isSSLNow() )
             {
-                $sslPort = $ini->variable( 'SiteSettings', 'SSLPort' );
-            }
-
-            if ( eZSys::serverPort() == $sslPort )
-            {
-                $protocol = 'https';
                 $port = false;
             }
         }
@@ -583,17 +574,19 @@ class eZHTTPTool
     }
 
     /**
-     * \static
      * Performs an HTTP redirect.
      *
-     * \param  $path  The path to redirect
-     * \param  $parameters  \see createRedirectUrl()
-     * \param  $status  The HTTP status code as a string
-     * \param  $encodeURL  Encode the URL. This should normally be true, but
-     * may be set to false to avoid double encoding when redirect() is called
-     * twice.
+     * @param string $path The path to redirect to
+     * @param array $parameters See createRedirectUrl(). Defaults to empty array.
+     * @param bool $status The HTTP status code as a string (code + text, e.g. "302 Found"). Defaults to false.
+     * @param bool $encodeURL Encodes the URL.
+     *                        This should normally be true, but may be set to false to avoid double encoding when redirect() is called twice.
+     *                        Defaults to true
+     * @param bool $returnRedirectObject If true, will return an ezpKernelRedirect object.
+     *
+     * @return null|ezpKernelRedirect
      */
-    static function redirect( $path, $parameters = array(), $status = false, $encodeURL = true )
+    static function redirect( $path, $parameters = array(), $status = false, $encodeURL = true, $returnRedirectObject = false )
     {
         $url = eZHTTPTool::createRedirectUrl( $path, $parameters );
         if ( strlen( $status ) > 0 )
@@ -608,12 +601,21 @@ class eZHTTPTool
         }
 
         eZHTTPTool::headerVariable( 'Location', $url );
-
         /* Fix for redirecting using workflows and apache 2 */
-        echo '<HTML><HEAD>';
-        echo '<META HTTP-EQUIV="Refresh" Content="0;URL='. htmlspecialchars( $url ) .'">';
-        echo '<META HTTP-EQUIV="Location" Content="'. htmlspecialchars( $url ) .'">';
-        echo '</HEAD><BODY></BODY></HTML>';
+        $escapedUrl = htmlspecialchars( $url );
+        $content = <<<EOT
+<HTML><HEAD>
+<META HTTP-EQUIV="Refresh" Content="0;URL=$escapedUrl">
+<META HTTP-EQUIV="Location" Content="$escapedUrl">
+</HEAD><BODY></BODY></HTML>
+EOT;
+
+        if ( $returnRedirectObject )
+        {
+            return new ezpKernelRedirect( $url, $status ?: null, $content );
+        }
+
+        echo $content;
     }
 
     /*!

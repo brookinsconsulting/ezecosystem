@@ -2,14 +2,15 @@
 /**
  * File containing the Content Search handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search\CriterionVisitor;
 
 use eZ\Publish\Core\Persistence\Solr\Content\Search\CriterionVisitor;
+use eZ\Publish\Core\Persistence\Solr\Content\Search\FieldMap;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 
 /**
@@ -17,6 +18,25 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
  */
 class FullText extends CriterionVisitor
 {
+    /**
+     * Field map
+     *
+     * @var \eZ\Publish\Core\Persistence\Solr\Content\Search\FieldMap
+     */
+    protected $fieldMap;
+
+    /**
+     * Create from content type handler and field registry
+     *
+     * @param \eZ\Publish\Core\Persistence\Solr\Content\Search\FieldMap $fieldMap
+     *
+     * @return void
+     */
+    public function __construct( FieldMap $fieldMap )
+    {
+        $this->fieldMap = $fieldMap;
+    }
+
     /**
      * CHeck if visitor is applicable to current criterion
      *
@@ -35,11 +55,45 @@ class FullText extends CriterionVisitor
      * @param Criterion $criterion
      * @param CriterionVisitor $subVisitor
      *
-     * @return void
+     * @return string
      */
     public function visit( Criterion $criterion, CriterionVisitor $subVisitor = null )
     {
-        return "text:" . $criterion->value;
+        $queries = array(
+            "text:" . $criterion->value,
+        );
+
+        foreach ( $criterion->boost as $field => $boost )
+        {
+            $fields = $this->fieldMap->getFieldTypes( $criterion );
+
+            if ( !isset( $fields[$field] ) )
+            {
+                continue;
+            }
+
+            foreach ( $fields[$field] as $fieldNames )
+            {
+                foreach ( $fieldNames as $fieldName )
+                {
+                    $queries[] = $fieldName . ":" . $criterion->value . "^" . $boost;
+                }
+            }
+        }
+
+        return "(" . implode(
+            ') OR (',
+            array_map(
+                function ($search) use ($criterion) {
+                    return $search . (
+                        $criterion->fuzziness < 1 ?
+                            sprintf( "~%.1f", $criterion->fuzziness ) :
+                            ""
+                        );
+                },
+                $queries
+            )
+        ) . ")";
     }
 }
 

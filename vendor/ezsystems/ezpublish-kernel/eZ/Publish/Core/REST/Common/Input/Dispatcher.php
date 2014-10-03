@@ -2,9 +2,9 @@
 /**
  * File containing the Input Dispatcher class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\Input;
@@ -84,7 +84,6 @@ class Dispatcher
         {
             // TODO expose default format
             $contentTypeParts[1] = "xml";
-            //throw new Exceptions\Parser( "No format specification in content type. Missing '+(json|xml|…)' in '{$message->headers['Content-Type']}'." );
         }
 
         $media  = $contentTypeParts[0];
@@ -105,6 +104,10 @@ class Dispatcher
         if ( isset( $message->headers['Url'] ) )
         {
             $rootNodeArray['__url'] = $message->headers['Url'];
+        }
+        if ( isset( $message->headers['__publish'] ) )
+        {
+            $rootNodeArray['__publish'] = $message->headers['__publish'];
         }
 
         return $this->parsingDispatcher->parse(

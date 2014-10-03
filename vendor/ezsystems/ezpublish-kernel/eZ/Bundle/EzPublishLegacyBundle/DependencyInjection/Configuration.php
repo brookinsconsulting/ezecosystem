@@ -2,31 +2,24 @@
 /**
  * File containing the Configuration class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
 
-/**
- * This is the class that validates and merges configuration from your ezpublish/config files
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
- */
-class Configuration implements ConfigurationInterface
+class Configuration extends SiteAccessConfiguration
 {
-    /**
-     * {@inheritDoc}
-     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder
-            ->root( 'ezpublish_legacy' )
+        $rootNode = $treeBuilder->root( 'ez_publish_legacy' );
+        $rootNode
             ->children()
                 ->booleanNode( 'enabled' )->defaultFalse()->end()
                 ->scalarNode( 'root_dir' )
@@ -41,6 +34,24 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
+        $this->addSiteAccessSettings( $this->generateScopeBaseNode( $rootNode ) );
         return $treeBuilder;
+    }
+
+    private function addSiteAccessSettings( NodeBuilder $nodeBuilder )
+    {
+        $nodeBuilder
+            ->arrayNode( 'templating' )
+                ->children()
+                    ->scalarNode( 'view_layout' )
+                        ->info( 'Template reference to use as pagelayout while rendering a content view in legacy' )
+                        ->example( 'eZDemoBundle::pagelayout.html.twig' )
+                    ->end()
+                    ->scalarNode( 'module_layout' )
+                        ->info( 'Template reference to use as pagelayout for legacy modules. If not specified, pagelayout from legacy will be used.' )
+                    ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }

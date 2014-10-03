@@ -2,9 +2,9 @@
 /**
  * File containing the BaseTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
@@ -12,10 +12,13 @@ namespace eZ\Publish\API\Repository\Tests;
 use PHPUnit_Framework_TestCase;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
+use eZ\Publish\API\Repository\Values\User\Limitation\RoleLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\Core\REST\Client\Sessionable;
 use DateTime;
 use ArrayObject;
+use Exception;
+use PDOException;
 
 /**
  * Base class for api specific tests.
@@ -46,7 +49,8 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
 
         try
         {
-            $repository = $this->getRepository();
+            // Use setup factory instance here w/o clearing data in case test don't need to
+            $repository = $this->getSetupFactory()->getRepository( false );
 
             // Set session if we are testing the REST backend to make it
             // possible to persist data in the memory backend during multiple
@@ -56,9 +60,17 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
                 $repository->setSession( $id = md5( microtime() ) );
             }
         }
-        catch ( \Exception $e )
+        catch ( PDOException $e )
         {
-            $this->markTestSkipped(
+            $this->fail(
+                "The communication with the database cannot be established. " .
+                "This is required in order to perform the tests.\n\n" .
+                "Exception: " . $e
+            );
+        }
+        catch ( Exception $e )
+        {
+            $this->fail(
                 'Cannot create a repository with predefined user. ' .
                 'Check the UserService or RoleService implementation. ' .
                 PHP_EOL . PHP_EOL .
@@ -137,13 +149,14 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param bool $initialInitializeFromScratch Only has an effect if set in first call within a test
      * @return \eZ\Publish\API\Repository\Repository
      */
-    protected function getRepository()
+    protected function getRepository( $initialInitializeFromScratch = true  )
     {
         if ( null === $this->repository )
         {
-            $this->repository = $this->getSetupFactory()->getRepository();
+            $this->repository = $this->getSetupFactory()->getRepository( $initialInitializeFromScratch );
         }
         return $this->repository;
     }
@@ -191,6 +204,28 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Asserts that properties given in $expectedValues are correctly set in
+     * $actualObject.
+     *
+     * If the property type is array, it will be sorted before comparison.
+     * @TODO: introduced because of randomly failing tests, ref: https://jira.ez.no/browse/EZP-21734
+     *
+     * @param mixed[] $expectedValues
+     * @param \eZ\Publish\API\Repository\Values\ValueObject $actualObject
+     *
+     * @return void
+     */
+    protected function assertPropertiesCorrectUnsorted( array $expectedValues, ValueObject $actualObject )
+    {
+        foreach ( $expectedValues as $propertyName => $propertyValue )
+        {
+            $this->assertPropertiesEqual(
+                $propertyName, $propertyValue, $actualObject->$propertyName, true
+            );
+        }
+    }
+
+    /**
      * Asserts all properties from $expectedValues are correctly set in
      * $actualObject. Additional (virtual) properties can be asserted using
      * $additionalProperties.
@@ -218,7 +253,25 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    private function assertPropertiesEqual( $propertyName, $expectedValue, $actualValue )
+    /**
+     * @see \eZ\Publish\API\Repository\Tests\BaseTest::assertPropertiesCorrectUnsorted()
+     *
+     * @param array $items An array of scalar values
+     */
+    private function sortItems( array &$items )
+    {
+        $sorter = function ( $a, $b )
+        {
+            if ( !is_scalar( $a ) || !is_scalar( $b ) )
+            {
+                $this->fail( "Wrong usage: method " . __METHOD__ . " accepts only an array of scalar values" );
+            }
+            return strcmp( $a, $b );
+        };
+        usort( $items, $sorter );
+    }
+
+    private function assertPropertiesEqual( $propertyName, $expectedValue, $actualValue, $sortArray = false )
     {
         if ( $expectedValue instanceof ArrayObject )
         {
@@ -237,6 +290,12 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
             $actualValue = $actualValue->format( DateTime::RFC850 );
         }
 
+        if ( $sortArray && is_array( $actualValue ) && is_array( $expectedValue ) )
+        {
+            $this->sortItems( $actualValue );
+            $this->sortItems( $expectedValue );
+        }
+
         $this->assertEquals(
             $expectedValue,
             $actualValue,
@@ -245,7 +304,7 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Create a user fixture in a variable named <b>$user</b>,
+     * Create a user in editor user group
      *
      * @return \eZ\Publish\API\Repository\Values\User\User
      */
@@ -283,38 +342,53 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Create a user fixture in a variable named <b>$user</b>,
+     * Create a user in new user group with editor rights limited to Media Library (/1/48/)
      *
+     * @uses createCustomUserVersion1()
      * @return \eZ\Publish\API\Repository\Values\User\User
      */
     protected function createMediaUserVersion1()
+    {
+        return $this->createCustomUserVersion1(
+            'Media Editor',
+            'Editor',
+            new SubtreeLimitation( array( 'limitationValues' => array( '/1/48/' ) ) )
+        );
+    }
+
+    /**
+     * Create a user with new user group and assign a existing role (optionally with RoleLimitation)
+     *
+     * @param string $userGroupName Name of the new user group to create
+     * @param string $roleIdentifier Role identifier to assign to the new group
+     * @param RoleLimitation|null $roleLimitation
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User
+     */
+    protected function createCustomUserVersion1( $userGroupName, $roleIdentifier, RoleLimitation $roleLimitation = null )
     {
         $repository = $this->getRepository();
 
         /* BEGIN: Inline */
         // ID of the "Users" user group in an eZ Publish demo installation
-        $usersGroupId = 4;
+        $rootUsersGroupId = $this->generateId( 'location', 4 );
 
         $roleService = $repository->getRoleService();
         $userService = $repository->getUserService();
 
         // Get a group create struct
         $userGroupCreate = $userService->newUserGroupCreateStruct( 'eng-US' );
-        $userGroupCreate->setField( 'name', 'Media Editor' );
+        $userGroupCreate->setField( 'name', $userGroupName );
 
         // Create new group with media editor rights
         $userGroup = $userService->createUserGroup(
             $userGroupCreate,
-            $userService->loadUserGroup( $usersGroupId )
+            $userService->loadUserGroup( $rootUsersGroupId )
         );
         $roleService->assignRoleToUserGroup(
-            $roleService->loadRoleByIdentifier( 'Editor' ),
+            $roleService->loadRoleByIdentifier( $roleIdentifier ),
             $userGroup,
-            new SubtreeLimitation(
-                array(
-                    'limitationValues' => array( '/1/48/' )
-                )
-            )
+            $roleLimitation
         );
 
         // Instantiate a create struct with mandatory properties

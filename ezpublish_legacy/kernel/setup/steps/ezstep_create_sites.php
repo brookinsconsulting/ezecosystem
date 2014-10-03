@@ -2,9 +2,9 @@
 /**
  * File containing the eZStepCreateSites class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -492,10 +492,15 @@ class eZStepCreateSites extends eZStepInstaller
 
                         if ( $db->databaseName() == 'mysql' )
                         {
-                            // We try to use InnoDB table type if it is available, else we use the default type.
-                            $innoDBAvail = $db->arrayQuery( "SHOW VARIABLES LIKE 'have_innodb';" );
-                            if ( $innoDBAvail[0]['Value'] == 'YES' )
-                                $params['table_type'] = 'innodb';
+                            $engines = $db->arrayQuery( 'SHOW ENGINES' );
+                            foreach( $engines as $engine )
+                            {
+                                if ( $engine['Engine'] == 'InnoDB' && in_array( $engine['Support'], array( 'YES', 'DEFAULT' ) ) )
+                                {
+                                    $params['table_type'] = 'innodb';
+                                    break;
+                                }
+                            }
                         }
 
                         if ( !$dbSchema->insertSchema( $params ) )
@@ -638,7 +643,7 @@ class eZStepCreateSites extends eZStepInstaller
 
         // Call user function for additional setup tasks.
         if ( function_exists( 'eZSitePreInstall' ) )
-            eZSitePreInstall();
+            eZSitePreInstall( $siteType );
 
 
         // Make sure objects use the selected main language instead of eng-GB
@@ -1015,8 +1020,13 @@ language_locale='eng-GB'";
         // Enable OE and ODF extensions by default
         $extensionsToEnable = array();
         // Included in "fat" install, needs to override $extraCommonSettings extensions
-        $extensionsPrepended = array( 'ezjscore', 'ezmultiupload', 'eztags', 'ezautosave',  'ezoe', 'ezformtoken' );
-        foreach ( array( 'ezie', 'ezodf', 'ezprestapiprovider' ) as $extension )
+        $extensionsPrepended = array( 'ezjscore', /*@EZP_BUILD_EXTENSION_ACTIVATE@*/ 'ezoe', 'ezformtoken' );
+        foreach (
+            array(
+                'ezie', 'ezodf', 'ezprestapiprovider', 'ezmultiupload', 'eztags',
+                'ezautosave', 'ez_network', 'ez_network_demo'
+            ) as $extension
+        )
         {
             if ( file_exists( "extension/$extension" ) )
             {
@@ -1316,22 +1326,34 @@ language_locale='eng-GB'";
             return false;
         }
 
+        $newUserObject = $userObject->createNewVersion( false, false );
+        if ( !is_object( $newUserObject ) )
+        {
+            $resultArray['errors'][] = array( 'code' => 'EZSW-022',
+                'text' => "Could not create new version of administrator content object" );
+            return false;
+        }
+        $dataMap = $newUserObject->attribute( 'data_map' );
+        $error = false;
+
         if ( trim( $admin['email'] ) )
         {
+            if ( !isset( $dataMap['user_account'] ) )
+            {
+                $resultArray['errors'][] = array( 'code' => 'EZSW-023',
+                    'text' => "Administrator content object does not have a 'user_account' attribute" );
+                return false;
+            }
+
             $userAccount->setInformation( 14, 'admin', $admin['email'], $admin['password'], $admin['password'] );
+            $dataMap['user_account']->setContent( $userAccount );
+            $dataMap['user_account']->store();
+            $publishAdmin = true;
+            $userAccount->store();
         }
 
         if ( trim( $admin['first_name'] ) or trim( $admin['last_name'] ) )
         {
-            $newUserObject = $userObject->createNewVersion( false, false );
-            if ( !is_object( $newUserObject ) )
-            {
-                $resultArray['errors'][] = array( 'code' => 'EZSW-022',
-                                                  'text' => "Could not create new version of administrator content object" );
-                return false;
-            }
-            $dataMap = $newUserObject->attribute( 'data_map' );
-            $error = false;
             if ( !isset( $dataMap['first_name'] ) )
             {
                 $resultArray['errors'][] = array( 'code' => 'EZSW-023',
@@ -1355,7 +1377,6 @@ language_locale='eng-GB'";
             $newUserObject->store();
             $publishAdmin = true;
         }
-        $userAccount->store();
 
         if ( $publishAdmin )
         {

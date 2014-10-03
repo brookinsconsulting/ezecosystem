@@ -2,13 +2,13 @@
 /**
  * File containing the eZDFSFileHandlerDFSBackend class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
-class eZDFSFileHandlerDFSBackend
+class eZDFSFileHandlerDFSBackend implements eZDFSFileHandlerDFSBackendInterface
 {
     public function __construct()
     {
@@ -29,10 +29,20 @@ class eZDFSFileHandlerDFSBackend
     }
 
     /**
+     * The legacy handler supports any type of file
+     */
+    public function supports( $path )
+    {
+        return true;
+    }
+
+    /**
      * Creates a copy of $srcFilePath from DFS to $dstFilePath on DFS
      *
      * @param string $srcFilePath Local source file path
      * @param string $dstFilePath Local destination file path
+     *
+     * @return bool
      */
     public function copyFromDFSToDFS( $srcFilePath, $dstFilePath )
     {
@@ -85,6 +95,11 @@ class eZDFSFileHandlerDFSBackend
             $ret = $this->createFile( $dstFilePath, file_get_contents( $srcFilePath ) );
         }
 
+        if ( $ret )
+        {
+            $ret = $this->copyTimestamp( $srcFilePath, $dstFilePath );
+        }
+
         $this->accumulatorStop();
 
         return $ret;
@@ -107,7 +122,7 @@ class eZDFSFileHandlerDFSBackend
         if ( $srcFileContents === false )
         {
             $this->accumulatorStop();
-            eZDebug::writeError( "Error getting contents of file FS://'$srcFilePath'.", __METHOD__ );
+            eZDebug::writeError( "Error getting contents of file 'FS://$srcFilePath'.", __METHOD__ );
             return false;
         }
 
@@ -264,7 +279,20 @@ class eZDFSFileHandlerDFSBackend
      */
     public function existsOnDFS( $filePath )
     {
-        return file_exists( $this->makeDFSPath( $filePath ) );
+        if ( file_exists( $this->makeDFSPath( $filePath ) ) )
+        {
+            return true;
+        }
+
+        // Verify that mount point is still there
+        $filePathDir = substr( $filePath, 0, strpos( $filePath, '/' ) + 1 );
+        $path = realpath( $this->getMountPoint() ). '/' . $filePathDir;
+        if ( !file_exists( $path ) || !is_dir( $path ) )
+        {
+            throw new eZDFSFileHandlerBackendException( "NFS mount root $path not found" );
+        }
+
+        return false;
     }
 
     /**
@@ -272,7 +300,7 @@ class eZDFSFileHandlerDFSBackend
      *
      * @return string
      */
-    public function getMountPoint()
+    protected function getMountPoint()
     {
         return $this->mountPointPath;
     }
@@ -302,6 +330,24 @@ class eZDFSFileHandlerDFSBackend
         chmod( $filePath, $this->filePermissionMask );
     }
 
+    /**
+     * copies the timestamp from the original file to the destination file
+     * @param string $srcFilePath
+     * @param string $dstFilePath
+     * @return bool False if the timestamp is not set with success on target file
+     */
+    protected function copyTimestamp( $srcFilePath, $dstFilePath )
+    {
+        clearstatcache( true, $srcFilePath );
+        $originalTimestamp = filemtime( $srcFilePath );
+        if ( !$originalTimestamp )
+        {
+            return false;
+        }
+
+        return touch( $dstFilePath, $originalTimestamp);
+    }
+
     protected function createFile( $filePath, $contents, $atomic = true )
     {
         // $contents can result from a failed file_get_contents(). In this case
@@ -325,6 +371,35 @@ class eZDFSFileHandlerDFSBackend
     public function getDfsFileSize( $filePath )
     {
         return filesize( $this->makeDFSPath( $filePath ) );
+    }
+
+    /**
+     * Returns an iterator over the files within $basePath on the backend
+     *
+     * @param string $basePath a path relative to the mount point
+     *
+     * @return Iterator An iterator that returns a DFS File pathname as the value
+     */
+    public function getFilesList( $basePath )
+    {
+        // The custom iterator filters out the file path in order to get a relative one
+        return new eZDFSFileHandlerDFSBackendFilterIterator(
+            new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator(
+                    $this->mountPointPath . '/' . $basePath,
+                    FilesystemIterator::SKIP_DOTS|FilesystemIterator::UNIX_PATHS
+                )
+            ),
+            $this->mountPointPath
+        );
+    }
+
+    /**
+     * No transformation is required since files are served from the same host
+     */
+    public function applyServerUri( $filePath )
+    {
+        return $filePath;
     }
 
     /**

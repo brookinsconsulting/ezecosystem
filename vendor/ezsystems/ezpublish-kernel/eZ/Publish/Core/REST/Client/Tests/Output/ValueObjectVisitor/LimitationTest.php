@@ -2,14 +2,15 @@
 /**
  * File containing a LimitationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client\Tests\Output\ValueObjectVisitor;
 
-use eZ\Publish\Core\REST\Common\Tests\Output\ValueObjectVisitorBaseTest;
+use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
+use eZ\Publish\Core\REST\Client\Tests\Output\ValueObjectVisitorBaseTest;
 
 use eZ\Publish\Core\REST\Client\Output\ValueObjectVisitor;
 use eZ\Publish\Core\REST\Common;
@@ -23,12 +24,12 @@ class LimitationTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getLimitationVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
 
-        $contentTypeLimitation = new \eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation();
+        $contentTypeLimitation = new ContentTypeLimitation();
         $contentTypeLimitation->limitationValues = array( 1, 2, 3 );
 
         $visitor->visit(
@@ -116,10 +117,8 @@ class LimitationTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Client\Output\ValueObjectVisitor\Limitation
      */
-    protected function getLimitationVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\Limitation(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\Limitation;
     }
 }

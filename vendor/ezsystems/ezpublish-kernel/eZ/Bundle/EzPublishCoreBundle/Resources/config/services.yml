@@ -6,23 +6,31 @@ parameters:
     ezpublish.config.default_scope: ezsettings
     ezpublish.controller.base.class: eZ\Publish\Core\MVC\Symfony\Controller\Controller
     ezpublish.controller.content.view.class: eZ\Publish\Core\MVC\Symfony\Controller\Content\ViewController
-    ezpublish.controller.page.view.class: eZ\Publish\Core\MVC\Symfony\Controller\PageController
-    ezpublish.data_collector.spi.persistence.class: eZ\Bundle\EzPublishCoreBundle\Collector\SPIPersistenceDataCollector
+    ezpublish.controller.content.preview.class: eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController
+    ezpublish.controller.page.view.class: eZ\Bundle\EzPublishCoreBundle\Controller\PageController
 
     # FragmentRenderer overrides
-    fragment.renderer.esi.class: eZ\Bundle\EzPublishCoreBundle\Fragment\EsiFragmentRenderer
-    fragment.renderer.inline.class: eZ\Bundle\EzPublishCoreBundle\Fragment\InlineFragmentRenderer
-    fragment.renderer.hinclude.class: eZ\Bundle\EzPublishCoreBundle\Fragment\HincludeFragmentRenderer
+    ezpublish.decorated_fragment_renderer.inline.class: eZ\Bundle\EzPublishCoreBundle\Fragment\InlineFragmentRenderer
+    ezpublish.decorated_fragment_renderer.class: eZ\Bundle\EzPublishCoreBundle\Fragment\DecoratedFragmentRenderer
+    ezpublish.fragment_listener.factory.class: eZ\Bundle\EzPublishCoreBundle\Fragment\FragmentListenerFactory
+
+    ezpublish.controller_manager.class: eZ\Publish\Core\MVC\Symfony\Controller\Manager
+    ezpublish.controller_listener.class: eZ\Bundle\EzPublishCoreBundle\EventListener\ViewControllerListener
 
 services:
     # Siteaccess is injected in the container at runtime
     ezpublish.siteaccess:
         class: %ezpublish.siteaccess.class%
         arguments: [%ezpublish.siteaccess.default.name%]
+        synchronized: true
 
     ezpublish.config.resolver.core:
         class: %ezpublish.config.resolver.dynamic.class%
-        arguments: [@ezpublish.siteaccess, %ezpublish.siteaccess.groups_by_siteaccess%, @service_container, %ezpublish.config.default_scope%]
+        arguments: [%ezpublish.siteaccess.groups_by_siteaccess%, %ezpublish.config.default_scope%]
+        calls:
+            - [setSiteAccess, [@ezpublish.siteaccess]]
+            - [setContainer, [@service_container]]
+        lazy: true
         tags:
             - { name: ezpublish.config.resolver, priority: 200 }
 
@@ -40,9 +48,23 @@ services:
 
     ezpublish.controller.content.view:
         class: %ezpublish.controller.content.view.class%
-        arguments: [@ezpublish.view_manager]
+        arguments:
+            - @ezpublish.view_manager
+            - @security.context
         parent: ezpublish.controller.base
-        scope: request
+
+    ezpublish.controller.content.preview.core:
+        class: %ezpublish.controller.content.preview.class%
+        arguments:
+            - @ezpublish.api.service.content
+            - @http_kernel
+            - @ezpublish.content_preview_helper
+            - @security.context
+        calls:
+            - [setRequest, [@?request=]]
+
+    ezpublish.controller.content.preview:
+        alias: ezpublish.controller.content.preview.core
 
     ezpublish.controller.page.view:
         class: %ezpublish.controller.page.view.class%
@@ -60,12 +82,27 @@ services:
     ez_page:
         alias: ezpublish.controller.page.view
 
-    # SPI profiling
-    ezpublish.data_collector.spi.persistence:
-        class: %ezpublish.data_collector.spi.persistence.class%
-        arguments: [ @ezpublish.spi.persistence.cache.persistenceLogger ]
+    ezpublish.controller_manager:
+        class: %ezpublish.controller_manager.class%
+        arguments: [@ezpublish.location_view.matcher_factory, @ezpublish.content_view.matcher_factory, @logger]
+
+    ezpublish.controller_listener:
+        class: %ezpublish.controller_listener.class%
+        arguments: [@controller_resolver, @ezpublish.controller_manager, @ezpublish.api.repository, @logger]
         tags:
-            -
-                name: data_collector
-                template: "EzPublishCoreBundle:Profiler:layout"
-                id: "ezpublish.spi.persistence"
+            - { name: kernel.event_subscriber }
+
+    ezpublish.fragment_listener.factory:
+        class: %ezpublish.fragment_listener.factory.class%
+        arguments: [%fragment.path%]
+        calls:
+            - [setRequest, [@?request=]]
+
+    ezpublish.decorated_fragment_renderer:
+        class: %ezpublish.decorated_fragment_renderer.class%
+        # Arguments replaced at compile time
+        arguments: []
+        calls:
+            - [setFragmentPath, [%fragment.path%]]
+            - [setSiteAccess, [@ezpublish.siteaccess]]
+        abstract: true

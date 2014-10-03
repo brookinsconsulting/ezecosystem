@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\Repository\URLWildcardService class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\Core\Repository
  */
 
@@ -20,6 +20,7 @@ use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\ContentValidationException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
+use Exception;
 
 /**
  * URLAlias service
@@ -119,7 +120,7 @@ class URLWildcardService implements URLWildcardServiceInterface
             );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -162,7 +163,7 @@ class URLWildcardService implements URLWildcardServiceInterface
             );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -247,27 +248,6 @@ class URLWildcardService implements URLWildcardServiceInterface
         }
 
         throw new NotFoundException( "URLWildcard", $url );
-    }
-
-    /**
-     * Map by specificity
-     *
-     * @param \eZ\Publish\SPI\Persistence\Content\UrlWildcard[] $spiUrlWildcards
-     *
-     * @todo use or remove
-     *
-     * @return array
-     */
-    private function buildSpecificityScoreMap( array $spiUrlWildcards )
-    {
-        $map = array();
-
-        foreach ( $spiUrlWildcards as $spiUrlWildcard )
-        {
-            $map[$spiUrlWildcard->id] = preg_replace( "/[\\D]/", "", strtr( $spiUrlWildcard->sourceUrl, "/*", "10" ) );
-        }
-
-        return $map;
     }
 
     /**

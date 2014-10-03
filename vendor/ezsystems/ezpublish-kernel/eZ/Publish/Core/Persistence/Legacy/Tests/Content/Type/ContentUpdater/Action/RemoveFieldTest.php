@@ -2,20 +2,21 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\Content\Type\ContentUpdater\Action\RemoveFieldTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content\Type\ContentUpdater\Action;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\Type\ContentUpdater\Action\RemoveField;
 use eZ\Publish\SPI\Persistence\Content;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Test case for Content Type Updater.
  */
-class RemoveFieldTest extends \PHPUnit_Framework_TestCase
+class RemoveFieldTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Content gateway mock
@@ -71,10 +72,7 @@ class RemoveFieldTest extends \PHPUnit_Framework_TestCase
 
         $this->getContentGatewayMock()->expects( $this->once() )
             ->method( 'deleteField' )
-            ->with(
-                $this->equalTo( 3 ),
-                $this->equalTo( 13 )
-            );
+            ->with( $this->equalTo( 3 ) );
 
         $this->getContentStorageHandlerMock()->expects( $this->once() )
             ->method( 'deleteFieldData' )
@@ -119,7 +117,7 @@ class RemoveFieldTest extends \PHPUnit_Framework_TestCase
     /**
      * Returns a Content Gateway mock
      *
-     * @return \eZ\Publish\Core\Persistence\Legacy\Content\Gateway
+     * @return \PHPUnit_Framework_MockObject_MockObject|\eZ\Publish\Core\Persistence\Legacy\Content\Gateway
      */
     protected function getContentGatewayMock()
     {
@@ -135,7 +133,7 @@ class RemoveFieldTest extends \PHPUnit_Framework_TestCase
     /**
      * Returns a Content StorageHandler mock
      *
-     * @return \eZ\Publish\Core\Persistence\Legacy\Content\StorageHandler
+     * @return \PHPUnit_Framework_MockObject_MockObject|\eZ\Publish\Core\Persistence\Legacy\Content\StorageHandler
      */
     protected function getContentStorageHandlerMock()
     {

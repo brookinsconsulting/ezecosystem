@@ -2,9 +2,9 @@
 /**
  * Autoloader definition for eZ Publish Kernel files.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  *
  */
@@ -120,7 +120,12 @@ return array(
       'eZDBSchemaInterface'                                => 'lib/ezdbschema/classes/ezdbschemainterface.php',
       'eZDBTool'                                           => 'lib/ezdb/classes/ezdbtool.php',
       'eZDFSFileHandler'                                   => 'kernel/private/classes/clusterfilehandlers/ezdfsfilehandler.php',
+      'eZDFSFileHandlerBackendException'                   => 'kernel/private/classes/clusterfilehandlers/dfsbackends/ezdfsfilehandlerbackendexception.php',
+      'eZDFSFileHandlerBackendFactory'                     => 'kernel/private/classes/clusterfilehandlers/ezdfsfilehandlerbackendfactory.php',
       'eZDFSFileHandlerDFSBackend'                         => 'kernel/private/classes/clusterfilehandlers/dfsbackends/dfs.php',
+      'eZDFSFileHandlerDFSBackendFactoryInterface'         => 'kernel/private/classes/clusterfilehandlers/dfsbackends/ezdfsfilehandlerdfsbackendfactoryinterface.php',
+      'eZDFSFileHandlerDFSBackendFilterIterator'           => 'kernel/private/classes/clusterfilehandlers/dfsbackends/dfs_filter_iterator.php',
+      'eZDFSFileHandlerDFSBackendInterface'                => 'kernel/private/classes/clusterfilehandlers/dfsbackends/ezdfsfilehandlerdfsbackendinterface.php',
       'eZDFSFileHandlerMySQLiBackend'                      => 'kernel/private/classes/clusterfilehandlers/dfsbackends/mysqli.php',
       'eZDFSFileHandlerNFSMountPointNotFoundException'     => 'kernel/private/classes/exceptions/cluster/mount_point_not_found.php',
       'eZDFSFileHandlerNFSMountPointNotWriteableException' => 'kernel/private/classes/exceptions/cluster/mount_point_not_writeable.php',
@@ -598,6 +603,7 @@ return array(
       'ezpI18n'                                            => 'kernel/common/ezpi18n.php',
       'ezpKernel'                                          => 'kernel/private/classes/ezpkernel.php',
       'ezpKernelHandler'                                   => 'kernel/private/interfaces/ezpkernelhandler.php',
+      'ezpKernelRedirect'                                  => 'kernel/private/classes/ezpkernelredirect.php',
       'ezpKernelResult'                                    => 'kernel/private/classes/ezpkernelresult.php',
       'ezpKernelTreeMenu'                                  => 'kernel/private/classes/ezpkerneltreemenu.php',
       'ezpKernelWeb'                                       => 'kernel/private/classes/ezpkernelweb.php',
@@ -707,6 +713,7 @@ return array(
       'ezpTopologicalSortNode'                             => 'kernel/private/classes/ezptopologicalsortnode.php',
       'ezpUpdatedContent'                                  => 'kernel/private/rest/classes/sync/updates.php',
       'ezpUserNotFoundException'                           => 'kernel/private/rest/classes/exceptions/user_not_found.php',
+      'ezpWebBasedKernelHandler'                           => 'kernel/private/interfaces/ezpwebbasedkernelhandler.php',
     );
 
 ?>

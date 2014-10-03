@@ -2,13 +2,20 @@
 /**
  * File containing the ImageVariation class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Variation\Values;
 
+/**
+ * @property-read int $width The width as number of pixels (for example "320")
+ * @property-read int $height The height as number of pixels (for example "256")
+ * @property-read string $name The name of the image alias (for example "original")
+ * @property-read mixed $info Extra information about the image, depending on the image type
+ * @property-read mixed $imageId
+ */
 class ImageVariation extends Variation
 {
     /**
@@ -40,4 +47,9 @@ class ImageVariation extends Variation
      * @var mixed
      */
     protected $info;
+
+    /**
+     * @var mixed
+     */
+    protected $imageId;
 }

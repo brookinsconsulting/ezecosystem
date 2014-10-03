@@ -2,9 +2,9 @@
 /**
  * File containing the ConfigurationDumperTest class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\Tests\SetupWizard;
@@ -12,8 +12,9 @@ namespace eZ\Bundle\EzPublishLegacyBundle\Tests\SetupWizard;
 use eZ\Bundle\EzPublishLegacyBundle\SetupWizard\ConfigurationDumper;
 use eZ\Publish\Core\MVC\Symfony\ConfigDumperInterface;
 use Symfony\Component\Yaml\Yaml;
+use PHPUnit_Framework_TestCase;
 
-class ConfigurationDumperTest extends \PHPUnit_Framework_TestCase
+class ConfigurationDumperTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -29,6 +30,11 @@ class ConfigurationDumperTest extends \PHPUnit_Framework_TestCase
      */
     private $envs;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    private $configurator;
+
     protected function setUp()
     {
         parent::setUp();
@@ -37,6 +43,13 @@ class ConfigurationDumperTest extends \PHPUnit_Framework_TestCase
         $this->configDir = __DIR__ . '/config';
         @mkdir( $this->configDir );
         $this->envs = array( 'dev', 'prod' );
+        $this->configurator = $this->getMock(
+            'Sensio\\Bundle\\DistributionBundle\\Configurator\\Configurator',
+            array(),
+            array(),
+            '',
+            false
+        );
     }
 
     protected function tearDown()
@@ -129,7 +142,23 @@ class ConfigurationDumperTest extends \PHPUnit_Framework_TestCase
             ->will( $this->returnValue( false ) );
         $this->expectsCacheClear();
 
-        $dumper = new ConfigurationDumper( $this->fs, $this->envs, __DIR__, $this->cacheDir );
+        $this->configurator
+            ->expects( $this->once() )
+            ->method( 'mergeParameters' )
+            ->with( $this->isType( 'array' ) );//@todo Change to check the value as well
+
+        $this->configurator
+            ->expects( $this->once() )
+            ->method( 'getStep' )
+            ->with( 1 )
+            ->will( $this->returnValue( (object)array( 'secret' => 'mysecret value' ) ) );
+
+        $this->configurator
+            ->expects( $this->once() )
+            ->method( 'write' )
+            ->with();
+
+        $dumper = new ConfigurationDumper( $this->fs, $this->envs, __DIR__, $this->cacheDir, $this->configurator );
         $dumper->dump( $configArray );
         $this->assertConfigFileValid( $configArray );
         $this->assertEnvConfigFilesValid();
@@ -152,7 +181,23 @@ class ConfigurationDumperTest extends \PHPUnit_Framework_TestCase
         $this->expectBackup();
         $this->expectsCacheClear();
 
-        $dumper = new ConfigurationDumper( $this->fs, $this->envs, __DIR__, $this->cacheDir );
+        $this->configurator
+            ->expects( $this->once() )
+            ->method( 'mergeParameters' )
+            ->with( $this->isType( 'array' ) );//@todo Change to check the value as well
+
+        $this->configurator
+            ->expects( $this->once() )
+            ->method( 'getStep' )
+            ->with( 1 )
+            ->will( $this->returnValue( (object)array( 'secret' => 'mysecret value' ) ) );
+
+        $this->configurator
+            ->expects( $this->once() )
+            ->method( 'write' )
+            ->with();
+
+        $dumper = new ConfigurationDumper( $this->fs, $this->envs, __DIR__, $this->cacheDir, $this->configurator );
         $dumper->dump( $configArray, ConfigDumperInterface::OPT_BACKUP_CONFIG );
         $this->assertConfigFileValid( $configArray );
         $this->assertEnvConfigFilesValid();

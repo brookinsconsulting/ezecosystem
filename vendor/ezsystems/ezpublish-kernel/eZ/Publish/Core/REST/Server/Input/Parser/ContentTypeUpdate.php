@@ -2,15 +2,15 @@
 /**
  * File containing the ContentTypeUpdate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\Core\REST\Common\Exceptions;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -19,7 +19,7 @@ use DateTime;
 /**
  * Parser for ContentTypeUpdate
  */
-class ContentTypeUpdate extends Base
+class ContentTypeUpdate extends BaseParser
 {
     /**
      * ContentType service
@@ -38,13 +38,11 @@ class ContentTypeUpdate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler, ContentTypeService $contentTypeService, ParserTools $parserTools )
+    public function __construct( ContentTypeService $contentTypeService, ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->contentTypeService = $contentTypeService;
         $this->parserTools = $parserTools;
     }
@@ -138,8 +136,7 @@ class ContentTypeUpdate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for User element in ContentTypeUpdate." );
             }
 
-            $userValues = $this->urlHandler->parse( 'user', $data['User']['_href'] );
-            $contentTypeUpdateStruct->modifierId = $userValues['user'];
+            $contentTypeUpdateStruct->modifierId = $this->requestParser->parseHref( $data['User']['_href'], 'userId' );
         }
 
         return $contentTypeUpdateStruct;

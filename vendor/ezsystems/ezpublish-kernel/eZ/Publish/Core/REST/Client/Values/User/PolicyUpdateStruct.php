@@ -2,14 +2,15 @@
 /**
  * File containing the PolicyUpdateStruct class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client\Values\User;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\API\Repository\Values\User\PolicyUpdateStruct as APIPolicyUpdateStruct;
 
 /**
  * Implementation of the {@link \eZ\Publish\API\Repository\Values\User\PolicyUpdateStruct}
@@ -17,7 +18,7 @@ use eZ\Publish\API\Repository\Values\User\Limitation;
  *
  * @see \eZ\Publish\API\Repository\Values\User\PolicyUpdateStruct
  */
-class PolicyUpdateStruct extends \eZ\Publish\API\Repository\Values\User\PolicyUpdateStruct
+class PolicyUpdateStruct extends APIPolicyUpdateStruct
 {
     /**
      * @var \eZ\Publish\API\Repository\Values\User\Limitation[]

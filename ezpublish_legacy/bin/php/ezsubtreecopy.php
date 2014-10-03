@@ -3,9 +3,9 @@
 /**
  * File containing the ezsubtreecopy.php script.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -50,7 +50,7 @@ function copyPublishContentObject( $sourceObject,
                                    &$syncObjectIDListSrc, &$syncObjectIDListNew,
                                    $allVersions = false, $keepCreator = false, $keepTime = false )
 {
-    global $cli;
+    $cli = eZCLI::instance();
 
     $sourceObjectID = $sourceObject->attribute( 'id' );
 
@@ -199,20 +199,6 @@ function copyPublishContentObject( $sourceObject,
         {
             die( "Copy Subtree Error: Algoritm ERROR! Cannot find source parent node ID in source parent node ID's list of contentobject being copied." );
         }
-        // Create unique remote_id
-        $newRemoteID = eZRemoteIdUtility::generate( 'node' );
-        $oldRemoteID = $newNode->attribute( 'remote_id' );
-        $newNode->setAttribute( 'remote_id', $newRemoteID );
-        // Change parent_remote_id for object assignments
-        foreach ( $objAssignments as $assignment )
-        {
-            if ( $assignment->attribute( 'parent_remote_id' ) == $oldRemoteID )
-            {
-                 $assignment->setAttribute( 'parent_remote_id', $newRemoteID );
-                 $assignment->store();
-            }
-        }
-        $newNode->store();
     }
 
     // Update "is_invisible" attribute for the newly created node.

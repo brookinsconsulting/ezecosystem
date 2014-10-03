@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -26,12 +26,18 @@ class ContentListTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getContentListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
 
         $contentList = new ContentList( array() );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_redirectContent',
+            array(),
+            '/content/objects'
+        );
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -57,7 +63,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
     {
         $this->assertTag(
             array(
-                'tag'      => 'ContentList',
+                'tag' => 'ContentList',
             ),
             $result,
             'Invalid <ContentList> element.',
@@ -93,7 +99,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
      */
     public function testContentListVisitsChildren()
     {
-        $visitor   = $this->getContentListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -121,10 +127,8 @@ class ContentListTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentList
      */
-    protected function getContentListVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\ContentList(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\ContentList;
     }
 }

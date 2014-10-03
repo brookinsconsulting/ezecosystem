@@ -2,16 +2,14 @@
 /**
  * File containing the ObjectStateLimitationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests\Values\User\Limitation;
 
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\User\Limitation\ObjectStateLimitation;
-use eZ\Publish\API\Repository\Tests\Values\User\Limitation\BaseLimitationTest;
 
 /**
  * Test case for the {@link \eZ\Publish\API\Repository\Values\User\Limitation\ObjectStateLimitation}
@@ -34,6 +32,7 @@ class ObjectStateLimitationTest extends BaseLimitationTest
     public function testObjectStateLimitationAllow()
     {
         $repository = $this->getRepository();
+        $notLockedState = $this->generateId( 'objectstate', 2 );
 
         $contentService = $repository->getContentService();
         /* BEGIN: Use Case */
@@ -65,8 +64,7 @@ class ObjectStateLimitationTest extends BaseLimitationTest
             new ObjectStateLimitation(
                 array(
                     'limitationValues' => array(
-                        // 'not_locked' state
-                        2
+                        $notLockedState
                     )
                 )
             )
@@ -101,6 +99,7 @@ class ObjectStateLimitationTest extends BaseLimitationTest
     public function testObjectStateLimitationForbid()
     {
         $repository = $this->getRepository();
+        $lockedState = $this->generateId( 'objectstate', 1 );
 
         $contentService = $repository->getContentService();
         /* BEGIN: Use Case */
@@ -132,8 +131,7 @@ class ObjectStateLimitationTest extends BaseLimitationTest
             new ObjectStateLimitation(
                 array(
                     'limitationValues' => array(
-                        // 'locked' state
-                        1
+                        $lockedState
                     )
                 )
             )

@@ -6,23 +6,25 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 // SOFTWARE NAME: eZ Star Rating
-// SOFTWARE RELEASE: 5.0.0
-// COPYRIGHT NOTICE: Copyright (C) 2009-2012 eZ Systems AS
+// SOFTWARE RELEASE: 2.x
+// COPYRIGHT NOTICE: Copyright (C) 2009-2014 eZ Systems AS
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
-//  This program is free software; you can redistribute it and/or
-//  modify it under the terms of version 2.0  of the GNU General
-//  Public License as published by the Free Software Foundation.
+//   This program is free software; you can redistribute it and/or
+//   modify it under the terms of version 2.0  of the GNU General
+//   Public License as published by the Free Software Foundation.
 //
-//  This program is distributed in the hope that it will be useful,
+//   This program is distributed in the hope that it will be useful,
 //   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
 //
-//  You should have received a copy of version 2.0 of the GNU General
-//  Public License along with this program; if not, write to the Free
-//  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-//  MA 02110-1301, USA.
+//   You should have received a copy of version 2.0 of the GNU General
+//   Public License along with this program; if not, write to the Free
+//   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+//   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -56,7 +58,10 @@ class ezsrServerFunctions extends ezjscServerFunctions
 
         // Provide extra session protection on 4.1 (not possible on 4.0) by expecting user
         // to have an existing session (new session = mostlikely a spammer / hacker trying to manipulate rating)
-        if ( class_exists( 'eZSession' ) && eZSession::userHasSessionCookie() !== true )
+        if (
+            eZSession::userHasSessionCookie() !== true
+            && eZINI::instance()->variable( 'eZStarRating', 'AllowAnonymousRating' ) === 'disabled'
+        )
             return $ret;
 
         // Return if parameters are not valid attribute id + version numbers

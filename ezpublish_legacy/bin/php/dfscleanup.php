@@ -3,9 +3,9 @@
 /**
  * File containing the script to cleanup files in a DFS setup
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package
  */
 
@@ -62,7 +62,7 @@ $pause = 1000; // microseconds, time to wait between heavy operations
 
 if ( !$checkBase && !$checkDFS )
 {
-    $cli->output( 'Nothing to do...' );
+    $cli->warning( 'Specify at least one of -B or -S' );
     $script->showHelp();
     $script->shutdown( 1 );
 }
@@ -90,22 +90,43 @@ if ( $checkBase )
     }
 
     $loopRun = true;
-    $limit = $optIterationLimit ? array (0, $optIterationLimit) : false;
-    while ( $loopRun && $files = $fileHandler->getFileList( false, false, $limit, $chekPath ) )
+    $limit = $optIterationLimit ? array( 0, $optIterationLimit ) : false;
+    while ( $loopRun )
     {
+        try
+        {
+            $files = $fileHandler->getFileList( false, false, $limit, $checkPath );
+        }
+        catch ( Exception $e )
+        {
+            abort( "Database error, aborting.\n" . $e->getMessage() );
+        }
+
         foreach ( $files as $file )
         {
             $fh = eZClusterFileHandler::instance( $file );
 
-            if ( !$fh->exists( true ) )
+            try
             {
-                $cli->output( '  - ' . $fh->name() );
-                if ( $delete );
-                // expire the file, and purge it
+                if ( !$fh->exists( true ) )
                 {
-                    $fh->delete();
-                    $fh->purge();
+                    $cli->output( '  - ' . $fh->name() );
+
+                    // expire the file, and purge it
+                    if ( $delete )
+                    {
+                        $fh->delete();
+                        $fh->purge();
+                    }
                 }
+            }
+            catch ( eZDFSFileHandlerDFSBackendException $e )
+            {
+                abort( "DFS FS backend error, aborting.\n" . $e->getMessage() );
+            }
+            catch ( Exception $e )
+            {
+                abort( "DFS DB backend error, aborting.\n" . $e->getMessage() );
             }
             usleep( $pause );
         }
@@ -133,45 +154,33 @@ if ( $checkDFS )
         $cli->output( 'Checking files on the DFS share...' );
     }
 
-    $dfsBackend = new eZDFSFileHandlerDFSBackend();
-    $base = realpath( $dfsBackend->getMountPoint() );
-    $cleanPregExpr = preg_quote( fixWinPath( $base ), '@' );
-    foreach (
-        new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator( $base . '/' . $checkPath )
-        ) as $filename => $current )
+    $dfsBackend = eZDFSFileHandlerBackendFactory::build();
+    foreach ( $dfsBackend->getFilesList( $checkPath ) as $filePathName )
     {
-        if ( $current->isFile() )
+        try
         {
-            $relativePath = trim( preg_replace( '@^' . $cleanPregExpr . '@', '', fixWinPath( $filename ) ), '/' );
-            if ( !$fileHandler->fileExists( $relativePath ) )
+            if ( !$fileHandler->fileExists( $filePathName ) )
             {
-                $cli->output( '  - ' . $relativePath );
+                $cli->output( '  - ' . $filePathName );
                 if ( $delete )
                 {
-                    unlink( $filename );
+                    unlink( $filePathName );
                 }
             }
-            usleep( $pause );
         }
+        catch ( Exception $e )
+        {
+            abort( "DFS Backend error, aborting.\n" . $e->getMessage() );
+        }
+        usleep( $pause );
     }
     $cli->output( 'Done' );
 }
 
 $script->shutdown();
 
-/**
- * Replaces backslashes in $path with forward slashes.
- *
- * Clustering only references path using forward slashes. This makes sure input path are consistent
- *
- * @param string $path The path to update
- * @return string The modified path.
- */
-function fixWinPath( $path )
+function abort( $message )
 {
-    if ( DIRECTORY_SEPARATOR == '\\' )
-        return str_replace( '\\', '/', $path );
-    else
-        return $path;
+    eZCLI::instance()->error( $message );
+    eZScript::instance()->shutdown( 2 );
 }

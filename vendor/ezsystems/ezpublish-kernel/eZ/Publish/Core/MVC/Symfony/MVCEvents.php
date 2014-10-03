@@ -2,9 +2,9 @@
 /**
  * File containing the Events class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony;
@@ -36,4 +36,45 @@ final class MVCEvents
      * The event listener method receives an \eZ\Publish\Core\MVC\Symfony\Event\APIContentExceptionEvent.
      */
     const API_CONTENT_EXCEPTION = 'ezpublish.api.contentException';
+
+    /**
+     * The API_SIGNAL event occurs when the SignalSlot repository services emit a signal.
+     * This make it possible to react to it, depending on which signal is emitted.
+     *
+     * All available signals can be found under eZ\Publish\Core\SignalSlot\Signal namespace.
+     *
+     * The event listener method receives a eZ\Publish\Core\MVC\Symfony\Event\SignalEvent instance.
+     */
+    const API_SIGNAL = 'ezpublish.api.signal';
+
+    /**
+     * CONFIG_SCOPE_CHANGE event occurs when configuration scope is changed (e.g. for content preview in a given siteaccess).
+     *
+     * The event listener method receives a eZ\Publish\Core\MVC\Symfony\Event\ScopeChangeEvent instance.
+     */
+    const CONFIG_SCOPE_CHANGE = 'ezpublish.config.scope_change';
+
+    /**
+     * CONFIG_SCOPE_RESTORE event occurs when original configuration scope is restored.
+     * It always happens after a scope change (see CONFIG_SCOPE_CHANGE).
+     *
+     * The event listener method receives a eZ\Publish\Core\MVC\Symfony\Event\ScopeChangeEvent instance.
+     */
+    const CONFIG_SCOPE_RESTORE = 'ezpublish.config.scope_restore';
+
+    /**
+     * INTERACTIVE_LOGIN event occurs when a user has been authenticated by a foreign user provider.
+     * Listening to this event gives a chance to retrieve a valid API user to be injected in repository.
+     *
+     * The event listener method receives a eZ\Publish\Core\MVC\Symfony\Event\InteractiveLoginEvent instance.
+     */
+    const INTERACTIVE_LOGIN = 'ezpublish.security.interactive_login';
+
+    /**
+     * ROUTE_REFERENCE_GENERATION event occurs when a RouteReference is generated, and gives an opportunity to
+     * alter the RouteReference, e.g. by adding parameters.
+     *
+     * The event listener method receives a eZ\Publish\Core\MVC\Symfony\Event\RouteReferenceGenerationEvent instance.
+     */
+    const ROUTE_REFERENCE_GENERATION = 'ezpublish.routing.reference_generation';
 }

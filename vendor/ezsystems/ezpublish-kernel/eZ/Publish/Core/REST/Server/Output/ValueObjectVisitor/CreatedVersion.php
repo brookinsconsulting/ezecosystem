@@ -2,9 +2,9 @@
 /**
  * File containing the CreatedVersion ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -14,6 +14,7 @@ use eZ\Publish\Core\REST\Common\Output\Visitor;
 
 /**
  * CreatedVersion value object visitor
+ * @todo coverage add unit test
  */
 class CreatedVersion extends Version
 {
@@ -29,11 +30,11 @@ class CreatedVersion extends Version
         parent::visit( $visitor, $generator, $data->version );
         $visitor->setHeader(
             'Location',
-            $this->urlHandler->generate(
-                'objectVersion',
+            $this->router->generate(
+                'ezpublish_rest_loadContentInVersion',
                 array(
-                    'object' => $data->version->content->id,
-                    'version' => $data->version->content->getVersionInfo()->versionNo
+                    'contentId' => $data->version->content->id,
+                    'versionNumber' => $data->version->content->getVersionInfo()->versionNo
                 )
             )
         );

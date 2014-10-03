@@ -2,12 +2,14 @@
 /**
  * File containing the Json ArrayObject class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\Output\Generator\Json;
+
+use ArrayObject as NativeArrayObject;
 
 /**
  * Json array object
@@ -15,7 +17,7 @@ namespace eZ\Publish\Core\REST\Common\Output\Generator\Json;
  * Special JSON array object implementation, which allows to access the
  * parent object it is assigned to again.
  */
-class ArrayObject extends \ArrayObject
+class ArrayObject extends NativeArrayObject
 {
     /**
      * Reference to the parent node

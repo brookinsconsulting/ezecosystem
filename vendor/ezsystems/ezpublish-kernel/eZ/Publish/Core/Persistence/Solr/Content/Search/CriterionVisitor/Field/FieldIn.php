@@ -2,9 +2,9 @@
 /**
  * File containing the Content Search handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search\CriterionVisitor\Field;
@@ -32,7 +32,8 @@ class FieldIn extends Field
         return
             $criterion instanceof Criterion\Field &&
             ( ( $criterion->operator ?: Operator::IN ) === Operator::IN ||
-              $criterion->operator === Operator::EQ );
+                $criterion->operator === Operator::EQ ||
+                $criterion->operator === Operator::CONTAINS );
     }
 
     /**
@@ -47,7 +48,7 @@ class FieldIn extends Field
      */
     public function visit( Criterion $criterion, CriterionVisitor $subVisitor = null )
     {
-        $fieldTypes = $this->getFieldTypes();
+        $fieldTypes = $this->getFieldTypes( $criterion );
 
         $criterion->value = (array)$criterion->value;
 
@@ -62,9 +63,12 @@ class FieldIn extends Field
         $queries = array();
         foreach ( $criterion->value as $value )
         {
-            foreach ( $fieldTypes[$criterion->target] as $name )
+            foreach ( $fieldTypes[$criterion->target] as $names )
             {
-                $queries[] = $name . ':"' . $value . '"';
+                foreach ( $names as $name )
+                {
+                    $queries[] = $name . ':"' . $value . '"';
+                }
             }
         }
 

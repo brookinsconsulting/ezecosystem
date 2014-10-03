@@ -31,6 +31,13 @@
 {% endspaceless %}
 {% endblock %}
 
+{% block ezrichtext_field %}
+{% spaceless %}
+    {% set field_value = field.value.xml|richtext_to_html5 %}
+    {{ block( 'simple_block_field' ) }}
+{% endspaceless %}
+{% endblock %}
+
 {% block ezauthor_field %}
 {% spaceless %}
     {% if field.value.authors|length() > 0 %}
@@ -71,7 +78,7 @@
 
 {% block ezdatetime_field %}
 {% spaceless %}
-    {% if field.value.value %}
+    {% if not ez_is_field_empty( content, field ) %}
         {% if fieldSettings.useSeconds %}
             {% set field_value = field.value.value|localizeddate( 'short', 'medium', parameters.locale ) %}
         {% else %}
@@ -84,7 +91,7 @@
 
 {% block ezdate_field %}
 {% spaceless %}
-    {% if field.value.date %}
+    {% if not ez_is_field_empty( content, field ) %}
         {% set field_value = field.value.date|localizeddate( 'short', 'none', parameters.locale ) %}
         {{ block( 'simple_block_field' ) }}
     {% endif %}
@@ -93,7 +100,7 @@
 
 {% block eztime_field %}
 {% spaceless %}
-    {% if field.value.time %}
+    {% if not ez_is_field_empty( content, field ) %}
         {% if fieldSettings.useSeconds %}
             {% set field_value = field.value.time|localizeddate( 'none', 'medium', parameters.locale ) %}
         {% else %}
@@ -106,7 +113,7 @@
 
 {% block ezemail_field %}
 {% spaceless %}
-    {% if field.value.email %}
+    {% if not ez_is_field_empty( content, field ) %}
         {% set field_value = field.value.email %}
         <a href="mailto:{{ field.value.email|escape( 'url' ) }}" {{ block( 'field_attributes' ) }}>{{ field.value.email }}</a>
     {% endif %}
@@ -115,7 +122,7 @@
 
 {% block ezinteger_field %}
 {% spaceless %}
-    {% if field.value %}
+    {% if not ez_is_field_empty( content, field ) %}
         {% set field_value = field.value.value %}
         {{ block( 'simple_inline_field' ) }}
     {% endif %}
@@ -125,7 +132,7 @@
 {# @todo: handle localization #}
 {% block ezfloat_field %}
 {% spaceless %}
-    {% if field.value %}
+    {% if not ez_is_field_empty( content, field ) %}
         {% set field_value = field.value.value %}
         {{ block( 'simple_inline_field' ) }}
     {% endif %}
@@ -134,16 +141,23 @@
 
 {% block ezurl_field %}
 {% spaceless %}
-    {% if field.value %}
+    {% if not ez_is_field_empty( content, field ) %}
         <a href="{{ field.value.link }}"
             {{ block( 'field_attributes' ) }}>{{ field.value.text ? field.value.text : field.value.link }}</a>
     {% endif %}
 {% endspaceless %}
 {% endblock %}
 
+{% block ezisbn_field %}
+{% spaceless %}
+    {% set field_value = field.value.isbn %}
+    {{ block( 'simple_inline_field' ) }}
+{% endspaceless %}
+{% endblock %}
+
 {% block ezkeyword_field %}
 {% spaceless %}
-    {% if field.value.values|length() > 0 %}
+    {% if not ez_is_field_empty( content, field ) %}
         <ul {{ block( 'field_attributes' ) }}>
         {% for keyword in field.value.values %}
             <li>{{ keyword }}</li>
@@ -190,18 +204,18 @@
 {# @todo: handle the unit of the fileSize (si operator in legacy template engine) #}
 {% block ezbinaryfile_field %}
 {% spaceless %}
-    {% if field.value %}
+    {% if not ez_is_field_empty( content, field ) %}
         {% set uri = 'content/download/' ~ contentInfo.id ~ '/' ~ field.id
                         ~ '/version/' ~ contentInfo.currentVersionNo ~  "/file/"
                         ~ field.value.fileName|escape( 'url' ) %}
         <a href="{{ path( 'ez_legacy', {'module_uri': uri} ) }}"
-            {{ block( 'field_attributes' ) }}>{{ field.value.fileName }}</a>&nbsp;({{ field.value.fileSize }})
+            {{ block( 'field_attributes' ) }}>{{ field.value.fileName }}</a>&nbsp;({{ field.value.fileSize|ez_file_size( 1 ) }})
     {% endif %}
 {% endspaceless %}
 {% endblock %}
 
 {% block ezmedia_field %}
-{% if field.value %}
+{% if not ez_is_field_empty( content, field ) %}
 {% spaceless %}
     {% set type = fieldSettings.mediaType %}
     {% set value = field.value %}
@@ -260,7 +274,7 @@
 
 {% block ezobjectrelationlist_field %}
 {% spaceless %}
-    {% if field.value.destinationContentIds|length > 0 %}
+    {% if not ez_is_field_empty( content, field ) %}
     <ul {{ block( 'field_attributes' ) }}>
         {% for contentId in field.value.destinationContentIds %}
         <li>
@@ -281,7 +295,9 @@
  # This field type block accepts the following parameters:
  # - string mapType the Google map type (ROADMAP, SATELLITE, HYBRID or TERRAIN), default is ROADMAP
  # - boolean showMap whether to show the Google map or not, default is true
+ # - boolean showInfo whether to show the latitude, longitude and address or not, default is true
  # - integer zoom the default zoom level, default is 13
+ # - boolean draggable whether to enable or not draggable map (useful on mobile / responsive layout), default is true
  # - string|false width the width of the rendered map with its unit (ie "500px" or "50em"),
  #                      set to false to not set any width style inline, default is 500px
  # - string|boolean height the height of the rendered map with its unit (ie "200px" or "20em"),
@@ -291,9 +307,11 @@
 <div {{ block( 'field_attributes' ) }}>
     {% set defaultWidth = '500px' %}
     {% set defaultHeight = '200px' %}
-    {% set defautShowMap = true %}
+    {% set defaultShowMap = true %}
+    {% set defaultShowInfo = true %}
     {% set defaultZoom = 13 %}
     {% set defaultMapType = 'ROADMAP' %}
+    {% set defaultDraggable = 'true' %}
 
     {% set hasContent = field.value is not null %}
     {% set latitude = field.value.latitude|default( 0 ) %}
@@ -303,22 +321,32 @@
 
     {% set zoom = parameters.zoom|default( defaultZoom ) %}
     {% set mapType = parameters.mapType|default( defaultMapType ) %}
-    {% if parameters.width is sameas(false) %}
-        {% set mapWidth = false %}
-    {% else %}
-        {% set mapWidth = parameters.width|default( defaultWidth ) %}
-    {% endif %}
-    {% if parameters.height is sameas(false) %}
-        {% set mapHeight = false %}
-    {% else %}
-        {% set mapHeight = parameters.width|default( defaultHeight ) %}
+
+    {% set mapWidth, mapHeight = defaultWidth, defaultHeight %}
+    {% if parameters.width is defined %}
+        {% set mapWidth = parameters.width %}
     {% endif %}
 
-    {% set showMap = defautShowMap %}
-    {% if parameters and parameters.showMap is sameas(false) %}
+    {% if parameters.height is defined %}
+        {% set mapHeight = parameters.height %}
+    {% endif %}
+
+    {% set showMap = defaultShowMap %}
+    {% if parameters.showMap is defined and not parameters.showMap %}
         {% set showMap = false %}
     {% endif %}
 
+    {% set showInfo = defaultShowInfo %}
+    {% if parameters.showInfo is defined and not parameters.showInfo %}
+        {% set showInfo = false %}
+    {% endif %}
+    
+    {% set draggable = defaultDraggable %}
+    {% if parameters.draggable is defined and not parameters.draggable %}
+        {% set draggable = 'false' %}
+    {% endif %}
+
+    {% if showInfo %}
     <dl>
         <dt>Latitude</dt>
         <dd>{{ hasContent ? latitude : "Not set" }}</dd>
@@ -329,6 +357,7 @@
         <dd>{{ address }}</dd>
         {% endif %}
     </dl>
+    {% endif %}
 
     {% if hasContent and showMap %}
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -337,12 +366,14 @@
             var mapView = function (mapId, latitude, longitude) {
                 var mapElt = doc.getElementById("{{ mapId }}"),
                     startPoint = new google.maps.LatLng(latitude, longitude),
-                    zoom = {{ zoom }};
+                    zoom = {{ zoom }},
+                    draggable = {{ draggable }};
 
                 new google.maps.Marker({
                     map: new google.maps.Map(mapElt, {
                         center: startPoint,
                         zoom: zoom,
+                        draggable: draggable,
                         mapTypeId: google.maps.MapTypeId.{{ mapType }}
                     }),
                     position: startPoint
@@ -379,7 +410,7 @@
  #}
 {% block ezimage_field %}
 {% spaceless %}
-{% if field.value %}
+{% if not ez_is_field_empty( content, field ) %}
 <figure {{ block( 'field_attributes' ) }}>
     {% set imageAlias = ez_image_alias( field, versionInfo, parameters.alias|default( 'original' ) ) %}
     <img src="{{ asset( imageAlias.uri ) }}" width="{{ imageAlias.width }}" height="{{ imageAlias.height }}" alt="{{ field.value.alternativeText }}" />
@@ -390,7 +421,7 @@
 
 {% block ezobjectrelation_field %}
 {% spaceless %}
-{% if field.value.destinationContentId %}
+{% if not ez_is_field_empty( content, field ) %}
     <div {{ block( 'field_attributes' ) }}>
         {{ render( controller( "ez_content:viewContent", {'contentId': field.value.destinationContentId, 'viewType': 'text_linked', 'noLayout': 1} ) ) }}
     </div>
@@ -401,7 +432,7 @@
 {# pageService is exposed under parameters.pageService thanks to Page\ParameterProvider #}
 {% block ezpage_field %}
 {% spaceless %}
-{% if field.value.page is not null %}
+{% if not ez_is_field_empty( content, field ) %}
     {% set layout = field.value.page.layout %}
     {% set template = parameters.pageService.getLayoutTemplate( layout ) %}
     {% include template with { 'zones': field.value.page.zones, 'zone_layout': layout, 'pageService': parameters.pageService } %}

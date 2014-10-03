@@ -571,12 +571,12 @@ if (!YAHOO.util.Event) {
                        // this case, even though the shiftKey modifier is set)
         },
 
-                isIE = YAHOO.env.ua.ie,
+		isIE = YAHOO.env.ua.ie,
 
         // String constants used by the addFocusListener and removeFocusListener methods
-                
-        FOCUSIN = "focusin",
-        FOCUSOUT = "focusout";
+		
+       	FOCUSIN = "focusin",
+       	FOCUSOUT = "focusout";
 
         return {
 
@@ -684,7 +684,7 @@ if (!YAHOO.util.Event) {
              * @static
              * @final
              */
-                        CAPTURE: 7,
+			CAPTURE: 7,
 
             /**
              * addListener/removeListener can throw errors in unexpected scenarios.
@@ -747,10 +747,10 @@ if (!YAHOO.util.Event) {
              * @static
              * @private
              */
-                        _specialTypes: {
-                                focusin: (isIE ? "focusin" : "focus"),
-                                focusout: (isIE ? "focusout" : "blur")
-                        },
+			_specialTypes: {
+				focusin: (isIE ? "focusin" : "focus"),
+				focusout: (isIE ? "focusout" : "blur")
+			},
 
 
             /**
@@ -1013,19 +1013,19 @@ if (!YAHOO.util.Event) {
 
             /**
              * Checks to see if the type requested is a special type 
-                         * (as defined by the _specialTypes hash), and (if so) returns 
-                         * the special type name.
+			 * (as defined by the _specialTypes hash), and (if so) returns 
+			 * the special type name.
              *
              * @method _getType
              *
              * @param {String}   sType     The type to look up
              * @private
              */
-                        _getType: function (type) {
-                        
-                                return this._specialTypes[type] || type;
-                                
-                        },
+			_getType: function (type) {
+			
+				return this._specialTypes[type] || type;
+				
+			},
 
 
             /**
@@ -1052,16 +1052,16 @@ if (!YAHOO.util.Event) {
              */
             addListener: function (el, sType, fn, obj, overrideContext) {
 
-                                var capture = ((sType == FOCUSIN || sType == FOCUSOUT) && !YAHOO.env.ua.ie) ? true : false;
+				var capture = ((sType == FOCUSIN || sType == FOCUSOUT) && !YAHOO.env.ua.ie) ? true : false;
 
                 return this._addListener(el, this._getType(sType), fn, obj, overrideContext, capture);
 
-                },
+        	},
 
 
             /**
              * Attaches a focusin event listener to the specified element for 
-                         * the purpose of listening for the focus event on the element's 
+ 			 * the purpose of listening for the focus event on the element's 
              * descendants.
              * @method addFocusListener
              *
@@ -1080,7 +1080,7 @@ if (!YAHOO.util.Event) {
              *                        could not have the listener attached,
              *                        or if the operation throws an exception.
              * @static
-                        * @deprecated use YAHOO.util.Event.on and specify "focusin" as the event type.
+			* @deprecated use YAHOO.util.Event.on and specify "focusin" as the event type.
              */
             addFocusListener: function (el, fn, obj, overrideContext) {
                 return this.on(el, FOCUSIN, fn, obj, overrideContext);
@@ -1089,7 +1089,7 @@ if (!YAHOO.util.Event) {
 
             /**
              * Removes a focusin event listener to the specified element for 
-                         * the purpose of listening for the focus event on the element's 
+			 * the purpose of listening for the focus event on the element's 
              * descendants.
              *
              * @method removeFocusListener
@@ -1103,7 +1103,7 @@ if (!YAHOO.util.Event) {
              * @return {boolean} true if the unbind was successful, false 
              *  otherwise.
              * @static
-                 * @deprecated use YAHOO.util.Event.removeListener and specify "focusin" as the event type.
+         	 * @deprecated use YAHOO.util.Event.removeListener and specify "focusin" as the event type.
              */
             removeFocusListener: function (el, fn) { 
                 return this.removeListener(el, FOCUSIN, fn);
@@ -1111,8 +1111,8 @@ if (!YAHOO.util.Event) {
 
             /**
              * Attaches a focusout event listener to the specified element for 
-                         * the purpose of listening for the blur event on the element's 
-                         * descendants.
+			 * the purpose of listening for the blur event on the element's 
+			 * descendants.
              *
              * @method addBlurListener
              *
@@ -1131,7 +1131,7 @@ if (!YAHOO.util.Event) {
              *                        could not have the listener attached,
              *                        or if the operation throws an exception.
              * @static
-                 * @deprecated use YAHOO.util.Event.on and specify "focusout" as the event type.
+         	 * @deprecated use YAHOO.util.Event.on and specify "focusout" as the event type.
              */
             addBlurListener: function (el, fn, obj, overrideContext) {
                 return this.on(el, FOCUSOUT, fn, obj, overrideContext);
@@ -1139,8 +1139,8 @@ if (!YAHOO.util.Event) {
 
             /**
              * Removes a focusout event listener to the specified element for 
-                         * the purpose of listening for the blur event on the element's 
-                         * descendants.
+			 * the purpose of listening for the blur event on the element's 
+			 * descendants.
              *
              * @method removeBlurListener
              *
@@ -1153,7 +1153,7 @@ if (!YAHOO.util.Event) {
              * @return {boolean} true if the unbind was successful, false 
              *  otherwise.
              * @static
-                 * @deprecated use YAHOO.util.Event.removeListener and specify "focusout" as the event type.
+         	 * @deprecated use YAHOO.util.Event.removeListener and specify "focusout" as the event type.
              */
             removeBlurListener: function (el, fn) { 
                 return this.removeListener(el, FOCUSOUT, fn);
@@ -1178,7 +1178,7 @@ if (!YAHOO.util.Event) {
             removeListener: function(el, sType, fn) {
                 var i, len, li;
 
-                                sType = this._getType(sType);
+				sType = this._getType(sType);
 
                 // The el argument can be a string
                 if (typeof el == "string") {
@@ -1237,7 +1237,7 @@ if (!YAHOO.util.Event) {
 
                 // this.logger.debug("Removing handler: " + el + ", " + sType);
 
-                                var bCapture = cacheItem[this.CAPTURE] === true ? true : false;
+				var bCapture = cacheItem[this.CAPTURE] === true ? true : false;
 
                 try {
                     this._simpleRemove(el, sType, cacheItem[this.WFN], bCapture);
@@ -1789,7 +1789,7 @@ if (!YAHOO.util.Event) {
                 } else if (sType === "unload") {
                     searchLists = [unloadListeners];
                 } else {
-                                        sType = this._getType(sType);
+					sType = this._getType(sType);
                     searchLists = [listeners];
                 }
 
@@ -1987,7 +1987,7 @@ if (!YAHOO.util.Event) {
          * @method onFocus
          * @see addFocusListener
          * @static
-                 * @deprecated use YAHOO.util.Event.on and specify "focusin" as the event type.
+		 * @deprecated use YAHOO.util.Event.on and specify "focusin" as the event type.
          */
         EU.onFocus = EU.addFocusListener;
 
@@ -1996,7 +1996,7 @@ if (!YAHOO.util.Event) {
          * @method onBlur
          * @see addBlurListener
          * @static
-                 * @deprecated use YAHOO.util.Event.on and specify "focusout" as the event type.
+		 * @deprecated use YAHOO.util.Event.on and specify "focusout" as the event type.
          */     
         EU.onBlur = EU.addBlurListener;
 

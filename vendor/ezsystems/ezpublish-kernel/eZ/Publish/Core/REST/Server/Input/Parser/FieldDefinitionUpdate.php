@@ -2,15 +2,15 @@
 /**
  * File containing the FieldDefinitionUpdate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\FieldTypeParser;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -19,7 +19,7 @@ use eZ\Publish\Core\REST\Common\Exceptions;
 /**
  * Parser for FieldDefinitionUpdate
  */
-class FieldDefinitionUpdate extends Base
+class FieldDefinitionUpdate extends BaseParser
 {
     /**
      * ContentType service
@@ -45,13 +45,11 @@ class FieldDefinitionUpdate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
+    public function __construct( ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
         $this->parserTools = $parserTools;
@@ -166,7 +164,7 @@ class FieldDefinitionUpdate extends Base
      * Returns field definition by 'typeFieldDefinitionDraft' pattern URL.
      *
      * Assumes given $data array has '__url' element set.
-     * @todo depends on temporary solution to give parser acces to the URL
+     * @todo depends on temporary solution to give parser access to the URL
      * @see \eZ\Publish\Core\REST\Server\Controller\ContentType::updateFieldDefinition
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
@@ -177,11 +175,13 @@ class FieldDefinitionUpdate extends Base
      */
     protected function getFieldDefinition( array $data )
     {
-        $urlValues = $this->urlHandler->parse( 'typeFieldDefinitionDraft', $data["__url"] );
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft( $urlValues['type'] );
+        $contentTypeId = $this->requestParser->parseHref( $data["__url"], 'contentTypeId' );
+        $fieldDefinitionId = $this->requestParser->parseHref( $data["__url"], 'fieldDefinitionId' );
+
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft( $contentTypeId );
         foreach ( $contentTypeDraft->getFieldDefinitions() as $fieldDefinition )
         {
-            if ( $fieldDefinition->id == $urlValues['fieldDefinition'] )
+            if ( $fieldDefinition->id == $fieldDefinitionId )
             {
                 return $fieldDefinition;
             }

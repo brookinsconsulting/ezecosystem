@@ -2,48 +2,52 @@
 /**
  * File containing the ContentHandler implementation
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Cache;
 
-use eZ\Publish\Core\Persistence\Factory as PersistenceFactory;
-use Tedivm\StashBundle\Service\CacheService;
-use eZ\Publish\Core\Persistence\Cache\PersistenceLogger;
+use eZ\Publish\SPI\Persistence\Handler as PersistenceHandler;
 
+/**
+ * Class AbstractHandler
+ *
+ * Abstract handler for use in other Persistence Cache Handlers.
+ */
 abstract class AbstractHandler
 {
     /**
-     * @var \Tedivm\StashBundle\Service\CacheService
+     * @var \eZ\Publish\Core\Persistence\Cache\CacheServiceDecorator
      */
     protected $cache;
 
     /**
-     * @var \eZ\Publish\Core\Persistence\Factory
+     * @var \eZ\Publish\SPI\Persistence\Handler
      */
-    protected $persistenceFactory;
+    protected $persistenceHandler;
 
     /**
-     * @var PersistenceLogger
+     * @var \eZ\Publish\Core\Persistence\Cache\PersistenceLogger
      */
     protected $logger;
 
     /**
      * Setups current handler with everything needed
      *
-     * @param \Tedivm\StashBundle\Service\CacheService $cache
-     * @param \eZ\Publish\Core\Persistence\Factory $persistenceFactory
-     * @param PersistenceLogger $logger
+     * @param \eZ\Publish\Core\Persistence\Cache\CacheServiceDecorator $cache
+     * @param \eZ\Publish\SPI\Persistence\Handler $persistenceHandler
+     * @param \eZ\Publish\Core\Persistence\Cache\PersistenceLogger $logger
      */
     public function __construct(
-        CacheService $cache,
-        PersistenceFactory $persistenceFactory,
-        PersistenceLogger $logger )
+        CacheServiceDecorator $cache,
+        PersistenceHandler $persistenceHandler,
+        PersistenceLogger $logger
+    )
     {
         $this->cache = $cache;
-        $this->persistenceFactory = $persistenceFactory;
+        $this->persistenceHandler = $persistenceHandler;
         $this->logger = $logger;
     }
 }

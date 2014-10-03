@@ -9,7 +9,19 @@ YUI(YUI3_config).use('ezautosubmit', 'node-base', 'node-style', function (Y) {ld
             form: '#editform',
             action: {concat( 'ezjscore/call/ezautosave::savedraft::', $object.id, '::', $edit_version, '::', $edit_language, '?ContentType=javascript' )|ezurl},
             interval: {ezini( 'AutosaveSettings', 'Interval', 'autosave.ini' )|int()},
-            trackUserInput: {cond( ezini( 'AutosaveSettings', 'TrackUserInput', 'autosave.ini')|eq( 'enabled' ), "true", "false" )}
+            trackUserInput: {cond( ezini( 'AutosaveSettings', 'TrackUserInput', 'autosave.ini')|eq( 'enabled' ), "true", "false" )},
+            enabled: function () {ldelim}
+
+                var ieDisableWithPassword = [{ezini( 'BrowserWorkarounds', 'IEDisableWithPassword', 'autosave.ini' )|implode( ', ')}];
+
+                if ( ieDisableWithPassword.indexOf(Y.UA.ie) !== -1 ) {ldelim}
+
+                    return (Y.one(this.conf.form).all("input[type=password]").size() == 0);
+                {rdelim}
+
+                return true;
+            {rdelim}
+
         {rdelim}),
         messages = {ldelim}
 
@@ -47,6 +59,7 @@ YUI(YUI3_config).use('ezautosubmit', 'node-base', 'node-style', function (Y) {ld
         place.setStyle('top', parseInt(Y.one('#ezwt').get('offsetHeight')) - 1 + 'px');
 {/literal}
         {if ezini( 'AutosaveSettings', 'HideStoreDraftButton', 'autosave.ini' )|eq( 'enabled' )}Y.all(this.conf.form + ' input[name=StoreButton]').hide();{/if}
+        {if ezini( 'AutosaveSettings', 'HidePreviewLink', 'autosave.ini' )|eq( 'enabled' )}Y.all(this.conf.form + ' #preview-link').each(function () {ldelim} this.hide() {rdelim});{/if}
 {literal}
         Y.on('beforeunload', function (e) {
             setTimeout(function () {

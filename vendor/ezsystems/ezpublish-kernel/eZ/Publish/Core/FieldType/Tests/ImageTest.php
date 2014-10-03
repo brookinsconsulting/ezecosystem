@@ -2,16 +2,16 @@
 /**
  * File containing the ImageTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\Image\Type as ImageType;
 use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
-use ReflectionObject;
+use eZ\Publish\Core\FieldType\ValidationError;
 
 /**
  * @group fieldType
@@ -19,36 +19,9 @@ use ReflectionObject;
  */
 class ImageTest extends FieldTypeTest
 {
-    /**
-     * FileService mock
-     *
-     * @var \PHPUnit_Framework_Mock
-     */
-    private $IOServiceMock;
-
     public function getImageInputPath()
     {
         return __DIR__ . '/squirrel-developers.jpg';
-    }
-
-    /**
-     * Returns a mock for the FileService
-     *
-     * @return \eZ\Publish\Core\FieldType\FileService
-     */
-    protected function getIOServiceMock()
-    {
-        if ( !isset( $this->IOServiceMock) )
-        {
-            $this->IOServiceMock = $this->getMock(
-                'eZ\\Publish\\Core\\IO\\IOService',
-                array(),
-                array(),
-                '',
-                false
-            );
-        }
-        return $this->IOServiceMock;
     }
 
     /**
@@ -82,9 +55,10 @@ class ImageTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new ImageType(
-            $this->getIOServiceMock()
-        );
+        $fieldType = new ImageType();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -117,7 +91,7 @@ class ImageTest extends FieldTypeTest
     /**
      * Returns the empty value expected from the field type.
      *
-     * @return void
+     * @return ImageValue
      */
     protected function getEmptyValueExpectation()
     {
@@ -155,17 +129,9 @@ class ImageTest extends FieldTypeTest
                 'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
             ),
             array(
-                array(),
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
-            ),
-            array(
-                new ImageValue(),
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
-            ),
-            array(
                 new ImageValue(
                     array(
-                        'path' => 'non/existent/path',
+                        'id' => 'non/existent/path',
                     )
                 ),
                 'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
@@ -173,7 +139,7 @@ class ImageTest extends FieldTypeTest
             array(
                 new ImageValue(
                     array(
-                        'path' => __FILE__,
+                        'id' => __FILE__,
                         'fileName' => array()
                     )
                 ),
@@ -182,7 +148,7 @@ class ImageTest extends FieldTypeTest
             array(
                 new ImageValue(
                     array(
-                        'path' => __FILE__,
+                        'id' => __FILE__,
                         'fileName' => 'ImageTest.php',
                         'fileSize' => 'truebar'
                     )
@@ -192,7 +158,7 @@ class ImageTest extends FieldTypeTest
             array(
                 new ImageValue(
                     array(
-                        'path' => __FILE__,
+                        'id' => __FILE__,
                         'fileName' => 'ImageTest.php',
                         'fileSize' => 23,
                         'alternativeText' => array()
@@ -219,7 +185,7 @@ class ImageTest extends FieldTypeTest
      *      array(
      *          __FILE__,
      *          new BinaryFileValue( array(
-     *              'path' => __FILE__,
+     *              'id' => __FILE__,
      *              'fileName' => basename( __FILE__ ),
      *              'fileSize' => filesize( __FILE__ ),
      *              'downloadCount' => 0,
@@ -240,32 +206,56 @@ class ImageTest extends FieldTypeTest
                 new ImageValue,
             ),
             array(
+                array(),
+                new ImageValue()
+            ),
+            array(
+                new ImageValue(),
+                new ImageValue()
+            ),
+            array(
                 $this->getImageInputPath(),
                 new ImageValue(
                     array(
-                        'path' => $this->getImageInputPath(),
+                        'inputUri' => $this->getImageInputPath(),
                         'fileName' => basename( $this->getImageInputPath() ),
                         'fileSize' => filesize( $this->getImageInputPath() ),
-                        'alternativeText' => null,
+                        'alternativeText' => null
                     )
                 ),
             ),
             array(
                 array(
-                    'path' => $this->getImageInputPath(),
+                    'id' => $this->getImageInputPath(),
                     'fileName' => 'Sindelfingen-Squirrels.jpg',
                     'fileSize' => 23,
                     'alternativeText' => 'This is so Sindelfingen!',
+                    'uri' => 'http://' . $this->getImageInputPath(),
                 ),
                 new ImageValue(
                     array(
-                        'path' => $this->getImageInputPath(),
+                        'id' => $this->getImageInputPath(),
                         'fileName' => 'Sindelfingen-Squirrels.jpg',
                         'fileSize' => 23,
                         'alternativeText' => 'This is so Sindelfingen!',
+                        'uri' => 'http://' . $this->getImageInputPath(),
                     )
                 ),
             ),
+            array(
+                array(
+                    'inputUri' => $this->getImageInputPath(),
+                    'fileName' => 'My Fancy Filename',
+                    'fileSize' => 123
+                ),
+                new ImageValue(
+                    array(
+                        'inputUri' => $this->getImageInputPath(),
+                        'fileName' => 'My Fancy Filename',
+                        'fileSize' => filesize( $this->getImageInputPath() )
+                    )
+                )
+            )
         );
     }
 
@@ -308,9 +298,32 @@ class ImageTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new ImageValue(),
                 null,
             ),
+            array(
+                new ImageValue(
+                    array(
+                        'id' => $this->getImageInputPath(),
+                        'fileName' => 'Sindelfingen-Squirrels.jpg',
+                        'fileSize' => 23,
+                        'alternativeText' => 'This is so Sindelfingen!',
+                        'imageId' => '123-12345',
+                        'uri' => 'http://' . $this->getImageInputPath(),
+                    )
+                ),
+                array(
+                    'id' => $this->getImageInputPath(),
+                    'path' => $this->getImageInputPath(),
+                    'fileName' => 'Sindelfingen-Squirrels.jpg',
+                    'fileSize' => 23,
+                    'alternativeText' => 'This is so Sindelfingen!',
+                    'imageId' => '123-12345',
+                    'uri' => 'http://' . $this->getImageInputPath(),
+                    'inputUri' => null,
+                ),
+            ),
+            // BC with 5.0 (EZP-20948). Path can be used as input instead of $inputUri.
             array(
                 new ImageValue(
                     array(
@@ -318,15 +331,21 @@ class ImageTest extends FieldTypeTest
                         'fileName' => 'Sindelfingen-Squirrels.jpg',
                         'fileSize' => 23,
                         'alternativeText' => 'This is so Sindelfingen!',
+                        'imageId' => '123-12345',
+                        'uri' => 'http://' . $this->getImageInputPath(),
                     )
                 ),
                 array(
+                    'id' => null,
                     'path' => $this->getImageInputPath(),
                     'fileName' => 'Sindelfingen-Squirrels.jpg',
                     'fileSize' => 23,
                     'alternativeText' => 'This is so Sindelfingen!',
+                    'imageId' => '123-12345',
+                    'uri' => 'http://' . $this->getImageInputPath(),
+                    'inputUri' => $this->getImageInputPath(),
                 ),
-            ),
+            )
         );
     }
 
@@ -370,25 +389,305 @@ class ImageTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null,
+                new ImageValue()
             ),
+            array(
+                array(
+                    'id' => $this->getImageInputPath(),
+                    'fileName' => 'Sindelfingen-Squirrels.jpg',
+                    'fileSize' => 23,
+                    'alternativeText' => 'This is so Sindelfingen!',
+                    'uri' => 'http://' . $this->getImageInputPath(),
+                ),
+                new ImageValue(
+                    array(
+                        'id' => $this->getImageInputPath(),
+                        'fileName' => 'Sindelfingen-Squirrels.jpg',
+                        'fileSize' => 23,
+                        'alternativeText' => 'This is so Sindelfingen!',
+                        'uri' => 'http://' . $this->getImageInputPath(),
+                    )
+                ),
+            ),
+            // BC with 5.0 (EZP-20948). Path can be used as input instead of ID.
             array(
                 array(
                     'path' => $this->getImageInputPath(),
                     'fileName' => 'Sindelfingen-Squirrels.jpg',
                     'fileSize' => 23,
                     'alternativeText' => 'This is so Sindelfingen!',
+                    'uri' => 'http://' . $this->getImageInputPath(),
                 ),
                 new ImageValue(
                     array(
-                        'path' => $this->getImageInputPath(),
+                        'inputUri' => $this->getImageInputPath(),
                         'fileName' => 'Sindelfingen-Squirrels.jpg',
                         'fileSize' => 23,
                         'alternativeText' => 'This is so Sindelfingen!',
+                        'uri' => 'http://' . $this->getImageInputPath(),
                     )
                 ),
-            ),
+            )
             // @todo: Provide REST upload tests
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezimage';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), "" ),
+            array(
+                new ImageValue( array( 'fileName' => 'Sindelfingen-Squirrels.jpg' ) ),
+                'Sindelfingen-Squirrels.jpg',
+            ),
+            // Alternative text has priority
+            array(
+                new ImageValue(
+                    array(
+                        'fileName' => 'Sindelfingen-Squirrels.jpg',
+                        'alternativeText' => 'This is so Sindelfingen!'
+                    )
+                ),
+                'This is so Sindelfingen!'
+            ),
+            array(
+                new ImageValue(
+                    array(
+                        'fileName' => 'Sindelfingen-Squirrels.jpg',
+                        'alternativeText' => 'This is so Sindelfingen!'
+                    )
+                ),
+                'This is so Sindelfingen!'
+            )
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings and
+     * field value which are considered valid by the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten if
+     * a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "StringLengthValidator" => array(
+     *                      "minStringLength" => 2,
+     *                      "maxStringLength" => 10,
+     *                  ),
+     *              ),
+     *          ),
+     *          new TextLineValue( "lalalala" ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  'isMultiple' => true
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              array(
+     *                  "BE" => array(
+     *                      "Name" => "Belgium",
+     *                      "Alpha2" => "BE",
+     *                      "Alpha3" => "BEL",
+     *                      "IDC" => 32,
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideValidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        "FileSizeValidator" => array(
+                            'maxFileSize' => 1
+                        ),
+                    ),
+                ),
+                new ImageValue(
+                    array(
+                        'id' => $this->getImageInputPath(),
+                        'fileName' => basename( $this->getImageInputPath() ),
+                        'fileSize' => filesize( $this->getImageInputPath() ),
+                        'alternativeText' => null,
+                        'uri' => ''
+                    )
+                ),
+            )
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings,
+     * field value and corresponding validation errors returned by
+     * the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten
+     * if a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "IntegerValueValidator" => array(
+     *                      "minIntegerValue" => 5,
+     *                      "maxIntegerValue" => 10
+     *                  ),
+     *              ),
+     *          ),
+     *          new IntegerValue( 3 ),
+     *          array(
+     *              new ValidationError(
+     *                  "The value can not be lower than %size%.",
+     *                  null,
+     *                  array(
+     *                      "size" => 5
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  "isMultiple" => false
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              "BE" => array(
+     *                  "Name" => "Belgium",
+     *                  "Alpha2" => "BE",
+     *                  "Alpha3" => "BEL",
+     *                  "IDC" => 32,
+     *              ),
+     *              "FR" => array(
+     *                  "Name" => "France",
+     *                  "Alpha2" => "FR",
+     *                  "Alpha3" => "FRA",
+     *                  "IDC" => 33,
+     *              ),
+     *          )
+     *      ),
+     *      array(
+     *          new ValidationError(
+     *              "Field definition does not allow multiple countries to be selected."
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideInvalidDataForValidate()
+    {
+        return array(
+            // File is too large
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        "FileSizeValidator" => array(
+                            'maxFileSize' => 0.01
+                        ),
+                    ),
+                ),
+                new ImageValue(
+                    array(
+                        'id' => $this->getImageInputPath(),
+                        'fileName' => basename( $this->getImageInputPath() ),
+                        'fileSize' => filesize( $this->getImageInputPath() ),
+                        'alternativeText' => null,
+                        'uri' => ''
+                    )
+                ),
+                array(
+                    new ValidationError(
+                        "The file size cannot exceed %size% byte.",
+                        "The file size cannot exceed %size% bytes.",
+                        array(
+                            "size" => 0.01,
+                        )
+                    ),
+                )
+            ),
+
+            // file is not an image file
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        "FileSizeValidator" => array(
+                            'maxFileSize' => 1
+                        ),
+                    ),
+                ),
+                new ImageValue(
+                    array(
+                        'id' => __FILE__,
+                        'fileName' => basename( __FILE__ ),
+                        'fileSize' => filesize( __FILE__ ),
+                        'alternativeText' => null,
+                        'uri' => ''
+                    )
+                ),
+                array(
+                    new ValidationError(
+                        "A valid image file is required."
+                    ),
+                ),
+            ),
+
+            // file is too large and invalid
+            array(
+                array(
+                    "validatorConfiguration" => array(
+                        "FileSizeValidator" => array(
+                            'maxFileSize' => 0.01
+                        ),
+                    ),
+                ),
+                new ImageValue(
+                    array(
+                        'id' => __FILE__,
+                        'fileName' => basename( __FILE__ ),
+                        'fileSize' => filesize( __FILE__ ),
+                        'alternativeText' => null,
+                        'uri' => ''
+                    )
+                ),
+                array(
+                    new ValidationError(
+                        "A valid image file is required."
+                    ),
+                    new ValidationError(
+                        "The file size cannot exceed %size% byte.",
+                        "The file size cannot exceed %size% bytes.",
+                        array(
+                            "size" => 0.01,
+                        )
+                    ),
+                ),
+            ),
         );
     }
 }

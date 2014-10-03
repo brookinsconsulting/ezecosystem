@@ -2,9 +2,9 @@
 /**
  * File containing the LocationServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
@@ -12,8 +12,9 @@ namespace eZ\Publish\API\Repository\Tests;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationList;
-
-use eZ\Publish\API\Repository\Exceptions;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Exception;
 
 /**
  * Test case for operations in the LocationService using in memory storage.
@@ -293,7 +294,7 @@ class LocationServiceTest extends BaseTest
                 $locationCreate
             )->id;
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -307,7 +308,7 @@ class LocationServiceTest extends BaseTest
             // Throws exception since creation of location was rolled back
             $location = $locationService->loadLocation( $createdLocationId );
         }
-        catch ( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+        catch ( NotFoundException $e )
         {
             return;
         }
@@ -1265,7 +1266,7 @@ class LocationServiceTest extends BaseTest
             $locationService->loadLocation( $mediaLocationId );
             $this->fail( "Location $mediaLocationId not deleted." );
         }
-        catch ( Exceptions\NotFoundException $e )
+        catch ( NotFoundException $e )
         {
         }
 
@@ -1278,7 +1279,7 @@ class LocationServiceTest extends BaseTest
                 $locationService->loadLocation( $this->generateId( 'location', $childLocationId ) );
                 $this->fail( "Location $childLocationId not deleted." );
             }
-            catch ( Exceptions\NotFoundException $e )
+            catch ( NotFoundException $e )
             {
             }
         }
@@ -1293,7 +1294,7 @@ class LocationServiceTest extends BaseTest
                 $contentService->loadContentInfo( $this->generateId( 'object', $childContentId ) );
                 $this->fail( "Content $childContentId not deleted." );
             }
-            catch ( Exceptions\NotFoundException $e )
+            catch ( NotFoundException $e )
             {
             }
         }
@@ -1341,6 +1342,52 @@ class LocationServiceTest extends BaseTest
         /* END: Use Case */
 
         $this->assertEquals( $childCountBefore - 1, $childCountAfter );
+    }
+
+    /**
+     * Test for the deleteLocation() method
+     *
+     * Related issue: EZP-21904
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\LocationService::deleteLocation()
+     * @expectedException eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
+    public function testDeleteContentObjectLastLocation()
+    {
+        $repository = $this->getRepository();
+
+        /* BEGIN: Use case */
+        $contentService = $repository->getContentService();
+        $locationService = $repository->getLocationService();
+        $contentTypeService = $repository->getContentTypeService();
+        $urlAliasService = $repository->getURLAliasService();
+
+        // prepare Content object
+        $createStruct = $contentService->newContentCreateStruct(
+            $contentTypeService->loadContentTypeByIdentifier( 'folder' ),
+            'eng-GB'
+        );
+        $createStruct->setField( 'name', 'Test folder' );
+
+        // creata Content object
+        $content = $contentService->publishVersion(
+            $contentService->createContent(
+                $createStruct,
+                array( $locationService->newLocationCreateStruct( 2 ) )
+            )->versionInfo
+        );
+
+        // delete location
+        $locationService->deleteLocation(
+            $locationService->loadLocation(
+                $urlAliasService->lookup( "/Test-folder" )->destination
+            )
+        );
+
+        // this should throw a not found exception
+        $contentService->loadContent( $content->versionInfo->contentInfo->id );
+        /* END: Use case*/
     }
 
     /**
@@ -1392,6 +1439,37 @@ class LocationServiceTest extends BaseTest
             ),
             $copiedLocation
         );
+
+        $this->assertDefaultContentStates( $copiedLocation->contentInfo );
+    }
+
+    /**
+     * Asserts that given Content has default ContentStates.
+     *
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     *
+     * @return void
+     */
+    private function assertDefaultContentStates( ContentInfo $contentInfo )
+    {
+        $repository = $this->getRepository();
+        $objectStateService = $repository->getObjectStateService();
+
+        $objectStateGroups = $objectStateService->loadObjectStateGroups();
+
+        foreach ( $objectStateGroups as $objectStateGroup )
+        {
+            $contentState = $objectStateService->getContentState( $contentInfo, $objectStateGroup );
+            foreach ( $objectStateService->loadObjectStates( $objectStateGroup ) as $objectState )
+            {
+                // Only check the first object state which is the default one.
+                $this->assertEquals(
+                    $objectState,
+                    $contentState
+                );
+                break;
+            }
+        }
     }
 
     /**
@@ -1850,5 +1928,4 @@ class LocationServiceTest extends BaseTest
             $overwrite
         );
     }
-
 }

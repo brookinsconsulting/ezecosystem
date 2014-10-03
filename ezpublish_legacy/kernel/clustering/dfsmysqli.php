@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -24,10 +24,33 @@ class ezpDfsMySQLiClusterGateway extends ezpClusterGateway
                 "(error #". mysqli_errno( $this->db ).": " . mysqli_error( $this->db ) );
     }
 
+    /**
+     * Returns the database table name to use for the specified file.
+     *
+     * For files detected as cache files the cache table is returned, if not
+     * the generic table is returned.
+     *
+     *
+     * @param string $filePath
+     * @return string The database table name
+     */
+     protected function dbTable( $filePath )
+     {
+         $cacheDir = defined( 'CLUSTER_METADATA_CACHE_PATH' ) ? CLUSTER_METADATA_CACHE_PATH : "/cache/";
+         $storageDir = defined( 'CLUSTER_METADATA_STORAGE_PATH' ) ? CLUSTER_METADATA_STORAGE_PATH : "/storage/";
+
+         if ( strpos( $filePath, $cacheDir ) !== false && strpos( $filePath, $storageDir ) === false )
+         {
+             return defined( 'CLUSTER_METADATA_TABLE_CACHE' ) ? CLUSTER_METADATA_TABLE_CACHE : 'ezdfsfile_cache';
+         }
+
+         return 'ezdfsfile';
+     }
+
     public function fetchFileMetadata( $filepath )
     {
         $filePathHash = md5( $filepath );
-        $sql = "SELECT `datatype`, `size`, `mtime` FROM ezdfsfile WHERE name_hash='{$filePathHash}'" ;
+        $sql = "SELECT `datatype`, `size`, `mtime` FROM " . $this->dbTable( $filepath ) . " WHERE name_hash='{$filePathHash}'" ;
         if ( !$res = mysqli_query( $this->db, $sql ) )
             throw new RuntimeException( "Failed to fetch file metadata for '$filepath' " .
                 "(error #". mysqli_errno( $this->db ).": " . mysqli_error( $this->db ) );

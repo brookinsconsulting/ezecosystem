@@ -2,9 +2,9 @@
 /**
  * File contains Test class
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Cache\Tests;
@@ -24,7 +24,7 @@ class LocationHandlerTest extends HandlerTest
     public function testLoadCacheIsMiss()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -42,9 +42,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -58,7 +58,7 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( $this->isInstanceOf( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location' ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->load( 33 );
     }
 
@@ -68,7 +68,7 @@ class LocationHandlerTest extends HandlerTest
     public function testLoadHasCache()
     {
         $this->loggerMock->expects( $this->never() )->method( $this->anything() );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -85,15 +85,15 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'isMiss' )
             ->will( $this->returnValue( false ) );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
-            ->method( 'getLocationHandler' );
+            ->method( 'locationHandler' );
 
         $cacheItemMock
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->load( 33 );
     }
 
@@ -103,7 +103,7 @@ class LocationHandlerTest extends HandlerTest
     public function testLoadLocationsByContentIsMiss()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -121,9 +121,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -137,7 +137,7 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( array( 33 ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->loadLocationsByContent( 44 );
     }
 
@@ -148,11 +148,11 @@ class LocationHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->never() )->method( $this->anything() );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
             ->method( $this->anything() );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
@@ -174,7 +174,7 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'set' );
 
         // inline call to load()
-        $cacheItemMock2 = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
@@ -195,7 +195,7 @@ class LocationHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->loadLocationsByContent( 44 );
     }
 
@@ -205,11 +205,11 @@ class LocationHandlerTest extends HandlerTest
     public function testLoadParentLocationsForDraftContentIsMiss()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', "44/parentLocationsForDraftContent" )
+            ->with( 'content', 'locations', '44', 'parentLocationsForDraftContent' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -223,9 +223,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -239,7 +239,7 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( array( 33 ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->loadParentLocationsForDraftContent( 44 );
     }
 
@@ -250,15 +250,15 @@ class LocationHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->never() )->method( $this->anything() );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
             ->method( $this->anything() );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', "44/parentLocationsForDraftContent" )
+            ->with( 'content', 'locations', '44', 'parentLocationsForDraftContent' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -276,7 +276,7 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'set' );
 
         // inline call to load()
-        $cacheItemMock2 = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
@@ -297,7 +297,7 @@ class LocationHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->loadParentLocationsForDraftContent( 44 );
     }
 
@@ -307,11 +307,11 @@ class LocationHandlerTest extends HandlerTest
     public function testLoadLocationsByContentWithRootIsMiss()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', '44/root/2' )
+            ->with( 'content', 'locations', '44', 'root', '2' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -325,9 +325,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -341,7 +341,7 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( array( 33 ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->loadLocationsByContent( 44, 2 );
     }
 
@@ -352,15 +352,15 @@ class LocationHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->never() )->method( $this->anything() );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
             ->method( $this->anything() );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'content', 'locations', '44/root/2' )
+            ->with( 'content', 'locations', '44', 'root', '2' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -378,7 +378,7 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'set' );
 
         // inline call to load()
-        $cacheItemMock2 = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
@@ -399,7 +399,7 @@ class LocationHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->loadLocationsByContent( 44, 2 );
     }
 
@@ -414,9 +414,9 @@ class LocationHandlerTest extends HandlerTest
             ->method( $this->anything() );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -425,7 +425,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 'sve45gdy4e' )
             ->will( $this->returnValue( new Location(  array( 'id' => 33  ) ) ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->loadByRemoteId( 'sve45gdy4e' );
     }
 
@@ -440,9 +440,9 @@ class LocationHandlerTest extends HandlerTest
             ->method( $this->anything() );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -451,7 +451,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 55, 66 )
             ->will( $this->returnValue( null ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->copySubtree( 55, 66 );
     }
 
@@ -462,15 +462,21 @@ class LocationHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
         $this->cacheMock
-            ->expects( $this->once() )
+            ->expects( $this->at( 0 ) )
             ->method( 'clear' )
             ->with( 'location' )
             ->will( $this->returnValue( true ) );
 
+        $this->cacheMock
+            ->expects( $this->at( 1 ) )
+            ->method( 'clear' )
+            ->with( 'user', 'role', 'assignments', 'byGroup' )
+            ->will( $this->returnValue( true ) );
+
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -479,7 +485,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 33, 66 )
             ->will( $this->returnValue( true ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->move( 33, 66 );
     }
 
@@ -494,9 +500,9 @@ class LocationHandlerTest extends HandlerTest
             ->method( $this->anything() );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -505,7 +511,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 55 )
             ->will( $this->returnValue( null ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->markSubtreeModified( 55 );
     }
     /**
@@ -521,9 +527,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -532,7 +538,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 33 )
             ->will( $this->returnValue( true ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->hide( 33 );
     }
 
@@ -549,9 +555,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -560,7 +566,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 33 )
             ->will( $this->returnValue( true ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->unhide( 33 );
     }
 
@@ -585,13 +591,25 @@ class LocationHandlerTest extends HandlerTest
         $this->cacheMock
             ->expects( $this->at( 2 ) )
             ->method( 'clear' )
+            ->with( 'location', 'subtree' )
+            ->will( $this->returnValue( true ) );
+
+        $this->cacheMock
+            ->expects( $this->at( 3 ) )
+            ->method( 'clear' )
             ->with( 'content', 'locations' )
             ->will( $this->returnValue( true ) );
 
+        $this->cacheMock
+            ->expects( $this->at( 4 ) )
+            ->method( 'clear' )
+            ->with( 'user', 'role', 'assignments', 'byGroup' )
+            ->will( $this->returnValue( true ) );
+
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -600,7 +618,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 33, 66 )
             ->will( $this->returnValue( true ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->swap( 33, 66 );
     }
 
@@ -610,17 +628,21 @@ class LocationHandlerTest extends HandlerTest
     public function testUpdate()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
-            ->expects( $this->once() )
-            ->method( 'getItem' )
-            ->with( 'location', 33 )
-            ->will( $this->returnValue( $cacheItemMock ) );
+            ->expects( $this->at( 0 ) )
+            ->method( 'clear' )
+            ->with( 'location', 33 );
+
+        $this->cacheMock
+            ->expects( $this->at( 1 ) )
+            ->method( 'clear' )
+            ->with( 'location', 'subtree' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -630,15 +652,10 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( new Location(  array( 'id' => 33  ) ) ) );
 
         $cacheItemMock
-            ->expects( $this->once() )
-            ->method( 'set' )
-            ->with( $this->isInstanceOf( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location' ) );
-
-        $cacheItemMock
             ->expects( $this->never() )
             ->method( 'get' );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->update( new UpdateStruct, 33  );
     }
 
@@ -648,7 +665,7 @@ class LocationHandlerTest extends HandlerTest
     public function testCreate()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -656,9 +673,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -677,12 +694,30 @@ class LocationHandlerTest extends HandlerTest
             ->method( 'get' );
 
         $this->cacheMock
-            ->expects( $this->once() )
+            ->expects( $this->at( 1 ) )
+            ->method( 'clear' )
+            ->with( 'location', 'subtree' )
+            ->will( $this->returnValue( true ) );
+
+        $this->cacheMock
+            ->expects( $this->at( 2 ) )
             ->method( 'clear' )
             ->with( 'content', 'locations', 2 )
             ->will( $this->returnValue( true ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $this->cacheMock
+            ->expects( $this->at( 3 ) )
+            ->method( 'clear' )
+            ->with( 'user', 'role', 'assignments', 'byGroup', 2 )
+            ->will( $this->returnValue( true ) );
+
+        $this->cacheMock
+            ->expects( $this->at( 4 ) )
+            ->method( 'clear' )
+            ->with( 'user', 'role', 'assignments', 'byGroup', 'inherited', 2 )
+            ->will( $this->returnValue( true ) );
+
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->create( new CreateStruct );
     }
 
@@ -704,10 +739,16 @@ class LocationHandlerTest extends HandlerTest
             ->with( 'content' )
             ->will( $this->returnValue( true ) );
 
+        $this->cacheMock
+            ->expects( $this->at( 2 ) )
+            ->method( 'clear' )
+            ->with( 'user', 'role', 'assignments', 'byGroup' )
+            ->will( $this->returnValue( true ) );
+
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -716,7 +757,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 33 )
             ->will( $this->returnValue( true ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->removeSubtree( 33 );
     }
 
@@ -732,9 +773,9 @@ class LocationHandlerTest extends HandlerTest
             ->with( 'content' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -743,7 +784,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 33, 2 )
             ->will( $this->returnValue( null ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->setSectionForSubtree( 33, 2 );
     }
 
@@ -767,9 +808,9 @@ class LocationHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandlerMock = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\Location\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getLocationHandler' )
+            ->method( 'locationHandler' )
             ->will( $this->returnValue( $innerHandlerMock ) );
 
         $innerHandlerMock
@@ -778,7 +819,7 @@ class LocationHandlerTest extends HandlerTest
             ->with( 30, 33 )
             ->will( $this->returnValue( true ) );
 
-        $handler = $this->persistenceHandler->locationHandler();
+        $handler = $this->persistenceCacheHandler->locationHandler();
         $handler->changeMainLocation( 30, 33 );
     }
 }

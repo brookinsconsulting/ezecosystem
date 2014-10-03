@@ -2,9 +2,9 @@
 /**
  * Contains Not Found Exception implementation
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Base\Exceptions;
@@ -29,10 +29,9 @@ class NotFoundException extends APINotFoundException implements Httpable
      */
     public function __construct( $what, $identifier, Exception $previous = null )
     {
+        $identifierStr = is_string( $identifier ) ? $identifier : var_export( $identifier, true );
         parent::__construct(
-            "Could not find '{$what}' with identifier '" .
-            ( is_array( $identifier ) ? var_export( $identifier, true ) : $identifier ) .
-            "'",
+            "Could not find '{$what}' with identifier '{$identifierStr}'",
             self::NOT_FOUND,
             $previous
         );

@@ -2,9 +2,9 @@
 /**
  * File containing the eZSSLZone class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -223,6 +223,10 @@ class eZSSLZone
         if ( !isset( $inSSL ) )
             return;
 
+        // Disable any further redirection/usage of SSLZones, see EZP-22204
+        // Prevents inner modules from redirecting to SSL if requested
+        $GLOBALS['eZSSLZoneEnabled'] = false;
+
         // $nowSSl is true if current access mode is HTTPS.
         $nowSSL = eZSys::isSSLNow();
 
@@ -319,7 +323,7 @@ class eZSSLZone
          * i.e. it cannot choose access mode itself,
          * then do nothing.
          */
-        if ( !$redirect && !eZSSLZone::isKeepModeView( $module, $view ) )
+        if ( !eZSSLZone::isKeepModeView( $module, $view ) )
             return;
 
         $pathString = $node->attribute( 'path_string' );

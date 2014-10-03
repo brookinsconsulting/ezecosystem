@@ -2,20 +2,25 @@
 /**
  * File containing the ContentServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
 
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
+use eZ\Publish\API\Repository\Values\User\Limitation\LocationLimitation;
+use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Exception;
 
 /**
  * Test case for operations in the ContentService using in memory storage.
@@ -95,6 +100,61 @@ class ContentServiceTest extends BaseContentServiceTest
     /**
      * Test for the createContent() method.
      *
+     * Tests made for issue #EZP-20955 where Anonymous user is granted access to create content
+     * and should have access to do that.
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Content
+     * @see \eZ\Publish\API\Repository\ContentService::createContent()
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testNewContentCreateStruct
+     * @group user
+     * @group field-type
+     */
+    function testCreateContentAndPublishWithPrivilegedAnonymousUser()
+    {
+        if ( $this->isVersion4() )
+        {
+            $this->markTestSkipped( "This test requires eZ Publish 5" );
+        }
+
+        $anonymousUserId = $this->generateId( 'user', 10 );
+
+        $repository = $this->getRepository();
+        $contentService = $repository->getContentService();
+        $contentTypeService = $repository->getContentTypeService();
+        $locationService = $repository->getLocationService();
+        $roleService = $repository->getRoleService();
+
+        // Give Anonymous user role additional rights
+        $role = $roleService->loadRoleByIdentifier( 'Anonymous' );
+        $policyCreateStruct = $roleService->newPolicyCreateStruct( 'content', 'create' );
+        $policyCreateStruct->addLimitation( new SectionLimitation( array( 'limitationValues' => array( 1 ) ) ) );
+        $policyCreateStruct->addLimitation( new LocationLimitation( array( 'limitationValues' => array( 2 ) ) ) );
+        $policyCreateStruct->addLimitation( new ContentTypeLimitation( array( 'limitationValues' => array( 1 ) ) ) );
+        $roleService->addPolicy( $role, $policyCreateStruct );
+
+        // Set Anonymous user as current
+        $repository->setCurrentUser( $repository->getUserService()->loadUser( $anonymousUserId ) );
+
+        // Create a new content object:
+        $contentCreate = $contentService->newContentCreateStruct(
+            $contentTypeService->loadContentTypeByIdentifier( "folder" ), "eng-GB"
+        );
+
+        $contentCreate->setField( "name", "Folder 1" );
+
+        $content = $contentService->createContent(
+            $contentCreate,
+            array( $locationService->newLocationCreateStruct( 2 ) )
+        );
+
+        $contentService->publishVersion(
+            $content->getVersionInfo()
+        );
+    }
+
+    /**
+     * Test for the createContent() method.
+     *
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Content
@@ -129,7 +189,9 @@ class ContentServiceTest extends BaseContentServiceTest
                 'eng-US',
                 $this->getRepository()->getCurrentUser()->id,
                 false,
-                null
+                null,
+                // Main Location id for unpublished Content should be null
+                null,
             ),
             array(
                 $content->contentInfo->id,
@@ -141,6 +203,7 @@ class ContentServiceTest extends BaseContentServiceTest
                 $content->contentInfo->ownerId,
                 $content->contentInfo->published,
                 $content->contentInfo->publishedDate,
+                $content->contentInfo->mainLocationId,
             )
         );
     }
@@ -797,6 +860,7 @@ class ContentServiceTest extends BaseContentServiceTest
             )
         );
 
+        $this->assertNotNull( $content->contentInfo->mainLocationId );
         $date = new \DateTime( '1984/01/01' );
         $this->assertGreaterThan(
             $date->getTimestamp(),
@@ -874,18 +938,31 @@ class ContentServiceTest extends BaseContentServiceTest
      * @return void
      * @see \eZ\Publish\API\Repository\ContentService::publishVersion()
      * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testPublishVersionCreatesLocationsDefinedOnCreate
-     * @depend(s) eZ\Publish\API\Repository\Tests\LocationServiceTest::testCreateLocation
-     * @depend(s) eZ\Publish\API\Repository\Tests\LocationServiceTest::testLoadLocationByRemoteId
-     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testCreateContentWithLocationCreateParameterDoesNotCreateLocationImmediately
-     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testPublishVersion
      */
-    public function testCreateContentWithLocationCreateParameterSetsMainLocationId( array $testData )
+    public function testCreateContentWithLocationCreateParameterCreatesExpectedLocation( array $testData )
     {
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         list( $content, $location ) = $testData;
 
-        $this->assertEquals(
-            $content->getVersionInfo()->getContentInfo()->mainLocationId,
-            $location->id
+        $parentLocationId = $this->generateId( 'location', 56 );
+        $parentLocation = $this->getRepository()->getLocationService()->loadLocation( $parentLocationId );
+        $mainLocationId = $content->getVersionInfo()->getContentInfo()->mainLocationId;
+
+        $this->assertPropertiesCorrect(
+            array(
+                'id' => $mainLocationId,
+                'priority' => 23,
+                'hidden' => true,
+                'invisible' => true,
+                'remoteId' => '0123456789abcdef0123456789abcdef',
+                'parentLocationId' => $parentLocationId,
+                'pathString' => $parentLocation->pathString . $mainLocationId . '/',
+                'depth' => $parentLocation->depth + 1,
+                'sortField' => Location::SORT_FIELD_NODE_ID,
+                'sortOrder' => Location::SORT_ORDER_DESC,
+            ),
+            $location
         );
     }
 
@@ -942,6 +1019,38 @@ class ContentServiceTest extends BaseContentServiceTest
         );
 
         return $draftedContent;
+    }
+
+    /**
+     * Test for the createContentDraft() method.
+     *
+     * Test that editor has access to edit own draft.
+     * Note: Editors have access to version_read, which is needed to load content drafts.
+     *
+     * @see \eZ\Publish\API\Repository\ContentService::createContentDraft()
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testPublishVersion
+     * @group user
+     */
+    public function testCreateContentDraftAndLoadAccess()
+    {
+        $repository = $this->getRepository();
+
+        /* BEGIN: Use Case */
+        $user = $this->createUserVersion1();
+
+        // Set new editor as user
+        $repository->setCurrentUser( $user );
+
+        // Create draft
+        $draft = $this->createContentDraftVersion1( 2, 'folder' );
+
+        // Try to load the draft
+        $contentService = $repository->getContentService();
+        $loadedDraft = $contentService->loadContent( $draft->id );
+
+        /* END: Use Case */
+
+        $this->assertEquals( $draft->id, $loadedDraft->id );
     }
 
     /**
@@ -1747,6 +1856,40 @@ class ContentServiceTest extends BaseContentServiceTest
     }
 
     /**
+     * Test for the deleteContent() method.
+     *
+     * Test for issue EZP-21057:
+     * "contentService: Unable to delete a content with an empty file attribute"
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\ContentService::deleteContent()
+     * @expectedException \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testPublishVersionFromContentDraft
+     */
+    public function testDeleteContentWithEmptyBinaryField()
+    {
+        $repository = $this->getRepository();
+
+        $contentService = $repository->getContentService();
+        $locationService = $repository->getLocationService();
+
+        /* BEGIN: Use Case */
+        $contentVersion = $this->createContentVersion1EmptyBinaryField();
+
+        // Load the locations for this content object
+        $locations = $locationService->loadLocations( $contentVersion->contentInfo );
+
+        // This will delete the content, all versions and the associated locations
+        $contentService->deleteContent( $contentVersion->contentInfo );
+        /* END: Use Case */
+
+        foreach ( $locations as $location )
+        {
+            $locationService->loadLocation( $location->id );
+        }
+    }
+
+    /**
      * Test for the loadContentDrafts() method.
      *
      * @return void
@@ -1885,13 +2028,21 @@ class ContentServiceTest extends BaseContentServiceTest
         $contentService = $repository->getContentService();
 
         /* BEGIN: Use Case */
-        $contentVersion2 = $this->createContentVersion2();
+        $publishedContent = $this->createContentVersion1();
 
-        // Will return the $versionInfo of $content
-        $versionInfo = $contentService->loadVersionInfo( $contentVersion2->contentInfo, 1 );
+        $draftContent = $contentService->createContentDraft( $publishedContent->contentInfo );
+
+        // Will return the VersionInfo of the $draftContent
+        $versionInfo = $contentService->loadVersionInfoById( $publishedContent->id, 2 );
         /* END: Use Case */
 
-        $this->assertEquals( 1, $versionInfo->versionNo );
+        $this->assertEquals( 2, $versionInfo->versionNo );
+
+        // Check that ContentInfo contained in VersionInfo has correct main Location id set
+        $this->assertEquals(
+            $publishedContent->getVersionInfo()->getContentInfo()->mainLocationId,
+            $versionInfo->getContentInfo()->mainLocationId
+        );
     }
 
     /**
@@ -1931,13 +2082,21 @@ class ContentServiceTest extends BaseContentServiceTest
         $contentService = $repository->getContentService();
 
         /* BEGIN: Use Case */
-        $contentVersion2 = $this->createContentVersion2();
+        $publishedContent = $this->createContentVersion1();
 
-        // Will return the $versionInfo of $content
-        $versionInfo = $contentService->loadVersionInfoById( $contentVersion2->id, 1 );
+        $draftContent = $contentService->createContentDraft( $publishedContent->contentInfo );
+
+        // Will return the VersionInfo of the $draftContent
+        $versionInfo = $contentService->loadVersionInfoById( $publishedContent->id, 2 );
         /* END: Use Case */
 
-        $this->assertEquals( 1, $versionInfo->versionNo );
+        $this->assertEquals( 2, $versionInfo->versionNo );
+
+        // Check that ContentInfo contained in VersionInfo has correct main Location id set
+        $this->assertEquals(
+            $publishedContent->getVersionInfo()->getContentInfo()->mainLocationId,
+            $versionInfo->getContentInfo()->mainLocationId
+        );
     }
 
     /**
@@ -2138,19 +2297,27 @@ class ContentServiceTest extends BaseContentServiceTest
         $contentService = $repository->getContentService();
 
         /* BEGIN: Use Case */
-        $contentVersion2 = $this->createContentVersion2();
+        $publishedContent = $this->createContentVersion1();
 
-        // Will return a Content instance equal to $content
-        $contentReloaded = $contentService->loadContentByContentInfo(
-            $contentVersion2->contentInfo,
+        $draftContent = $contentService->createContentDraft( $publishedContent->contentInfo );
+
+        // This content instance is identical to $draftContent
+        $draftContentReloaded = $contentService->loadContentByContentInfo(
+            $publishedContent->contentInfo,
             null,
-            1
+            2
         );
         /* END: Use Case */
 
         $this->assertEquals(
-            1,
-            $contentReloaded->getVersionInfo()->versionNo
+            2,
+            $draftContentReloaded->getVersionInfo()->versionNo
+        );
+
+        // Check that ContentInfo contained in reloaded draft Content has correct main Location id set
+        $this->assertEquals(
+            $publishedContent->versionInfo->contentInfo->mainLocationId,
+            $draftContentReloaded->versionInfo->contentInfo->mainLocationId
         );
     }
 
@@ -2214,13 +2381,21 @@ class ContentServiceTest extends BaseContentServiceTest
         $contentService = $repository->getContentService();
 
         /* BEGIN: Use Case */
-        $draftVersion2 = $this->createContentDraftVersion2();
+        $publishedContent = $this->createContentVersion1();
 
-        // This content instance is identical to $contentVersion1
-        $oldContent = $contentService->loadContent( $draftVersion2->id, null, 1 );
+        $draftContent = $contentService->createContentDraft( $publishedContent->contentInfo );
+
+        // This content instance is identical to $draftContent
+        $draftContentReloaded = $contentService->loadContent( $publishedContent->id, null, 2 );
         /* END: Use Case */
 
-        $this->assertEquals( 1, $oldContent->getVersionInfo()->versionNo );
+        $this->assertEquals( 2, $draftContentReloaded->getVersionInfo()->versionNo );
+
+        // Check that ContentInfo contained in reloaded draft Content has correct main Location id set
+        $this->assertEquals(
+            $publishedContent->versionInfo->contentInfo->mainLocationId,
+            $draftContentReloaded->versionInfo->contentInfo->mainLocationId
+        );
     }
 
     /**
@@ -2288,17 +2463,25 @@ class ContentServiceTest extends BaseContentServiceTest
         $contentService = $repository->getContentService();
 
         /* BEGIN: Use Case */
-        $draftVersion2 = $this->createContentDraftVersion2();
+        $publishedContent = $this->createContentVersion1();
 
-        // This content instance is identical to $contentVersion1
-        $oldContent = $contentService->loadContentByRemoteId(
-            $draftVersion2->contentInfo->remoteId,
+        $draftContent = $contentService->createContentDraft( $publishedContent->contentInfo );
+
+        // This content instance is identical to $draftContent
+        $draftContentReloaded = $contentService->loadContentByRemoteId(
+            $publishedContent->contentInfo->remoteId,
             null,
-            1
+            2
         );
         /* END: Use Case */
 
-        $this->assertEquals( 1, $oldContent->getVersionInfo()->versionNo );
+        $this->assertEquals( 2, $draftContentReloaded->getVersionInfo()->versionNo );
+
+        // Check that ContentInfo contained in reloaded draft Content has correct main Location id set
+        $this->assertEquals(
+            $publishedContent->versionInfo->contentInfo->mainLocationId,
+            $draftContentReloaded->versionInfo->contentInfo->mainLocationId
+        );
     }
 
     /**
@@ -2481,6 +2664,8 @@ class ContentServiceTest extends BaseContentServiceTest
         $this->assertEquals( 2, $contentCopied->getVersionInfo()->versionNo );
 
         $this->assertAllFieldsEquals( $contentCopied->getFields() );
+
+        $this->assertDefaultContentStates( $contentCopied->contentInfo );
     }
 
     /**
@@ -2639,7 +2824,7 @@ class ContentServiceTest extends BaseContentServiceTest
      * @see \eZ\Publish\API\Repository\ContentService::createContentDraft()
      * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testAddRelationSetsExpectedRelations
      */
-    public function testCreateContentDraftFromContentWithRelations()
+    public function testCreateContentDraftWithRelations()
     {
         $repository = $this->getRepository();
 
@@ -2801,6 +2986,136 @@ class ContentServiceTest extends BaseContentServiceTest
     }
 
     /**
+     * Test for the loadRelations() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\ContentService::loadRelations()
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testAddRelation
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testLoadRelations
+     */
+    public function testLoadRelationsSkipsArchivedContent()
+    {
+        $repository = $this->getRepository();
+
+        $contentService = $repository->getContentService();
+
+        /* BEGIN: Use Case */
+        $trashService = $repository->getTrashService();
+        $locationService = $repository->getLocationService();
+        // Remote ids of the "Media" and the "eZ Publish Demo Design ..." page
+        // of a eZ Publish demo installation.
+        $mediaRemoteId = 'a6e35cbcb7cd6ae4b691f3eee30cd262';
+        $demoDesignRemoteId = '8b8b22fe3c6061ed500fbd2b377b885f';
+
+        $draft = $this->createContentDraftVersion1();
+
+        // Load other content objects
+        $media = $contentService->loadContentInfoByRemoteId( $mediaRemoteId );
+        $demoDesign = $contentService->loadContentInfoByRemoteId( $demoDesignRemoteId );
+
+        // Create relation between new content object and "Media" page
+        $contentService->addRelation(
+            $draft->getVersionInfo(),
+            $media
+        );
+
+        // Create another relation with the "Demo Design" page
+        $contentService->addRelation(
+            $draft->getVersionInfo(),
+            $demoDesign
+        );
+
+        $demoDesignLocation = $locationService->loadLocation( $demoDesign->mainLocationId );
+
+        // Trashing Content's last Location will change its status to archived,
+        // in this case relation towards it will not be loaded.
+        $trashService->trash( $demoDesignLocation );
+
+        // Load all relations
+        $relations = $contentService->loadRelations( $draft->getVersionInfo() );
+        /* END: Use Case */
+
+        $this->assertCount( 1, $relations );
+        $this->assertEquals(
+            array(
+                array(
+                    'sourceContentInfo' => 'abcdef0123456789abcdef0123456789',
+                    'destinationContentInfo' => 'a6e35cbcb7cd6ae4b691f3eee30cd262',
+                ),
+            ),
+            array(
+                array(
+                    'sourceContentInfo' => $relations[0]->sourceContentInfo->remoteId,
+                    'destinationContentInfo' => $relations[0]->destinationContentInfo->remoteId,
+                ),
+            )
+        );
+    }
+
+    /**
+     * Test for the loadRelations() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\ContentService::loadRelations()
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testAddRelation
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testLoadRelations
+     */
+    public function testLoadRelationsSkipsDraftContent()
+    {
+        $repository = $this->getRepository();
+
+        $contentService = $repository->getContentService();
+
+        /* BEGIN: Use Case */
+        // Remote ids of the "Media" and the "eZ Publish Demo Design ..." page
+        // of a eZ Publish demo installation.
+        $mediaRemoteId = 'a6e35cbcb7cd6ae4b691f3eee30cd262';
+        $demoDesignRemoteId = '8b8b22fe3c6061ed500fbd2b377b885f';
+
+        $draft = $this->createContentDraftVersion1();
+
+        // Load other content objects
+        $media = $contentService->loadContentByRemoteId( $mediaRemoteId );
+        $demoDesign = $contentService->loadContentInfoByRemoteId( $demoDesignRemoteId );
+
+        // Create draft of "Media" page
+        $mediaDraft = $contentService->createContentDraft( $media->contentInfo );
+
+        // Create relation between "Media" page and new content object draft.
+        // This relation will not be loaded before the draft is published.
+        $contentService->addRelation(
+            $mediaDraft->getVersionInfo(),
+            $draft->getVersionInfo()->getContentInfo()
+        );
+
+        // Create another relation with the "Demo Design" page
+        $contentService->addRelation(
+            $mediaDraft->getVersionInfo(),
+            $demoDesign
+        );
+
+        // Load all relations
+        $relations = $contentService->loadRelations( $mediaDraft->getVersionInfo() );
+        /* END: Use Case */
+
+        $this->assertCount( 1, $relations );
+        $this->assertEquals(
+            array(
+                array(
+                    'sourceContentInfo' => 'a6e35cbcb7cd6ae4b691f3eee30cd262',
+                    'destinationContentInfo' => '8b8b22fe3c6061ed500fbd2b377b885f',
+                ),
+            ),
+            array(
+                array(
+                    'sourceContentInfo' => $relations[0]->sourceContentInfo->remoteId,
+                    'destinationContentInfo' => $relations[0]->destinationContentInfo->remoteId,
+                ),
+            )
+        );
+    }
+
+    /**
      * Test for the loadReverseRelations() method.
      *
      * @return void
@@ -2891,6 +3206,168 @@ class ContentServiceTest extends BaseContentServiceTest
                     'sourceContentInfo' => $reverseRelations[1]->sourceContentInfo->remoteId,
                     'destinationContentInfo' => $reverseRelations[1]->destinationContentInfo->remoteId,
                 )
+            )
+        );
+    }
+
+    /**
+     * Test for the loadReverseRelations() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\ContentService::loadReverseRelations()
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testAddRelation
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testLoadReverseRelations
+     */
+    public function testLoadReverseRelationsSkipsArchivedContent()
+    {
+        $repository = $this->getRepository();
+
+        $contentService = $repository->getContentService();
+
+        /* BEGIN: Use Case */
+        $trashService = $repository->getTrashService();
+        $locationService = $repository->getLocationService();
+        // Remote ids of the "Media" and the "eZ Publish Demo Design ..." page
+        // of a eZ Publish demo installation.
+        $mediaRemoteId = 'a6e35cbcb7cd6ae4b691f3eee30cd262';
+        $demoDesignRemoteId = '8b8b22fe3c6061ed500fbd2b377b885f';
+
+        $versionInfo = $this->createContentVersion1()->getVersionInfo();
+        $contentInfo = $versionInfo->getContentInfo();
+
+        // Create some drafts
+        $mediaDraft = $contentService->createContentDraft(
+            $contentService->loadContentInfoByRemoteId( $mediaRemoteId )
+        );
+        $demoDesignDraft = $contentService->createContentDraft(
+            $contentService->loadContentInfoByRemoteId( $demoDesignRemoteId )
+        );
+
+        // Create relation between new content object and "Media" page
+        $relation1 = $contentService->addRelation(
+            $mediaDraft->getVersionInfo(),
+            $contentInfo
+        );
+
+        // Create another relation with the "Demo Design" page
+        $relation2 = $contentService->addRelation(
+            $demoDesignDraft->getVersionInfo(),
+            $contentInfo
+        );
+
+        // Publish drafts, so relations become active
+        $contentService->publishVersion( $mediaDraft->getVersionInfo() );
+        $contentService->publishVersion( $demoDesignDraft->getVersionInfo() );
+
+        $demoDesignLocation = $locationService->loadLocation( $demoDesignDraft->contentInfo->mainLocationId );
+
+        // Trashing Content's last Location will change its status to archived,
+        // in this case relation from it will not be loaded.
+        $trashService->trash( $demoDesignLocation );
+
+        // Load all relations
+        $relations = $contentService->loadRelations( $versionInfo );
+        $reverseRelations = $contentService->loadReverseRelations( $contentInfo );
+        /* END: Use Case */
+
+        $this->assertEquals( $contentInfo->id, $relation1->getDestinationContentInfo()->id );
+        $this->assertEquals( $mediaDraft->id, $relation1->getSourceContentInfo()->id );
+
+        $this->assertEquals( $contentInfo->id, $relation2->getDestinationContentInfo()->id );
+        $this->assertEquals( $demoDesignDraft->id, $relation2->getSourceContentInfo()->id );
+
+        $this->assertEquals( 0, count( $relations ) );
+        $this->assertEquals( 1, count( $reverseRelations ) );
+
+        $this->assertEquals(
+            array(
+                array(
+                    'sourceContentInfo' => 'a6e35cbcb7cd6ae4b691f3eee30cd262',
+                    'destinationContentInfo' => 'abcdef0123456789abcdef0123456789',
+                ),
+            ),
+            array(
+                array(
+                    'sourceContentInfo' => $reverseRelations[0]->sourceContentInfo->remoteId,
+                    'destinationContentInfo' => $reverseRelations[0]->destinationContentInfo->remoteId,
+                ),
+            )
+        );
+    }
+
+    /**
+     * Test for the loadReverseRelations() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\ContentService::loadReverseRelations()
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testAddRelation
+     * @depends eZ\Publish\API\Repository\Tests\ContentServiceTest::testLoadReverseRelations
+     */
+    public function testLoadReverseRelationsSkipsDraftContent()
+    {
+        $repository = $this->getRepository();
+
+        $contentService = $repository->getContentService();
+
+        /* BEGIN: Use Case */
+        // Remote ids of the "Media" and the "eZ Publish Demo Design ..." page
+        // of a eZ Publish demo installation.
+        $mediaRemoteId = 'a6e35cbcb7cd6ae4b691f3eee30cd262';
+        $demoDesignRemoteId = '8b8b22fe3c6061ed500fbd2b377b885f';
+
+        // Load "Media" page Content
+        $media = $contentService->loadContentByRemoteId( $mediaRemoteId );
+
+        // Create some drafts
+        $newDraftVersionInfo = $this->createContentDraftVersion1()->getVersionInfo();
+        $demoDesignDraft = $contentService->createContentDraft(
+            $contentService->loadContentInfoByRemoteId( $demoDesignRemoteId )
+        );
+
+        // Create relation between "Media" page and new content object
+        $relation1 = $contentService->addRelation(
+            $newDraftVersionInfo,
+            $media->contentInfo
+        );
+
+        // Create another relation with the "Demo Design" page
+        $relation2 = $contentService->addRelation(
+            $demoDesignDraft->getVersionInfo(),
+            $media->contentInfo
+        );
+
+        // Publish drafts, so relations become active
+        $contentService->publishVersion( $demoDesignDraft->getVersionInfo() );
+        // We will not publish new Content draft, therefore relation from it
+        // will not be loaded as reverse relation for "Media" page
+        //$contentService->publishVersion( $newDraftVersionInfo );
+
+        // Load all relations
+        $relations = $contentService->loadRelations( $media->versionInfo );
+        $reverseRelations = $contentService->loadReverseRelations( $media->contentInfo );
+        /* END: Use Case */
+
+        $this->assertEquals( $media->contentInfo->id, $relation1->getDestinationContentInfo()->id );
+        $this->assertEquals( $newDraftVersionInfo->contentInfo->id, $relation1->getSourceContentInfo()->id );
+
+        $this->assertEquals( $media->contentInfo->id, $relation2->getDestinationContentInfo()->id );
+        $this->assertEquals( $demoDesignDraft->id, $relation2->getSourceContentInfo()->id );
+
+        $this->assertEquals( 0, count( $relations ) );
+        $this->assertEquals( 1, count( $reverseRelations ) );
+
+        $this->assertEquals(
+            array(
+                array(
+                    'sourceContentInfo' => '8b8b22fe3c6061ed500fbd2b377b885f',
+                    'destinationContentInfo' => 'a6e35cbcb7cd6ae4b691f3eee30cd262',
+                ),
+            ),
+            array(
+                array(
+                    'sourceContentInfo' => $reverseRelations[0]->sourceContentInfo->remoteId,
+                    'destinationContentInfo' => $reverseRelations[0]->destinationContentInfo->remoteId,
+                ),
             )
         );
     }
@@ -3047,7 +3524,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Create a new content object
             $contentId = $contentService->createContent( $contentCreate )->id;
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3062,7 +3539,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // This call will fail with a "NotFoundException"
             $contentService->loadContent( $contentId );
         }
-        catch ( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+        catch ( NotFoundException $e )
         {
             // This is expected
             return;
@@ -3114,7 +3591,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3151,7 +3628,7 @@ class ContentServiceTest extends BaseContentServiceTest
         {
             $draft = $this->createContentDraftVersion1();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3205,7 +3682,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Roleback the transaction
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3253,7 +3730,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Store version number for later reuse
             $versionNo = $drafted->versionInfo->versionNo;
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3314,7 +3791,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3366,7 +3843,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Store version number for later reuse
             $versionNo = $content->versionInfo->versionNo;
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3429,7 +3906,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3487,7 +3964,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Publish updated version
             $contentService->publishVersion( $draft->getVersionInfo() );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3551,7 +4028,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit all changes.
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3606,7 +4083,7 @@ class ContentServiceTest extends BaseContentServiceTest
                 $metadataUpdate
             );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3667,7 +4144,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit all changes.
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3714,7 +4191,7 @@ class ContentServiceTest extends BaseContentServiceTest
 
             $contentService->deleteVersion( $draft->getVersionInfo() );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3767,7 +4244,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit all changes.
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3813,7 +4290,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Delete content object
             $contentService->deleteContent( $contentInfo );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3865,7 +4342,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3929,7 +4406,7 @@ class ContentServiceTest extends BaseContentServiceTest
                 $locationCreate
             );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -3994,7 +4471,7 @@ class ContentServiceTest extends BaseContentServiceTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -4340,6 +4817,35 @@ class ContentServiceTest extends BaseContentServiceTest
             }
         }
         return $fields;
+    }
+
+    /**
+     * Asserts that given Content has default ContentStates.
+     *
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     *
+     * @return void
+     */
+    private function assertDefaultContentStates( ContentInfo $contentInfo )
+    {
+        $repository = $this->getRepository();
+        $objectStateService = $repository->getObjectStateService();
+
+        $objectStateGroups = $objectStateService->loadObjectStateGroups();
+
+        foreach ( $objectStateGroups as $objectStateGroup )
+        {
+            $contentState = $objectStateService->getContentState( $contentInfo, $objectStateGroup );
+            foreach ( $objectStateService->loadObjectStates( $objectStateGroup ) as $objectState )
+            {
+                // Only check the first object state which is the default one.
+                $this->assertEquals(
+                    $objectState,
+                    $contentState
+                );
+                break;
+            }
+        }
     }
 
     /**

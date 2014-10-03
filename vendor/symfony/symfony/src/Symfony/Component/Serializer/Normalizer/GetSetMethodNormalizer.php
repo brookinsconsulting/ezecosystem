@@ -38,6 +38,7 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
 {
     protected $callbacks = array();
     protected $ignoredAttributes = array();
+    protected $camelizedAttributes = array();
 
     /**
      * Set normalization callbacks
@@ -64,6 +65,16 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
     public function setIgnoredAttributes(array $ignoredAttributes)
     {
         $this->ignoredAttributes = $ignoredAttributes;
+    }
+
+    /**
+     * Set attributes to be camelized on denormalize
+     *
+     * @param array $camelizedAttributes
+     */
+    public function setCamelizedAttributes(array $camelizedAttributes)
+    {
+        $this->camelizedAttributes = $camelizedAttributes;
     }
 
     /**
@@ -111,13 +122,15 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
 
             $params = array();
             foreach ($constructorParameters as $constructorParameter) {
-                $paramName = lcfirst($constructorParameter->name);
+                $paramName = lcfirst($this->formatAttribute($constructorParameter->name));
 
                 if (isset($data[$paramName])) {
                     $params[] = $data[$paramName];
                     // don't run set for a parameter passed to the constructor
                     unset($data[$paramName]);
-                } elseif (!$constructorParameter->isOptional()) {
+                } elseif ($constructorParameter->isOptional()) {
+                    $params[] = $constructorParameter->getDefaultValue();
+                } else {
                     throw new RuntimeException(
                         'Cannot create an instance of '.$class.
                         ' from serialized data because its constructor requires '.
@@ -132,7 +145,8 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
         }
 
         foreach ($data as $attribute => $value) {
-            $setter = 'set'.$attribute;
+            $setter = 'set'.$this->formatAttribute($attribute);
+
             if (method_exists($object, $setter)) {
                 $object->$setter($value);
             }
@@ -142,7 +156,28 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
     }
 
     /**
-     * {@inheritDoc}
+     * Format attribute name to access parameters or methods
+     * As option, if attribute name is found on camelizedAttributes array
+     * returns attribute name in camelcase format
+     *
+     * @param string $attributeName
+     * @return string
+     */
+    protected function formatAttribute($attributeName)
+    {
+        if (in_array($attributeName, $this->camelizedAttributes)) {
+            return preg_replace_callback(
+                '/(^|_|\.)+(.)/', function ($match) {
+                    return ('.' === $match[1] ? '_' : '').strtoupper($match[2]);
+                }, $attributeName
+            );
+        }
+
+        return $attributeName;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function supportsNormalization($data, $format = null)
     {
@@ -150,7 +185,7 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -162,7 +197,7 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
      *
      * @param string $class
      *
-     * @return Boolean
+     * @return bool
      */
     private function supports($class)
     {
@@ -182,7 +217,7 @@ class GetSetMethodNormalizer extends SerializerAwareNormalizer implements Normal
      *
      * @param \ReflectionMethod $method the method to check
      *
-     * @return Boolean whether the method is a getter.
+     * @return bool    whether the method is a getter.
      */
     private function isGetMethod(\ReflectionMethod $method)
     {

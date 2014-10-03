@@ -2,9 +2,9 @@
 /**
  * File containing the eZContentClass class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -390,7 +390,6 @@ class eZContentClass extends eZPersistentObject
         if ( $enableCaching )
         {
             $http = eZHTTPTool::instance();
-            eZExpiryHandler::registerShutdownFunction();
             $handler = eZExpiryHandler::instance();
             $expiredTimeStamp = 0;
             if ( $handler->hasTimestamp( 'user-class-cache' ) )
@@ -911,7 +910,6 @@ You will need to change the class of the node by using the swap functionality.' 
            }
         }
 
-        eZExpiryHandler::registerShutdownFunction();
         $handler = eZExpiryHandler::instance();
         $handler->setTimestamp( 'user-class-cache', time() );
         $handler->store();
@@ -1031,7 +1029,6 @@ You will need to change the class of the node by using the swap functionality.' 
         }
         eZContentClassClassGroup::removeClassMembers( $this->ID, $previousVersion );
 
-        eZExpiryHandler::registerShutdownFunction();
         $handler = eZExpiryHandler::instance();
         $time = time();
         $handler->setTimestamp( 'user-class-cache', $time );
@@ -1039,14 +1036,14 @@ You will need to change the class of the node by using the swap functionality.' 
         $handler->setTimestamp( 'sort-key-cache', $time );
         $handler->store();
 
-        eZContentCacheManager::clearAllContentCache();
-
         $this->setAttribute( 'serialized_name_list', $this->NameList->serializeNames() );
         $this->setAttribute( 'serialized_description_list', $this->DescriptionList->serializeNames() );
         parent::store();
         $this->NameList->store( $this );
 
         $db->commit();
+
+        eZContentCacheManager::clearAllContentCache();
     }
 
     function setVersion( $version, $set_childs = false )
@@ -1832,7 +1829,6 @@ You will need to change the class of the node by using the swap functionality.' 
                                           '',
                                           array( 'clustering' => 'classidentifiers' ) );
 
-            eZExpiryHandler::registerShutdownFunction();
             $handler = eZExpiryHandler::instance();
             $expiryTime = 0;
             if ( $handler->hasTimestamp( 'class-identifier-cache' ) )

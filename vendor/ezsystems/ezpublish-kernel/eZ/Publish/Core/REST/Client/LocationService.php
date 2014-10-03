@@ -2,9 +2,9 @@
 /**
  * File containing the LocationUpdateStruct class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 namespace eZ\Publish\Core\REST\Client;
 
@@ -14,7 +14,7 @@ use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 
-use eZ\Publish\Core\REST\Common\UrlHandler;
+use eZ\Publish\Core\REST\Common\RequestParser;
 use eZ\Publish\Core\REST\Common\Input\Dispatcher;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
 use eZ\Publish\Core\REST\Common\Message;
@@ -44,22 +44,22 @@ class LocationService implements APILocationService, Sessionable
     private $outputVisitor;
 
     /**
-     * @var \eZ\Publish\Core\REST\Common\UrlHandler
+     * @var \eZ\Publish\Core\REST\Common\RequestParser
      */
-    private $urlHandler;
+    private $requestParser;
 
     /**
      * @param \eZ\Publish\Core\REST\Client\HttpClient $client
      * @param \eZ\Publish\Core\REST\Common\Input\Dispatcher $inputDispatcher
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
+     * @param \eZ\Publish\Core\REST\Common\RequestParser $requestParser
      */
-    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, UrlHandler $urlHandler )
+    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, RequestParser $requestParser )
     {
         $this->client          = $client;
         $this->inputDispatcher = $inputDispatcher;
         $this->outputVisitor   = $outputVisitor;
-        $this->urlHandler      = $urlHandler;
+        $this->requestParser   = $requestParser;
     }
 
     /**
@@ -113,10 +113,10 @@ class LocationService implements APILocationService, Sessionable
         $inputMessage = $this->outputVisitor->visit( $locationCreateStruct );
         $inputMessage->headers['Accept'] = $this->outputVisitor->getMediaType( 'Location' );
 
-        $values = $this->urlHandler->parse( 'object', $contentInfo->id );
+        $values = $this->requestParser->parse( 'object', $contentInfo->id );
         $result = $this->client->request(
             'POST',
-            $this->urlHandler->generate( 'objectLocations', array( 'object' => $values['object'] ) ),
+            $this->requestParser->generate( 'objectLocations', array( 'object' => $values['object'] ) ),
             $inputMessage
         );
 
@@ -129,7 +129,7 @@ class LocationService implements APILocationService, Sessionable
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException If the current user user is not allowed to read this location
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If the specified location is not found
      *
-     * @param int $locationId
+     * @param mixed $locationId
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location
      */
@@ -160,7 +160,7 @@ class LocationService implements APILocationService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'locationByRemote', array( 'location' => $remoteId ) ),
+            $this->requestParser->generate( 'locationByRemote', array( 'location' => $remoteId ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'LocationList' ) )
             )
@@ -220,10 +220,10 @@ class LocationService implements APILocationService, Sessionable
      */
     public function loadLocations( ContentInfo $contentInfo, Location $rootLocation = null )
     {
-        $values = $this->urlHandler->parse( 'object', $contentInfo->id );
+        $values = $this->requestParser->parse( 'object', $contentInfo->id );
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'objectLocations', array( 'object' => $values['object'] ) ),
+            $this->requestParser->generate( 'objectLocations', array( 'object' => $values['object'] ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'LocationList' ) )
             )
@@ -244,10 +244,10 @@ class LocationService implements APILocationService, Sessionable
      */
     public function loadLocationChildren( Location $location, $offset = 0, $limit = -1 )
     {
-        $values = $this->urlHandler->parse( 'location', $location->id );
+        $values = $this->requestParser->parse( 'location', $location->id );
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'locationChildren', array( 'location' => $values['location'] ) ),
+            $this->requestParser->generate( 'locationChildren', array( 'location' => $values['location'] ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'LocationList' ) )
             )

@@ -2,9 +2,9 @@
 /**
  * File containing the Country class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Country;
@@ -14,6 +14,8 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\FieldType\Country\Exception\InvalidValue;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\FieldType\ValidationError;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
+use eZ\Publish\Core\FieldType\Value as BaseValue;
 
 /**
  * The Country field type.
@@ -58,22 +60,13 @@ class Type extends FieldType
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
      *
-     * @param mixed $value
+     * @param \eZ\Publish\Core\FieldType\Country\Value $value
      *
-     * @return mixed
+     * @return string
      */
-    public function getName( $value )
+    public function getName( SPIValue $value )
     {
-        return implode(
-            ", ",
-            array_map(
-                function ( $countryInfo )
-                {
-                    return $countryInfo["Name"];
-                },
-                $this->countriesInfo
-            )
-        );
+        return (string)$value;
     }
 
     /**
@@ -88,41 +81,41 @@ class Type extends FieldType
     }
 
     /**
-     * Implements the core of {@see acceptValue()}.
+     * Inspects given $inputValue and potentially converts it into a dedicated value object.
      *
-     * @param mixed $inputValue
+     * @param array|\eZ\Publish\Core\FieldType\Country\Value $inputValue
      *
      * @return \eZ\Publish\Core\FieldType\Country\Value The potentially converted and structurally plausible value.
      */
-    protected function internalAcceptValue( $inputValue )
+    protected function createValueFromInput( $inputValue )
     {
         if ( is_array( $inputValue ) )
         {
-            if ( empty( $inputValue ) )
-                return $this->getEmptyValue();
-
             $inputValue = $this->fromHash( $inputValue );
         }
 
-        if ( !$inputValue instanceof Value )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue',
-                'eZ\\Publish\\Core\\FieldType\\Country\\Value',
-                $inputValue
-            );
-        }
-
-        if ( !is_array( $inputValue->countries ) )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue->countries',
-                'array',
-                $inputValue->countries
-            );
-        }
-
         return $inputValue;
+    }
+
+    /**
+     * Throws an exception if value structure is not of expected format.
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure.
+     *
+     * @param \eZ\Publish\Core\FieldType\Country\Value $value
+     *
+     * @return void
+     */
+    protected function checkValueStructure( BaseValue $value )
+    {
+        if ( !is_array( $value->countries ) )
+        {
+            throw new InvalidArgumentType(
+                '$value->countries',
+                'array',
+                $value->countries
+            );
+        }
     }
 
     /**
@@ -133,14 +126,20 @@ class Type extends FieldType
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      *
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
-     * @param \eZ\Publish\Core\FieldType\Value $fieldValue The field value for which an action is performed
+     * @param \eZ\Publish\Core\FieldType\Country\Value $fieldValue The field value for which an action is performed
      *
      * @return \eZ\Publish\SPI\FieldType\ValidationError[]
      */
-    public function validate( FieldDefinition $fieldDefinition, $fieldValue )
+    public function validate( FieldDefinition $fieldDefinition, SPIValue $fieldValue )
     {
         $validationErrors = array();
-        $fieldSettings = $fieldDefinition->fieldSettings;
+
+        if ( $this->isEmptyValue( $fieldValue ) )
+        {
+            return $validationErrors;
+        }
+
+        $fieldSettings = $fieldDefinition->getFieldSettings();
 
         if ( ( !isset( $fieldSettings["isMultiple"] ) || $fieldSettings["isMultiple"] === false )
             && count( $fieldValue->countries ) > 1 )
@@ -172,19 +171,16 @@ class Type extends FieldType
     /**
      * Returns information for FieldValue->$sortKey relevant to the field type.
      *
+     * @param \eZ\Publish\Core\FieldType\Country\Value $value
+     *
      * @return array
      */
-    protected function getSortInfo( $value )
+    protected function getSortInfo( BaseValue $value )
     {
-        if ( $value === null )
-        {
-            return "";
-        }
-
         $countries = array();
         foreach ( $value->countries as $countryInfo )
         {
-            $countries[] = strtolower( $countryInfo["Name"] );
+            $countries[] = $this->transformationProcessor->transformByGroup( $countryInfo["Name"], "lowercase" );
         }
 
         sort( $countries );
@@ -203,7 +199,7 @@ class Type extends FieldType
     {
         if ( $hash === null )
         {
-            return null;
+            return $this->getEmptyValue();
         }
 
         $countries = array();
@@ -234,7 +230,7 @@ class Type extends FieldType
      *
      * @return mixed
      */
-    public function toHash( $value )
+    public function toHash( SPIValue $value )
     {
         if ( $this->isEmptyValue( $value ) )
         {
@@ -255,18 +251,6 @@ class Type extends FieldType
     }
 
     /**
-     * Get index data for field data for search backend
-     *
-     * @param mixed $value
-     *
-     * @return \eZ\Publish\SPI\Persistence\Content\Search\Field[]
-     */
-    public function getIndexData( $value )
-    {
-        throw new \RuntimeException( '@todo: Implement' );
-    }
-
-    /**
      * Validates the fieldSettings of a FieldDefinitionCreateStruct or FieldDefinitionUpdateStruct
      *
      * @param mixed $fieldSettings
@@ -277,27 +261,9 @@ class Type extends FieldType
     {
         $validationErrors = array();
 
-        foreach ( (array)$fieldSettings as $name => $value )
+        foreach ( $fieldSettings as $name => $value )
         {
-            if ( isset( $this->settingsSchema[$name] ) )
-            {
-                switch ( $name )
-                {
-                    case "isMultiple":
-                        if ( !is_bool( $value ) )
-                        {
-                            $validationErrors[] = new ValidationError(
-                                "Setting '%setting%' value must be of boolean type",
-                                null,
-                                array(
-                                    "setting" => $name
-                                )
-                            );
-                        }
-                        break;
-                }
-            }
-            else
+            if ( !isset( $this->settingsSchema[$name] ) )
             {
                 $validationErrors[] = new ValidationError(
                     "Setting '%setting%' is unknown",
@@ -306,6 +272,23 @@ class Type extends FieldType
                         "setting" => $name
                     )
                 );
+                continue;
+            }
+
+            switch ( $name )
+            {
+                case "isMultiple":
+                    if ( !is_bool( $value ) )
+                    {
+                        $validationErrors[] = new ValidationError(
+                            "Setting '%setting%' value must be of boolean type",
+                            null,
+                            array(
+                                "setting" => $name
+                            )
+                        );
+                    }
+                    break;
             }
         }
 

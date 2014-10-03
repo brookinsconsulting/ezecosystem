@@ -90,6 +90,18 @@ class Stopwatch
     }
 
     /**
+     * Checks if the event was started
+     *
+     * @param string $name The event name
+     *
+     * @return bool
+     */
+    public function isStarted($name)
+    {
+        return end($this->activeSections)->isEventStarted($name);
+    }
+
+    /**
      * Stops an event.
      *
      * @param string $name The event name
@@ -178,8 +190,6 @@ class Section
                 return $child;
             }
         }
-
-        return null;
     }
 
     /**
@@ -235,6 +245,18 @@ class Section
         }
 
         return $this->events[$name]->start();
+    }
+
+    /**
+     * Checks if the event was started
+     *
+     * @param string $name The event name
+     *
+     * @return bool
+     */
+    public function isEventStarted($name)
+    {
+        return isset($this->events[$name]) && $this->events[$name]->isStarted();
     }
 
     /**

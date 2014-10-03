@@ -2,17 +2,19 @@
 /**
  * File containing the Session class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\LegacyMapper;
 
-use eZ\Publish\Core\MVC\Legacy\LegacyEvents;
 use eZ\Publish\Core\MVC\Legacy\Event\PreBuildKernelEvent;
+use eZ\Publish\Core\MVC\Legacy\LegacyEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 
 /**
  * Maps the session parameters to the legacy parameters
@@ -20,13 +22,35 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class Session implements EventSubscriberInterface
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    private $container;
+    private $session;
 
-    public function __construct( ContainerInterface $container )
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+     */
+    private $sessionStorage;
+
+    /**
+     * @var string
+     */
+    private $sessionStorageKey;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
+    private $request;
+
+    public function __construct( SessionStorageInterface $sessionStorage, $sessionStorageKey, SessionInterface $session = null )
     {
-        $this->container = $container;
+        $this->sessionStorage = $sessionStorage;
+        $this->sessionStorageKey = $sessionStorageKey;
+        $this->session = $session;
+    }
+
+    public function setRequest( Request $request = null )
+    {
+        $this->request = $request;
     }
 
     public static function getSubscribedEvents()
@@ -52,20 +76,32 @@ class Session implements EventSubscriberInterface
             'has_previous' => false,
             'storage' => false,
         );
-        if ( $this->container->has( 'session' ) )
+        if ( isset( $this->session ) )
         {
             $sessionInfos['configured'] = true;
 
-            $session = $this->container->get( 'session' );
-            $sessionInfos['name'] = $session->getName();
-            $sessionInfos['started'] = $session->isStarted();
-            $sessionInfos['namespace'] = $this->container->getParameter(
-                'ezpublish.session.attribute_bag.storage_key'
-            );
-            $sessionInfos['has_previous'] = $this->container->isScopeActive( 'request' ) ? $this->container->get( 'request' )->hasPreviousSession() : false;
-            $sessionInfos['storage'] = $this->container->get( 'session.storage' );
+            $sessionInfos['name'] = $this->session->getName();
+            $sessionInfos['started'] = $this->session->isStarted();
+            $sessionInfos['namespace'] = $this->sessionStorageKey;
+            $sessionInfos['has_previous'] = isset( $this->request ) ? $this->request->hasPreviousSession() : false;
+            $sessionInfos['storage'] = $this->sessionStorage;
         }
 
-        $event->getParameters()->set( 'session', $sessionInfos );
+        $legacyKernelParameters = $event->getParameters();
+        $legacyKernelParameters->set( 'session', $sessionInfos );
+
+        // Deactivate session cookie settings in legacy kernel.
+        // This will force using settings defined in Symfony.
+        $sessionSettings = array(
+            'site.ini/Session/CookieTimeout' => false,
+            'site.ini/Session/CookiePath' => false,
+            'site.ini/Session/CookieDomain' => false,
+            'site.ini/Session/CookieSecure' => false,
+            'site.ini/Session/CookieHttponly' => false,
+        );
+        $legacyKernelParameters->set(
+            "injected-settings",
+            $sessionSettings + (array)$legacyKernelParameters->get( "injected-settings" )
+        );
     }
 }

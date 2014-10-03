@@ -2,15 +2,15 @@
 /**
  * File containing the Test Setup Factory base class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Repository\Tests\Service\Integration\Legacy;
 
-use eZ\Publish\API\Repository\Tests\SetupFactory\Legacy as APILegacySetupFactory;
 use eZ\Publish\Core\Base\ServiceContainer;
+use eZ\Publish\API\Repository\Tests\SetupFactory\Legacy as APILegacySetupFactory;
 
 /**
  * A Test Factory is used to setup the infrastructure for a tests, based on a
@@ -19,38 +19,42 @@ use eZ\Publish\Core\Base\ServiceContainer;
 class SetupFactory extends APILegacySetupFactory
 {
     /**
-     * Service container
-     *
-     * @var \eZ\Publish\Core\Base\ServiceContainer
+     * @var string
      */
-    protected static $legacyServiceContainer;
+    protected $repositoryReference = "ezpublish.api.inner_repository";
 
     /**
      * Returns the service container used for initialization of the repository
-     *
-     * @todo Getting service container statically, too, would be nice
      *
      * @return \eZ\Publish\Core\Base\ServiceContainer
      */
     protected function getServiceContainer()
     {
-        if ( !isset( static::$legacyServiceContainer ) )
+        if ( !isset( static::$serviceContainer ) )
         {
-            $configManager = $this->getConfigurationManager();
+            $config = include __DIR__ . "/../../../../../../../../config.php";
+            $installDir = $config['install_dir'];
 
-            $serviceSettings = $configManager->getConfiguration( 'service' )->getAll();
+            /** @var \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder */
+            $containerBuilder = include $config['container_builder_path'];
 
-            $serviceSettings['persistence_handler']['alias'] = 'persistence_handler_legacy';
-            $serviceSettings['io_handler']['alias'] = 'io_handler_legacy';
-            $serviceSettings['persistence_handler_legacy']['arguments']['config']['dsn'] = self::$dsn;
-            $serviceSettings['legacy_db_handler']['arguments']['dsn'] = self::$dsn;
+            /** @var \Symfony\Component\DependencyInjection\Loader\YamlFileLoader $loader */
+            $loader->load( 'tests/integration_legacy_core.yml' );
 
-            static::$legacyServiceContainer = new ServiceContainer(
-                $serviceSettings,
-                $this->getDependencyConfiguration()
+            $containerBuilder->setParameter(
+                "legacy_dsn",
+                static::$dsn
+            );
+
+            static::$serviceContainer = new ServiceContainer(
+                $containerBuilder,
+                $installDir,
+                $config['cache_dir'],
+                true,
+                true
             );
         }
 
-        return static::$legacyServiceContainer;
+        return static::$serviceContainer;
     }
 }

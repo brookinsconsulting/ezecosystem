@@ -2,9 +2,9 @@
 /**
  * File containing the Content Search handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Search;
@@ -39,7 +39,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
  * reduce singular and and or constructs…
  *
  * 4) Additionally we might need a post-query filtering step, which filters
- * content objects based on criteria, which could not be convertedd in to
+ * content objects based on criteria, which could not be converted in to
  * database statements.
  */
 class Handler implements SearchHandlerInterface
@@ -95,13 +95,19 @@ class Handler implements SearchHandlerInterface
     public function findContent( Query $query, array $fieldFilters = array() )
     {
         $start = microtime( true );
+        $query->filter = $query->filter ?: new Criterion\MatchAll();
+        $query->query = $query->query ?: new Criterion\MatchAll();
 
         if ( count( $query->facetBuilders ) )
         {
             throw new NotImplementedException( "Facets are not supported by the legacy search engine." );
         }
 
-        $data = $this->gateway->find( $query->criterion, $query->offset, $query->limit, $query->sortClauses, null );
+        // The legacy search does not know about scores, so that we just
+        // combine the query with the filter
+        $filter = new Criterion\LogicalAnd( array( $query->query, $query->filter ) );
+
+        $data = $this->gateway->find( $filter, $query->offset, $query->limit, $query->sortClauses, null );
 
         $result = new SearchResult();
         $result->time = microtime( true ) - $start;
@@ -127,19 +133,20 @@ class Handler implements SearchHandlerInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if there is more than than one result matching the criterions
      *
      * @todo define structs for the field filters
-     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $criterion
+     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $filter
      * @param array $fieldFilters - a map of filters for the returned fields.
      *        Currently supported: <code>array("languages" => array(<language1>,..))</code>.
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Content
+     * @return \eZ\Publish\SPI\Persistence\Content
      */
-    public function findSingle( Criterion $criterion, array $fieldFilters = array() )
+    public function findSingle( Criterion $filter, array $fieldFilters = array() )
     {
-        $query = new Query();
-        $query->criterion = $criterion;
-        $query->offset    = 0;
-        $query->limit     = 1;
-        $result = $this->findContent( $query, $fieldFilters );
+        $searchQuery = new Query();
+        $searchQuery->filter = $filter;
+        $searchQuery->query  = new Criterion\MatchAll();
+        $searchQuery->offset = 0;
+        $searchQuery->limit  = 1;
+        $result = $this->findContent( $searchQuery, $fieldFilters );
 
         if ( !$result->totalCount )
             throw new NotFoundException( 'Content', "findSingle() found no content for given \$criterion" );
@@ -184,6 +191,16 @@ class Handler implements SearchHandlerInterface
      * @return void
      */
     public function deleteContent( $contentId, $versionId = null )
+    {
+        throw new \Exception( "Not implemented yet." );
+    }
+
+    /**
+     * Deletes a location from the index
+     *
+     * @param mixed $locationId
+     */
+    public function deleteLocation( $locationId )
     {
         throw new \Exception( "Not implemented yet." );
     }

@@ -2,9 +2,9 @@
 /**
  * File containing the ezxFormToken class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package ezformtoken
  */
 
@@ -16,7 +16,7 @@
  *
  * @internal
  * @since 4.5.0
- * @version  2013.5
+ * @version 2014.07.0
  * @package ezformtoken
  */
 class ezxFormToken
@@ -113,7 +113,7 @@ class ezxFormToken
      */
     static public function input( eZURI $uri )
     {
-        if ( $_SERVER['REQUEST_METHOD'] !== 'POST' && empty( $_POST ) )
+        if ( isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== 'POST' && empty( $_POST ) )
         {
             eZDebugSetting::writeDebug( 'ezformtoken', 'Input not protected (not POST)', __METHOD__ );
             return null;
@@ -159,8 +159,11 @@ class ezxFormToken
      * Appends tokens to  POST forms if user is logged in.
      *
      * @param string $templateResult ByRef
+     * @param bool $filterForms For use when the output has already been filtered, but not for the whole layout.
+     *
+     * @return mixed|string
      */
-    static public function output( $templateResult )
+    static public function output( $templateResult, $filterForms = true )
     {
         if ( !self::shouldProtectUser() )
         {
@@ -211,11 +214,14 @@ class ezxFormToken
             );
         }
 
-        $templateResult = preg_replace(
-            '/(<form\W[^>]*\bmethod=(\'|"|)POST(\'|"|)\b[^>]*>)/i',
-            '\\1' . "\n<input type=\"hidden\" name=\"{$field}\" value=\"{$token}\" />\n",
-            $templateResult
-        );
+        if ( $filterForms )
+        {
+            $templateResult = preg_replace(
+                '/(<form\W[^>]*\bmethod=(\'|"|)POST(\'|"|)\b[^>]*>)/i',
+                '\\1' . "\n<input type=\"hidden\" name=\"{$field}\" value=\"{$token}\" />\n",
+                $templateResult
+            );
+        }
 
         return str_replace( $replaceKey, $token, $templateResult );
     }
@@ -254,6 +260,11 @@ class ezxFormToken
     static public function setIsEnabled( $isEnabled )
     {
         self::$isEnabled = (bool)$isEnabled;
+    }
+
+    static public function isEnabled()
+    {
+        return (bool)self::$isEnabled;
     }
 
     /**

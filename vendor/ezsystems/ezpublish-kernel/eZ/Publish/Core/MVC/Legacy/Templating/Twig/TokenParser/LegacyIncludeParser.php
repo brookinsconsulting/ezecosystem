@@ -2,15 +2,16 @@
 /**
  * File containing the LegacyIncludeParser class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Legacy\Templating\Twig\TokenParser;
 
 use eZ\Publish\Core\MVC\Legacy\Templating\Twig\Node\LegacyIncludeNode;
 use Twig_Token;
+use Twig_TokenParser;
 use Twig_Node_Expression_Array;
 
 /**
@@ -18,7 +19,7 @@ use Twig_Node_Expression_Array;
  *
  * @deprecated since 5.1
  */
-class LegacyIncludeParser extends \Twig_TokenParser
+class LegacyIncludeParser extends Twig_TokenParser
 {
 
     /**

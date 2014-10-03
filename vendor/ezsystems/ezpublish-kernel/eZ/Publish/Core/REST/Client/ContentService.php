@@ -2,9 +2,9 @@
 /**
  * File containing the ContentService class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client;
@@ -22,11 +22,10 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\User\User;
 
-use eZ\Publish\Core\REST\Common\UrlHandler;
+use eZ\Publish\Core\REST\Common\RequestParser;
 use eZ\Publish\Core\REST\Common\Input\Dispatcher;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
 use eZ\Publish\Core\REST\Common\Message;
-use eZ\Publish\Core\REST\Common\Exceptions;
 
 use eZ\Publish\Core\REST\Client\Values;
 
@@ -51,9 +50,9 @@ class ContentService implements APIContentService, Sessionable
     private $outputVisitor;
 
     /**
-     * @var \eZ\Publish\Core\REST\Common\UrlHandler
+     * @var \eZ\Publish\Core\REST\Common\RequestParser
      */
-    private $urlHandler;
+    private $requestParser;
 
     /**
      * @var \eZ\Publish\Core\REST\Client\ContentTypeService
@@ -64,15 +63,15 @@ class ContentService implements APIContentService, Sessionable
      * @param \eZ\Publish\Core\REST\Client\HttpClient $client
      * @param \eZ\Publish\Core\REST\Common\Input\Dispatcher $inputDispatcher
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
+     * @param \eZ\Publish\Core\REST\Common\RequestParser $requestParser
      * @param \eZ\Publish\Core\REST\Client\ContentTypeService $contentTypeService
      */
-    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, UrlHandler $urlHandler, ContentTypeService $contentTypeService )
+    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, RequestParser $requestParser, ContentTypeService $contentTypeService )
     {
         $this->client          = $client;
         $this->inputDispatcher = $inputDispatcher;
         $this->outputVisitor   = $outputVisitor;
-        $this->urlHandler      = $urlHandler;
+        $this->requestParser      = $requestParser;
         $this->contentTypeService = $contentTypeService;
     }
 
@@ -124,7 +123,7 @@ class ContentService implements APIContentService, Sessionable
      *
      * To load fields use loadContent
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowd to create the content in the given location
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to create the content in the given location
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException - if the content with the given remote id does not exist
      *
      * @param string $remoteId
@@ -135,7 +134,7 @@ class ContentService implements APIContentService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'objectByRemote', array( 'object' => $remoteId ) ),
+            $this->requestParser->generate( 'objectByRemote', array( 'object' => $remoteId ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentInfo' ) )
             )
@@ -165,7 +164,7 @@ class ContentService implements APIContentService, Sessionable
      */
     protected function completeContentInfo( Values\RestContentInfo $restContentInfo )
     {
-        $versionUrlValues = $this->urlHandler->parse(
+        $versionUrlValues = $this->requestParser->parse(
             'objectVersion',
             $this->fetchCurrentVersionUrl( $restContentInfo->currentVersionReference )
         );
@@ -254,7 +253,7 @@ class ContentService implements APIContentService, Sessionable
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException - if the version with the given number does not exist
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to load this version
      *
-     * @param int $contentId
+     * @param mixed $contentId
      * @param int $versionNo the version number. If not given the current version is returned.
      *
      * @return \eZ\Publish\API\Repository\Values\Content\VersionInfo
@@ -323,13 +322,13 @@ class ContentService implements APIContentService, Sessionable
     public function loadContent( $contentId, array $languages = null, $versionNo = null )
     {
         // $contentId should already be a URL!
-        $contentIdValues = $this->urlHandler->parse( 'object', $contentId );
+        $contentIdValues = $this->requestParser->parse( 'object', $contentId );
 
         $url = '';
         if ( $versionNo === null )
         {
             $url = $this->fetchCurrentVersionUrl(
-                $this->urlHandler->generate(
+                $this->requestParser->generate(
                     'objectCurrentVersion',
                     array(
                         'object' => $contentIdValues['object'],
@@ -339,7 +338,7 @@ class ContentService implements APIContentService, Sessionable
         }
         else
         {
-            $url = $this->urlHandler->generate(
+            $url = $this->requestParser->generate(
                 'objectVersion',
                 array(
                     'object' => $contentIdValues['object'],
@@ -392,7 +391,8 @@ class ContentService implements APIContentService, Sessionable
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to create the content in the given location
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if there is a provided remoteId which exists in the system
-     *                                                            or (4.x) there is no location provided
+     *                                                                        or there is no location provided (4.x) or multiple locations
+     *                                                                        are under the same parent or if the a field value is not accepted by the field type
      * @throws \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException if a field in the $contentCreateStruct is not valid
      * @throws \eZ\Publish\API\Repository\Exceptions\ContentValidationException if a required field is missing
      *
@@ -411,8 +411,8 @@ class ContentService implements APIContentService, Sessionable
      *
      * (see {@link ContentMetadataUpdateStruct}) of a content object - to update fields use updateContent
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowd to update the content meta data
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the remoteId in $contentMetadataUpdateStruct is set but already existis
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to update the content meta data
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the remoteId in $contentMetadataUpdateStruct is set but already exists
      *
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      * @param \eZ\Publish\API\Repository\Values\Content\ContentMetadataUpdateStruct $contentMetadataUpdateStruct
@@ -427,7 +427,7 @@ class ContentService implements APIContentService, Sessionable
     /**
      * Deletes a content object including all its versions and locations including their subtrees.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowd to delete the content (in one of the locations of the given content object)
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to delete the content (in one of the locations of the given content object)
      *
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      */
@@ -437,10 +437,10 @@ class ContentService implements APIContentService, Sessionable
     }
 
     /**
-     * Creates a draft from a publshed or archived version.
+     * Creates a draft from a published or archived version.
      *
      * If no version is given, the current published version is used.
-     * 4.x: The draft is created with the initialLanguge code of the source version or if not present with the main language.
+     * 4.x: The draft is created with the initialLanguage code of the source version or if not present with the main language.
      * It can be changed on updating the version.
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to create the draft
@@ -697,7 +697,7 @@ class ContentService implements APIContentService, Sessionable
      * @example Examples/translation_5x.php
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to update this version
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException if the given destiantioon version is not a draft
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException if the given destination version is not a draft
      * @throws \eZ\Publish\API\Repository\Exceptions\ContentValidationException if a required field is set to an empty value
      * @throws \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException if a field in the $translationValues is not valid
      *

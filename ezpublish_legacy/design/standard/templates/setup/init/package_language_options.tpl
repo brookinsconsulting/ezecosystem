@@ -24,16 +24,21 @@
         <td>{$package_language.name}</td>
         <td>
             <select name={concat("eZSetupPackageLanguageMap[", $package_language.locale, "]")}>
-                <option value="skip">{'Skip content in this language'|i18n( 'design/standard/setup/init' )}</option>
-                <option value="{$package_language.locale}">{'Create language'|i18n( 'design/standard/setup/init' )}</option>
-                {foreach $site_language_list as $site_language}
-                    <option value="{$site_language.locale}">{concat('Map to '|i18n( 'design/standard/setup/init' ),$site_language.name)}</option>
+                {foreach $site_language_list as $site_language_key => $site_language}
+                    <option value="{$site_language.locale}"{if $site_language_key|eq(0)} selected="selected"{/if}>{concat('Map to '|i18n( 'design/standard/setup/init' ),$site_language.name)}</option>
                 {/foreach}
+                <option value="{$package_language.locale}">{'Create language'|i18n( 'design/standard/setup/init' )}</option>
+                <option value="skip">{'Skip content in this language'|i18n( 'design/standard/setup/init' )}</option>
             </select>
         </td>
     </tr>
   {/foreach}
   </table>
+
+<p>
+<em>{"Notice: The out of the box front-end site often relies on data within a package. This is why it is strongly suggested to map the package language to your primary language, otherwise you'll need to adjust the configuration and template files to get it working."|i18n("design/standard/setup/init")}</em>
+</p>
+
 </fieldset>
 
 {include uri="design:setup/persistence.tpl"}

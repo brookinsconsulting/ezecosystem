@@ -2,9 +2,9 @@
 /**
  * File containing the SiteAccess class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\LegacyMapper;
@@ -12,22 +12,19 @@ namespace eZ\Bundle\EzPublishLegacyBundle\LegacyMapper;
 use eZ\Publish\Core\MVC\Legacy\LegacyEvents;
 use eZ\Publish\Core\MVC\Legacy\Event\PreBuildKernelWebHandlerEvent;
 use eZSiteAccess;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Maps the SiteAccess object to the legacy parameters
  */
-class SiteAccess implements EventSubscriberInterface
+class SiteAccess extends ContainerAware implements EventSubscriberInterface
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    private $container;
+    protected $options = array();
 
-    public function __construct( ContainerInterface $container )
+    public function __construct( array $options = array() )
     {
-        $this->container = $container;
+        $this->options = $options;
     }
 
     public static function getSubscribedEvents()
@@ -90,7 +87,7 @@ class SiteAccess implements EventSubscriberInterface
         {
             $aPathinfo = explode( '/', substr( $pathinfo, 1 ) );
             $aSemanticPathinfo = explode( '/', substr( $semanticPathinfo, 1 ) );
-            $uriPart = array_diff( $aPathinfo, $aSemanticPathinfo );
+            $uriPart = array_diff( $aPathinfo, $aSemanticPathinfo, $this->getFragmentPathItems() );
         }
 
         $event->getParameters()->set(
@@ -101,5 +98,18 @@ class SiteAccess implements EventSubscriberInterface
                 'uri_part' => $uriPart
             )
         );
+    }
+
+    /**
+     * Returns an array with all the components of the fragment_path option
+     * @return array
+     */
+    protected function getFragmentPathItems()
+    {
+        if ( isset( $this->options['fragment_path'] ) )
+        {
+            return explode( '/', trim( $this->options['fragment_path'], '/' ) );
+        }
+        return array( '_fragment' );
     }
 }

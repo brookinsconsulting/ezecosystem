@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Symfony\Bridge\Twig\NodeVisitor;
 
 /**
@@ -23,7 +32,7 @@ class Scope
     private $data;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $left;
 
@@ -88,7 +97,7 @@ class Scope
      *
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function has($key)
     {

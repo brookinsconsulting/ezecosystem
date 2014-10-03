@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\FieldType\Tests\FieldTypeTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
@@ -27,7 +27,10 @@ class MapLocationTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new MapLocation\Type();
+        $fieldType = new MapLocation\Type();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -88,14 +91,6 @@ class MapLocationTest extends FieldTypeTest
         return array(
             array(
                 'some string',
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
-            ),
-            array(
-                array(),
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
-            ),
-            array(
-                new MapLocation\Value( array() ),
                 'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentException',
             ),
             array(
@@ -165,6 +160,14 @@ class MapLocationTest extends FieldTypeTest
                 new MapLocation\Value
             ),
             array(
+                array(),
+                new MapLocation\Value
+            ),
+            array(
+                new MapLocation\Value,
+                new MapLocation\Value
+            ),
+            array(
                 array(
                     'latitude' => 23.42,
                     'longitude' => 42.23,
@@ -175,6 +178,20 @@ class MapLocationTest extends FieldTypeTest
                         'latitude' => 23.42,
                         'longitude' => 42.23,
                         'address' => 'Nowhere',
+                    )
+                ),
+            ),
+            array(
+                array(
+                    'latitude' => 23,
+                    'longitude' => 42,
+                    'address' => 'Somewhere',
+                ),
+                new MapLocation\Value(
+                    array(
+                        'latitude' => 23,
+                        'longitude' => 42,
+                        'address' => 'Somewhere',
                     )
                 ),
             ),
@@ -236,7 +253,7 @@ class MapLocationTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new MapLocation\Value,
                 null,
             ),
             array(
@@ -298,7 +315,7 @@ class MapLocationTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null
+                new MapLocation\Value
             ),
             array(
                 array(
@@ -314,6 +331,19 @@ class MapLocationTest extends FieldTypeTest
                     )
                 ),
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezgmaplocation';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), "" ),
+            array( new MapLocation\Value( array( 'address' => 'Bag End, The Shire' ) ), "Bag End, The Shire" )
         );
     }
 }

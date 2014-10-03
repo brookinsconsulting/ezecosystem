@@ -4,24 +4,26 @@
 // Forked on: <20-Des-2007 13:02:06 ar> from eZDHTMLInput class
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
-// SOFTWARE NAME: eZ Publish Community Project
-// SOFTWARE RELEASE:  2013.5
-// COPYRIGHT NOTICE: Copyright (C) 1999-2013 eZ Systems AS
-// SOFTWARE LICENSE: GNU General Public License v2
+// SOFTWARE NAME: eZ Online Editor extension for eZ Publish
+// SOFTWARE RELEASE: 5.0
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
+// SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of version 2.0  of the GNU General
 //   Public License as published by the Free Software Foundation.
-// 
+//
 //   This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
 //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //   GNU General Public License for more details.
-// 
+//
 //   You should have received a copy of version 2.0 of the GNU General
 //   Public License along with this program; if not, write to the Free
 //   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 //   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -586,11 +588,20 @@ class eZOEXMLInput extends eZXMLInputHandler
             if ( $lastChild && $lastChild->nodeName === 'paragraph' )
             {
                 $textChild = $lastChild->lastChild;
-                // $textChild->textContent == "??" : string(2) whitespace in Opera
-                if ( !$textChild ||
-                     ( $lastChild->childNodes->length == 1 &&
-                       $textChild->nodeType == XML_TEXT_NODE &&
-                       ( $textChild->textContent == "??" || $textChild->textContent == ' ' || $textChild->textContent == '' || $textChild->textContent == '&nbsp;' ) ) )
+                if (
+                    !$textChild ||
+                    (
+                        $lastChild->childNodes->length == 1 &&
+                        $textChild->nodeType == XML_TEXT_NODE &&
+                        (
+                            $textChild->textContent == " " || // that's a non breaking space (Opera)
+                            $textChild->textContent == ' ' ||
+                            $textChild->textContent == '' ||
+                            $textChild->textContent == '&nbsp;' ||
+                            $textChild->textContent == "\xC2\xA0" // utf8 non breaking space
+                        )
+                    )
+                )
                 {
                     $parent->removeChild( $lastChild );
                 }
@@ -1236,7 +1247,7 @@ class eZOEXMLInput extends eZXMLInputHandler
                         $objectAttr .= ' class="' . $className . '"';
 
                     $output .= '<img id="' . $idString . '" title="' . $objectName . '" src="' .
-                               $srcString . '" width="' . $imageWidth . '" height="' . $imageHeight .
+                               htmlspecialchars( $srcString ) . '" width="' . $imageWidth . '" height="' . $imageHeight .
                                '" ' . $objectAttr . $customAttributePart . $styleString . ' />';
                 }
                 else if ( self::embedTagIsCompatibilityMode() )
@@ -1325,8 +1336,9 @@ class eZOEXMLInput extends eZXMLInputHandler
                 else if ( $inline === true )
                 {
                     if ( !$childTagText ) $childTagText = '&nbsp;';
-                    $output .= '<span class="ezoeItemCustomTag ' . $name . '" type="custom"' .
-                               $customAttributePart . $styleString . '>' . $childTagText . '</span>';
+                    $tagName = $name === 'underline' ? 'u' : 'span';
+                    $output .= '<' . $tagName . ' class="ezoeItemCustomTag ' . $name . '" type="custom"' .
+                               $customAttributePart . $styleString . '>' . $childTagText . '</' . $tagName . '>';
                 }
                 else if ( $inline )
                 {
@@ -1493,7 +1505,7 @@ class eZOEXMLInput extends eZXMLInputHandler
                         }
                         if ( $cellAlign )
                         {
-                                $TDcustomAttributePart .= ' align="' . $cellAlign . '"';
+                        	$TDcustomAttributePart .= ' align="' . $cellAlign . '"';
                         }
                         $cellContent = '';
                         $tdSectionLevel = $currentSectionLevel;
@@ -1792,17 +1804,7 @@ class eZOEXMLInput extends eZXMLInputHandler
             else
             {
                 $domain = eZSys::hostname();
-                $protocol = 'http';
-
-                // Default to https if SSL is enabled
-                // Check if SSL port is defined in site.ini
-                $sslPort = 443;
-                $ini = eZINI::instance();
-                if ( $ini->hasVariable( 'SiteSettings', 'SSLPort' ) )
-                    $sslPort = $ini->variable( 'SiteSettings', 'SSLPort' );
-
-                if ( eZSys::serverPort() == $sslPort )
-                    $protocol = 'https';
+                $protocol = eZSys::serverProtocol();
 
                 self::$serverURL = $protocol . '://' . $domain . eZSys::wwwDir();
             }
@@ -1838,25 +1840,26 @@ class eZOEXMLInput extends eZXMLInputHandler
      */
     public static function customTagIsInline( $name )
     {
-        if ( self::$customInlineTagList === null )
+        $ini = eZINI::instance( 'content.ini' );
+        $customInlineTagList = $ini->variable( 'CustomTagSettings', 'IsInline' );
+        $customInlineIconPath = array();
+        if ( $ini->hasVariable( 'CustomTagSettings', 'InlineImageIconPath' ) )
         {
-            $ini = eZINI::instance( 'content.ini' );
-            self::$customInlineTagList = $ini->variable( 'CustomTagSettings', 'IsInline' );
-            self::$customInlineIconPath = $ini->hasVariable( 'CustomTagSettings', 'InlineImageIconPath' ) ?
-                                          $ini->variable( 'CustomTagSettings', 'InlineImageIconPath' ) :
-                                          array();
+            $customInlineIconPath = $ini->variable(
+                'CustomTagSettings', 'InlineImageIconPath'
+            );
         }
 
-        if ( isset( self::$customInlineTagList[ $name ] ) )
+        if ( isset( $customInlineTagList[$name] ) )
         {
-            if ( self::$customInlineTagList[ $name ] === 'true' )
+            if ( $customInlineTagList[$name] === 'true' )
             {
                 return true;
             }
-            else if ( self::$customInlineTagList[ $name ] === 'image' )
+            else if ( $customInlineTagList[$name] === 'image' )
             {
-                if ( isset( self::$customInlineIconPath[ $name ] ) )
-                    return self::$customInlineIconPath[ $name ];
+                if ( isset( $customInlineIconPath[$name] ) )
+                    return $customInlineIconPath[$name];
                 else
                     return 'images/tango/image-x-generic22.png';
             }
@@ -1981,8 +1984,6 @@ class eZOEXMLInput extends eZXMLInputHandler
     protected static $browserType = null;
     protected static $designBases = null;
     protected static $userAccessHash = array();
-    protected static $customInlineTagList = null;
-    protected static $customInlineIconPath = null;
     protected static $customAttributeStyleMap = null;
     protected static $embedIsCompatibilityMode = null;
     protected static $xmlTagAliasList = null;

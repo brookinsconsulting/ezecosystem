@@ -2,9 +2,9 @@
 /**
  * File containing the eZCollaborationItem class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -499,6 +499,40 @@ class eZCollaborationItem extends eZPersistentObject
         $handler = $this->handler();
         $handler->readItem( $this, $viewMode );
         return true;
+    }
+
+    /**
+     * Checks if $user is a participant in this collaboration item
+     * @param eZUser $user
+     * @return bool
+     */
+    public function userIsParticipant( eZUser $user )
+    {
+        /** @var eZCollaborationItemParticipantLink $participantLink */
+        foreach ( $this->participantList() as $participantLink )
+        {
+            $participant = $participantLink->participant();
+
+            if ( $participant instanceof eZUser )
+            {
+                if ( $participant->attribute( 'contentobject_id' ) == $user->attribute( 'contentobject_id' ) )
+                {
+                    return true;
+                }
+            }
+            // user group
+            else if ( $participant instanceof eZContentObject )
+            {
+                foreach ( $user->groups() as $userGroup )
+                {
+                    if ( $participant->attribute( 'id' ) == $userGroup->attribute( 'id' ) )
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /*!

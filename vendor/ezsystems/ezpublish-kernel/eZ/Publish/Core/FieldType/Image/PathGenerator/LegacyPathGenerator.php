@@ -3,9 +3,9 @@
  * File containing the PathGenerator implementation compatible to the legacy
  * kernel.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Image\PathGenerator;
@@ -22,18 +22,35 @@ class LegacyPathGenerator extends PathGenerator
      * @param mixed $fieldId
      * @param int $versionNo
      * @param string $languageCode
-     * @param string $nodePathString
      *
      * @return string
      */
-    public function getStoragePathForField( $fieldId, $versionNo, $languageCode, $nodePathString )
+    public function getStoragePathForField( $fieldId, $versionNo, $languageCode )
     {
         return sprintf(
-            '%s%s-%s-%s',
-            $nodePathString, // note that $nodePathString ends with a "/"
+            '%s/%s-%s-%s',
+            $this->getDirectoryStructure( $fieldId ),
             $fieldId,
             $versionNo,
             $languageCode
+        );
+    }
+
+    /**
+     * Computes a 4 levels directory structure from $id
+     * @param string $id
+     * @return string
+     */
+    private function getDirectoryStructure( $id )
+    {
+        // our base string is the last 4 digits, defaulting to 0, reversed
+        $idString = strrev(
+            substr( str_pad( $id, 4, 0, STR_PAD_LEFT ), -4 )
+        );
+
+        return trim(
+            chunk_split( $idString, 1, "/" ),
+            "/"
         );
     }
 }

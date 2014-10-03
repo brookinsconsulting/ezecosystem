@@ -2,9 +2,9 @@
 /**
  * File containing the eZContentUpload class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -425,6 +425,17 @@ class eZContentUpload
         if ( $storeResult['require_storage'] )
             $dataMap[$nameAttribute]->store();
 
+        if ( is_array( $parentNodes ) )
+        {
+            foreach ( $parentNodes as $parentNode )
+            {
+                $object->createNodeAssignment(
+                    $parentNode,
+                    $parentNode == $parentMainNode
+                );
+            }
+        }
+
         return $this->publishObject( $result, $result['errors'], $result['notices'],
                                      $object, $publishVersion, $class, $parentNodes, $parentMainNode );
     }
@@ -451,10 +462,11 @@ class eZContentUpload
      * @param string|false $localeCode
      *        Locale code (eg eng-GB, fre-FR, ...) to use when creating the
      *        object or the version.
+     * @param boolean $publish whether to publish the new created content object
      *
      * @return boolean
      */
-    function handleUpload( &$result, $httpFileIdentifier, $location, $existingNode, $nameString = '', $localeCode = false )
+    function handleUpload( &$result, $httpFileIdentifier, $location, $existingNode, $nameString = '', $localeCode = false, $publish = true )
     {
         $result = array( 'errors' => array(),
                          'notices' => array(),
@@ -696,8 +708,43 @@ class eZContentUpload
         if ( $storeResult['require_storage'] )
             $dataMap[$nameAttribute]->store();
 
-        $tmpresult = $this->publishObject( $result, $result['errors'], $result['notices'],
-                                           $object, $publishVersion, $class, $parentNodes, $parentMainNode );
+        if ( is_array( $parentNodes ) )
+        {
+            foreach ( $parentNodes as $key => $parentNode )
+            {
+                $object->createNodeAssignment(
+                    $parentNode,
+                    $parentNode == $parentMainNode
+                );
+            }
+        }
+
+        $object->setName( $class->contentObjectName( $object ) );
+        $object->store();
+
+        if ( $publish )
+        {
+            $tmpresult = $this->publishObject(
+                $result, $result['errors'], $result['notices'],
+                $object, $publishVersion, $class, $parentNodes, $parentMainNode
+            );
+        }
+        else
+        {
+            $tmpresult = $result;
+            $tmpresult['contentobject'] = $object;
+            $tmpresult['contentobject_id'] = $object->attribute( 'id' );
+            $tmpresult['contentobject_version'] = $publishVersion;
+            $tmpresult['contentobject_main_node'] = false;
+            $tmpresult['contentobject_main_node_id'] = false;
+            $this->setResult(
+                array(
+                    'node_id' => 0,
+                    'object_id' => $object->attribute( 'id' ),
+                    'object_version' => $publishVersion
+                )
+            );
+        }
 
         $db->commit();
         return $tmpresult;
@@ -712,17 +759,6 @@ class eZContentUpload
     function publishObject( &$result, &$errors, &$notices,
                             $object, $publishVersion, $class, $parentNodes, $parentMainNode )
     {
-        if ( is_array( $parentNodes ) )
-        {
-            foreach ( $parentNodes as $key => $parentNode )
-            {
-                $object->createNodeAssignment( $parentNode, $parentNode == $parentMainNode );
-            }
-        }
-
-        $object->setName( $class->contentObjectName( $object ) );
-        $object->store();
-
         $operationResult = eZOperationHandler::execute( 'content', 'publish', array( 'object_id' => $object->attribute( 'id' ),
                                                                                      'version' => $publishVersion ) );
 
@@ -771,8 +807,12 @@ class eZContentUpload
 
         $mainNode = $object->mainNode();
         $result['contentobject_main_node'] = $mainNode;
-        $result['contentobject_main_node_id'] = $mainNode->attribute( 'node_id' );
-        $this->setResult( array( 'node_id' => $mainNode->attribute( 'node_id' ),
+
+        // The published object may not have a node if publishing was interrupted
+        $mainNodeId = $mainNode ? $mainNode->attribute( 'node_id' ) : 0;
+
+        $result['contentobject_main_node_id'] = $mainNodeId;
+        $this->setResult( array( 'node_id' => $mainNodeId,
                                  'object_id' => $object->attribute( 'id' ),
                                  'object_version' => $publishVersion ) );
 

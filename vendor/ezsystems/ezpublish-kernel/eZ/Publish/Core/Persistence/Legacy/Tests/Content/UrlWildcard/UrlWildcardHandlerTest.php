@@ -2,16 +2,16 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\Content\UrlWildcardHandlerTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content\UrlWildcard;
 
 use eZ\Publish\Core\Persistence\Legacy\Tests\TestCase;
 use eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Handler;
-use eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Gateway\EzcDatabase;
+use eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Gateway\DoctrineDatabase;
 use eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Mapper;
 use eZ\Publish\SPI\Persistence\Content\UrlWildcard;
 
@@ -215,7 +215,7 @@ class UrlWildcardHandlerTest extends TestCase
     );
 
     /**
-     * @var \eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Gateway\EzcDatabase
+     * @var \eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Gateway\DoctrineDatabase
      */
     protected $gateway;
 
@@ -236,7 +236,7 @@ class UrlWildcardHandlerTest extends TestCase
     {
         if ( !isset( $this->urlWildcardHandler ) )
         {
-            $this->gateway = new EzcDatabase( $this->getDatabaseHandler() );
+            $this->gateway = new DoctrineDatabase( $this->getDatabaseHandler() );
             $this->mapper = new Mapper();
 
             $this->urlWildcardHandler = new Handler(

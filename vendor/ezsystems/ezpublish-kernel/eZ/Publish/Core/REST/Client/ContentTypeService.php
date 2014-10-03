@@ -2,9 +2,9 @@
 /**
  * File containing the ContentTypeService class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 namespace eZ\Publish\Core\REST\Client;
 
@@ -24,7 +24,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroupUpdateStruct;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroupCreateStruct;
 
 use eZ\Publish\Core\REST\Common\Exceptions\NotFoundException;
-use eZ\Publish\Core\REST\Common\UrlHandler;
+use eZ\Publish\Core\REST\Common\RequestParser;
 use eZ\Publish\Core\REST\Common\Input\Dispatcher;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
 use eZ\Publish\Core\REST\Common\Message;
@@ -59,22 +59,22 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     private $outputVisitor;
 
     /**
-     * @var \eZ\Publish\Core\REST\Common\UrlHandler
+     * @var \eZ\Publish\Core\REST\Common\RequestParser
      */
-    private $urlHandler;
+    private $requestParser;
 
     /**
      * @param \eZ\Publish\Core\REST\Client\HttpClient $client
      * @param \eZ\Publish\Core\REST\Common\Input\Dispatcher $inputDispatcher
      * @param \eZ\Publish\Core\REST\Common\Output\Visitor $outputVisitor
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
+     * @param \eZ\Publish\Core\REST\Common\RequestParser $requestParser
      */
-    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, UrlHandler $urlHandler )
+    public function __construct( HttpClient $client, Dispatcher $inputDispatcher, Visitor $outputVisitor, RequestParser $requestParser )
     {
         $this->client          = $client;
         $this->inputDispatcher = $inputDispatcher;
         $this->outputVisitor   = $outputVisitor;
-        $this->urlHandler      = $urlHandler;
+        $this->requestParser      = $requestParser;
     }
 
     /**
@@ -113,7 +113,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
 
         $result = $this->client->request(
             'POST',
-            $this->urlHandler->generate( 'typegroups' ),
+            $this->requestParser->generate( 'typegroups' ),
             $inputMessage
         );
 
@@ -161,7 +161,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'typegroupByIdentifier', array( "typegroup" => $contentTypeGroupIdentifier ) ),
+            $this->requestParser->generate( 'typegroupByIdentifier', array( "typegroup" => $contentTypeGroupIdentifier ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeGroupList' ) )
             )
@@ -190,7 +190,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( 'typegroups' ),
+            $this->requestParser->generate( 'typegroups' ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeGroupList' ) )
             )
@@ -303,9 +303,9 @@ class ContentTypeService implements APIContentTypeService, Sessionable
         $firstGroup = array_pop( $contentTypeGroups );
         $response = $this->client->request(
             'POST',
-            $this->urlHandler->generate(
+            $this->requestParser->generate(
                 "grouptypes",
-                $this->urlHandler->parse( "typegroup", $firstGroup->id )
+                $this->requestParser->parse( "typegroup", $firstGroup->id )
             ),
             $inputMessage
         );
@@ -346,9 +346,9 @@ class ContentTypeService implements APIContentTypeService, Sessionable
 
         $response = $this->client->request(
             "GET",
-            $this->urlHandler->generate(
+            $this->requestParser->generate(
                 "groupsOfType",
-                $this->urlHandler->parse( "type", $contentType->id )
+                $this->requestParser->parse( "type", $contentType->id )
             ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeGroupRefList' ) )
@@ -408,7 +408,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If the content type draft owned by the current user can not be found
      *
-     * @param int $contentTypeId
+     * @param mixed $contentTypeId
      *
      * @return \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft
      */
@@ -447,6 +447,12 @@ class ContentTypeService implements APIContentTypeService, Sessionable
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the identifier in already exists in the content type
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to edit a content type
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
+     *         if a field definition in the $contentTypeCreateStruct is not valid
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException If field definition of the same non-repeatable type is being
+     *                                                                 added to the ContentType that already contains one
+     *                                                                 or field definition that can't be added to a ContentType that
+     *                                                                 has Content instances is being added to such ContentType
      *
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCreateStruct $fieldDefinitionCreateStruct
@@ -506,7 +512,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If a content type with the given id and status DEFINED can not be found
      *
-     * @param int $contentTypeId
+     * @param mixed $contentTypeId
      *
      * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
      */
@@ -604,7 +610,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( "typeByIdentifier", array( "type" => $identifier ) ),
+            $this->requestParser->generate( "typeByIdentifier", array( "type" => $identifier ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeList' ) )
             )
@@ -626,7 +632,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate( "typeByRemoteId", array( "type" => $remoteId ) ),
+            $this->requestParser->generate( "typeByRemoteId", array( "type" => $remoteId ) ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeList' ) )
             )
@@ -646,9 +652,9 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     {
         $response = $this->client->request(
             'GET',
-            $this->urlHandler->generate(
+            $this->requestParser->generate(
                 "grouptypes",
-                $this->urlHandler->parse( "typegroup", $contentTypeGroup->id )
+                $this->requestParser->parse( "typegroup", $contentTypeGroup->id )
             ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeList' ) )
@@ -667,7 +673,7 @@ class ContentTypeService implements APIContentTypeService, Sessionable
      * Creates a draft from an existing content type.
      *
      * This is a complete copy of the content
-     * type wiich has the state STATUS_DRAFT.
+     * type which has the state STATUS_DRAFT.
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to edit a content type
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException If there is already a draft assigned to another user
@@ -727,17 +733,17 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     {
         if ( $contentType instanceof ContentTypeDraft )
         {
-            $urlValues = $this->urlHandler->parse( "typeDraft", $contentType->id );
+            $urlValues = $this->requestParser->parse( "typeDraft", $contentType->id );
         }
         else
         {
-            $urlValues = $this->urlHandler->parse( "type", $contentType->id );
+            $urlValues = $this->requestParser->parse( "type", $contentType->id );
         }
         $urlValues["group"] = $contentTypeGroup->id;
 
         $response = $this->client->request(
             'POST',
-            $this->urlHandler->generate( 'typeGroupAssign', $urlValues ),
+            $this->requestParser->generate( 'typeGroupAssign', $urlValues ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeGroupRefList' ) )
             )
@@ -770,18 +776,18 @@ class ContentTypeService implements APIContentTypeService, Sessionable
     {
         if ( $contentType instanceof ContentTypeDraft )
         {
-            $urlValues = $this->urlHandler->parse( "typeDraft", $contentType->id );
+            $urlValues = $this->requestParser->parse( "typeDraft", $contentType->id );
         }
         else
         {
-            $urlValues = $this->urlHandler->parse( "type", $contentType->id );
+            $urlValues = $this->requestParser->parse( "type", $contentType->id );
         }
-        $groupUrlValues = $this->urlHandler->parse( "typegroup", $contentTypeGroup->id );
+        $groupUrlValues = $this->requestParser->parse( "typegroup", $contentTypeGroup->id );
         $urlValues["group"] = $groupUrlValues["typegroup"];
 
         $response = $this->client->request(
             'DELETE',
-            $this->urlHandler->generate( 'groupOfType', $urlValues ),
+            $this->requestParser->generate( 'groupOfType', $urlValues ),
             new Message(
                 array( 'Accept' => $this->outputVisitor->getMediaType( 'ContentTypeGroupRefList' ) )
             )

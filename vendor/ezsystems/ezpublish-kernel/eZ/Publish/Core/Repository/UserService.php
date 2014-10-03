@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\Repository\UserService class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\Core\Repository
  */
 
@@ -28,11 +28,11 @@ use eZ\Publish\API\Repository\UserService as UserServiceInterface;
 use eZ\Publish\SPI\Persistence\User as SPIUser;
 use eZ\Publish\Core\FieldType\User\Value as UserValue;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd as CriterionLogicalAnd;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeId as CriterionContentTypeId;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LocationId as CriterionLocationId;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId as CriterionParentLocationId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Status as CriterionStatus;
 use eZ\Publish\Core\Base\Exceptions\ContentValidationException;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentValue;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
@@ -40,6 +40,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use ezcMailTools;
+use Exception;
 
 /**
  * This service provides methods for managing users and user groups
@@ -78,7 +79,6 @@ class UserService implements UserServiceInterface
         $this->userHandler = $userHandler;
         // Union makes sure default settings are ignored if provided in argument
         $this->settings = $settings + array(
-            'anonymousUserID' => 10,
             'defaultUserPlacement' => 12,
             'userClassID' => 4,// @todo Rename this settings to swap out "Class" for "Type"
             'userGroupClassID' => 3,
@@ -106,9 +106,6 @@ class UserService implements UserServiceInterface
      */
     public function createUserGroup( APIUserGroupCreateStruct $userGroupCreateStruct, APIUserGroup $parentGroup )
     {
-        if ( !is_numeric( $parentGroup->id ) )
-            throw new InvalidArgumentValue( "id", $parentGroup->id, "UserGroup" );
-
         $contentService = $this->repository->getContentService();
         $locationService = $this->repository->getLocationService();
         $contentTypeService = $this->repository->getContentTypeService();
@@ -135,7 +132,7 @@ class UserService implements UserServiceInterface
             $publishedContent = $contentService->publishVersion( $contentDraft->getVersionInfo() );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -147,7 +144,7 @@ class UserService implements UserServiceInterface
     /**
      * Loads a user group for the given id
      *
-     * @param int $id
+     * @param mixed $id
      *
      * @return \eZ\Publish\API\Repository\Values\User\UserGroup
      *
@@ -156,9 +153,6 @@ class UserService implements UserServiceInterface
      */
     public function loadUserGroup( $id )
     {
-        if ( !is_numeric( $id ) )
-            throw new InvalidArgumentValue( "id", $id );
-
         $content = $this->repository->getContentService()->loadContent( $id );
 
         return $this->buildDomainUserGroupObject( $content );
@@ -175,9 +169,6 @@ class UserService implements UserServiceInterface
      */
     public function loadSubUserGroups( APIUserGroup $userGroup )
     {
-        if ( !is_numeric( $userGroup->id ) )
-            throw new InvalidArgumentValue( "id", $userGroup->id, "UserGroup" );
-
         $locationService = $this->repository->getLocationService();
 
         $loadedUserGroup = $this->loadUserGroup( $userGroup->id );
@@ -211,7 +202,7 @@ class UserService implements UserServiceInterface
     /**
      * Returns (searches) subgroups of a user group described by its main location
      *
-     * @param int $locationId
+     * @param mixed $locationId
      * @param int|null $sortField
      * @param int $sortOrder
      * @param int $offset
@@ -226,11 +217,10 @@ class UserService implements UserServiceInterface
         $searchQuery->offset = $offset >= 0 ? (int)$offset : 0;
         $searchQuery->limit = $limit >= 0 ? (int)$limit  : null;
 
-        $searchQuery->criterion = new CriterionLogicalAnd(
+        $searchQuery->filter = new CriterionLogicalAnd(
             array(
                 new CriterionContentTypeId( $this->settings['userGroupClassID'] ),
-                new CriterionParentLocationId( $locationId ),
-                new CriterionStatus( CriterionStatus::STATUS_PUBLISHED )
+                new CriterionParentLocationId( $locationId )
             )
         );
 
@@ -252,9 +242,6 @@ class UserService implements UserServiceInterface
      */
     public function deleteUserGroup( APIUserGroup $userGroup )
     {
-        if ( !is_numeric( $userGroup->id ) )
-            throw new InvalidArgumentValue( "id", $userGroup->id, "UserGroup" );
-
         $loadedUserGroup = $this->loadUserGroup( $userGroup->id );
 
         $this->repository->beginTransaction();
@@ -264,7 +251,7 @@ class UserService implements UserServiceInterface
             $this->repository->getContentService()->deleteContent( $loadedUserGroup->getVersionInfo()->getContentInfo() );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -281,12 +268,6 @@ class UserService implements UserServiceInterface
      */
     public function moveUserGroup( APIUserGroup $userGroup, APIUserGroup $newParent )
     {
-        if ( !is_numeric( $userGroup->id ) )
-            throw new InvalidArgumentValue( "id", $userGroup->id, "UserGroup" );
-
-        if ( !is_numeric( $newParent->id ) )
-            throw new InvalidArgumentValue( "id", $newParent->id, "UserGroup" );
-
         $loadedUserGroup = $this->loadUserGroup( $userGroup->id );
         $loadedNewParent = $this->loadUserGroup( $newParent->id );
 
@@ -311,7 +292,7 @@ class UserService implements UserServiceInterface
             $locationService->moveSubtree( $userGroupMainLocation, $newParentMainLocation );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -335,9 +316,6 @@ class UserService implements UserServiceInterface
      */
     public function updateUserGroup( APIUserGroup $userGroup, UserGroupUpdateStruct $userGroupUpdateStruct )
     {
-        if ( !is_numeric( $userGroup->id ) )
-            throw new InvalidArgumentValue( "id", $userGroup->id, "UserGroup" );
-
         if ( $userGroupUpdateStruct->contentUpdateStruct === null &&
             $userGroupUpdateStruct->contentMetadataUpdateStruct === null )
         {
@@ -375,7 +353,7 @@ class UserService implements UserServiceInterface
 
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -526,7 +504,7 @@ class UserService implements UserServiceInterface
 
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -538,7 +516,7 @@ class UserService implements UserServiceInterface
     /**
      * Loads a user
      *
-     * @param int $userId
+     * @param mixed $userId
      *
      * @return \eZ\Publish\API\Repository\Values\User\User
      *
@@ -546,9 +524,6 @@ class UserService implements UserServiceInterface
      */
     public function loadUser( $userId )
     {
-        if ( !is_numeric( $userId ) )
-            throw new InvalidArgumentValue( "userId", $userId );
-
         /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $this->repository->getContentService()->internalLoadContent( $userId );
         // Get spiUser value from Field Value
@@ -582,6 +557,8 @@ class UserService implements UserServiceInterface
     /**
      * Loads anonymous user
      *
+     * @deprecated since 5.3, use loadUser( $anonymousUserId ) instead
+     *
      * @uses loadUser()
      *
      * @return \eZ\Publish\API\Repository\Values\User\User
@@ -600,7 +577,6 @@ class UserService implements UserServiceInterface
      * @return \eZ\Publish\API\Repository\Values\User\User
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException if a user with the given credentials was not found
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException if multiple users with same login were found
      */
     public function loadUserByCredentials( $login, $password )
     {
@@ -613,29 +589,59 @@ class UserService implements UserServiceInterface
         // Randomize login time to protect against timing attacks
         usleep( mt_rand( 0, 30000 ) );
 
-        $spiUsers = $this->userHandler->loadByLogin( $login );
-
-        if ( empty( $spiUsers ) )
-            throw new NotFoundException( "user", $login );
-
-        if ( count( $spiUsers ) > 1 )
-        {
-            // something went wrong, we should not have more than one
-            // user with the same login
-            throw new BadStateException( "login", 'found several users with same login' );
-        }
-
+        $spiUser = $this->userHandler->loadByLogin( $login );
         $passwordHash = $this->createPasswordHash(
             $login,
             $password,
             $this->settings['siteName'],
-            $spiUsers[0]->hashAlgorithm
+            $spiUser->hashAlgorithm
         );
 
-        if ( $spiUsers[0]->passwordHash !== $passwordHash )
+        if ( $spiUser->passwordHash !== $passwordHash )
             throw new NotFoundException( "user", $login );
 
-        return $this->buildDomainUserObject( $spiUsers[0] );
+        return $this->buildDomainUserObject( $spiUser );
+    }
+
+    /**
+     * Loads a user for the given login
+     *
+     * @param string $login
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException if a user with the given credentials was not found
+     */
+    public function loadUserByLogin( $login )
+    {
+        if ( !is_string( $login ) || empty( $login ) )
+            throw new InvalidArgumentValue( "login", $login );
+
+        $spiUser = $this->userHandler->loadByLogin( $login );
+        return $this->buildDomainUserObject( $spiUser );
+    }
+
+    /**
+     * Loads a user for the given email
+     *
+     * Returns an array of Users since eZ Publish has under certain circumstances allowed
+     * several users having same email in the past (by means of a configuration option).
+     *
+     * @param string $email
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User[]
+     */
+    public function loadUsersByEmail( $email )
+    {
+        if ( !is_string( $email ) || empty( $email ) )
+            throw new InvalidArgumentValue( "email", $email );
+
+        $users = array();
+        foreach ( $this->userHandler->loadByEmail( $email ) as $spiUser )
+        {
+            $users[] = $this->buildDomainUserObject( $spiUser );
+        }
+        return $users;
     }
 
     /**
@@ -656,7 +662,7 @@ class UserService implements UserServiceInterface
             $this->userHandler->delete( $loadedUser->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -770,7 +776,7 @@ class UserService implements UserServiceInterface
 
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -790,12 +796,6 @@ class UserService implements UserServiceInterface
      */
     public function assignUserToUserGroup( APIUser $user, APIUserGroup $userGroup )
     {
-        if ( !is_numeric( $user->id ) )
-            throw new InvalidArgumentValue( "id", $user->id, "User" );
-
-        if ( !is_numeric( $userGroup->id ) )
-            throw new InvalidArgumentValue( "id", $userGroup->id, "UserGroup" );
-
         $loadedUser = $this->loadUser( $user->id );
         $loadedGroup = $this->loadUserGroup( $userGroup->id );
         $locationService = $this->repository->getLocationService();
@@ -831,7 +831,7 @@ class UserService implements UserServiceInterface
             );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -850,12 +850,6 @@ class UserService implements UserServiceInterface
      */
     public function unAssignUserFromUserGroup( APIUser $user, APIUserGroup $userGroup )
     {
-        if ( !is_numeric( $user->id ) )
-            throw new InvalidArgumentValue( "id", $user->id, "User" );
-
-        if ( !is_numeric( $userGroup->id ) )
-            throw new InvalidArgumentValue( "id", $userGroup->id, "UserGroup" );
-
         $loadedUser = $this->loadUser( $user->id );
         $loadedGroup = $this->loadUserGroup( $userGroup->id );
         $locationService = $this->repository->getLocationService();
@@ -882,7 +876,7 @@ class UserService implements UserServiceInterface
                     $this->repository->commit();
                     return;
                 }
-                catch ( \Exception $e )
+                catch ( Exception $e )
                 {
                     $this->repository->rollback();
                     throw $e;
@@ -925,11 +919,10 @@ class UserService implements UserServiceInterface
         $searchQuery->offset = 0;
         $searchQuery->limit = null;
 
-        $searchQuery->criterion = new CriterionLogicalAnd(
+        $searchQuery->filter = new CriterionLogicalAnd(
             array(
                 new CriterionContentTypeId( $this->settings['userGroupClassID'] ),
-                new CriterionLocationId( $parentLocationIds ),
-                new CriterionStatus( CriterionStatus::STATUS_PUBLISHED )
+                new CriterionLocationId( $parentLocationIds )
             )
         );
 
@@ -968,11 +961,10 @@ class UserService implements UserServiceInterface
 
         $searchQuery = new Query();
 
-        $searchQuery->criterion = new CriterionLogicalAnd(
+        $searchQuery->filter = new CriterionLogicalAnd(
             array(
                 new CriterionContentTypeId( $this->settings['userClassID'] ),
-                new CriterionParentLocationId( $mainGroupLocation->id ),
-                new CriterionStatus( CriterionStatus::STATUS_PUBLISHED )
+                new CriterionParentLocationId( $mainGroupLocation->id )
             )
         );
 
@@ -1177,19 +1169,19 @@ class UserService implements UserServiceInterface
         switch ( $sortField )
         {
             case Location::SORT_FIELD_PATH:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPathString( $sortOrder );
+                return new SortClause\LocationPathString( $sortOrder );
 
             case Location::SORT_FIELD_PUBLISHED:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished( $sortOrder );
+                return new SortClause\DatePublished( $sortOrder );
 
             case Location::SORT_FIELD_MODIFIED:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\DateModified( $sortOrder );
+                return new SortClause\DateModified( $sortOrder );
 
             case Location::SORT_FIELD_SECTION:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\SectionIdentifier( $sortOrder );
+                return new SortClause\SectionIdentifier( $sortOrder );
 
             case Location::SORT_FIELD_DEPTH:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationDepth( $sortOrder );
+                return new SortClause\LocationDepth( $sortOrder );
 
             //@todo: enable
             // case APILocation::SORT_FIELD_CLASS_IDENTIFIER:
@@ -1198,10 +1190,10 @@ class UserService implements UserServiceInterface
             // case APILocation::SORT_FIELD_CLASS_NAME:
 
             case Location::SORT_FIELD_PRIORITY:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPriority( $sortOrder );
+                return new SortClause\LocationPriority( $sortOrder );
 
             case Location::SORT_FIELD_NAME:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName( $sortOrder );
+                return new SortClause\ContentName( $sortOrder );
 
             //@todo: enable
             // case APILocation::SORT_FIELD_MODIFIED_SUBNODE:
@@ -1213,7 +1205,7 @@ class UserService implements UserServiceInterface
             // case APILocation::SORT_FIELD_CONTENTOBJECT_ID:
 
             default:
-                return new \eZ\Publish\API\Repository\Values\Content\Query\SortClause\LocationPathString( $sortOrder );
+                return new SortClause\LocationPathString( $sortOrder );
         }
     }
 }

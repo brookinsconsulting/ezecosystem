@@ -2,9 +2,9 @@
 /**
  * File containing the KeywordStorage Converter class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Keyword;
@@ -57,14 +57,19 @@ class KeywordStorage extends GatewayBasedStorage
     }
 
     /**
-     * @param array $fieldId
+     * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
+     * @param array $fieldIds
      * @param array $context
      *
      * @return boolean
      */
-    public function deleteFieldData( VersionInfo $versionInfo, array $fieldId, array $context )
+    public function deleteFieldData( VersionInfo $versionInfo, array $fieldIds, array $context )
     {
-        // @todo: What about deleting keywords?
+        $gateway = $this->getGateway( $context );
+        foreach ( $fieldIds as $fieldId )
+        {
+            $gateway->deleteFieldData( $fieldId );
+        }
     }
 
     /**

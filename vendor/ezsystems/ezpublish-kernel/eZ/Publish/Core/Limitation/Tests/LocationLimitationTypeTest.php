@@ -2,9 +2,9 @@
 /**
  * File containing a Test Case for LimitationType class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Limitation\Tests;
@@ -57,7 +57,6 @@ class LocationLimitationTypeTest extends Base
     }
 
     /**
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::__construct
      *
      * @return \eZ\Publish\Core\Limitation\LocationLimitationType
      */
@@ -81,7 +80,6 @@ class LocationLimitationTypeTest extends Base
     /**
      * @dataProvider providerForTestAcceptValue
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::acceptValue
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation\LocationLimitation $limitation
      * @param \eZ\Publish\Core\Limitation\LocationLimitationType $limitationType
@@ -105,7 +103,6 @@ class LocationLimitationTypeTest extends Base
     /**
      * @dataProvider providerForTestAcceptValueException
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::acceptValue
      * @expectedException \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation $limitation
@@ -130,7 +127,6 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestValidatePass
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::validate
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation\LocationLimitation $limitation
      */
@@ -173,7 +169,6 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestValidateError
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::validate
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation\LocationLimitation $limitation
      * @param int $errorCount
@@ -212,7 +207,6 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::buildValue
      *
      * @param \eZ\Publish\Core\Limitation\LocationLimitationType $limitationType
      */
@@ -256,7 +250,7 @@ class LocationLimitationTypeTest extends Base
         $versionInfoMock
             ->expects( $this->once() )
             ->method( 'getContentInfo' )
-            ->will( $this->returnValue( new ContentInfo() ) );
+            ->will( $this->returnValue( new ContentInfo( array( 'published' => true ) ) ) );
 
         $versionInfoMock2 = $this->getMock(
             "eZ\\Publish\\API\\Repository\\Values\\Content\\VersionInfo",
@@ -269,13 +263,13 @@ class LocationLimitationTypeTest extends Base
         $versionInfoMock2
             ->expects( $this->once() )
             ->method( 'getContentInfo' )
-            ->will( $this->returnValue( new ContentInfo() ) );
+            ->will( $this->returnValue( new ContentInfo( array( 'published' => true ) ) ) );
 
         return array(
             // ContentInfo, with targets, no access
             array(
                 'limitation' => new LocationLimitation(),
-                'object' => new ContentInfo(),
+                'object' => new ContentInfo( array( 'published' => true ) ),
                 'targets' => array( new Location() ),
                 'persistence' => array(),
                 'expected' => false
@@ -283,7 +277,7 @@ class LocationLimitationTypeTest extends Base
             // ContentInfo, with targets, no access
             array(
                 'limitation' => new LocationLimitation( array( 'limitationValues' => array( 2 ) ) ),
-                'object' => new ContentInfo(),
+                'object' => new ContentInfo( array( 'published' => true ) ),
                 'targets' => array( new Location( array( 'id' => 55 ) ) ),
                 'persistence' => array(),
                 'expected' => false
@@ -291,7 +285,7 @@ class LocationLimitationTypeTest extends Base
             // ContentInfo, with targets, with access
             array(
                 'limitation' => new LocationLimitation( array( 'limitationValues' => array( 2 ) ) ),
-                'object' => new ContentInfo(),
+                'object' => new ContentInfo( array( 'published' => true ) ),
                 'targets' => array( new Location( array( 'id' => 2 ) ) ),
                 'persistence' => array(),
                 'expected' => true
@@ -299,16 +293,32 @@ class LocationLimitationTypeTest extends Base
             // ContentInfo, no targets, with access
             array(
                 'limitation' => new LocationLimitation( array( 'limitationValues' => array( 2 ) ) ),
-                'object' => new ContentInfo(),
-                'targets' => array(),
+                'object' => new ContentInfo( array( 'published' => true ) ),
+                'targets' => null,
                 'persistence' => array( new Location( array( 'id' => 2 ) ) ),
                 'expected' => true
             ),
             // ContentInfo, no targets, no access
             array(
                 'limitation' => new LocationLimitation( array( 'limitationValues' => array( 2, 43 ) ) ),
-                'object' => new ContentInfo(),
-                'targets' => array(),
+                'object' => new ContentInfo( array( 'published' => true ) ),
+                'targets' => null,
+                'persistence' => array( new Location( array( 'id' => 55 ) ) ),
+                'expected' => false
+            ),
+            // ContentInfo, no targets, un-published, with access
+            array(
+                'limitation' => new LocationLimitation( array( 'limitationValues' => array( 2 ) ) ),
+                'object' => new ContentInfo( array( 'published' => false ) ),
+                'targets' => null,
+                'persistence' => array( new Location( array( 'id' => 2 ) ) ),
+                'expected' => true
+            ),
+            // ContentInfo, no targets, un-published, no access
+            array(
+                'limitation' => new LocationLimitation( array( 'limitationValues' => array( 2, 43 ) ) ),
+                'object' => new ContentInfo( array( 'published' => false ) ),
+                'targets' => null,
                 'persistence' => array( new Location( array( 'id' => 55 ) ) ),
                 'expected' => false
             ),
@@ -357,12 +367,11 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestEvaluate
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::evaluate
      */
     public function testEvaluate(
         LocationLimitation $limitation,
         ValueObject $object,
-        array $targets,
+        $targets,
         array $persistenceLocations,
         $expected
     )
@@ -376,7 +385,7 @@ class LocationLimitationTypeTest extends Base
             ->method( $this->anything() );
 
         $persistenceMock = $this->getPersistenceMock();
-        if ( empty( $persistenceLocations ) )
+        if ( empty( $persistenceLocations ) && $targets !== null )
         {
             $persistenceMock
                 ->expects( $this->never() )
@@ -391,7 +400,7 @@ class LocationLimitationTypeTest extends Base
 
             $this->locationHandlerMock
                 ->expects( $this->once() )
-                ->method( "loadLocationsByContent" )
+                ->method( $object instanceof ContentInfo && $object->published ? "loadLocationsByContent" : "loadParentLocationsForDraftContent" )
                 ->with( $object->id )
                 ->will( $this->returnValue( $persistenceLocations ) );
         }
@@ -446,13 +455,12 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestEvaluateInvalidArgument
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::evaluate
      * @expectedException \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function testEvaluateInvalidArgument(
         Limitation $limitation,
         ValueObject $object,
-        array $targets,
+        $targets,
         array $persistenceLocations
     )
     {
@@ -475,12 +483,11 @@ class LocationLimitationTypeTest extends Base
             $object,
             $targets
         );
-        var_dump( $v );
+        var_dump( $v );// intentional, debug in case no exception above
     }
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::getCriterion
      * @expectedException \RuntimeException
      *
      * @param \eZ\Publish\Core\Limitation\LocationLimitationType $limitationType
@@ -495,7 +502,6 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::getCriterion
      *
      * @param \eZ\Publish\Core\Limitation\LocationLimitationType $limitationType
      */
@@ -515,7 +521,6 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::getCriterion
      *
      * @param \eZ\Publish\Core\Limitation\LocationLimitationType $limitationType
      */
@@ -535,7 +540,6 @@ class LocationLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\LocationLimitationType::valueSchema
      *
      * @param \eZ\Publish\Core\Limitation\LocationLimitationType $limitationType
      */

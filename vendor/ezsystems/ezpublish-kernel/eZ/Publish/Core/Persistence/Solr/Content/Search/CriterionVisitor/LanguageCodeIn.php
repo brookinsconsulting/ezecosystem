@@ -2,9 +2,9 @@
 /**
  * File containing the LanguageCodeIn visitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search\CriterionVisitor;
@@ -21,7 +21,7 @@ class LanguageCodeIn extends CriterionVisitor
     /**
      * CHeck if visitor is applicable to current criterion
      *
-     * @param Criterion $criterion
+     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $criterion
      *
      * @return boolean
      */
@@ -36,25 +36,28 @@ class LanguageCodeIn extends CriterionVisitor
     /**
      * Map field value to a proper Solr representation
      *
-     * @param Criterion $criterion
-     * @param CriterionVisitor $subVisitor
+     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $criterion
+     * @param \eZ\Publish\Core\Persistence\Solr\Content\Search\CriterionVisitor $subVisitor
      *
-     * @return void
+     * @return string
      */
     public function visit( Criterion $criterion, CriterionVisitor $subVisitor = null )
     {
-        return '(' .
-            implode(
-                ' OR ',
-                array_map(
-                    function ( $value )
-                    {
-                        return 'language_code_s:"' . $value . '"';
-                    },
-                    $criterion->value
-                )
-            ) .
-            ')';
+        $languageCodeExpressions = array_map(
+            function ( $value )
+            {
+                return 'language_code_ms:"' . $value . '"';
+            },
+            $criterion->value
+        );
+
+        /** @var Criterion\LanguageCode $criterion */
+        if ( $criterion->matchAlwaysAvailable )
+        {
+            $languageCodeExpressions[] = "always_available_b:true";
+        }
+
+        return '(' . implode( ' OR ', $languageCodeExpressions ) . ')';
     }
 }
 

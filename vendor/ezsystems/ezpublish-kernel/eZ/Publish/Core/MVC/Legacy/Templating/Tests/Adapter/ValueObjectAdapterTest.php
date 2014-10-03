@@ -2,17 +2,18 @@
 /**
  * File containing the ValueObjectAdapterTest class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Legacy\Templating\Tests\Adapter;
 
 use eZ\Publish\Core\MVC\Legacy\Templating\Adapter\ValueObjectAdapter;
 use eZ\Publish\API\Repository\Values\ValueObject;
+use PHPUnit_Framework_TestCase;
 
-class ValueObjectAdapterTest extends \PHPUnit_Framework_TestCase
+class ValueObjectAdapterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject

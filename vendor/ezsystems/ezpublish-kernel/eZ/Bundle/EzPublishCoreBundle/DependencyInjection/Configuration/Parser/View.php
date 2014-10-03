@@ -2,14 +2,15 @@
 /**
  * File containing the View class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -19,8 +20,6 @@ class View extends AbstractParser
      * Adds semantic configuration definition.
      *
      * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
-     *
-     * @return void
      */
     public function addSemanticConfig( NodeBuilder $nodeBuilder )
     {
@@ -32,11 +31,37 @@ class View extends AbstractParser
                 ->prototype( "array" )
                     ->useAttributeAsKey( "key" )
                     ->normalizeKeys( false )
+                    ->info( "View selection rulesets, grouped by view type. Key is the view type (e.g. 'full', 'line', ...)" )
                     ->prototype( "array" )
                         ->children()
-                            ->scalarNode( "template" )->isRequired()->info( "Your template path, as MyBundle:subdir:my_template.html.twig" )->end()
+                            ->scalarNode( "template" )->info( "Your template path, as MyBundle:subdir:my_template.html.twig" )->end()
+                            ->scalarNode( 'controller' )
+                                ->info(
+<<<EOT
+Use custom controller instead of the default one to display a content matching your rules.
+You can use the controller reference notation supported by Symfony.
+EOT
+                                )
+                                ->example( 'MyBundle:MyControllerClass:view' )
+                            ->end()
                             ->arrayNode( "match" )
                                 ->info( "Condition matchers configuration" )
+                                ->useAttributeAsKey( "key" )
+                                ->prototype( "variable" )->end()
+                            ->end()
+                            ->arrayNode( "params" )
+                                ->info(
+<<<EOT
+Arbitrary params that will be passed in the ContentView object, manageable by ViewProviders.
+Those params will NOT be passed to the resulting view template by default.
+EOT
+                                )
+                                ->example(
+                                    array(
+                                        "foo"        => "%some.parameter.reference%",
+                                        "osTypes"    => array( "osx", "linux", "windows" ),
+                                    )
+                                )
                                 ->useAttributeAsKey( "key" )
                                 ->prototype( "variable" )->end()
                             ->end()
@@ -46,16 +71,14 @@ class View extends AbstractParser
             ->end();
     }
 
-    /**
-     * Translates parsed semantic config values from $config to internal key/value pairs.
-     *
-     * @param array $config
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     *
-     * @return void
-     */
-    public function registerInternalConfig( array $config, ContainerBuilder $container )
+    public function preMap( array $config, ContextualizerInterface $contextualizer )
     {
-        $this->registerInternalConfigArray( static::NODE_KEY, $config, $container, self::MERGE_FROM_SECOND_LEVEL );
+        $contextualizer->mapConfigArray( static::NODE_KEY, $config, ContextualizerInterface::MERGE_FROM_SECOND_LEVEL );
+    }
+
+    public function mapConfig( array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer )
+    {
+        // Nothing to do here.
     }
 }
+

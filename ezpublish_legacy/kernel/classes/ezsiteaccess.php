@@ -2,9 +2,9 @@
 /**
  * File containing (site)access functionality
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -375,12 +375,28 @@ class eZSiteAccess
 
             if ( isset( $name ) && $name != '' )
             {
-                $name = preg_replace( array( '/[^a-zA-Z0-9]+/', '/_+/', '/^_/', '/_$/' ),
-                                      array( '_', '_', '', '' ),
-                                      $name );
+                $nameClean = self::washName( $name );
 
-                if ( in_array( $name, $siteAccessList ) )
+                if ( in_array( $nameClean, $siteAccessList ) )
                 {
+                    if ( $nameClean !== $name )
+                    {
+                        if ( !$ini->hasVariable( 'SiteAccessSettings', 'NormalizeSANames' ) || $ini->variable( 'SiteAccessSettings', 'NormalizeSANames' ) == 'enabled' )
+                        {
+                            $name = $nameClean;
+                            if ( $ini->hasVariable( 'SiteAccessSettings', 'RedirectOnNormalize' ) && $ini->variable( 'SiteAccessSettings', 'RedirectOnNormalize' ) == 'enabled' )
+                            {
+                                header( $_SERVER['SERVER_PROTOCOL'] .  " 301 Moved Permanently" );
+                                header( "Status: 301 Moved Permanently" );
+                                $uriSlice = $uri->URIArray;
+                                array_shift( $uriSlice );
+                                $newUri = $name . '/' . implode( '/' , $uriSlice );
+                                $location = eZSys::indexDir() . "/" . eZURI::encodeIRI( $newUri );
+                                header( "Location: " . $location );
+                                eZExecution::cleanExit();
+                            }
+                        }
+                    }
                     if ( $type == eZSiteAccess::TYPE_URI )
                     {
                         if ( $match_type == 'element' )
@@ -524,6 +540,11 @@ class eZSiteAccess
                 else
                     $access['uri_part'] = array();
             }
+            else
+            {
+                $access['uri_part'] = self::washName( $access['uri_part'] );
+            }
+
             eZSys::setAccessPath( $access['uri_part'], $name );
 
             eZUpdateDebugSettings();
@@ -531,6 +552,27 @@ class eZSiteAccess
         }
 
         return $access;
+    }
+
+    /**
+     * Washes site access name
+     *
+     * Allowed characters are [a-z], [A-Z] and [0-9], and the "_" (underscore). The washing rules are:
+     * - Characters not in the previous list (alphanumerical and underscore) are replaced by an "_" (underscore);
+     * - Multiple consecutive "_" (underscores) are replaced by a single underscore;
+     * - Leading and trailing "_" are removed.
+     *
+     * @since 5.3
+     * @param string $name The site access name, as received from the browser
+     * @return string The washed name
+     */
+    private static function washName( $name )
+    {
+        return preg_replace(
+            array( '/[^a-zA-Z0-9]+/', '/_+/', '/^_/', '/_$/' ),
+            array( '_', '_', '', '' ),
+            $name
+        );
     }
 
     /**

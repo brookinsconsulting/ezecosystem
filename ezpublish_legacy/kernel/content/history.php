@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -264,57 +264,15 @@ if ( $Module->isCurrentAction( 'CopyVersion' )  )
         return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
     }
 
-    // Check the version limit for the object's class
-    $versionlimit = eZContentClass::versionHistoryLimit( $object->attribute( 'contentclass_id' ) );
-    $versionCount = $object->getVersionCount();
-    if ( $versionCount < $versionlimit )
+    // Copying version (versionHistoryLimit is done in eZContentObject createNewVersion() )
+    $db = eZDB::instance();
+    $db->begin();
+    $newVersionID = $object->copyRevertTo( $versionID, $language );
+    $db->commit();
+
+    if ( !$http->hasPostVariable( 'DoNotEditAfterCopy' ) )
     {
-        $db = eZDB::instance();
-        $db->begin();
-        $newVersionID = $object->copyRevertTo( $versionID, $language );
-        $db->commit();
-
-        if ( !$http->hasPostVariable( 'DoNotEditAfterCopy' ) )
-        {
-            return $Module->redirectToView( 'edit', array( $ObjectID, $newVersionID, $language ) );
-        }
-    }
-    else
-    {
-        $params = array( 'conditions'=> array( 'status' => eZContentObjectVersion::STATUS_ARCHIVED ) );
-        $versions = $object->versions( true, $params );
-        if ( count( $versions ) > 0 )
-        {
-            $modified = $versions[0]->attribute( 'modified' );
-            $removeVersion = $versions[0];
-            foreach ( $versions as $version )
-            {
-                $currentModified = $version->attribute( 'modified' );
-                if ( $currentModified < $modified )
-                {
-                    $modified = $currentModified;
-                    $removeVersion = $version;
-                }
-            }
-
-            $db = eZDB::instance();
-            $db->begin();
-            $removeVersion->removeThis();
-            $newVersionID = $object->copyRevertTo( $versionID, $language );
-            $db->commit();
-
-            if ( !$http->hasPostVariable( 'DoNotEditAfterCopy' ) )
-            {
-                return $Module->redirectToView( 'edit', array( $ObjectID, $newVersionID, $language ) );
-            }
-        }
-        else
-        {
-            $http->setSessionVariable( 'ExcessVersionHistoryLimit', true );
-            $currentVersion = $object->attribute( 'current_version' );
-            $Module->redirectToView( 'history', array( $ObjectID, $currentVersion ) );
-            return eZModule::HOOK_STATUS_CANCEL_RUN;
-        }
+        return $Module->redirectToView( 'edit', array( $ObjectID, $newVersionID, $language ) );
     }
 }
 

@@ -2,9 +2,9 @@
 /**
  * File containing the XmlTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\Tests\Output\Generator;
@@ -221,6 +221,15 @@ class XmlTest extends GeneratorTest
         );
     }
 
+    public function testSerializeBool()
+    {
+        $generator = $this->getGenerator();
+
+        $this->assertTrue( $generator->serializeBool( true ) === 'true' );
+        $this->assertTrue( $generator->serializeBool( false ) === 'false' );
+        $this->assertTrue( $generator->serializeBool( 'notbooleanbuttrue' ) === 'true' );
+    }
+
     protected function getGenerator()
     {
         if ( !isset( $this->generator ) )
@@ -235,6 +244,7 @@ class XmlTest extends GeneratorTest
                 )
             );
         }
+        $this->generator->setFormatOutput( true );
         return $this->generator;
     }
 }

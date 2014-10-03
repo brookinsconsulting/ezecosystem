@@ -2,9 +2,9 @@
 /**
  * File containing the RoleServiceAuthorizationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
@@ -290,6 +290,37 @@ class RoleServiceAuthorizationTest extends BaseTest
 
         // This call will fail with an "UnauthorizedException"
         $roleService->removePolicy( $role, $policy );
+        /* END: Use Case */
+    }
+
+    /**
+     * Test for the deletePolicy() method.
+     *
+     * @return void
+     * @see \eZ\Publish\API\Repository\RoleService::deletePolicy()
+     * @expectedException \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @depends eZ\Publish\API\Repository\Tests\RoleServiceTest::testDeletePolicy
+     * @depends eZ\Publish\API\Repository\Tests\UserServiceTest::testCreateUser
+     */
+    public function testDeletePolicyThrowsUnauthorizedException()
+    {
+        $repository = $this->getRepository();
+        $roleService = $repository->getRoleService();
+
+        /* BEGIN: Use Case */
+        $user = $this->createUserVersion1();
+
+        $role = $this->createRole();
+
+        // Get first role policy
+        $policies = $role->getPolicies();
+        $policy = reset( $policies );
+
+        // Set "Editor" user as current user.
+        $repository->setCurrentUser( $user );
+
+        // This call will fail with an "UnauthorizedException"
+        $roleService->deletePolicy( $policy );
         /* END: Use Case */
     }
 

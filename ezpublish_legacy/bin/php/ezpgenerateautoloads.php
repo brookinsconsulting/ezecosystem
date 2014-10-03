@@ -3,9 +3,9 @@
 /**
  * File containing the ezpgenerateautoloads.php script.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -18,6 +18,7 @@ if ( file_exists( "config.php" ) )
 //{
 $appName = defined( 'EZP_APP_FOLDER_NAME' ) ? EZP_APP_FOLDER_NAME : 'ezpublish';
 $appFolder = getcwd() . "/../$appName";
+$legacyVendorDir = getcwd() . "/vendor";
 
 $baseEnabled = true;
 // Bundled
@@ -35,6 +36,12 @@ else if ( defined( 'EZC_BASE_PATH' ) )
 else if ( strpos( $appFolder, "{$appName}/../{$appName}" ) === false && file_exists( "{$appFolder}/autoload.php" ) )
 {
     require_once "{$appFolder}/autoload.php";
+    $baseEnabled = false;
+}
+// Composer if in eZ Publish legacy context
+else if ( file_exists( "{$legacyVendorDir}/autoload.php" ) )
+{
+    require_once "{$legacyVendorDir}/autoload.php";
     $baseEnabled = false;
 }
 // PEAR
@@ -67,6 +74,11 @@ $helpOption = new ezcConsoleOption( 'h', 'help' );
 $helpOption->mandatory = false;
 $helpOption->shorthelp = "Show help information";
 $params->registerOption( $helpOption );
+
+$quietOption = new ezcConsoleOption( 'q', 'quiet', ezcConsoleInput::TYPE_NONE );
+$quietOption->mandatory = false;
+$quietOption->shorthelp = "do not give any output except when errors occur";
+$params->registerOption( $quietOption );
 
 $targetOption = new ezcConsoleOption( 't', 'target', ezcConsoleInput::TYPE_STRING );
 $targetOption->mandatory = false;
@@ -178,7 +190,7 @@ if ( defined( 'EZP_AUTOLOAD_OUTPUT' ) )
 }
 else
 {
-    $autoloadCliOutput = new ezpAutoloadCliOutput();
+    $autoloadCliOutput = new ezpAutoloadCliOutput( $quietOption->value );
 }
 
 $autoloadGenerator->setOutputObject( $autoloadCliOutput );
@@ -187,7 +199,6 @@ $autoloadGenerator->setOutputCallback( array( $autoloadCliOutput, 'outputCli') )
 try
 {
     $autoloadGenerator->buildAutoloadArrays();
-    $autoloadGenerator->buildPHPUnitConfigurationFile();
 
     // If we are showing progress output, let's print the list of warnings at
     // the end.

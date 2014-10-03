@@ -2,9 +2,9 @@
 /**
  * File containing the Configuration class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\LegacyMapper;
@@ -15,15 +15,17 @@ use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Cache\GatewayCachePurger;
 use eZ\Bundle\EzPublishLegacyBundle\Cache\PersistenceCachePurger;
 use eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
+use eZ\Publish\Core\Persistence\Database\DatabaseHandler;
 use ezpEvent;
 use ezxFormToken;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use RuntimeException;
 
 /**
  * Maps configuration parameters to the legacy parameters
  */
-class Configuration implements EventSubscriberInterface
+class Configuration extends ContainerAware implements EventSubscriberInterface
 {
     /**
      * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
@@ -41,14 +43,14 @@ class Configuration implements EventSubscriberInterface
     private $persistenceCachePurger;
 
     /**
-     * @var \eZ\Bundle\EzPublishCoreBundle\Routing\UrlAliasRouter
+     * @var \eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator
      */
     private $urlAliasGenerator;
 
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \eZ\Publish\Core\Persistence\Database\DatabaseHandler
      */
-    private $container;
+    private $legacyDbHandler;
 
     /**
      * @var array
@@ -56,35 +58,37 @@ class Configuration implements EventSubscriberInterface
     private $options;
 
     /**
-     * Disables the feature when set using setIsEnabled()
+     * Disables the feature when set using setEnabled()
+     *
      * @var bool
      */
-    private $isEnabled = true;
+    private $enabled = true;
 
     public function __construct(
         ConfigResolverInterface $configResolver,
         GatewayCachePurger $gatewayCachePurger,
         PersistenceCachePurger $persistenceCachePurger,
-        ContainerInterface $container,
         UrlAliasGenerator $urlAliasGenerator,
+        DatabaseHandler $legacyDbHandler,
         array $options = array()
     )
     {
         $this->configResolver = $configResolver;
         $this->gatewayCachePurger = $gatewayCachePurger;
         $this->persistenceCachePurger = $persistenceCachePurger;
-        $this->container = $container;
         $this->urlAliasGenerator = $urlAliasGenerator;
+        $this->legacyDbHandler = $legacyDbHandler;
         $this->options = $options;
     }
 
     /**
      * Toggles the feature
+     *
      * @param bool $isEnabled
      */
-    public function setIsEnabled( $isEnabled )
+    public function setEnabled( $isEnabled )
     {
-        $this->isEnabled = (bool)$isEnabled;
+        $this->enabled = (bool)$isEnabled;
     }
 
     public static function getSubscribedEvents()
@@ -98,40 +102,60 @@ class Configuration implements EventSubscriberInterface
      * Adds settings to the parameters that will be injected into the legacy kernel
      *
      * @param \eZ\Publish\Core\MVC\Legacy\Event\PreBuildKernelEvent $event
-     *
-     * @todo Cache computed settings somehow
      */
     public function onBuildKernel( PreBuildKernelEvent $event )
     {
-        if ( !$this->isEnabled )
+        if ( !$this->enabled )
         {
             return;
         }
 
-        $databaseSettings = $this->configResolver->getParameter( "database" );
+        $databaseSettings = $this->legacyDbHandler->getConnection()->getParams();
         $settings = array();
         foreach (
             array(
-                "server" => "Server",
+                "host" => "Server",
                 "port" => "Port",
                 "user" => "User",
                 "password" => "Password",
-                "database_name" => "Database",
-                "type" => "DatabaseImplementation",
-                "socket" => "Socket"
+                "dbname" => "Database",
+                "unix_socket" => "Socket",
+                "driver" => "DatabaseImplementation"
             ) as $key => $iniKey
         )
         {
             if ( isset( $databaseSettings[$key] ) )
             {
-                $settings["site.ini/DatabaseSettings/$iniKey"] = $databaseSettings[$key];
+                $iniValue = $databaseSettings[$key];
+
+                switch ( $key )
+                {
+                    case "driver":
+                        $driverMap = array(
+                            'pdo_mysql' => 'ezmysqli',
+                            'pdo_pgsql' => 'ezpostgresql',
+                            'oci8' => 'ezoracle'
+                        );
+                        if ( !isset( $driverMap[$iniValue] ) )
+                        {
+                            throw new RuntimeException(
+                                "Could not map database driver to Legacy Stack database implementation.\n" .
+                                "Expected one of '" . implode( "', '", array_keys( $driverMap ) ) . "', got '" .
+                                $iniValue . "'."
+                            );
+                        }
+                        $iniValue = $driverMap[$iniValue];
+                        break;
+                }
+
+                $settings["site.ini/DatabaseSettings/$iniKey"] = $iniValue;
             }
             // Some settings need specific values when not present.
             else
             {
                 switch ( $key )
                 {
-                    case "socket":
+                    case "unix_socket":
                         $settings["site.ini/DatabaseSettings/$iniKey"] = "disabled";
                         break;
                 }
@@ -148,24 +172,30 @@ class Configuration implements EventSubscriberInterface
         // Multisite settings (PathPrefix and co)
         $settings += $this->getMultiSiteSettings();
 
+        // User settings
+        $settings["site.ini/UserSettings/AnonymousUserID"] = $this->configResolver->getParameter( "anonymous_user_id" );
+
         $event->getParameters()->set(
             "injected-settings",
             $settings + (array)$event->getParameters()->get( "injected-settings" )
         );
 
-        // Inject csrf protection settings to make sure legacy & symfony stack work together
-        if (
-            $this->container->hasParameter( 'form.type_extension.csrf.enabled' ) &&
-            $this->container->getParameter( 'form.type_extension.csrf.enabled' )
-        )
+        if ( class_exists( 'ezxFormToken' ) )
         {
-            ezxFormToken::setSecret( $this->container->getParameter( 'kernel.secret' ) );
-            ezxFormToken::setFormField( $this->container->getParameter( 'form.type_extension.csrf.field_name' ) );
-        }
-        // csrf protection is disabled, disable it in legacy extension as well.
-        else
-        {
-            ezxFormToken::setIsEnabled( false );
+            // Inject csrf protection settings to make sure legacy & symfony stack work together
+            if (
+                $this->container->hasParameter( 'form.type_extension.csrf.enabled' ) &&
+                $this->container->getParameter( 'form.type_extension.csrf.enabled' )
+            )
+            {
+                ezxFormToken::setSecret( $this->container->getParameter( 'kernel.secret' ) );
+                ezxFormToken::setFormField( $this->container->getParameter( 'form.type_extension.csrf.field_name' ) );
+            }
+            // csrf protection is disabled, disable it in legacy extension as well.
+            else
+            {
+                ezxFormToken::setIsEnabled( false );
+            }
         }
 
         // Register http cache content/cache event listener
@@ -224,6 +254,7 @@ class Configuration implements EventSubscriberInterface
     private function getMultiSiteSettings()
     {
         $rootLocationId = $this->configResolver->getParameter( 'content.tree_root.location_id' );
+        $defaultPage = $this->configResolver->getParameter( 'default_page' );
         if ( $rootLocationId === null )
         {
             return array();
@@ -243,7 +274,7 @@ class Configuration implements EventSubscriberInterface
             'site.ini/SiteAccessSettings/PathPrefixExclude' => $pathPrefixExcludeItems,
             'logfile.ini/AccessLogFileSettings/PathPrefix'  => $pathPrefix,
             'site.ini/SiteSettings/IndexPage'               => "/content/view/full/$rootLocationId/",
-            'site.ini/SiteSettings/DefaultPage'             => "/content/view/full/$rootLocationId/",
+            'site.ini/SiteSettings/DefaultPage'             => $defaultPage !== null ? $defaultPage : "/content/view/full/$rootLocationId/",
             'content.ini/NodeSettings/RootNode'             => $rootLocationId,
         );
     }

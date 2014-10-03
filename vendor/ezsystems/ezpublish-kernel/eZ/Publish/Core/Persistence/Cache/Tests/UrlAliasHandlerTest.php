@@ -2,9 +2,9 @@
 /**
  * File contains Test class
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Cache\Tests;
@@ -48,9 +48,9 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( $this->anything() );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $expects = $innerHandler
@@ -70,7 +70,7 @@ class UrlAliasHandlerTest extends HandlerTest
 
         $expects->will( $this->returnValue( null ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         call_user_func_array( array( $handler, $method ), $arguments );
     }
 
@@ -82,9 +82,9 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -99,30 +99,31 @@ class UrlAliasHandlerTest extends HandlerTest
             ->with( 'urlAlias', 'location', 44 )
             ->will( $this->returnValue( null  ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->publishUrlAliasForLocation( 44, 2, 'name', 'eng-GB', true );
     }
 
     /**
      * @covers eZ\Publish\Core\Persistence\Cache\UrlAliasHandler::createCustomUrlAlias
      */
-    public function testCreateCustomUrlAlias()
+    public function testCreateCustomUrlAliasHasCache()
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
+        $urlAlias = new UrlAlias( array( 'id' => 55, 'destination' => 44 ) );
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
             ->expects( $this->once() )
             ->method( 'createCustomUrlAlias' )
             ->with( 44, '/path', true, 'eng-GB', true )
-            ->will( $this->returnValue( new UrlAlias( array( 'id' => 55, 'destination' => 44 ) ) ) );
+            ->will( $this->returnValue( $urlAlias ) );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
@@ -130,21 +131,97 @@ class UrlAliasHandlerTest extends HandlerTest
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
+            ->expects( $this->never() )
+            ->method( 'get' );
+        $cacheItemMock
             ->expects( $this->once() )
             ->method( 'set' )
-            ->with( $this->isInstanceOf( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias' ) );
+            ->with( $urlAlias );
+
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
+        $this->cacheMock
+            ->expects( $this->at( 1 ) )
+            ->method( 'getItem' )
+            ->with( 'urlAlias', 'location', 44, 'custom' )
+            ->will( $this->returnValue( $cacheItemMock2 ) );
+
+        $cacheItemMock2
+            ->expects( $this->once() )
+            ->method( 'get' )
+            ->will( $this->returnValue( array( 42 ) ) );
+
+        $cacheItemMock2
+            ->expects( $this->once() )
+            ->method( 'isMiss' )
+            ->will( $this->returnValue( false ) );
+
+        $cacheItemMock2
+            ->expects( $this->once() )
+            ->method( 'set' )
+            ->with( array( 42, 55 ) );
+
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
+        $handler->createCustomUrlAlias( 44, '/path', true, 'eng-GB', true );
+    }
+
+    /**
+     * @covers eZ\Publish\Core\Persistence\Cache\UrlAliasHandler::createCustomUrlAlias
+     */
+    public function testCreateCustomUrlAliasIsMiss()
+    {
+        $this->loggerMock->expects( $this->once() )->method( 'logCall' );
+
+        $urlAlias = new UrlAlias( array( 'id' => 55, 'destination' => 44 ) );
+        $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
+        $this->persistenceHandlerMock
+            ->expects( $this->once() )
+            ->method( 'urlAliasHandler' )
+            ->will( $this->returnValue( $innerHandler ) );
+
+        $innerHandler
+            ->expects( $this->once() )
+            ->method( 'createCustomUrlAlias' )
+            ->with( 44, '/path', true, 'eng-GB', true )
+            ->will( $this->returnValue( $urlAlias ) );
+
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
+        $this->cacheMock
+            ->expects( $this->at( 0 ) )
+            ->method( 'getItem' )
+            ->with( 'urlAlias', 55 )
+            ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
             ->expects( $this->never() )
             ->method( 'get' );
+        $cacheItemMock
+            ->expects( $this->once() )
+            ->method( 'set' )
+            ->with( $urlAlias );
 
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
-            ->method( 'clear' )
+            ->method( 'getItem' )
             ->with( 'urlAlias', 'location', 44, 'custom' )
-            ->will( $this->returnValue( $cacheItemMock ) );
+            ->will( $this->returnValue( $cacheItemMock2 ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $cacheItemMock2
+            ->expects( $this->once() )
+            ->method( 'get' )
+            ->will( $this->returnValue( null ) );
+
+        $cacheItemMock2
+            ->expects( $this->once() )
+            ->method( 'isMiss' )
+            ->will( $this->returnValue( true ) );
+
+        $cacheItemMock2
+            ->expects( $this->once() )
+            ->method( 'set' )
+            ->with( array( 55 ) );
+
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->createCustomUrlAlias( 44, '/path', true, 'eng-GB', true );
     }
 
@@ -156,9 +233,9 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -167,7 +244,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->with( '/old', '/path', true, 'eng-GB', true )
             ->will( $this->returnValue( new UrlAlias( array( 'id' => 55 ) ) ) );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -183,7 +260,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'get' );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->createGlobalUrlAlias( '/old', '/path', true, 'eng-GB', true );
     }
 
@@ -194,7 +271,7 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -212,9 +289,9 @@ class UrlAliasHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -236,7 +313,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( array( 55, 58, 91 ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->listURLAliasesForLocation( 44, false );
     }
 
@@ -247,11 +324,11 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'location', '44/custom' )
+            ->with( 'urlAlias', 'location', '44', 'custom' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -265,9 +342,9 @@ class UrlAliasHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -289,7 +366,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( array( 55, 58, 91 ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->listURLAliasesForLocation( 44, true );
     }
 
@@ -300,7 +377,7 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->never() )->method( 'logCall' );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
@@ -317,7 +394,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'isMiss' )
             ->will( $this->returnValue( false ) );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
             ->method( $this->anything() );
 
@@ -326,7 +403,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'set' );
 
         // inline calls to loadUrlAlias() using the cache
-        $cacheItemMock2 = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
@@ -369,7 +446,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->listURLAliasesForLocation( 44, false );
     }
 
@@ -380,11 +457,11 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->never() )->method( 'logCall' );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
-            ->with( 'urlAlias', 'location', '44/custom' )
+            ->with( 'urlAlias', 'location', '44', 'custom' )
             ->will( $this->returnValue( $cacheItemMock ) );
 
         $cacheItemMock
@@ -397,7 +474,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'isMiss' )
             ->will( $this->returnValue( false ) );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
             ->method( $this->anything() );
 
@@ -406,7 +483,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'set' );
 
                 // inline calls to loadUrlAlias() using the cache
-        $cacheItemMock2 = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
@@ -449,7 +526,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->listURLAliasesForLocation( 44, true );
     }
 
@@ -461,9 +538,9 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -490,7 +567,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'clear' )
             ->with( 'urlAlias', 'location', 44 );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->removeURLAliases(
             array(
                 new UrlAlias( array( 'id' => 21 ) ),
@@ -506,7 +583,7 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -524,9 +601,9 @@ class UrlAliasHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -540,7 +617,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( 55 );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->lookup( '/url' );
     }
 
@@ -551,11 +628,11 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->never() )->method( 'logCall' );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
             ->method( $this->anything() );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 0 ) )
             ->method( 'getItem' )
@@ -576,7 +653,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $cacheItemMock2 = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock2 = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->at( 1 ) )
             ->method( 'getItem' )
@@ -597,7 +674,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->lookup( '/url' );
     }
 
@@ -608,7 +685,7 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -626,9 +703,9 @@ class UrlAliasHandlerTest extends HandlerTest
             ->will( $this->returnValue( true ) );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -642,7 +719,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->method( 'set' )
             ->with( $this->isInstanceOf( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias' ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->loadUrlAlias( 55 );
     }
 
@@ -653,11 +730,11 @@ class UrlAliasHandlerTest extends HandlerTest
     {
         $this->loggerMock->expects( $this->never() )->method( 'logCall' );
 
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->never() )
             ->method( $this->anything() );
 
-        $cacheItemMock = $this->getMock( 'Stash\\Item', array(), array(), '', false );
+        $cacheItemMock = $this->getMock( 'Stash\Interfaces\ItemInterface' );
         $this->cacheMock
             ->expects( $this->once() )
             ->method( 'getItem' )
@@ -678,7 +755,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->expects( $this->never() )
             ->method( 'set' );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->loadUrlAlias( 55 );
     }
 
@@ -690,9 +767,9 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -706,7 +783,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->with( 'urlAlias' )
             ->will( $this->returnValue( null  ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->locationMoved( 44, 2, 45 );
     }
 
@@ -718,9 +795,9 @@ class UrlAliasHandlerTest extends HandlerTest
         $this->loggerMock->expects( $this->once() )->method( 'logCall' );
 
         $innerHandler = $this->getMock( 'eZ\\Publish\\SPI\\Persistence\\Content\\UrlAlias\\Handler' );
-        $this->persistenceFactoryMock
+        $this->persistenceHandlerMock
             ->expects( $this->once() )
-            ->method( 'getUrlAliasHandler' )
+            ->method( 'urlAliasHandler' )
             ->will( $this->returnValue( $innerHandler ) );
 
         $innerHandler
@@ -734,7 +811,7 @@ class UrlAliasHandlerTest extends HandlerTest
             ->with( 'urlAlias', 'location', 44 )
             ->will( $this->returnValue( null  ) );
 
-        $handler = $this->persistenceHandler->urlAliasHandler();
+        $handler = $this->persistenceCacheHandler->urlAliasHandler();
         $handler->locationDeleted( 44 );
     }
 }

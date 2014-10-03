@@ -2,9 +2,9 @@
 /**
  * File containing the content updater remove field action class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Type\ContentUpdater\Action;
@@ -23,7 +23,7 @@ class RemoveField extends Action
     /**
      * Field definition of the field to remove
      *
-     * @var mixed
+     * @var \eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition
      */
     protected $fieldDefinition;
 
@@ -54,7 +54,7 @@ class RemoveField extends Action
     /**
      * Applies the action to the given $content
      *
-     * @param Content $content
+     * @param \eZ\Publish\SPI\Persistence\Content $content
      *
      * @return void
      */
@@ -66,9 +66,7 @@ class RemoveField extends Action
         {
             if ( $field->fieldDefinitionId == $this->fieldDefinition->id )
             {
-                $this->contentGateway->deleteField(
-                    $field->id, $field->versionNo
-                );
+                $this->contentGateway->deleteField( $field->id );
                 $fieldIdsToRemoveMap[$field->type][] = $field->id;
             }
         }

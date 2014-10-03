@@ -2,17 +2,17 @@
 /**
  * File containing the Legacy\MoveSubtreeSlot class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\SignalSlot\Slot;
 
 use eZ\Publish\Core\SignalSlot\Signal;
-use eZ\Publish\Core\SignalSlot\Slot\AbstractLegacySlot;
 use eZContentObject;
 use eZContentObjectTreeNode;
+use eZContentOperationCollection;
 
 /**
  * A legacy slot handling MoveSubtreeSignal.
@@ -37,7 +37,7 @@ class LegacyMoveSubtreeSlot extends AbstractLegacySlot
             {
                 $node = eZContentObjectTreeNode::fetch( $signal->locationId );
                 eZContentObjectTreeNode::clearViewCacheForSubtree( $node );
-                // @todo What about eZSearch in this case?
+                eZContentOperationCollection::registerSearchObject( $node->attribute( 'contentobject_id' ) );
                 eZContentObject::clearCache();// Clear all object memory cache to free memory
             },
             false

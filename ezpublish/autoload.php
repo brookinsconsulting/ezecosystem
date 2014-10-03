@@ -3,21 +3,18 @@
  * File containing the autoload configuration.
  * It uses Composer autoloader and is greatly inspired by the Symfony standard distribution's.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version //autogentag//
  */
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Composer\Autoload\ClassLoader;
 
+/**
+ * @var $loader ClassLoader
+ */
 $loader = require __DIR__.'/../vendor/autoload.php';
-
-// intl
-if ( !function_exists( 'intl_get_error_code' ) )
-{
-    require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
-    $loader->add( '', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs' );
-}
 
 AnnotationRegistry::registerLoader( array( $loader, 'loadClass' ) );
 

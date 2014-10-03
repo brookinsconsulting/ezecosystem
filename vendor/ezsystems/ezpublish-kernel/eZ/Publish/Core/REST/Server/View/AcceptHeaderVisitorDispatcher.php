@@ -3,15 +3,16 @@
  * This file contains the AcceptHeaderVisitorDispatcher class
  *
  * @version $Revision$
- * @copyright Copyright (c) 2011 Qafoo GmbH
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 
 namespace eZ\Publish\Core\REST\Server\View;
 
-use eZ\Publish\Core\REST\Server\Request;
+use Symfony\Component\HttpFoundation\Request;
 use eZ\Publish\Core\REST\Common\Output\Visitor as OutputVisitor;
 use Qafoo\RMF\View\NowViewFoundException;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Dispatcher for various visitors depending on the mime-type accept header
@@ -27,19 +28,6 @@ class AcceptHeaderVisitorDispatcher
     protected $mapping = array();
 
     /**
-     * Construct from view handler mapping
-     *
-     * @param array $mapping
-     */
-    public function __construct( array $mapping )
-    {
-        foreach ( $mapping as $regexp => $visitor )
-        {
-            $this->addVisitor( $regexp, $visitor );
-        }
-    }
-
-    /**
      * Adds view handler
      *
      * @param string $regexp
@@ -53,20 +41,22 @@ class AcceptHeaderVisitorDispatcher
     /**
      * Dispatches a visitable result to the mapped visitor
      *
-     * @param \eZ\Publish\Core\REST\Server\Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param mixed $result
      *
-     * @return \eZ\Publish\Core\REST\Common\Message
+     * @throws NowViewFoundException
+     *
+     * @return Response
      */
     public function dispatch( Request $request, $result )
     {
-        foreach ( $request->mimetype as $mimeType )
+        foreach ( $request->getAcceptableContentTypes() as $mimeType )
         {
+            /** @var \eZ\Publish\Core\REST\Common\Output\Visitor $visitor */
             foreach ( $this->mapping as $regexp => $visitor )
             {
-                if ( preg_match( $regexp, $mimeType['value'] ) )
+                if ( preg_match( $regexp, $mimeType ) )
                 {
-                    /** @var \eZ\Publish\Core\REST\Common\Output\Visitor $visitor */
                     return $visitor->visit( $result );
                 }
             }

@@ -2,15 +2,17 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\User\UserHandlerTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\User;
 
 use eZ\Publish\Core\Persistence\Legacy\Tests\TestCase;
 use eZ\Publish\Core\Persistence\Legacy\User;
+use eZ\Publish\Core\Persistence\Legacy\User\Role\LimitationConverter;
+use eZ\Publish\Core\Persistence\Legacy\User\Role\LimitationHandler\ObjectStateHandler as ObjectStateLimitationHandler;
 use eZ\Publish\SPI\Persistence;
 
 /**
@@ -22,9 +24,10 @@ class UserHandlerTest extends TestCase
     {
         $dbHandler = $this->getDatabaseHandler();
         return new User\Handler(
-            new User\Gateway\EzcDatabase( $dbHandler ),
-            new User\Role\Gateway\EzcDatabase( $dbHandler ),
-            new User\Mapper()
+            new User\Gateway\DoctrineDatabase( $dbHandler ),
+            new User\Role\Gateway\DoctrineDatabase( $dbHandler ),
+            new User\Mapper(),
+            new LimitationConverter( array( new ObjectStateLimitationHandler( $dbHandler ) ) )
         );
     }
 
@@ -61,7 +64,7 @@ class UserHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException \PDOException
+     * @expectedException \Doctrine\DBAL\DBALException
      */
     public function testCreateDuplicateUser()
     {
@@ -72,7 +75,7 @@ class UserHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException \PDOException
+     * @expectedException \Doctrine\DBAL\DBALException
      */
     public function testInsertIncompleteUser()
     {
@@ -110,10 +113,10 @@ class UserHandlerTest extends TestCase
         $handler = $this->getUserHandler();
         $handler->create( $user = $this->getValidUser() );
 
-        $users = $handler->loadByLogin( $user->login );
+        $loadedUser = $handler->loadByLogin( $user->login );
         $this->assertEquals(
             $user,
-            $users[0]
+            $loadedUser
         );
     }
 
@@ -133,7 +136,7 @@ class UserHandlerTest extends TestCase
         $handler = $this->getUserHandler();
         $handler->create( $user = $this->getValidUser() );
 
-        $users = $handler->loadByLogin( $user->email, true );
+        $users = $handler->loadByEmail( $user->email );
         $this->assertEquals(
             $user,
             $users[0]
@@ -257,25 +260,6 @@ class UserHandlerTest extends TestCase
         );
     }
 
-    public function testLoadRoleWithGroups()
-    {
-        $handler = $this->getUserHandler();
-
-        $role = new Persistence\User\Role();
-        $role->identifier = 'Test';
-
-        $role = $handler->createRole( $role );
-
-        $handler->assignRole( 23, $role->id );
-        $handler->assignRole( 42, $role->id );
-
-        $loaded = $handler->loadRole( $role->id );
-        $this->assertEquals(
-            array( 23, 42 ),
-            $loaded->groupIds
-        );
-    }
-
     public function testLoadRoleWithPolicies()
     {
         $handler = $this->getUserHandler();
@@ -340,11 +324,6 @@ class UserHandlerTest extends TestCase
                 )
             ),
             $loaded->policies
-        );
-
-        $this->assertEquals(
-            array( 23, 42 ),
-            $loaded->groupIds
         );
     }
 
@@ -590,12 +569,12 @@ class UserHandlerTest extends TestCase
         );
     }
 
-    public function testRemovePolicy()
+    public function testDeletePolicy()
     {
         $handler = $this->getUserHandler();
 
         $role = $this->createRole();
-        $handler->removePolicy( $role->id, $role->policies[0]->id );
+        $handler->deletePolicy( $role->policies[0]->id );
 
         $this->assertQueryResult(
             array(
@@ -606,12 +585,12 @@ class UserHandlerTest extends TestCase
         );
     }
 
-    public function testRemovePolicyLimitations()
+    public function testDeletePolicyLimitations()
     {
         $handler = $this->getUserHandler();
 
         $role = $this->createRole();
-        $handler->removePolicy( $role->id, $role->policies[0]->id );
+        $handler->deletePolicy( $role->policies[0]->id );
 
         $this->assertQueryResult(
             array( array( 3, 'Foo', 2 ) ),
@@ -619,12 +598,12 @@ class UserHandlerTest extends TestCase
         );
     }
 
-    public function testRemovePolicyLimitationValues()
+    public function testDeletePolicyLimitationValues()
     {
         $handler = $this->getUserHandler();
 
         $role = $this->createRole();
-        $handler->removePolicy( $role->id, $role->policies[0]->id );
+        $handler->deletePolicy( $role->policies[0]->id );
 
         $this->assertQueryResult(
             array( array( 4, 3, 'Blubb' ) ),
@@ -885,6 +864,36 @@ class UserHandlerTest extends TestCase
                 )
             ),
             $handler->loadRoleAssignmentsByGroupId( 13, true )
+        );
+    }
+
+    public function testLoadRoleAssignmentsByRoleId()
+    {
+        $this->insertDatabaseFixture( __DIR__ . '/../../../../Repository/Tests/Service/Integration/Legacy/_fixtures/clean_ezdemo_47_dump.php' );
+        $handler = $this->getUserHandler();
+
+        $this->assertEquals(
+            array(
+                new Persistence\User\RoleAssignment(
+                    array(
+                        'roleId' => 1,
+                        'contentId' => 11
+                    )
+                ),
+                new Persistence\User\RoleAssignment(
+                    array(
+                        'roleId' => 1,
+                        'contentId' => 42
+                    )
+                ),
+                new Persistence\User\RoleAssignment(
+                    array(
+                        'roleId' => 1,
+                        'contentId' => 59
+                    )
+                ),
+            ),
+            $handler->loadRoleAssignmentsByRoleId( 1 )
         );
     }
 }

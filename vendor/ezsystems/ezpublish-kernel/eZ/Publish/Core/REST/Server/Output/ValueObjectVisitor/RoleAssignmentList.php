@@ -2,9 +2,9 @@
 /**
  * File containing the RoleAssignmentList ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -34,8 +34,8 @@ class RoleAssignmentList extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $data->isGroupAssignment ?
-                $this->urlHandler->generate( 'groupRoleAssignments', array( 'group' => $data->id ) ) :
-                $this->urlHandler->generate( 'userRoleAssignments', array( 'user' => $data->id ) )
+                $this->router->generate( 'ezpublish_rest_loadRoleAssignmentsForUserGroup', array( 'groupPath' => $data->id ) ) :
+                $this->router->generate( 'ezpublish_rest_loadRoleAssignmentsForUser', array( 'userId' => $data->id ) )
         );
         $generator->endAttribute( 'href' );
 

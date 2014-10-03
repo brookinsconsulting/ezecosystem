@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\Content\UrlAliasHandlerTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content;
@@ -12,17 +12,17 @@ namespace eZ\Publish\Core\Persistence\Legacy\Tests\Content;
 use eZ\Publish\Core\Persistence\Legacy\Tests\TestCase;
 use eZ\Publish\Core\Persistence\Legacy\Content\UrlAlias\Handler;
 use eZ\Publish\Core\Persistence\Legacy\Content\UrlAlias\Mapper;
-use eZ\Publish\Core\Persistence\Legacy\Content\UrlAlias\Gateway\EzcDatabase;
+use eZ\Publish\Core\Persistence\Legacy\Content\UrlAlias\Gateway\DoctrineDatabase;
 use eZ\Publish\Core\Persistence\Legacy\Content\UrlAlias\SlugConverter;
-use eZ\Publish\Core\Persistence\Legacy\Content\Location\Gateway\EzcDatabase as EzcDatabaseLocation;
+use eZ\Publish\Core\Persistence\Legacy\Content\Location\Gateway\DoctrineDatabase as DoctrineDatabaseLocation;
 use eZ\Publish\Core\Persistence\Legacy\Content\Language\Handler as LanguageHandler;
-use eZ\Publish\Core\Persistence\Legacy\Content\Language\Gateway\EzcDatabase as LanguageGateway;
+use eZ\Publish\Core\Persistence\Legacy\Content\Language\Gateway\DoctrineDatabase as LanguageGateway;
 use eZ\Publish\Core\Persistence\Legacy\Content\Language\Mapper as LanguageMapper;
 use eZ\Publish\Core\Persistence\Legacy\Content\Language\MaskGenerator as LanguageMaskGenerator;
-use eZ\Publish\Core\Persistence\Legacy\Content\Search\TransformationProcessor\DefinitionBased;
-use eZ\Publish\Core\Persistence\Legacy\Content\Search\TransformationProcessor\DefinitionBased\Parser;
-use eZ\Publish\Core\Persistence\Legacy\Content\Search\TransformationProcessor\PcreCompiler;
-use eZ\Publish\Core\Persistence\Legacy\Content\Search\Utf8Converter;
+use eZ\Publish\Core\Persistence\TransformationProcessor\DefinitionBased;
+use eZ\Publish\Core\Persistence\TransformationProcessor\DefinitionBased\Parser;
+use eZ\Publish\Core\Persistence\TransformationProcessor\PcreCompiler;
+use eZ\Publish\Core\Persistence\Utf8Converter;
 use eZ\Publish\SPI\Persistence\Content\UrlAlias;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 
@@ -1779,6 +1779,86 @@ class UrlAliasHandlerTest extends TestCase
                     "id" => "0-" . md5( $path ),
                     "type" => UrlAlias::LOCATION,
                     "destination" => 314,
+                    "pathData" => array(
+                        array(
+                            "always-available" => false,
+                            "translations" => array(
+                                "cro-HR" => "custom-location-alias"
+                            )
+                        )
+                    ),
+                    "languageCodes" => array( "cro-HR" ),
+                    "alwaysAvailable" => false,
+                    "isHistory" => false,
+                    "isCustom" => true,
+                    "forward" => false
+                )
+            ),
+            $customUrlAlias
+        );
+    }
+
+    /**
+     * Test for the createUrlAlias() method.
+     *
+     * @covers \eZ\Publish\Core\Persistence\Legacy\Content\UrlAlias\Handler::createUrlAlias
+     * @group create
+     * @group custom
+     */
+    public function testCreateCustomUrlAliasWithNonameParts()
+    {
+        $handler = $this->getHandler();
+        $this->insertDatabaseFixture( __DIR__ . "/_fixtures/publish_base.php" );
+
+        $path = "there-is-a//custom-location-alias//here";
+        $customUrlAlias = $handler->createCustomUrlAlias(
+            314,
+            $path,
+            false,
+            "cro-HR",
+            false
+        );
+
+        self::assertEquals( 6, $this->countRows() );
+
+        self::assertEquals(
+            new UrlAlias(
+                array(
+                    "id" => "5-" . md5( "here" ),
+                    "type" => UrlAlias::LOCATION,
+                    "destination" => 314,
+                    "pathData" => array(
+                        array(
+                            "always-available" => true,
+                            "translations" => array(
+                                "always-available" => "there-is-a"
+                            )
+                        ),
+                        array(
+                            "always-available" => true,
+                            "translations" => array(
+                                "always-available" => "noname2"
+                            )
+                        ),
+                        array(
+                            "always-available" => true,
+                            "translations" => array(
+                                "always-available" => "custom-location-alias"
+                            )
+                        ),
+                        array(
+                            "always-available" => true,
+                            "translations" => array(
+                                "always-available" => "noname4"
+                            )
+                        ),
+                        array(
+                            "always-available" => false,
+                            "translations" => array(
+                                "cro-HR" => "here"
+                            )
+                        )
+                    ),
                     "languageCodes" => array( "cro-HR" ),
                     "alwaysAvailable" => false,
                     "isHistory" => false,
@@ -1867,6 +1947,20 @@ class UrlAliasHandlerTest extends TestCase
                     "id" => "2-" . md5( "palunko" ),
                     "type" => UrlAlias::LOCATION,
                     "destination" => 314,
+                    "pathData" => array(
+                        array(
+                            "always-available" => true,
+                            "translations" => array(
+                                "always-available" => "ribar"
+                            )
+                        ),
+                        array(
+                            "always-available" => true,
+                            "translations" => array(
+                                "cro-HR" => "palunko"
+                            )
+                        ),
+                    ),
                     "languageCodes" => array( "cro-HR" ),
                     "alwaysAvailable" => true,
                     "isHistory" => false,
@@ -2787,7 +2881,7 @@ class UrlAliasHandlerTest extends TestCase
      */
     protected function countRows()
     {
-        /** @var \ezcQuerySelect $query */
+        /** @var \eZ\Publish\Core\Persistence\Database\SelectQuery $query */
         $query = $this->dbHandler->createSelectQuery();
         $query->select(
             $query->expr->count( "*" )
@@ -2806,7 +2900,7 @@ class UrlAliasHandlerTest extends TestCase
      */
     protected function dump()
     {
-        /** @var \ezcQuerySelect $query */
+        /** @var \eZ\Publish\Core\Persistence\Database\SelectQuery $query */
         $query = $this->dbHandler->createSelectQuery();
         $query->select(
             "*"
@@ -2821,7 +2915,7 @@ class UrlAliasHandlerTest extends TestCase
     }
 
     /**
-     * @var \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler
+     * @var \eZ\Publish\Core\Persistence\Doctrine\ConnectionHandler
      */
     protected $dbHandler;
 
@@ -2883,7 +2977,7 @@ class UrlAliasHandlerTest extends TestCase
             new LanguageMapper()
         );
         $languageMaskGenerator = new LanguageMaskGenerator( $languageHandler );
-        $gateway = new EzcDatabase(
+        $gateway = new DoctrineDatabase(
             $this->dbHandler,
             $languageMaskGenerator
         );
@@ -2911,27 +3005,21 @@ class UrlAliasHandlerTest extends TestCase
 
         if ( !isset( $this->locationGateway ) )
         {
-            $this->locationGateway = new EzcDatabaseLocation( $this->dbHandler );
+            $this->locationGateway = new DoctrineDatabaseLocation( $this->dbHandler );
         }
 
         return $this->locationGateway;
     }
 
     /**
-     * @return \eZ\Publish\Core\Persistence\Legacy\Content\Search\TransformationProcessor
+     * @return \eZ\Publish\Core\Persistence\TransformationProcessor
      */
     public function getProcessor()
     {
-        $rules = array();
-        foreach ( glob( __DIR__ . '/../SearchHandler/_fixtures/transformations/*.tr' ) as $file )
-        {
-            $rules[] = str_replace( self::getInstallationDir(), '', $file );
-        }
-
         return new DefinitionBased(
-            new Parser( self::getInstallationDir() ),
+            new Parser(),
             new PcreCompiler( new Utf8Converter() ),
-            $rules
+            glob( __DIR__ . '/../../../../Tests/TransformationProcessor/_fixtures/transformations/*.tr' )
         );
     }
 }

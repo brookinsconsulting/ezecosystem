@@ -2,15 +2,14 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
 
 use eZ\Publish\Core\REST\Common\Tests\Output\ValueObjectVisitorBaseTest;
-use eZ\Publish\Core\REST\Server\Values\RestFieldDefinition;
 
 use eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
 use eZ\Publish\Core\REST\Server;
@@ -38,7 +37,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
      */
     public function testVisitRestFieldDefinition()
     {
-        $visitor   = $this->getContentVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -54,6 +53,15 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
                     'my default value text'
                 )
             );
+
+        $this->addRouteExpectation(
+            "ezpublish_rest_loadContentTypeFieldDefinition",
+            array(
+                'contentTypeId' => $restFieldDefinition->contentType->id,
+                'fieldDefinitionId' => $restFieldDefinition->fieldDefinition->id,
+            ),
+            "/content/types/{$restFieldDefinition->contentType->id}/fieldDefinitions/{$restFieldDefinition->fieldDefinition->id}"
+        );
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -147,11 +155,8 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\RestFieldDefinition
      */
-    protected function getContentVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\RestFieldDefinition(
-            new Common\UrlHandler\eZPublish(),
-            $this->fieldTypeSerializerMock
-        );
+        return new ValueObjectVisitor\RestFieldDefinition( $this->fieldTypeSerializerMock );
     }
 }

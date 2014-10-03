@@ -2,9 +2,9 @@
 /**
  * File containing the eZContentFunctionCollection class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version //autogentag//
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -782,7 +782,8 @@ class eZContentFunctionCollection
                                 $owner = false,
                                 $parentNodeID = false,
                                 $includeDuplicates = true,
-                                $strictMatching = false )
+                                $strictMatching = false,
+                                $depth = 1 )
     {
         $classIDArray = array();
         if ( is_numeric( $classid ) )
@@ -804,7 +805,16 @@ class eZContentFunctionCollection
         $alphabet = $db->escapeString( $alphabet );
 
         $sqlOwnerString = is_numeric( $owner ) ? "AND ezcontentobject.owner_id = '$owner'" : '';
-        $parentNodeIDString = is_numeric( $parentNodeID ) ? "AND ezcontentobject_tree.parent_node_id = '$parentNodeID'" : '';
+        $parentNodeIDString = '';
+        if ( is_numeric( $parentNodeID ) )
+        {
+            $notEqParentString  = '';
+            // If the node(s) doesn't exist we return null.
+            if ( !eZContentObjectTreeNode::createPathConditionAndNotEqParentSQLStrings( $parentNodeIDString, $notEqParentString, $parentNodeID, $depth ) )
+            {
+                return null;
+            }
+        }
 
         $sqlClassIDs = '';
         if ( $classIDArray != null )
@@ -835,12 +845,13 @@ class eZContentFunctionCollection
                       INNER JOIN ezcontentobject_tree ON (ezcontentobject_tree.contentobject_id = ezcontentobject.id)
                       INNER JOIN ezcontentclass ON (ezcontentclass.id = ezcontentobject.contentclass_id)
                        $sqlPermissionChecking[from]
-                  WHERE $sqlMatching
+                  WHERE 
+                  $parentNodeIDString
+                  $sqlMatching
                   $showInvisibleNodesCond
                   $sqlPermissionChecking[where]
                   $sqlClassIDs
                   $sqlOwnerString
-                  $parentNodeIDString
                   AND ezcontentclass.version = 0
                   AND ezcontentobject.status = " . eZContentObject::STATUS_PUBLISHED . "
                   AND ezcontentobject_tree.main_node_id = ezcontentobject_tree.node_id";
@@ -870,7 +881,8 @@ class eZContentFunctionCollection
                            $sortBy = array(),
                            $parentNodeID = false,
                            $includeDuplicates = true,
-                           $strictMatching = false )
+                           $strictMatching = false,
+                           $depth = 1 )
     {
         $classIDArray = array();
         if ( is_numeric( $classid ) )
@@ -972,7 +984,16 @@ class eZContentFunctionCollection
         }
 
         $sqlOwnerString = is_numeric( $owner ) ? "AND ezcontentobject.owner_id = '$owner'" : '';
-        $parentNodeIDString = is_numeric( $parentNodeID ) ? "AND ezcontentobject_tree.parent_node_id = '$parentNodeID'" : '';
+        $parentNodeIDString = '';
+        if ( is_numeric( $parentNodeID ) )
+        {
+            $notEqParentString  = '';
+            // If the node(s) doesn't exist we return null.
+            if ( !eZContentObjectTreeNode::createPathConditionAndNotEqParentSQLStrings( $parentNodeIDString, $notEqParentString, $parentNodeID, $depth ) )
+            {
+                return null;
+            }
+        }
 
         $sqlClassIDString = '';
         if ( is_array( $classIDArray ) and count( $classIDArray ) )
@@ -998,12 +1019,12 @@ class eZContentFunctionCollection
                        $sortingInfo[attributeFromSQL]
                        $sqlPermissionChecking[from]
                   WHERE
+                  $parentNodeIDString
                   $sqlMatching
                   $showInvisibleNodesCond
                   $sqlPermissionChecking[where]
                   $sqlClassIDString
                   $sqlOwnerString
-                  $parentNodeIDString
                   AND ezcontentclass.version = 0
                   AND ezcontentobject.status = ".eZContentObject::STATUS_PUBLISHED."
                   AND ezcontentobject_tree.main_node_id = ezcontentobject_tree.node_id
@@ -1505,8 +1526,6 @@ class eZContentFunctionCollection
 
     static public function fetchContentTreeMenuExpiry()
     {
-        eZExpiryHandler::registerShutdownFunction();
-
         $expiryHandler = eZExpiryHandler::instance();
 
         if ( !$expiryHandler->hasTimestamp( 'content-tree-menu' ) )

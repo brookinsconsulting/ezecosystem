@@ -195,13 +195,13 @@ PLEASE NOTE:
 
 .hide-scrollbars * {
 
-        overflow: hidden;
+	overflow: hidden;
 
 }
 
 .hide-scrollbars select {
 
-        display: none;
+	display: none;
 
 }
 
@@ -219,7 +219,7 @@ when one of its submenus is visible.
 .yuimenu.show-scrollbars,
 .yuimenubar.show-scrollbars {
 
-        overflow: visible; 
+	overflow: visible; 
 
 }
 

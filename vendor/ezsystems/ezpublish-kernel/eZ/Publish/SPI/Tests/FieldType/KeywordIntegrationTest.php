@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\SPI\Tests\FieldType\KeywordIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
@@ -49,30 +49,23 @@ class KeywordIntegrationTest extends BaseIntegrationTest
     /**
      * Get handler with required custom field types registered
      *
-     * @return Handler
+     * @return \eZ\Publish\SPI\Persistence\Handler
      */
     public function getCustomHandler()
     {
-        $handler = $this->getHandler();
+        $fieldType = new FieldType\Keyword\Type();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessor() );
 
-        $handler->getFieldTypeRegistry()->register(
+        return $this->getHandler(
             'ezkeyword',
-            new FieldType\Keyword\Type()
-        );
-        $handler->getStorageRegistry()->register(
-            'ezkeyword',
+            $fieldType,
+            new Legacy\Content\FieldValue\Converter\Keyword(),
             new FieldType\Keyword\KeywordStorage(
                 array(
                     'LegacyStorage' => new FieldType\Keyword\KeywordStorage\Gateway\LegacyStorage(),
                 )
             )
         );
-        $handler->getFieldValueConverterRegistry()->register(
-            'ezkeyword',
-            new Legacy\Content\FieldValue\Converter\Null()
-        );
-
-        return $handler;
     }
 
     /**
@@ -112,9 +105,9 @@ class KeywordIntegrationTest extends BaseIntegrationTest
     {
         return new Content\FieldValue(
             array(
-                'data'         => null,
+                'data'         => array(),
                 'externalData' => array( 'foo', 'bar', 'sindelfingen' ),
-                'sortKey'      => null,
+                'sortKey'      => false,
             )
         );
     }
@@ -135,7 +128,7 @@ class KeywordIntegrationTest extends BaseIntegrationTest
             $field->value->externalData
         );
 
-        $this->assertNull( $field->value->data );
+        $this->assertEquals( array(), $field->value->data );
         $this->assertNull( $field->value->sortKey );
     }
 
@@ -187,9 +180,9 @@ class KeywordIntegrationTest extends BaseIntegrationTest
     {
         return new Content\FieldValue(
             array(
-                'data'         => null,
+                'data'         => array(),
                 'externalData' => array( 'sindelfingen', 'baz' ),
-                'sortKey'      => null,
+                'sortKey'      => false,
             )
         );
     }
@@ -213,7 +206,7 @@ class KeywordIntegrationTest extends BaseIntegrationTest
             $field->value->externalData
         );
 
-        $this->assertNull( $field->value->data );
+        $this->assertEquals( array(), $field->value->data );
         $this->assertNull( $field->value->sortKey );
     }
 }

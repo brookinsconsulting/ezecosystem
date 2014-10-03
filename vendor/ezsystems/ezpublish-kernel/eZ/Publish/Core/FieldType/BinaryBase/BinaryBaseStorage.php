@@ -2,19 +2,21 @@
 /**
  * File containing the BinaryBaseStorage class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\BinaryBase;
 
+use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\Core\FieldType\GatewayBasedStorage;
-use eZ\Publish\Core\IO\IOService;
+use eZ\Publish\Core\IO\IOServiceInterface;
 use eZ\Publish\SPI\FieldType\BinaryBase\PathGenerator;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\IO\MimeTypeDetector;
+use Psr\Log\LoggerInterface;
 
 /**
  * Storage for binary files
@@ -22,9 +24,14 @@ use eZ\Publish\SPI\IO\MimeTypeDetector;
 class BinaryBaseStorage extends GatewayBasedStorage
 {
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * An instance of IOService configured to store to the images folder
      *
-     * @var IOService
+     * @var IOServiceInterface
      */
     protected $IOService;
 
@@ -40,15 +47,18 @@ class BinaryBaseStorage extends GatewayBasedStorage
      * Construct from gateways
      *
      * @param \eZ\Publish\Core\FieldType\StorageGateway[] $gateways
-     * @param IOService $IOService
+     * @param IOServiceInterface $IOService
      * @param PathGenerator $pathGenerator
+     * @param MimeTypeDetector $mimeTypeDetector
+     * @param LoggerInterface $logger
      */
-    public function __construct( array $gateways, IOService $IOService, PathGenerator $pathGenerator, MimeTypeDetector $mimeTypeDetector )
+    public function __construct( array $gateways, IOServiceInterface $IOService, PathGenerator $pathGenerator, MimeTypeDetector $mimeTypeDetector, LoggerInterface $logger = null )
     {
         parent::__construct( $gateways );
         $this->IOService = $IOService;
         $this->pathGenerator = $pathGenerator;
         $this->mimeTypeDetector = $mimeTypeDetector;
+        $this->logger = $logger;
     }
 
     /**
@@ -71,7 +81,7 @@ class BinaryBaseStorage extends GatewayBasedStorage
      *   - connection (the connection handler)
      * For example, using Legacy storage engine, $context will be:
      *   - identifier = 'LegacyStorage'
-     *   - connection = {@link \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler} object handler (for DB connection),
+     *   - connection = {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler} object handler (for DB connection),
      *                  to be used accordingly to
      *                  {@link http://incubator.apache.org/zetacomponents/documentation/trunk/Database/tutorial.html ezcDatabase} usage
      *
@@ -92,39 +102,40 @@ class BinaryBaseStorage extends GatewayBasedStorage
         // no mimeType means we are dealing with an input, local file
         if ( !isset( $field->value->externalData['mimeType'] ) )
         {
-            $field->value->externalData['mimeType'] = $this->mimeTypeDetector->getFromPath( $field->value->externalData['path'] );
+            $field->value->externalData['mimeType'] =
+                $this->mimeTypeDetector->getFromPath( $field->value->externalData['inputUri'] );
         }
 
         $storedValue = $field->value->externalData;
-        $storagePath = $this->pathGenerator->getStoragePathForField( $field, $versionInfo );
 
         // The file referenced in externalData MAY be an existing IOService file which we can use
-        if ( ( $this->IOService->loadBinaryFile( $storedValue['path'] ) === false ) &&
-             ( $this->IOService->loadBinaryFile( $storagePath ) === false ) )
+        if ( $storedValue['id'] === null )
         {
             $createStruct = $this->IOService->newBinaryCreateStructFromLocalFile(
-                $storedValue['path']
+                $storedValue['inputUri']
             );
-            $createStruct->uri = $storagePath;
-            $this->IOService->createBinaryFile( $createStruct );
-            $storedValue['path'] = $createStruct->uri;
+            $storagePath = $this->pathGenerator->getStoragePathForField( $field, $versionInfo );
+            $createStruct->id = $storagePath;
+            $binaryFile = $this->IOService->createBinaryFile( $createStruct );
+            $storedValue['id'] = $binaryFile->id;
             $storedValue['mimeType'] = $createStruct->mimeType;
+            $storedValue['uri'] = $binaryFile->uri;
         }
 
         $field->value->externalData = $storedValue;
 
         $this->removeOldFile( $field->id, $versionInfo->versionNo, $context );
 
-        return $this->getGateway( $context )->storeFileReference( $versionInfo, $field );
+        $this->getGateway( $context )->storeFileReference( $versionInfo, $field );
     }
 
     public function copyLegacyField( VersionInfo $versionInfo, Field $field, Field $originalField, array $context )
     {
-        if ( $originalField->value->data === null )
+        if ( $originalField->value->externalData === null )
             return false;
 
         // field translations have their own file reference, but to the original file
-        $originalField->value->externalData['path'];
+        $originalField->value->externalData['id'];
 
         return $this->getGateway( $context )->storeFileReference( $versionInfo, $field );
     }
@@ -152,13 +163,24 @@ class BinaryBaseStorage extends GatewayBasedStorage
 
         $gateway->removeFileReference( $fieldId, $versionNo );
 
-        $fileCounts = $gateway->countFileReferences( array( $fileReference['path'] ) );
+        $fileCounts = $gateway->countFileReferences( array( $fileReference['id'] ) );
 
-        if ( $fileCounts[$fileReference['path']] === 0 )
+        if ( $fileCounts[$fileReference['id']] === 0 )
         {
-            $this->IOService->deleteBinaryFile(
-                $this->IOService->loadBinaryFile( $fileReference['path'] )
-            );
+            try
+            {
+                $binaryFile = $this->IOService->loadBinaryFile( $fileReference['id'] );
+                $this->IOService->deleteBinaryFile( $binaryFile );
+            }
+            catch ( NotFoundException $e )
+            {
+                if ( isset( $this->logger ) )
+                {
+                    $binaryFileId = $this->IOService->getInternalPath( $fileReference['id'] );
+                    $this->logger->error( "BinaryFile with ID $binaryFileId not found" );
+                }
+                return;
+            }
         }
     }
 
@@ -179,13 +201,20 @@ class BinaryBaseStorage extends GatewayBasedStorage
         $field->value->externalData = $this->getGateway( $context )->getFileReferenceData( $field->id, $versionInfo->versionNo );
         if ( $field->value->externalData !== null )
         {
-            if ( ( $binaryFile = $this->IOService->loadBinaryFile( $field->value->externalData['path'] ) ) !== false )
+            try
             {
+                $binaryFile = $this->IOService->loadBinaryFile( $field->value->externalData['id'] );
                 $field->value->externalData['fileSize'] = $binaryFile->size;
+                $field->value->externalData['uri'] = $binaryFile->uri;
             }
-            else
+            catch ( NotFoundException $e )
             {
-                throw new \RuntimeException( "Failed loading binary file {$field->value->externalData['path']}" );
+                if ( isset( $this->logger ) )
+                {
+                    $fileId = $this->IOService->getInternalPath( $field->value->externalData['id'] );
+                    $this->logger->error( "BinaryFile with ID $fileId not found" );
+                }
+                return;
             }
         }
     }
@@ -201,6 +230,11 @@ class BinaryBaseStorage extends GatewayBasedStorage
      */
     public function deleteFieldData( VersionInfo $versionInfo, array $fieldIds, array $context )
     {
+        if ( empty( $fieldIds ) )
+        {
+            return;
+        }
+
         $gateway = $this->getGateway( $context );
 
         $referencedFiles = $gateway->getReferencedFiles( $fieldIds, $versionInfo->versionNo );
@@ -213,9 +247,19 @@ class BinaryBaseStorage extends GatewayBasedStorage
         {
             if ( $count === 0 )
             {
-                $this->IOService->deleteBinaryFile(
-                    $this->IOService->loadBinaryFile( $filePath )
-                );
+                try
+                {
+                    $binaryFile = $this->IOService->loadBinaryFile( $filePath );
+                    $this->IOService->deleteBinaryFile( $binaryFile );
+                }
+                catch ( NotFoundException $e )
+                {
+                    if ( isset( $this->logger ) )
+                    {
+                        $filePath = $this->IOService->getInternalPath( $filePath );
+                        $this->logger->error( "BinaryFile with ID $filePath not found" );
+                    }
+                }
             }
         }
     }
@@ -239,6 +283,5 @@ class BinaryBaseStorage extends GatewayBasedStorage
      */
     public function getIndexData( VersionInfo $versionInfo, Field $field, array $context )
     {
-
     }
 }

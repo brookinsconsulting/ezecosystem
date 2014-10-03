@@ -2,13 +2,15 @@
 /**
  * File containing the UrlAliasRouterTest class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\Routing\Tests;
 
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\URLAliasService;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\HttpFoundation\Request;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
@@ -18,8 +20,9 @@ use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use eZ\Publish\Core\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\Symfony\View\Manager as ViewManager;
+use PHPUnit_Framework_TestCase;
 
-class UrlAliasRouterTest extends \PHPUnit_Framework_TestCase
+class UrlAliasRouterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -51,48 +54,45 @@ class UrlAliasRouterTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
+        $repositoryClass = 'eZ\\Publish\\Core\\Repository\\Repository';
         $this->repository = $repository = $this
-            ->getMockBuilder( 'eZ\\Publish\\Core\\Repository\\Repository' )
+            ->getMockBuilder( $repositoryClass )
             ->disableOriginalConstructor()
+            ->setMethods(
+                array_diff(
+                    get_class_methods( $repositoryClass ),
+                    array( 'sudo' )
+                )
+            )
             ->getMock();
-        $lazyRepository = function () use ( $repository )
-        {
-            return $repository;
-        };
         $this->urlAliasService = $this->getMock( 'eZ\\Publish\\API\\Repository\\URLAliasService' );
         $this->locationService = $this->getMock( 'eZ\\Publish\\API\\Repository\\LocationService' );
-        $this->repository
-            ->expects( $this->any() )
-            ->method( 'getUrlAliasService' )
-            ->will( $this->returnValue( $this->urlAliasService ) );
-        $this->repository
-            ->expects( $this->any() )
-            ->method( 'getLocationService' )
-            ->will( $this->returnValue( $this->locationService ) );
         $this->urlALiasGenerator = $this
             ->getMockBuilder( 'eZ\\Publish\\Core\\MVC\\Symfony\\Routing\\Generator\\UrlAliasGenerator' )
             ->setConstructorArgs(
                 array(
-                    $lazyRepository,
-                    $this->getMock( 'Symfony\\Component\\Routing\\RouterInterface' )
+                    $repository,
+                    $this->getMock( 'Symfony\\Component\\Routing\\RouterInterface' ),
+                    $this->getMock( 'eZ\Publish\Core\MVC\ConfigResolverInterface' )
                 )
             )
             ->getMock();
         $this->requestContext = new RequestContext();
 
-        $this->router = $this->getRouter( $lazyRepository, $this->urlALiasGenerator, $this->requestContext );
+        $this->router = $this->getRouter( $this->locationService, $this->urlAliasService, $this->urlALiasGenerator, $this->requestContext );
     }
 
     /**
-     * @param callable $lazyRepository
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
      * @param UrlAliasGenerator $urlAliasGenerator
      * @param RequestContext $requestContext
      *
      * @return UrlAliasRouter
      */
-    protected function getRouter( \Closure $lazyRepository, UrlAliasGenerator $urlAliasGenerator, RequestContext $requestContext )
+    protected function getRouter( LocationService $locationService, URLAliasService $urlAliasService, UrlAliasGenerator $urlAliasGenerator, RequestContext $requestContext )
     {
-        return new UrlAliasRouter( $lazyRepository, $urlAliasGenerator, $requestContext );
+        return new UrlAliasRouter( $locationService, $urlAliasService, $urlAliasGenerator, $requestContext );
     }
 
     /**
@@ -227,6 +227,86 @@ class UrlAliasRouterTest extends \PHPUnit_Framework_TestCase
                 'type' => UrlAlias::LOCATION,
                 'destination' => $destinationId,
                 'isHistory' => true
+            )
+        );
+        $request = $this->getRequestByPathInfo( $pathInfo );
+        $this->urlAliasService
+            ->expects( $this->once() )
+            ->method( 'lookup' )
+            ->with( $pathInfo )
+            ->will( $this->returnValue( $urlAlias ) );
+        $this->urlALiasGenerator
+            ->expects( $this->once() )
+            ->method( 'loadLocation' )
+            ->with( $destinationId )
+            ->will(
+                $this->returnValue( $destinationLocation )
+            );
+        $this->urlALiasGenerator
+            ->expects( $this->once() )
+            ->method( 'generate' )
+            ->with( $destinationLocation )
+            ->will( $this->returnValue( $newPathInfo ) );
+
+        $expected = array(
+            '_route' => UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
+            '_controller' => UrlAliasRouter::LOCATION_VIEW_CONTROLLER,
+            'locationId' => $destinationId,
+            'viewType' => ViewManager::VIEW_TYPE_FULL,
+            'layout' => true
+        );
+        $this->assertEquals( $expected, $this->router->matchRequest( $request ) );
+        $this->assertSame( $newPathInfo, $request->attributes->get( 'semanticPathinfo' ) );
+        $this->assertTrue( $request->attributes->get( 'needsRedirect' ) );
+        $this->assertFalse( $request->attributes->get( 'prependSiteaccessOnRedirect' ) );
+    }
+
+    public function testMatchRequestLocationCustom()
+    {
+        $pathInfo = '/foo/bar';
+        $destinationId = 123;
+        $urlAlias = new URLAlias(
+            array(
+                'path' => $pathInfo,
+                'type' => UrlAlias::LOCATION,
+                'destination' => $destinationId,
+                'isHistory' => false,
+                'isCustom' => true,
+                'forward' => false
+            )
+        );
+        $request = $this->getRequestByPathInfo( $pathInfo );
+        $this->urlAliasService
+            ->expects( $this->once() )
+            ->method( 'lookup' )
+            ->with( $pathInfo )
+            ->will( $this->returnValue( $urlAlias ) );
+
+        $expected = array(
+            '_route' => UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
+            '_controller' => UrlAliasRouter::LOCATION_VIEW_CONTROLLER,
+            'locationId' => $destinationId,
+            'viewType' => ViewManager::VIEW_TYPE_FULL,
+            'layout' => true
+        );
+        $this->assertEquals( $expected, $this->router->matchRequest( $request ) );
+        $this->assertSame( $destinationId, $request->attributes->get( 'locationId' ) );
+    }
+
+    public function testMatchRequestLocationCustomForward()
+    {
+        $pathInfo = '/foo/bar';
+        $newPathInfo = '/foo/bar-new';
+        $destinationId = 123;
+        $destinationLocation = new Location( array( 'id' => $destinationId ) );
+        $urlAlias = new URLAlias(
+            array(
+                'path' => $pathInfo,
+                'type' => UrlAlias::LOCATION,
+                'destination' => $destinationId,
+                'isHistory' => false,
+                'isCustom' => true,
+                'forward' => true
             )
         );
         $request = $this->getRequestByPathInfo( $pathInfo );

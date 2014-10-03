@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -41,12 +41,12 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getVersionInfoVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
 
-        $section = new Content\VersionInfo(
+        $versionInfo = new Content\VersionInfo(
             array(
                 'id' => 23,
                 'versionNo' => 5,
@@ -64,10 +64,22 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
             )
         );
 
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadUser',
+            array( 'userId' => $versionInfo->creatorId ),
+            "/user/users/{$versionInfo->creatorId}"
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContent',
+            array( 'contentId' => $versionInfo->contentInfo->id ),
+            "/content/objects/{$versionInfo->contentInfo->id}"
+        );
+
         $visitor->visit(
             $this->getVisitorMock(),
             $generator,
-            $section
+            $versionInfo
         );
 
         $result = $generator->endDocument( null );
@@ -271,10 +283,8 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\VersionInfo
      */
-    protected function getVersionInfoVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\VersionInfo(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\VersionInfo;
     }
 }

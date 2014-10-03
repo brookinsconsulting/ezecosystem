@@ -2,15 +2,15 @@
 /**
  * File containing the UserUpdate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\FieldTypeParser;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\Core\REST\Common\Exceptions;
@@ -21,7 +21,7 @@ use eZ\Publish\API\Repository\ContentService;
 /**
  * Parser for UserUpdate
  */
-class UserUpdate extends Base
+class UserUpdate extends BaseParser
 {
     /**
      * User service
@@ -54,15 +54,13 @@ class UserUpdate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\Core\REST\Common\Input\FieldTypeParser $fieldTypeParser
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler, UserService $userService, ContentService $contentService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
+    public function __construct( UserService $userService, ContentService $contentService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->userService = $userService;
         $this->contentService = $contentService;
         $this->fieldTypeParser = $fieldTypeParser;
@@ -110,8 +108,7 @@ class UserUpdate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for Section element in UserUpdate." );
             }
 
-            $sectionValues = $this->urlHandler->parse( 'section', $data['Section']['_href'] );
-            $parsedData['sectionId'] = $sectionValues['section'];
+            $parsedData['sectionId'] = $this->requestParser->parseHref( $data['Section']['_href'], 'sectionId' );
         }
 
         if ( array_key_exists( 'remoteId', $data ) )
@@ -121,7 +118,7 @@ class UserUpdate extends Base
 
         if ( array_key_exists( 'fields', $data ) )
         {
-            $urlValues = $this->urlHandler->parse( 'user', $data['__url'] );
+            $userId = $this->requestParser->parseHref( $data['__url'], 'userId' );
 
             if ( !is_array( $data['fields'] ) || !array_key_exists( 'field', $data['fields'] ) || !is_array( $data['fields']['field'] ) )
             {
@@ -141,7 +138,7 @@ class UserUpdate extends Base
                     throw new Exceptions\Parser( "Missing 'fieldValue' element for '{$fieldData['fieldDefinitionIdentifier']}' identifier in UserUpdate." );
                 }
 
-                $fieldValue = $this->fieldTypeParser->parseFieldValue( $urlValues['user'], $fieldData['fieldDefinitionIdentifier'], $fieldData['fieldValue'] );
+                $fieldValue = $this->fieldTypeParser->parseFieldValue( $userId, $fieldData['fieldDefinitionIdentifier'], $fieldData['fieldValue'] );
 
                 $languageCode = null;
                 if ( array_key_exists( 'languageCode', $fieldData ) )

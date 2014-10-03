@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Values\Content\Query\Criterion;
@@ -21,7 +21,7 @@ class LogicalNot extends LogicalOperator
      *
      * Will match of the given criterion doesn't match
      *
-     * @param Criterion[] $criteria One criterion, as a an array
+     * @param Criterion[] $criteria One criterion, as an array
      *
      * @throws \InvalidArgumentException if more than one criterion is given in the array parameter
      */

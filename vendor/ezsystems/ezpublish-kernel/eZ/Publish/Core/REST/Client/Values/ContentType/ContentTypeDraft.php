@@ -1,15 +1,23 @@
 <?php
+/**
+ * File containing the ContentTypeDraft class
+ *
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
+ */
 
 namespace eZ\Publish\Core\REST\Client\Values\ContentType;
 
 use eZ\Publish\API\Repository\Values;
+use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft as APIContentTypeDraft;
 
 /**
  *
  * This class represents a draft of a content type
  *
  */
-class ContentTypeDraft extends \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft
+class ContentTypeDraft extends APIContentTypeDraft
 {
     /**
      * ContentType encapsulated in the draft
@@ -61,7 +69,7 @@ class ContentTypeDraft extends \eZ\Publish\API\Repository\Values\ContentType\Con
      *
      * @param string $languageCode
      *
-     * @return string the name for the given language or null if none existis.
+     * @return string the name for the given language or null if none exists.
      */
     public function getName( $languageCode )
     {
@@ -88,7 +96,7 @@ class ContentTypeDraft extends \eZ\Publish\API\Repository\Values\ContentType\Con
      *
      * @param string $languageCode
      *
-     * @return string the description for the given language or null if none existis.
+     * @return string the description for the given language or null if none exists.
      */
     public function getDescription( $languageCode )
     {

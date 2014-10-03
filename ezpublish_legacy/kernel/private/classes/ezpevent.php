@@ -2,9 +2,9 @@
 /**
  * File containing the ezpEvent class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -13,7 +13,7 @@
  *
  * @internal
  * @since 4.5.0
- * @version  2013.5
+ * @version 2014.07.0
  * @package kernel
  */
 class ezpEvent
@@ -120,7 +120,7 @@ class ezpEvent
     }
 
     /**
-     * Notify all listeners on an event
+     * Notify all listeners of an event
      *
      * @param string $name In the form "content/delete/1", "content/delete", "content/read"
      * @param array $params The arguments for the specific event as simple array structure (not hash)
@@ -141,11 +141,12 @@ class ezpEvent
     }
 
     /**
-     * Notify all listeners on an event but stop if any of them return something else then null
+     * Call all listeners of an event and allow them to filter (change) first value
      *
      * @param string $name In the form "content/delete/1", "content/delete", "content/read"
      * @param array|string|numeric $value The value you want to let listeners filter
-     * @return mixed $value param after being filtered by filters, or unmodified if no filters
+     * @param array|string|numeric $value,... Optional additional values provided to listeners 
+     * @return mixed First $value param after being filtered by filters, or unmodified if no filters
      */
     public function filter( $name, $value )
     {

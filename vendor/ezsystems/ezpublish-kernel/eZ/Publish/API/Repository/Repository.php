@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Repository class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\API\Repository
  */
 
@@ -201,5 +201,13 @@ interface Repository
      * @throws \RuntimeException If no transaction has been started
      */
     public function rollback();
+
+    /**
+     * Enqueue an event to be triggered at commit or directly if no transaction has started
+     *
+     * @deprecated In 5.3.3, to be removed. Signals are emitted after transaction instead of being required to use this.
+     * @param Callable $event
+     */
+    public function commitEvent( $event );
 }
 

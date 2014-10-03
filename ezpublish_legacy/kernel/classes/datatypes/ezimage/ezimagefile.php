@@ -2,9 +2,9 @@
 /**
  * File containing the eZImageFile class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -80,10 +80,7 @@ class eZImageFile extends eZPersistentObject
      * @param string $filePath file path to look up as URL in the XML string
      * @param int $contentObjectAttributeID
      *
-     * @return array An array of content object attribute ids and versions of
-     *               image files where the url is referenced
-     *
-     * @todo Rewrite ! A where data_text LIKE '%xxx%' is a resource hog !
+     * @return array An array with a series of ezcontentobject_attribute's id, version and language_code
      */
     static function fetchImageAttributesByFilepath( $filepath, $contentObjectAttributeID )
     {
@@ -117,19 +114,35 @@ class eZImageFile extends eZPersistentObject
         );
         // Escape _ in like to avoid it to act as a wildcard !
         $filepath = addcslashes( $filepath, "_" );
-        $query = "SELECT id, version
+        $query = "SELECT id, version, language_code
                   FROM   ezcontentobject_attribute
-                  WHERE  contentobject_id = $contentObjectID and
-                         contentclassattribute_id = $contentClassAttributeID and
-                         data_text like '%url=\"$filepath\"%'";
+                  WHERE  contentobject_id = $contentObjectID AND
+                         contentclassattribute_id = $contentClassAttributeID AND
+                         data_text LIKE '%url=\"$filepath\"%'";
+        if ( $db->databaseName() == 'oracle' )
+        {
+            $query .= " ESCAPE '\'";
+        }
         $rows = $db->arrayQuery( $query );
         return $rows;
     }
 
+    /**
+     * Fetches the eZImageFile objects matching $filepath, optionally filtered by content object attribute id
+     *
+     * @param int $contentObjectAttributeId Optional content object attribute id to filter on. Set to false to disable.
+     * @param string $filepath
+     * @param bool $asObject
+     *
+     * @return eZImageFile
+     *
+     * @todo This method is actually wrong: the method could return multiple objects (EZP-21324)
+     */
     static function fetchByFilepath( $contentObjectAttributeID, $filepath, $asObject = true )
     {
         // Fetch by file path without $contentObjectAttributeID
         if ( $contentObjectAttributeID === false )
+
             return eZPersistentObject::fetchObject( eZImageFile::definition(),
                                                     null,
                                                     array( 'filepath' => $filepath ),
@@ -140,6 +153,25 @@ class eZImageFile extends eZPersistentObject
                                                 array( 'contentobject_attribute_id' => $contentObjectAttributeID,
                                                        'filepath' => $filepath ),
                                                 $asObject );
+    }
+
+    /**
+     * Fetches unique eZImageFile data (as an array) for $filePath
+     *
+     * @param string $filePath
+     *
+     * @return array array of hash. Keys: contentobject_attribute_id, filepath
+     */
+    static function fetchListByFilePath( $filePath )
+    {
+        return eZPersistentObject::fetchObjectList(
+            eZImageFile::definition(),
+            array( 'contentobject_attribute_id', 'filepath' ),
+            array( 'filepath' => $filePath ),
+            null,
+            null,
+            false
+        );
     }
 
     static function moveFilepath( $contentObjectAttributeID, $oldFilepath, $newFilepath )
@@ -191,9 +223,71 @@ class eZImageFile extends eZPersistentObject
         eZPersistentObject::removeObject( eZImageFile::definition(), array( 'contentobject_attribute_id' => $contentObjectAttributeID ) );
     }
 
+    /**
+     * Tests if $filepath is referenced by content attributes of the same $attributeId in different $attributeVersion or $languageCode
+     *
+     * @param string $filepath
+     * @param int $attributeId Content object attribute ID
+     * @param int $attributeVersion Content object attribute version
+     * @param string $languageCode Attribute language code
+     * @return bool true if $filepath is referenced by other attributes, false otherwise
+     */
+    public static function isReferencedByOtherAttributes( $filepath, $attributeId, $attributeVersion, $languageCode )
+    {
+        $db = eZDB::instance();
+        $filepath = $db->escapeString( $filepath );
+
+        // Check eZImageFile and eZContentobjectAttribute for references to the alias file, in another version/language
+        $rows = $db->arrayQuery(
+            sprintf(
+                "
+                SELECT count(*) as count FROM ezcontentobject_attribute
+                INNER JOIN ezimagefile ON ezcontentobject_attribute.id=ezimagefile.contentobject_attribute_id
+                WHERE ezimagefile.filepath='%s'
+                AND ezcontentobject_attribute.data_text LIKE '%%url=\"%s\"%%'
+                AND ezcontentobject_attribute.id = %d
+                AND ( ezcontentobject_attribute.version != %d OR ezcontentobject_attribute.language_code != '%s' )
+                ",
+                $filepath, $filepath,
+                $attributeId,
+                $attributeVersion,
+                $languageCode
+            )
+        );
+
+        return (int)$rows[0]['count'] > 0;
+    }
+
+    /**
+     * Tests if there are ezimagefile rows with a different $attributeId that reference $filepath
+     *
+     * @param string $filepath
+     * @param int $attributeId
+     * @return bool
+     */
+    public static function isReferencedByOtherImageFiles( $filepath, $attributeId )
+    {
+        $db = eZDB::instance();
+        $filepath = $db->escapeString( $filepath );
+
+        $rows = $db->arrayQuery(
+            sprintf(
+                "
+                SELECT count(*) as count FROM ezcontentobject_attribute
+                INNER JOIN ezimagefile ON ezcontentobject_attribute.id=ezimagefile.contentobject_attribute_id
+                WHERE ezimagefile.filepath='%s'
+                AND ezcontentobject_attribute.id != %d
+                ",
+                $filepath,
+                $attributeId
+            )
+        );
+
+        return (int)$rows[0]['count'] > 0;
+    }
+
 
     /// \privatesection
-    public $ID;
     public $ContentObjectAttributeID;
     public $Filepath;
 }

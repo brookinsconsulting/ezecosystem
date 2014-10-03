@@ -2,9 +2,9 @@
 /**
  * File containing the XML generator class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\Output\Generator;
@@ -58,7 +58,7 @@ class Xml extends Generator
 
         $this->xmlWriter = new \XMLWriter();
         $this->xmlWriter->openMemory();
-        $this->xmlWriter->setIndent( true );
+        $this->xmlWriter->setIndent( $this->formatOutput );
         $this->xmlWriter->startDocument( '1.0', 'UTF-8' );
     }
 
@@ -251,5 +251,16 @@ class Xml extends Generator
     public function generateFieldTypeHash( $hashElementName, $hashValue )
     {
         $this->hashGenerator->generateHashValue( $this->xmlWriter, $hashElementName, $hashValue );
+    }
+
+    /**
+     * Serializes a boolean value
+     *
+     * @param boolean $boolValue
+     * @return string
+     */
+    public function serializeBool( $boolValue )
+    {
+        return ( $boolValue ? 'true' : 'false' );
     }
 }

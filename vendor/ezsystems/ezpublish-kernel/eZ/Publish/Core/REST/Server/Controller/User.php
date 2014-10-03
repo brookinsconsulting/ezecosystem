@@ -2,9 +2,9 @@
 /**
  * File containing the User controller class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Controller;
@@ -25,13 +25,16 @@ use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\User\UserRoleAssignment;
 use eZ\Publish\API\Repository\Values\User\UserGroupRoleAssignment;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException as APINotFoundException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 
-use eZ\Publish\Core\REST\Common\Exceptions\InvalidArgumentException AS RestInvalidArgumentException;
 use eZ\Publish\Core\REST\Common\Exceptions\NotFoundException AS RestNotFoundException;
 use eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException;
+use eZ\Publish\Core\REST\Common\Exceptions\NotFoundException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
  * User controller
@@ -124,22 +127,29 @@ class User extends RestController
     {
         //@todo Replace hardcoded value with one loaded from settings
         return new Values\PermanentRedirect(
-            $this->urlHandler->generate( 'group', array( 'group' => '/1/5' ) )
+            $this->router->generate( 'ezpublish_rest_loadUserGroup', array( 'groupPath' => '/1/5' ) )
         );
     }
 
     /**
      * Loads a user group for the given path
      *
+     * @param $groupPath
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\RestUserGroup
      */
-    public function loadUserGroup()
+    public function loadUserGroup( $groupPath )
     {
-        $urlValues = $this->urlHandler->parse( 'group', $this->request->path );
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $urlValues['group'] )
+            $this->extractLocationIdFromPath( $groupPath )
         );
+
+        if ( trim( $userGroupLocation->pathString, '/' ) != $groupPath )
+        {
+            throw new NotFoundException(
+                "Could not find location with path string $groupPath"
+            );
+        }
 
         $userGroup = $this->userService->loadUserGroup(
             $userGroupLocation->contentId
@@ -147,77 +157,65 @@ class User extends RestController
         $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
         $contentType = $this->contentTypeService->loadContentType( $userGroupContentInfo->contentTypeId );
 
-        return new Values\RestUserGroup(
-            $userGroup,
-            $contentType,
-            $userGroupContentInfo,
-            $userGroupLocation,
-            $this->contentService->loadRelations( $userGroup->getVersionInfo() )
+        return new Values\CachedValue(
+            new Values\RestUserGroup(
+                $userGroup,
+                $contentType,
+                $userGroupContentInfo,
+                $userGroupLocation,
+                $this->contentService->loadRelations( $userGroup->getVersionInfo() )
+            ),
+            array( 'locationId' => $userGroupLocation->id )
         );
     }
 
     /**
      * Loads a user for the given ID
      *
+     * @param $userId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\RestUser
      */
-    public function loadUser()
+    public function loadUser( $userId )
     {
-        $urlValues = $this->urlHandler->parse( 'user', $this->request->path );
-
-        $user = $this->userService->loadUser(
-            $urlValues['user']
-        );
+        $user = $this->userService->loadUser( $userId );
 
         $userContentInfo = $user->getVersionInfo()->getContentInfo();
         $userMainLocation = $this->locationService->loadLocation( $userContentInfo->mainLocationId );
         $contentType = $this->contentTypeService->loadContentType( $userContentInfo->contentTypeId );
 
-        return new Values\RestUser(
-            $user,
-            $contentType,
-            $userContentInfo,
-            $userMainLocation,
-            $this->contentService->loadRelations( $user->getVersionInfo() )
+        return new Values\CachedValue(
+            new Values\RestUser(
+                $user,
+                $contentType,
+                $userContentInfo,
+                $userMainLocation,
+                $this->contentService->loadRelations( $user->getVersionInfo() )
+            ),
+            array( 'locationId' => $userContentInfo->mainLocationId )
         );
     }
 
     /**
      * Create a new user group under the given parent
-     * To create a top level group use /user/groups/subgroups
+     * To create a top level group use /user/groups/1/5/subgroups
      *
+     * @param $groupPath
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\BadRequestException
      * @return \eZ\Publish\Core\REST\Server\Values\CreatedUserGroup
      */
-    public function createUserGroup()
+    public function createUserGroup( $groupPath )
     {
-        try
-        {
-            $urlValues = $this->urlHandler->parse( 'groupSubgroups', $this->request->path );
-            $userGroupPath = $urlValues['group'];
-        }
-        catch ( RestInvalidArgumentException $e )
-        {
-            try
-            {
-                $this->urlHandler->parse( 'rootUserGroupSubGroups', $this->request->path );
-                //@todo Load from settings instead of using hardcoded value
-                $userGroupPath = '/1/5';
-            }
-            catch ( RestInvalidArgumentException $e )
-            {
-                throw new Exceptions\BadRequestException( 'Unrecognized user group resource' );
-            }
-        }
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $userGroupPath )
+            $this->extractLocationIdFromPath( $groupPath )
         );
 
         $createdUserGroup = $this->userService->createUserGroup(
             $this->inputDispatcher->parse(
                 new Message(
-                    array( 'Content-Type' => $this->request->contentType ),
-                    $this->request->body
+                    array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                    $this->request->getContent()
                 )
             ),
             $this->userService->loadUserGroup(
@@ -245,21 +243,22 @@ class User extends RestController
     /**
      * Create a new user group in the given group
      *
+     * @param $groupPath
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\CreatedUser
      */
-    public function createUser()
+    public function createUser( $groupPath )
     {
-        $urlValues = $this->urlHandler->parse( 'groupUsers', $this->request->path );
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $urlValues['group'] )
+            $this->extractLocationIdFromPath( $groupPath )
         );
         $userGroup = $this->userService->loadUserGroup( $userGroupLocation->contentId );
 
         $userCreateStruct = $this->inputDispatcher->parse(
             new Message(
-                array( 'Content-Type' => $this->request->contentType ),
-                $this->request->body
+                array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                $this->request->getContent()
             )
         );
 
@@ -292,14 +291,14 @@ class User extends RestController
     /**
      * Updates a user group
      *
+     * @param $groupPath
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\RestUserGroup
      */
-    public function updateUserGroup()
+    public function updateUserGroup( $groupPath )
     {
-        $urlValues = $this->urlHandler->parse( 'group', $this->request->path );
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $urlValues['group'] )
+            $this->extractLocationIdFromPath( $groupPath )
         );
 
         $userGroup = $this->userService->loadUserGroup(
@@ -309,11 +308,11 @@ class User extends RestController
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 array(
-                    'Content-Type' => $this->request->contentType,
+                    'Content-Type' => $this->request->headers->get( 'Content-Type' ),
                     // @todo Needs refactoring! Temporary solution so parser has access to URL
-                    'Url' => $this->request->path
+                    'Url' => $this->request->getPathInfo()
                 ),
-                $this->request->body
+                $this->request->getContent()
             )
         );
 
@@ -343,22 +342,22 @@ class User extends RestController
     /**
      * Updates a user
      *
+     * @param $userId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\RestUser
      */
-    public function updateUser()
+    public function updateUser( $userId )
     {
-        $urlValues = $this->urlHandler->parse( 'user', $this->request->path );
-
-        $user = $this->userService->loadUser( $urlValues['user'] );
+        $user = $this->userService->loadUser( $userId );
 
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 array(
-                    'Content-Type' => $this->request->contentType,
+                    'Content-Type' => $this->request->headers->get( 'Content-Type' ),
                     // @todo Needs refactoring! Temporary solution so parser has access to URL
-                    'Url' => $this->request->path
+                    'Url' => $this->request->getPathInfo()
                 ),
-                $this->request->body
+                $this->request->getContent()
             )
         );
 
@@ -388,14 +387,15 @@ class User extends RestController
     /**
      * Given user group is deleted
      *
+     * @param $groupPath
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\NoContent
      */
-    public function deleteUserGroup()
+    public function deleteUserGroup( $groupPath )
     {
-        $urlValues = $this->urlHandler->parse( 'group', $this->request->path );
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $urlValues['group'] )
+            $this->extractLocationIdFromPath( $groupPath )
         );
 
         $userGroup = $this->userService->loadUserGroup(
@@ -417,15 +417,14 @@ class User extends RestController
     /**
      * Given user is deleted
      *
+     * @param $userId
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\NoContent
      */
-    public function deleteUser()
+    public function deleteUser( $userId )
     {
-        $urlValues = $this->urlHandler->parse( 'user', $this->request->path );
-
-        $user = $this->userService->loadUser(
-            $urlValues['user']
-        );
+        $user = $this->userService->loadUser( $userId );
 
         if ( $user->id == $this->repository->getCurrentUser()->id )
         {
@@ -445,44 +444,23 @@ class User extends RestController
     public function loadUsers()
     {
         $restUsers = array();
-        if ( isset( $this->request->variables['roleId'] ) )
+        if ( $this->request->query->has( 'roleId' ) )
         {
              $restUsers = $this->loadUsersAssignedToRole();
         }
-        else if ( isset( $this->request->variables['remoteId'] ) )
+        else if ( $this->request->query->has( 'remoteId' ) )
         {
             $restUsers = array(
                 $this->loadUserByRemoteId()
             );
         }
 
-        if ( $this->getMediaType( $this->request ) === 'application/vnd.ez.api.userlist' )
+        if ( $this->getMediaType() === 'application/vnd.ez.api.userlist' )
         {
-            return new Values\UserList( $restUsers, $this->request->path );
+            return new Values\UserList( $restUsers, $this->request->getPathInfo() );
         }
 
-        return new Values\UserRefList( $restUsers, $this->request->path );
-    }
-
-    /**
-     * Loads a user by its remote ID
-     *
-     * @return \eZ\Publish\Core\REST\Server\Values\RestUser
-     */
-    public function loadUserByRemoteId()
-    {
-        $contentInfo = $this->contentService->loadContentInfoByRemoteId( $this->request->variables['remoteId'] );
-        $user = $this->userService->loadUser( $contentInfo->id );
-        $userLocation = $this->locationService->loadLocation( $contentInfo->mainLocationId );
-        $contentType = $this->contentTypeService->loadContentType( $contentInfo->contentTypeId );
-
-        return new Values\RestUser(
-            $user,
-            $contentType,
-            $contentInfo,
-            $userLocation,
-            $this->contentService->loadRelations( $user->getVersionInfo() )
-        );
+        return new Values\UserRefList( $restUsers, $this->request->getPathInfo() );
     }
 
     /**
@@ -492,9 +470,9 @@ class User extends RestController
      */
     public function loadUsersAssignedToRole()
     {
-        $roleValues = $this->urlHandler->parse( 'role', $this->request->variables['roleId'] );
-
-        $role = $this->roleService->loadRole( $roleValues['role'] );
+        $role = $this->roleService->loadRole(
+            $this->requestParser->parseHref( $this->request->query->get( 'roleId' ), 'roleId' )
+        );
         $roleAssignments = $this->roleService->getRoleAssignments( $role );
 
         $restUsers = array();
@@ -522,6 +500,27 @@ class User extends RestController
     }
 
     /**
+     * Loads a user by its remote ID
+     *
+     * @return \eZ\Publish\Core\REST\Server\Values\RestUser
+     */
+    public function loadUserByRemoteId()
+    {
+        $contentInfo = $this->contentService->loadContentInfoByRemoteId( $this->request->query->get( 'remoteId' ) );
+        $user = $this->userService->loadUser( $contentInfo->id );
+        $userLocation = $this->locationService->loadLocation( $contentInfo->mainLocationId );
+        $contentType = $this->contentTypeService->loadContentType( $contentInfo->contentTypeId );
+
+        return new Values\RestUser(
+            $user,
+            $contentType,
+            $contentInfo,
+            $userLocation,
+            $this->contentService->loadRelations( $user->getVersionInfo() )
+        );
+    }
+
+    /**
      * Loads user groups
      *
      * @return \eZ\Publish\Core\REST\Server\Values\UserGroupList|\eZ\Publish\Core\REST\Server\Values\UserGroupRefList
@@ -529,9 +528,9 @@ class User extends RestController
     public function loadUserGroups()
     {
         $restUserGroups = array();
-        if ( isset( $this->request->variables['id'] ) )
+        if ( $this->request->query->has( 'id' ) )
         {
-            $userGroup = $this->userService->loadUserGroup( $this->request->variables['id'] );
+            $userGroup = $this->userService->loadUserGroup( $this->request->query->get( 'id' ) );
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
             $userGroupMainLocation = $this->locationService->loadLocation( $userGroupContentInfo->mainLocationId );
             $contentType = $this->contentTypeService->loadContentType( $userGroupContentInfo->contentTypeId );
@@ -546,23 +545,23 @@ class User extends RestController
                 )
             );
         }
-        else if ( isset( $this->request->variables['roleId'] ) )
+        else if ( $this->request->query->has( 'roleId' ) )
         {
              $restUserGroups = $this->loadUserGroupsAssignedToRole();
         }
-        else if ( isset( $this->request->variables['remoteId'] ) )
+        else if ( $this->request->query->has( 'remoteId' ) )
         {
             $restUserGroups = array(
                 $this->loadUserGroupByRemoteId()
             );
         }
 
-        if ( $this->getMediaType( $this->request ) === 'application/vnd.ez.api.usergrouplist' )
+        if ( $this->getMediaType() === 'application/vnd.ez.api.usergrouplist' )
         {
-            return new Values\UserGroupList( $restUserGroups, $this->request->path );
+            return new Values\UserGroupList( $restUserGroups, $this->request->getPathInfo() );
         }
 
-        return new Values\UserGroupRefList( $restUserGroups, $this->request->path );
+        return new Values\UserGroupRefList( $restUserGroups, $this->request->getPathInfo() );
     }
 
     /**
@@ -572,7 +571,7 @@ class User extends RestController
      */
     public function loadUserGroupByRemoteId()
     {
-        $contentInfo = $this->contentService->loadContentInfoByRemoteId( $this->request->variables['remoteId'] );
+        $contentInfo = $this->contentService->loadContentInfoByRemoteId( $this->request->query->get( 'remoteId' ) );
         $userGroup = $this->userService->loadUserGroup( $contentInfo->id );
         $userGroupLocation = $this->locationService->loadLocation( $contentInfo->mainLocationId );
         $contentType = $this->contentTypeService->loadContentType( $contentInfo->contentTypeId );
@@ -593,9 +592,9 @@ class User extends RestController
      */
     public function loadUserGroupsAssignedToRole()
     {
-        $roleValues = $this->urlHandler->parse( 'role', $this->request->variables['roleId'] );
-
-        $role = $this->roleService->loadRole( $roleValues['role'] );
+        $role = $this->roleService->loadRole(
+            $this->requestParser->parseHref( $this->request->query->get( 'roleId' ), 'roleId' )
+        );
         $roleAssignments = $this->roleService->getRoleAssignments( $role );
 
         $restUserGroups = array();
@@ -625,45 +624,49 @@ class User extends RestController
     /**
      * Loads drafts assigned to user
      *
+     * @param $userId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\VersionList
      */
-    public function loadUserDrafts()
+    public function loadUserDrafts( $userId )
     {
-        $urlValues = $this->urlHandler->parse( 'userDrafts', $this->request->path );
-
         $contentDrafts = $this->contentService->loadContentDrafts(
-            $this->userService->loadUser( $urlValues['user'] )
+            $this->userService->loadUser( $userId )
         );
 
-        return new Values\VersionList( $contentDrafts, $this->request->path );
+        return new Values\VersionList( $contentDrafts, $this->request->getPathInfo() );
     }
 
     /**
      * Moves the user group to another parent
      *
+     * @param $groupPath
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\ResourceCreated
      */
-    public function moveUserGroup()
+    public function moveUserGroup( $groupPath )
     {
-        $urlValues = $this->urlHandler->parse( 'group', $this->request->path );
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $urlValues['group'] )
+            $this->extractLocationIdFromPath( $groupPath )
         );
 
         $userGroup = $this->userService->loadUserGroup(
             $userGroupLocation->contentId
         );
 
-        $destinationParts = $this->urlHandler->parse( 'group', $this->request->destination );
+        $locationPath = $this->requestParser->parseHref(
+            $this->request->headers->get( 'Destination' ),
+            'groupPath'
+        );
 
         try
         {
             $destinationGroupLocation = $this->locationService->loadLocation(
-                $this->extractLocationIdFromPath( $destinationParts['group'] )
+                $this->extractLocationIdFromPath( $locationPath )
             );
         }
-        catch ( NotFoundException $e )
+        catch ( APINotFoundException $e )
         {
             throw new Exceptions\ForbiddenException( $e->getMessage() );
         }
@@ -672,7 +675,7 @@ class User extends RestController
         {
             $destinationGroup = $this->userService->loadUserGroup( $destinationGroupLocation->contentId );
         }
-        catch ( NotFoundException $e )
+        catch ( APINotFoundException $e )
         {
             throw new Exceptions\ForbiddenException( $e->getMessage() );
         }
@@ -680,10 +683,10 @@ class User extends RestController
         $this->userService->moveUserGroup( $userGroup, $destinationGroup );
 
         return new Values\ResourceCreated(
-            $this->urlHandler->generate(
-                'group',
+            $this->router->generate(
+                'ezpublish_rest_loadUserGroup',
                 array(
-                    'group' => $destinationGroupLocation->pathString . $userGroupLocation->id
+                    'groupPath' => $destinationGroupLocation->pathString . $userGroupLocation->id
                 )
             )
         );
@@ -692,14 +695,14 @@ class User extends RestController
     /**
      * Returns a list of the sub groups
      *
+     * @param $groupPath
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\UserGroupList|\eZ\Publish\Core\REST\Server\Values\UserGroupRefList
      */
-    public function loadSubUserGroups()
+    public function loadSubUserGroups( $groupPath )
     {
-        $urlValues = $this->urlHandler->parse( 'groupSubgroups', $this->request->path );
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $urlValues['group'] )
+            $this->extractLocationIdFromPath( $groupPath )
         );
 
         $userGroup = $this->userService->loadUserGroup(
@@ -724,12 +727,18 @@ class User extends RestController
             );
         }
 
-        if ( $this->getMediaType( $this->request ) === 'application/vnd.ez.api.usergrouplist' )
+        if ( $this->getMediaType() === 'application/vnd.ez.api.usergrouplist' )
         {
-            return new Values\UserGroupList( $restUserGroups, $this->request->path );
+            return new Values\CachedValue(
+                new Values\UserGroupList( $restUserGroups, $this->request->getPathInfo() ),
+                array( 'locationId' => $userGroupLocation->id )
+            );
         }
 
-        return new Values\UserGroupRefList( $restUserGroups, $this->request->path );
+        return new Values\CachedValue(
+            new Values\UserGroupRefList( $restUserGroups, $this->request->getPathInfo() ),
+            array( 'locationId' => $userGroupLocation->id )
+        );
     }
 
     /**
@@ -737,13 +746,13 @@ class User extends RestController
      * The returned list includes the resources for unassigning
      * a user group if the user is in multiple groups.
      *
+     * @param $userId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\UserGroupRefList
      */
-    public function loadUserGroupsOfUser()
+    public function loadUserGroupsOfUser( $userId )
     {
-        $urlValues = $this->urlHandler->parse( 'userGroups', $this->request->path );
-
-        $user = $this->userService->loadUser( $urlValues['user'] );
+        $user = $this->userService->loadUser( $userId );
         $userGroups = $this->userService->loadUserGroupsOfUser( $user );
 
         $restUserGroups = array();
@@ -762,31 +771,32 @@ class User extends RestController
             );
         }
 
-        return new Values\UserGroupRefList( $restUserGroups, $this->request->path, $urlValues['user'] );
+        return new Values\CachedValue(
+            new Values\UserGroupRefList( $restUserGroups, $this->request->getPathInfo(), $userId ),
+            array( 'locationId' => $user->contentInfo->mainLocationId )
+        );
+
     }
 
     /**
      * Loads the users of the group with the given path
      *
+     * @param $groupPath
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\UserList|\eZ\Publish\Core\REST\Server\Values\UserRefList
      */
-    public function loadUsersFromGroup()
+    public function loadUsersFromGroup( $groupPath )
     {
-        $questionMark = strpos( $this->request->path, '?' );
-        $requestPath = $questionMark !== false ? substr( $this->request->path, 0, $questionMark ) : $this->request->path;
-
-        $urlValues = $this->urlHandler->parse( 'groupUsers', $requestPath );
-
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath( $urlValues['group'] )
+            $this->extractLocationIdFromPath( $groupPath )
         );
 
         $userGroup = $this->userService->loadUserGroup(
             $userGroupLocation->contentId
         );
 
-        $offset = isset( $this->request->variables['offset'] ) ? (int)$this->request->variables['offset'] : 0;
-        $limit = isset( $this->request->variables['limit'] ) ? (int)$this->request->variables['limit'] : -1;
+        $offset = $this->request->query->has( 'offset' ) ? (int)$this->request->query->get( 'offset' ) : 0;
+        $limit = $this->request->query->has( 'limit' ) ? (int)$this->request->query->get( 'limit' ) : -1;
 
         $users = $this->userService->loadUsersOfUserGroup(
             $userGroup,
@@ -810,25 +820,33 @@ class User extends RestController
             );
         }
 
-        if ( $this->getMediaType( $this->request ) === 'application/vnd.ez.api.userlist' )
+        if ( $this->getMediaType() === 'application/vnd.ez.api.userlist' )
         {
-            return new Values\UserList( $restUsers, $this->request->path );
+            return new Values\CachedValue(
+                new Values\UserList( $restUsers, $this->request->getPathInfo() ),
+                array( 'locationId' => $userGroupLocation->id )
+            );
         }
 
-        return new Values\UserRefList( $restUsers, $this->request->path );
+        return new Values\CachedValue(
+            new Values\UserRefList( $restUsers, $this->request->getPathInfo() ),
+            array( 'locationId' => $userGroupLocation->id )
+        );
     }
 
     /**
      * Unassigns the user from a user group
      *
+     * @param $userId
+     * @param $groupPath
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\UserGroupRefList
      */
-    public function unassignUserFromUserGroup()
+    public function unassignUserFromUserGroup( $userId, $groupPath )
     {
-        $urlValues = $this->urlHandler->parse( 'userGroup', $this->request->path );
-
-        $user = $this->userService->loadUser( $urlValues['user'] );
-        $userGroupLocation = $this->locationService->loadLocation( trim( $urlValues['group'], '/' ) );
+        $user = $this->userService->loadUser( $userId );
+        $userGroupLocation = $this->locationService->loadLocation( trim( $groupPath, '/' ) );
 
         $userGroup = $this->userService->loadUserGroup(
             $userGroupLocation->contentId
@@ -863,29 +881,33 @@ class User extends RestController
 
         return new Values\UserGroupRefList(
             $restUserGroups,
-            $this->urlHandler->generate( 'userGroups', array( 'user' => $urlValues['user'] ) ),
-            $urlValues['user']
+            $this->router->generate(
+                'ezpublish_rest_loadUserGroupsOfUser',
+                array( 'userId' => $userId )
+            ),
+            $userId
         );
     }
 
     /**
      * Assigns the user to a user group
      *
+     * @param $userId
+     *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\UserGroupRefList
      */
-    public function assignUserToUserGroup()
+    public function assignUserToUserGroup( $userId )
     {
-        $urlValues = $this->urlHandler->parse( 'userGroupAssign', $this->request->path );
-
-        $user = $this->userService->loadUser( $urlValues['user'] );
+        $user = $this->userService->loadUser( $userId );
 
         try
         {
             $userGroupLocation = $this->locationService->loadLocation(
-                $this->extractLocationIdFromPath( $this->request->variables['group'] )
+                $this->extractLocationIdFromPath( $this->request->query->get( 'group' ) )
             );
         }
-        catch ( NotFoundException $e )
+        catch ( APINotFoundException $e )
         {
             throw new Exceptions\ForbiddenException( $e->getMessage() );
         }
@@ -896,7 +918,7 @@ class User extends RestController
                 $userGroupLocation->contentId
             );
         }
-        catch ( NotFoundException $e )
+        catch ( APINotFoundException $e )
         {
             throw new Exceptions\ForbiddenException( $e->getMessage() );
         }
@@ -929,91 +951,125 @@ class User extends RestController
 
         return new Values\UserGroupRefList(
             $restUserGroups,
-            $this->urlHandler->generate( 'userGroups', array( 'user' => $urlValues['user'] ) ),
-            $urlValues['user']
+            $this->router->generate(
+                'ezpublish_rest_loadUserGroupsOfUser',
+                array( 'userId' => $userId )
+            ),
+            $userId
         );
     }
 
     /**
      * Creates a new session based on the credentials provided as POST parameters
+     *
+     * @throws \eZ\Publish\Core\Base\Exceptions\UnauthorizedException If the login or password are incorrect or invalid CSRF
+     * @return Values\UserSession|Values\Conflict
      */
     public function createSession()
     {
         /** @var $sessionInput \eZ\Publish\Core\REST\Server\Values\SessionInput */
         $sessionInput = $this->inputDispatcher->parse(
             new Message(
-                array( 'Content-Type' => $this->request->contentType ),
-                $this->request->body
+                array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                $this->request->getContent()
             )
         );
+        $this->request->attributes->set( 'username', $sessionInput->login );
+        $this->request->attributes->set( 'password', $sessionInput->password );
 
         try
         {
-            $user = $this->userService->loadUserByCredentials(
-                $sessionInput->login,
-                $sessionInput->password
-            );
-        }
-        catch ( NotFoundException $e )
-        {
-            throw new UnauthorizedException( "Invalid login or password", 0, null, $e );
-        }
-
-        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
-        $session = $this->container->get( 'session' );
-        /** @var $authenticationToken \Symfony\Component\Security\Core\Authentication\Token\TokenInterface */
-        $authenticationToken = $this->container->get( 'security.context' )->getToken();
-
-        if ( $session->isStarted() && $authenticationToken !== null )
-        {
-            /** @var $currentUser \eZ\Publish\API\Repository\Values\User\User */
-            $currentUser = $authenticationToken->getUser()->getAPIUser();
-            if ( $user->id == $currentUser->id )
+            $csrfToken = '';
+            $csrfProvider = $this->container->get( 'form.csrf_provider', ContainerInterface::NULL_ON_INVALID_REFERENCE );
+            $session = $this->request->getSession();
+            if ( $session->isStarted() )
             {
-                return new Values\SeeOther(
-                    $this->urlHandler->generate(
-                        'userSession',
-                        array( 'sessionId' => $session->getId() )
+                if ( $csrfProvider )
+                {
+                    $csrfToken = $this->request->headers->get( 'X-CSRF-Token' );
+                    if (
+                        !$csrfProvider->isCsrfTokenValid(
+                            $this->container->getParameter( 'ezpublish_rest.csrf_token_intention' ),
+                            $csrfToken
+                        )
                     )
+                    {
+                        throw new UnauthorizedException( 'Missing or invalid CSRF token', $csrfToken );
+                    }
+                }
+            }
+
+            $authenticator = $this->container->get( 'ezpublish_rest.session_authenticator' );
+            $token = $authenticator->authenticate( $this->request );
+            // If CSRF token has not been generated yet (i.e. session not started), we generate it now.
+            // This will seamlessly start the session.
+            if ( !$csrfToken )
+            {
+                $csrfToken = $csrfProvider->generateCsrfToken(
+                    $this->container->getParameter( 'ezpublish_rest.csrf_token_intention' )
                 );
             }
 
-            $anonymousUser = $this->userService->loadAnonymousUser();
-            if ( $currentUser->id != $anonymousUser->id )
-            {
-                // Already logged in with another user, this will be converted to HTTP status 409
-                return new Values\Conflict();
-            }
-        }
+            return new Values\UserSession(
+                $token->getUser()->getAPIUser(),
+                $session->getName(),
+                $session->getId(),
+                $csrfToken,
+                !$token->hasAttribute( 'isFromSession' )
+            );
 
-        if ( $this->container->getParameter( 'form.type_extension.csrf.enabled' ) )
+        }
+        // Already logged in with another user, this will be converted to HTTP status 409
+        catch ( Exceptions\UserConflictException $e )
         {
-            /** @var $csrfProvider \Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface */
-            $csrfProvider = $this->container->get( 'form.csrf_provider' );
+            return new Values\Conflict();
+        }
+        catch ( AuthenticationException $e )
+        {
+            throw new UnauthorizedException( "Invalid login or password", $this->request->getPathInfo() );
+        }
+        catch ( AccessDeniedException $e )
+        {
+            throw new UnauthorizedException( $e->getMessage(), $this->request->getPathInfo() );
+        }
+    }
+
+    /**
+     * Refresh given session.
+     *
+     * @param string $sessionId
+     *
+     * @throws \eZ\Publish\Core\REST\Common\Exceptions\NotFoundException
+     * @return \eZ\Publish\Core\REST\Server\Values\UserSession
+     */
+    public function refreshSession( $sessionId )
+    {
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $this->request->getSession();
+        $inputCsrf = $this->request->headers->get( 'X-CSRF-Token' );
+        if ( !$session->isStarted() || $session->getId() != $sessionId || $session == null )
+        {
+            throw new RestNotFoundException( "Session not valid" );
         }
 
-        $session->start();
-        $session->set( "eZUserLoggedInID", $user->id );
         return new Values\UserSession(
-            $user,
+            $this->repository->getCurrentUser(),
             $session->getName(),
             $session->getId(),
-            isset( $csrfProvider ) ?
-                $csrfProvider->generateCsrfToken(
-                    $this->container->getParameter( 'ezpublish_rest.csrf_token_intention' )
-                ) :
-                ""
+            $inputCsrf,
+            false
         );
     }
 
     /**
      * Deletes given session.
+     *
+     * @param string $sessionId
+     * @return \eZ\Publish\Core\REST\Server\Values\NoContent
+     * @throws RestNotFoundException
      */
-    public function deleteSession()
+    public function deleteSession( $sessionId )
     {
-        $urlValues = $this->urlHandler->parse( "userSession", $this->request->path );
-        $sessionId = $urlValues["sessionId"];
-
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $this->container->get( 'session' );
         if ( !$session->isStarted() || $session->getId() != $sessionId )
@@ -1021,10 +1077,9 @@ class User extends RestController
             throw new RestNotFoundException( "Session not found: '{$sessionId}'." );
         }
 
-        $this->container->get( 'security.context' )->setToken( null );
-        $session->invalidate();
-
-        return new Values\NoContent();
+        return new Values\DeletedUserSession(
+            $this->container->get( 'ezpublish_rest.session_authenticator' )->logout( $this->request )
+        );
     }
 
     /**
@@ -1038,22 +1093,5 @@ class User extends RestController
     {
         $pathParts = explode( '/', $path );
         return array_pop( $pathParts );
-    }
-
-    /**
-     * Extracts the requested media type from $request
-     *
-     * @return string
-     */
-    protected function getMediaType()
-    {
-        foreach ( $this->request->mimetype as $mimeType )
-        {
-            if ( preg_match( '(^([a-z0-9-/.]+)\+.*$)', $mimeType['value'], $matches ) )
-            {
-                return $matches[1];
-            }
-        }
-        return 'unknown/unknown';
     }
 }

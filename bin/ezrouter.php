@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version //autogentag//
  */
 
 /**
@@ -32,8 +32,11 @@ EOT;
     exit;
 }
 
-// Use indev_dev.php front controller to have all debug tools and info.
-$script = 'index_dev.php';
+// Use indev_dev.php front controller to have all debug tools and info unless ENVIRONMENT is set.
+if ( getenv( "ENVIRONMENT" ) === false )
+    $script = 'index_dev.php';
+else
+    $script = 'index.php';
 
 // To stick with regular Apache HTTPD behaviour, SCRIPT_NAME should equal to PHP_SELF.
 // Fix SCRIPT_NAME and PHP_SELF since we deal with virtual folders, so PHP server would append /index.php to it.

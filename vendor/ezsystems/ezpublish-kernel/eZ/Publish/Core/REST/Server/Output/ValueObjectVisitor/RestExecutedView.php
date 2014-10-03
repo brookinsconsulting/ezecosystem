@@ -2,9 +2,9 @@
 /**
  * File containing the Section ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -13,8 +13,8 @@ use eZ\Publish\Core\REST\Common\Output\ValueObjectVisitor;
 use eZ\Publish\Core\REST\Common\Output\Generator;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
 use eZ\Publish\Core\REST\Server\Values\RestContent as RestContentValue;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 
 /**
@@ -27,15 +27,36 @@ class RestExecutedView extends ValueObjectVisitor
      *
      * @var \eZ\Publish\API\Repository\LocationService
      */
-    protected $contentService;
-
     protected $locationService;
 
-    public function __construct( UrlHandler $urlHandler, LocationService $locationService, ContentService $contentService )
+    /**
+     * Content service
+     *
+     * @var \eZ\Publish\API\Repository\ContentService
+     */
+    protected $contentService;
+
+    /**
+     * ContentType service
+     *
+     * @var \eZ\Publish\API\Repository\ContentTypeService
+     */
+    protected $contentTypeService;
+
+    /**
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     */
+    public function __construct(
+        LocationService $locationService,
+        ContentService $contentService,
+        ContentTypeService $contentTypeService
+    )
     {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
-        parent::__construct( $urlHandler );
+        $this->contentTypeService = $contentTypeService;
     }
 
     /**
@@ -52,7 +73,7 @@ class RestExecutedView extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'view', array( 'view' => $data->identifier ) )
+            $this->router->generate( 'ezpublish_rest_getView', array( 'viewId' => $data->identifier ) )
         );
         $generator->endAttribute( 'href' );
 
@@ -65,10 +86,10 @@ class RestExecutedView extends ValueObjectVisitor
         // END Query
 
         // BEGIN Result
-        $generator->startObjectElement( 'Result', $generator->getMediaType( 'ViewResult' ) );
+        $generator->startObjectElement( 'Result', 'ViewResult' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'viewResults', array( 'view' => $data->identifier ) )
+            $this->router->generate( 'ezpublish_rest_loadViewResults', array( 'viewId' => $data->identifier ) )
         );
         $generator->endAttribute( 'href' );
 
@@ -88,11 +109,13 @@ class RestExecutedView extends ValueObjectVisitor
 
             $generator->startObjectElement( 'value' );
 
+            /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo */
             $contentInfo = $searchHit->valueObject->contentInfo;
             $restContent = new RestContentValue(
                 $contentInfo,
                 $this->locationService->loadLocation( $contentInfo->mainLocationId ),
                 $searchHit->valueObject,
+                $this->contentTypeService->loadContentType( $contentInfo->contentTypeId ),
                 $this->contentService->loadRelations( $searchHit->valueObject->getVersionInfo() )
             );
             $visitor->visitValueObject( $restContent );

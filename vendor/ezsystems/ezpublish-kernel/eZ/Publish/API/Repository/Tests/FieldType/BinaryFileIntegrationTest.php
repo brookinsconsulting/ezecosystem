@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\API\Repository\Tests\FieldType\BinaryFileIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests\FieldType;
@@ -39,20 +39,22 @@ class BinaryFileIntegrationTest extends FileBaseIntegrationTest
     /**
      * Sets up fixture data.
      *
-     * @return void
+     * @return array
      */
     protected function getFixtureData()
     {
         return array(
             'create' => array(
-                'path' => ( $path = __DIR__ . '/_fixtures/image.jpg' ),
+                'id' => null,
+                'inputUri' => ( $path = __DIR__ . '/_fixtures/image.jpg' ),
                 'fileName' => 'Icy-Night-Flower-Binary.jpg',
                 'fileSize' => filesize( $path ),
                 'mimeType' => 'image/jpeg',
                 // Left out'downloadCount' by intention (will be set to 0)
             ),
             'update' => array(
-                'path' => ( $path = __DIR__ . '/_fixtures/image.png' ),
+                'id' => null,
+                'inputUri' => ( $path = __DIR__ . '/_fixtures/image.png' ),
                 'fileName' => 'Blue-Blue-Blue-Sindelfingen.png',
                 'fileSize' => filesize( $path ),
                 'downloadCount' => 23,
@@ -180,19 +182,21 @@ class BinaryFileIntegrationTest extends FileBaseIntegrationTest
         $expectedData = $fixtureData['create'];
 
         // Will change during storage
-        unset( $expectedData['path'] );
+        unset( $expectedData['id'] );
+        $expectedData['inputUri'] = null;
 
+        $this->assertNotEmpty( $field->value->id );
         $this->assertPropertiesCorrect(
             $expectedData,
             $field->value
         );
 
         $this->assertTrue(
-            file_exists( $path = $this->getInstallDir() . '/' . $this->getStorageDir() . '/' . $this->getStoragePrefix() . '/' . $field->value->path ),
-            "File $path exists"
+            file_exists( $path = $this->getInstallDir() . '/' . $this->getStorageDir() . '/' . $this->getStoragePrefix() . '/' . $field->value->id ),
+            "File $path doesn't exist"
         );
 
-        self::$loadedBinaryFilePath = $field->value->path;
+        self::$loadedBinaryFilePath = $field->value->id;
     }
 
     /**
@@ -220,23 +224,15 @@ class BinaryFileIntegrationTest extends FileBaseIntegrationTest
     {
         return array(
             array(
-                array(),
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentValue',
-            ),
-            array(
-                new BinaryFileValue( array() ),
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentValue',
-            ),
-            array(
                 array(
-                    'path' => '/foo/bar/sindelfingen.pdf',
+                    'id' => '/foo/bar/sindelfingen.pdf',
                 ),
                 'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentValue',
             ),
             array(
                 new BinaryFileValue(
                     array(
-                        'path' => '/foo/bar/sindelfingen.pdf',
+                        'id' => '/foo/bar/sindelfingen.pdf',
                     )
                 ),
                 'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentValue',
@@ -271,17 +267,20 @@ class BinaryFileIntegrationTest extends FileBaseIntegrationTest
 
         $fixtureData = $this->getFixtureData();
         $expectedData = $fixtureData['update'];
-        // Will change during storage
-        unset( $expectedData['path'] );
 
+        // Will change during storage
+        unset( $expectedData['id'] );
+        $expectedData['inputUri'] = null;
+
+        $this->assertNotEmpty( $field->value->id );
         $this->assertPropertiesCorrect(
             $expectedData,
             $field->value
         );
 
         $this->assertTrue(
-            file_exists( $path = $this->getInstallDir() . '/' . $this->getStorageDir() . '/' . $this->getStoragePrefix() . '/' . $field->value->path ),
-            "File $path exists."
+            file_exists( $path = $this->getInstallDir() . '/' . $this->getStorageDir() . '/' . $this->getStoragePrefix() . '/' . $field->value->id ),
+            "File $path doesn't exist."
         );
     }
 
@@ -325,7 +324,7 @@ class BinaryFileIntegrationTest extends FileBaseIntegrationTest
 
         $this->assertEquals(
             self::$loadedBinaryFilePath,
-            $field->value->path
+            $field->value->id
         );
     }
 
@@ -353,9 +352,15 @@ class BinaryFileIntegrationTest extends FileBaseIntegrationTest
     {
         $fixture = $this->getFixtureData();
         $fixture['create']['downloadCount'] = 0;
+        $fixture['create']['uri'] = $fixture['create']['inputUri'];
+        $fixture['create']['path'] = $fixture['create']['inputUri'];
+
+        $fieldValue = $this->getValidCreationFieldData();
+        $fieldValue->uri = $fixture['create']['uri'];
+
         return array(
             array(
-                $this->getValidCreationFieldData(),
+                $fieldValue,
                 $fixture['create'],
             ),
         );
@@ -372,10 +377,15 @@ class BinaryFileIntegrationTest extends FileBaseIntegrationTest
     {
         $fixture = $this->getFixtureData();
         $fixture['create']['downloadCount'] = 0;
+        $fixture['create']['uri'] = $fixture['create']['inputUri'];
+
+        $fieldValue = $this->getValidCreationFieldData();
+        $fieldValue->uri = $fixture['create']['uri'];
+
         return array(
             array(
                 $fixture['create'],
-                $this->getValidCreationFieldData()
+                $fieldValue
             ),
         );
     }

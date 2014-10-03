@@ -2,9 +2,9 @@
 /**
  * File containing the eZAutoloadGenerator class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -330,20 +330,26 @@ class eZAutoloadGenerator
                     $extraExcludeKernelDirs = $extraExcludeDirs;
                     $extraExcludeKernelDirs[] = "@^{$sanitisedBasePath}{$dirSep}extension@";
                     $extraExcludeKernelDirs[] = "@^{$sanitisedBasePath}{$dirSep}tests@";
-                    $retFiles[self::MODE_KERNEL] = $this->buildFileList( $sanitisedBasePath, $extraExcludeKernelDirs );
+                    $retFiles[$modusOperandi] = $this->buildFileList( $sanitisedBasePath, $extraExcludeKernelDirs );
                     break;
 
                 case self::MODE_EXTENSION:
                 case self::MODE_KERNEL_OVERRIDE:
-                    $retFiles[$modusOperandi] = $this->buildFileList( "$sanitisedBasePath/extension", $extraExcludeDirs );
+                    $extraExcludeExtensionDirs = $extraExcludeDirs;
+                    $extraExcludeExtensionDirs[] = "@^{$sanitisedBasePath}{$dirSep}extension{$dirSep}[^{$dirSep}]+{$dirSep}tests@";
+                    $retFiles[$modusOperandi] = $this->buildFileList( "$sanitisedBasePath/extension", $extraExcludeExtensionDirs );
                     break;
 
                 case self::MODE_TESTS:
-                    $retFiles[self::MODE_TESTS] = $this->buildFileList( "$sanitisedBasePath/tests", $extraExcludeDirs );
+                    $retFiles[$modusOperandi] = $this->buildFileList( "$sanitisedBasePath/tests", $extraExcludeDirs );
+                    $extraExcludeExtensionDirs = $extraExcludeDirs;
+                    $extraExcludeExtensionDirs[] = "@^{$sanitisedBasePath}{$dirSep}extension{$dirSep}[^{$dirSep}]+{$dirSep}(?!tests)@";
+                    $extensionTestFiles = $this->buildFileList("$sanitisedBasePath/extension", $extraExcludeExtensionDirs );
+                    $retFiles[$modusOperandi] = array_merge( $retFiles[$modusOperandi], $extensionTestFiles );
                     break;
 
                 case self::MODE_SINGLE_EXTENSION:
-                    $retFiles = array( self::MODE_SINGLE_EXTENSION => $this->buildFileList( "$sanitisedBasePath", $extraExcludeDirs ) );
+                    $retFiles = array( $modusOperandi => $this->buildFileList( "$sanitisedBasePath", $extraExcludeDirs ) );
                     break;
             }
         }
@@ -377,6 +383,7 @@ class eZAutoloadGenerator
     {
         $dirSep = preg_quote( DIRECTORY_SEPARATOR );
         $exclusionFilter = array( "@^{$path}{$dirSep}(var|settings|benchmarks|bin|autoload|port_info|update|templates|tmp|UnitTest|lib{$dirSep}ezc)@" );
+
         if ( !empty( $extraFilter ) and is_array( $extraFilter ) )
         {
             foreach( $extraFilter as $filter )
@@ -899,9 +906,9 @@ class eZAutoloadGenerator
 /**
  * Autoloader definition for eZ Publish $description files.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  *
  */
@@ -1308,72 +1315,5 @@ END;
     {
         $this->output = $outputObject;
     }
-
-    /**
-     * Create phpunit configuration file adding blacklist from tests/ and extension tests
-     *
-     * It writes file phpunit.xml in ./tests directory
-     *
-     * @return DOMDocument;
-     */
-    public function buildPHPUnitConfigurationFile()
-    {
-        if ( ~$this->mask & self::MODE_TESTS )
-        {
-            return;
-        }
-
-        $this->log( 'Creating phpunit configuration file.' );
-
-        $dom = new DOMDocument( '1.0', 'utf-8' );
-        $dom->formatOutput = true;
-
-        $baseDir = getcwd();
-        $filter = $dom->createElement( 'filter' );
-        $blacklist = $dom->createElement( 'blacklist' );
-
-        /* PHPUnit docs says we should either use whitelist or blacklist ( if a whitelist exists, the blacklsit will be ignored )
-         * Since whitelisting only works on source files containing classes, we base this on blacklisting
-         */
-        /*
-        $whitelist = $dom->createElement( 'whitelist' );
-        $autoloadArray = @include 'autoload/ezp_kernel.php';
-        foreach ( $autoloadArray as $class => $filename )
-        {
-            $file = $dom->createElement( 'file', $baseDir . DIRECTORY_SEPARATOR . $filename );
-            $whitelist->appendChild($file);
-        }
-        $filter->appendChild($whitelist);
-        */
-
-        //Blacklist tests in extension/
-        $extensionDir = $this->options->basePath . '/extension';
-
-        if ( file_exists( $extensionDir ) )
-        {
-            foreach ( scandir( $extensionDir ) as $file )
-            {
-                if ( ( $file === '.' ) || ( $file === '..' ) )
-                    continue;
-
-                $testDirectory = "$extensionDir/$file/tests";
-                if ( is_dir( $testDirectory ) )
-                {
-                    $blacklist->appendChild( $dom->createElement( 'directory', $testDirectory ) );
-                }
-            }
-        }
-
-        $blacklist->appendChild( $dom->createElement( 'directory', "$baseDir/tests" ) );
-        $filter->appendChild( $blacklist );
-        $root = $dom->createElement( 'phpunit' );
-        $root->appendChild( $filter );
-        $dom->appendChild( $root );
-
-        file_put_contents( "$baseDir/tests/phpunit.xml", $dom->saveXML() );
-
-        return $dom;
-    }
-
 }
 ?>

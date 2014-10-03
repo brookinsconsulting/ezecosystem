@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\RepositoryTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests\FieldType;
@@ -80,6 +80,14 @@ class RelationListFieldTypeIntegrationTest extends RelationBaseIntegrationTest
                     "type" => Relation::FIELD,
                     "sourceContentInfo" => $content->contentInfo,
                     "destinationContentInfo" => $contentService->loadContentInfo( 4 )
+                )
+            ),
+            new Relation(
+                array(
+                    "sourceFieldDefinitionIdentifier" => "data",
+                    "type" => Relation::FIELD,
+                    "sourceContentInfo" => $content->contentInfo,
+                    "destinationContentInfo" => $contentService->loadContentInfo( 49 )
                 )
             ),
             new Relation(
@@ -205,7 +213,7 @@ class RelationListFieldTypeIntegrationTest extends RelationBaseIntegrationTest
         $expectedData = array(
             'destinationContentIds' => array( 4, 49 ),
         );
-        $this->assertPropertiesCorrect(
+        $this->assertPropertiesCorrectUnsorted(
             $expectedData,
             $field->value
         );
@@ -249,7 +257,7 @@ class RelationListFieldTypeIntegrationTest extends RelationBaseIntegrationTest
      */
     public function getValidUpdateFieldData()
     {
-        return new RelationListValue( array( 4, 54 ) );
+        return new RelationListValue( array( 49, 54, 4 ) );
     }
 
     /**
@@ -267,9 +275,9 @@ class RelationListFieldTypeIntegrationTest extends RelationBaseIntegrationTest
         );
 
         $expectedData = array(
-            'destinationContentIds' => array( 4, 54 ),
+            'destinationContentIds' => array( 49, 54, 4 ),
         );
-        $this->assertPropertiesCorrect(
+        $this->assertPropertiesCorrectUnsorted(
             $expectedData,
             $field->value
         );
@@ -319,8 +327,7 @@ class RelationListFieldTypeIntegrationTest extends RelationBaseIntegrationTest
         $expectedData = array(
             'destinationContentIds' => array( 4, 49 )
         );
-
-        $this->assertPropertiesCorrect(
+        $this->assertPropertiesCorrectUnsorted(
             $expectedData,
             $field->value
         );

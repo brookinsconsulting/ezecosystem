@@ -2,9 +2,9 @@
 /**
  * File containing the ezpKernelTreeMenu class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 class ezpKernelTreeMenu implements ezpKernelHandler
@@ -37,6 +37,30 @@ class ezpKernelTreeMenu implements ezpKernelHandler
 
     public function __construct( array $settings = array() )
     {
+        if ( isset( $settings['injected-settings'] ) )
+        {
+            $injectedSettings = array();
+            foreach ( $settings["injected-settings"] as $keySetting => $injectedSetting )
+            {
+                list( $file, $section, $setting ) = explode( "/", $keySetting );
+                $injectedSettings[$file][$section][$setting] = $injectedSetting;
+            }
+            // those settings override anything else in local .ini files and
+            // their overrides
+            eZINI::injectSettings( $injectedSettings );
+        }
+        if ( isset( $settings['injected-merge-settings'] ) )
+        {
+            $injectedSettings = array();
+            foreach ( $settings["injected-merge-settings"] as $keySetting => $injectedSetting )
+            {
+                list( $file, $section, $setting ) = explode( "/", $keySetting );
+                $injectedSettings[$file][$section][$setting] = $injectedSetting;
+            }
+            // those settings override anything else in local .ini files and
+            // their overrides
+            eZINI::injectMergeSettings( $injectedSettings );
+        }
         $this->settings = $settings + array(
             'use-cache-headers'         => true,
             'max-age'                   => 86400,
@@ -67,7 +91,7 @@ class ezpKernelTreeMenu implements ezpKernelHandler
         // This makes ini system not check modified time so
         // that index_treemenu.php can assume that index.php does
         // this regular enough, set in config.php to override.
-        if ( !defined('EZP_INI_FILEMTIME_CHECK') )
+        if ( !defined( 'EZP_INI_FILEMTIME_CHECK' ) )
         {
             define( 'EZP_INI_FILEMTIME_CHECK', false );
         }
@@ -75,7 +99,10 @@ class ezpKernelTreeMenu implements ezpKernelHandler
         eZExecution::addFatalErrorHandler(
             function ()
             {
-                header( $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error' );
+                if ( !headers_sent() )
+                {
+                    header( $_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error' );
+                }
             }
         );
         eZDebug::setHandleType( eZDebug::HANDLE_FROM_PHP );
@@ -110,8 +137,7 @@ class ezpKernelTreeMenu implements ezpKernelHandler
                 eZSys::hostname(),
                 eZSys::serverPort(),
                 eZSys::indexFile()
-            )
-        ;
+            );
         eZSiteAccess::change( $this->access );
 
         // Check for new extension loaded by siteaccess
@@ -237,7 +263,7 @@ class ezpKernelTreeMenu implements ezpKernelHandler
             $this->uri->elements( false ),
             false,
             array(
-                 'use-cache-headers' => $this->settings['use-cache-headers']
+                'use-cache-headers' => $this->settings['use-cache-headers']
             )
         );
         $attributes = isset( $content['lastModified'] ) ? array( 'lastModified' => $content['lastModified'] ) : array();
@@ -282,6 +308,7 @@ class ezpKernelTreeMenu implements ezpKernelHandler
     {
         eZExecution::cleanup();
         eZExecution::setCleanExit();
+        eZExpiryHandler::shutdown();
         if ( $reInitialize )
             $this->isInitialized = false;
     }
@@ -322,8 +349,8 @@ class ezpKernelTreeMenu implements ezpKernelHandler
             return new ezpKernelResult(
                 json_encode(
                     array(
-                         'error'        => $errorMessage,
-                         'code'         => $errorCode
+                        'error'        => $errorMessage,
+                        'code'         => $errorCode
                     )
                 )
             );

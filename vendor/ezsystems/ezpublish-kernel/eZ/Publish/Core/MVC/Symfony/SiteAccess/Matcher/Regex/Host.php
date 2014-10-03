@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher\Regex\Host class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher\Regex;
@@ -13,6 +13,9 @@ use eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher\Regex;
 use eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest;
 
+/**
+ * @deprecated since 5.3 as it cannot be reverted.
+ */
 class Host extends Regex implements Matcher
 {
     /**
@@ -37,11 +40,14 @@ class Host extends Regex implements Matcher
      * Injects the request object to match against.
      *
      * @param \eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest $request
-     *
-     * @return void
      */
     public function setRequest( SimplifiedRequest $request )
     {
-        $this->setMatchElement( $request->host );
+        if ( !$this->element )
+        {
+            $this->setMatchElement( $request->host );
+        }
+
+        parent::setRequest( $request );
     }
 }

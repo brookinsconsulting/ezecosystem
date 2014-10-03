@@ -3754,7 +3754,7 @@ version: 2.8.2r1
          *
          * @param {Number} x The X coordinate value to be constrained
          * @return {Number} The constrained x coordinate
-         */             
+         */		
         getConstrainedX: function (x) {
             return this._getConstrainedPos("x", x);
         },
@@ -3766,7 +3766,7 @@ version: 2.8.2r1
          *
          * @param {Number} y The Y coordinate value to be constrained
          * @return {Number} The constrained y coordinate
-         */             
+         */		
         getConstrainedY : function (y) {
             return this._getConstrainedPos("y", y);
         },
@@ -7011,7 +7011,7 @@ version: 2.8.2r1
          */
         _renderHeader: function(moduleElement){
             moduleElement = moduleElement || this.innerElement;
-                        Panel.superclass._renderHeader.call(this, moduleElement);
+			Panel.superclass._renderHeader.call(this, moduleElement);
         },
 
         /**
@@ -8559,7 +8559,7 @@ version: 2.8.2r1
             var sIcon = args[0],
                 oBody = this.body,
                 sCSSClass = SimpleDialog.ICON_CSS_CLASSNAME,
-                                aElements,
+				aElements,
                 oIcon,
                 oIconParent;
         
@@ -8567,9 +8567,9 @@ version: 2.8.2r1
 
                 aElements = Dom.getElementsByClassName(sCSSClass, "*" , oBody);
 
-                                if (aElements.length === 1) {
+				if (aElements.length === 1) {
 
-                                        oIcon = aElements[0];
+					oIcon = aElements[0];
                     oIconParent = oIcon.parentNode;
 
                     if (oIconParent) {
@@ -8580,7 +8580,7 @@ version: 2.8.2r1
 
                     }
 
-                                }
+				}
 
 
                 if (sIcon.indexOf(".") == -1) {

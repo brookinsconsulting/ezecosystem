@@ -2,9 +2,9 @@
 /**
  * File containing the Persistence Handler interface
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Persistence;
@@ -40,6 +40,11 @@ interface Handler
     public function locationHandler();
 
     /**
+     * @return \eZ\Publish\SPI\Persistence\Content\Location\Search\Handler
+     */
+    public function locationSearchHandler();
+
+    /**
      * @return \eZ\Publish\SPI\Persistence\Content\ObjectState\Handler
      */
     public function objectStateHandler();
@@ -70,10 +75,17 @@ interface Handler
     public function urlWildcardHandler();
 
     /**
+     * @return \eZ\Publish\SPI\Persistence\TransactionHandler
+     */
+    public function transactionHandler();
+
+    /**
      * Begin transaction
      *
      * Begins an transaction, make sure you'll call commit or rollback when done,
      * otherwise work will be lost.
+     *
+     * @deprecated Since 5.3 {@use transactionHandler()->beginTransaction()}
      */
     public function beginTransaction();
 
@@ -83,6 +95,8 @@ interface Handler
      * Commit transaction, or throw exceptions if no transactions has been started.
      *
      * @throws \RuntimeException If no transaction has been started
+     *
+     * @deprecated Since 5.3 {@use transactionHandler()->commit()}
      */
     public function commit();
 
@@ -92,6 +106,8 @@ interface Handler
      * Rollback transaction, or throw exceptions if no transactions has been started.
      *
      * @throws \RuntimeException If no transaction has been started
+     *
+     * @deprecated Since 5.3 {@use transactionHandler()->rollback()}
      */
     public function rollback();
 }

@@ -2,9 +2,9 @@
 /**
  * File containing the In Memory Caching Content Type Handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Type;
@@ -146,12 +146,12 @@ class MemoryCachingHandler implements BaseContentTypeHandler
      */
     public function load( $contentTypeId, $status = Type::STATUS_DEFINED )
     {
-        if ( isset( $this->contentTypes[$contentTypeId][$status] ) )
+        if ( isset( $this->contentTypes['id'][$contentTypeId][$status] ) )
         {
-            return $this->contentTypes[$contentTypeId][$status];
+            return $this->contentTypes['id'][$contentTypeId][$status];
         }
 
-        return $this->contentTypes[$contentTypeId][$status] =
+        return $this->contentTypes['id'][$contentTypeId][$status] =
             $this->innerHandler->load( $contentTypeId, $status );
     }
 
@@ -329,6 +329,18 @@ class MemoryCachingHandler implements BaseContentTypeHandler
 
         return $this->fieldDefinitions[$id][$status] =
             $this->innerHandler->getFieldDefinition( $id, $status );
+    }
+
+    /**
+     * Counts the number of Content instances of the ContentType identified by given $contentTypeId.
+     *
+     * @param mixed $contentTypeId
+     *
+     * @return int
+     */
+    public function getContentCount( $contentTypeId )
+    {
+        return $this->innerHandler->getContentCount( $contentTypeId );
     }
 
     /**

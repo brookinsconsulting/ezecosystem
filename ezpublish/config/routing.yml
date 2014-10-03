@@ -1,3 +1,11 @@
+login:
+    path:   /login
+    defaults:  { _controller: ezpublish.security.controller:loginAction }
+login_check:
+    path:   /login_check
+logout:
+    path:   /logout
+
 _ezpublishRoutes:
     resource: "@EzPublishCoreBundle/Resources/config/routing/internal.yml"
 
@@ -7,3 +15,11 @@ _ezpublishLegacyRoutes:
 _ezpublishRestRoutes:
     resource: "@EzPublishRestBundle/Resources/config/routing.yml"
     prefix:   %ezpublish_rest.path_prefix%
+
+_ezpublishRestOptionsRoutes:
+    resource: "@EzPublishRestBundle/Resources/config/routing.yml"
+    prefix: %ezpublish_rest.path_prefix%
+    type: rest_options
+
+_ezpublishDemoRoutes:
+    resource: "@eZDemoBundle/Resources/config/routing.yml"

@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -22,11 +22,13 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     /**
      * Test the ContentTypeGroupRefList visitor
      *
+     * @todo coverage test with one group (can't be deleted)
+     *
      * @return \DOMDocument
      */
     public function testVisit()
     {
-        $visitor   = $this->getContentTypeGroupRefListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -50,6 +52,42 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
                     )
                 )
             )
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_listContentTypesForGroup',
+            array( 'contentTypeGroupId' => $contentTypeGroupRefList->contentType->id ),
+            "/content/types/{$contentTypeGroupRefList->contentType->id}/groups"
+        );
+
+        // first iteration
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentTypeGroup',
+            array( 'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[0]->id ),
+            "/content/typegroups/{$contentTypeGroupRefList->contentTypeGroups[0]->id}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_unlinkContentTypeFromGroup',
+            array(
+                'contentTypeId' => $contentTypeGroupRefList->contentType->id,
+                'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[0]->id
+            ),
+            "/content/types/{$contentTypeGroupRefList->contentType->id}/groups/{$contentTypeGroupRefList->contentTypeGroups[0]->id}"
+        );
+
+        // second iteration
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentTypeGroup',
+            array( 'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[1]->id ),
+            "/content/typegroups/{$contentTypeGroupRefList->contentTypeGroups[1]->id}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_unlinkContentTypeFromGroup',
+            array(
+                'contentTypeId' => $contentTypeGroupRefList->contentType->id,
+                'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[1]->id
+            ),
+            "/content/types/{$contentTypeGroupRefList->contentType->id}/groups/{$contentTypeGroupRefList->contentTypeGroups[1]->id}"
         );
 
         $visitor->visit(
@@ -173,10 +211,8 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
      */
-    protected function getContentTypeGroupRefListVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\ContentTypeGroupRefList(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\ContentTypeGroupRefList;
     }
 }

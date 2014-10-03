@@ -2,9 +2,9 @@
 /**
  * File containing the eZWaitUntilDateValue class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -72,6 +72,11 @@ class eZWaitUntilDateValue extends eZPersistentObject
         if ( $this->ClassName === null )
         {
             $contentClass = eZContentClass::fetch( $this->attribute( 'contentclass_id' ) );
+            if ( !$contentClass instanceof eZContentClass )
+            {
+                eZDebug::writeError( 'Unable to find eZContentClass #' . $this->attribute( 'contentclass_id' ), __METHOD__ );
+                return null;
+            }
             $this->ClassName = $contentClass->attribute( 'name' );
         }
         return $this->ClassName;
@@ -82,6 +87,11 @@ class eZWaitUntilDateValue extends eZPersistentObject
         if ( $this->ClassAttributeName === null )
         {
             $contentClassAttribute = eZContentClassAttribute::fetch( $this->attribute( 'contentclass_attribute_id' ) );
+            if ( !$contentClassAttribute instanceof eZContentClassAttribute )
+            {
+                eZDebug::writeError( 'Unable to find eZContentClassAttribute #' . $this->attribute( 'contentclass_attribute_id' ), __METHOD__ );
+                return null;
+            }
             $this->ClassAttributeName = $contentClassAttribute->attribute( 'name' );
         }
         return $this->ClassAttributeName;

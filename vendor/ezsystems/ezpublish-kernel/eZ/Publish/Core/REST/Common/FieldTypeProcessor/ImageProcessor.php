@@ -2,12 +2,14 @@
 /**
  * File containing the ImageProcessor class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\FieldTypeProcessor;
+
+use Symfony\Component\Routing\RouterInterface;
 
 class ImageProcessor extends BinaryInputProcessor
 {
@@ -19,40 +21,69 @@ class ImageProcessor extends BinaryInputProcessor
     protected $urlTemplate;
 
     /**
-     * Array of variant names and content types
+     * Array of variations identifiers
      *
      * <code>
-     * array(
-     *      'small' => 'image/jpeg',
-     *      'thumbnail' => 'image/png',
-     * )
+     * array( 'small', 'thumbnail', 'large' )
      * </code>
      *
-     * @var string[][]
+     * @var string[]
      */
-    protected $variants;
+    protected $variations;
+
+    /**
+     * @var RouterInterface
+     */
+    protected $router;
 
     /**
      * @param string $temporaryDirectory
-     * @param string $urlTemplate
-     * @param array $variants
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param array $variations array of variations identifiers
      */
-    public function __construct( $temporaryDirectory, $urlTemplate, array $variants )
+    public function __construct( $temporaryDirectory, RouterInterface $router, array $variations )
     {
         parent::__construct( $temporaryDirectory );
-        $this->urlTemplate = $urlTemplate;
-        $this->variants = $variants;
+        $this->router = $router;
+        $this->variations = $variations;
     }
 
     /**
-     * Generates a URL for $path in $variant
+     * {@inheritDoc}
+     */
+    public function postProcessValueHash( $outgoingValueHash )
+    {
+        if ( !is_array( $outgoingValueHash ) )
+        {
+            return $outgoingValueHash;
+        }
+
+        $outgoingValueHash['path'] = '/' . $outgoingValueHash['path'];
+        foreach ( $this->variations as $variationIdentifier )
+        {
+            $outgoingValueHash['variations'][$variationIdentifier] = array(
+                'href' => $this->router->generate(
+                    'ezpublish_rest_binaryContent_getImageVariation',
+                    array(
+                        'imageId' => $outgoingValueHash['imageId'],
+                        'variationIdentifier' => $variationIdentifier
+                    )
+                ),
+            );
+        }
+
+        return $outgoingValueHash;
+    }
+
+    /**
+     * Generates a URL for $path in $variation
      *
      * @param string $path
-     * @param string $variant
+     * @param string $variation
      *
      * @return string
      */
-    protected function generateUrl( $path, $variant )
+    protected function generateUrl( $path, $variation )
     {
         $fieldId = '';
         $versionNo = '';
@@ -66,12 +97,12 @@ class ImageProcessor extends BinaryInputProcessor
 
         return str_replace(
             array(
-                '{variant}',
+                '{variation}',
                 '{fieldId}',
                 '{versionNo}',
             ),
             array(
-                $variant,
+                $variation,
                 $fieldId,
                 $versionNo
             ),

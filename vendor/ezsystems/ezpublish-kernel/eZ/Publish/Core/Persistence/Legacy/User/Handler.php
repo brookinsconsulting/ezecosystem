@@ -2,9 +2,9 @@
 /**
  * File containing the UserHandler interface
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\User;
@@ -15,7 +15,9 @@ use eZ\Publish\SPI\Persistence\User\Role;
 use eZ\Publish\SPI\Persistence\User\RoleUpdateStruct;
 use eZ\Publish\SPI\Persistence\User\Policy;
 use eZ\Publish\Core\Persistence\Legacy\User\Role\Gateway as RoleGateway;
+use eZ\Publish\Core\Persistence\Legacy\User\Role\LimitationConverter;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException as NotFound;
+use LogicException;
 
 /**
  * Storage Engine handler for user module
@@ -44,17 +46,24 @@ class Handler implements BaseUserHandler
     protected $mapper;
 
     /**
+     * @var \eZ\Publish\Core\Persistence\Legacy\User\Role\LimitationConverter
+     */
+    protected $limitationConverter;
+
+    /**
      * Construct from userGateway
      *
      * @param \eZ\Publish\Core\Persistence\Legacy\User\Gateway $userGateway
      * @param \eZ\Publish\Core\Persistence\Legacy\User\Role\Gateway $roleGateway
      * @param \eZ\Publish\Core\Persistence\Legacy\User\Mapper $mapper
+     * @param \eZ\Publish\Core\Persistence\Legacy\User\Role\LimitationConverter $limitationConverter
      */
-    public function __construct( Gateway $userGateway, RoleGateway $roleGateway, Mapper $mapper )
+    public function __construct( Gateway $userGateway, RoleGateway $roleGateway, Mapper $mapper, LimitationConverter $limitationConverter )
     {
         $this->userGateway = $userGateway;
         $this->roleGateway = $roleGateway;
         $this->mapper = $mapper;
+        $this->limitationConverter = $limitationConverter;
     }
 
     /**
@@ -93,20 +102,47 @@ class Handler implements BaseUserHandler
     }
 
     /**
-     * Loads user with user login / email.
+     * Loads user with user login.
      *
      * @param string $login
-     * @param boolean $alsoMatchEmail Also match user email, caller must verify that $login is a valid email address.
      *
-     * @return \eZ\Publish\SPI\Persistence\User[]
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If user is not found
+     *
+     * @return \eZ\Publish\SPI\Persistence\User
      */
-    public function loadByLogin( $login, $alsoMatchEmail = false )
+    public function loadByLogin( $login )
     {
-        $data = $this->userGateway->loadByLoginOrMail( $login, $alsoMatchEmail ? $login : null );
+        $data = $this->userGateway->loadByLogin( $login );
 
         if ( empty( $data ) )
         {
             throw new NotFound( 'user', $login );
+        }
+        else if ( isset( $data[1] ) )
+        {
+            throw new LogicException( "Found more then one user with login '{$login}'" );
+        }
+
+        return $this->mapper->mapUser( $data[0] );
+    }
+
+    /**
+     * Loads user(s) with user email.
+     *
+     * As earlier eZ Publish versions supported several users having same email (ini config),
+     * this function may return several users.
+     *
+     * @param string $email
+     *
+     * @return \eZ\Publish\SPI\Persistence\User[]
+     */
+    public function loadByEmail( $email )
+    {
+        $data = $this->userGateway->loadByEmail( $email );
+
+        if ( empty( $data ) )
+        {
+            return array();
         }
 
         return $this->mapper->mapUsers( $data );
@@ -169,7 +205,13 @@ class Handler implements BaseUserHandler
             throw new NotFound( 'role', $roleId );
         }
 
-        return $this->mapper->mapRole( $data );
+        $role = $this->mapper->mapRole( $data );
+        foreach ( $role->policies as $policy )
+        {
+            $this->limitationConverter->toSPI( $policy );
+        }
+
+        return $role;
     }
 
     /**
@@ -190,7 +232,13 @@ class Handler implements BaseUserHandler
             throw new NotFound( 'role', $identifier );
         }
 
-        return $this->mapper->mapRole( $data );
+        $role = $this->mapper->mapRole( $data );
+        foreach ( $role->policies as $policy )
+        {
+            $this->limitationConverter->toSPI( $policy );
+        }
+
+        return $role;
     }
 
     /**
@@ -202,7 +250,16 @@ class Handler implements BaseUserHandler
     {
         $data = $this->roleGateway->loadRoles();
 
-        return $this->mapper->mapRoles( $data );
+        $roles = $this->mapper->mapRoles( $data );
+        foreach ( $roles as $role )
+        {
+            foreach ( $role->policies as $policy )
+            {
+                $this->limitationConverter->toSPI( $policy );
+            }
+        }
+
+        return $roles;
     }
 
     /**
@@ -229,11 +286,6 @@ class Handler implements BaseUserHandler
             $this->roleGateway->removePolicy( $policy->id );
         }
 
-        foreach ( $role->groupIds as $groupId )
-        {
-            $this->userGateway->removeRole( $groupId, $role->id );
-        }
-
         $this->roleGateway->deleteRole( $role->id );
     }
 
@@ -247,7 +299,11 @@ class Handler implements BaseUserHandler
      */
     public function addPolicy( $roleId, Policy $policy )
     {
-        $this->roleGateway->addPolicy( $roleId, $policy );
+        $legacyPolicy = clone $policy;
+        $this->limitationConverter->toLegacy( $legacyPolicy );
+
+        $this->roleGateway->addPolicy( $roleId, $legacyPolicy );
+        $policy->id = $legacyPolicy->id;
 
         return $policy;
     }
@@ -261,6 +317,9 @@ class Handler implements BaseUserHandler
      */
     public function updatePolicy( Policy $policy )
     {
+        $policy = clone $policy;
+        $this->limitationConverter->toLegacy( $policy );
+
         $this->roleGateway->removePolicyLimitations( $policy->id );
         $this->roleGateway->addPolicyLimitations( $policy->id, $policy->limitations );
     }
@@ -268,12 +327,11 @@ class Handler implements BaseUserHandler
     /**
      * Removes a policy from a role
      *
-     * @param mixed $roleId
      * @param mixed $policyId
      *
      * @return void
      */
-    public function removePolicy( $roleId, $policyId )
+    public function deletePolicy( $policyId )
     {
         // Each policy can only be associated to exactly one role. Thus it is
         // sufficient to use the policyId for identification and just remove
@@ -292,7 +350,14 @@ class Handler implements BaseUserHandler
     {
         $data = $this->roleGateway->loadPoliciesByUserId( $userId );
 
-        return $this->mapper->mapPolicies( $data );
+        $policies = $this->mapper->mapPolicies( $data );
+
+        foreach ( $policies as $policy )
+        {
+            $this->limitationConverter->toSPI( $policy );
+        }
+
+        return $policies;
     }
 
     /**
@@ -345,7 +410,14 @@ class Handler implements BaseUserHandler
      */
     public function loadRoleAssignmentsByRoleId( $roleId )
     {
-        throw new \eZ\Publish\API\Repository\Exceptions\NotImplementedException( __METHOD__ );
+        $data = $this->roleGateway->loadRoleAssignmentsByRoleId( $roleId );
+
+        if ( empty( $data ) )
+        {
+            return array();
+        }
+
+        return $this->mapper->mapRoleAssignments( $data );
     }
 
     /**

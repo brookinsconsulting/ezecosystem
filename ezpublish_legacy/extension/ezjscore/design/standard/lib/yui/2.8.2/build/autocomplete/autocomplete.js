@@ -2223,10 +2223,10 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
         elContainer.removeChild(oClone);
         oClone = null;
 
-        var oSelf = this;
-        var onAnimComplete = function() {
+    	var oSelf = this;
+    	var onAnimComplete = function() {
             // Finish the collapse
-                oAnim.onComplete.unsubscribeAll();
+    		oAnim.onComplete.unsubscribeAll();
 
             if(bShow) {
                 oSelf._toggleContainerHelpers(true);
@@ -2238,7 +2238,7 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
                 oSelf._bContainerOpen = bShow;
                 oSelf.containerCollapseEvent.fire(oSelf);
             }
-        };
+     	};
 
         // Display container and animate it
         this._toggleContainerHelpers(false); // Bug 1424486: Be early to hide, late to show;

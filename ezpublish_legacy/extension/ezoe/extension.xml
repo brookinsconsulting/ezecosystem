@@ -3,8 +3,8 @@
     <metadata>
         <name>eZ Online Editor LS</name>
         <version>//autogentag//</version>
-        <copyright>Copyright (C) 1999-2013 eZ Systems AS</copyright>
-        <license>GNU General Public License v2</license>
+        <copyright>Copyright (C) eZ Systems AS. All rights reserved.</copyright>
+        <license>This software is distributed under same license as eZ Publish</license>
         <info_url>https://github.com/ezsystems/ezoe</info_url>
 
         <software>

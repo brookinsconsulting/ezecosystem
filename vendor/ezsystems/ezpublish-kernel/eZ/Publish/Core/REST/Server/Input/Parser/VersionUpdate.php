@@ -2,23 +2,23 @@
 /**
  * File containing the VersionUpdate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\FieldTypeParser;
 use eZ\Publish\Core\REST\Common\Exceptions;
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 
 /**
  * Parser for VersionUpdate
  */
-class VersionUpdate extends Base
+class VersionUpdate extends BaseParser
 {
     /**
      * Content service
@@ -37,13 +37,11 @@ class VersionUpdate extends Base
     /**
      * Construct from content service
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\Core\REST\Common\Input\FieldTypeParser $fieldTypeParser
      */
-    public function __construct( UrlHandler $urlHandler, ContentService $contentService, FieldTypeParser $fieldTypeParser )
+    public function __construct( ContentService $contentService, FieldTypeParser $fieldTypeParser )
     {
-        parent::__construct( $urlHandler );
         $this->contentService = $contentService;
         $this->fieldTypeParser = $fieldTypeParser;
     }
@@ -77,7 +75,7 @@ class VersionUpdate extends Base
                 throw new Exceptions\Parser( "Invalid 'fields' element for VersionUpdate." );
             }
 
-            $urlValues = $this->urlHandler->parse( 'objectVersion', $data['__url'] );
+            $contentId = $this->requestParser->parseHref( $data['__url'], 'contentId' );
 
             foreach ( $data['fields']['field'] as $fieldData )
             {
@@ -91,7 +89,11 @@ class VersionUpdate extends Base
                     throw new Exceptions\Parser( "Missing 'fieldValue' element for '{$fieldData['fieldDefinitionIdentifier']}' identifier in VersionUpdate." );
                 }
 
-                $fieldValue = $this->fieldTypeParser->parseFieldValue( $urlValues['object'], $fieldData['fieldDefinitionIdentifier'], $fieldData['fieldValue'] );
+                $fieldValue = $this->fieldTypeParser->parseFieldValue(
+                    $contentId,
+                    $fieldData['fieldDefinitionIdentifier'],
+                    $fieldData['fieldValue']
+                );
 
                 $languageCode = null;
                 if ( array_key_exists( 'languageCode', $fieldData ) )

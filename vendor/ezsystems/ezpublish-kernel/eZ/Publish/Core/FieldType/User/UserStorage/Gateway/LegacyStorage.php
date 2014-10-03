@@ -2,9 +2,9 @@
 /**
  * File containing the UserStorage LegacyStorage Gateway
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\User\UserStorage\Gateway;
@@ -21,19 +21,19 @@ class LegacyStorage extends Gateway
     protected $dbHandler;
 
     /**
-     * Default values for user fielfs
+     * Default values for user fields
      *
      * @var array
      */
     protected $defaultValues = array(
-        'hasStoredLogin'   => false,
-        'contentId'   => null,
-        'login'              => null,
-        'email'              => null,
-        'passwordHash'      => null,
+        'hasStoredLogin' => false,
+        'contentId' => null,
+        'login' => null,
+        'email' => null,
+        'passwordHash' => null,
         'passwordHashType' => null,
-        'enabled'         => false,
-        'maxLogin'          => null,
+        'enabled' => false,
+        'maxLogin' => null,
     );
 
     /**
@@ -100,7 +100,7 @@ class LegacyStorage extends Gateway
         // the given class design there is no sane other option. Actually the
         // dbHandler *should* be passed to the constructor, and there should
         // not be the need to post-inject it.
-        if ( !$dbHandler instanceof \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler )
+        if ( !$dbHandler instanceof \eZ\Publish\Core\Persistence\Database\DatabaseHandler )
         {
             throw new \RuntimeException( "Invalid dbHandler passed" );
         }

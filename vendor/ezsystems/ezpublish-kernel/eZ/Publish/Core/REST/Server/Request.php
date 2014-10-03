@@ -2,9 +2,9 @@
 /**
  * File containing the Request class.
  *
- * @copyright Copyright (C) 2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 namespace eZ\Publish\Core\REST\Server;
 
@@ -13,6 +13,7 @@ use Qafoo\RMF\Request\PropertyHandler;
 
 /**
  * Encapsulated RMF HTTP Request for REST server
+ * @todo Remove when the REST client is refactored
  */
 class Request extends RMFRequest
 {
@@ -48,9 +49,6 @@ class Request extends RMFRequest
         );
 
         $this->addHandler( 'destination', new PropertyHandler\Server( 'HTTP_DESTINATION' ) );
-
-        // @todo: ATTENTION, only used for test setup
-        $this->addHandler( 'testUser', new PropertyHandler\Server( 'HTTP_X_TEST_USER' ) );
 
         parent::__construct( $handlers );
     }

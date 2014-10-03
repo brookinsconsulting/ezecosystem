@@ -2,9 +2,9 @@
 /**
  * File containing the RestContent ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -45,7 +45,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $data->path === null ?
-                $this->urlHandler->generate( 'object', array( 'object' => $contentInfo->id ) ) :
+                $this->router->generate( 'ezpublish_rest_loadContent', array( 'contentId' => $contentInfo->id ) ) :
                 $data->path
         );
         $generator->endAttribute( 'href' );
@@ -58,9 +58,9 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement( 'ContentType' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate(
-                'type',
-                array( 'type' => $contentInfo->contentTypeId )
+            $this->router->generate(
+                'ezpublish_rest_loadContentType',
+                array( 'contentTypeId' => $contentInfo->contentTypeId )
             )
         );
         $generator->endAttribute( 'href' );
@@ -72,7 +72,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement( 'Versions', 'VersionList' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'objectVersions', array( 'object' => $contentInfo->id ) )
+            $this->router->generate( 'ezpublish_rest_loadContentVersions', array( 'contentId' => $contentInfo->id ) )
         );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'Versions' );
@@ -80,9 +80,9 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement( 'CurrentVersion', 'Version' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate(
-                'objectCurrentVersion',
-                array( 'object' => $contentInfo->id )
+            $this->router->generate(
+                'ezpublish_rest_redirectCurrentVersion',
+                array( 'contentId' => $contentInfo->id )
             )
         );
         $generator->endAttribute( 'href' );
@@ -104,7 +104,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement( 'Section' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'section', array( 'section' => $contentInfo->sectionId ) )
+            $this->router->generate( 'ezpublish_rest_loadSection', array( 'sectionId' => $contentInfo->sectionId ) )
         );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'Section' );
@@ -115,7 +115,10 @@ class RestContent extends ValueObjectVisitor
             $generator->startObjectElement( 'MainLocation', 'Location' );
             $generator->startAttribute(
                 'href',
-                $this->urlHandler->generate( 'location', array( 'location' => rtrim( $mainLocation->pathString, '/' ) ) )
+                $this->router->generate(
+                    'ezpublish_rest_loadLocation',
+                    array( 'locationPath' => trim( $mainLocation->pathString, '/' ) )
+                )
             );
             $generator->endAttribute( 'href' );
             $generator->endObjectElement( 'MainLocation' );
@@ -124,7 +127,10 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement( 'Locations', 'LocationList' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'objectLocations', array( 'object' => $contentInfo->id ) )
+            $this->router->generate(
+                'ezpublish_rest_loadLocationsForContent',
+                array( 'contentId' => $contentInfo->id )
+            )
         );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'Locations' );
@@ -132,7 +138,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement( 'Owner', 'User' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'user', array( 'user' => $contentInfo->ownerId ) )
+            $this->router->generate( 'ezpublish_rest_loadUser', array( 'userId' => $contentInfo->ownerId ) )
         );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'Owner' );
@@ -167,9 +173,20 @@ class RestContent extends ValueObjectVisitor
 
         $generator->startValueElement(
             'alwaysAvailable',
-            ( $contentInfo->alwaysAvailable ? 'true' : 'false' )
+            $this->serializeBool( $generator, $contentInfo->alwaysAvailable )
         );
         $generator->endValueElement( 'alwaysAvailable' );
+
+        $generator->startObjectElement( 'ObjectStates', 'ContentObjectStates' );
+        $generator->startAttribute(
+            'href',
+            $this->router->generate(
+                'ezpublish_rest_getObjectStatesForContent',
+                array( 'contentId' => $contentInfo->id )
+            )
+        );
+        $generator->endAttribute( 'href' );
+        $generator->endObjectElement( 'ObjectStates' );
 
         $generator->endObjectElement( 'Content' );
     }

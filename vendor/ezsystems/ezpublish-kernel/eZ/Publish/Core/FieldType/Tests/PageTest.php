@@ -2,9 +2,9 @@
 /**
  * File containing the AuthorTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
@@ -65,10 +65,13 @@ class PageTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new PageType(
+        $fieldType = new PageType(
             $this->getPageServiceMock(),
             new HashConverter
         );
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     protected function getPageReference()
@@ -315,7 +318,7 @@ class PageTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new PageValue(),
                 null
             ),
             array(
@@ -365,7 +368,7 @@ class PageTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null
+                new PageValue(),
             ),
             array(
                 $this->getHashReference(),
@@ -448,6 +451,19 @@ class PageTest extends FieldTypeTest
                 // non-available layout
                 array( "defaultLayout" => "2ZonesLayout3" )
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezpage';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), "" ),
+            array( new PageValue( $this->getPageReference() ), "" )
         );
     }
 }

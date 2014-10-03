@@ -4,6 +4,7 @@ namespace eZ\Publish\Core\FieldType\Keyword\KeywordStorage\Gateway;
 
 use eZ\Publish\Core\FieldType\Keyword\KeywordStorage\Gateway;
 use eZ\Publish\SPI\Persistence\Content\Field;
+use eZ\Publish\Core\Persistence\Database\DatabaseHandler;
 
 class LegacyStorage extends Gateway
 {
@@ -21,7 +22,7 @@ class LegacyStorage extends Gateway
      *
      * @return void
      * @throws \RuntimeException if $dbHandler is not an instance of
-     *         {@link \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler}
+     *         {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler}
      */
     public function setConnection( $dbHandler )
     {
@@ -29,7 +30,7 @@ class LegacyStorage extends Gateway
         // the given class design there is no sane other option. Actually the
         // dbHandler *should* be passed to the constructor, and there should
         // not be the need to post-inject it.
-        if ( !$dbHandler instanceof \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler )
+        if ( !$dbHandler instanceof DatabaseHandler )
         {
             throw new \RuntimeException( "Invalid dbHandler passed" );
         }
@@ -42,7 +43,7 @@ class LegacyStorage extends Gateway
      *
      * @throws \RuntimeException if no connection has been set, yet.
      *
-     * @return \eZ\Publish\Core\Persistence\Legacy\EzcDbHandler
+     * @return \eZ\Publish\Core\Persistence\Database\DatabaseHandler
      */
     protected function getConnection()
     {
@@ -63,7 +64,7 @@ class LegacyStorage extends Gateway
     {
         $existingKeywordMap = $this->getExistingKeywords( $field->value->externalData, $contentTypeId );
 
-        $this->deleteOldKeywordAssignments( $field );
+        $this->deleteOldKeywordAssignments( $field->id );
 
         $this->assignKeywords(
             $field->id,
@@ -101,6 +102,17 @@ class LegacyStorage extends Gateway
     public function getContentTypeId( Field $field )
     {
         return $this->loadContentTypeId( $field->fieldDefinitionId );
+    }
+
+    /**
+     * Stores the keyword list from $field->value->externalData
+     *
+     * @param mixed $fieldId
+     */
+    public function deleteFieldData( $fieldId )
+    {
+        $this->deleteOldKeywordAssignments( $fieldId );
+        $this->deleteOrphanedKeywords();
     }
 
     /**
@@ -230,7 +242,7 @@ class LegacyStorage extends Gateway
      * </code>
      *
      * @param string[] $keywordsToInsert
-     * @param mixed $fieldDefinitionId
+     * @param mixed $contentTypeId
      *
      * @return mixed[]
      */
@@ -269,7 +281,7 @@ class LegacyStorage extends Gateway
         return $keywordIdMap;
     }
 
-    protected function deleteOldKeywordAssignments( Field $field )
+    protected function deleteOldKeywordAssignments( $fieldId )
     {
         $dbHandler = $this->getConnection();
 
@@ -279,7 +291,7 @@ class LegacyStorage extends Gateway
         )->where(
             $deleteQuery->expr->eq(
                 $dbHandler->quoteColumn( "objectattribute_id", "ezkeyword_attribute_link" ),
-                $deleteQuery->bindValue( $field->id, null, \PDO::PARAM_INT )
+                $deleteQuery->bindValue( $fieldId, null, \PDO::PARAM_INT )
             )
         );
 
@@ -343,7 +355,7 @@ class LegacyStorage extends Gateway
     {
         $dbHandler = $this->getConnection();
 
-        /** @var $query \ezcQuerySelect */
+        /** @var $query \\eZ\Publish\Core\Persistence\Database\SelectQuery */
         $query = $dbHandler->createSelectQuery();
         $query->select(
             "ezkeyword.id"

@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\IO\Tests\Base class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\IO\Tests\Handler;
@@ -15,8 +15,9 @@ use eZ\Publish\SPI\IO\BinaryFileUpdateStruct;
 use eZ\Publish\Core\IO\Handler as IOHandler;
 use DateTime;
 use finfo;
+use PHPUnit_Framework_TestCase;
 
-abstract class Base extends \PHPUnit_Framework_TestCase
+abstract class Base extends PHPUnit_Framework_TestCase
 {
     /**
      * Binary IoHandler
@@ -65,7 +66,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
         $binaryFile = $this->IOHandler->create( $struct );
 
         self::assertInstanceOf( 'eZ\\Publish\\SPI\\IO\\BinaryFile', $binaryFile );
-        self::assertEquals( $repositoryPath, $binaryFile->uri );
+        self::assertEquals( $repositoryPath, $binaryFile->id );
         self::assertEquals( 1928, $binaryFile->size );
         self::assertInstanceOf( 'DateTime', $binaryFile->mtime );
         self::assertNotEquals( 0, $binaryFile->mtime->getTimestamp() );
@@ -102,12 +103,13 @@ abstract class Base extends \PHPUnit_Framework_TestCase
         self::assertFalse( $this->IOHandler->exists( $secondPath ) );
         self::assertEquals(
             md5_file( $this->imageInputPath ),
-            md5( fread( $this->IOHandler->getFileResource( $firstPath ), $binaryFile->size ) )
+            md5( fread( $this->IOHandler->getFileResource( $firstPath ), $binaryFile->size ) ),
+            "Failed asserting that file contents was updated\n"
         );
 
         $newFilePath = __DIR__ . DIRECTORY_SEPARATOR . 'ezplogo2.png';
         $updateStruct = new BinaryFileUpdateStruct();
-        $updateStruct->uri = $secondPath;
+        $updateStruct->id = $secondPath;
         $updateStruct->setInputStream( fopen( $newFilePath, 'rb' ) );
         $updateStruct->size = filesize( $newFilePath );
 
@@ -124,32 +126,12 @@ abstract class Base extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \eZ\Publish\Core\IO\Handler::update
-     */
-    public function testUpdateMtime()
-    {
-        $path = 'images/update-mtime.gif';
-        $struct = $this->getCreateStructFromLocalFile( $this->imageInputPath, $path );
-        $binaryFile = $this->IOHandler->create( $struct );
-
-        $newMtime = new DateTime( 'last week' );
-        $updateStruct = new BinaryFileUpdateStruct();
-        $updateStruct->mtime = $newMtime;
-
-        $updatedBinaryFile = $this->IOHandler->update( $path, $updateStruct );
-        self::assertEquals( $binaryFile->uri, $updatedBinaryFile->uri );
-        self::assertEquals( $binaryFile->size, $updatedBinaryFile->size );
-
-        self::assertEquals( $newMtime, $updatedBinaryFile->mtime );
-    }
-
-    /**
-     * @covers \eZ\Publish\Core\IO\Handler::update
      * @expectedException \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function testUpdateNonExistingSource()
     {
         $updateStruct = new BinaryFileUpdateStruct();
-        $updateStruct->uri = 'images/testUpdateSourceNotFoundTarget.png';
+        $updateStruct->id = 'images/testUpdateSourceNotFoundTarget.png';
 
         $this->IOHandler->update( 'images/testUpdateSourceNotFoundSource.png', $updateStruct );
     }
@@ -173,7 +155,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
         self::assertTrue( $this->IOHandler->exists( $secondPath ) );
 
         $updateStruct = new BinaryFileUpdateStruct();
-        $updateStruct->uri = $secondPath;
+        $updateStruct->id = $secondPath;
 
         $this->IOHandler->update( $firstPath, $updateStruct );
     }
@@ -232,7 +214,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
 
         self::assertInstanceOf( 'eZ\\Publish\\SPI\\IO\\BinaryFile', $loadedFile );
 
-        self::assertEquals( 'images/load.gif', $loadedFile->uri );
+        self::assertEquals( 'images/load.gif', $loadedFile->id );
         self::assertEquals( 1928, $loadedFile->size );
         self::assertInstanceOf( 'DateTime', $loadedFile->mtime );
     }
@@ -265,7 +247,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \eZ\Publish\Core\IO\Handler::getFileResource
-     * @expectedException eZ\Publish\Core\Base\Exceptions\NotFoundException
+     * @expectedException \eZ\Publish\Core\Base\Exceptions\NotFoundException
      */
     public function testGetFileResourceNonExistingFile()
     {
@@ -286,7 +268,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \eZ\Publish\Core\IO\Handler::getFileContents
-     * @expectedException eZ\Publish\Core\Base\Exceptions\NotFoundException
+     * @expectedException \eZ\Publish\Core\Base\Exceptions\NotFoundException
      */
     public function testGetFileContentsNonExistingFile()
     {
@@ -300,8 +282,8 @@ abstract class Base extends \PHPUnit_Framework_TestCase
     public function testGetMetadata( BinaryFile $binaryFile )
     {
         // @todo Add @depends on createFile
-        $path = $binaryFile->uri;
-        $internalPath = $this->IOHandler->getInternalPath( $path );
+        $id = $binaryFile->id;
+        $internalPath = $this->IOHandler->getInternalPath( $id );
 
         $metadataHandlerMock = $this->getMock( 'eZ\\Publish\\Core\\IO\\MetadataHandler' );
         $expectedMetadata = array( 'some' => 1, 'meta' => 2 );
@@ -312,7 +294,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
 
         $metadata = $this->IOHandler->getMetadata(
             $metadataHandlerMock,
-            $path
+            $id
         );
 
         self::assertEquals( $metadata, $expectedMetadata );
@@ -338,7 +320,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
 
         $struct = new BinaryFileCreateStruct();
         $struct->size = filesize( $localFile );
-        $struct->uri = $repositoryPath;
+        $struct->id = $repositoryPath;
         $struct->mimeType = $this->getMimeTypeFromPath( $localFile );
 
         $inputStream = fopen( $localFile, 'rb' );

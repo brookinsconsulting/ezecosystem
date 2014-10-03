@@ -2,9 +2,9 @@
 /**
  * File containing the CreatedURLWildcard ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -14,6 +14,7 @@ use eZ\Publish\Core\REST\Common\Output\Visitor;
 
 /**
  * CreatedURLWildcard value object visitor
+ * @todo coverage add unit test
  */
 class CreatedURLWildcard extends URLWildcard
 {
@@ -29,9 +30,9 @@ class CreatedURLWildcard extends URLWildcard
         parent::visit( $visitor, $generator, $data->urlWildcard );
         $visitor->setHeader(
             'Location',
-            $this->urlHandler->generate(
-                'urlWildcard',
-                array( 'urlwildcard' => $data->urlWildcard->id )
+            $this->router->generate(
+                'ezpublish_rest_loadURLWildcard',
+                array( 'urlWildcardId' => $data->urlWildcard->id )
             )
         );
         $visitor->setStatus( 201 );

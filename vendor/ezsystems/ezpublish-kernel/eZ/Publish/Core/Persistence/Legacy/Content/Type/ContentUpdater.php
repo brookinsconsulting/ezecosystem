@@ -2,14 +2,13 @@
 /**
  * File containing the content updater class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Type;
 
-use eZ\Publish\Core\Persistence\Legacy\Content;
 use eZ\Publish\SPI\Persistence\Content\Search\Handler as SearchHandler;
 use eZ\Publish\Core\Persistence\Legacy\Content\Gateway as ContentGateway;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageHandler;
@@ -78,7 +77,7 @@ class ContentUpdater
      * @param \eZ\Publish\SPI\Persistence\Content\Type $fromType
      * @param \eZ\Publish\SPI\Persistence\Content\Type $toType
      *
-     * @return ContentUpdater\Action[]
+     * @return \eZ\Publish\Core\Persistence\Legacy\Content\Type\ContentUpdater\Action[]
      */
     public function determineActions( Type $fromType, Type $toType )
     {
@@ -135,7 +134,7 @@ class ContentUpdater
      * Applies all given updates
      *
      * @param mixed $contentTypeId
-     * @param ContentUpdater\Action[] $actions
+     * @param \eZ\Publish\Core\Persistence\Legacy\Content\Type\ContentUpdater\Action[] $actions
      *
      * @return void
      */
@@ -155,14 +154,14 @@ class ContentUpdater
      *
      * @param mixed $contentTypeId
      *
-     * @return Content[]
+     * @return \eZ\Publish\SPI\Persistence\Content[]
      */
     protected function loadContentObjects( $contentTypeId )
     {
         $result = $this->searchHandler->findContent(
             new Query(
                 array(
-                    'criterion' => new Criterion\ContentTypeId( $contentTypeId )
+                    'filter' => new Criterion\ContentTypeId( $contentTypeId )
                 )
             )
         );

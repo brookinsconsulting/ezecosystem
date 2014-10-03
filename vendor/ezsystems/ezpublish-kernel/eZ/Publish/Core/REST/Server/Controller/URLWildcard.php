@@ -2,9 +2,9 @@
 /**
  * File containing the URLWildcard controller class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Controller;
@@ -42,12 +42,13 @@ class URLWildcard extends RestController
     /**
      * Returns the URL wildcard with the given id
      *
+     * @param $urlWildcardId
+     *
      * @return \eZ\Publish\API\Repository\Values\Content\URLWildcard
      */
-    public function loadURLWildcard()
+    public function loadURLWildcard( $urlWildcardId )
     {
-        $values = $this->urlHandler->parse( 'urlWildcard', $this->request->path );
-        return $this->urlWildcardService->load( $values['urlwildcard'] );
+        return $this->urlWildcardService->load( $urlWildcardId );
     }
 
     /**
@@ -65,14 +66,15 @@ class URLWildcard extends RestController
     /**
      * Creates a new URL wildcard
      *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\CreatedURLWildcard
      */
     public function createURLWildcard()
     {
         $urlWildcardCreate = $this->inputDispatcher->parse(
             new Message(
-                array( 'Content-Type' => $this->request->contentType ),
-                $this->request->body
+                array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                $this->request->getContent()
             )
         );
 
@@ -99,13 +101,14 @@ class URLWildcard extends RestController
     /**
      * The given URL wildcard is deleted
      *
+     * @param $urlWildcardId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\NoContent
      */
-    public function deleteURLWildcard()
+    public function deleteURLWildcard( $urlWildcardId)
     {
-        $values = $this->urlHandler->parse( 'urlWildcard', $this->request->path );
         $this->urlWildcardService->remove(
-            $this->urlWildcardService->load( $values['urlwildcard'] )
+            $this->urlWildcardService->load( $urlWildcardId )
         );
 
         return new Values\NoContent();

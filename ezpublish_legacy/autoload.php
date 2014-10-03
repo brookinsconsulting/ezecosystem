@@ -2,9 +2,9 @@
 /**
  * Autoloader definition for eZ Publish
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -23,6 +23,7 @@ if ( !defined( 'EZCBASE_ENABLED' ) )
 {
     $appName = defined( 'EZP_APP_FOLDER_NAME' ) ? EZP_APP_FOLDER_NAME : 'ezpublish';
     $appFolder = __DIR__ . "/../$appName";
+    $legacyVendorDir = __DIR__ . "/vendor";
 
     // Bundled
     if ( defined( 'EZP_USE_BUNDLED_COMPONENTS' ) ? EZP_USE_BUNDLED_COMPONENTS === true : file_exists( __DIR__ . "/lib/ezc" ) )
@@ -41,6 +42,12 @@ if ( !defined( 'EZCBASE_ENABLED' ) )
     else if ( strpos( $appFolder, "{$appName}/../{$appName}" ) === false && file_exists( "{$appFolder}/autoload.php" ) )
     {
         require_once "{$appFolder}/autoload.php";
+        $baseEnabled = false;
+    }
+    // Composer if in eZ Publish legacy context
+    else if ( file_exists( "{$legacyVendorDir}/autoload.php" ) )
+    {
+        require_once "{$legacyVendorDir}/autoload.php";
         $baseEnabled = false;
     }
     // PEAR install

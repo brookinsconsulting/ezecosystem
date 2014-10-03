@@ -2,16 +2,15 @@
 /**
  * File containing the TextBlockTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\TextBlock\Type as TextBlockType;
 use eZ\Publish\Core\FieldType\TextBlock\Value as TextBlockValue;
-use ReflectionObject;
 
 /**
  * @group fieldType
@@ -32,7 +31,10 @@ class TextBlockTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new TextBlockType();
+        $fieldType = new TextBlockType();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -337,6 +339,19 @@ class TextBlockTest extends FieldTypeTest
                     'textRows' => 'foo',
                 )
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'eztext';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), '' ),
+            array( new TextBlockValue( 'This is a piece of text' ), 'This is a piece of text' )
         );
     }
 }

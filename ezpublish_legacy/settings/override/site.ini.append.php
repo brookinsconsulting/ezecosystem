@@ -20,6 +20,12 @@ DebugIPList[]=192.168.1.73
 DebugIPList[]=127.0.0.1
 DebugIPList[]=::1/32
 
+[TemplateSettings]
+# Enabled to see which template files are loaded or disabled to supress debug
+# Warning: Will add debug xhtml comments to your source code, including mails!
+# Note: No debug on templates starting with <!DOCTYPE to not trigger quirks mode!
+# Debug=enabled
+
 [ExtensionSettings]
 ActiveExtensions[]
 ActiveExtensions[]=ezecosystem

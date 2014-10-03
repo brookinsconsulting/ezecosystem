@@ -2,23 +2,25 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 // SOFTWARE NAME: eZ Flow
-// SOFTWARE RELEASE: 5.0.0
-// COPYRIGHT NOTICE: Copyright (C) 1999-2012 eZ Systems AS
+// SOFTWARE RELEASE: 1.1-0
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
-//  This program is free software; you can redistribute it and/or
-//  modify it under the terms of version 2.0  of the GNU General
-//  Public License as published by the Free Software Foundation.
+//   This program is free software; you can redistribute it and/or
+//   modify it under the terms of version 2.0  of the GNU General
+//   Public License as published by the Free Software Foundation.
 //
-//  This program is distributed in the hope that it will be useful,
+//   This program is distributed in the hope that it will be useful,
 //   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
 //
-//  You should have received a copy of version 2.0 of the GNU General
-//  Public License along with this program; if not, write to the Free
-//  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-//  MA 02110-1301, USA.
+//   You should have received a copy of version 2.0 of the GNU General
+//   Public License along with this program; if not, write to the Free
+//   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+//   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -78,13 +80,23 @@ class eZFlowPool
         if ( isset( $GLOBALS['eZFlowPool'][$blockID] ) )
             return $GLOBALS['eZFlowPool'][$blockID];
 
+        $visibilitySQL = "";
+
+        if ( eZINI::instance( 'site.ini' )->variable( 'SiteAccessSettings', 'ShowHiddenNodes' ) !== 'true' )
+        {
+            $visibilitySQL = "AND ezcontentobject_tree.is_invisible = 0 ";
+        }
+
         $db = eZDB::instance();
-        $validNodes = $db->arrayQuery( "SELECT *
-                                        FROM ezm_pool, ezcontentobject_tree
+        $validNodes = $db->arrayQuery( "SELECT ezm_pool.node_id
+                                        FROM ezm_pool, ezcontentobject_tree, ezcontentobject
                                         WHERE ezm_pool.block_id='$blockID'
                                           AND ezm_pool.ts_visible>0
                                           AND ezm_pool.ts_hidden=0
                                           AND ezcontentobject_tree.node_id = ezm_pool.node_id
+                                          AND ezcontentobject.id = ezm_pool.object_id
+                                          AND " . eZContentLanguage::languagesSQLFilter( 'ezcontentobject' ) . "
+                                          $visibilitySQL
                                         ORDER BY ezm_pool.priority DESC" );
 
         if ( $asObject && !empty( $validNodes ) )
@@ -93,8 +105,9 @@ class eZFlowPool
 
             foreach( $validNodes as $node )
             {
-                $nodeID = $node['node_id'];
-                $validNodesObjects[] = eZContentObjectTreeNode::fetch( $nodeID );
+                $validNodeObject = eZContentObjectTreeNode::fetch( $node['node_id'] );
+                if ( $validNodeObject instanceof eZContentObjectTreeNode && $validNodeObject->canRead() )
+                    $validNodesObjects[] = $validNodeObject;
             }
 
             $GLOBALS['eZFlowPool'][$blockID] = $validNodesObjects;

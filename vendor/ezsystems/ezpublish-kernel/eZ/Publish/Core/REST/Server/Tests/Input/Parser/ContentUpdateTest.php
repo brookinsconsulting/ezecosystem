@@ -2,15 +2,17 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\REST\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
 use eZ\Publish\Core\REST\Common\Values\RestContentMetadataUpdateStruct;
+use eZ\Publish\Core\REST\Common\Exceptions\Parser;
 use DateTime;
 
 class ContentUpdateTest extends BaseTest
@@ -24,7 +26,7 @@ class ContentUpdateTest extends BaseTest
     {
         $inputArray = $this->getValidInputData();
 
-        $contentUpdateParser = $this->getContentUpdate();
+        $contentUpdateParser = $this->getParser();
         $result = $contentUpdateParser->parse(
             $inputArray,
             $this->getParsingDispatcherMock()
@@ -63,7 +65,7 @@ class ContentUpdateTest extends BaseTest
         $inputArray = $this->getValidInputData();
         $inputArray[$element]['_href'] = '/invalid/section/uri';
 
-        $contentUpdateParser = $this->getContentUpdate();
+        $contentUpdateParser = $this->getParser();
 
         try
         {
@@ -72,7 +74,7 @@ class ContentUpdateTest extends BaseTest
                 $this->getParsingDispatcherMock()
             );
         }
-        catch ( \eZ\Publish\Core\REST\Common\Exceptions\Parser $e )
+        catch ( Parser $e )
         {
             if ( $e->getMessage() != $exceptionMessage )
             {
@@ -105,7 +107,7 @@ class ContentUpdateTest extends BaseTest
         $inputArray = $this->getValidInputData();
         $inputArray[$element] = 42;
 
-        $contentUpdateParser = $this->getContentUpdate();
+        $contentUpdateParser = $this->getParser();
 
         try
         {
@@ -114,7 +116,7 @@ class ContentUpdateTest extends BaseTest
                 $this->getParsingDispatcherMock()
             );
         }
-        catch ( \eZ\Publish\Core\REST\Common\Exceptions\Parser $e )
+        catch ( Parser $e )
         {
             if ( $e->getMessage() != $exceptionMessage )
             {
@@ -142,9 +144,9 @@ class ContentUpdateTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\ContentUpdate
      */
-    protected function getContentUpdate()
+    protected function internalGetParser()
     {
-        return new ContentUpdateParser( $this->getUrlHandler() );
+        return new ContentUpdateParser();
     }
 
     /**
@@ -157,9 +159,9 @@ class ContentUpdateTest extends BaseTest
         return new RestContentMetadataUpdateStruct(
             array(
                 'mainLanguageCode' => 'eng-GB',
-                'sectionId'        => '23',
+                'sectionId'        => 23,
                 'mainLocationId'   => '/1/2/55',
-                'ownerId'          => '42',
+                'ownerId'          => 42,
                 'alwaysAvailable'  => false,
                 'remoteId'         => '7e7afb135e50490a281dafc0aafb6dac',
                 'modificationDate' => new DateTime( '19/Sept/2012:14:05:00 +0200' ),
@@ -183,7 +185,20 @@ class ContentUpdateTest extends BaseTest
             'alwaysAvailable'  => 'false',
             'remoteId'         => '7e7afb135e50490a281dafc0aafb6dac',
             'modificationDate' => '19/Sept/2012:14:05:00 +0200',
-            'publishDate'    => '19/Sept/2012:14:05:00 +0200'
+            'publishDate'      => '19/Sept/2012:14:05:00 +0200'
+        );
+    }
+
+    public function getParseHrefExpectationsMap()
+    {
+        return array(
+            array( '/content/sections/23', 'sectionId', 23 ),
+            array( '/user/users/42', 'userId', 42 ),
+            array( '/content/locations/1/2/55', 'locationPath', '1/2/55' ),
+
+            array( '/invalid/section/uri', 'sectionId', new InvalidArgumentException( 'Invalid format for <Section> reference in <ContentUpdate>.' ) ),
+            array( '/invalid/section/uri', 'userId', new InvalidArgumentException( 'Invalid format for <Owner> reference in <ContentUpdate>.' ) ),
+            array( '/invalid/section/uri', 'locationPath', new InvalidArgumentException( 'Invalid format for <MainLocation> reference in <ContentUpdate>.' ) ),
         );
     }
 }

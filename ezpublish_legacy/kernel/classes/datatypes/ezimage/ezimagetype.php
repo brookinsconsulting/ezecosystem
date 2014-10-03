@@ -2,9 +2,9 @@
 /**
  * File containing the eZImageType class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -140,7 +140,7 @@ class eZImageType extends eZDataType
             return;
         }
         $conds = array(
-                "contentobject_attribute_id" => $contentObjectAttribute->attribute( "id" ),
+        	"contentobject_attribute_id" => $contentObjectAttribute->attribute( "id" ),
             "filepath"                   => array( $aliasesPath )
         );
         $remainingAliases = eZPersistentObject::fetchObjectList(
@@ -175,15 +175,13 @@ class eZImageType extends eZDataType
 
     function deleteStoredObjectAttribute( $contentObjectAttribute, $version = null )
     {
-        if ( $version === null )
+        /** @var eZImageAliasHandler $imageHandler */
+        $imageHandler = $contentObjectAttribute->attribute( 'content' );
+        if ( $imageHandler )
         {
-            eZImageAliasHandler::removeAllAliases( $contentObjectAttribute );
-        }
-        else
-        {
-            $imageHandler = $contentObjectAttribute->attribute( 'content' );
-            if ( $imageHandler )
-                $imageHandler->removeAliases( $contentObjectAttribute );
+            $imageHandler->setAttribute( 'alternative_text', false );
+            $imageHandler->removeAliases();
+            $imageHandler->store( $contentObjectAttribute );
         }
     }
 
@@ -432,6 +430,7 @@ class eZImageType extends eZDataType
         $hasContent = $contentObjectAttribute->hasContent();
         if ( $hasContent )
         {
+            /** @var eZImageAliasHandler $imageHandler */
             $imageHandler = $contentObjectAttribute->attribute( 'content' );
             $mainNode = false;
             foreach ( array_keys( $publishedNodes ) as $publishedNodeKey )
@@ -477,11 +476,7 @@ class eZImageType extends eZDataType
     {
         if( $action == "delete_image" )
         {
-            $content = $contentObjectAttribute->attribute( 'content' );
-            if ( $content )
-            {
-                $content->removeAliases( $contentObjectAttribute );
-            }
+            $this->deleteStoredObjectAttribute( $contentObjectAttribute );
         }
     }
 
@@ -612,6 +607,7 @@ class eZImageType extends eZDataType
     {
         $delimiterPos = strpos( $string, '|' );
 
+        /** @var eZImageAliasHandler $content */
         $content = $objectAttribute->attribute( 'content' );
         if ( $delimiterPos === false )
         {
@@ -629,6 +625,29 @@ class eZImageType extends eZDataType
     function supportsBatchInitializeObjectAttribute()
     {
         return true;
+    }
+
+    /**
+     * Iterates over images referenced in data_text, and adds eZImageFile references
+     * @param eZContentObjectAttribute $objectAttribute
+     */
+    function postStore( $objectAttribute )
+    {
+        $objectAttributeId = $objectAttribute->attribute( "id" );
+
+        if ( ( $doc = simplexml_load_string( $objectAttribute->attribute( "data_text" ) ) ) === false )
+            return;
+
+        // Creates ezimagefile entries
+        foreach ( $doc->xpath( "//*/@url" ) as $url )
+        {
+            $url = (string)$url;
+
+            if ( $url === "" )
+                continue;
+
+            eZImageFile::appendFilepath( $objectAttributeId, $url, true );
+        }
     }
 }
 

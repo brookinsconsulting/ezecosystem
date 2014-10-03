@@ -2,9 +2,9 @@
 /**
  * File containing the ContentTypeGateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\User\Role\Gateway;
@@ -13,6 +13,9 @@ use eZ\Publish\Core\Persistence\Legacy\User\Role\Gateway;
 use eZ\Publish\SPI\Persistence\User\Policy;
 use eZ\Publish\SPI\Persistence\User\RoleUpdateStruct;
 use eZ\Publish\SPI\Persistence\User\Role;
+use Doctrine\DBAL\DBALException;
+use PDOException;
+use RuntimeException;
 
 /**
  * Base class for content type gateways.
@@ -49,13 +52,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->createRole( $role );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -72,13 +75,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadRole( $roleId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -95,13 +98,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadRoleByIdentifier( $identifier );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -116,13 +119,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadRoles();
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -139,13 +142,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadRolesForContentObjects( $contentIds );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -163,13 +166,36 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadRoleAssignmentsByGroupId( $groupId, $inherited );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
+        }
+    }
+
+    /**
+     * Loads role assignments for given role ID
+     *
+     * @param mixed $roleId
+     *
+     * @return array
+     */
+    public function loadRoleAssignmentsByRoleId( $roleId )
+    {
+        try
+        {
+            return $this->innerGateway->loadRoleAssignmentsByRoleId( $roleId );
+        }
+        catch ( DBALException $e )
+        {
+            throw new RuntimeException( 'Database error', 0, $e );
+        }
+        catch ( PDOException $e )
+        {
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -186,18 +212,20 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadPoliciesByUserId( $userId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
     /**
      * Update role
+     *
+     * @throws \eZ\Publish\Core\Base\Exceptions\NotFoundException
      *
      * @param RoleUpdateStruct $role
      */
@@ -207,18 +235,18 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->updateRole( $role );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
     /**
-     * Delete the specified role
+     * Delete the specified role including all of its assignments
      *
      * @param mixed $roleId
      */
@@ -228,13 +256,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteRole( $roleId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -252,13 +280,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->addPolicy( $roleId, $policy );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -276,13 +304,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->addPolicyLimitations( $policyId, $limitations );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -299,13 +327,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->removePolicy( $policyId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 
@@ -322,13 +350,13 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->removePolicyLimitations( $policyId );
         }
-        catch ( \ezcDbException $e )
+        catch ( DBALException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
-        catch ( \PDOException $e )
+        catch ( PDOException $e )
         {
-            throw new \RuntimeException( 'Database error', 0, $e );
+            throw new RuntimeException( 'Database error', 0, $e );
         }
     }
 }

@@ -3754,7 +3754,7 @@ version: 2.8.2r1
          *
          * @param {Number} x The X coordinate value to be constrained
          * @return {Number} The constrained x coordinate
-         */             
+         */		
         getConstrainedX: function (x) {
             return this._getConstrainedPos("x", x);
         },
@@ -3766,7 +3766,7 @@ version: 2.8.2r1
          *
          * @param {Number} y The Y coordinate value to be constrained
          * @return {Number} The constrained y coordinate
-         */             
+         */		
         getConstrainedY : function (y) {
             return this._getConstrainedPos("y", y);
         },

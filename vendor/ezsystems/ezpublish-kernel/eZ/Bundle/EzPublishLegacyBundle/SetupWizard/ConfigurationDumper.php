@@ -2,9 +2,9 @@
 /**
  * File containing the legacy ConfigurationDumper class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishLegacyBundle\SetupWizard;
@@ -48,7 +48,7 @@ class ConfigurationDumper implements ConfigDumperInterface
      */
     protected $envs;
 
-    public function __construct( Filesystem $fs, array $envs, $rootDir, $cacheDir, Configurator $sensioConfigurator = null )
+    public function __construct( Filesystem $fs, array $envs, $rootDir, $cacheDir, Configurator $sensioConfigurator )
     {
         $this->fs = $fs;
         $this->rootDir = $rootDir;
@@ -105,16 +105,13 @@ class ConfigurationDumper implements ConfigDumperInterface
         }
 
         // Handling %secret%
-        if ( $this->sensioConfigurator !== null )
-        {
-            $this->sensioConfigurator->mergeParameters(
-                array(
-                    // Step #1 is SecretStep
-                    'secret' => $this->sensioConfigurator->getStep( 1 )->secret
-                )
-            );
-            $this->sensioConfigurator->write();
-        }
+        $this->sensioConfigurator->mergeParameters(
+            array(
+                // Step #1 is SecretStep
+                'secret' => $this->sensioConfigurator->getStep( 1 )->secret
+            )
+        );
+        $this->sensioConfigurator->write();
 
         $this->clearCache();
     }

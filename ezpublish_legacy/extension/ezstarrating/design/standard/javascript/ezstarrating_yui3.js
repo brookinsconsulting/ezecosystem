@@ -4,8 +4,8 @@
  * 
  * This piece of code depends on YUI 3.0 and eZJSCore ( Y.io.ez() plugin ).
  *
- * @copyright Copyright (c) 1999-2012 eZ Systems AS
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
+ * @copyright Copyright (c) 1999-2014 eZ Systems AS
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2.0
  * @package eZ Starating extension for eZ Publish
  *
  */

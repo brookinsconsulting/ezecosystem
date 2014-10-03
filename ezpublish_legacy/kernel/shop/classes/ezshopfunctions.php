@@ -2,9 +2,9 @@
 /**
  * File containing the eZShopFunctions class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -107,13 +107,23 @@ class eZShopFunctions
         return in_array( $dataTypeString, eZShopFunctions::productDatatypeStringList() );
     }
 
-    /*!
-     \static
-    */
+    /**
+     * Since 5.3 you can define a ini variable containing all datatypes having prices.
+     * If the setting is not present, function will return a hardcoded list of them
+     * like it did before.
+     *
+     * @return array
+     */
     static function productDatatypeStringList()
     {
-        return array( 'ezprice',
-                      'ezmultiprice' );
+        $ini = eZINI::instance();
+        if ( $ini->hasVariable( 'ShopSettings', 'ProductDatatypeStringList' ) )
+            return eZINI::instance()->variable('ShopSettings', 'ProductDatatypeStringList' );
+
+        return array(
+            'ezprice',
+            'ezmultiprice'
+        );
     }
 
     static function productClassList()

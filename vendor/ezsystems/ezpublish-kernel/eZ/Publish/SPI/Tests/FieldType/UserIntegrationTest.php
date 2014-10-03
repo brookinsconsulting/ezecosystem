@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\SPI\Tests\FieldType\UserIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
@@ -55,26 +55,19 @@ class UserIntegrationTest extends BaseIntegrationTest
      */
     public function getCustomHandler()
     {
-        $handler = $this->getHandler();
+        $fieldType = new FieldType\User\Type();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessor() );
 
-        $handler->getFieldTypeRegistry()->register(
+        return $this->getHandler(
             'ezuser',
-            new FieldType\User\Type()
-        );
-        $handler->getStorageRegistry()->register(
-            'ezuser',
+            $fieldType,
+            new Legacy\Content\FieldValue\Converter\Null(),
             new FieldType\User\UserStorage(
                 array(
                     'LegacyStorage' => new FieldType\User\UserStorage\Gateway\LegacyStorage(),
                 )
             )
         );
-        $handler->getFieldValueConverterRegistry()->register(
-            'ezuser',
-            new Legacy\Content\FieldValue\Converter\Null()
-        );
-
-        return $handler;
     }
 
     /**

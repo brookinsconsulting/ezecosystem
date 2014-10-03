@@ -2,17 +2,16 @@
 /**
  * File contains: eZ\Publish\Core\Persistence\Legacy\Tests\HandlerTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Tests;
 
-use eZ\Publish\Core\Persistence\Legacy\Tests\TestCase;
-use eZ\Publish\Core\Base\ConfigurationManager;
 use eZ\Publish\Core\Base\ServiceContainer;
 use eZ\Publish\Core\Persistence\Legacy\Handler;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Compiler;
 
 /**
  * Test case for Repository Handler
@@ -51,129 +50,6 @@ class HandlerTest extends TestCase
         $this->assertSame(
             $handler->contentHandler(),
             $handler->contentHandler()
-        );
-    }
-
-    /**
-     * Issue #97
-     *
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::contentHandler
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::getStorageRegistry
-     *
-     * @return void
-     */
-    public function testStorageRegistryReused()
-    {
-        $handler = $this->getHandlerFixture();
-
-        $storageRegistry = $handler->getStorageRegistry();
-        $contentHandler = $handler->contentHandler();
-        $fieldHandler = $this->readAttribute(
-            $contentHandler,
-            'fieldHandler'
-        );
-        $storageHandler = $this->readAttribute(
-            $fieldHandler,
-            'storageHandler'
-        );
-
-        $this->assertAttributeSame(
-            $storageRegistry,
-            'storageRegistry',
-            $storageHandler
-        );
-    }
-
-    /**
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::getFieldValueConverterRegistry
-     *
-     * @return void
-     */
-    public function testGetFieldValueConverterRegistry()
-    {
-        $handler = $this->getHandlerFixture();
-        $registry = $handler->getFieldValueConverterRegistry();
-
-        $this->assertInstanceOf(
-            'eZ\\Publish\\Core\\Persistence\\Legacy\\Content\\FieldValue\\ConverterRegistry',
-            $registry
-        );
-    }
-
-    /**
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::getFieldValueConverterRegistry
-     *
-     * @return void
-     */
-    public function testGetFieldValueConverterRegistryTwice()
-    {
-        $handler = $this->getHandlerFixture();
-
-        $this->assertSame(
-            $handler->getFieldValueConverterRegistry(),
-            $handler->getFieldValueConverterRegistry()
-        );
-    }
-
-    /**
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::getStorageRegistry
-     *
-     * @return void
-     */
-    public function testGetStorageRegistry()
-    {
-        $handler = $this->getHandlerFixture();
-        $registry = $handler->getStorageRegistry();
-
-        $this->assertInstanceOf(
-            'eZ\\Publish\\Core\\Persistence\\Legacy\\Content\\StorageRegistry',
-            $registry
-        );
-    }
-
-    /**
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::getStorageRegistry
-     *
-     * @return void
-     */
-    public function testGetStorageRegistryTwice()
-    {
-        $handler = $this->getHandlerFixture();
-
-        $this->assertSame(
-            $handler->getStorageRegistry(),
-            $handler->getStorageRegistry()
-        );
-    }
-
-    /**
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::getFieldTypeRegistry
-     *
-     * @return void
-     */
-    public function testGetFieldTypeRegistry()
-    {
-        $handler = $this->getHandlerFixture();
-        $registry = $handler->getFieldTypeRegistry();
-
-        $this->assertInstanceOf(
-            'eZ\\Publish\\Core\\Persistence\\FieldTypeRegistry',
-            $registry
-        );
-    }
-
-    /**
-     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::getFieldTypeRegistry
-     *
-     * @return void
-     */
-    public function testGetFieldTypeRegistryTwice()
-    {
-        $handler = $this->getHandlerFixture();
-
-        $this->assertSame(
-            $handler->getFieldTypeRegistry(),
-            $handler->getFieldTypeRegistry()
         );
     }
 
@@ -400,59 +276,106 @@ class HandlerTest extends TestCase
     }
 
     /**
+     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::transactionHandler
+     *
+     * @return void
+     */
+    public function testTransactionHandler()
+    {
+        $handler = $this->getHandlerFixture();
+        $transactionHandler = $handler->transactionHandler();
+
+        $this->assertInstanceOf(
+            'eZ\\Publish\\SPI\\Persistence\\TransactionHandler',
+            $transactionHandler
+        );
+        $this->assertInstanceOf(
+            'eZ\\Publish\\Core\\Persistence\\Legacy\\TransactionHandler',
+            $transactionHandler
+        );
+    }
+
+    /**
+     * @covers eZ\Publish\Core\Persistence\Legacy\Handler::transactionHandler
+     *
+     * @return void
+     */
+    public function testTransactionHandlerTwice()
+    {
+        $handler = $this->getHandlerFixture();
+
+        $this->assertSame(
+            $handler->transactionHandler(),
+            $handler->transactionHandler()
+        );
+    }
+
+    protected static $legacyHandler;
+
+    /**
      * Returns the Handler
      *
      * @return Handler
      */
     protected function getHandlerFixture()
     {
-        // get configuration config
-        if ( !( $settings = include 'config.php' ) )
+        if ( !isset( self::$legacyHandler ) )
         {
-            throw new \RuntimeException( 'Could not find config.php, please copy config.php-DEVELOPMENT to config.php customize to your needs!' );
+            $container = $this->getContainer();
+
+            self::$legacyHandler = $container->get( 'ezpublish.spi.persistence.legacy' );
         }
 
-        // load configuration uncached
-        $configManager = new ConfigurationManager(
-            array_merge_recursive(
-                $settings,
-                array(
-                    'base' => array(
-                        'Configuration' => array(
-                            'UseCache' => false
-                        )
-                    )
-                )
-            ),
-            $settings['base']['Configuration']['Paths']
-        );
+        return self::$legacyHandler;
+    }
 
-        $serviceSettings = $configManager->getConfiguration( 'service' )->getAll();
-        $serviceSettings['legacy_db_handler']['arguments']['dsn'] = $this->getDsn();
-        $sc = new ServiceContainer(
-            $serviceSettings,
-            array()
-        );
+    protected static $container;
 
-        return $sc->get( 'persistence_handler_legacy' );
+    protected function getContainer()
+    {
+        if ( !isset( self::$container ) )
+        {
+            $config = include __DIR__ . '/../../../../../../config.php';
+            $installDir = $config['install_dir'];
+
+            /** @var \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder */
+            $containerBuilder = include $config['container_builder_path'];
+
+            $containerBuilder->setParameter(
+                "languages",
+                array( "eng-US", "eng-GB" )
+            );
+            $containerBuilder->setParameter(
+                "legacy_dsn",
+                $this->getDsn()
+            );
+
+            self::$container = new ServiceContainer(
+                $containerBuilder,
+                $installDir,
+                $config['cache_dir'],
+                true,
+                true
+            );
+        }
+
+        return self::$container;
     }
 
     /**
-     * @covers eZ\Publish\Core\Persistence\Legacy\EzcDbHandler::create
+     * @covers \eZ\Publish\Core\Persistence\Doctrine\ConnectionHandler::createFromDSN
      *
      * @return void
      */
     public function testDatabaseInstance()
     {
-        $method = new \ReflectionProperty(
-            'eZ\\Publish\\Core\\Persistence\\Legacy\\Handler',
-            'dbHandler'
-        );
-        $method->setAccessible( true );
-
-        $dbHandler = $method->getValue( $this->getHandlerFixture() );
+        $container = $this->getContainer();
+        $databaseHandler = $container->get( "ezpublish.api.storage_engine.legacy.dbhandler" );
         $className = get_class( $this->getDatabaseHandler() );
 
-        $this->assertTrue( $dbHandler instanceof $className, get_class( $dbHandler ) . " not of type $className." );
+        $this->assertTrue(
+            $databaseHandler instanceof $className,
+            get_class( $databaseHandler ) . " not of type $className."
+        );
     }
 }

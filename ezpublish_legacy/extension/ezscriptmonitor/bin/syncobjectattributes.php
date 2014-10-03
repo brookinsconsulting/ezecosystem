@@ -4,7 +4,7 @@
 //
 // Created on: <10-Aug-2004 15:47:14 pk>
 //
-// Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
+// Copyright (C) 1999-2014 eZ Systems AS. All rights reserved.
 //
 // This source file is part of the eZ publish (tm) Open Source Content
 // Management System.
@@ -73,27 +73,55 @@ function updateClass( $classId, $scheduledScript )
     {
         $attributeExist = false;
         $oldClassAttributeID = $oldClassAttribute->attribute( 'id' );
+
         foreach ( $attributes as $newClassAttribute )
         {
             if ( $oldClassAttributeID == $newClassAttribute->attribute( 'id' ) )
+            {
                 $attributeExist = true;
+            }
         }
+
         if ( !$attributeExist )
         {
-            $objectLimit = 50;
+            $ezscriptmonitorINI = eZINI::instance( 'ezscriptmonitor.ini' );
+            $objectLimit = $ezscriptmonitorINI->variable( 'GeneralSettings', 'ObjectLimit' );
             $limit = array( 'offset' => 0 , 'length' => $objectLimit );
             do
             {
-                $objectAttributes = eZContentObjectAttribute::fetchSameClassAttributeIDList( $oldClassAttributeID, true, false, false, $limit );
+                $objectAttributes = eZContentObjectAttribute::fetchSameClassAttributeIDList( $oldClassAttributeID, false, false, false, $limit );
                 $objectAttributeCount = count( $objectAttributes );
+
+                $conditions = array( "contentclassattribute_id" => $oldClassAttributeID );
+
+                $totalObjectAttributeCount = eZContentObjectAttribute::count(
+                    eZContentObjectAttribute::definition(),
+                    array( "contentclassattribute_id" => $oldClassAttributeID )
+                );
+
                 if ( is_array( $objectAttributes ) && $objectAttributeCount > 0 )
                 {
                     $db = eZDB::instance();
                     $db->begin();
+
                     foreach ( $objectAttributes as $objectAttribute )
+                    {
+                        $objectAttribute = new eZContentObjectAttribute( $objectAttribute );
                         $objectAttribute->removeThis( $objectAttribute->attribute( 'id' ) );
+                    }
+
                     $db->commit();
                     $limit['offset'] += $objectAttributeCount;
+
+                    $percentage = round( ( 100 * $limit['offset'] ) / $totalObjectAttributeCount, 2 );
+
+                    // for ezscriptmonitor 100 means the script is all the way done
+                    if ( ( $percentage < 100 ) && ( $scheduledScript !== false ) )
+                    {
+                        $scheduledScript->updateProgress( $percentage );
+                    }
+
+                    $cli->output( "Removing attributes - Progress: " . $percentage. " %" );
                 }
             } while ( $objectAttributeCount == $objectLimit );
         }
@@ -104,6 +132,7 @@ function updateClass( $classId, $scheduledScript )
     foreach ( $attributes as $newClassAttribute )
     {
         $attributeExist = false;
+
         foreach ( $oldClassAttributes as $oldClassAttribute )
         {
             if ( $oldClassAttribute->attribute( 'id' ) == $newClassAttribute->attribute( 'id' ) )
@@ -115,12 +144,15 @@ function updateClass( $classId, $scheduledScript )
         if ( !$attributeExist )
         {
             $objects = null;
+            $cli->output( "Adding attribute : " . $newClassAttribute->attribute( 'name' ));
             $newClassAttribute->initializeObjectAttributes( $objects );
         }
     }
 
     if ( $scheduledScript !== false )
+    {
         $scheduledScript->updateProgress( 100 );
+    }
 }
 
 

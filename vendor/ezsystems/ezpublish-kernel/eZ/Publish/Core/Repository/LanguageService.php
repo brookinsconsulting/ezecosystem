@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\Repository\LanguageService class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\Core\Repository
  */
 
@@ -22,6 +22,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentValue;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use LogicException;
+use Exception;
 
 /**
  * Language service, used for language operations
@@ -110,7 +111,7 @@ class LanguageService implements LanguageServiceInterface
             $createdLanguage = $this->languageHandler->create( $createStruct );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -133,9 +134,6 @@ class LanguageService implements LanguageServiceInterface
      */
     public function updateLanguageName( Language $language, $newName )
     {
-        if ( !is_numeric( $language->id ) )
-            throw new InvalidArgumentValue( "id", $language->id, "Language" );
-
         if ( !is_string( $newName ) || empty( $newName ) )
             throw new InvalidArgumentValue( "newName", $newName );
 
@@ -159,7 +157,7 @@ class LanguageService implements LanguageServiceInterface
             $this->languageHandler->update( $updateLanguageStruct );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -179,9 +177,6 @@ class LanguageService implements LanguageServiceInterface
      */
     public function enableLanguage( Language $language )
     {
-        if ( !is_numeric( $language->id ) )
-            throw new InvalidArgumentValue( "id", $language->id );
-
         if ( $this->repository->hasAccess( 'content', 'translations' ) !== true )
             throw new UnauthorizedException( 'content', 'translations' );
 
@@ -202,7 +197,7 @@ class LanguageService implements LanguageServiceInterface
             $this->languageHandler->update( $updateLanguageStruct );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -222,9 +217,6 @@ class LanguageService implements LanguageServiceInterface
      */
     public function disableLanguage( Language $language )
     {
-        if ( !is_numeric( $language->id ) )
-            throw new InvalidArgumentValue( "id", $language->id );
-
         if ( $this->repository->hasAccess( 'content', 'translations' ) !== true )
             throw new UnauthorizedException( 'content', 'translations' );
 
@@ -245,7 +237,7 @@ class LanguageService implements LanguageServiceInterface
             $this->languageHandler->update( $updateLanguageStruct );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -295,20 +287,15 @@ class LanguageService implements LanguageServiceInterface
     /**
      * Loads a Language by its id ($languageId)
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if languageId argument
-     *         is not integer
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException if language could not be found
      *
-     * @param int $languageId
+     * @param mixed $languageId
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Language
      */
     public function loadLanguageById( $languageId )
     {
-        if ( !is_numeric( $languageId ) )
-            throw new InvalidArgumentValue( "languageId", $languageId );
-
-        $language = $this->languageHandler->load( (int)$languageId );
+        $language = $this->languageHandler->load( $languageId );
 
         return $this->buildDomainObject( $language );
     }
@@ -325,9 +312,6 @@ class LanguageService implements LanguageServiceInterface
      */
     public function deleteLanguage( Language $language )
     {
-        if ( !is_numeric( $language->id ) )
-            throw new InvalidArgumentValue( "id", $language->id, "Language" );
-
         if ( $this->repository->hasAccess( 'content', 'translations' ) !== true )
             throw new UnauthorizedException( 'content', 'translations' );
 
@@ -344,7 +328,7 @@ class LanguageService implements LanguageServiceInterface
             $this->repository->rollback();
             throw new InvalidArgumentException( "language", $e->getMessage(), $e );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;

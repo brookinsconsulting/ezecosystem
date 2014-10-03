@@ -2,17 +2,19 @@
 /**
  * File containing the eZ\Publish\Core\FieldType\XmlText\Converter\EmbedToHtml5 class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\XmlText\Converter;
 
 use eZ\Publish\Core\FieldType\XmlText\Converter;
-use eZ\Publish\Core\MVC\Symfony\View\Manager;
 use eZ\Publish\API\Repository\Repository;
 use DOMDocument;
+use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo as APIVersionInfo;
+use eZ\Publish\Core\MVC\Symfony\View\ViewManagerInterface;
 
 /**
  * Converts embedded elements from internal XmlText representation to HTML5
@@ -26,7 +28,7 @@ class EmbedToHtml5 implements Converter
     protected $excludedAttributes = array();
 
     /**
-     * @var \eZ\Publish\Core\MVC\Symfony\View\Manager
+     * @var \eZ\Publish\Core\MVC\Symfony\View\ViewManagerInterface
      */
     protected $viewManager;
 
@@ -35,7 +37,7 @@ class EmbedToHtml5 implements Converter
      */
     protected $repository;
 
-    public function __construct( Manager $viewManager, Repository $repository, array $excludedAttributes )
+    public function __construct( ViewManagerInterface $viewManager, Repository $repository, array $excludedAttributes )
     {
         $this->viewManager = $viewManager;
         $this->repository = $repository;
@@ -49,6 +51,7 @@ class EmbedToHtml5 implements Converter
      */
     protected function processTag( DOMDocument $xmlDoc, $tagName )
     {
+        /** @var $embed \DOMElement */
         foreach ( $xmlDoc->getElementsByTagName( $tagName ) as $embed )
         {
             if ( !$view = $embed->getAttribute( "view" ) )
@@ -73,19 +76,52 @@ class EmbedToHtml5 implements Converter
 
             if ( $contentId = $embed->getAttribute( "object_id" ) )
             {
-                $embedContent = $this->viewManager->renderContent(
-                    $this->repository->getContentService()->loadContent( $contentId ),
-                    $view,
-                    $parameters
+                /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+                $content = $this->repository->sudo(
+                    function ( Repository $repository ) use ( $contentId )
+                    {
+                        return $repository->getContentService()->loadContent( $contentId );
+                    }
                 );
+
+                if (
+                    !$this->repository->canUser( 'content', 'read', $content )
+                    && !$this->repository->canUser( 'content', 'view_embed', $content )
+                )
+                {
+                    throw new UnauthorizedException( 'content', 'read' );
+                }
+
+                // Check published status of the Content
+                if (
+                    $content->getVersionInfo()->status !== APIVersionInfo::STATUS_PUBLISHED
+                    && !$this->repository->canUser( 'content', 'versionread', $content )
+                )
+                {
+                    throw new UnauthorizedException( 'content', 'versionread' );
+                }
+
+                $embedContent = $this->viewManager->renderContent( $content, $view, $parameters );
             }
             else if ( $locationId = $embed->getAttribute( "node_id" ) )
             {
-                $embedContent = $this->viewManager->renderLocation(
-                    $this->repository->getLocationService()->loadLocation( $locationId ),
-                    $view,
-                    $parameters
+                /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
+                $location = $this->repository->sudo(
+                    function ( Repository $repository ) use ( $locationId )
+                    {
+                        return $repository->getLocationService()->loadLocation( $locationId );
+                    }
                 );
+
+                if (
+                    !$this->repository->canUser( 'content', 'read', $location->getContentInfo(), $location )
+                    && !$this->repository->canUser( 'content', 'view_embed', $location->getContentInfo(), $location )
+                )
+                {
+                    throw new UnauthorizedException( 'content', 'read' );
+                }
+
+                $embedContent = $this->viewManager->renderLocation( $location, $view, $parameters );
             }
 
             if ( $embedContent !== null )

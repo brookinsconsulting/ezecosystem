@@ -2,15 +2,17 @@
 /**
  * File containing the Persistence Cache SPI logger class
  *
- * @copyright Copyright (C) 1999-2012 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Cache;
 
 /**
  * Log un-cached use of SPI Persistence
+ *
+ * Stops logging details when reaching $maxLogCalls to conserve memory use
  */
 class PersistenceLogger
 {
@@ -20,6 +22,11 @@ class PersistenceLogger
      * @var int
      */
     protected $count = 0;
+
+    /**
+     * @var bool
+     */
+    protected $logCalls = true;
 
     /**
      * @var array
@@ -32,17 +39,29 @@ class PersistenceLogger
     protected $unCachedHandlers = array();
 
     /**
+     * @param bool $logCalls Flag to enable logging of calls or not, should be disabled in prod
+     */
+    public function __construct( $logCalls = true )
+    {
+        $this->logCalls = $logCalls;
+    }
+
+    /**
+     * Log SPI calls with method name and arguments until $maxLogCalls is reached.
+     *
      * @param string $method
      * @param array $arguments
      */
-    public function logCall( $method, array $arguments = array() )//, $microTime = 0 )
+    public function logCall( $method, array $arguments = array() )
     {
         $this->count++;
-        $this->calls[] = array(
-            'method' => $method,
-            'arguments' => $arguments,
-            //'microTime' => $microTime
-        );
+        if ( $this->logCalls )
+        {
+            $this->calls[] = array(
+                'method' => $method,
+                'arguments' => $arguments
+            );
+        }
     }
 
     /**
@@ -52,7 +71,11 @@ class PersistenceLogger
      */
     public function logUnCachedHandler( $handler )
     {
-        $this->unCachedHandlers[] = $handler;
+        if ( !isset( $this->unCachedHandlers[$handler] ) )
+        {
+            $this->unCachedHandlers[$handler] = 0;
+        }
+        $this->unCachedHandlers[$handler]++;
     }
 
     /**
@@ -69,6 +92,14 @@ class PersistenceLogger
     public function getCount()
     {
         return $this->count;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCallsLoggingEnabled()
+    {
+        return $this->logCalls;
     }
 
     /**

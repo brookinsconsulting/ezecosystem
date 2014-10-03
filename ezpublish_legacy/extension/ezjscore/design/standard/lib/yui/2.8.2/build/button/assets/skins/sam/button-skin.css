@@ -21,12 +21,12 @@ version: 2.8.2r1
     border-color: #808080;
     margin: 0 -1px;
 
-        /*
-                Using negative margins for rounded corners won't work in IE 6 and IE 7 
-                (Quirks Mode Only), so set the "margin" property to "0" for those 
-                browsers.
-        */
-        _margin: 0;
+	/*
+		Using negative margins for rounded corners won't work in IE 6 and IE 7 
+		(Quirks Mode Only), so set the "margin" property to "0" for those 
+		browsers.
+	*/
+ 	_margin: 0;
 
 }
 
@@ -51,7 +51,7 @@ version: 2.8.2r1
         height in IE.
     */
     *line-height: 1.875;
-        *padding-bottom: 1px;
+	*padding-bottom: 1px;
 
 }
 

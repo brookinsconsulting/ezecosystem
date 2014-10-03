@@ -2,9 +2,9 @@
 /**
  * File containing the PageController class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\Controller;
@@ -24,7 +24,7 @@ class PageController extends Controller
     /**
      * @var \eZ\Publish\Core\FieldType\Page\PageService
      */
-    private $pageService;
+    protected $pageService;
 
     public function __construct( ViewManager $viewManager, PageService $pageService )
     {
@@ -67,9 +67,38 @@ class PageController extends Controller
         $response->setContent(
             $this->viewManager->renderBlock(
                 $block,
-                $params + array( 'pageService' => $this->pageService )
+                $params + array(
+                    // @deprecated pageService injection will be removed in 6.0.
+                    'pageService' => $this->pageService,
+                    'valid_items' => $this->pageService->getValidBlockItems( $block )
+                )
             )
         );
         return $response;
+    }
+
+    /**
+     * Renders the block with given $id.
+     *
+     * This method can be used with ESI rendering strategy.
+     *
+     * @uses self::viewBlock()
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If block could not be found.
+     *
+     * @param mixed $id Block id
+     * @param array $params
+     * @param array $cacheSettings settings for the HTTP cache, 'smax-age' and
+     *              'max-age' are checked.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewBlockById( $id, array $params = array(), array $cacheSettings = array() )
+    {
+        return $this->viewBlock(
+            $this->pageService->loadBlock( $id ),
+            $params,
+            $cacheSettings
+        );
     }
 }

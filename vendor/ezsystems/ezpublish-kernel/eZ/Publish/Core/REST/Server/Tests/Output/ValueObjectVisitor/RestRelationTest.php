@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -26,7 +26,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getRelationVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -51,6 +51,26 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             ),
             1,
             1
+        );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadVersionRelation',
+            array(
+                'contentId' => $relation->contentId,
+                'versionNumber' => $relation->versionNo,
+                'relationId' => $relation->relation->id
+            ),
+            "/content/objects/{$relation->contentId}/versions/{$relation->versionNo}/relations/{$relation->relation->id}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContent',
+            array( 'contentId' => $relation->contentId ),
+            "/content/objects/{$relation->contentId}"
+        );
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContent',
+            array( 'contentId' => $relation->relation->getDestinationContentInfo()->id ),
+            "/content/objects/{$relation->relation->getDestinationContentInfo()->id}"
         );
 
         $visitor->visit(
@@ -195,10 +215,8 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\RestRelation
      */
-    protected function getRelationVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\RestRelation(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\RestRelation;
     }
 }

@@ -2,16 +2,15 @@
 /**
  * File containing the KeywordTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\Keyword\Type as KeywordType;
 use eZ\Publish\Core\FieldType\Keyword\Value as KeywordValue;
-use ReflectionObject;
 
 /**
  * @group fieldType
@@ -32,7 +31,10 @@ class KeywordTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new KeywordType();
+        $fieldType = new KeywordType();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -137,6 +139,10 @@ class KeywordTest extends FieldTypeTest
             array(
                 array(),
                 new KeywordValue( array() ),
+            ),
+            array(
+                'foo',
+                new KeywordValue( array( 'foo' ) ),
             ),
             array(
                 array( 'foo' ),
@@ -244,6 +250,19 @@ class KeywordTest extends FieldTypeTest
                 array( 'foo', 'bar' ),
                 new KeywordValue( array( 'foo', 'bar' ) ),
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezkeyword';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), "" ),
+            array( new KeywordValue( array( 'foo', 'bar' ) ), "foo, bar" )
         );
     }
 }

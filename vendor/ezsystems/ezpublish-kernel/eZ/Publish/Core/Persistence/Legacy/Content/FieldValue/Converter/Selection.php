@@ -2,9 +2,9 @@
 /**
  * File containing the Selection converter
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
@@ -107,10 +107,14 @@ class Selection implements Converter
     public function toFieldDefinition( StorageFieldDefinition $storageDef, FieldDefinition $fieldDef )
     {
         $options = array();
+        $simpleXml = simplexml_load_string( $storageDef->dataText5 );
 
-        foreach ( simplexml_load_string( $storageDef->dataText5 )->options->option as $option )
+        if ( $simpleXml !== false )
         {
-            $options[(int)$option["id"]] = (string)$option["name"];
+            foreach ( $simpleXml->options->option as $option )
+            {
+                $options[(int)$option["id"]] = (string)$option["name"];
+            }
         }
 
         $fieldDef->fieldTypeConstraints->fieldSettings = new FieldSettings(
@@ -123,6 +127,7 @@ class Selection implements Converter
         // @todo: Can Selection store a default value in the DB?
         $fieldDef->defaultValue = new FieldValue();
         $fieldDef->defaultValue->data = array();
+        $fieldDef->defaultValue->sortKey = "";
     }
 
     /**

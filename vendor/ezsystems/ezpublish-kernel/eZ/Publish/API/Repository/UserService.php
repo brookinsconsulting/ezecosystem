@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\UserService class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\API\Repository
  */
 
@@ -48,7 +48,7 @@ interface UserService
     /**
      * Loads a user group for the given id
      *
-     * @param int $id
+     * @param mixed $id
      *
      * @return \eZ\Publish\API\Repository\Values\User\UserGroup
      *
@@ -126,7 +126,7 @@ interface UserService
     /**
      * Loads a user
      *
-     * @param int $userId
+     * @param mixed $userId
      *
      * @return \eZ\Publish\API\Repository\Values\User\User
      *
@@ -137,6 +137,8 @@ interface UserService
     /**
      * Loads anonymous user
      *
+     * @deprecated since 5.3, use loadUser( $anonymousUserId ) instead
+     *
      * @uses loadUser()
      *
      * @return \eZ\Publish\API\Repository\Values\User\User
@@ -146,6 +148,9 @@ interface UserService
     /**
      * Loads a user for the given login and password
      *
+     * This method is case sensitive in regards to $login and $password as a comparison of password hash is done
+     * which contains both parameters.
+     *
      * @param string $login
      * @param string $password the plain password
      *
@@ -154,6 +159,33 @@ interface UserService
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException if a user with the given credentials was not found
      */
     public function loadUserByCredentials( $login, $password );
+
+    /**
+     * Loads a user for the given login
+     *
+     * Note: This method loads user by $login where $login might be case in-sensitive on certain storage engines!
+     *
+     * @param string $login
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException if a user with the given credentials was not found
+     */
+    public function loadUserByLogin( $login );
+
+    /**
+     * Loads a user for the given email
+     *
+     * Note: This method loads user by $email where $email might be case in-sensitive on certain storage engines!
+     *
+     * Returns an array of Users since eZ Publish has under certain circumstances allowed
+     * several users having same email in the past (by means of a configuration option).
+     *
+     * @param string $email
+     *
+     * @return \eZ\Publish\API\Repository\Values\User\User[]
+     */
+    public function loadUsersByEmail( $email );
 
     /**
      * This method deletes a user

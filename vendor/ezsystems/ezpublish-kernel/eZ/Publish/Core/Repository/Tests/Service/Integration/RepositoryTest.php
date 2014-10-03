@@ -2,9 +2,9 @@
 /**
  * File containing the RepositoryTest class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Repository\Tests\Service\Integration;
@@ -23,42 +23,6 @@ abstract class RepositoryTest extends BaseServiceTest
     public function testRepositoryInstance()
     {
         self::assertInstanceOf( 'eZ\\Publish\\API\\Repository\\Repository', $this->repository );
-    }
-
-    /**
-     * Test repository method
-     * @covers \eZ\Publish\API\Repository\Repository::canUser
-     */
-    public function testCanUser()
-    {
-        self::markTestIncomplete( "Not implemented: " . __METHOD__ );
-    }
-
-    /**
-     * Test repository method
-     * @covers \eZ\Publish\API\Repository\Repository::hasAccess
-     */
-    public function testHasAccess()
-    {
-        self::markTestIncomplete( "Not implemented: " . __METHOD__ );
-    }
-
-    /**
-     * Test repository method
-     * @covers \eZ\Publish\API\Repository\Repository::setCurrentUser
-     */
-    public function testSetCurrentUser()
-    {
-        self::markTestIncomplete( "Not implemented: " . __METHOD__ );
-    }
-
-    /**
-     * Test repository method
-     * @covers \eZ\Publish\API\Repository\Repository::getCurrentUser
-     */
-    public function testGetCurrentUser()
-    {
-        self::markTestIncomplete( "Not implemented: " . __METHOD__ );
     }
 
     /**

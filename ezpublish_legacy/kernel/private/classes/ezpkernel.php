@@ -2,9 +2,9 @@
 /**
  * File containing the ezpKernel class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 /**
@@ -12,7 +12,7 @@
  * Wraps a "kernel handler" and forwards calls to it.
  * This allows to have different kernel handlers depending on the context (i.e. "web" or "cli")
  */
-class ezpKernel implements ezpKernelHandler
+class ezpKernel implements ezpWebBasedKernelHandler
 {
     /**
      * @var ezpKernelHandler
@@ -76,6 +76,17 @@ class ezpKernel implements ezpKernelHandler
     public function setUseExceptions( $useExceptions )
     {
         $this->kernelHandler->setUseExceptions( $useExceptions );
+    }
+
+    /**
+     * @param bool $usePagelayout
+     */
+    public function setUsePagelayout( $usePagelayout )
+    {
+        if ( $this->kernelHandler instanceof ezpWebBasedKernelHandler )
+        {
+            $this->kernelHandler->setUsePagelayout( $usePagelayout );
+        }
     }
 
     /**

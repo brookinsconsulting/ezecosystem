@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
@@ -24,7 +24,7 @@ class URLWildcardCreateTest extends BaseTest
             'forward' => 'true'
         );
 
-        $urlWildcardCreate = $this->getURLWildcardCreate();
+        $urlWildcardCreate = $this->getParser();
         $result = $urlWildcardCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
 
         $this->assertEquals(
@@ -51,7 +51,7 @@ class URLWildcardCreateTest extends BaseTest
             'forward' => 'true'
         );
 
-        $urlWildcardCreate = $this->getURLWildcardCreate();
+        $urlWildcardCreate = $this->getParser();
         $urlWildcardCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -68,7 +68,7 @@ class URLWildcardCreateTest extends BaseTest
             'forward' => 'true'
         );
 
-        $urlWildcardCreate = $this->getURLWildcardCreate();
+        $urlWildcardCreate = $this->getParser();
         $urlWildcardCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -85,7 +85,7 @@ class URLWildcardCreateTest extends BaseTest
             'destinationUrl' => '/destination/url'
         );
 
-        $urlWildcardCreate = $this->getURLWildcardCreate();
+        $urlWildcardCreate = $this->getParser();
         $urlWildcardCreate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -94,8 +94,10 @@ class URLWildcardCreateTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\URLWildcardCreate
      */
-    protected function getURLWildcardCreate()
+    protected function internalGetParser()
     {
-        return new URLWildcardCreate( $this->getUrlHandler(), $this->getParserTools() );
+        $parser = new URLWildcardCreate( $this->getParserTools() );
+        $parser->setRequestParser( $this->getRequestParserMock() );
+        return $parser;
     }
 }

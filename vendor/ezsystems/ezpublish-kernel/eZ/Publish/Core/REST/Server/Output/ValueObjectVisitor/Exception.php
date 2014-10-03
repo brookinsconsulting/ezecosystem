@@ -2,9 +2,9 @@
 /**
  * File containing the Exception ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -12,7 +12,6 @@ namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
 use eZ\Publish\Core\REST\Common\Output\ValueObjectVisitor;
 use eZ\Publish\Core\REST\Common\Output\Generator;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 
 /**
  * Exception value object visitor
@@ -72,12 +71,10 @@ class Exception extends ValueObjectVisitor
     /**
      * Construct from debug flag
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param boolean $debug
      */
-    public function __construct( UrlHandler $urlHandler, $debug = false )
+    public function __construct( $debug = false )
     {
-        parent::__construct( $urlHandler );
         $this->debug = (bool)$debug;
     }
 

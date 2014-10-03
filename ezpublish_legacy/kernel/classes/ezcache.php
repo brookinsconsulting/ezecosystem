@@ -2,9 +2,9 @@
 /**
  * File containing the {@link eZCache} class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -160,6 +160,14 @@ class eZCache
                                        'path' => false,
                                        'function' => array( 'eZCache', 'clearStateLimitations' ),
                                        'purge-function' => array( 'eZCache', 'clearStateLimitations' ) ),
+                                array( 'name' => ezpI18n::tr( 'kernel/cache', 'Content Language cache' ),
+                                       'is-clustered' => true,
+                                       'id' => 'content_language',
+                                       'tag' => array( 'content' ),
+                                       'enabled' => true,
+                                       'path' => false,
+                                       'function' => array( 'eZContentLanguage', 'expireCache' ),
+                                       'purge-function' => array( 'eZContentLanguage', 'expireCache' ) ),
                                 array( 'name' => ezpI18n::tr( 'kernel/cache', 'Design base cache' ),
                                        'id' => 'design_base',
                                        'tag' => array( 'template' ),
@@ -452,7 +460,6 @@ class eZCache
         if ( isset( $cacheItem['expiry-key'] ) )
         {
             $key = $cacheItem['expiry-key'];
-            eZExpiryHandler::registerShutdownFunction();
             $expiryHandler = eZExpiryHandler::instance();
             $keyValue = $expiryHandler->getTimestamp( $key );
             if ( $keyValue !== false )
@@ -507,6 +514,11 @@ class eZCache
                 return;
             }
 
+            if ( !file_exists( $cachePath ) )
+            {
+                return;
+            }
+
             if ( is_file( $cachePath ) )
             {
                 $handler = eZFileHandler::instance( false );
@@ -525,7 +537,6 @@ class eZCache
      */
     static function clearImageAlias( $cacheItem )
     {
-        eZExpiryHandler::registerShutdownFunction();
         $expiryHandler = eZExpiryHandler::instance();
         $expiryHandler->setTimestamp( 'image-manager-alias', time() );
         $expiryHandler->store();
@@ -620,7 +631,7 @@ class eZCache
                 }
                 elseif ( $attr->attribute( 'has_content' ) )
                 {
-                    $attr->attribute( 'content' )->purgeAllAliases( $attr );
+                    $attr->attribute( 'content' )->purgeAllAliases();
                 }
             }
         }
@@ -634,7 +645,6 @@ class eZCache
      */
     static function clearContentTreeMenu( $cacheItem )
     {
-        eZExpiryHandler::registerShutdownFunction();
         $expiryHandler = eZExpiryHandler::instance();
         $expiryHandler->setTimestamp( 'content-tree-menu', time() );
         $expiryHandler->store();
@@ -645,7 +655,6 @@ class eZCache
      */
     static function clearTemplateBlockCache( $cacheItem )
     {
-        eZExpiryHandler::registerShutdownFunction();
         $expiryHandler = eZExpiryHandler::instance();
         $expiryHandler->setTimestamp( 'global-template-block-cache', time() );
         $expiryHandler->store();
@@ -694,7 +703,6 @@ class eZCache
      */
     static function clearUserInfoCache( $cacheItem )
     {
-        eZExpiryHandler::registerShutdownFunction();
         $handler = eZExpiryHandler::instance();
         $handler->setTimestamp( 'user-info-cache', time() );
         $handler->store();
@@ -706,7 +714,6 @@ class eZCache
      */
     static function clearContentCache( $cacheItem )
     {
-        eZExpiryHandler::registerShutdownFunction();
         $handler = eZExpiryHandler::instance();
         $handler->setTimestamp( 'content-view-cache', time() );
         $handler->store();
@@ -764,8 +771,6 @@ class eZCache
      */
     static function clearActiveExtensions( $cacheItem )
     {
-        eZExpiryHandler::registerShutdownFunction();
-
         $handler = eZExpiryHandler::instance();
         $handler->setTimestamp( $cacheItem['expiry-key'], time() );
         $handler->store();

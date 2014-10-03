@@ -2,9 +2,9 @@
 /**
  * File containing the Content Search Gateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search\Gateway;
@@ -42,7 +42,7 @@ class Native extends Gateway
     protected $criterionVisitor;
 
     /**
-     * Sort cluase visitor
+     * Sort clause visitor
      *
      * @var SortClauseVisitor
      */
@@ -56,7 +56,7 @@ class Native extends Gateway
     protected $facetBuilderVisitor;
 
     /**
-     * Field valu mapper
+     * Field value mapper
      *
      * @var FieldValueMapper
      */
@@ -75,6 +75,11 @@ class Native extends Gateway
      * @var FieldNameGenerator
      */
     protected $nameGenerator;
+
+    /**
+     * @var bool
+     */
+    protected $commit = true;
 
     /**
      * Construct from HTTP client
@@ -113,7 +118,8 @@ class Native extends Gateway
     public function findContent( Query $query, array $fieldFilters = array() )
     {
         $parameters = array(
-            "q" => $this->criterionVisitor->visit( $query->criterion ),
+            "q" => $this->criterionVisitor->visit( $query->query ),
+            "fq" => $this->criterionVisitor->visit( $query->filter ),
             "sort" => implode(
                 ", ",
                 array_map(
@@ -186,21 +192,22 @@ class Native extends Gateway
     /**
      * Indexes a content object
      *
-     * @param \eZ\Publish\SPI\Persistence\Content\Search\Field[] $document
+     * @param \eZ\Publish\SPI\Persistence\Content\Search\Field[][] $documents
+     * @todo $documents should be generated more on demand then this and sent to Solr in chunks before final commit
      *
      * @return void
      */
-    public function indexContent( array $document )
+    public function bulkIndexContent( array $documents )
     {
-        $update   = $this->createUpdate( $document );
+        $updates   = $this->createUpdates( $documents );
         $result   = $this->client->request(
             'POST',
-            '/solr/update?commit=true&wt=json',
+            '/solr/update?' . ( $this->commit ? "softCommit=true&" : "" ) . 'wt=json',
             new Message(
                 array(
-                    'Content-Type: text/xml',
+                    'Content-Type' => 'text/xml',
                 ),
-                $update
+                $updates
             )
         );
 
@@ -222,14 +229,118 @@ class Native extends Gateway
     {
         $this->client->request(
             'POST',
-            '/solr/update?commit=true&wt=json',
+            '/solr/update?' . ( $this->commit ? "softCommit=true&" : "" ) . 'wt=json',
             new Message(
                 array(
-                    'Content-Type: text/xml',
+                    'Content-Type' => 'text/xml',
                 ),
                 "<delete><query>id:" . (int)$contentId . ( $versionId !== null ? " AND version_id:" . (int)$versionId : "" ) . "</query></delete>"
             )
         );
+    }
+
+    /**
+     * Deletes a location from the index
+     *
+     * @param mixed $locationId
+     */
+    public function deleteLocation( $locationId )
+    {
+        $response = $this->client->request(
+            'GET',
+            '/solr/select?' .
+            http_build_query(
+                array(
+                    "q" => "path_mid:*/$locationId/*",
+                    "fl" => "*",
+                    "wt" => "json",
+                )
+            )
+        );
+        // @todo: Error handling?
+        $data = json_decode( $response->body );
+
+        $locationParent = array( $locationId );
+        $contentToDelete = $contentToUpdate = array();
+        foreach ( $data->response->docs as $doc )
+        {
+            // Check that this document only had one location in which case it can be removed.
+            // @todo When orphaned objects will be possible, we will have to update those doc instead of removing.
+            if ( $doc->location_parent_mid == $locationParent || $doc->location_mid == $locationParent )
+            {
+                $contentToDelete[] = $doc->id;
+            }
+            else
+            {
+                $contentToUpdate[] = $doc;
+            }
+        }
+
+        if ( !empty( $contentToDelete ) )
+        {
+            $this->client->request(
+                "POST",
+                "/solr/update?" . ( $this->commit ? "softCommit=true&" : "" ) . "wt=json",
+                new Message(
+                    array(
+                        "Content-Type" => "text/xml",
+                    ),
+                    "<delete><query>id:(" . implode( " ", $contentToDelete ) . ")</query></delete>"
+                )
+            );
+        }
+
+        if ( !empty( $contentToUpdate ) )
+        {
+            $jsonString = "";
+            foreach ( $contentToUpdate as $doc )
+            {
+                // Removing location references in location_parent_mid, location_mid and path_mid
+                // main_* fields are not modified since removing main node is not permitted.
+                foreach ( $doc->location_parent_mid as $key => $value )
+                {
+                    if ( $value == $locationId )
+                    {
+                        unset( $doc->location_parent_mid[$key] );
+                    }
+                }
+                foreach ( $doc->location_mid as $key => $value )
+                {
+                    if ( $value == $locationId )
+                    {
+                        unset( $doc->location_mid[$key] );
+                    }
+                }
+                foreach ( $doc->path_mid as $key => $value )
+                {
+                    if ( strpos( $value, "/$locationId/" ) )
+                    {
+                        unset( $doc->path_mid[$key] );
+                    }
+                }
+
+                // Reindex arrays
+                $doc->location_parent_mid = array_values( $doc->location_parent_mid );
+                $doc->location_mid = array_values( $doc->location_mid );
+                $doc->path_mid = array_values( $doc->path_mid );
+
+                if ( !empty( $jsonString ) )
+                    $jsonString .= ",";
+
+                $jsonString .= '"add": { "doc": ' . json_encode( $doc ) . "}";
+            }
+
+            $this->client->request(
+                "POST",
+                "/solr/update/json?" . ( $this->commit ? "softCommit=true&" : "" ) . "wt=json",
+                new Message(
+                    array(
+                        "Content-Type: application/json",
+                    ),
+                    "{ $jsonString }"
+                )
+            );
+        }
     }
 
     /**
@@ -241,10 +352,10 @@ class Native extends Gateway
     {
         $this->client->request(
             'POST',
-            '/solr/update?commit=true&wt=json',
+            '/solr/update?' . ( $this->commit ? "softCommit=true&" : "" ) . 'wt=json',
             new Message(
                 array(
-                    'Content-Type: text/xml',
+                    'Content-Type' => 'text/xml',
                 ),
                 '<delete><query>*:*</query></delete>'
             )
@@ -252,36 +363,45 @@ class Native extends Gateway
     }
 
     /**
-     * Create document update XML
+     * @param bool $commit
+     */
+    public function setCommit( $commit )
+    {
+        $this->commit = !!$commit;
+    }
+
+    /**
+     * Create document(s) update XML
      *
-     * @param array $document
+     * @param array $documents
      *
      * @return string
      */
-    protected function createUpdate( array $document )
+    protected function createUpdates( array $documents )
     {
         $xml = new \XmlWriter();
         $xml->openMemory();
         $xml->startElement( 'add' );
-        $xml->startElement( 'doc' );
 
-        foreach ( $document as $field )
+        foreach ( $documents as $document )
         {
-            foreach ( (array)$this->fieldValueMapper->map( $field ) as $value )
+            $xml->startElement( 'doc' );
+            foreach ( $document as $field )
             {
-                $xml->startElement( 'field' );
-                $xml->writeAttribute(
-                    'name',
-                    $this->nameGenerator->getTypedName( $field->name, $field->type )
-                );
-                $xml->text( $value );
-                $xml->endElement();
+                foreach ( (array)$this->fieldValueMapper->map( $field ) as $value )
+                {
+                    $xml->startElement( 'field' );
+                    $xml->writeAttribute(
+                        'name',
+                        $this->nameGenerator->getTypedName( $field->name, $field->type )
+                    );
+                    $xml->text( $value );
+                    $xml->endElement();
+                }
             }
+            $xml->endElement();
         }
-
         $xml->endElement();
-        $xml->endElement();
-
         return $xml->outputMemory( true );
     }
 }

@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Repository\Tests\Service\Integration\ContentBase class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Repository\Tests\Service\Integration;
@@ -382,8 +382,10 @@ abstract class ContentBase extends BaseServiceTest
         return array(
             array( 4, null, null ),
             array( 4, array( "eng-US" ), null ),
+            array( 4, array( "eng-US", "fre-FR" ), null ),
             array( 4, null, 1 ),
-            array( 4, array( "eng-US" ), 1 )
+            array( 4, array( "eng-US", "fre-FR", "nor-NO", "eng-DE" ), 1 ),
+            array( 4, array( "eng-US" ), 1 ),
         );
     }
 
@@ -466,6 +468,24 @@ abstract class ContentBase extends BaseServiceTest
      * Test for the loadContent() method.
      *
      * @covers \eZ\Publish\Core\Repository\ContentService::loadContent
+     * @expectedException \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    public function testLoadContentWithVersionThrowsUnauthorizedException()
+    {
+        list( $draft, ) = $this->createTestContent();
+        $this->repository->setCurrentUser( $this->getStubbedUser( 10 ) );
+
+        $this->repository->getContentService()->loadContent(
+            $draft->id,
+            null,
+            $draft->versionInfo->versionNo
+        );
+    }
+
+    /**
+     * Test for the loadContent() method.
+     *
+     * @covers \eZ\Publish\Core\Repository\ContentService::loadContent
      * @expectedException \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function testLoadContentThrowsNotFoundExceptionContentNotFound()
@@ -506,7 +526,7 @@ abstract class ContentBase extends BaseServiceTest
         $contentService = $this->repository->getContentService();
 
         // Throws an exception because content does not exists in "eng-GB" language
-        $content = $contentService->loadContent( 4, array( "eng-GB" ) );
+        $content = $contentService->loadContent( 4, array( "fre-FR" ) );
         /* END: Use Case */
     }
 
@@ -514,15 +534,19 @@ abstract class ContentBase extends BaseServiceTest
      * Test for the loadContent() method.
      *
      * @covers \eZ\Publish\Core\Repository\ContentService::loadContent
-     * @expectedException \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function testLoadContentThrowsNotFoundExceptionLanguageNotFoundVariation()
     {
         /* BEGIN: Use Case */
         $contentService = $this->repository->getContentService();
 
-        // Throws an exception because content does not exists in "eng-GB" language
+        // Content only exists in eng-US, so we should only have it in eng-US.
         $content = $contentService->loadContent( 4, array( "eng-US", "eng-GB" ) );
+        $this->assertInstanceOf(
+            "eZ\\Publish\\API\\Repository\\Values\\Content\\Content",
+            $content
+        );
+        $this->assertContentValues( $content, array( "eng-US" ) );
         /* END: Use Case */
     }
 
@@ -597,6 +621,27 @@ abstract class ContentBase extends BaseServiceTest
         $this->repository->setCurrentUser( $this->getStubbedUser( 10 ) );
 
         $this->repository->getContentService()->loadContentByRemoteId( "f5c88a2209584891056f987fd965b0ba" );
+    }
+
+    /**
+     * Test for the loadContentByRemoteId() method.
+     *
+     * @covers \eZ\Publish\Core\Repository\ContentService::loadContentByRemoteId
+     * @expectedException \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    public function testLoadContentByRemoteIdWithVersionThrowsUnauthorizedException()
+    {
+        $contentService = $this->repository->getContentService();
+
+        $content = $contentService->loadContent( 4 );
+        $draft = $contentService->createContentDraft( $content->contentInfo );
+        $this->repository->setCurrentUser( $this->getStubbedUser( 10 ) );
+
+        $contentService->loadContentByRemoteId(
+            $draft->contentInfo->remoteId,
+            null,
+            $draft->versionInfo->versionNo
+        );
     }
 
     /**
@@ -1333,176 +1378,6 @@ abstract class ContentBase extends BaseServiceTest
                 "fields" => array()
             ),
             $contentUpdateStruct
-        );
-    }
-
-    /**
-     * Test for the updateContent() method.
-     *
-     * @depends testCreateContent
-     * @depends testNewContentUpdateStruct
-     * @covers \eZ\Publish\Core\Repository\ContentService::updateContent
-     *
-     * @return array
-     */
-    public function testUpdateContent()
-    {
-        list( $content, $contentType ) = $this->createTestContent();
-        $time = time();
-
-        /* BEGIN: Use Case */
-        $contentService = $this->repository->getContentService();
-
-        $versionInfo = $contentService->loadVersionInfoById(
-            $content->id,
-            $content->getVersionInfo()->versionNo
-        );
-
-        $contentUpdateStruct = $contentService->newContentUpdateStruct();
-        $contentUpdateStruct->initialLanguageCode = "eng-US";
-
-        $contentUpdateStruct->setField( "test_required_empty", "new value for test_required_empty" );
-        $contentUpdateStruct->setField( "test_translatable", "new eng-US value for test_translatable" );
-        $contentUpdateStruct->setField( "test_untranslatable", "new value for test_untranslatable" );
-        $contentUpdateStruct->setField( "test_translatable", "new eng-GB value for test_translatable", "eng-GB" );
-
-        $updatedContent = $contentService->updateContent( $versionInfo, $contentUpdateStruct );
-        /* END: Use Case */
-
-        $this->assertInstanceOf( "eZ\\Publish\\API\\Repository\\Values\\Content\\Content", $updatedContent );
-
-        return array(
-            "actual" => $updatedContent,
-            "expected" => $contentUpdateStruct,
-            "previous" => $content,
-            "contentType" => $contentType,
-            "time" => $time
-        );
-    }
-
-    /**
-     * Test for the updateContent() method.
-     *
-     * @depends testUpdateContent
-     * @covers \eZ\Publish\Core\Repository\ContentService::updateContent
-     *
-     * @param array $data
-     */
-    public function testUpdateContentStructValues( array $data )
-    {
-        /** @var $updatedContentDraft \eZ\Publish\API\Repository\Values\Content\Content */
-        $updatedContentDraft = $data['actual'];
-        /** @var $contentUpdate \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct */
-        $contentUpdate = $data['expected'];
-        /** @var $contentDraft \eZ\Publish\API\Repository\Values\Content\Content */
-        $contentDraft = $data['previous'];
-        /** @var $contentDraft \eZ\Publish\API\Repository\Values\ContentType\ContentType */
-        $contentType = $data['contentType'];
-
-        $this->assertCount( 8, $updatedContentDraft->getFields() );
-
-        // Check field values
-        $structFields = array();
-        foreach ( $contentUpdate->fields as $field )
-        {
-            $structFields[$field->fieldDefIdentifier][$field->languageCode] = $field;
-        }
-
-        foreach ( $contentType->fieldDefinitions as $fieldDefinition )
-        {
-            $this->assertArrayHasKey(
-                $fieldDefinition->identifier,
-                $updatedContentDraft->fields,
-                "Field values are missing for field definition '{$fieldDefinition->identifier}'"
-            );
-
-            foreach ( $updatedContentDraft->getVersionInfo()->languageCodes as $languageCode )
-            {
-                $this->assertArrayHasKey(
-                    $languageCode,
-                    $updatedContentDraft->fields[$fieldDefinition->identifier],
-                    "Field value is missing for field definition '{$fieldDefinition->identifier}' in language '{$languageCode}'"
-                );
-
-                // If field is not set in update struct, it should retain its previous value
-                $valueLanguageCode = $fieldDefinition->isTranslatable ? $languageCode : $contentUpdate->initialLanguageCode;
-                if ( isset( $structFields[$fieldDefinition->identifier][$valueLanguageCode] ) )
-                {
-                    $this->assertEquals(
-                        $structFields[$fieldDefinition->identifier][$valueLanguageCode]->value,
-                        $updatedContentDraft->fields[$fieldDefinition->identifier][$languageCode],
-                        "Field value for field definition '{$fieldDefinition->identifier}' in language '{$languageCode}' is not equal to update struct field value"
-                    );
-                }
-                else
-                {
-                    $this->assertEquals(
-                        $contentDraft->fields[$fieldDefinition->identifier][$languageCode],
-                        $updatedContentDraft->fields[$fieldDefinition->identifier][$languageCode],
-                        "Non-updated field value for field definition '{$fieldDefinition->identifier}' in language '{$languageCode}' did not retain its previous value"
-                    );
-                }
-            }
-        }
-
-        $this->assertEquals(
-            $contentUpdate->initialLanguageCode,
-            $updatedContentDraft->versionInfo->initialLanguageCode
-        );
-        $this->assertGreaterThanOrEqual(
-            $data["time"],
-            $updatedContentDraft->versionInfo->modificationDate->getTimestamp()
-        );
-    }
-
-    /**
-     * Test for the updateContent() method.
-     *
-     * @covers \eZ\Publish\Core\Repository\ContentService::updateContent
-     */
-    public function testUpdateContentWithNewLanguage()
-    {
-        list( $content, $contentType ) = $this->createTestContent();
-
-        /* BEGIN: Use Case */
-        $contentService = $this->repository->getContentService();
-
-        $versionInfo = $contentService->loadVersionInfoById(
-            $content->id,
-            $content->getVersionInfo()->versionNo
-        );
-
-        $contentUpdateStruct = $contentService->newContentUpdateStruct();
-        $contentUpdateStruct->initialLanguageCode = "eng-GB";
-        $contentUpdateStruct->setField( "test_required_empty", "new value for untranslatable field", "eng-GB" );
-        $contentUpdateStruct->setField( "test_translatable", "Französisch frites", "ger-DE" );
-
-        $updatedContent = $contentService->updateContent( $versionInfo, $contentUpdateStruct );
-        /* END: Use Case */
-
-        $fields = $updatedContent->fields;
-
-        $this->assertCount( 3, $updatedContent->versionInfo->languageCodes );
-        $this->assertCount( 12, $updatedContent->getFields() );
-        $this->assertCount( 4, $updatedContent->fields );
-        foreach ( $fields as $langFields )
-        {
-            $this->assertCount( 3, $langFields );
-        }
-        $this->assertEquals( "new value for untranslatable field", $fields["test_required_empty"]["eng-GB"] );
-        $this->assertEquals( "new value for untranslatable field", $fields["test_required_empty"]["eng-US"] );
-        $this->assertEquals( "new value for untranslatable field", $fields["test_required_empty"]["ger-DE"] );
-        $this->assertEquals( $fields["test_required_not_empty"]["eng-GB"], $fields["test_required_not_empty"]["ger-DE"] );
-        $this->assertEquals( "Französisch frites", $fields["test_translatable"]["ger-DE"] );
-        $this->assertEquals( $fields["test_untranslatable"]["eng-GB"], $fields["test_untranslatable"]["ger-DE"] );
-
-        $this->assertEquals(
-            array(
-                "eng-GB" => "new value for untranslatable field",
-                "eng-US" => "new value for untranslatable field",
-                "ger-DE" => "new value for untranslatable field",
-            ),
-            $updatedContent->versionInfo->getNames()
         );
     }
 
@@ -2491,28 +2366,6 @@ abstract class ContentBase extends BaseServiceTest
      * Test for the loadReverseRelations() method.
      *
      * @covers \eZ\Publish\Core\Repository\ContentService::loadReverseRelations
-     */
-    public function testLoadReverseRelations()
-    {
-        list( $contentDraft, $contentType ) = $this->createTestContent();
-        $contentService = $this->repository->getContentService();
-
-        $mediaContentInfo = $contentService->loadContentInfoByRemoteId( 'a6e35cbcb7cd6ae4b691f3eee30cd262' );
-
-        $contentService->addRelation(
-            $contentDraft->getVersionInfo(),
-            $mediaContentInfo
-        );
-
-        $relations = $contentService->loadReverseRelations( $mediaContentInfo );
-
-        $this->assertRelations( $relations, $contentDraft->contentInfo, $mediaContentInfo );
-    }
-
-    /**
-     * Test for the loadReverseRelations() method.
-     *
-     * @covers \eZ\Publish\Core\Repository\ContentService::loadReverseRelations
      * @expectedException \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function testLoadReverseRelationsThrowsUnauthorizedException()
@@ -2732,7 +2585,7 @@ abstract class ContentBase extends BaseServiceTest
         $typeCreateStruct = $contentTypeService->newContentTypeCreateStruct(
             "test-type"
         );
-        $typeCreateStruct->names = array( "eng-US" => "Test type name" );
+        $typeCreateStruct->names = array( "eng-GB" => "Test type name" );
         $typeCreateStruct->descriptions = array( "eng-GB" => "Test type description" );
         $typeCreateStruct->remoteId = "test-type-remoteid";
         $typeCreateStruct->creatorId = $this->repository->getCurrentUser()->id;

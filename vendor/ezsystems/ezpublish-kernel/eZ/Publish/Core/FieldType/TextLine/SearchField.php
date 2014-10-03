@@ -1,10 +1,10 @@
 <?php
 /**
- * File containing the UserStorage class
+ * File containing the TextLine SearchField class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\TextLine;
@@ -14,7 +14,7 @@ use eZ\Publish\SPI\FieldType\Indexable;
 use eZ\Publish\SPI\Persistence\Content\Search;
 
 /**
- * Indexable definition for string field type
+ * Indexable definition for TextLine field type
  */
 class SearchField implements Indexable
 {
@@ -31,21 +31,20 @@ class SearchField implements Indexable
             new Search\Field(
                 'value',
                 $field->value->data,
-                new Search\FieldType\StringField()
+                new Search\FieldType\MultipleStringField()
             ),
         );
     }
 
     /**
-     * Get index fied types for search backend
+     * Get index field types for search backend
      *
      * @return \eZ\Publish\SPI\Persistence\Content\Search\FieldType[]
      */
     public function getIndexDefinition()
     {
         return array(
-            'value' => new Search\FieldType\StringField(),
+            'value' => new Search\FieldType\MultipleStringField(),
         );
     }
 }
-

@@ -2,9 +2,9 @@
 /**
  * File containing the eZDateTime class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -85,9 +85,9 @@ class eZDateTime
             $datetime = time();
         }
 
-        $this->DateTime = $datetime;
+        $this->DateTime = intval( $datetime );
         $this->Locale = eZLocale::instance();
-        $this->IsValid = $datetime > 0;
+        $this->IsValid = $datetime !== null;
     }
 
     function attributes()
@@ -192,7 +192,7 @@ class eZDateTime
     function setTimeStamp( $stamp )
     {
         $this->DateTime = $stamp;
-        $this->IsValid = $stamp > 0;
+        $this->IsValid = $stamp !== null;
     }
 
     /*!

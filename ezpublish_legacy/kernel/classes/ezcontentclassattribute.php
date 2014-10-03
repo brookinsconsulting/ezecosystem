@@ -2,9 +2,9 @@
 /**
  * File containing the eZContentClassAttribute class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -523,6 +523,9 @@ class eZContentClassAttribute extends eZPersistentObject
                                            $down );
     }
 
+    /**
+     * @return eZDataType
+     */
     function dataType()
     {
         return eZDataType::create( $this->DataTypeString );
@@ -590,8 +593,6 @@ class eZContentClassAttribute extends eZPersistentObject
 
     static function cachedInfo()
     {
-        eZExpiryHandler::registerShutdownFunction();
-
         $info = array();
         $db = eZDB::instance();
         $dbName = md5( $db->DB );
@@ -913,7 +914,6 @@ class eZContentClassAttribute extends eZPersistentObject
                                           '',
                                           array( 'clustering' => 'classattridentifiers' ) );
 
-            eZExpiryHandler::registerShutdownFunction();
             $handler = eZExpiryHandler::instance();
             $expiryTime = 0;
             if ( $handler->hasTimestamp( 'class-identifier-cache' ) )

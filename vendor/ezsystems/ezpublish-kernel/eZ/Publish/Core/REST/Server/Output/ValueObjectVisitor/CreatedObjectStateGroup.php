@@ -2,9 +2,9 @@
 /**
  * File containing the CreatedObjectStateGroup ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -14,6 +14,7 @@ use eZ\Publish\Core\REST\Common\Output\Visitor;
 
 /**
  * CreatedObjectStateGroup value object visitor
+ * @todo coverage add unit test
  */
 class CreatedObjectStateGroup extends ObjectStateGroup
 {
@@ -29,9 +30,9 @@ class CreatedObjectStateGroup extends ObjectStateGroup
         parent::visit( $visitor, $generator, $data->objectStateGroup );
         $visitor->setHeader(
             'Location',
-            $this->urlHandler->generate(
-                'objectstategroup',
-                array( 'objectstategroup' => $data->objectStateGroup->id )
+            $this->router->generate(
+                'ezpublish_rest_loadObjectStateGroup',
+                array( 'objectStateGroupId' => $data->objectStateGroup->id )
             )
         );
         $visitor->setStatus( 201 );

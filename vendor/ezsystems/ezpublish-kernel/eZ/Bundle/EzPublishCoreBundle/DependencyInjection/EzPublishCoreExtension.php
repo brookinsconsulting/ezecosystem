@@ -2,29 +2,48 @@
 /**
  * File containing the EzPublishCoreExtension class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection;
 
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigParser;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ConfigurationProcessor;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Suggestion\Collector\SuggestionCollector;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Suggestion\Collector\SuggestionCollectorAwareInterface;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Suggestion\Formatter\YamlSuggestionFormatter;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\Config\FileLocator;
+use InvalidArgumentException;
 
 class EzPublishCoreExtension extends Extension
 {
     /**
-     * @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser[]
+     * @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Suggestion\Collector\SuggestionCollector
      */
-    private $configParsers;
+    private $suggestionCollector;
+
+    /**
+     * @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ParserInterface
+     */
+    private $configParser;
 
     public function __construct( array $configParsers = array() )
     {
-        $this->configParsers = $configParsers;
+        $this->suggestionCollector = new SuggestionCollector();
+        foreach ( $configParsers as $parser )
+        {
+            if ( $parser instanceof SuggestionCollectorAwareInterface )
+            {
+                $parser->setSuggestionCollector( $this->suggestionCollector );
+            }
+        }
+        $this->configParser = new ConfigParser( $configParsers );
     }
 
     public function getAlias()
@@ -48,6 +67,7 @@ class EzPublishCoreExtension extends Extension
             $container,
             new FileLocator( __DIR__ . '/../Resources/config' )
         );
+
         $configuration = $this->getConfiguration( $configs, $container );
 
         // Note: this is where the transformation occurs
@@ -59,24 +79,38 @@ class EzPublishCoreExtension extends Extension
         $loader->load( 'security.yml' );
         // Default settings
         $loader->load( 'default_settings.yml' );
+        $this->registerRepositoriesConfiguration( $config, $container );
         $this->registerSiteAccessConfiguration( $config, $container );
         $this->registerImageMagickConfiguration( $config, $container );
         $this->registerPageConfiguration( $config, $container );
 
         // Routing
-        $this->handleRouting( $container, $loader );
+        $this->handleRouting( $config, $container, $loader );
         // Public API loading
         $this->handleApiLoading( $container, $loader );
         $this->handleTemplating( $container, $loader );
         $this->handleSessionLoading( $container, $loader );
         $this->handleCache( $config, $container, $loader );
         $this->handleLocale( $config, $container, $loader );
+        $this->handleHelpers( $config, $container, $loader );
 
         // Map settings
-        foreach ( $this->configParsers as $configParser )
+        $processor = new ConfigurationProcessor( $container, 'ezsettings' );
+        $processor->mapConfig( $config, $this->configParser );
+
+        if ( $this->suggestionCollector->hasSuggestions() )
         {
-            $configParser->registerInternalConfig( $config, $container );
+            $message = '';
+            $suggestionFormatter = new YamlSuggestionFormatter();
+            foreach ( $this->suggestionCollector->getSuggestions() as $suggestion )
+            {
+                $message .= $suggestionFormatter->format( $suggestion ) . "\n\n";
+            }
+
+            throw new InvalidArgumentException( $message );
         }
+
+        $this->handleSiteAccessesRelation( $container );
     }
 
     /**
@@ -87,7 +121,17 @@ class EzPublishCoreExtension extends Extension
      */
     public function getConfiguration( array $config, ContainerBuilder $container )
     {
-        return new Configuration( $this->configParsers );
+        return new Configuration( $this->configParser, $this->suggestionCollector );
+    }
+
+    private function registerRepositoriesConfiguration( array $config, ContainerBuilder $container )
+    {
+        if ( !isset( $config['repositories'] ) )
+        {
+            $config['repositories'] = array();
+        }
+
+        $container->setParameter( 'ezpublish.repositories', $config['repositories'] );
     }
 
     private function registerSiteAccessConfiguration( array $config, ContainerBuilder $container )
@@ -102,6 +146,7 @@ class EzPublishCoreExtension extends Extension
         }
 
         $container->setParameter( 'ezpublish.siteaccess.list', $config['siteaccess']['list'] );
+        ConfigurationProcessor::setAvailableSiteAccesses( $config['siteaccess']['list'] );
         $container->setParameter( 'ezpublish.siteaccess.default', $config['siteaccess']['default_siteaccess'] );
         $container->setParameter( 'ezpublish.siteaccess.match_config', $config['siteaccess']['match'] );
 
@@ -119,6 +164,7 @@ class EzPublishCoreExtension extends Extension
             }
         }
         $container->setParameter( 'ezpublish.siteaccess.groups_by_siteaccess', $groupsBySiteaccess );
+        ConfigurationProcessor::setGroupsBySiteAccess( $groupsBySiteaccess );
     }
 
     private function registerImageMagickConfiguration( array $config, ContainerBuilder $container )
@@ -174,13 +220,37 @@ class EzPublishCoreExtension extends Extension
     /**
      * Handle routing parameters
      *
+     * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param \Symfony\Component\DependencyInjection\Loader\FileLoader $loader
      */
-    private function handleRouting( ContainerBuilder $container, FileLoader $loader )
+    private function handleRouting( array $config, ContainerBuilder $container, FileLoader $loader )
     {
         $loader->load( 'routing.yml' );
         $container->setAlias( 'router', 'ezpublish.chain_router' );
+
+        if ( isset( $config['router']['default_router']['non_siteaccess_aware_routes'] ) )
+        {
+            $container->setParameter(
+                'ezpublish.default_router.non_siteaccess_aware_routes',
+                array_merge(
+                    $container->getParameter( 'ezpublish.default_router.non_siteaccess_aware_routes' ),
+                    $config['router']['default_router']['non_siteaccess_aware_routes']
+                )
+            );
+        }
+
+        // Define additional routes that are allowed with legacy_mode: true.
+        if ( isset( $config['router']['default_router']['legacy_aware_routes'] ) )
+        {
+            $container->setParameter(
+                'ezpublish.default_router.legacy_aware_routes',
+                array_merge(
+                    $container->getParameter( 'ezpublish.default_router.legacy_aware_routes' ),
+                    $config['router']['default_router']['legacy_aware_routes']
+                )
+            );
+        }
     }
 
     /**
@@ -191,16 +261,29 @@ class EzPublishCoreExtension extends Extension
      */
     private function handleApiLoading( ContainerBuilder $container, FileLoader $loader )
     {
+        // Loading configuration from Core/settings
+        $coreLoader = new Loader\YamlFileLoader(
+            $container,
+            new FileLocator( __DIR__ . '/../../../Publish/Core/settings' )
+        );
+        $coreLoader->load( 'repository.yml' );
+        $coreLoader->load( 'fieldtype_external_storages.yml' );
+        $coreLoader->load( 'fieldtypes.yml' );
+        $coreLoader->load( 'roles.yml' );
+        $coreLoader->load( 'storage_engines/common.yml' );
+        $coreLoader->load( 'storage_engines/cache.yml' );
+        $coreLoader->load( 'storage_engines/legacy.yml' );
+        $coreLoader->load( 'utils.yml' );
+
         // Public API services
         $loader->load( 'papi.yml' );
         // IO Services
         $loader->load( 'io.yml' );
         // Built-in field types
-        $loader->load( 'fieldtypes.yml' );
-        // Built-in storage engines
+        $loader->load( 'fieldtype_services.yml' );
+
+        // Storage engine
         $loader->load( 'storage_engines.yml' );
-        // Roles and limitations
-        $loader->load( 'roles.yml' );
     }
 
     /**
@@ -284,5 +367,71 @@ class EzPublishCoreExtension extends Extension
             'ezpublish.locale.conversion_map',
             $config['locale_conversion'] + $container->getParameter( 'ezpublish.locale.conversion_map' )
         );
+    }
+
+    /**
+     * Handle helpers.
+     *
+     * @param array $config
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\Loader\FileLoader $loader
+     */
+    private function handleHelpers( array $config, ContainerBuilder $container, FileLoader $loader )
+    {
+        $loader->load( 'helpers.yml' );
+    }
+
+    /**
+     * Handles relation between SiteAccesses.
+     * Related SiteAccesses share the same repository and root location id.
+     *
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    private function handleSiteAccessesRelation( ContainerBuilder $container )
+    {
+        $configResolver = $container->get( 'ezpublish.config.resolver.core' );
+        $configResolver->setContainer( $container );
+
+        $saRelationMap = array();
+        $saList = $container->getParameter( 'ezpublish.siteaccess.list' );
+        // First build the SiteAccess relation map, indexed by repository and rootLocationId.
+        foreach ( $saList as $sa )
+        {
+            // Exclude siteaccesses in legacy_mode (e.g. admin interface)
+            if ( $configResolver->getParameter( 'legacy_mode', 'ezsettings', $sa ) === true )
+            {
+                continue;
+            }
+
+            $repository = $configResolver->getParameter( 'repository', 'ezsettings', $sa );
+            if ( !isset( $saRelationMap[$repository] ) )
+            {
+                $saRelationMap[$repository] = array();
+            }
+
+            $rootLocationId = $configResolver->getParameter( 'content.tree_root.location_id', 'ezsettings', $sa );
+            if ( !isset( $saRelationMap[$repository][$rootLocationId] ) )
+            {
+                $saRelationMap[$repository][$rootLocationId] = array();
+            }
+            $saRelationMap[$repository][$rootLocationId][] = $sa;
+        }
+        $container->setParameter( 'ezpublish.siteaccess.relation_map', $saRelationMap );
+
+        // Now build the related SiteAccesses list, based on the relation map.
+        foreach ( $saList as $sa )
+        {
+            if ( $configResolver->getParameter( 'legacy_mode', 'ezsettings', $sa ) === true )
+            {
+                continue;
+            }
+
+            $repository = $configResolver->getParameter( 'repository', 'ezsettings', $sa );
+            $rootLocationId = $configResolver->getParameter( 'content.tree_root.location_id', 'ezsettings', $sa );
+            $container->setParameter(
+                "ezsettings.$sa.related_siteaccesses",
+                $saRelationMap[$repository][$rootLocationId]
+            );
+        }
     }
 }

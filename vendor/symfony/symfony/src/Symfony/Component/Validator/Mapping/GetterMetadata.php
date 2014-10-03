@@ -40,18 +40,18 @@ class GetterMetadata extends MemberMetadata
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertyValue($object)
     {
-        return $this->getReflectionMember()->invoke($object);
+        return $this->newReflectionMember($object)->invoke($object);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    protected function newReflectionMember()
+    protected function newReflectionMember($objectOrClassName)
     {
-        return new \ReflectionMethod($this->getClassName(), $this->getName());
+        return new \ReflectionMethod($objectOrClassName, $this->getName());
     }
 }

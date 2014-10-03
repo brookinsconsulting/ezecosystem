@@ -2,9 +2,9 @@
 /**
  * File containing the FieldType class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Client;
@@ -104,12 +104,12 @@ class FieldType implements APIFieldType
      */
     public function getValidatorConfigurationSchema()
     {
-        return $third->innerFieldType->getValidatorConfigurationSchema();
+        return $this->innerFieldType->getValidatorConfigurationSchema();
     }
 
     public function getName( $value )
     {
-        return $third->innerFieldType->getName( $value );
+        return $this->innerFieldType->getName( $value );
     }
 
     /**
@@ -123,6 +123,26 @@ class FieldType implements APIFieldType
     }
 
     /**
+     * Indicates if the field definition of this type can appear only once in the same ContentType.
+     *
+     * @return boolean
+     */
+    public function isSingular()
+    {
+        return $this->innerFieldType->isSingular();
+    }
+
+    /**
+     * Indicates if the field definition of this type can be added to a ContentType with Content instances.
+     *
+     * @return boolean
+     */
+    public function onlyEmptyInstance()
+    {
+        return $this->innerFieldType->onlyEmptyInstance();
+    }
+
+    /**
      * Returns the fallback default value of field type when no such default
      * value is provided in the field definition in content types.
      *
@@ -131,6 +151,24 @@ class FieldType implements APIFieldType
     public function getEmptyValue()
     {
         return $this->innerFieldType->getEmptyValue();
+    }
+
+    /**
+     * Returns if the given $value is considered empty by the field type
+     *
+     * Usually, only the value returned by {@link getEmptyValue()} is
+     * considered empty but that is not always the case.
+     *
+     * Note: This function assumes that $value is valid so this function can only
+     * be used reliably on $values that came from the API, not from the user.
+     *
+     * @param mixed $value
+     *
+     * @return boolean
+     */
+    public function isEmptyValue( $value )
+    {
+        return $this->innerFieldType->isEmptyValue( $value );
     }
 
     /**

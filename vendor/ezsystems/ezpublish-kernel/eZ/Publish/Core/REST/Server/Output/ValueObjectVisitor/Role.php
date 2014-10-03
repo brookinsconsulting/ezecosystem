@@ -2,9 +2,9 @@
 /**
  * File containing the Role ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -33,7 +33,7 @@ class Role extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'role', array( 'role' => $data->id ) )
+            $this->router->generate( 'ezpublish_rest_loadRole', array( 'roleId' => $data->id ) )
         );
         $generator->endAttribute( 'href' );
 
@@ -43,7 +43,7 @@ class Role extends ValueObjectVisitor
         $generator->startObjectElement( 'Policies', 'PolicyList' );
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'policies', array( 'role' => $data->id ) )
+            $this->router->generate( 'ezpublish_rest_loadPolicies', array( 'roleId' => $data->id ) )
         );
         $generator->endAttribute( 'href' );
         $generator->endObjectElement( 'Policies' );

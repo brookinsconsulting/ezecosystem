@@ -2,20 +2,21 @@
 /**
  * Repository class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Repository;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentValue;
-use eZ\Publish\SPI\Persistence\Handler as PersistenceHandler;
 use eZ\Publish\API\Repository\Repository as RepositoryInterface;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
+use eZ\Publish\Core\Base\Exceptions\InvalidArgumentValue;
+use eZ\Publish\SPI\Persistence\Handler as PersistenceHandler;
+use eZ\Publish\SPI\Limitation\Type as LimitationType;
 use Exception;
 use RuntimeException;
 
@@ -37,7 +38,7 @@ class Repository implements RepositoryInterface
      *
      * @var \eZ\Publish\API\Repository\Values\User\User
      */
-    protected $user;
+    protected $currentUser;
 
     /**
      * Flag to specify if current execution is sudo mode, only set by {@see sudo()}.
@@ -159,6 +160,39 @@ class Repository implements RepositoryInterface
     protected $serviceSettings;
 
     /**
+     * Instance of domain mapper
+     *
+     * @var \eZ\Publish\Core\Repository\DomainMapper
+     */
+    protected $domainMapper;
+
+    /**
+     * Instance of permissions criterion handler
+     *
+     * @var \eZ\Publish\Core\Repository\PermissionsCriterionHandler
+     */
+    protected $permissionsCriterionHandler;
+
+    /**
+     * Array of arrays of commit events indexed by the transaction count.
+     *
+     * @var array
+     */
+    protected $commitEventsQueue = array();
+
+    /**
+     * @var int
+     */
+    protected $transactionDepth = 0;
+
+    /**
+     * @var int
+     */
+    private $transactionCount = 0;
+
+    /**
+
+    /**
      * Constructor
      *
      * Construct repository object with provided storage engine
@@ -176,7 +210,9 @@ class Repository implements RepositoryInterface
             'location' => array(),
             'section' => array(),
             'role' => array(),
-            'user' => array(),
+            'user' => array(
+                'anonymousUserID' => 10
+            ),
             'language' => array(),
             'trash' => array(),
             'io' => array(),
@@ -205,12 +241,14 @@ class Repository implements RepositoryInterface
      */
     public function getCurrentUser()
     {
-        if ( !$this->user instanceof User )
+        if ( !$this->currentUser instanceof User )
         {
-            $this->user = $this->getUserService()->loadAnonymousUser();
+            $this->currentUser = $this->getUserService()->loadUser(
+                $this->serviceSettings["user"]["anonymousUserID"]
+            );
         }
 
-        return $this->user;
+        return $this->currentUser;
     }
 
     /**
@@ -225,7 +263,7 @@ class Repository implements RepositoryInterface
         if ( !$user->id )
             throw new InvalidArgumentValue( '$user->id', $user->id );
 
-        $this->user = $user;
+        $this->currentUser = $user;
     }
 
     /**
@@ -250,7 +288,7 @@ class Repository implements RepositoryInterface
      * @throws \Exception Re throws exceptions thrown inside $callback
      * @return mixed
      */
-    final public function sudo( \Closure $callback )
+    public function sudo( \Closure $callback )
     {
         if ( $this->sudoFlag === true )
             throw new RuntimeException( "Recursive sudo use detected, abort abort!" );
@@ -360,15 +398,11 @@ class Repository implements RepositoryInterface
             return $permissionSets;
         }
 
-        if ( $targets === null )
-        {
-            $targets = array();
-        }
-        else if ( $targets instanceof ValueObject )
+        if ( $targets instanceof ValueObject )
         {
             $targets = array( $targets );
         }
-        else if ( !is_array( $targets ) )
+        else if ( $targets !== null && !is_array( $targets ) )
         {
             throw new InvalidArgumentType(
                 "\$targets",
@@ -382,29 +416,59 @@ class Repository implements RepositoryInterface
         foreach ( $permissionSets as $permissionSet )
         {
             /**
+             * First deal with Role limitation if any
+             *
+             * Here we accept ACCESS_GRANTED and ACCESS_ABSTAIN, the latter in cases where $object and $targets
+             * are not supported by limitation.
+             *
              * @var \eZ\Publish\API\Repository\Values\User\Limitation[] $permissionSet
              */
             if ( $permissionSet['limitation'] instanceof Limitation )
             {
                 $type = $roleService->getLimitationType( $permissionSet['limitation']->getIdentifier() );
-                if ( !$type->evaluate( $permissionSet['limitation'], $currentUser, $object, $targets ) )
+                $accessVote = $type->evaluate( $permissionSet['limitation'], $currentUser, $object, $targets );
+                if ( $accessVote === LimitationType::ACCESS_DENIED )
                     continue;
             }
 
             /**
+             * Loop over all policies
+             *
+             * These are already filtered by hasAccess and given hasAccess did not return boolean
+             * there must be some, so only return true if one of them says yes.
+             *
              * @var \eZ\Publish\API\Repository\Values\User\Policy $policy
              */
             foreach ( $permissionSet['policies'] as $policy )
             {
                 $limitations = $policy->getLimitations();
+
+                /**
+                 * Return true if policy gives full access (aka no limitations)
+                 */
                 if ( $limitations === '*' )
                     return true;
 
+                /**
+                 * Loop over limitations, all must return ACCESS_GRANTED for policy to pass.
+                 * If limitations was empty array this means same as '*'
+                 */
                 $limitationsPass = true;
                 foreach ( $limitations as $limitation )
                 {
                     $type = $roleService->getLimitationType( $limitation->getIdentifier() );
-                    if ( !$type->evaluate( $limitation, $currentUser, $object, $targets ) )
+                    $accessVote = $type->evaluate( $limitation, $currentUser, $object, $targets );
+                    /**
+                     * For policy limitation atm only support ACCESS_GRANTED
+                     *
+                     * Reasoning: Right now, use of a policy limitation not valid for a policy is per definition a
+                     * BadState. To reach this you would have to configure the "limitationMap" wrongly, like using
+                     * Node (Location) limitation on state/assign. So in this case Role Limitations will return
+                     * ACCESS_ABSTAIN (== no access here), and other limitations will throw InvalidArgument above,
+                     * both cases forcing dev to investigate to find miss configuration. This might be relaxed in
+                     * the future if valid use cases for ACCESS_ABSTAIN on policy limitations becomes known.
+                     */
+                    if ( $accessVote !== LimitationType::ACCESS_GRANTED )
                     {
                         $limitationsPass = false;
                         break;// Break to next policy, all limitations must pass
@@ -429,7 +493,14 @@ class Repository implements RepositoryInterface
         if ( $this->contentService !== null )
             return $this->contentService;
 
-        $this->contentService = new ContentService( $this, $this->persistenceHandler, $this->serviceSettings['content'] );
+        $this->contentService = new ContentService(
+            $this,
+            $this->persistenceHandler,
+            $this->getDomainMapper(),
+            $this->getRelationProcessor(),
+            $this->getNameSchemaService(),
+            $this->serviceSettings['content']
+        );
         return $this->contentService;
     }
 
@@ -469,6 +540,7 @@ class Repository implements RepositoryInterface
         $this->contentTypeService = new ContentTypeService(
             $this,
             $this->persistenceHandler->contentTypeHandler(),
+            $this->getDomainMapper(),
             $this->serviceSettings['contentType']
         );
         return $this->contentTypeService;
@@ -486,7 +558,14 @@ class Repository implements RepositoryInterface
         if ( $this->locationService !== null )
             return $this->locationService;
 
-        $this->locationService = new LocationService( $this, $this->persistenceHandler, $this->serviceSettings['location'] );
+        $this->locationService = new LocationService(
+            $this,
+            $this->persistenceHandler,
+            $this->getDomainMapper(),
+            $this->getNameSchemaService(),
+            $this->getPermissionsCriterionHandler(),
+            $this->serviceSettings['location']
+        );
         return $this->locationService;
     }
 
@@ -503,7 +582,12 @@ class Repository implements RepositoryInterface
         if ( $this->trashService !== null )
             return $this->trashService;
 
-        $this->trashService = new TrashService( $this, $this->persistenceHandler, $this->serviceSettings['trash'] );
+        $this->trashService = new TrashService(
+            $this,
+            $this->persistenceHandler,
+            $this->getNameSchemaService(),
+            $this->serviceSettings['trash']
+        );
         return $this->trashService;
     }
 
@@ -631,6 +715,9 @@ class Repository implements RepositoryInterface
         $this->searchService = new SearchService(
             $this,
             $this->persistenceHandler->searchHandler(),
+            $this->persistenceHandler->locationSearchHandler(),
+            $this->getDomainMapper(),
+            $this->getPermissionsCriterionHandler(),
             $this->serviceSettings['search']
         );
         return $this->searchService;
@@ -659,7 +746,7 @@ class Repository implements RepositoryInterface
      *
      * @return \eZ\Publish\Core\Repository\NameSchemaService
      */
-    public function getNameSchemaService()
+    protected function getNameSchemaService()
     {
         if ( $this->nameSchemaService !== null )
             return $this->nameSchemaService;
@@ -677,13 +764,50 @@ class Repository implements RepositoryInterface
      *
      * @return \eZ\Publish\Core\Repository\RelationProcessor
      */
-    public function getRelationProcessor()
+    protected function getRelationProcessor()
     {
         if ( $this->relationProcessor !== null )
             return $this->relationProcessor;
 
         $this->relationProcessor = new RelationProcessor( $this, $this->persistenceHandler );
         return $this->relationProcessor;
+    }
+
+    /**
+     * Get RelationProcessor
+     *
+     * @access private Internal service for the Core Services
+     *
+     * @todo Move out from this & other repo instances when services becomes proper services in DIC terms using factory.
+     *
+     * @return \eZ\Publish\Core\Repository\DomainMapper
+     */
+    protected function getDomainMapper()
+    {
+        if ( $this->domainMapper !== null )
+            return $this->domainMapper;
+
+        $this->domainMapper = new DomainMapper(
+            $this,
+            $this->persistenceHandler->contentLanguageHandler()
+        );
+        return $this->domainMapper;
+    }
+
+    /**
+     * Get PermissionsCriterionHandler
+     *
+     * @access private Internal service for the Core Services
+     *
+     * @todo Move out from this & other repo instances when services becomes proper services in DIC terms using factory.
+     *
+     * @return \eZ\Publish\Core\Repository\PermissionsCriterionHandler
+     */
+    protected function getPermissionsCriterionHandler()
+    {
+        return $this->permissionsCriterionHandler !== null ?
+            $this->permissionsCriterionHandler :
+            $this->permissionsCriterionHandler = new PermissionsCriterionHandler( $this );
     }
 
     /**
@@ -695,6 +819,9 @@ class Repository implements RepositoryInterface
     public function beginTransaction()
     {
         $this->persistenceHandler->beginTransaction();
+
+        ++$this->transactionDepth;
+        $this->commitEventsQueue[++$this->transactionCount] = array();
     }
 
     /**
@@ -709,6 +836,29 @@ class Repository implements RepositoryInterface
         try
         {
             $this->persistenceHandler->commit();
+
+            --$this->transactionDepth;
+
+            if ( $this->transactionDepth === 0 )
+            {
+                $queueCountDown = count( $this->commitEventsQueue );
+                foreach ( $this->commitEventsQueue as $eventsQueue )
+                {
+                    --$queueCountDown;
+                    if ( empty( $eventsQueue ) )
+                        continue;
+
+                    $eventCountDown = count( $eventsQueue );
+                    foreach ( $eventsQueue as $event )
+                    {
+                        --$eventCountDown;
+                        // event expects a boolean param, if true it means it is last event (for commit use)
+                        $event( $queueCountDown === 0 && $eventCountDown === 0 );
+                    }
+                }
+
+                $this->commitEventsQueue = array();
+            }
         }
         catch ( Exception $e )
         {
@@ -728,10 +878,31 @@ class Repository implements RepositoryInterface
         try
         {
             $this->persistenceHandler->rollback();
+
+            --$this->transactionDepth;
+            unset( $this->commitEventsQueue[$this->transactionCount] );
         }
         catch ( Exception $e )
         {
             throw new RuntimeException( $e->getMessage(), 0, $e );
+        }
+    }
+
+    /**
+     * Enqueue an event to be triggered at commit or directly if no transaction has started
+     *
+     * @param Callable $event
+     */
+    public function commitEvent( $event )
+    {
+        if ( $this->transactionDepth !== 0 )
+        {
+            $this->commitEventsQueue[$this->transactionCount][] = $event;
+        }
+        else
+        {
+            // event expects a boolean param, if true it means it is last event (for commit use)
+            $event( true );
         }
     }
 

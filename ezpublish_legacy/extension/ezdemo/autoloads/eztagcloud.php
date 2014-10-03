@@ -2,23 +2,25 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 // SOFTWARE NAME: eZ Publish Website Interface
-// SOFTWARE RELEASE: 5.0.0
-// COPYRIGHT NOTICE: Copyright (C) 1999-2012 eZ Systems AS
+// SOFTWARE RELEASE: 1.4-0
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
-//  This program is free software; you can redistribute it and/or
-//  modify it under the terms of version 2.0  of the GNU General
-//  Public License as published by the Free Software Foundation.
+//   This program is free software; you can redistribute it and/or
+//   modify it under the terms of version 2.0  of the GNU General
+//   Public License as published by the Free Software Foundation.
 //
-//  This program is distributed in the hope that it will be useful,
+//   This program is distributed in the hope that it will be useful,
 //   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
 //
-//  You should have received a copy of version 2.0 of the GNU General
-//  Public License along with this program; if not, write to the Free
-//  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-//  MA 02110-1301, USA.
+//   You should have received a copy of version 2.0 of the GNU General
+//   Public License along with this program; if not, write to the Free
+//   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+//   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -123,15 +125,18 @@ class eZTagCloud
                 $languageFilter .= 'AND ' . eZContentLanguage::languagesSQLFilter( 'ezcontentobject_attribute', 'language_id' );
 
                 $rs = $db->arrayQuery( "SELECT ezkeyword.keyword, count(ezkeyword.keyword) AS keyword_count
-                                        FROM ( ezkeyword $sqlPermissionChecking[from], ezkeyword_attribute_link )
+                                        FROM ezkeyword_attribute_link
                                         LEFT JOIN ezcontentobject_attribute
                                             ON ezkeyword_attribute_link.objectattribute_id = ezcontentobject_attribute.id
                                         LEFT JOIN ezcontentobject
                                             ON ezcontentobject_attribute.contentobject_id = ezcontentobject.id
                                         LEFT JOIN ezcontentobject_tree
                                             ON ezcontentobject_attribute.contentobject_id = ezcontentobject_tree.contentobject_id
-                                        WHERE ezkeyword.id = ezkeyword_attribute_link.keyword_id
-                                            AND ezcontentobject.status = " . eZContentObject::STATUS_PUBLISHED . "
+                                        LEFT JOIN ezkeyword
+                                            ON ezkeyword.id = ezkeyword_attribute_link.keyword_id
+                                        $sqlPermissionChecking[from]
+                                        WHERE
+                                            ezcontentobject.status = " . eZContentObject::STATUS_PUBLISHED . "
                                             AND ezcontentobject_attribute.version = ezcontentobject.current_version
                                             AND ezcontentobject_tree.main_node_id = ezcontentobject_tree.node_id
                                             $pathString

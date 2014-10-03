@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\Core\Repository\Tests\Service\Integration\ContentTypeBase class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Repository\Tests\Service\Integration;
@@ -12,7 +12,7 @@ namespace eZ\Publish\Core\Repository\Tests\Service\Integration;
 use eZ\Publish\Core\Repository\Tests\Service\Integration\Base as BaseServiceTest;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Exceptions;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Tests\BaseTest as APIBaseTest;
 use eZ\Publish\Core\FieldType\XmlText\Value as XmlValue;
 
@@ -690,7 +690,7 @@ abstract class ContentTypeBase extends BaseServiceTest
             $contentTypeService->loadContentTypeGroup( $group->id );
             $this->fail( 'Content type group not deleted.' );
         }
-        catch ( Exceptions\NotFoundException $e )
+        catch ( NotFoundException $e )
         {
             // All fine
         }
@@ -1425,9 +1425,12 @@ abstract class ContentTypeBase extends BaseServiceTest
         $typeCreateStruct->remoteId = "other-remoteid";
         $typeCreateStruct->creatorId = $this->repository->getCurrentUser()->id;
         $typeCreateStruct->creationDate = new \DateTime();
-        $typeCreateStruct->mainLanguageCode = 'eng-GB';
+        $typeCreateStruct->mainLanguageCode = 'eng-US';
         $typeCreateStruct->names = array( 'eng-US' => 'A name.' );
         $typeCreateStruct->descriptions = array( 'eng-US' => 'A description.' );
+
+        $fieldCreate = $contentTypeService->newFieldDefinitionCreateStruct( 'test', 'eztext' );
+        $typeCreateStruct->addFieldDefinition( $fieldCreate );
 
         // Throws an exception because content type with identifier "new-type" already exists
         $type = $contentTypeService->createContentType(
@@ -1463,9 +1466,12 @@ abstract class ContentTypeBase extends BaseServiceTest
         $typeCreateStruct->remoteId = "new-remoteid";
         $typeCreateStruct->creatorId = $this->repository->getCurrentUser()->id;
         $typeCreateStruct->creationDate = new \DateTime();
-        $typeCreateStruct->mainLanguageCode = 'eng-GB';
+        $typeCreateStruct->mainLanguageCode = 'eng-US';
         $typeCreateStruct->names = array( 'eng-US' => 'A name.' );
         $typeCreateStruct->descriptions = array( 'eng-US' => 'A description.' );
+
+        $fieldCreate = $contentTypeService->newFieldDefinitionCreateStruct( 'test', 'eztext' );
+        $typeCreateStruct->addFieldDefinition( $fieldCreate );
 
         // Throws an exception because content type with remoteId "new-remoteid" already exists
         $type = $contentTypeService->createContentType(
@@ -1501,7 +1507,7 @@ abstract class ContentTypeBase extends BaseServiceTest
         $typeCreateStruct->remoteId = "new-unique-remoteid";
         $typeCreateStruct->creatorId = $this->repository->getCurrentUser()->id;
         $typeCreateStruct->creationDate = new \DateTime();
-        $typeCreateStruct->mainLanguageCode = 'eng-GB';
+        $typeCreateStruct->mainLanguageCode = 'eng-US';
         $typeCreateStruct->names = array( 'eng-US' => 'A name.' );
         $typeCreateStruct->descriptions = array( 'eng-US' => 'A description.' );
 
@@ -2555,7 +2561,7 @@ abstract class ContentTypeBase extends BaseServiceTest
      */
     public function testUpdateContentTypeDraftThrowsInvalidArgumentExceptionNoDraftForAuthenticatedUser()
     {
-        $contentTypeDraft = $this->createContentType( false, $this->getStubbedUser( 28 )->id );
+        $contentTypeDraft = $this->createContentType( false, $this->getStubbedUser( 10 )->id );
 
         /* BEGIN: Use Case */
         // $contentTypeDraft contains a ContentTypeDraft with identifier 'blog-post', belonging to the user with id=28
@@ -2593,7 +2599,7 @@ abstract class ContentTypeBase extends BaseServiceTest
             $contentTypeService->loadContentType( $commentType->id );
             $this->fail( 'Content type could be loaded after delete.' );
         }
-        catch ( Exceptions\NotFoundException $e )
+        catch ( NotFoundException $e )
         {
             // All fine
         }

@@ -2,9 +2,9 @@
 /**
  * File containing the CreatedRelation ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -14,6 +14,7 @@ use eZ\Publish\Core\REST\Common\Output\Visitor;
 
 /**
  * CreatedRelation value object visitor
+ * @todo coverage add unit test
  */
 class CreatedRelation extends RestRelation
 {
@@ -29,12 +30,12 @@ class CreatedRelation extends RestRelation
         parent::visit( $visitor, $generator, $data->relation );
         $visitor->setHeader(
             'Location',
-            $this->urlHandler->generate(
-                'objectVersionRelation',
+            $this->router->generate(
+                'ezpublish_rest_loadVersionRelation',
                 array(
-                    'object' => $data->relation->contentId,
-                    'version' => $data->relation->versionNo,
-                    'relation' => $data->relation->relation->id
+                    'contentId' => $data->relation->contentId,
+                    'versionNumber' => $data->relation->versionNo,
+                    'relationId' => $data->relation->relation->id
                 )
             )
         );

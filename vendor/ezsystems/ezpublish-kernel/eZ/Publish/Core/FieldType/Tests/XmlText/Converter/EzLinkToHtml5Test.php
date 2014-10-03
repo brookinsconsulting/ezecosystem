@@ -2,15 +2,13 @@
 /**
  * File containing the EzLinkToHtml5 EzXml test
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
-namespace eZ\Publish\Core\Repository\Tests\FieldType\XmlText\Converter;
+namespace eZ\Publish\Core\FieldType\Tests\XmlText\Converter;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\UrlAlias;
-use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use eZ\Publish\Core\FieldType\XmlText\Converter\EzLinkToHtml5;
 use PHPUnit_Framework_TestCase;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException as APINotFoundException;
@@ -26,6 +24,25 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
+    public function providerLinkXmlSample()
+    {
+        return array(
+            array(
+                '<?xml version="1.0" encoding="utf-8"?>
+<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/" xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/" xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph>This is an <link url="/test">object link</link>.</paragraph></section>',
+                '/test',
+            ),
+            array(
+                '<?xml version="1.0" encoding="utf-8"?>
+<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/" xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/" xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph>This is an <link url="/test" anchor_name="anchor">object link</link>.</paragraph></section>',
+                '/test#anchor',
+            ),
+        );
+    }
+
+    /**
+     * @return array
+     */
     public function providerObjectLinkXmlSample()
     {
         return array(
@@ -35,7 +52,16 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
                 104,
                 106,
                 'test',
-            )
+                'test',
+            ),
+            array(
+                '<?xml version="1.0" encoding="utf-8"?>
+<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/" xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/" xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph>This is an <link object_id="104" anchor_name="anchor">object link</link>.</paragraph></section>',
+                104,
+                106,
+                'test',
+                'test#anchor',
+            ),
         );
     }
 
@@ -49,8 +75,16 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
                 '<?xml version="1.0" encoding="utf-8"?>
 <section xmlns:image="http://ez.no/namespaces/ezpublish3/image/" xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/" xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph>This is a <link node_id="106">node link</link>.</paragraph></section>',
                 106,
-                'test'
-            )
+                'test',
+                'test',
+            ),
+            array(
+                '<?xml version="1.0" encoding="utf-8"?>
+<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/" xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/" xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph>This is a <link node_id="106" anchor_name="anchor">node link</link>.</paragraph></section>',
+                106,
+                'test',
+                'test#anchor',
+            ),
         );
     }
 
@@ -135,6 +169,17 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getMockUrlAliasRouter()
+    {
+        return $this
+            ->getMockBuilder( 'eZ\\Publish\\Core\\MVC\\Symfony\\Routing\\UrlAliasRouter' )
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    /**
      * @param $contentService
      * @param $locationService
      * @return \PHPUnit_Framework_MockObject_MockObject
@@ -160,46 +205,69 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
 
     /**
      * Test setting of urls on links with node_id attributes
-     * @dataProvider providerLocationLinkXmlSample
+     * @dataProvider providerLinkXmlSample
      * @param $xmlString
-     * @param $locationId
      * @param $url
      */
-    public function testLocationLink( $xmlString, $locationId, $url )
+    public function testLink( $xmlString, $url )
     {
         $xmlDoc = new \DOMDocument();
         $xmlDoc->loadXML( $xmlString );
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasService = $this->getMockUrlAliasService();
+        $urlAliasRouter = $this->getMockUrlAliasRouter();
+
+        $contentService->expects( $this->never() )
+            ->method( $this->anything() );
+
+        $locationService->expects( $this->never() )
+            ->method( $this->anything() );
+
+        $urlAliasRouter->expects( $this->never() )
+            ->method( $this->anything() );
+
+        $converter = new EzLinkToHtml5( $locationService, $contentService, $urlAliasRouter );
+        $converter->convert( $xmlDoc );
+
+        $links = $xmlDoc->getElementsByTagName( 'link' );
+        foreach ( $links as $link )
+        {
+            // assumes only one link, or all pointing to same url
+            $this->assertEquals( $url, $link->getAttribute( 'url' ) );
+        }
+    }
+
+    /**
+     * Test setting of urls on links with node_id attributes
+     * @dataProvider providerLocationLinkXmlSample
+     * @param $xmlString
+     * @param $locationId
+     * @param $rawUrl
+     * @param $url
+     */
+    public function testLocationLink( $xmlString, $locationId, $rawUrl, $url )
+    {
+        $xmlDoc = new \DOMDocument();
+        $xmlDoc->loadXML( $xmlString );
+
+        $contentService = $this->getMockContentService();
+        $locationService = $this->getMockLocationService();
+        $urlAliasRouter = $this->getMockUrlAliasRouter();
 
         $location = $this->getMock( 'eZ\Publish\API\Repository\Values\Content\Location' );
-        $urlAlias = $this->getMock( 'eZ\Publish\API\Repository\Values\Content\URLAlias' );
 
         $locationService->expects( $this->once() )
             ->method( 'loadLocation' )
             ->with( $this->equalTo( $locationId ) )
             ->will( $this->returnValue( $location ) );
 
-        $urlAliasService->expects( $this->once() )
-            ->method( 'reverseLookup' )
+        $urlAliasRouter->expects( $this->once() )
+            ->method( 'generate' )
             ->with( $this->equalTo( $location ) )
-            ->will( $this->returnValue( $urlAlias ) );
+            ->will( $this->returnValue( $rawUrl ) );
 
-        $urlAlias->expects( $this->once() )
-            ->method( '__get' )
-            ->with( $this->equalTo( 'path' ) )
-            ->will( $this->returnValue( $url ) );
-
-        $repository = $this->getMockRepository(
-            $contentService,
-            $locationService,
-            $urlAliasService
-        );
-
-        $converter = new EzLinkToHtml5( $repository );
-
+        $converter = new EzLinkToHtml5( $locationService, $contentService, $urlAliasRouter );
         $converter->convert( $xmlDoc );
 
         $links = $xmlDoc->getElementsByTagName( 'link' );
@@ -219,26 +287,20 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
      * @param $xmlString
      * @param $contentId
      * @param $locationId
+     * @param $rawUrl
      * @param $url
      */
-    public function testObjectLink( $xmlString, $contentId, $locationId, $url )
+    public function testObjectLink( $xmlString, $contentId, $locationId, $rawUrl, $url )
     {
         $xmlDoc = new \DOMDocument();
         $xmlDoc->loadXML( $xmlString );
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasService = $this->getMockUrlAliasService();
+        $urlAliasRouter = $this->getMockUrlAliasRouter();
 
-        $content = $this->getMock( 'eZ\Publish\API\Repository\Values\Content\Content' );
         $contentInfo = $this->getMock( 'eZ\Publish\API\Repository\Values\Content\ContentInfo' );
         $location = $this->getMock( 'eZ\Publish\API\Repository\Values\Content\Location' );
-        $urlAlias = $this->getMock( 'eZ\Publish\API\Repository\Values\Content\URLAlias' );
-
-        $content->expects( $this->once() )
-            ->method( '__get' )
-            ->with( $this->equalTo( 'contentInfo' ) )
-            ->will( $this->returnValue( $contentInfo ) );
 
         $contentInfo->expects( $this->once() )
             ->method( '__get' )
@@ -246,33 +308,21 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
             ->will( $this->returnValue( $locationId ) );
 
         $contentService->expects( $this->any() )
-            ->method( 'loadContent' )
+            ->method( 'loadContentInfo' )
             ->with( $this->equalTo( $contentId ) )
-            ->will( $this->returnValue( $content ) );
+            ->will( $this->returnValue( $contentInfo ) );
 
         $locationService->expects( $this->once() )
             ->method( 'loadLocation' )
             ->with( $this->equalTo( $locationId ) )
             ->will( $this->returnValue( $location ) );
 
-        $urlAliasService->expects( $this->once() )
-            ->method( 'reverseLookup' )
+        $urlAliasRouter->expects( $this->once() )
+            ->method( 'generate' )
             ->with( $this->equalTo( $location ) )
-            ->will( $this->returnValue( $urlAlias ) );
+            ->will( $this->returnValue( $rawUrl ) );
 
-        $urlAlias->expects( $this->once() )
-            ->method( '__get' )
-            ->with( $this->equalTo( 'path' ) )
-            ->will( $this->returnValue( $url ) );
-
-        $repository = $this->getMockRepository(
-            $contentService,
-            $locationService,
-            $urlAliasService
-        );
-
-        $converter = new EzLinkToHtml5( $repository );
-
+        $converter = new EzLinkToHtml5( $locationService, $contentService, $urlAliasRouter );
         $converter->convert( $xmlDoc );
 
         $links = $xmlDoc->getElementsByTagName( 'link' );
@@ -300,8 +350,7 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasService = $this->getMockUrlAliasService();
-
+        $urlAliasRouter = $this->getMockUrlAliasRouter();
         $logger = $this->getMock( 'Psr\Log\LoggerInterface' );
 
         $logger->expects( $this->once() )
@@ -313,14 +362,7 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
             ->with( $this->equalTo( $locationId ) )
             ->will( $this->throwException( $exception ) );
 
-        $repository = $this->getMockRepository(
-            $contentService,
-            $locationService,
-            $urlAliasService
-        );
-
-        $converter = new EzLinkToHtml5( $repository, $logger );
-
+        $converter = new EzLinkToHtml5( $locationService, $contentService, $urlAliasRouter, $logger );
         $converter->convert( $xmlDoc );
     }
 
@@ -340,8 +382,7 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasService = $this->getMockUrlAliasService();
-
+        $urlAliasRouter = $this->getMockUrlAliasRouter();
         $logger = $this->getMock( 'Psr\Log\LoggerInterface' );
 
         $logger->expects( $this->once() )
@@ -349,18 +390,11 @@ class EzLinkToHtml5Test extends PHPUnit_Framework_TestCase
             ->with( $this->equalTo( $logMessage ) );
 
         $contentService->expects( $this->once() )
-            ->method( 'loadContent' )
+            ->method( 'loadContentInfo' )
             ->with( $this->equalTo( $contentId ) )
             ->will( $this->throwException( $exception ) );
 
-        $repository = $this->getMockRepository(
-            $contentService,
-            $locationService,
-            $urlAliasService
-        );
-
-        $converter = new EzLinkToHtml5( $repository, $logger );
-
+        $converter = new EzLinkToHtml5( $locationService, $contentService, $urlAliasRouter, $logger );
         $converter->convert( $xmlDoc );
     }
 

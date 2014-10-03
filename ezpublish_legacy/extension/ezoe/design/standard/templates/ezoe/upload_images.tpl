@@ -61,7 +61,7 @@ eZOEPopupUtils.settings.browseClassGenerator = function( n, hasImage ){
         <div class="panel">
             <table class="properties">
 
-                {include uri="design:ezoe/upload/common_attributes.tpl" file_name_attribute='accept="image/*"'}
+                {include uri="design:ezoe/upload/common_attributes.tpl" objectname_input_name='ContentObjectAttribute_name' file_name_attribute='accept="image/*"'}
 
                 <!-- Next two attributes are image specific  -->
                 <tr>
@@ -93,7 +93,7 @@ eZOEPopupUtils.settings.browseClassGenerator = function( n, hasImage ){
                     {foreach $grouped_related_contentobjects.images as $img}
 
                     <div class="image-thumbnail-item">
-                        <a title="{$img.object.name|wash}" href="JavaScript:eZOEPopupUtils.selectByEmbedId( {$img.object.id} )" class="contenttype_image">
+                        <a title="{$img.object.name|wash}" href="JavaScript:eZOEPopupUtils.selectByEmbedId( {$img.object.id|wash('javascript')} )" class="contenttype_image">
                         {attribute_view_gui attribute=$img.object.data_map[ $img.image_attribute ] image_class=small}
                         </a>
                     </div>

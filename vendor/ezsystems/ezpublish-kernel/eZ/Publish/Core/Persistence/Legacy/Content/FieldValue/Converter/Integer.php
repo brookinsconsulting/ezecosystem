@@ -2,9 +2,9 @@
 /**
  * File containing the Integer converter
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
@@ -19,7 +19,6 @@ class Integer implements Converter
 {
     const FLOAT_VALIDATOR_IDENTIFIER = "IntegerValueValidator";
 
-    const NO_MIN_MAX_VALUE = 0;
     const HAS_MIN_VALUE = 1;
     const HAS_MAX_VALUE = 2;
 
@@ -44,7 +43,7 @@ class Integer implements Converter
     public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
     {
         $storageFieldValue->dataInt = $value->data;
-        $storageFieldValue->sortKeyInt = $value->sortKey;
+        $storageFieldValue->sortKeyInt = (int)$value->sortKey;
     }
 
     /**
@@ -90,28 +89,19 @@ class Integer implements Converter
      */
     public function toFieldDefinition( StorageFieldDefinition $storageDef, FieldDefinition $fieldDef )
     {
-        $fieldDef->fieldTypeConstraints->validators = array(
-            self::FLOAT_VALIDATOR_IDENTIFIER => array( 'minIntegerValue' => false, 'maxIntegerValue' => false )
-        );
-
-        if ( $storageDef->dataInt4 !== self::NO_MIN_MAX_VALUE )
+        $validatorParameters = array( 'minIntegerValue' => false, 'maxIntegerValue' => false );
+        if ( $storageDef->dataInt4 & self::HAS_MIN_VALUE )
         {
-            if ( !empty( $storageDef->dataInt1 ) )
-            {
-                $fieldDef
-                    ->fieldTypeConstraints
-                    ->validators[self::FLOAT_VALIDATOR_IDENTIFIER]['minIntegerValue'] = $storageDef->dataInt1;
-            }
-
-            if ( !empty( $storageDef->dataInt2 ) )
-            {
-                $fieldDef
-                    ->fieldTypeConstraints
-                    ->validators[self::FLOAT_VALIDATOR_IDENTIFIER]['maxIntegerValue'] = $storageDef->dataInt2;
-            }
+            $validatorParameters['minIntegerValue'] = $storageDef->dataInt1;
         }
 
-        $fieldDef->defaultValue->data = isset( $storageDef->dataInt3 ) ? $storageDef->dataInt3 : 0;
+        if ( $storageDef->dataInt4 & self::HAS_MAX_VALUE )
+        {
+            $validatorParameters['maxIntegerValue'] = $storageDef->dataInt2;
+        }
+        $fieldDef->fieldTypeConstraints->validators[self::FLOAT_VALIDATOR_IDENTIFIER] = $validatorParameters;
+        $fieldDef->defaultValue->data = $storageDef->dataInt3;
+        $fieldDef->defaultValue->sortKey = ( $storageDef->dataInt3 === null ? 0 : $storageDef->dataInt3 );
     }
 
     /**
@@ -131,7 +121,6 @@ class Integer implements Converter
     /**
      * Returns validator state for storage definition.
      * Validator state is a bitfield value composed of:
-     *   - {@link self::NO_MIN_MAX_VALUE}
      *   - {@link self::HAS_MAX_VALUE}
      *   - {@link self::HAS_MIN_VALUE}
      *
@@ -142,13 +131,13 @@ class Integer implements Converter
      */
     private function getStorageDefValidatorState( $minValue, $maxValue )
     {
-        $state = self::NO_MIN_MAX_VALUE;
+        $state = 0;
 
         if ( $minValue !== null )
-            $state += self::HAS_MIN_VALUE;
+            $state |= self::HAS_MIN_VALUE;
 
         if ( $maxValue !== null )
-            $state += self::HAS_MAX_VALUE;
+            $state |= self::HAS_MAX_VALUE;
 
         return $state;
     }

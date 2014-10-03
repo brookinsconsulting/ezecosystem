@@ -1,6 +1,15 @@
 <?php
+/**
+ * File containing the FieldDefinition class
+ *
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
+ */
 
 namespace eZ\Publish\Core\REST\Client\Values\ContentType;
+
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
 
 /**
  *
@@ -14,13 +23,13 @@ namespace eZ\Publish\Core\REST\Client\Values\ContentType;
  * @property-read string $fieldGroup the field group name
  * @property-read int $position the position of the field definition in the content typr
  * @property-read string $fieldType String identifier of the field type
- * @property-read boolean $isTranslatable indicatats if fields of this definition are translatable
+ * @property-read boolean $isTranslatable indicates if fields of this definition are translatable
  * @property-read boolean $isRequired indicates if this field is required in the content object
  * @property-read boolean $isSearchable indicates if the field is searchable
  * @property-read boolean $isInfoCollector indicates if this field is used for information collection
  * @property-read $defaultValue the default value of the field
  */
-class FieldDefinition extends \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition
+class FieldDefinition extends APIFieldDefinition
 {
     /**
      * Contains the human readable name of this field in all provided languages
@@ -80,7 +89,7 @@ class FieldDefinition extends \eZ\Publish\API\Repository\Values\ContentType\Fiel
      *
      * @param string $languageCode
      *
-     * @return string the name for the given language or null if none existis.
+     * @return string the name for the given language or null if none exists.
      */
     public function getName( $languageCode )
     {
@@ -107,7 +116,7 @@ class FieldDefinition extends \eZ\Publish\API\Repository\Values\ContentType\Fiel
      *
      * @param string $languageCode
      *
-     * @return string the description for the given language or null if none existis.
+     * @return string the description for the given language or null if none exists.
      */
     public function getDescription( $languageCode )
     {

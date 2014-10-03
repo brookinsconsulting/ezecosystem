@@ -2,14 +2,13 @@
 /**
  * File containing the RestFieldDefinition ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Output\Generator;
 use eZ\Publish\Core\REST\Common\Output\Visitor;
 use eZ\Publish\Core\REST\Common\Output\FieldTypeSerializer;
@@ -29,12 +28,10 @@ class RestFieldDefinition extends RestContentTypeBase
     protected $fieldTypeSerializer;
 
     /**
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\Core\REST\Common\Output\FieldTypeSerializer $fieldTypeSerializer
      */
-    public function __construct( UrlHandler $urlHandler, FieldTypeSerializer $fieldTypeSerializer )
+    public function __construct( FieldTypeSerializer $fieldTypeSerializer )
     {
-        parent::__construct( $urlHandler );
         $this->fieldTypeSerializer = $fieldTypeSerializer;
     }
 
@@ -63,11 +60,11 @@ class RestFieldDefinition extends RestContentTypeBase
 
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate(
-                'typeFieldDefinition'  . $urlTypeSuffix,
+            $this->router->generate(
+                "ezpublish_rest_loadContentType{$urlTypeSuffix}FieldDefinition",
                 array(
-                    'type' => $contentType->id,
-                    'fieldDefinition' => $fieldDefinition->id,
+                    'contentTypeId' => $contentType->id,
+                    'fieldDefinitionId' => $fieldDefinition->id,
                 )
             )
         );
@@ -88,13 +85,22 @@ class RestFieldDefinition extends RestContentTypeBase
         $generator->startValueElement( 'position', $fieldDefinition->position );
         $generator->endValueElement( 'position' );
 
-        $generator->startValueElement( 'isTranslatable', $this->serializeBool( $fieldDefinition->isTranslatable ) );
+        $generator->startValueElement(
+            'isTranslatable',
+            $this->serializeBool( $generator, $fieldDefinition->isTranslatable )
+        );
         $generator->endValueElement( 'isTranslatable' );
 
-        $generator->startValueElement( 'isRequired', $this->serializeBool( $fieldDefinition->isRequired ) );
+        $generator->startValueElement(
+            'isRequired',
+            $this->serializeBool( $generator, $fieldDefinition->isRequired )
+        );
         $generator->endValueElement( 'isRequired' );
 
-        $generator->startValueElement( 'isInfoCollector', $this->serializeBool( $fieldDefinition->isInfoCollector ) );
+        $generator->startValueElement(
+            'isInfoCollector',
+            $this->serializeBool( $generator, $fieldDefinition->isInfoCollector )
+        );
         $generator->endValueElement( 'isInfoCollector' );
 
         $this->fieldTypeSerializer->serializeFieldDefaultValue(
@@ -103,7 +109,10 @@ class RestFieldDefinition extends RestContentTypeBase
             $fieldDefinition->defaultValue
         );
 
-        $generator->startValueElement( 'isSearchable', $this->serializeBool( $fieldDefinition->isSearchable ) );
+        $generator->startValueElement(
+            'isSearchable',
+            $this->serializeBool( $generator, $fieldDefinition->isSearchable )
+        );
         $generator->endValueElement( 'isSearchable' );
 
         $this->visitNamesList( $generator, $fieldDefinition->getNames() );

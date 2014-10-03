@@ -2,18 +2,17 @@
 /**
  * File containing the Legacy\PublishVersionSlot class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\SignalSlot\Slot;
 
 use eZ\Publish\Core\SignalSlot\Signal;
-use eZ\Publish\Core\SignalSlot\Slot\AbstractLegacySlot;
 use eZContentCacheManager;
 use eZContentObject;
-use eZSearch;
+use eZContentOperationCollection;
 
 /**
  * A legacy slot handling PublishVersionSignal.
@@ -37,8 +36,7 @@ class LegacyPublishVersionSlot extends AbstractLegacySlot
             function () use ( $signal )
             {
                 eZContentCacheManager::clearContentCacheIfNeeded( $signal->contentId );
-                $object = eZContentObject::fetch( $signal->contentId );
-                eZSearch::addObject( $object, false );
+                eZContentOperationCollection::registerSearchObject( $signal->contentId );
                 eZContentObject::clearCache();// Clear all object memory cache to free memory
             },
             false

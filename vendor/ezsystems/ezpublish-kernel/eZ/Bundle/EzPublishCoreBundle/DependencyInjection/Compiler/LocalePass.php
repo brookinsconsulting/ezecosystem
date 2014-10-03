@@ -2,9 +2,9 @@
 /**
  * File containing the LocalePass class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Compiler;
@@ -30,7 +30,7 @@ class LocalePass implements CompilerPassInterface
 
         $localeListenerDef = $container->getDefinition( 'locale_listener' );
         // Injecting the service container for lazy loading purpose, since all event listeners are instantiated before events are triggered
-        $localeListenerDef->addMethodCall( 'setServiceContainer', array( new Reference( 'service_container' ) ) );
+        $localeListenerDef->addMethodCall( 'setConfigResolver', array( new Reference( 'ezpublish.config.resolver' ) ) );
         $localeListenerDef->addMethodCall( 'setLocaleConverter', array( new Reference( 'ezpublish.locale.converter' ) ) );
     }
 }

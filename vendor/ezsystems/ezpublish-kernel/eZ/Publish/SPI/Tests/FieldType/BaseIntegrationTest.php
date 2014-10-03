@@ -2,22 +2,25 @@
 /**
  * File contains: eZ\Publish\SPI\Tests\FieldType\BaseIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
 
+use eZ\Publish\Core\Persistence;
+use eZ\Publish\Core\Persistence\TransformationProcessor\DefinitionBased;
 use eZ\Publish\Core\Persistence\Legacy\Tests\TestCase;
 use eZ\Publish\Core\Persistence\Legacy;
 use eZ\Publish\SPI\Persistence\Content;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\Type;
 use eZ\Publish\SPI\Persistence\Content\UpdateStruct;
-use eZ\Publish\Core\Persistence\FieldTypeRegistry;
-use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\ConverterRegistry;
-use eZ\Publish\Core\Persistence\Legacy\Content\StorageRegistry;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use eZ\Publish\Core\Base\Container\Compiler;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
  * Integration test for the legacy storage
@@ -53,6 +56,47 @@ abstract class BaseIntegrationTest extends TestCase
      * @var string
      */
     protected static $contentVersion;
+
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+     */
+    protected static $container;
+
+    /**
+     * @return string
+     */
+    static protected function getInstallationDir()
+    {
+        static $installDir = null;
+        if ( $installDir === null )
+        {
+            $config = require __DIR__ . '/../../../../../config.php';
+            $installDir = $config['install_dir'];
+        }
+        return $installDir;
+    }
+
+    /**
+     * @var \eZ\Publish\Core\Persistence\TransformationProcessor
+     */
+    protected $transformationProcessor;
+
+    /**
+     * @return \eZ\Publish\Core\Persistence\TransformationProcessor
+     */
+    public function getTransformationProcessor()
+    {
+        if ( !isset( $this->transformationProcessor ) )
+        {
+            $this->transformationProcessor = new DefinitionBased(
+                new Persistence\TransformationProcessor\DefinitionBased\Parser( self::getInstallationDir() ),
+                new Persistence\TransformationProcessor\PcreCompiler( new Persistence\Utf8Converter() ),
+                glob( __DIR__ . '/../../../Core/Persistence/Tests/TransformationProcessor/_fixtures/transformations/*.tr' )
+            );
+        }
+
+        return $this->transformationProcessor;
+    }
 
     /**
      * Returns the identifier of the FieldType under test
@@ -183,6 +227,9 @@ abstract class BaseIntegrationTest extends TestCase
     {
         if ( !self::$setUp )
         {
+            self::$container = $this->getContainer();
+            $this->handler = self::$container->get( "ezpublish.api.storage_engine.legacy.dbhandler" );
+            $this->db = $this->handler->getName();
             parent::setUp();
             $this->insertDatabaseFixture( __DIR__ . '/../../../Core/Repository/Tests/Service/Integration/Legacy/_fixtures/clean_ezdemo_47_dump.php' );
             self::$setUp = $this->handler;
@@ -347,6 +394,10 @@ abstract class BaseIntegrationTest extends TestCase
                         )
                     )
                 ),
+                // Language with id=2 is eng-US
+                // This is probably a mistake, as the fields are given with eng-GB, but it has a nice
+                // side effect of testing creation with empty value.
+                // TODO: change to eng-GB (8) and/or find a more obvious way to test creation with empty value
                 'initialLanguageId' => 2,
                 'remoteId'          => microtime(),
                 'modified'          => time(),
@@ -522,35 +573,68 @@ abstract class BaseIntegrationTest extends TestCase
         );
     }
 
+    protected function getContainer()
+    {
+        $config = include __DIR__ . "/../../../../../config.php";
+        $installDir = $config["install_dir"];
+
+        $containerBuilder = new ContainerBuilder();
+        $settingsPath = $installDir . "/eZ/Publish/Core/settings/";
+        $loader = new YamlFileLoader( $containerBuilder, new FileLocator( $settingsPath ) );
+
+        $loader->load( 'fieldtypes.yml' );
+        $loader->load( 'io.yml' );
+        $loader->load( 'repository.yml' );
+        $loader->load( 'fieldtype_external_storages.yml' );
+        $loader->load( 'storage_engines/common.yml' );
+        $loader->load( 'storage_engines/legacy.yml' );
+        $loader->load( 'storage_engines/cache.yml' );
+        $loader->load( 'settings.yml' );
+        $loader->load( 'fieldtype_services.yml' );
+        $loader->load( 'utils.yml' );
+
+        $containerBuilder->setParameter( "ezpublish.kernel.root_dir", $installDir );
+
+        $containerBuilder->setParameter(
+            "legacy_dsn",
+            $this->getDsn()
+        );
+
+        $containerBuilder->compile();
+
+        return $containerBuilder;
+    }
+
     /**
      * Returns the Handler
      *
-     * @return Handler
+     * @param string $identifier
+     * @param \eZ\Publish\SPI\Persistence\FieldType $fieldType
+     * @param \eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter $fieldValueConverter
+     * @param \eZ\Publish\SPI\FieldType\FieldStorage $externalStorage
+     *
+     * @return \eZ\Publish\SPI\Persistence\Handler
      */
-    protected function getHandler()
+    protected function getHandler( $identifier, $fieldType, $fieldValueConverter, $externalStorage )
     {
-        return new Legacy\Handler(
-            self::$setUp,
-            new FieldTypeRegistry(
-                array(
-                    'ezstring' => new \eZ\Publish\Core\FieldType\TextLine\Type(),
-                )
-            ),
-            new ConverterRegistry(
-                array(
-                    'ezstring' => new Legacy\Content\FieldValue\Converter\TextLine(),
-                )
-            ),
-            new StorageRegistry(
-                array()
-            ),
-            $this->getMock(
-                'eZ\\Publish\\Core\\Persistence\\Legacy\\Content\\Search\\TransformationProcessor\\DefinitionBased',
-                array(),
-                array(),
-                '',
-                false
-            )
-        );
+        /** @var \eZ\Publish\Core\Persistence\FieldTypeRegistry $fieldTypeRegistry */
+        $fieldTypeRegistry = self::$container->get( "ezpublish.persistence.field_type_registry" );
+        /** @var \eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\ConverterRegistry $converterRegistry */
+        $converterRegistry = self::$container->get( "ezpublish.persistence.legacy.field_value_converter.registry" );
+        /** @var \eZ\Publish\Core\Persistence\Legacy\Content\StorageRegistry $storageRegistry */
+        $storageRegistry = self::$container->get( "ezpublish.persistence.external_storage_registry" );
+
+        $textLineFieldType = new \eZ\Publish\Core\FieldType\TextLine\Type();
+        $textLineFieldType->setTransformationProcessor( $this->getTransformationProcessor() );
+        $textLineFieldValueConverter = new Legacy\Content\FieldValue\Converter\TextLine();
+
+        $fieldTypeRegistry->register( "ezstring", $textLineFieldType );
+        $converterRegistry->register( "ezstring", $textLineFieldValueConverter );
+
+        $fieldTypeRegistry->register( $identifier, $fieldType );
+        $converterRegistry->register( $identifier, $fieldValueConverter );
+        $storageRegistry->register( $identifier, $externalStorage );
+
+        return self::$container->get( "ezpublish.spi.persistence.legacy" );
     }
 }

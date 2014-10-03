@@ -8,6 +8,7 @@ $container->loadFromExtension('twig', array(
      ),
      'globals' => array(
          'foo' => '@bar',
+         'baz' => '@@qux',
          'pi'  => 3.14,
          'bad' => array('key' => 'foo'),
      ),
@@ -21,7 +22,7 @@ $container->loadFromExtension('twig', array(
      'paths'               => array(
          'path1',
          'path2',
-         'namespaced_path1' => 'namespace',
-         'namespaced_path2' => 'namespace',
+         'namespaced_path1' => 'namespace1',
+         'namespaced_path2' => 'namespace2',
       ),
 ));

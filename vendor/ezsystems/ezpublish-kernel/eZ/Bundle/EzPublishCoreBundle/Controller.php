@@ -2,9 +2,9 @@
 /**
  * File containing the Controller class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle;
@@ -26,9 +26,6 @@ class Controller extends BaseController
      */
     public function getRepository()
     {
-        if ( !$this->container->has( 'ezpublish.api.repository' ) )
-            throw new \LogicException( 'The EzPublishCoreBundle has not been registered in your application.' );
-
         return $this->container->get( 'ezpublish.api.repository' );
     }
 
@@ -64,5 +61,25 @@ class Controller extends BaseController
     public function isGranted( AuthorizationAttribute $attribute )
     {
         return $this->container->get( 'security.context' )->isGranted( $attribute );
+    }
+
+    /**
+     * Returns the general helper service, exposed in Twig templates as "ezpublish" global variable.
+     *
+     * @return \eZ\Publish\Core\MVC\Legacy\Templating\GlobalHelper
+     */
+    public function getGlobalHelper()
+    {
+        return $this->container->get( 'ezpublish.templating.global_helper' );
+    }
+
+    /**
+     * Returns the root location object for current siteaccess configuration.
+     *
+     * @return \eZ\Publish\API\Repository\Values\Content\Location
+     */
+    public function getRootLocation()
+    {
+        return $this->getGlobalHelper()->getRootLocation();
     }
 }

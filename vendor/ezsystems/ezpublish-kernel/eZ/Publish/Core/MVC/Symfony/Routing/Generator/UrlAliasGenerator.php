@@ -2,18 +2,17 @@
 /**
  * File containing the UrlAliasGenerator class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\Routing\Generator;
 
-use Psr\Log\LoggerInterface;
+use eZ\Publish\API\Repository\Repository;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Routing\Generator;
 use Symfony\Component\Routing\RouterInterface;
-use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use eZ\Publish\Core\MVC\Symfony\SiteAccess\URILexer;
 
 /**
  * URL generator for UrlAlias based links
@@ -24,17 +23,17 @@ class UrlAliasGenerator extends Generator
 {
     const INTERNAL_LOCATION_ROUTE = '_ezpublishLocation';
 
-    private $lazyRepository;
+    /**
+     * @var \eZ\Publish\Core\Repository\Repository
+     */
+    private $repository;
 
     /**
+     * The default router (that works with declared routes).
+     *
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private $defaultRouter;
 
     /**
      * @var int
@@ -52,32 +51,15 @@ class UrlAliasGenerator extends Generator
     private $pathPrefixMap = array();
 
     /**
-     * @var \eZ\Publish\Core\MVC\Symfony\SiteAccess
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
-    private $siteAccess;
+    private $configResolver;
 
-    public function __construct( \Closure $lazyRepository, RouterInterface $router, LoggerInterface $logger = null )
+    public function __construct( Repository $repository, RouterInterface $defaultRouter, ConfigResolverInterface $configResolver )
     {
-        $this->lazyRepository = $lazyRepository;
-        $this->router = $router;
-        $this->logger = $logger;
-    }
-
-    /**
-     * @param SiteAccess $siteAccess
-     */
-    public function setSiteAccess( SiteAccess $siteAccess )
-    {
-        $this->siteAccess = $siteAccess;
-    }
-
-    /**
-     * @return \eZ\Publish\Core\Repository\Repository
-     */
-    protected function getRepository()
-    {
-        $lazyRepository = $this->lazyRepository;
-        return $lazyRepository();
+        $this->repository = $repository;
+        $this->defaultRouter = $defaultRouter;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -91,7 +73,26 @@ class UrlAliasGenerator extends Generator
      */
     public function doGenerate( $location, array $parameters )
     {
-        $urlAliases = $this->getRepository()->getURLAliasService()->listLocationAliases( $location, false );
+        $urlAliasService = $this->repository->getURLAliasService();
+        if ( isset( $parameters['siteaccess'] ) )
+        {
+            // We generate for a different SiteAccess, so potentially in a different language.
+            // We then loop against configured languages until we find a valid URLAlias.
+            $languages = $this->configResolver->getParameter( 'languages', null, $parameters['siteaccess'] );
+            foreach ( $languages as $lang )
+            {
+                if ( $urlAliases = $urlAliasService->listLocationAliases( $location, false, $lang, null, $languages ) )
+                {
+                    break;
+                }
+            }
+
+            unset( $parameters['siteaccess'] );
+        }
+        else
+        {
+            $urlAliases = $urlAliasService->listLocationAliases( $location, false );
+        }
 
         $queryString = '';
         if ( !empty( $parameters ) )
@@ -106,13 +107,14 @@ class UrlAliasGenerator extends Generator
             if ( $this->rootLocationId !== null )
             {
                 $pathPrefix = $this->getPathPrefixByRootLocationId( $this->rootLocationId );
-                if ( mb_stripos( $path, $pathPrefix ) === 0 )
+                // "/" cannot be considered as a path prefix since it's root, so we ignore it.
+                if ( $pathPrefix !== '/' && mb_stripos( $path, $pathPrefix ) === 0 )
                 {
                     $path = mb_substr( $path, mb_strlen( $pathPrefix ) );
                 }
                 // Location path is outside configured content tree and doesn't have an excluded prefix.
                 // This is most likely an error (from content edition or link generation logic).
-                else if ( !$this->isUriPrefixExcluded( $path ) && $this->logger !== null )
+                else if ( $pathPrefix !== '/' && !$this->isUriPrefixExcluded( $path ) && $this->logger !== null )
                 {
                     $this->logger->warning( "Generating a link to a location outside root content tree: '$path' is outside tree starting to location #$this->rootLocationId" );
                 }
@@ -120,15 +122,10 @@ class UrlAliasGenerator extends Generator
         }
         else
         {
-            $path = $this->router->generate(
+            $path = $this->defaultRouter->generate(
                 self::INTERNAL_LOCATION_ROUTE,
                 array( 'locationId' => $location->id )
             );
-        }
-
-        if ( isset( $this->siteAccess ) && $this->siteAccess->matcher instanceof URILexer )
-        {
-            $path = $this->siteAccess->matcher->analyseLink( $path );
         }
 
         $path = $path ?: '/';
@@ -166,8 +163,7 @@ class UrlAliasGenerator extends Generator
             return $this->pathPrefixMap[$rootLocationId];
         }
 
-        $repository = $this->getRepository();
-        $this->pathPrefixMap[$rootLocationId] = $repository
+        $this->pathPrefixMap[$rootLocationId] = $this->repository
             ->getURLAliasService()
             ->reverseLookup( $this->loadLocation( $rootLocationId ) )
             ->path;
@@ -204,7 +200,7 @@ class UrlAliasGenerator extends Generator
      */
     public function loadLocation( $locationId )
     {
-        return $this->getRepository()->sudo(
+        return $this->repository->sudo(
             function ( $repository ) use ( $locationId )
             {
                 /** @var $repository \eZ\Publish\Core\Repository\Repository */

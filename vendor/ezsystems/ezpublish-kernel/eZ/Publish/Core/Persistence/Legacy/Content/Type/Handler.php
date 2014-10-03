@@ -2,9 +2,9 @@
 /**
  * File containing the Content Type Handler class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Type;
@@ -34,7 +34,7 @@ class Handler implements BaseContentTypeHandler
     protected $contentTypeGateway;
 
     /**
-     * Mappper for Type objects.
+     * Mapper for Type objects.
      *
      * @var Mapper
      */
@@ -176,6 +176,10 @@ class Handler implements BaseContentTypeHandler
     }
 
     /**
+     * Loads a content type by id and status
+     *
+     * Note: This method is responsible of having the Field Definitions of the loaded ContentType sorted by placement.
+     *
      * @param int $contentTypeId
      * @param int $status
      *
@@ -195,6 +199,8 @@ class Handler implements BaseContentTypeHandler
     /**
      * Loads a (defined) content type by identifier
      *
+     * Note: This method is responsible of having the Field Definitions of the loaded ContentType sorted by placement.
+     *
      * @param string $identifier
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException If defined type is not found
@@ -211,6 +217,8 @@ class Handler implements BaseContentTypeHandler
 
     /**
      * Loads a (defined) content type by remote id
+     *
+     * Note: This method is responsible of having the Field Definitions of the loaded ContentType sorted by placement.
      *
      * @param mixed $remoteId
      *
@@ -409,7 +417,9 @@ class Handler implements BaseContentTypeHandler
         $createStruct->modifierId = $userId;
         $createStruct->created = $createStruct->modified = time();
         $createStruct->creatorId = $userId;
-        $createStruct->identifier .= '_' . ( $createStruct->remoteId = md5( uniqid( get_class( $createStruct ), true ) ) );
+        $createStruct->remoteId = md5( uniqid( get_class( $createStruct ), true ) );
+        $createStruct->identifier = 'copy_of_' . $createStruct->identifier . '_' . $createStruct->remoteId;
+
         // Set FieldDefinition ids to null to trigger creating new id
         foreach ( $createStruct->fieldDefinitions as $fieldDefinition )
         {
@@ -495,6 +505,18 @@ class Handler implements BaseContentTypeHandler
         }
 
         return $this->mapper->extractFieldFromRow( $row );
+    }
+
+    /**
+     * Counts the number of Content instances of the ContentType identified by given $contentTypeId.
+     *
+     * @param mixed $contentTypeId
+     *
+     * @return int
+     */
+    public function getContentCount( $contentTypeId )
+    {
+        return $this->contentTypeGateway->countInstancesOfType( $contentTypeId );
     }
 
     /**

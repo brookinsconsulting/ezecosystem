@@ -2,18 +2,19 @@
 /**
  * File containing the eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher\URIElement class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher;
 
-use eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher;
 use eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess\URILexer;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess\VersatileMatcher;
+use LogicException;
 
-class URIElement implements Matcher, URILexer
+class URIElement implements VersatileMatcher, URILexer
 {
     /**
      * @var \eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest
@@ -48,7 +49,7 @@ class URIElement implements Matcher, URILexer
         {
             return implode( "_", $this->getURIElements() );
         }
-        catch ( \LogicException $e )
+        catch ( LogicException $e )
         {
             return false;
         }
@@ -72,11 +73,11 @@ class URIElement implements Matcher, URILexer
         foreach ( $elements as $element )
         {
             if ( $element === "" )
-                throw new \LogicException( 'One of the URI elements was empty' );
+                throw new LogicException( 'One of the URI elements was empty' );
         }
 
         if ( count( $elements ) !== $this->elementNumber )
-            throw new \LogicException( 'The number of provided elements to consider is different than the number of elements found in the URI' );
+            throw new LogicException( 'The number of provided elements to consider is different than the number of elements found in the URI' );
 
         return $elements;
     }
@@ -90,12 +91,18 @@ class URIElement implements Matcher, URILexer
      * Injects the request object to match against.
      *
      * @param \eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest $request
-     *
-     * @return void
      */
     public function setRequest( SimplifiedRequest $request )
     {
         $this->request = $request;
+    }
+
+    /**
+     * @return \eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest
+     */
+    public function getRequest()
+    {
+        return $this->request;
     }
 
     /**
@@ -128,7 +135,35 @@ class URIElement implements Matcher, URILexer
      */
     public function analyseLink( $linkUri )
     {
+        // Joining slash between uriElements and actual linkUri must be present, except if $linkUri is empty.
+        $joiningSlash = empty( $linkUri ) ? '' : '/';
+        $linkUri = ltrim( $linkUri, '/' );
         $uriElements = implode( '/', $this->getURIElements() );
-        return "/{$uriElements}{$linkUri}";
+        return "/{$uriElements}{$joiningSlash}{$linkUri}";
+    }
+
+    /**
+     * Returns matcher object corresponding to $siteAccessName or null if non applicable.
+     *
+     * Limitation: If the element number is > 1, we cannot predict how URI segments are expected to be built.
+     * So we expect "_" will be reversed to "/"
+     * e.g. foo_bar => foo/bar with elementNumber == 2
+     * Hence if number of elements is different than the element number, we report as non matched.
+     *
+     * @param string $siteAccessName
+     *
+     * @return \eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher\URIElement|null
+     */
+    public function reverseMatch( $siteAccessName )
+    {
+        $elements = $this->elementNumber > 1 ? explode( '_', $siteAccessName ) : array( $siteAccessName );
+        if ( count( $elements ) !== $this->elementNumber )
+        {
+            return null;
+        }
+
+        $pathinfo = '/' . implode( '/', $elements ) . '/' . ltrim( $this->request->pathinfo, '/' );
+        $this->request->setPathinfo( $pathinfo );
+        return $this;
     }
 }

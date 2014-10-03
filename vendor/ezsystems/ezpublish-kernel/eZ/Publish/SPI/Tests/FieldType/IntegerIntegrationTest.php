@@ -2,9 +2,9 @@
 /**
  * File contains: eZ\Publish\SPI\Tests\FieldType\IntegerIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
@@ -42,7 +42,7 @@ class IntegerIntegrationTest extends BaseIntegrationTest
      */
     public function getTypeName()
     {
-        return 'ezint';
+        return 'ezinteger';
     }
 
     /**
@@ -52,22 +52,15 @@ class IntegerIntegrationTest extends BaseIntegrationTest
      */
     public function getCustomHandler()
     {
-        $handler = $this->getHandler();
+        $fieldType = new FieldType\Integer\Type();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessor() );
 
-        $handler->getFieldTypeRegistry()->register(
-            'ezint',
-            new FieldType\Integer\Type()
-        );
-        $handler->getStorageRegistry()->register(
-            'ezint',
+        return $this->getHandler(
+            'ezinteger',
+            $fieldType,
+            new Legacy\Content\FieldValue\Converter\Integer(),
             new FieldType\NullStorage()
         );
-        $handler->getFieldValueConverterRegistry()->register(
-            'ezint',
-            new Legacy\Content\FieldValue\Converter\Integer()
-        );
-
-        return $handler;
     }
 
     /**
@@ -93,7 +86,7 @@ class IntegerIntegrationTest extends BaseIntegrationTest
         return array(
             // The ezint field type does not have any special field definition
             // properties
-            array( 'fieldType', 'ezint' ),
+            array( 'fieldType', 'ezinteger' ),
             array(
                 'fieldTypeConstraints',
                 new Content\FieldTypeConstraints(

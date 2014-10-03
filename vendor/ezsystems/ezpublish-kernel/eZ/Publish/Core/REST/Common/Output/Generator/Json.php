@@ -2,9 +2,9 @@
 /**
  * File containing the Json generator class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\Output\Generator;
@@ -82,8 +82,14 @@ class Json extends Generator
     {
         $this->checkEndDocument( $data );
 
+        $jsonEncodeOptions = 0;
+        if ( $this->formatOutput && defined( 'JSON_PRETTY_PRINT' ) )
+        {
+            $jsonEncodeOptions = JSON_PRETTY_PRINT;
+        }
+
         $this->json = $this->convertArrayObjects( $this->json );
-        return json_encode( $this->json );
+        return json_encode( $this->json, $jsonEncodeOptions );
     }
 
     /**
@@ -323,5 +329,16 @@ class Json extends Generator
             $hashElementName,
             $hashValue
         );
+    }
+
+    /**
+     * Serializes a boolean value
+     *
+     * @param boolean $boolValue
+     * @return boolean
+     */
+    public function serializeBool( $boolValue )
+    {
+        return (bool)$boolValue;
     }
 }

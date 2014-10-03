@@ -2,21 +2,21 @@
 /**
  * File contains: eZ\Publish\SPI\Tests\FieldType\XmlTextIntegrationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Tests\FieldType;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter\XmlText as XmlTextConverter;
 use eZ\Publish\Core\FieldType;
-use eZ\Publish\Core\FieldType\NullStorage;
 use eZ\Publish\Core\FieldType\FieldSettings;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldTypeConstraints;
 use DOMDocument;
 use eZ\Publish\Core\FieldType\XmlText\XmlTextStorage\Gateway\LegacyStorage;
+use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway\LegacyStorage as UrlGateway;
 
 /**
  * Integration test for legacy storage field types
@@ -57,26 +57,19 @@ class XmlTextIntegrationTest extends BaseIntegrationTest
      */
     public function getCustomHandler()
     {
-        $handler = $this->getHandler();
+        $fieldType = new FieldType\XmlText\Type();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessor() );
 
-        $handler->getFieldTypeRegistry()->register(
+        return $this->getHandler(
             'ezxmltext',
-            new FieldType\XmlText\Type()
-        );
-        $handler->getStorageRegistry()->register(
-            'ezxmltext',
+            $fieldType,
+            new XmlTextConverter(),
             new FieldType\XmlText\XmlTextStorage(
                 array(
-                    'LegacyStorage' => new LegacyStorage()
+                    'LegacyStorage' => new LegacyStorage( new UrlGateway() )
                 )
             )
         );
-        $handler->getFieldValueConverterRegistry()->register(
-            'ezxmltext',
-            new XmlTextConverter()
-        );
-
-        return $handler;
     }
 
     /**

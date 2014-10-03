@@ -2,9 +2,9 @@
 /**
  * File containing the eZWebDAVContentBackend class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -1557,7 +1557,7 @@ class eZWebDAVContentBackend extends ezcWebdavSimpleBackend implements ezcWebdav
             // So we need to replace the media folder URL Alias part by the one translated via ezpI18n, which never varies.
             // Otherwise unexpected errors can occurred, depending on WebDAV client, especially when URL Alias from media child nodes
             // doesn't match EXACTLY with the virtual media folder name.
-            // e.g. : having "M??dia" as virtual media folder name and a child node with Media/Images (without accent) as URL alias will break.
+            // e.g. : having "Média" as virtual media folder name and a child node with Media/Images (without accent) as URL alias will break.
             // See http://issues.ez.no/15035
             else if ( $virtualFolder === self::virtualMediaFolderName() )
             {

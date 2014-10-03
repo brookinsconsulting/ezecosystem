@@ -2,30 +2,31 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
 
-use eZ\Publish\Core\REST\Common\UrlHandler;
+use eZ\Publish\Core\REST\Common\RequestParser;
 use eZ\Publish\Core\REST\Common\Input;
+use eZ\Publish\Core\REST\Server\Tests\BaseTest as ParentBaseTest;
 
 /**
  * Base test for input parsers.
  */
-abstract class BaseTest extends \eZ\Publish\Core\REST\Server\Tests\BaseTest
+abstract class BaseTest extends ParentBaseTest
 {
     /**
-     * @var \eZ\Publish\Core\REST\Common\Input\ParsingDispatcher
+     * @var \eZ\Publish\Core\REST\Common\Input\ParsingDispatcher|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $parsingDispatcherMock;
 
     /**
-     * @var \eZ\Publish\Core\REST\Common\UrlHandler\eZPublish
+     * @var \eZ\Publish\Core\REST\Common\RequestParser|\PHPUnit_Framework_MockObject_MockObject
      */
-    protected $urlHandler;
+    protected $requestParserMock;
 
     /**
      * @var \eZ\Publish\Core\REST\Common\Input\ParserTools
@@ -53,17 +54,51 @@ abstract class BaseTest extends \eZ\Publish\Core\REST\Server\Tests\BaseTest
     }
 
     /**
-     * Get the URL handler
-     *
-     * @return \eZ\Publish\Core\REST\Common\UrlHandler\eZPublish
+     * Returns the parseHref invocation expectations, as an array of:
+     * 0. route to parse the href from (/content/objects/59
+     * 1. attribute name we are looking for (contentId)
+     * 2. expected return value (59)*
+     * @return array
      */
-    protected function getUrlHandler()
+    public function getParseHrefExpectationsMap()
     {
-        if ( !isset( $this->urlHandler ) )
+        return array();
+    }
+
+    /**
+     * Get the Request parser
+     *
+     * @return \eZ\Publish\Core\REST\Common\RequestParser|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getRequestParserMock()
+    {
+        if ( !isset( $this->requestParserMock ) )
         {
-            $this->urlHandler = new UrlHandler\eZPublish;
+            $that =& $this;
+
+            $callback = function( $href, $attribute ) use ( $that )
+            {
+                foreach ( $that->getParseHrefExpectationsMap() as $map )
+                {
+                    if ( $map[0] == $href && $map[1] == $attribute )
+                    {
+                        if ( $map[2] instanceof \Exception )
+                            throw $map[2];
+                        else
+                            return $map[2];
+                    }
+                }
+                return null;
+            };
+
+            $this->requestParserMock = $this->getMock( 'eZ\\Publish\\Core\\REST\\Common\\RequestParser' );
+
+            $this->requestParserMock
+                ->expects( $this->any() )
+                ->method( 'parseHref' )
+                ->will( $this->returnCallback( $callback ) );
         }
-        return $this->urlHandler;
+        return $this->requestParserMock;
     }
 
     /**
@@ -79,4 +114,17 @@ abstract class BaseTest extends \eZ\Publish\Core\REST\Server\Tests\BaseTest
         }
         return $this->parserTools;
     }
+
+    protected function getParser()
+    {
+        $parser = $this->internalGetParser();
+        $parser->setRequestParser( $this->getRequestParserMock() );
+        return $parser;
+    }
+
+    /**
+     * Must return the tested parser object.
+     * @return \eZ\Publish\Core\REST\Server\Input\Parser\Base
+     */
+    abstract protected function internalGetParser();
 }

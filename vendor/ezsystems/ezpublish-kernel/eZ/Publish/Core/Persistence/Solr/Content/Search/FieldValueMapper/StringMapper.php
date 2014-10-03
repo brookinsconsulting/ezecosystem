@@ -2,9 +2,9 @@
 /**
  * File containing the StringMapper class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Solr\Content\Search\FieldValueMapper;
@@ -43,9 +43,20 @@ class StringMapper extends FieldValueMapper
      */
     public function map( Field $field )
     {
-        // Remove non-printables
+        return $this->convert( $field->value );
+    }
 
-        return preg_replace( '([\x00-\x09\x0B\x0C\x1E\x1F]+)', '', $field->value instanceof DOMDocument ? $field->value->saveXML() : $field->value );
+    /**
+     * Convert to a proper Solr representation
+     *
+     * @param mixed $value
+     *
+     * @return string
+     */
+    protected function convert( $value )
+    {
+        // Remove non-printables
+        return preg_replace( '([\x00-\x09\x0B\x0C\x1E\x1F]+)', '', $value instanceof DOMDocument ? $value->saveXML() : $value );
     }
 }
 

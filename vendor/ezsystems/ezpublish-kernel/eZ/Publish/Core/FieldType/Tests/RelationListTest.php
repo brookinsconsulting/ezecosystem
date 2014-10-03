@@ -2,18 +2,17 @@
 /**
  * File containing the RelationTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\RelationList\Type as RelationList;
 use eZ\Publish\Core\FieldType\RelationList\Value;
-use eZ\Publish\Core\FieldType\Tests\FieldTypeTest;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\API\Repository\Values\Content\Relation;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
 use PHPUnit_Framework_TestCase;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 
@@ -32,7 +31,10 @@ class RelationListTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new RelationList();
+        $fieldType = new RelationList();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -71,7 +73,7 @@ class RelationListTest extends FieldTypeTest
     /**
      * Returns the empty value expected from the field type.
      *
-     * @return void
+     * @return Value
      */
     protected function getEmptyValueExpectation()
     {
@@ -338,22 +340,6 @@ class RelationListTest extends FieldTypeTest
     {
         return array(
             array(
-                // Missing mandatory keys 'selectionMethod' and 'selectionDefaultLocation'
-                array()
-            ),
-            array(
-                // Missing mandatory key 'selectionDefaultLocation'
-                array(
-                    'selectionMethod' => RelationList::SELECTION_DROPDOWN,
-                )
-            ),
-            array(
-                // Missing mandatory key 'selectionMethod'
-                array(
-                    'selectionDefaultLocation' => 23
-                )
-            ),
-            array(
                 // Invalid value for 'selectionMethod'
                 array(
                     'selectionMethod' => true,
@@ -389,6 +375,27 @@ class RelationListTest extends FieldTypeTest
                 Relation::FIELD => array( 70, 72 ),
             ),
             $ft->getRelations( $ft->acceptValue( array( 70, 72 ) ) )
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezobjectrelationlist';
+    }
+
+    /**
+     * @dataProvider provideDataForGetName
+     * @expectedException \RuntimeException
+     */
+    public function testGetName( SPIValue $value, $expected )
+    {
+        $this->getFieldTypeUnderTest()->getName( $value );
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), '' )
         );
     }
 }

@@ -2,9 +2,9 @@
 /**
  * File containing the XmlTextStorage class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\XmlText;
@@ -20,7 +20,12 @@ class XmlTextStorage extends GatewayBasedStorage
      */
     public function storeFieldData( VersionInfo $versionInfo, Field $field, array $context )
     {
-        $this->getGateway( $context )->storeFieldData( $versionInfo, $field );
+        $update = $this->getGateway( $context )->storeFieldData( $versionInfo, $field );
+
+        if ( $update )
+        {
+            return true;
+        }
     }
 
     /**
@@ -39,6 +44,13 @@ class XmlTextStorage extends GatewayBasedStorage
 
     public function deleteFieldData( VersionInfo $versionInfo, array $fieldIds, array $context )
     {
+        /** @var \eZ\Publish\Core\FieldType\XmlText\XmlTextStorage\Gateway $gateway */
+        $gateway = $this->getGateway( $context );
+
+        foreach ( $fieldIds as $fieldId )
+        {
+            $gateway->unlinkUrl( $fieldId, $versionInfo->versionNo );
+        }
     }
 
     /**

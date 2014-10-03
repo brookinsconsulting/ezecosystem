@@ -2,16 +2,15 @@
 /**
  * File containing a Test Case for LimitationType class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Limitation\Tests;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
@@ -57,7 +56,6 @@ class ContentTypeLimitationTypeTest extends Base
     }
 
     /**
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::__construct
      *
      * @return \eZ\Publish\Core\Limitation\ContentTypeLimitationType
      */
@@ -81,7 +79,6 @@ class ContentTypeLimitationTypeTest extends Base
     /**
      * @dataProvider providerForTestAcceptValue
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::acceptValue
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation $limitation
      * @param \eZ\Publish\Core\Limitation\ContentTypeLimitationType $limitationType
@@ -105,7 +102,6 @@ class ContentTypeLimitationTypeTest extends Base
     /**
      * @dataProvider providerForTestAcceptValueException
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::acceptValue
      * @expectedException \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation $limitation
@@ -130,7 +126,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestValidatePass
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::validate
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation $limitation
      */
@@ -173,7 +168,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestValidateError
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::validate
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation $limitation
      * @param int $errorCount
@@ -212,7 +206,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::buildValue
      *
      * @param \eZ\Publish\Core\Limitation\ContentTypeLimitationType $limitationType
      */
@@ -326,7 +319,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestEvaluate
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::evaluate
      */
     public function testEvaluate(
         ContentTypeLimitation $limitation,
@@ -382,7 +374,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @dataProvider providerForTestEvaluateInvalidArgument
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::evaluate
      * @expectedException \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function testEvaluateInvalidArgument(
@@ -410,12 +401,11 @@ class ContentTypeLimitationTypeTest extends Base
             $object,
             $targets
         );
-        var_dump( $v );
+        var_dump( $v );// intentional, debug in case no exception above
     }
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::getCriterion
      * @expectedException \RuntimeException
      *
      * @param \eZ\Publish\Core\Limitation\ContentTypeLimitationType $limitationType
@@ -430,7 +420,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::getCriterion
      *
      * @param \eZ\Publish\Core\Limitation\ContentTypeLimitationType $limitationType
      */
@@ -450,7 +439,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::getCriterion
      *
      * @param \eZ\Publish\Core\Limitation\ContentTypeLimitationType $limitationType
      */
@@ -470,7 +458,6 @@ class ContentTypeLimitationTypeTest extends Base
 
     /**
      * @depends testConstruct
-     * @covers \eZ\Publish\Core\Limitation\ContentTypeLimitationType::valueSchema
      * @expectedException \eZ\Publish\API\Repository\Exceptions\NotImplementedException
      *
      * @param \eZ\Publish\Core\Limitation\ContentTypeLimitationType $limitationType
@@ -478,7 +465,7 @@ class ContentTypeLimitationTypeTest extends Base
     public function testValueSchema( ContentTypeLimitationType $limitationType )
     {
         self::assertEquals(
-            ContentTypeLimitationType::VALUE_SCHEMA_LOCATION_ID,
+            array(),
             $limitationType->valueSchema()
         );
     }

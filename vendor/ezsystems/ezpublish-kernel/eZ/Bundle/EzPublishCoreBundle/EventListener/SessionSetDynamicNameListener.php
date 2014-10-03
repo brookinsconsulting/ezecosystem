@@ -2,17 +2,22 @@
 /**
  * File containing the SessionSetDynamicNameListener class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\EventListener;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\Event\PostSiteAccessMatchEvent;
+use eZ\Bundle\EzPublishCoreBundle\Kernel;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
+use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -25,18 +30,30 @@ class SessionSetDynamicNameListener implements EventSubscriberInterface
     const MARKER = "{siteaccess_hash}";
 
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
-    private $container;
+    private $configResolver;
 
     /**
-     * @note Injecting the service container is mandatory since event listeners are instantiated before siteaccess matching
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface|null
      */
-    public function __construct( ContainerInterface $container )
+    private $session;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface|NativeSessionStorage
+     */
+    private $sessionStorage;
+
+    /**
+     * @param ConfigResolverInterface $configResolver
+     * @param SessionInterface $session
+     * @param \Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface $sessionStorage
+     */
+    public function __construct( ConfigResolverInterface $configResolver, SessionInterface $session = null, SessionStorageInterface $sessionStorage = null )
     {
-        $this->container = $container;
+        $this->configResolver = $configResolver;
+        $this->session = $session;
+        $this->sessionStorage = $sessionStorage;
     }
 
     public static function getSubscribedEvents()
@@ -48,30 +65,44 @@ class SessionSetDynamicNameListener implements EventSubscriberInterface
 
     public function onSiteAccessMatch( PostSiteAccessMatchEvent $event )
     {
-        if ( !$this->container->has( 'session' ) || $event->getRequestType() !== HttpKernelInterface::MASTER_REQUEST )
+        if (
+            !(
+                $event->getRequestType() === HttpKernelInterface::MASTER_REQUEST
+                && isset( $this->session )
+                && !$this->session->isStarted()
+                && $this->sessionStorage instanceof NativeSessionStorage
+            )
+        )
         {
             return;
         }
 
-        // Getting from the container and not from the request because the session object is assigned to the request only when session has started.
-        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
-        $session = $this->container->get( 'session' );
+        $sessionOptions = (array)$this->configResolver->getParameter( 'session' );
+        $sessionName = isset( $sessionOptions['name'] ) ? $sessionOptions['name'] : $this->session->getName();
+        $sessionOptions['name'] = $this->getSessionName( $sessionName, $event->getSiteAccess() );
+        $this->sessionStorage->setOptions( $sessionOptions );
+    }
 
-        if ( !$session->isStarted() )
+    /**
+     * @param string $sessionName
+     * @param \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteAccess
+     *
+     * @return string
+     */
+    private function getSessionName( $sessionName, SiteAccess $siteAccess )
+    {
+        // Add session prefix if needed.
+        if ( strpos( $sessionName, Kernel::SESSION_NAME_PREFIX ) !== 0 )
         {
-            $sessionName = $this->container->get( 'ezpublish.config.resolver' )->getParameter( 'session_name' );
-            if ( strpos( $sessionName, self::MARKER ) !== false )
-            {
-                $session->setName(
-                    str_replace(
-                        self::MARKER, md5( $event->getSiteAccess()->name ), $sessionName
-                    )
-                );
-            }
-            else
-            {
-                $session->setName( $sessionName );
-            }
+            $sessionName = Kernel::SESSION_NAME_PREFIX . '_' . $sessionName;
         }
+
+        // Check if uniqueness marker is present. If so, session name will be unique for current siteaccess.
+        if ( strpos( $sessionName, self::MARKER ) !== false )
+        {
+            $sessionName = str_replace( self::MARKER, md5( $siteAccess->name ), $sessionName );
+        }
+
+        return $sessionName;
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @author pb
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version 5.1.0
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package ezfind
  *
  */

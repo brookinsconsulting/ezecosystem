@@ -2,9 +2,9 @@
 /**
  * File containing the CreatedPolicy ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -14,6 +14,8 @@ use eZ\Publish\Core\REST\Common\Output\Visitor;
 
 /**
  * CreatedPolicy value object visitor
+ *
+ * @todo coverage add unit test
  */
 class CreatedPolicy extends Policy
 {
@@ -29,11 +31,11 @@ class CreatedPolicy extends Policy
         parent::visit( $visitor, $generator, $data->policy );
         $visitor->setHeader(
             'Location',
-            $this->urlHandler->generate(
-                'policy',
+            $this->router->generate(
+                'ezpublish_rest_loadPolicy',
                 array(
-                    'role' => $data->policy->roleId,
-                    'policy' => $data->policy->id
+                    'roleId' => $data->policy->roleId,
+                    'policyId' => $data->policy->id
                 )
             )
         );

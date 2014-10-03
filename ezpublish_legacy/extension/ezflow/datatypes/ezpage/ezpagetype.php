@@ -2,23 +2,25 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 // SOFTWARE NAME: eZ Flow
-// SOFTWARE RELEASE: 5.0.0
-// COPYRIGHT NOTICE: Copyright (C) 1999-2012 eZ Systems AS
+// SOFTWARE RELEASE: 1.1-0
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
-//  This program is free software; you can redistribute it and/or
-//  modify it under the terms of version 2.0  of the GNU General
-//  Public License as published by the Free Software Foundation.
+//   This program is free software; you can redistribute it and/or
+//   modify it under the terms of version 2.0  of the GNU General
+//   Public License as published by the Free Software Foundation.
 //
-//  This program is distributed in the hope that it will be useful,
+//   This program is distributed in the hope that it will be useful,
 //   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
 //
-//  You should have received a copy of version 2.0 of the GNU General
-//  Public License along with this program; if not, write to the Free
-//  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-//  MA 02110-1301, USA.
+//   You should have received a copy of version 2.0 of the GNU General
+//   Public License along with this program; if not, write to the Free
+//   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+//   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -51,6 +53,37 @@ class eZPageType extends eZDataType
     }
 
     /**
+     * Serialize contentclass attribute
+     *
+     * @param eZContentClassAttribute $classAttribute
+     * @param DOMNode $attributeNode
+     * @param DOMNode $attributeParametersNode
+     */
+    function serializeContentClassAttribute( $classAttribute, $attributeNode, $attributeParametersNode )
+    {
+        $defaultZoneLayout = $classAttribute->attribute( self::DEFAULT_ZONE_LAYOUT_FIELD );
+        $dom = $attributeParametersNode->ownerDocument;
+
+        $defaultLayoutNode = $dom->createElement( 'default-layout' );
+        $defaultLayoutNode->appendChild( $dom->createTextNode( $defaultZoneLayout ) );
+        $attributeParametersNode->appendChild( $defaultLayoutNode );
+    }
+
+    /**
+     * Unserialize contentclass attribute
+     *
+     * @param eZContentClassAttribute $classAttribute
+     * @param DOMNode $attributeNode
+     * @param DOMNode $attributeParametersNode
+     */
+    function unserializeContentClassAttribute( $classAttribute, $attributeNode, $attributeParametersNode )
+    {
+        $defaultZoneLayout = $attributeParametersNode->getElementsByTagName( 'default-layout' )->item( 0 )->textContent;
+        if ( $defaultZoneLayout !== false )
+            $classAttribute->setAttribute( self::DEFAULT_ZONE_LAYOUT_FIELD, $defaultZoneLayout );
+    }
+
+    /**
      * Initialize contentobject attribute content
      *
      * @param eZContentObjectAttribute $contentObjectAttribute
@@ -69,7 +102,8 @@ class eZPageType extends eZDataType
             // Case when content object was copied or when new translation has been added to the existing one
             if ( ( $contentObjectID != $originalContentObjectID )
                     || ( ( $contentObjectID == $originalContentObjectID )
-                       && ( $languageMask != $originalLanguageMask ) ) )
+                       && ( $languageMask != $originalLanguageMask )
+                            && ( $contentObjectAttribute->attribute( 'can_translate' ) ) ) )
             {
                 $page = $originalContentObjectAttribute->content();
                 $clonedPage = clone $page;
@@ -537,12 +571,22 @@ class eZPageType extends eZDataType
                 $rotationUnit = $http->postVariable( 'RotationUnit_' . $params[2] );
                 $rotationSuffle = $http->postVariable( 'RotationShuffle_' . $params[2] );
 
-                if ( $rotationValue == '' )
+                if ( trim( $rotationValue ) == '' || $rotationValue == 0 )
                 {
                     $block->setAttribute( 'rotation', array( 'interval' => 0,
                                                              'type' => 0,
                                                              'value' => '',
                                                              'unit' => '' ) );
+                    $waitingItems = $block->attribute( 'waiting' );
+                    foreach ( $waitingItems as $item )
+                    {
+                        $item->setAttribute( 'ts_publication', time() );
+                        $item->setAttribute( 'ts_visible', time() );
+                        $item->setAttribute( 'ts_hidden', '0' );
+                        $item->setAttribute( 'action', 'add' );
+                        $item->setXMLStorable( true );
+                        $block->addItem( $item );
+                    }
                 }
                 else
                 {
@@ -731,13 +775,20 @@ class eZPageType extends eZDataType
                 if( $blockINI->hasVariable( $type, 'AllowedClasses' ) )
                     $classArray = $blockINI->variable( $type, 'AllowedClasses' );
 
-                eZContentBrowse::browse( array( 'class_array' => $classArray,
-                                                'action_name' => 'AddNewBlockItem',
-                                                'browse_custom_action' => array( 'name' => 'CustomActionButton[' . $contentObjectAttribute->attribute( 'id' ) . '_new_item-' . $params[1] . '-' . $params[2] . ']',
-                                                                                 'value' => $contentObjectAttribute->attribute( 'id' ) ),
-                                                'from_page' => $redirectionURI,
-                                                'cancel_page' => $redirectionURI,
-                                                'persistent_data' => array( 'HasObjectInput' => 0 ) ), $module );
+                $browseParameters = array( 'class_array' => $classArray,
+                                           'action_name' => 'AddNewBlockItem',
+                                           'browse_custom_action' => array( 'name' => 'CustomActionButton[' . $contentObjectAttribute->attribute( 'id' ) . '_new_item-' . $params[1] . '-' . $params[2] . ']',
+                                                                            'value' => $contentObjectAttribute->attribute( 'id' ) ),
+                                           'from_page' => $redirectionURI,
+                                           'cancel_page' => $redirectionURI,
+                                           'persistent_data' => array( 'HasObjectInput' => 0 ) );
+
+                if( $blockINI->hasVariable( $block->attribute( 'type' ), 'ManualBlockStartBrowseNode' ) )
+                {
+                    $browseParameters['start_node'] = $blockINI->variable( $block->attribute( 'type' ), 'ManualBlockStartBrowseNode' );
+                }
+
+                eZContentBrowse::browse( $browseParameters, $module );
                 break;
             case 'new_source':
                 $page = $contentObjectAttribute->content();
@@ -750,7 +801,7 @@ class eZPageType extends eZDataType
                     $selectedNodeIDArray = $http->postVariable( 'SelectedNodeIDArray' );
                     $blockINI = eZINI::instance( 'block.ini' );
 
-                    $fetchParametersSelectionType = $blockINI->variable( $block->attribute('type'), 'FetchParametersSelectionType' );
+                    $fetchParametersSelectionType = $blockINI->variable( $block->attribute( 'type' ), 'FetchParametersSelectionType' );
                     $fetchParams = unserialize( $block->attribute( 'fetch_params' ) );
 
                     if ( $fetchParametersSelectionType['Source'] == 'single' )
@@ -779,19 +830,25 @@ class eZPageType extends eZDataType
 
                 $blockINI = eZINI::instance( 'block.ini' );
 
-                $fetchParametersSelectionType = $blockINI->variable( $block->attribute('type'), 'FetchParametersSelectionType' );
+                $fetchParametersSelectionType = $blockINI->variable( $block->attribute( 'type' ), 'FetchParametersSelectionType' );
 
                 $module = $parameters['module'];
                 $redirectionURI = $redirectionURI = $parameters['current-redirection-uri'];
 
+                $browseParameters = array( 'action_name' => 'AddNewBlockSource',
+                                           'selection' => $fetchParametersSelectionType['Source'],
+                                           'browse_custom_action' => array( 'name' => 'CustomActionButton[' . $contentObjectAttribute->attribute( 'id' ) . '_new_source-' . $params[1] . '-' . $params[2] . ']',
+                                                                            'value' => $contentObjectAttribute->attribute( 'id' ) ),
+                                           'from_page' => $redirectionURI,
+                                           'cancel_page' => $redirectionURI,
+                                           'persistent_data' => array( 'HasObjectInput' => 0 ) );
 
-                eZContentBrowse::browse( array( 'action_name' => 'AddNewBlockSource',
-                                                'selection' => $fetchParametersSelectionType['Source'],
-                                                'browse_custom_action' => array( 'name' => 'CustomActionButton[' . $contentObjectAttribute->attribute( 'id' ) . '_new_source-' . $params[1] . '-' . $params[2] . ']',
-                                                                                 'value' => $contentObjectAttribute->attribute( 'id' ) ),
-                                                'from_page' => $redirectionURI,
-                                                'cancel_page' => $redirectionURI,
-                                                'persistent_data' => array( 'HasObjectInput' => 0 ) ), $module );
+                if( $blockINI->hasVariable( $block->attribute( 'type' ), 'DynamicBlockStartBrowseNode' ) )
+                {
+                    $browseParameters['start_node'] = $blockINI->variable( $block->attribute( 'type' ), 'DynamicBlockStartBrowseNode' );
+                }
+
+                eZContentBrowse::browse( $browseParameters, $module );
                 break;
             case 'custom_attribute':
                 $page = $contentObjectAttribute->content();
@@ -816,14 +873,29 @@ class eZPageType extends eZDataType
             case 'custom_attribute_browse':
                 $module = $parameters['module'];
                 $redirectionURI = $redirectionURI = $parameters['current-redirection-uri'];
+                $page = $contentObjectAttribute->content();
+                $zone = $page->getZone( $params[1] );
+                $block = $zone->getBlock( $params[2] );
+                $blockINI = eZINI::instance( 'block.ini' );
 
+                $browseParameters = array( 'action_name' => 'CustomAttributeBrowse',
+                                           'browse_custom_action' => array( 'name' => 'CustomActionButton[' . $contentObjectAttribute->attribute( 'id' ) . '_custom_attribute-' . $params[1] . '-' . $params[2] . '-' . $params[3] . ']',
+                                                                            'value' => $contentObjectAttribute->attribute( 'id' ) ),
+                                           'from_page' => $redirectionURI,
+                                           'cancel_page' => $redirectionURI,
+                                           'persistent_data' => array( 'HasObjectInput' => 0 ) );
 
-                eZContentBrowse::browse( array( 'action_name' => 'CustomAttributeBrowse',
-                                                'browse_custom_action' => array( 'name' => 'CustomActionButton[' . $contentObjectAttribute->attribute( 'id' ) . '_custom_attribute-' . $params[1] . '-' . $params[2] . '-' . $params[3] . ']',
-                                                                                 'value' => $contentObjectAttribute->attribute( 'id' ) ),
-                                                'from_page' => $redirectionURI,
-                                                'cancel_page' => $redirectionURI,
-                                                'persistent_data' => array( 'HasObjectInput' => 0 ) ), $module );
+                if( $blockINI->hasVariable( $block->attribute( 'type' ), 'CustomAttributeStartBrowseNode' ) )
+                {
+                    $customAttributeStartBrowseNode = $blockINI->variable( $block->attribute( 'type' ), 'CustomAttributeStartBrowseNode' );
+                    $customAttributeIdentifier = $params[3];
+                    if( isset( $customAttributeStartBrowseNode[$customAttributeIdentifier] ) )
+                    {
+                        $browseParameters['start_node'] = $customAttributeStartBrowseNode[$customAttributeIdentifier];
+                    }
+                }
+
+                eZContentBrowse::browse( $browseParameters, $module );
                 break;
             case 'remove_item':
                 $page = $contentObjectAttribute->content();
@@ -996,25 +1068,45 @@ class eZPageType extends eZDataType
                                             break;
 
                                         case 'modify':
+                                            $updateQuery = array();
+
                                             if ( $item->hasAttribute( 'ts_publication' ) )
                                             {
-                                                $db->query( "UPDATE ezm_pool SET ts_publication='" . $item->attribute( 'ts_publication' ) . "'
-                                                                WHERE object_id='" . $item->attribute( 'object_id' ) . "'
-                                                                    AND block_id='" . $blockID ."'" );
+                                                $updateQuery[] = " ts_publication="
+                                                    . (int)$item->attribute( 'ts_publication' );
                                             }
+
+                                            //make sure to update different node locations of the same object
+                                            if ( $item->hasAttribute( 'node_id' ) )
+                                            {
+                                                $updateQuery[] = " node_id="
+                                                    . (int)$item->attribute( 'node_id' );
+                                            }
+
                                             if ( $item->hasAttribute( 'priority' ) )
                                             {
-                                                $db->query( "UPDATE ezm_pool SET priority='" . $item->attribute( 'priority' ) . "'
-                                                                WHERE object_id='" . $item->attribute( 'object_id' ) . "'
-                                                                    AND block_id='" . $blockID ."'" );
+                                                $updateQuery[] = " priority="
+                                                    . (int)$item->attribute( 'priority' );
                                             }
+
                                             //if there is ts_hidden and ts_visible, update the two fields. This is the case when add items from history
                                             if ( $item->hasAttribute( 'ts_hidden' ) && $item->hasAttribute( 'ts_visible' ) )
                                             {
-                                                $db->query( "UPDATE ezm_pool SET ts_hidden='" . $item->attribute( 'ts_hidden' ) . "',
-                                                             ts_visible='" . $item->attribute('ts_visible') . "'
-                                                                WHERE object_id='" . $item->attribute( 'object_id' ) . "'
-                                                                    AND block_id='" . $blockID ."'" );
+                                                $updateQuery[] = " ts_hidden="
+                                                    . (int)$item->attribute( 'ts_hidden' )
+                                                    . ", ts_visible="
+                                                    . (int)$item->attribute( 'ts_visible' );
+                                            }
+
+                                            if ( !empty( $updateQuery ) )
+                                            {
+                                                $db->query(
+                                                    "UPDATE ezm_pool SET "
+                                                    . join( ", ", $updateQuery )
+                                                    . " WHERE object_id="
+                                                    . (int)$item->attribute( 'object_id' )
+                                                    . " AND block_id='" . $blockID ."'"
+                                                );
                                             }
                                             break;
                                     }

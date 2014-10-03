@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -23,14 +23,18 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
      *
      * @return string
      */
-    public function testVisit()
+    public function testVisitUserRoleAssignmentList()
     {
-        $visitor   = $this->getRoleAssignmentListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
 
         $roleAssignmentList = new RoleAssignmentList( array(), '42' );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadRoleAssignmentsForUser', array( 'userId' => 42 ), '/user/users/42/roles'
+        );
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -50,7 +54,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
      *
      * @param string $result
      *
-     * @depends testVisit
+     * @depends testVisitUserRoleAssignmentList
      */
     public function testResultContainsRoleListElement( $result )
     {
@@ -69,9 +73,9 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
      *
      * @param string $result
      *
-     * @depends testVisit
+     * @depends testVisitUserRoleAssignmentList
      */
-    public function testResultContainsRoleAssignmentListAttributes( $result )
+    public function testResultContainsUserRoleAssignmentListAttributes( $result )
     {
         $this->assertTag(
             array(
@@ -92,7 +96,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
      */
     public function testRoleAssignmentListVisitsChildren()
     {
-        $visitor   = $this->getRoleAssignmentListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -117,14 +121,68 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
+     * Test the RoleAssignmentList visitor
+     *
+     * @return string
+     */
+    public function testVisitGroupRoleAssignmentList()
+    {
+        $this->resetRouterMock();
+
+        $visitor   = $this->getVisitor();
+        $generator = $this->getGenerator();
+
+        $generator->startDocument( null );
+
+        $roleAssignmentList = new RoleAssignmentList( array(), '/1/5/777', true );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadRoleAssignmentsForUserGroup', array( 'groupPath' => '/1/5/777' ), '/user/groups/1/5/777/roles'
+        );
+
+        $visitor->visit(
+            $this->getVisitorMock(),
+            $generator,
+            $roleAssignmentList
+        );
+
+        $result = $generator->endDocument( null );
+
+        $this->assertNotNull( $result );
+
+        return $result;
+    }
+
+    /**
+     * Test if result contains RoleAssignmentList element attributes
+     *
+     * @param string $result
+     *
+     * @depends testVisitGroupRoleAssignmentList
+     */
+    public function testResultContainsGroupRoleAssignmentListAttributes( $result )
+    {
+        $this->assertTag(
+            array(
+                'tag'      => 'RoleAssignmentList',
+                'attributes' => array(
+                    'media-type' => 'application/vnd.ez.api.RoleAssignmentList+xml',
+                    'href'       => '/user/groups/1/5/777/roles',
+                )
+            ),
+            $result,
+            'Invalid <RoleAssignmentList> attributes.',
+            false
+        );
+    }
+
+    /**
      * Get the RoleAssignmentList visitor
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\RoleAssignmentList
      */
-    protected function getRoleAssignmentListVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\RoleAssignmentList(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\RoleAssignmentList;
     }
 }

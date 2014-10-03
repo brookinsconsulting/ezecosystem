@@ -2,20 +2,30 @@
 /**
  * File containing the JsonTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Common\Tests\Input\Handler;
 
 use eZ\Publish\Core\REST\Common;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Json input handler test
  */
-class JsonTest extends \PHPUnit_Framework_TestCase
+class JsonTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @expectedException \eZ\Publish\Core\REST\Common\Exceptions\Parser
+     */
+    public function testConvertInvalidJson()
+    {
+        $handler = $this->getHandler();
+        $handler->convert( '{text:"Hello world!"}' );
+    }
+
     /**
      * Tests conversion of array to JSON
      */

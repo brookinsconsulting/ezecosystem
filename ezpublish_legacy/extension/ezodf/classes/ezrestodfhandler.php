@@ -3,24 +3,26 @@
 // Created on: <18-Feb-2008 15:17:00 kk>
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
-// SOFTWARE NAME: eZ Publish Community Project
-// SOFTWARE RELEASE:  2013.5
-// COPYRIGHT NOTICE: Copyright (C) 1999-2013 eZ Systems AS
-// SOFTWARE LICENSE: GNU General Public License v2
+// SOFTWARE NAME: eZ Publish
+// SOFTWARE RELEASE: 3.9.x
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
+// SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of version 2.0  of the GNU General
 //   Public License as published by the Free Software Foundation.
-// 
+//
 //   This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
 //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //   GNU General Public License for more details.
-// 
+//
 //   You should have received a copy of version 2.0 of the GNU General
 //   Public License along with this program; if not, write to the Free
 //   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 //   MA 02110-1301, USA.
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -578,7 +580,7 @@ class eZRESTODFHandler extends eZRESTBaseHandler
      * @return DOMElement NameList DOMDocument, example:
      *
      *     <OODocument base64Encoded="1" filename="My article.odt">
-     *         <![CDATA[ ad lk??jsda??lfhads?? fiuancfivn s??gsbdnvsahf?? ]]>
+     *         <![CDATA[ ad lkøjsdaølfhadsø fiuancfivn søgsbdnvsahfø ]]>
      *     </OODocument>
      */
     protected function createOODOMElement( DOMDocument $domDocument, eZContentObjectTreeNode $node )
@@ -613,7 +615,7 @@ class eZRESTODFHandler extends eZRESTBaseHandler
      * @return DOMElement NameList DOMDocument, example:
      *
      *     <OODocument base64Encoded="1" filename="My article.doc">
-     *         <![CDATA[ ad lk??jsda??lfhads?? fiuancfivn s??gsbdnvsahf?? ]]>
+     *         <![CDATA[ ad lkøjsdaølfhadsø fiuancfivn søgsbdnvsahfø ]]>
      *     </OODocument>
      */
     protected function createDocDOMElement( DOMDocument $domDocument, eZContentObjectTreeNode $node )

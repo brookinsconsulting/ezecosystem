@@ -2,16 +2,15 @@
 /**
  * File containing the DateAndTimeTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\DateAndTime\Type as DateAndTime;
 use eZ\Publish\Core\FieldType\DateAndTime\Value as DateAndTimeValue;
-use ReflectionObject;
 use DateTime;
 use DateInterval;
 use stdClass;
@@ -35,7 +34,10 @@ class DateAndTimeTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new DateAndTime();
+        $fieldType = new DateAndTime();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -204,7 +206,7 @@ class DateAndTimeTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new DateAndTimeValue,
                 null,
             ),
             array(
@@ -259,7 +261,7 @@ class DateAndTimeTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null,
+                new DateAndTimeValue,
             ),
             array(
                 array(
@@ -379,6 +381,25 @@ class DateAndTimeTest extends FieldTypeTest
                     'dateInterval' => new stdClass(),
                 )
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezdatetime';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array(
+                $this->getEmptyValueExpectation(),
+                ''
+            ),
+            array(
+                DateAndTimeValue::fromTimestamp( 438512400 ),
+                'Thu 1983-24-11 09:00:00'
+            )
         );
     }
 }

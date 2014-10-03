@@ -2,15 +2,17 @@
 /**
  * File containing the eZ\Publish\Core\FieldType\XmlText\Converter\EzLinkToHtml5 class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\XmlText\Converter;
 
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\Core\FieldType\XmlText\Converter;
-use eZ\Publish\API\Repository\Repository;
+use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Psr\Log\LoggerInterface;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException as APINotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException as APIUnauthorizedException;
@@ -30,20 +32,20 @@ class EzLinkToHtml5 implements Converter
     protected $contentService;
 
     /**
-     * @var \eZ\Publish\API\Repository\URLAliasService
+     * @var \eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter
      */
-    protected $urlAliasService;
+    protected $urlAliasRouter;
 
     /**
      * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
-    public function __construct( Repository $repository, LoggerInterface $logger = null )
+    public function __construct( LocationService $locationService, ContentService $contentService, UrlAliasRouter $urlAliasRouter, LoggerInterface $logger = null )
     {
-        $this->locationService = $repository->getLocationService();
-        $this->contentService = $repository->getContentService();
-        $this->urlAliasService = $repository->getURLAliasService();
+        $this->locationService = $locationService;
+        $this->contentService = $contentService;
+        $this->urlAliasRouter = $urlAliasRouter;
         $this->logger = $logger;
     }
 
@@ -64,8 +66,8 @@ class EzLinkToHtml5 implements Converter
             {
                 try
                 {
-                    $content = $this->contentService->loadContent( $link->getAttribute( 'object_id' ) );
-                    $location = $this->locationService->loadLocation( $content->contentInfo->mainLocationId );
+                    $contentInfo = $this->contentService->loadContentInfo( $link->getAttribute( 'object_id' ) );
+                    $location = $this->locationService->loadLocation( $contentInfo->mainLocationId );
                 }
                 catch ( APINotFoundException $e )
                 {
@@ -119,8 +121,12 @@ class EzLinkToHtml5 implements Converter
 
             if ( $location !== null )
             {
-                $urlAlias = $this->urlAliasService->reverseLookup( $location );
-                $link->setAttribute( 'url', $urlAlias->path );
+                $link->setAttribute( 'url', $this->urlAliasRouter->generate( $location ) );
+            }
+
+            if ( $link->hasAttribute( 'anchor_name' ) )
+            {
+                $link->setAttribute( 'url', $link->getAttribute( 'url' ) . "#" . $link->getAttribute( 'anchor_name' ) );
             }
         }
     }

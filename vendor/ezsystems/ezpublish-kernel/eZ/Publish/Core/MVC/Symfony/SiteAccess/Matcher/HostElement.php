@@ -2,17 +2,17 @@
 /**
  * File containing the eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher\HostElement class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher;
 
-use eZ\Publish\Core\MVC\Symfony\SiteAccess\Matcher;
 use eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess\VersatileMatcher;
 
-class HostElement implements Matcher
+class HostElement implements VersatileMatcher
 {
     /**
      * @var \eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest
@@ -57,11 +57,28 @@ class HostElement implements Matcher
      * Injects the request object to match against.
      *
      * @param \eZ\Publish\Core\MVC\Symfony\Routing\SimplifiedRequest $request
-     *
-     * @return void
      */
     public function setRequest( SimplifiedRequest $request )
     {
         $this->request = $request;
+    }
+
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    public function reverseMatch( $siteAccessName )
+    {
+        $hostElements = explode( '.', $this->request->host );
+        $elementNumber = $this->elementNumber - 1;
+        if ( !isset( $hostElements[$elementNumber] ) )
+        {
+            return null;
+        }
+
+        $hostElements[$elementNumber] = $siteAccessName;
+        $this->request->setHost( implode( '.', $hostElements ) );
+        return $this;
     }
 }

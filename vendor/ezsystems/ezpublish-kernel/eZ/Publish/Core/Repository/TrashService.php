@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\Repository\TrashService class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package eZ\Publish\Core\Repository
  */
 
@@ -24,6 +24,7 @@ use eZ\Publish\API\Repository\Values\Content\SearchResult;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use DateTime;
+use Exception;
 
 /**
  * Trash service, used for managing trashed content
@@ -48,16 +49,28 @@ class TrashService implements TrashServiceInterface
     protected $settings;
 
     /**
+     * @var \eZ\Publish\Core\Repository\NameSchemaService
+     */
+    protected $nameSchemaService;
+
+    /**
      * Setups service with reference to repository object that created it & corresponding handler
      *
      * @param \eZ\Publish\API\Repository\Repository $repository
      * @param \eZ\Publish\SPI\Persistence\Handler $handler
+     * @param \eZ\Publish\Core\Repository\NameSchemaService $nameSchemaService
      * @param array $settings
      */
-    public function __construct( RepositoryInterface $repository, Handler $handler, array $settings = array() )
+    public function __construct(
+        RepositoryInterface $repository,
+        Handler $handler,
+        NameSchemaService $nameSchemaService,
+        array $settings = array()
+    )
     {
         $this->repository = $repository;
         $this->persistenceHandler = $handler;
+        $this->nameSchemaService = $nameSchemaService;
         // Union makes sure default settings are ignored if provided in argument
         $this->settings = $settings + array(
             //'defaultSetting' => array(),
@@ -72,15 +85,12 @@ class TrashService implements TrashServiceInterface
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException if the user is not allowed to read the trashed location
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException - if the location with the given id does not exist
      *
-     * @param int $trashItemId
+     * @param mixed $trashItemId
      *
      * @return \eZ\Publish\API\Repository\Values\Content\TrashItem
      */
     public function loadTrashItem( $trashItemId )
     {
-        if ( !is_numeric( $trashItemId ) )
-            throw new InvalidArgumentValue( "trashItemId", $trashItemId );
-
         if ( $this->repository->hasAccess( 'content', 'restore' ) !== true )
             throw new UnauthorizedException( 'content', 'restore' );
 
@@ -118,7 +128,7 @@ class TrashService implements TrashServiceInterface
             $this->persistenceHandler->urlAliasHandler()->locationDeleted( $location->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -165,7 +175,7 @@ class TrashService implements TrashServiceInterface
             );
 
             $content = $this->repository->getContentService()->loadContent( $trashItem->contentId );
-            $urlAliasNames = $this->repository->getNameSchemaService()->resolveUrlAliasSchema( $content );
+            $urlAliasNames = $this->nameSchemaService->resolveUrlAliasSchema( $content );
 
             // Publish URL aliases for recovered location
             foreach ( $urlAliasNames as $languageCode => $name )
@@ -181,7 +191,7 @@ class TrashService implements TrashServiceInterface
 
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -210,7 +220,7 @@ class TrashService implements TrashServiceInterface
             $this->persistenceHandler->trashHandler()->emptyTrash();
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -240,7 +250,7 @@ class TrashService implements TrashServiceInterface
             $this->persistenceHandler->trashHandler()->deleteTrashItem( $trashItem->id );
             $this->repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->repository->rollback();
             throw $e;
@@ -258,8 +268,8 @@ class TrashService implements TrashServiceInterface
      */
     public function findTrashItems( Query $query )
     {
-        if ( $query->criterion !== null && !$query->criterion instanceof Criterion )
-            throw new InvalidArgumentValue( "query->criterion", $query->criterion, "Query" );
+        if ( $query->filter !== null && !$query->filter instanceof Criterion )
+            throw new InvalidArgumentValue( "query->filter", $query->filter, "Query" );
 
         if ( $query->sortClauses !== null )
         {
@@ -280,7 +290,7 @@ class TrashService implements TrashServiceInterface
             throw new InvalidArgumentValue( "query->limit", $query->limit, "Query" );
 
         $spiTrashItems = $this->persistenceHandler->trashHandler()->findTrashItems(
-            $query->criterion !== null ? $query->criterion : null,
+            $query->filter !== null ? $query->filter : null,
             $query->offset !== null && $query->offset > 0 ? (int)$query->offset : 0,
             $query->limit !== null && $query->limit >= 1 ? (int)$query->limit : null,
             $query->sortClauses !== null ? $query->sortClauses : null
@@ -312,16 +322,16 @@ class TrashService implements TrashServiceInterface
         return new TrashItem(
             array(
                 'contentInfo' => $this->repository->getContentService()->loadContentInfo( $spiTrashItem->contentId ),
-                'id' => (int)$spiTrashItem->id,
-                'priority' => (int)$spiTrashItem->priority,
-                'hidden' => (bool)$spiTrashItem->hidden,
-                'invisible' => (bool)$spiTrashItem->invisible,
+                'id' => $spiTrashItem->id,
+                'priority' => $spiTrashItem->priority,
+                'hidden' => $spiTrashItem->hidden,
+                'invisible' => $spiTrashItem->invisible,
                 'remoteId' => $spiTrashItem->remoteId,
-                'parentLocationId' => (int)$spiTrashItem->parentId,
+                'parentLocationId' => $spiTrashItem->parentId,
                 'pathString' => $spiTrashItem->pathString,
-                'depth' => (int)$spiTrashItem->depth,
-                'sortField' => (int)$spiTrashItem->sortField,
-                'sortOrder' => (int)$spiTrashItem->sortOrder,
+                'depth' => $spiTrashItem->depth,
+                'sortField' => $spiTrashItem->sortField,
+                'sortOrder' => $spiTrashItem->sortOrder,
             )
         );
     }

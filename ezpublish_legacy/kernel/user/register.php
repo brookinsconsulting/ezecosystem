@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -47,6 +47,28 @@ if ( $redirectNumber == '3' )
 
 $db = eZDB::instance();
 $db->begin();
+
+// Fix issue EZP-22524
+if ( $http->hasSessionVariable( "RegisterUserID" ) )
+{
+    if ( $http->hasSessionVariable( 'StartedRegistration' ) )
+    {
+        eZDebug::writeWarning( 'Cancel module run to protect against multiple form submits', 'user/register' );
+        $http->removeSessionVariable( "RegisterUserID" );
+        $http->removeSessionVariable( 'StartedRegistration' );
+        $db->commit();
+        return eZModule::HOOK_STATUS_CANCEL_RUN;
+    }
+
+    $userID = $http->sessionVariable( "RegisterUserID" );
+
+    $object = eZContentObject::fetch( $userID );
+    if ( $object === null )
+    {
+        $http->removeSessionVariable( "RegisterUserID" );
+        $http->removeSessionVariable( 'StartedRegistration' );
+    }
+}
 
 // Create new user object if user is not logged in
 if ( !$http->hasSessionVariable( "RegisterUserID" ) )
@@ -138,19 +160,6 @@ if ( !$http->hasSessionVariable( "RegisterUserID" ) )
                                                        'parent_node' => $defaultUserPlacement,
                                                        'is_main' => 1 ) );
     $nodeAssignment->store();
-}
-else
-{
-    if ( $http->hasSessionVariable( 'StartedRegistration' ) )
-    {
-        eZDebug::writeWarning( 'Cancel module run to protect against multiple form submits', 'user/register' );
-        $http->removeSessionVariable( "RegisterUserID" );
-        $http->removeSessionVariable( 'StartedRegistration' );
-        $db->commit();
-        return eZModule::HOOK_STATUS_CANCEL_RUN;
-    }
-
-    $userID = $http->sessionVariable( "RegisterUserID" );
 }
 
 $Params['ObjectID'] = $userID;
@@ -257,7 +266,10 @@ if ( !function_exists( 'checkContentActions' ) )
             $http->removeSessionVariable( 'StartedRegistration' );
 
             // if everything is passed, login the user
-            if( $operationResult['status'] === eZModuleOperationInfo::STATUS_CONTINUE )
+            if (
+                $operationResult['status'] === eZModuleOperationInfo::STATUS_CONTINUE
+                && $ini->variable( "UserSettings", "RegisterAutoLogin" ) === "enabled"
+            )
             {
                 $user->loginCurrent();
             }

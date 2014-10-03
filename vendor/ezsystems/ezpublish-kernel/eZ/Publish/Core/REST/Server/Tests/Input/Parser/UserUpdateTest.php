@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Input\Parser;
@@ -41,7 +41,7 @@ class UserUpdateTest extends BaseTest
             '__url' => '/user/users/14'
         );
 
-        $userUpdate = $this->getUserUpdate();
+        $userUpdate = $this->getParser();
         $result = $userUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
 
         $this->assertInstanceOf(
@@ -134,7 +134,7 @@ class UserUpdateTest extends BaseTest
             '__url' => '/user/users/14'
         );
 
-        $userUpdate = $this->getUserUpdate();
+        $userUpdate = $this->getParser();
         $userUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -159,7 +159,7 @@ class UserUpdateTest extends BaseTest
             '__url' => '/user/users/14'
         );
 
-        $userUpdate = $this->getUserUpdate();
+        $userUpdate = $this->getParser();
         $userUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -190,7 +190,7 @@ class UserUpdateTest extends BaseTest
             '__url' => '/user/users/14'
         );
 
-        $userUpdate = $this->getUserUpdate();
+        $userUpdate = $this->getParser();
         $userUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -221,7 +221,7 @@ class UserUpdateTest extends BaseTest
             '__url' => '/user/users/14'
         );
 
-        $userUpdate = $this->getUserUpdate();
+        $userUpdate = $this->getParser();
         $userUpdate->parse( $inputArray, $this->getParsingDispatcherMock() );
     }
 
@@ -230,10 +230,9 @@ class UserUpdateTest extends BaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Input\Parser\UserUpdate
      */
-    protected function getUserUpdate()
+    protected function internalGetParser()
     {
         return new UserUpdate(
-            $this->getUrlHandler(),
             $this->getUserServiceMock(),
             $this->getContentServiceMock(),
             $this->getFieldTypeParserMock(),
@@ -332,5 +331,13 @@ class UserUpdateTest extends BaseTest
             );
 
         return $contentServiceMock;
+    }
+
+    public function getParseHrefExpectationsMap()
+    {
+        return array(
+            array( '/user/users/14', 'userId', 14 ),
+            array( '/content/sections/1', 'sectionId', 1 )
+        );
     }
 }

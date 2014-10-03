@@ -2,9 +2,9 @@
 /**
  * File containing the BinaryBase Value class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\BinaryBase;
@@ -15,16 +15,26 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 
 /**
  * Base value for binary field types
+ * @property string $path Used for BC with 5.0 (EZP-20948). Equivalent to $id.
+ * @property-read string $id Unique file ID, set by storage. Read only since 5.3 (EZP-22808).
  */
 abstract class Value extends BaseValue
 {
     /**
-     * Path string, where the binary file is located
+     * Unique file ID, set by storage
+     *
+     * Since 5.3 this is not used for input, use self::$inputUri instead
+     *
+     * @var null|string
+     */
+    protected $id;
+
+    /**
+     * Input file URI, as a path to a file on a disk
      *
      * @var string
-     * @required
      */
-    public $path;
+    public $inputUri;
 
     /**
      * Display file name
@@ -48,27 +58,33 @@ abstract class Value extends BaseValue
     public $mimeType;
 
     /**
+     * HTTP URI
+     * @var string
+     */
+    public $uri;
+
+    /**
      * Construct a new Value object.
      *
      * @param array $fileData
      */
     public function __construct( array $fileData = array() )
     {
-        foreach ( $fileData as $key => $value )
+        // BC with 5.0 (EZP-20948)
+        if ( isset( $fileData['path'] ) )
         {
-            try
-            {
-                $this->$key = $value;
-            }
-            catch ( PropertyNotFoundException $e )
-            {
-                throw new InvalidArgumentType(
-                    sprintf( '$imageData->%s', $key ),
-                    'Property not found',
-                    $value
-                );
-            }
+            $fileData['id'] = $fileData['path'];
+            unset( $fileData['path'] );
         }
+
+        // BC with 5.2 (EZP-22808)
+        if ( isset( $fileData['id'] ) && file_exists( $fileData['id'] ) )
+        {
+            $fileData['inputUri'] = $fileData['id'];
+            unset( $fileData['id'] );
+        }
+
+        parent::__construct( $fileData );
     }
 
     /**
@@ -80,6 +96,40 @@ abstract class Value extends BaseValue
      */
     public function __toString()
     {
-        return (string)$this->path;
+        return (string)$this->uri;
+    }
+
+    public function __get( $propertyName )
+    {
+        if ( $propertyName == 'path' )
+            return $this->inputUri;
+
+        return parent::__get( $propertyName );
+    }
+
+    public function __set( $propertyName, $propertyValue )
+    {
+        // BC with 5.0 (EZP-20948)
+        if ( $propertyName == 'path' )
+        {
+            $this->inputUri = $propertyValue;
+        }
+        // BC with 5.2 (EZP-22808)
+        else if ( $propertyName == 'id' && file_exists( $propertyValue ) )
+        {
+            $this->inputUri = $propertyValue;
+        }
+        else
+        {
+            parent::__set( $propertyName, $propertyValue );
+        }
+    }
+
+    public function __isset( $propertyName )
+    {
+        if ( $propertyName == 'path' )
+            return true;
+
+        return parent::__isset( $propertyName );
     }
 }

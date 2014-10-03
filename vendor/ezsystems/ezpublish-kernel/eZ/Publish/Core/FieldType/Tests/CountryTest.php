@@ -2,16 +2,17 @@
 /**
  * File containing the CountryTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\Country\Type as Country;
 use eZ\Publish\Core\FieldType\Country\Value as CountryValue;
-use ReflectionObject;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
+use eZ\Publish\Core\FieldType\ValidationError;
 
 /**
  * @group fieldType
@@ -19,6 +20,11 @@ use ReflectionObject;
  */
 class CountryTest extends FieldTypeTest
 {
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezcountry';
+    }
+
     /**
      * Returns the field type under test.
      *
@@ -32,7 +38,7 @@ class CountryTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new Country(
+        $fieldType = new Country(
             array(
                 "BE" => array(
                     "Name" => "Belgium",
@@ -72,6 +78,9 @@ class CountryTest extends FieldTypeTest
                 ),
             )
         );
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -388,6 +397,247 @@ class CountryTest extends FieldTypeTest
                             "IDC" => 33,
                         )
                     )
+                ),
+            ),
+        );
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array(
+                new CountryValue(),
+                ''
+            ),
+            array(
+                new CountryValue( array( 'FR' => array( 'Name' => 'France' ) ) ),
+                'France'
+            ),
+            array(
+                new CountryValue( array( 'FR' => array( 'Name' => 'France' ), 'DE' => array( 'Name' => 'Deutschland' ) ) ),
+                'France, Deutschland'
+            ),
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings and
+     * field value which are considered valid by the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten if
+     * a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "StringLengthValidator" => array(
+     *                      "minStringLength" => 2,
+     *                      "maxStringLength" => 10,
+     *                  ),
+     *              ),
+     *          ),
+     *          new TextLineValue( "lalalala" ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  'isMultiple' => true
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              array(
+     *                  "BE" => array(
+     *                      "Name" => "Belgium",
+     *                      "Alpha2" => "BE",
+     *                      "Alpha3" => "BEL",
+     *                      "IDC" => 32,
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideValidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "fieldSettings" => array(
+                        'isMultiple' => true
+                    ),
+                ),
+                new CountryValue(),
+            ),
+            array(
+                array(
+                    "fieldSettings" => array(
+                        'isMultiple' => false
+                    ),
+                ),
+                new CountryValue(
+                    array(
+                        "BE" => array(
+                            "Name" => "Belgium",
+                            "Alpha2" => "BE",
+                            "Alpha3" => "BEL",
+                            "IDC" => 32,
+                        ),
+                    )
+                ),
+            ),
+            array(
+                array(
+                    "fieldSettings" => array(
+                        'isMultiple' => true
+                    ),
+                ),
+                new CountryValue(
+                    array(
+                        "BE" => array(
+                            "Name" => "Belgium",
+                            "Alpha2" => "BE",
+                            "Alpha3" => "BEL",
+                            "IDC" => 32,
+                        ),
+                        "FR" => array(
+                            "Name" => "France",
+                            "Alpha2" => "FR",
+                            "Alpha3" => "FRA",
+                            "IDC" => 33,
+                        ),
+                    )
+                ),
+            ),
+        );
+    }
+
+    /**
+     * Provides data sets with validator configuration and/or field settings,
+     * field value and corresponding validation errors returned by
+     * the {@link validate()} method.
+     *
+     * ATTENTION: This is a default implementation, which must be overwritten
+     * if a FieldType supports validation!
+     *
+     * For example:
+     *
+     * <code>
+     *  return array(
+     *      array(
+     *          array(
+     *              "validatorConfiguration" => array(
+     *                  "IntegerValueValidator" => array(
+     *                      "minIntegerValue" => 5,
+     *                      "maxIntegerValue" => 10
+     *                  ),
+     *              ),
+     *          ),
+     *          new IntegerValue( 3 ),
+     *          array(
+     *              new ValidationError(
+     *                  "The value can not be lower than %size%.",
+     *                  null,
+     *                  array(
+     *                      "size" => 5
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *      array(
+     *          array(
+     *              "fieldSettings" => array(
+     *                  "isMultiple" => false
+     *              ),
+     *          ),
+     *          new CountryValue(
+     *              "BE" => array(
+     *                  "Name" => "Belgium",
+     *                  "Alpha2" => "BE",
+     *                  "Alpha3" => "BEL",
+     *                  "IDC" => 32,
+     *              ),
+     *              "FR" => array(
+     *                  "Name" => "France",
+     *                  "Alpha2" => "FR",
+     *                  "Alpha3" => "FRA",
+     *                  "IDC" => 33,
+     *              ),
+     *          )
+     *      ),
+     *      array(
+     *          new ValidationError(
+     *              "Field definition does not allow multiple countries to be selected."
+     *          ),
+     *      ),
+     *      // ...
+     *  );
+     * </code>
+     *
+     * @return array
+     */
+    public function provideInvalidDataForValidate()
+    {
+        return array(
+            array(
+                array(
+                    "fieldSettings" => array(
+                        'isMultiple' => false
+                    ),
+                ),
+                new CountryValue(
+                    array(
+                        "BE" => array(
+                            "Name" => "Belgium",
+                            "Alpha2" => "BE",
+                            "Alpha3" => "BEL",
+                            "IDC" => 32,
+                        ),
+                        "FR" => array(
+                            "Name" => "France",
+                            "Alpha2" => "FR",
+                            "Alpha3" => "FRA",
+                            "IDC" => 33,
+                        ),
+                    )
+                ),
+                array(
+                    new ValidationError(
+                        "Field definition does not allow multiple countries to be selected."
+                    ),
+                ),
+            ),
+            array(
+                array(
+                    "fieldSettings" => array(
+                        'isMultiple' => true
+                    ),
+                ),
+                new CountryValue(
+                    array(
+                        "LE" => array(
+                            "Name" => "LegoLand",
+                            "Alpha2" => "LE",
+                            "Alpha3" => "LEG",
+                            "IDC" => 888,
+                        ),
+                    )
+                ),
+                array(
+                    new ValidationError(
+                        "Country with Alpha2 code '%alpha2%' is not defined in FieldType settings.",
+                        null,
+                        array(
+                            "alpha2" => "LE"
+                        )
+                    ),
                 ),
             ),
         );

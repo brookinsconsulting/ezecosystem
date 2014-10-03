@@ -2,9 +2,9 @@
 /**
  * File containing the \eZ\Publish\SPI\IO\BinaryFileCreateStruct class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\IO;
@@ -12,8 +12,36 @@ namespace eZ\Publish\SPI\IO;
 /**
  * Create struct for BinaryFile objects
  */
-class BinaryFileCreateStruct extends BinaryFile
+class BinaryFileCreateStruct
 {
+    /**
+     * File size, in bytes
+     * @var int
+     */
+    public $size;
+
+    /**
+     * File modification time
+     * @var \DateTime
+     */
+    public $mtime;
+
+    /**
+     * The file's mime type
+     * If not provided, will be auto-detected by the IOService
+     * Example: text/xml
+     * @var string
+     */
+    public $mimeType;
+
+    /**
+     * Unique identifier for this file
+     * Ex: images/media/images/ez-logo/209-1-eng-GB/eZ-Logo.gif,
+     *     or original/application/2b042138835bb5f48beb9c9df6e86de4.pdf
+     * @var mixed
+     */
+    public $id;
+
     /**
      * @var resource
      */

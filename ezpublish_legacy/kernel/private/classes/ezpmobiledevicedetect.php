@@ -2,9 +2,9 @@
 /**
  * File containing the ezpMobileDeviceDetect abstract class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -36,7 +36,24 @@ class ezpMobileDeviceDetect
      */
     public static function isEnabled()
     {
-        return ( eZINI::instance()->variable( 'SiteAccessSettings', 'DetectMobileDevice' ) === 'enabled' );
+        if ( eZINI::instance()->variable( 'SiteAccessSettings', 'DetectMobileDevice' ) === 'enabled' )
+        {
+            $mobileSaList = eZINI::instance()->variable( 'SiteAccessSettings', 'MobileSiteAccessList' );
+
+            if ( !empty( $mobileSaList ) )
+            {
+                return true;
+            }
+            else
+            {
+                eZDebug::writeError(
+                    "DetectMobileDevice is enabled and MobileSiteAccessList is empty, please check your site.ini configuration",
+                    __METHOD__
+                );
+            }
+        }
+
+        return false;
     }
 
     /**

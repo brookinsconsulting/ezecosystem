@@ -2,9 +2,9 @@
 /**
  * File containing the configuration of the REST SDK client
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST;
@@ -35,7 +35,7 @@ $generator = getenv( 'backendEncoding' ) === 'xml' ?
 
 // The URL Handler is responsible for URL parsing and generation. It will be
 // used in the output generators and in some parsing handlers.
-$urlHandler = new Common\UrlHandler\eZPublish();
+$requestParser = new Common\RequestParser\eZPublish();
 
 // FieldTypes to be used in integration tests. The field types are only used
 // in terms of conversions from and to hash values.
@@ -101,22 +101,22 @@ $repository = new Client\IntegrationTestRepository(
         // value object (or its parent class(es)) to the respective visitor
         // implementation instance.
         array(
-            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\SectionCreateStruct'                   => new Client\Output\ValueObjectVisitor\SectionCreateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\SectionUpdateStruct'                   => new Client\Output\ValueObjectVisitor\SectionUpdateStruct( $urlHandler ),
-            '\\eZ\\Publish\\Core\\REST\\Common\\Values\\SectionIncludingContentMetadataUpdateStruct' => new Client\Output\ValueObjectVisitor\SectionIncludingContentMetadataUpdateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\User\\RoleCreateStruct'                         => new Client\Output\ValueObjectVisitor\RoleCreateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\User\\RoleUpdateStruct'                         => new Client\Output\ValueObjectVisitor\RoleUpdateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\User\\PolicyCreateStruct'                       => new Client\Output\ValueObjectVisitor\PolicyCreateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\User\\Limitation'                               => new Client\Output\ValueObjectVisitor\Limitation( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\User\\PolicyUpdateStruct'                       => new Client\Output\ValueObjectVisitor\PolicyUpdateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\LocationCreateStruct'                  => new Client\Output\ValueObjectVisitor\LocationCreateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateGroupCreateStruct'      => new Client\Output\ValueObjectVisitor\ObjectStateGroupCreateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateGroupUpdateStruct'      => new Client\Output\ValueObjectVisitor\ObjectStateGroupUpdateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateCreateStruct'           => new Client\Output\ValueObjectVisitor\ObjectStateCreateStruct( $urlHandler ),
-            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateUpdateStruct'           => new Client\Output\ValueObjectVisitor\ObjectStateUpdateStruct( $urlHandler ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\SectionCreateStruct'                   => new Client\Output\ValueObjectVisitor\SectionCreateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\SectionUpdateStruct'                   => new Client\Output\ValueObjectVisitor\SectionUpdateStruct( $requestParser ),
+            '\\eZ\\Publish\\Core\\REST\\Common\\Values\\SectionIncludingContentMetadataUpdateStruct' => new Client\Output\ValueObjectVisitor\SectionIncludingContentMetadataUpdateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\User\\RoleCreateStruct'                         => new Client\Output\ValueObjectVisitor\RoleCreateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\User\\RoleUpdateStruct'                         => new Client\Output\ValueObjectVisitor\RoleUpdateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\User\\PolicyCreateStruct'                       => new Client\Output\ValueObjectVisitor\PolicyCreateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\User\\Limitation'                               => new Client\Output\ValueObjectVisitor\Limitation( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\User\\PolicyUpdateStruct'                       => new Client\Output\ValueObjectVisitor\PolicyUpdateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\LocationCreateStruct'                  => new Client\Output\ValueObjectVisitor\LocationCreateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateGroupCreateStruct'      => new Client\Output\ValueObjectVisitor\ObjectStateGroupCreateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateGroupUpdateStruct'      => new Client\Output\ValueObjectVisitor\ObjectStateGroupUpdateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateCreateStruct'           => new Client\Output\ValueObjectVisitor\ObjectStateCreateStruct( $requestParser ),
+            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectStateUpdateStruct'           => new Client\Output\ValueObjectVisitor\ObjectStateUpdateStruct( $requestParser ),
         )
     ),
-    $urlHandler,
+    $requestParser,
     $fieldTypes,
     $authenticator
 );
@@ -198,6 +198,9 @@ foreach ( $inputParsers as $mimeType => $parser )
 
 // Force sets the used user. This will be refactored most likely, since this is
 // not really valid for a REST client.
+/*
+Code commented while implementing EZP-21168, the stubs are removed.
+
 $repository->setCurrentUser(
     new \eZ\Publish\API\Repository\Tests\Stubs\Values\User\UserStub(
         array(
@@ -209,5 +212,6 @@ $repository->setCurrentUser(
         )
     )
 );
+*/
 
 return $repository;

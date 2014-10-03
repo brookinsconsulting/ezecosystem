@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\Core\IO\Values\BinaryFile class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\IO\Values;
@@ -23,6 +23,13 @@ use eZ\Publish\API\Repository\Values\ValueObject;
  */
 class BinaryFile extends ValueObject
 {
+    /**
+     * Unique ID
+     * Ex: media/images/ez-logo/209-1-eng-GB/eZ-Logo.gif, or application/2b042138835bb5f48beb9c9df6e86de4.pdf
+     * @var mixed
+     */
+    protected $id;
+
     /**
      * File size, in bytes
      * @var int
@@ -47,5 +54,4 @@ class BinaryFile extends ValueObject
      * @var string
      */
     public $mimeType;
-
 }

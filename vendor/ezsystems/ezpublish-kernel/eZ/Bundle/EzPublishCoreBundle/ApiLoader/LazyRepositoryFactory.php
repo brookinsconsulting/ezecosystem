@@ -2,26 +2,28 @@
 /**
  * File containing the LazyRepositoryFactory class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\ApiLoader;
 
 use eZ\Publish\API\Repository\Repository;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * @deprecated This factory is not needed any more as ProxyManager is now used for lazy loading. Use ezpublish.api.repository instead.
+ */
 class LazyRepositoryFactory
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \eZ\Publish\API\Repository\Repository
      */
-    protected $container;
+    protected $repository;
 
-    public function __construct( ContainerInterface $container )
+    public function __construct( Repository $repository )
     {
-        $this->container = $container;
+        $this->repository = $repository;
     }
 
     /**
@@ -33,15 +35,9 @@ class LazyRepositoryFactory
      */
     public function buildRepository()
     {
-        $container = $this->container;
-        return function () use ( $container )
+        $repository = $this->repository;
+        return function () use ( $repository )
         {
-            static $repository;
-            if ( !$repository instanceof Repository )
-            {
-                $repository = $container->get( 'ezpublish.api.repository' );
-            }
-
             return $repository;
         };
     }

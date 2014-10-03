@@ -2,9 +2,9 @@
 /**
  * File containing the Image Value class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Image;
@@ -16,9 +16,8 @@ use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
 /**
  * Value for Image field type
  *
- * @property string $fileName Display file name of the image.
- * @property string $path Path where the image can be found
- * @property string $alternativeText Alternative text for the image
+ * @property string $path @deprecated BC with 5.0 (EZP-20948). Equivalent to $id or $inputUri, depending on which one is set
+ * .
  *
  * @todo Mime type?
  * @todo Dimensions?
@@ -26,9 +25,17 @@ use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
 class Value extends BaseValue
 {
     /**
+     * Image id
+     *
+     * @var mixed
+     * @required
+     */
+    public $id;
+
+    /**
      * The alternative image text (for example "Picture of an apple.").
      *
-     * @var string
+     * @var string|null
      */
     public $alternativeText;
 
@@ -49,17 +56,27 @@ class Value extends BaseValue
     public $fileSize;
 
     /**
-     * Path string, where the image is located
-     *
+     * The image's HTTP URI
      * @var string
-     * @required
      */
-    public $path;
+    public $uri;
+
+    /**
+     * External image ID (required by REST for now, see https://jira.ez.no/browse/EZP-20831)
+     * @var mixed
+     */
+    public $imageId;
+
+    /**
+     * Input image file URI
+     * @var string
+     */
+    public $inputUri;
 
     /**
      * Construct a new Value object.
      *
-     * @param array $fileData
+     * @param array $imageData
      */
     public function __construct( array $imageData = array() )
     {
@@ -72,8 +89,8 @@ class Value extends BaseValue
             catch ( PropertyNotFoundException $e )
             {
                 throw new InvalidArgumentType(
-                    sprintf( '$imageData->%s', $key ),
-                    'Property not found',
+                    sprintf( 'Image\Value::$%s', $key ),
+                    'Existing property',
                     $value
                 );
             }
@@ -85,7 +102,9 @@ class Value extends BaseValue
      *
      * @param string $path
      *
+     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
      * @return Value
+     * @deprecated Starting with 5.3.3, handled by Image\Type::acceptValue()
      */
     public static function fromString( $path )
     {
@@ -99,10 +118,9 @@ class Value extends BaseValue
         }
         return new static(
             array(
-                'path' => $path,
+                'inputUri' => $path,
                 'fileName' => basename( $path ),
-                'fileSize' => filesize( $path ),
-                'alternativeText' => '',
+                'fileSize' => filesize( $path )
             )
         );
     }
@@ -123,5 +141,26 @@ class Value extends BaseValue
     public function __toString()
     {
         return (string)$this->fileName;
+    }
+
+    public function __get( $propertyName )
+    {
+        if ( $propertyName == 'path' )
+        {
+            return $this->inputUri ?: $this->id;
+        }
+
+        throw new PropertyNotFoundException( $propertyName, get_class( $this ) );
+    }
+
+    public function __set( $propertyName, $propertyValue )
+    {
+        if ( $propertyName == 'path' )
+        {
+            $this->inputUri = $propertyValue;
+            return;
+        }
+
+        throw new PropertyNotFoundException( $propertyName, get_class( $this ) );
     }
 }

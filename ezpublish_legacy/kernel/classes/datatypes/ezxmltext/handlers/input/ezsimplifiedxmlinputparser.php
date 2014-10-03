@@ -2,9 +2,9 @@
 /**
  * File containing the eZSimplifiedXMLInputParser class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -277,6 +277,21 @@ class eZSimplifiedXMLInputParser extends eZXMLInputParser
             $newLine = $newParent;
             $ret['result'] = $newParent;
         }
+        else if (
+            $parentName === 'header'
+            && (
+                $parent->getElementsByTagName( 'line' )->length
+                || $parent->getElementsByTagName( 'br' )->length
+            )
+        )
+        {
+            // by default the header element does not need a line element
+            // unless it contains a <br> or a previously created <line>
+            $newLine = $this->createAndPublishElement( 'line', $ret );
+            $element = $parent->replaceChild( $newLine, $element );
+            $newLine->appendChild( $element );
+            $ret['result'] = $newLine;
+        }
         elseif ( $parentName == 'paragraph' )
         {
             $newLine = $this->createAndPublishElement( 'line', $ret );
@@ -516,6 +531,11 @@ class eZSimplifiedXMLInputParser extends eZXMLInputParser
                     }
                 }
                 $elementToMove = $element;
+                while ( $elementToMove->parentNode->nodeName === 'custom' )
+                {
+                    $elementToMove = $elementToMove->parentNode;
+                    $parent = $elementToMove->parentNode;
+                }
                 while( $elementToMove &&
                        $elementToMove->nodeName != 'section' )
                 {
@@ -524,8 +544,13 @@ class eZSimplifiedXMLInputParser extends eZXMLInputParser
                     $current->appendChild( $elementToMove );
                     $elementToMove = $next;
 
-                    if ( $elementToMove->nodeName == 'header' &&
-                         $elementToMove->getAttribute( 'level' ) <= $level )
+                    if (
+                        !$elementToMove ||
+                        (
+                            $elementToMove->nodeName == 'header' &&
+                            $elementToMove->getAttribute( 'level' ) <= $level
+                        )
+                    )
                     {
                         break;
                     }

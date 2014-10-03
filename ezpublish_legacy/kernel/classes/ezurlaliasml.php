@@ -2,9 +2,9 @@
 /**
  * File containing the eZURLAlias class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -63,10 +63,71 @@ class eZURLAliasML extends eZPersistentObject
     const ACTION_INVALID = 51;
     const DB_ERROR = 101;
 
-    /*!
-     Optionally computed path string for this element, used for caching purposes.
+    /**
+     * Optionally computed path string for this element, used for caching purposes.
+     *
+     * @var string
      */
     public $Path;
+
+    /**
+     * @var int
+     */
+    public $ID;
+
+    /**
+     * @var int
+     */
+    public $Parent;
+
+    /**
+     * @var int
+     */
+    public $Link;
+
+    /**
+     * @var string
+     */
+    public $Text;
+
+    /**
+     * @var string
+     */
+    public $TextMD5;
+
+    /**
+     * @var int
+     */
+    public $LangMask;
+
+    /**
+     * @var string
+     */
+    public $Action;
+
+    /**
+     * @var string
+     */
+    public $ActionType;
+
+    /**
+     * @var int
+     */
+    public $AliasRedirects;
+
+    /**
+     * @var int
+     */
+    public $IsAlias;
+
+    /**
+     * @var bool
+     */
+    public $IsOriginal;
+
+    /**
+     * @var string|null
+     */
     private static $charset = null;
 
     /*!
@@ -352,6 +413,10 @@ class eZURLAliasML extends eZPersistentObject
 
             if ( count( $rows ) == 0 )
             {
+                if ( $incomingLanguageList !== null )
+                {
+                    eZContentLanguage::clearPrioritizedLanguages();
+                }
                 break;
             }
             $result = eZURLAliasML::choosePrioritizedRow( $rows );
@@ -2173,7 +2238,7 @@ class eZURLAliasML extends eZPersistentObject
      'What is this?' => 'What-is-this'
      'This & that' => 'This-that'
      'myfile.tpl' => 'Myfile-tpl',
-     '??????' => 'oeaeaa'
+     'øæå' => 'oeaeaa'
      \endexample
     */
     static public function convertToAlias( $urlElement, $defaultValue = false )
@@ -2211,7 +2276,7 @@ class eZURLAliasML extends eZPersistentObject
      'What is this?' => 'What-is-this'
      'This & that' => 'This-that'
      'myfile.tpl' => 'Myfile-tpl',
-     '??????' => 'oeaeaa'
+     'øæå' => 'oeaeaa'
      \endexample
 
      \note Provided for creating url alias as they were before 3.10. Also used to make path_identification_string.

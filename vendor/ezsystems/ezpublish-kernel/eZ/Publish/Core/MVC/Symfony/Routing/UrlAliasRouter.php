@@ -2,15 +2,15 @@
 /**
  * File containing the UrlAliasRouter class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\Routing;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LocationId;
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -31,7 +31,7 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
     const URL_ALIAS_ROUTE_NAME = 'ez_urlalias';
 
-    const LOCATION_VIEW_CONTROLLER = 'ezpublish.controller.content.view:viewLocation';
+    const LOCATION_VIEW_CONTROLLER = 'ez_content:viewLocation';
 
     /**
      * @var \Symfony\Component\Routing\RequestContext
@@ -39,9 +39,9 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
     protected $requestContext;
 
     /**
-     * @var \Closure
+     * @var \eZ\Publish\API\Repository\LocationService
      */
-    protected $lazyRepository;
+    protected $locationService;
 
     /**
      * @var \eZ\Publish\API\Repository\URLAliasService
@@ -64,25 +64,18 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
     protected $logger;
 
     public function __construct(
-        \Closure $lazyRepository,
+        LocationService $locationService,
+        URLAliasService $urlAliasService,
         UrlAliasGenerator $generator,
         RequestContext $requestContext,
         LoggerInterface $logger = null
     )
     {
-        $this->lazyRepository = $lazyRepository;
+        $this->locationService = $locationService;
+        $this->urlAliasService = $urlAliasService;
         $this->generator = $generator;
         $this->requestContext = $requestContext !== null ? $requestContext : new RequestContext();
         $this->logger = $logger;
-    }
-
-    /**
-     * @return \eZ\Publish\API\Repository\Repository
-     */
-    protected function getRepository()
-    {
-        $lazyRepository = $this->lazyRepository;
-        return $lazyRepository();
     }
 
     /**
@@ -110,7 +103,7 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
             );
             switch ( $urlAlias->type )
             {
-                case UrlAlias::LOCATION:
+                case URLAlias::LOCATION:
                     $params += array(
                         '_controller' => static::LOCATION_VIEW_CONTROLLER,
                         'locationId' => $urlAlias->destination,
@@ -120,7 +113,10 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
 
                     $request->attributes->set( 'locationId', $urlAlias->destination );
 
-                    if ( $urlAlias->isHistory === true )
+                    // For Location alias setup 301 redirect to Location's current URL when:
+                    // 1. alias is history
+                    // 2. alias is custom with forward flag true
+                    if ( $urlAlias->isHistory === true || ( $urlAlias->isCustom === true && $urlAlias->forward === true ) )
                     {
                         $request->attributes->set(
                             'semanticPathinfo',
@@ -138,8 +134,8 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
 
                     break;
 
-                case UrlAlias::RESOURCE:
-                case UrlAlias::VIRTUAL:
+                case URLAlias::RESOURCE:
+                case URLAlias::VIRTUAL:
                     $request->attributes->set( 'semanticPathinfo', '/' . trim( $urlAlias->destination, '/' ) );
                     // In URLAlias terms, "forward" means "redirect".
                     if ( $urlAlias->forward )
@@ -165,7 +161,7 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
      */
     protected function getUrlAlias( $pathinfo )
     {
-        return $this->getRepository()->getURLAliasService()->lookup( $pathinfo );
+        return $this->urlAliasService->lookup( $pathinfo );
     }
 
     /**
@@ -230,8 +226,8 @@ class UrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
                 );
             }
 
-            $location = isset( $parameters['location'] ) ? $parameters['location'] : $this->getRepository()->getLocationService()->loadLocation( $parameters['locationId'] );
-            unset( $parameters['location'], $parameters['locationId'] );
+            $location = isset( $parameters['location'] ) ? $parameters['location'] : $this->locationService->loadLocation( $parameters['locationId'] );
+            unset( $parameters['location'], $parameters['locationId'], $parameters['viewType'], $parameters['layout'] );
             return $this->generator->generate( $location, $parameters, $absolute );
         }
 

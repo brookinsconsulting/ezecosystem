@@ -2,9 +2,9 @@
 /**
  * File containing the URLAlias ValueObjectVisitor class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
@@ -33,7 +33,7 @@ class URLAlias extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->urlHandler->generate( 'urlAlias', array( 'urlalias' => $data->id ) )
+            $this->router->generate( 'ezpublish_rest_loadURLAlias', array( 'urlAliasId' => $data->id ) )
         );
         $generator->endAttribute( 'href' );
 
@@ -48,7 +48,7 @@ class URLAlias extends ValueObjectVisitor
             $generator->startObjectElement( 'location', 'Location' );
             $generator->startAttribute(
                 'href',
-                $this->urlHandler->generate( 'locationById', array( 'location' => $data->destination ) )
+                $this->router->generate( 'ezpublish_rest_loadLocation', array( 'locationPath' => $data->destination ) )
             );
             $generator->endAttribute( 'href' );
             $generator->endObjectElement( 'location' );
@@ -65,16 +65,28 @@ class URLAlias extends ValueObjectVisitor
         $generator->startValueElement( 'languageCodes', implode( ',', $data->languageCodes ) );
         $generator->endValueElement( 'languageCodes' );
 
-        $generator->startValueElement( 'alwaysAvailable', $this->serializeBool( $data->alwaysAvailable ) );
+        $generator->startValueElement(
+            'alwaysAvailable',
+            $this->serializeBool( $generator, $data->alwaysAvailable )
+        );
         $generator->endValueElement( 'alwaysAvailable' );
 
-        $generator->startValueElement( 'isHistory', $this->serializeBool( $data->isHistory ) );
+        $generator->startValueElement(
+            'isHistory',
+            $this->serializeBool( $generator, $data->isHistory )
+        );
         $generator->endValueElement( 'isHistory' );
 
-        $generator->startValueElement( 'forward', $this->serializeBool( $data->forward ) );
+        $generator->startValueElement(
+            'forward',
+            $this->serializeBool( $generator, $data->forward )
+        );
         $generator->endValueElement( 'forward' );
 
-        $generator->startValueElement( 'custom', $this->serializeBool( $data->isCustom ) );
+        $generator->startValueElement(
+            'custom',
+            $this->serializeBool( $generator, $data->isCustom )
+        );
         $generator->endValueElement( 'custom' );
 
         $generator->endObjectElement( 'UrlAlias' );

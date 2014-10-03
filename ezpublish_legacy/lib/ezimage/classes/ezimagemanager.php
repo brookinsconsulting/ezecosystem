@@ -2,9 +2,9 @@
 /**
  * File containing the eZImageManager class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package lib
  */
 
@@ -275,7 +275,6 @@ class eZImageManager
     */
     function isImageTimestampValid( $timestamp )
     {
-        eZExpiryHandler::registerShutdownFunction();
         $expiryHandler = eZExpiryHandler::instance();
         if ( $expiryHandler->hasTimestamp( 'image-manager-alias' ) )
         {
@@ -765,7 +764,10 @@ class eZImageManager
             $alias['filters'] = $filters;
         }
         if ( $ini->hasVariable( $iniGroup, 'Reference' ) )
-            $alias['reference'] = $ini->variable( $iniGroup, 'Reference' );
+        {
+            $alias['reference'] = trim( $ini->variable( $iniGroup, 'Reference' ) );
+            $alias['reference'] = ( $alias['reference'] !== '' ) ? $alias['reference'] : false;
+        }
         return $alias;
     }
 
@@ -783,8 +785,6 @@ class eZImageManager
      */
     function createImageAlias( $aliasName, &$existingAliasList, $parameters = array() )
     {
-        $fname = "createImageAlias( $aliasName )";
-
         // check for $aliasName validity
         $aliasList = $this->aliasList();
         if ( !isset( $aliasList[$aliasName] ) )

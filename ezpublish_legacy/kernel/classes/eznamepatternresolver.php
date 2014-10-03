@@ -2,9 +2,9 @@
 /**
  * File containing the eZNamePatternResolver class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  *
  */
@@ -33,10 +33,12 @@
  * edit-interface.
  *
  * @package kernel
- * @version  2013.5
+ * @version 2014.07.0
  */
 class eZNamePatternResolver
 {
+    const FIELD_NAME_MAX_SIZE = 255;
+
     /**
      * Holds token groups
      *
@@ -112,7 +114,7 @@ class eZNamePatternResolver
         $this->version = $contentVersion;
         $this->translation = $contentTranslation;
 
-        $this->namePattern = $this->filterNamePattern( $namePattern);
+        $this->namePattern = $this->filterNamePattern( $namePattern );
     }
 
     /**
@@ -130,15 +132,20 @@ class eZNamePatternResolver
         // Replace tokens with real values
         $objectName = $this->translatePattern();
 
-        // Make sure length is not longer then $limit unless it's 0
-        if ( !$limit || strlen( $objectName ) <= $limit )
+        $db = eZDB::instance();
+
+        $limit = $limit ?: self::FIELD_NAME_MAX_SIZE;
+
+        if ( $db->countStringSize( $objectName ) <= $limit )
         {
             return $objectName;
         }
-        else
-        {
-            return rtrim( substr( $objectName, 0, $limit - strlen( $sequence ) +1 ) ) . $sequence;
-        }
+
+        return preg_replace(
+            "/[\pZ\pC]+$/u",
+            '',
+            $db->truncateString( $objectName, $limit, 'name', $sequence )
+        ). $sequence;
     }
 
     /**
@@ -241,7 +248,7 @@ class eZNamePatternResolver
             }
             else
             {
-                if ( array_key_exists( $tokenPart, $this->attributeArray ) and $this->attributeArray[$tokenPart] !== '' and $this->attributeArray[$tokenPart] !== NULL )
+                if ( isset( $this->attributeArray[$tokenPart] ) && $this->attributeArray[$tokenPart] !== '' && $this->attributeArray[$tokenPart] !== false )
                 {
                     $replaceString = $this->attributeArray[$tokenPart];
                     // We want to stop after the first matching token part / identifier is found

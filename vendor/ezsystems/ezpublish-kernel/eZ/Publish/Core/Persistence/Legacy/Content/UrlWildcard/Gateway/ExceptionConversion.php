@@ -2,16 +2,16 @@
 /**
  * File containing the Section Gateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Gateway;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\UrlWildcard\Gateway;
 use eZ\Publish\SPI\Persistence\Content\UrlWildcard;
-use ezcDbException;
+use Doctrine\DBAL\DBALException;
 use PDOException;
 
 /**
@@ -49,7 +49,7 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->insertUrlWildcard( $urlWildcard );
         }
-        catch ( ezcDbException $e )
+        catch ( DBALException $e )
         {
             throw new \RuntimeException( 'Database error', 0, $e );
         }
@@ -72,7 +72,7 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->deleteUrlWildcard( $id );
         }
-        catch ( ezcDbException $e )
+        catch ( DBALException $e )
         {
             throw new \RuntimeException( 'Database error', 0, $e );
         }
@@ -93,7 +93,7 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadUrlWildcardData( $parentId );
         }
-        catch ( ezcDbException $e )
+        catch ( DBALException $e )
         {
             throw new \RuntimeException( 'Database error', 0, $e );
         }
@@ -117,7 +117,7 @@ class ExceptionConversion extends Gateway
         {
             return $this->innerGateway->loadUrlWildcardsData( $offset, $limit );
         }
-        catch ( ezcDbException $e )
+        catch ( DBALException $e )
         {
             throw new \RuntimeException( 'Database error', 0, $e );
         }

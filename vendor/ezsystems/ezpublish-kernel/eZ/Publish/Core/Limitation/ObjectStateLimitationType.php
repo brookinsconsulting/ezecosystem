@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\API\Repository\Values\User\Limitation\ObjectStateLimitation class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Limitation;
@@ -115,11 +115,11 @@ class ObjectStateLimitationType extends AbstractPersistenceLimitationType implem
      * @param \eZ\Publish\API\Repository\Values\User\Limitation $value
      * @param \eZ\Publish\API\Repository\Values\User\User $currentUser
      * @param \eZ\Publish\API\Repository\Values\ValueObject $object
-     * @param \eZ\Publish\API\Repository\Values\ValueObject[] $targets An array of location, parent or "assignment" value objects
+     * @param \eZ\Publish\API\Repository\Values\ValueObject[]| $targets An array of location, parent or "assignment" value objects
      *
      * @return boolean
      */
-    public function evaluate( APILimitationValue $value, APIUser $currentUser, ValueObject $object, array $targets = array() )
+    public function evaluate( APILimitationValue $value, APIUser $currentUser, ValueObject $object, array $targets = null )
     {
         if ( !$value instanceof APIObjectStateLimitation )
         {
@@ -169,10 +169,12 @@ class ObjectStateLimitationType extends AbstractPersistenceLimitationType implem
                 }
 
                 if ( $defaultStateId === null )
+                {
                     throw new BadStateException(
                         '$defaultStateId',
                         "Could not find a default state for object state group {$stateGroup->id}"
                     );
+                }
 
                 $objectStateIdArray[] = $defaultStateId;
             }

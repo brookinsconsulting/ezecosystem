@@ -2,8 +2,8 @@
 /**
  * File containing the eZ Publish upload view implementation.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
  * @version 1.0.0
  * @package ezmultiupload
  */
@@ -24,6 +24,11 @@ if( $module->isCurrentAction( 'Upload' ) )
     // Handle file upload only if there was no errors
     if( empty( $result['errors'] ) )
     {
+        $behaviour = new ezpContentPublishingBehaviour();
+        $behaviour->isTemporary = true;
+        $behaviour->disableAsynchronousPublishing = false;
+        ezpContentPublishingBehaviour::setBehaviour( $behaviour );
+
         // Handle file upload. All checkes are performed by eZContentUpload::handleUpload()
         // and available in $result array
         $upload = new eZContentUpload();

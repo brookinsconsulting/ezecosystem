@@ -2,15 +2,15 @@
 /**
  * File containing the ContentCreate parser class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Input\Parser;
 
+use eZ\Publish\Core\REST\Common\Input\BaseParser;
 use eZ\Publish\Core\REST\Common\Input\ParsingDispatcher;
-use eZ\Publish\Core\REST\Common\UrlHandler;
 use eZ\Publish\Core\REST\Common\Input\ParserTools;
 use eZ\Publish\Core\REST\Common\Input\FieldTypeParser;
 use eZ\Publish\Core\REST\Common\Exceptions;
@@ -22,7 +22,7 @@ use DateTime;
 /**
  * Parser for ContentCreate
  */
-class ContentCreate extends Base
+class ContentCreate extends BaseParser
 {
     /**
      * Content service
@@ -62,21 +62,18 @@ class ContentCreate extends Base
     /**
      * Construct
      *
-     * @param \eZ\Publish\Core\REST\Common\UrlHandler $urlHandler
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\Core\REST\Common\Input\FieldTypeParser $fieldTypeParser
      * @param \eZ\Publish\Core\REST\Server\Input\Parser\LocationCreate $locationCreateParser
      * @param \eZ\Publish\Core\REST\Common\Input\ParserTools $parserTools
      */
-    public function __construct( UrlHandler $urlHandler,
-                                 ContentService $contentService,
+    public function __construct( ContentService $contentService,
                                  ContentTypeService $contentTypeService,
                                  FieldTypeParser $fieldTypeParser,
                                  LocationCreate $locationCreateParser,
                                  ParserTools $parserTools )
     {
-        parent::__construct( $urlHandler );
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
@@ -116,9 +113,8 @@ class ContentCreate extends Base
             throw new Exceptions\Parser( "Missing 'mainLanguageCode' element for ContentCreate." );
         }
 
-        $contentTypeValues = $this->urlHandler->parse( 'type', $data['ContentType']['_href'] );
         $contentType = $this->contentTypeService->loadContentType(
-            $contentTypeValues['type']
+            $this->requestParser->parseHref( $data['ContentType']['_href'], 'contentTypeId' )
         );
 
         $contentCreateStruct = $this->contentService->newContentCreateStruct( $contentType, $data['mainLanguageCode'] );
@@ -130,8 +126,7 @@ class ContentCreate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for Section element in ContentCreate." );
             }
 
-            $sectionValues = $this->urlHandler->parse( 'section', $data['Section']['_href'] );
-            $contentCreateStruct->sectionId = $sectionValues['section'];
+            $contentCreateStruct->sectionId = $this->requestParser->parseHref( $data['Section']['_href'], 'sectionId' );
         }
 
         if ( array_key_exists( 'alwaysAvailable', $data ) )
@@ -156,8 +151,7 @@ class ContentCreate extends Base
                 throw new Exceptions\Parser( "Missing '_href' attribute for User element in ContentCreate." );
             }
 
-            $userValues = $this->urlHandler->parse( 'user', $data['User']['_href'] );
-            $contentCreateStruct->ownerId = $userValues['user'];
+            $contentCreateStruct->ownerId = $this->requestParser->parseHref( $data['User']['_href'], 'userId' );
         }
 
         if ( !array_key_exists( 'fields', $data ) || !is_array( $data['fields'] ) || !is_array( $data['fields']['field'] ) )

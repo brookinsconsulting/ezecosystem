@@ -2,15 +2,17 @@
 /**
  * File containing the Author class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Author;
 
 use eZ\Publish\Core\FieldType\FieldType;
+use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
+use eZ\Publish\SPI\FieldType\Value as SPIValue;
 
 /**
  * Author field type.
@@ -36,14 +38,12 @@ class Type extends FieldType
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
      *
-     * @param mixed $value
+     * @param \eZ\Publish\Core\FieldType\Author\Value $value
      *
-     * @return mixed
+     * @return string
      */
-    public function getName( $value )
+    public function getName( SPIValue $value )
     {
-        $value = $this->acceptValue( $value );
-
         return isset( $value->authors[0] ) ? $value->authors[0]->name : "";
     }
 
@@ -59,45 +59,51 @@ class Type extends FieldType
     }
 
     /**
-     * Implements the core of {@see acceptValue()}.
+     * Inspects given $inputValue and potentially converts it into a dedicated value object.
      *
-     * @param mixed $inputValue
+     * @param array|\eZ\Publish\Core\FieldType\Author\Value $inputValue
      *
      * @return \eZ\Publish\Core\FieldType\Author\Value The potentially converted and structurally plausible value.
      */
-    protected function internalAcceptValue( $inputValue )
+    protected function createValueFromInput( $inputValue )
     {
         if ( is_array( $inputValue ) )
         {
             $inputValue = new Value( $inputValue );
-        }
-        else if ( !$inputValue instanceof Value )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue',
-                'eZ\\Publish\\Core\\FieldType\\Author\\Value',
-                $inputValue
-            );
-        }
-
-        if ( !$inputValue->authors instanceof AuthorCollection )
-        {
-            throw new InvalidArgumentType(
-                '$inputValue->authors',
-                'eZ\\Publish\\Core\\FieldType\\Author\\AuthorCollection',
-                $inputValue->authors
-            );
         }
 
         return $inputValue;
     }
 
     /**
+     * Throws an exception if value structure is not of expected format.
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure.
+     *
+     * @param \eZ\Publish\Core\FieldType\Author\Value $value
+     *
+     * @return void
+     */
+    protected function checkValueStructure( BaseValue $value )
+    {
+        if ( !$value->authors instanceof AuthorCollection )
+        {
+            throw new InvalidArgumentType(
+                '$value->authors',
+                'eZ\\Publish\\Core\\FieldType\\Author\\AuthorCollection',
+                $value->authors
+            );
+        }
+    }
+
+    /**
      * Returns information for FieldValue->$sortKey relevant to the field type.
+     *
+     * @param \eZ\Publish\Core\FieldType\Author\Value $value
      *
      * @return array
      */
-    protected function getSortInfo( $value )
+    protected function getSortInfo( BaseValue $value )
     {
         return false;
     }
@@ -129,7 +135,7 @@ class Type extends FieldType
      *
      * @return mixed
      */
-    public function toHash( $value )
+    public function toHash( SPIValue $value )
     {
         return array_map(
             function ( $author )
@@ -148,37 +154,5 @@ class Type extends FieldType
     public function isSearchable()
     {
         return true;
-    }
-
-    /**
-     * @todo workaround for a bug in PHP 5.3.3 {@link https://bugs.php.net/bug.php?id=61326},
-     * when support for it ends this implementation should be removed for overriden method
-     *
-     * Returns if the given $value is considered empty by the field type
-     *
-     * Default implementation, which performs a "==" check with the value
-     * returned by {@link getEmptyValue()}. Overwrite in the specific field
-     * type, if necessary.
-     *
-     * @param mixed $value
-     *
-     * @return boolean
-     */
-    public function isEmptyValue( $value )
-    {
-        return $value === null
-            || ( $value instanceof Value && (array)$value->authors == (array)$this->getEmptyValue()->authors );
-    }
-
-    /**
-     * Get index data for field data for search backend
-     *
-     * @param mixed $value
-     *
-     * @return \eZ\Publish\SPI\Persistence\Content\Search\Field[]
-     */
-    public function getIndexData( $value )
-    {
-        throw new \RuntimeException( '@todo: Implement' );
     }
 }

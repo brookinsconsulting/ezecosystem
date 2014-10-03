@@ -2,16 +2,14 @@
 /**
  * File containing the Location Handler interface
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Persistence\Content\Location;
 
 use eZ\Publish\SPI\Persistence\Content\Location;
-use eZ\Publish\SPI\Persistence\Content\Location\CreateStruct;
-use eZ\Publish\SPI\Persistence\Content\Location\UpdateStruct;
 
 /**
  * The Location Handler interface defines operations on Location elements in the storage engine.
@@ -28,6 +26,17 @@ interface Handler
      * @return \eZ\Publish\SPI\Persistence\Content\Location
      */
     public function load( $locationId );
+
+    /**
+     * Loads the subtree ids of the location identified by $locationId.
+     *
+     * @param int $locationId
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     *
+     * @return array Location ids are in the index, Content ids in the value.
+     */
+    public function loadSubtreeIds( $locationId );
 
     /**
      * Loads the data for the location identified by $remoteId.
@@ -140,7 +149,7 @@ interface Handler
      * @param \eZ\Publish\SPI\Persistence\Content\Location\UpdateStruct $location
      * @param int $locationId
      *
-     * @return boolean
+     * @return void
      */
     public function update( UpdateStruct $location, $locationId );
 

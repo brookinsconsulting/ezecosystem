@@ -2,9 +2,9 @@
 /**
  * File containing the ContentView class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Symfony\View;
@@ -20,8 +20,8 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
  * The prototype of the closure must be :
  * <code>
  * namespace Foo;
- * use eZ\Publish\API\Repository\Values\Content\ContentInfo,
- *     eZ\Publish\API\Repository\Values\Content\Location;
+ * use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+ * use eZ\Publish\API\Repository\Values\Content\Location;
  *
  * // For a content
  * function ( ContentInfo $contentInfo, array $parameters = array() )
@@ -49,6 +49,11 @@ class ContentView implements ContentViewInterface
      * @var array
      */
     protected $parameters;
+
+    /**
+     * @var array
+     */
+    protected $configHash;
 
     /**
      * @param string|\Closure $templateIdentifier Valid path to the template. Can also be a closure.
@@ -128,7 +133,7 @@ class ContentView implements ContentViewInterface
      */
     public function setTemplateIdentifier( $templateIdentifier )
     {
-        if ( !is_string( $templateIdentifier ) || !$templateIdentifier instanceof \Closure )
+        if ( !is_string( $templateIdentifier ) && !$templateIdentifier instanceof \Closure )
             throw new InvalidArgumentType( 'templateIdentifier', 'string or \Closure', $templateIdentifier );
 
         $this->templateIdentifier = $templateIdentifier;
@@ -140,5 +145,29 @@ class ContentView implements ContentViewInterface
     public function getTemplateIdentifier()
     {
         return $this->templateIdentifier;
+    }
+
+    /**
+     * Injects the config hash that was used to match and generate the current view.
+     * Typically, the hash would have as keys:
+     *  - template : The template that has been matched
+     *  - match : The matching configuration, including the matcher "identifier" and what has been passed to it.
+     *  - matcher : The matcher object
+     *
+     * @param array $config
+     */
+    public function setConfigHash( array $config )
+    {
+        $this->configHash = $config;
+    }
+
+    /**
+     * Returns the config hash.
+     *
+     * @return array|null
+     */
+    public function getConfigHash()
+    {
+        return $this->configHash;
     }
 }

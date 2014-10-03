@@ -2,27 +2,24 @@
 /**
  * File contains: eZ\Publish\Core\Repository\Tests\Service\Integration\IOBase class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\IO\Tests;
 
-use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException as PropertyNotFound;
-use eZ\Publish\API\Repository\Exceptions\PropertyReadOnlyException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\Core\IO\Handler as IOHandlerInterface;
 use eZ\Publish\Core\IO\Values\BinaryFile;
 use eZ\Publish\Core\IO\Values\BinaryFileCreateStruct;
-use eZ\Publish\SPI\IO\BinaryFileCreateStruct as SPIBinaryFileCreateStruct;
 use eZ\Publish\SPI\IO\BinaryFile as SPIBinaryFile;
 use eZ\Publish\SPI\IO\MimeTypeDetector;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Test case for IO Service
  */
-class IOServiceTest extends \PHPUnit_Framework_TestCase
+class IOServiceTest extends PHPUnit_Framework_TestCase
 {
     const PREFIX = 'test-prefix';
 
@@ -94,7 +91,7 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
         );
 
         self::assertInstanceOf( 'eZ\\Publish\\Core\\IO\\Values\\BinaryFileCreateStruct', $binaryCreateStruct );
-        self::assertNull( $binaryCreateStruct->uri );
+        self::assertNull( $binaryCreateStruct->id );
         self::assertTrue( is_resource( $binaryCreateStruct->inputStream ) );
         self::assertEquals( filesize( __FILE__ ), $binaryCreateStruct->size );
         self::assertEquals( 'text/x-php', $binaryCreateStruct->mimeType );
@@ -110,11 +107,12 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateBinaryFile( BinaryFileCreateStruct $createStruct )
     {
-        $createStruct->uri = "my/path.php";
-        $uri = $this->getPrefixedUri( $createStruct->uri );
+        $createStruct->id = "my/path.php";
+        $id = $this->getPrefixedUri( $createStruct->id );
 
         $spiBinaryFile = new SPIBinaryFile;
-        $spiBinaryFile->uri = $uri;
+        $spiBinaryFile->id = $id;
+        $spiBinaryFile->uri = $id;
         $spiBinaryFile->size = filesize( __FILE__ );
         $spiBinaryFile->mimeType = 'text/x-php';
 
@@ -125,7 +123,7 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
 
         $binaryFile = $this->getIOService()->createBinaryFile( $createStruct );
         self::assertInstanceOf( 'eZ\\Publish\\Core\\IO\Values\\BinaryFile', $binaryFile );
-        self::assertEquals( $createStruct->uri, $binaryFile->uri );
+        self::assertEquals( $createStruct->id, $binaryFile->id );
         self::assertEquals( $createStruct->mimeType, $binaryFile->mimeType );
         self::assertEquals( $createStruct->size, $binaryFile->size );
 
@@ -137,23 +135,47 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadBinaryFile()
     {
-        $uri = "my/path.png";
-        $spiUri = $this->getPrefixedUri( $uri );
+        $id = "my/path.png";
+        $spiId = $this->getPrefixedUri( $id );
         $spiBinaryFile = new SPIBinaryFile;
-        $spiBinaryFile->uri = $spiUri;
+        $spiBinaryFile->id = $spiId;
         $spiBinaryFile->size = 12345;
         $spiBinaryFile->mimeType = 'application/any';
+        $spiBinaryFile->uri = $spiId;
 
         $this->getIOHandlerMock()
             ->expects( $this->once() )
             ->method( 'load' )
-            ->with( $spiUri )
+            ->with( $spiId )
             ->will( $this->returnValue( $spiBinaryFile ) );
 
-        $binaryFile = $this->getIOService()->loadBinaryFile( $uri );
-        self::assertEquals( $uri, $binaryFile->uri );
+        $binaryFile = $this->getIOService()->loadBinaryFile( $id );
+        self::assertEquals( $id, $binaryFile->id );
 
         return $binaryFile;
+    }
+
+    /**
+     * @covers \eZ\Publish\Core\IO\IOService::loadBinaryFile
+     * @expectedException \eZ\Publish\Core\Base\Exceptions\NotFoundException
+     */
+    public function testLoadBinaryFileNotFound()
+    {
+        $id = 'id.ext';
+        $prefixedUri = $this->getPrefixedUri( $id );
+        $this->getIOHandlerMock()
+            ->expects( $this->once() )
+            ->method( 'load' )
+            ->with( $prefixedUri )
+            ->will(
+                $this->throwException(
+                    new \eZ\Publish\Core\Base\Exceptions\NotFoundException(
+                        'BinaryFile', $prefixedUri
+                    )
+                )
+            );
+
+        $this->getIOService()->loadBinaryFile( $id );
     }
 
     /**
@@ -176,12 +198,49 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
         $this->getIOHandlerMock()
             ->expects( $this->once() )
             ->method( 'getFileContents' )
-            ->with( $this->equalTo( $this->getPrefixedUri( $binaryFile->uri ) ) )
+            ->with( $this->equalTo( $this->getPrefixedUri( $binaryFile->id ) ) )
             ->will( $this->returnValue( $expectedContents ) );
 
         self::assertEquals(
             $this->getIOService()->getFileContents( $binaryFile ),
             $expectedContents
+        );
+    }
+
+    /**
+     * @depends testCreateBinaryFile
+     * @covers IOService \eZ\Publish\Core\IO\IOService::exists()
+     */
+    public function testExists( BinaryFile $binaryFile)
+    {
+        $this->getIOHandlerMock()
+            ->expects( $this->once() )
+            ->method( 'exists' )
+            ->with( $this->equalTo( $this->getPrefixedUri( $binaryFile->id ) ) )
+            ->will( $this->returnValue( true ) );
+
+        self::assertTrue(
+            $this->getIOService()->exists(
+                $binaryFile->id
+            )
+        );
+    }
+
+    /**
+     * @covers IOService \eZ\Publish\Core\IO\IOService::exists()
+     */
+    public function testExistsNot()
+    {
+        $this->getIOHandlerMock()
+            ->expects( $this->once() )
+            ->method( 'exists' )
+            ->with( $this->equalTo( $this->getPrefixedUri( __METHOD__ ) ) )
+            ->will( $this->returnValue( false ) );
+
+        self::assertFalse(
+            $this->getIOService()->exists(
+                __METHOD__
+            )
         );
     }
 
@@ -194,7 +253,31 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
         $this->getIOHandlerMock()
             ->expects( $this->once() )
             ->method( 'delete' )
-            ->with( $this->equalTo( $this->getPrefixedUri( $binaryFile->uri ) ) );
+            ->with( $this->equalTo( $this->getPrefixedUri( $binaryFile->id ) ) );
+
+        $this->getIOService()->deleteBinaryFile( $binaryFile );
+    }
+
+    /**
+     * @covers \eZ\Publish\Core\IO\IOService::deleteBinaryFile
+     * @expectedException \eZ\Publish\Core\Base\Exceptions\NotFoundException
+     */
+    public function testDeleteBinaryFileNotFound()
+    {
+        $binaryFile = new BinaryFile(
+            array( 'id' => __METHOD__ )
+        );
+
+        $prefixedId = $this->getPrefixedUri( $binaryFile->id );
+        $this->getIOHandlerMock()
+            ->expects( $this->once() )
+            ->method( 'delete' )
+            ->with( $this->equalTo( $prefixedId ) )
+            ->will(
+                $this->throwException(
+                    new \eZ\Publish\Core\Base\Exceptions\NotFoundException( 'BinaryFile', $prefixedId )
+                )
+            );
 
         $this->getIOService()->deleteBinaryFile( $binaryFile );
     }
@@ -208,7 +291,7 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
     {
         $binaryFile = new BinaryFile(
             array(
-                'uri' => 'some/uri.png',
+                'id' => 'some/uri.png',
             )
         );
 
@@ -249,7 +332,7 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return IOHandlerInterface
+     * @return IOHandlerInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     private function getIOHandlerMock()
     {
@@ -261,7 +344,7 @@ class IOServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return MimeTypeDetector
+     * @return MimeTypeDetector|\PHPUnit_Framework_MockObject_MockObject
      */
     private function getMimeTypeDetectorMock()
     {

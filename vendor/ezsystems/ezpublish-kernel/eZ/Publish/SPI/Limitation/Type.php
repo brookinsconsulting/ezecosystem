@@ -2,9 +2,9 @@
 /**
  * File containing the eZ\Publish\SPI\Limitation\Type class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\SPI\Limitation;
@@ -15,9 +15,28 @@ use eZ\Publish\API\Repository\Values\User\User as APIUser;
 
 /**
  * This interface represent the Limitation Type
+ *
+ * A Limitation is a lot like a Symfony voter, telling the permission system if user has
+ * access or not. It consists of a Limitation Value which is persisted, and this Limitation
+ * Type which contains the business logic for evaluate ("vote"), as well as accepting and
+ * validating the Value object and to generate criteria for content/location searches.
  */
 interface Type
 {
+    /**
+     * Constants for return value of {@see evaluate()}
+     *
+     * Currently ACCESS_ABSTAIN must mean that evaluate does not support the provided $object or $targets,
+     * this is currently only supported by role limitations as policy limitations should not allow this.
+     *
+     * @note In future version constant values might change to 1, 0 and -1 as used in Symfony.
+     *
+     * @since 5.3.2
+     */
+    const ACCESS_GRANTED = true;
+    const ACCESS_ABSTAIN = null;
+    const ACCESS_DENIED  = false;
+
     /**
      * Constants for valueSchema() return values
      *
@@ -62,24 +81,29 @@ interface Type
     public function buildValue( array $limitationValues );
 
     /**
-     * Evaluate permission against content and placement
+     * Evaluate ("Vote") against a main value object and targets for the context
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If any of the arguments are invalid
      *         Example: If LimitationValue is instance of ContentTypeLimitationValue, and Type is SectionLimitationType.
+     *         However if $object or $targets is unsupported by ROLE limitation, ACCESS_ABSTAIN should be returned!
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException If value of the LimitationValue is unsupported
      *         Example if OwnerLimitationValue->limitationValues[0] is not one of: [ 1,  2 ]
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation $value
      * @param \eZ\Publish\API\Repository\Values\User\User $currentUser
      * @param \eZ\Publish\API\Repository\Values\ValueObject $object
-     * @param \eZ\Publish\API\Repository\Values\ValueObject[] $targets An array of location, parent or "assignment" value objects
+     * @param \eZ\Publish\API\Repository\Values\ValueObject[]|null $targets An array of location, parent or "assignment"
+     *                                                                 objects, if null: none where provided by caller
      *
-     * @return boolean
+     * @return boolean|null Returns one of ACCESS_* constants
      */
-    public function evaluate( APILimitationValue $value, APIUser $currentUser, APIValueObject $object, array $targets = array() );
+    public function evaluate( APILimitationValue $value, APIUser $currentUser, APIValueObject $object, array $targets = null );
 
     /**
      * Returns Criterion for use in find() query
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotImplementedException If the limitation does not support
+     *         being used as a Criterion.
      *
      * @param \eZ\Publish\API\Repository\Values\User\Limitation $value
      * @param \eZ\Publish\API\Repository\Values\User\User $currentUser

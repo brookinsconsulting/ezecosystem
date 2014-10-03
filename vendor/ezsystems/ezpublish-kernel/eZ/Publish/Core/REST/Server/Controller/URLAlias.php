@@ -2,9 +2,9 @@
 /**
  * File containing the URLAlias controller class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Controller;
@@ -52,12 +52,13 @@ class URLAlias extends RestController
     /**
      * Returns the URL alias with the given ID
      *
+     * @param $urlAliasId
+     *
      * @return \eZ\Publish\API\Repository\Values\Content\URLAlias
      */
-    public function loadURLAlias()
+    public function loadURLAlias( $urlAliasId )
     {
-        $urlValues = $this->urlHandler->parse( 'urlAlias', $this->request->path );
-        return $this->urlAliasService->load( $urlValues['urlalias'] );
+        return $this->urlAliasService->load( $urlAliasId );
     }
 
     /**
@@ -69,53 +70,57 @@ class URLAlias extends RestController
     {
         return new Values\URLAliasRefList(
             $this->urlAliasService->listGlobalAliases(),
-            $this->urlHandler->generate( 'urlAliases' )
+            $this->router->generate( 'ezpublish_rest_listGlobalURLAliases' )
         );
     }
 
     /**
      * Returns the list of URL aliases for a location
      *
+     * @param $locationPath
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\URLAliasRefList
      */
-    public function listLocationURLAliases()
+    public function listLocationURLAliases( $locationPath )
     {
-        $questionMark = strpos( $this->request->path, '?' );
-        $requestPath = $questionMark !== false ? substr( $this->request->path, 0, $questionMark ) : $this->request->path;
-
-        $urlValues = $this->urlHandler->parse( 'locationUrlAliases', $requestPath );
-        $locationPathParts = explode( '/', $urlValues['location'] );
+        $locationPathParts = explode( '/', $locationPath );
 
         $location = $this->locationService->loadLocation(
             array_pop( $locationPathParts )
         );
 
-        $custom = isset( $this->request->variables['custom'] ) && $this->request->variables['custom'] === 'false' ? false : true;
+        $custom = $this->request->query->has( 'custom' ) && $this->request->query->get( 'custom' ) === 'false' ? false : true;
 
-        return new Values\URLAliasRefList(
-            $this->urlAliasService->listLocationAliases( $location, $custom ),
-            $this->request->path
+        return new Values\CachedValue(
+            new Values\URLAliasRefList(
+                $this->urlAliasService->listLocationAliases( $location, $custom ),
+                $this->request->getPathInfo()
+            ),
+            array( 'locationId' => $location->id )
         );
     }
 
     /**
      * Creates a new URL alias
      *
+     * @throws \eZ\Publish\Core\REST\Server\Exceptions\ForbiddenException
      * @return \eZ\Publish\Core\REST\Server\Values\CreatedURLAlias
      */
     public function createURLAlias()
     {
         $urlAliasCreate = $this->inputDispatcher->parse(
             new Message(
-                array( 'Content-Type' => $this->request->contentType ),
-                $this->request->body
+                array( 'Content-Type' => $this->request->headers->get( 'Content-Type' ) ),
+                $this->request->getContent()
             )
         );
 
         if ( $urlAliasCreate['_type'] === 'LOCATION' )
         {
-            $locationUrlValues = $this->urlHandler->parse( 'location', $urlAliasCreate['location']['_href'] );
-            $locationPathParts = explode( '/', $locationUrlValues['location'] );
+            $locationPathParts = explode(
+                '/',
+                $this->requestParser->parseHref( $urlAliasCreate['location']['_href'], 'locationPath' )
+            );
 
             $location = $this->locationService->loadLocation(
                 array_pop( $locationPathParts )
@@ -164,15 +169,15 @@ class URLAlias extends RestController
     /**
      * The given URL alias is deleted
      *
+     * @param $urlAliasId
+     *
      * @return \eZ\Publish\Core\REST\Server\Values\NoContent
      */
-    public function deleteURLAlias()
+    public function deleteURLAlias( $urlAliasId )
     {
-        $urlValues = $this->urlHandler->parse( 'urlAlias', $this->request->path );
-
         $this->urlAliasService->removeAliases(
             array(
-                $this->urlAliasService->load( $urlValues['urlalias'] )
+                $this->urlAliasService->load( $urlAliasId )
             )
         );
 

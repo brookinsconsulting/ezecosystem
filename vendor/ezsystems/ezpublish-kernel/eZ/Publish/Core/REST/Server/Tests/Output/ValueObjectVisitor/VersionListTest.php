@@ -2,9 +2,9 @@
 /**
  * File containing a test class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\REST\Server\Tests\Output\ValueObjectVisitor;
@@ -13,8 +13,9 @@ use eZ\Publish\Core\REST\Common\Tests\Output\ValueObjectVisitorBaseTest;
 
 use eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor;
 use eZ\Publish\Core\REST\Server\Values\VersionList;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
+use eZ\Publish\Core\Repository\Values\ContentType;
 use eZ\Publish\Core\REST\Common;
 
 class VersionListTest extends ValueObjectVisitorBaseTest
@@ -26,12 +27,27 @@ class VersionListTest extends ValueObjectVisitorBaseTest
      */
     public function testVisit()
     {
-        $visitor   = $this->getVersionListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
 
-        $versionList = new VersionList( array(), '/some/path' );
+        $versionInfo = new VersionInfo(
+            array(
+                'versionNo' => 1,
+                'contentInfo' => new ContentInfo( array( 'id' => 12345 ) )
+            )
+        );
+        $versionList = new VersionList( array( $versionInfo ), '/some/path' );
+
+        $this->addRouteExpectation(
+            'ezpublish_rest_loadContentInVersion',
+            array(
+                'contentId' => $versionInfo->contentInfo->id,
+                'versionNumber' => $versionInfo->versionNo
+            ),
+            "/content/objects/{$versionInfo->contentInfo->id}/versions/{$versionInfo->versionNo}"
+        );
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -93,7 +109,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
      */
     public function testVersionListVisitsChildren()
     {
-        $visitor   = $this->getVersionListVisitor();
+        $visitor   = $this->getVisitor();
         $generator = $this->getGenerator();
 
         $generator->startDocument( null );
@@ -140,10 +156,8 @@ class VersionListTest extends ValueObjectVisitorBaseTest
      *
      * @return \eZ\Publish\Core\REST\Server\Output\ValueObjectVisitor\VersionList
      */
-    protected function getVersionListVisitor()
+    protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\VersionList(
-            new Common\UrlHandler\eZPublish()
-        );
+        return new ValueObjectVisitor\VersionList;
     }
 }

@@ -2,15 +2,16 @@
 /**
  * File containing the SectionServiceTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\API\Repository\Tests;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\Content\Section;
+use Exception;
 
 /**
  * Test case for operations in the SectionService using in memory storage.
@@ -54,7 +55,7 @@ class SectionServiceTest extends BaseTest
                 );
             }
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             $this->markTestSkipped(
                 'This test cannot be executed, because the utilized ' .
@@ -707,7 +708,7 @@ class SectionServiceTest extends BaseTest
             // Create a new section
             $sectionService->createSection( $sectionCreate );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -763,7 +764,7 @@ class SectionServiceTest extends BaseTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -808,7 +809,7 @@ class SectionServiceTest extends BaseTest
             // Update section
             $sectionService->updateSection( $section, $sectionUpdate );
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();
@@ -859,7 +860,7 @@ class SectionServiceTest extends BaseTest
             // Commit all changes
             $repository->commit();
         }
-        catch ( \Exception $e )
+        catch ( Exception $e )
         {
             // Cleanup hanging transaction on error
             $repository->rollback();

@@ -2,17 +2,18 @@
 /**
  * File containing the ConfigResolverTest class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Bundle\EzPublishCoreBundle\Tests;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver;
+use PHPUnit_Framework_TestCase;
 
-class ConfigResolverTest extends \PHPUnit_Framework_TestCase
+class ConfigResolverTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var \eZ\Publish\Core\MVC\Symfony\SiteAccess
@@ -34,27 +35,23 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
     /**
      * @param string $defaultNS
      * @param int $undefinedStrategy
+     * @param array $groupsBySiteAccess
      *
      * @return \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver
      */
     private function getResolver( $defaultNS = 'ezsettings', $undefinedStrategy = ConfigResolver::UNDEFINED_STRATEGY_EXCEPTION, array $groupsBySiteAccess = array() )
     {
-        return new ConfigResolver(
-            $this->siteAccess,
+        $configResolver = new ConfigResolver(
             $groupsBySiteAccess,
-            $this->containerMock,
             $defaultNS,
             $undefinedStrategy
         );
+        $configResolver->setSiteAccess( $this->siteAccess );
+        $configResolver->setContainer( $this->containerMock );
+
+        return $configResolver;
     }
 
-    /**
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getUndefinedStrategy
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::setUndefinedStrategy
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getDefaultNamespace
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::setDefaultNamespace
-     */
     public function testGetSetUndefinedStrategy()
     {
         $strategy = ConfigResolver::UNDEFINED_STRATEGY_NULL;
@@ -72,8 +69,6 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \eZ\Publish\Core\MVC\Exception\ParameterNotFoundException
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getParameter
      */
     public function testGetParameterFailedWithException()
     {
@@ -81,10 +76,6 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
         $resolver->getParameter( 'foo' );
     }
 
-    /**
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getParameter
-     */
     public function testGetParameterFailedNull()
     {
         $resolver = $this->getResolver( 'ezsettings', ConfigResolver::UNDEFINED_STRATEGY_NULL );
@@ -120,8 +111,6 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider parameterProvider
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getParameter
      */
     public function testGetParameterGlobalScope( $paramName, $expectedValue )
     {
@@ -142,8 +131,6 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider parameterProvider
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getParameter
      */
     public function testGetParameterRelativeScope( $paramName, $expectedValue )
     {
@@ -170,8 +157,6 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider parameterProvider
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getParameter
      */
     public function testGetParameterSpecificScope( $paramName, $expectedValue )
     {
@@ -202,8 +187,6 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider parameterProvider
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::getParameter
      */
     public function testGetParameterDefaultScope( $paramName, $expectedValue )
     {
@@ -233,59 +216,86 @@ class ConfigResolverTest extends \PHPUnit_Framework_TestCase
     public function hasParameterProvider()
     {
         return array(
-            array( true, true, true, true ),
-            array( true, true, false, true ),
-            array( true, false, false, true ),
-            array( false, false, false, false ),
-            array( false, true, false, true ),
-            array( false, false, true, true ),
-            array( false, true, true, true ),
+            array( true, true, true, true, true ),
+            array( true, true, true, false, true ),
+            array( true, true, false, false, true ),
+            array( false, false, false, false, false ),
+            array( false, false, true, false, true ),
+            array( false, false, false, true, true ),
+            array( false, false, true, true, true ),
+            array( false, true, false, false, true ),
         );
     }
 
     /**
      * @dataProvider hasParameterProvider
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::hasParameter
      */
-    public function testHasParameterNoNamespace( $defaultMatch, $scopeMatch, $globalMatch, $expectedResult )
+    public function testHasParameterNoNamespace( $defaultMatch, $groupMatch, $scopeMatch, $globalMatch, $expectedResult )
     {
         $paramName = 'foo.bar';
+        $groupName = 'my_group';
+        $configResolver = $this->getResolver(
+            'ezsettings',
+            ConfigResolver::UNDEFINED_STRATEGY_EXCEPTION,
+            array( $this->siteAccess->name => array( $groupName ) )
+        );
+
         $this->containerMock->expects( $this->atLeastOnce() )
             ->method( 'hasParameter' )
-            ->with(
-                $this->logicalOr(
-                    "ezsettings.global.$paramName",
-                    "ezsettings.{$this->siteAccess->name}.$paramName",
-                    "ezsettings.default.$paramName"
+            ->will(
+                $this->returnValueMap(
+                    array(
+                        array( "ezsettings.default.$paramName", $defaultMatch ),
+                        array( "ezsettings.$groupName.$paramName", $groupMatch ),
+                        array( "ezsettings.{$this->siteAccess->name}.$paramName", $scopeMatch ),
+                        array( "ezsettings.global.$paramName", $globalMatch ),
+                    )
                 )
-            )
-            ->will( $this->onConsecutiveCalls( $defaultMatch, $scopeMatch, $globalMatch ) );
+            );
 
-        $this->assertSame( $expectedResult, $this->getResolver()->hasParameter( $paramName ) );
+        $this->assertSame( $expectedResult, $configResolver->hasParameter( $paramName ) );
     }
 
     /**
      * @dataProvider hasParameterProvider
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::__construct
-     * @covers \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigResolver::hasParameter
      */
-    public function testHasParameterWithNamespaceAndScope( $defaultMatch, $scopeMatch, $globalMatch, $expectedResult )
+    public function testHasParameterWithNamespaceAndScope( $defaultMatch, $groupMatch, $scopeMatch, $globalMatch, $expectedResult )
     {
         $paramName = 'foo.bar';
         $namespace = 'my.namespace';
         $scope = "another_siteaccess";
+        $groupName = 'my_group';
+        $configResolver = $this->getResolver(
+            'ezsettings',
+            ConfigResolver::UNDEFINED_STRATEGY_EXCEPTION,
+            array(
+                $this->siteAccess->name => array( 'some_group' ),
+                $scope => array( $groupName )
+            )
+        );
+
         $this->containerMock->expects( $this->atLeastOnce() )
             ->method( 'hasParameter' )
-            ->with(
-                $this->logicalOr(
-                    "$namespace.global.$paramName",
-                    "$namespace.$scope.$paramName",
-                    "$namespace.default.$paramName"
+            ->will(
+                $this->returnValueMap(
+                    array(
+                        array( "$namespace.default.$paramName", $defaultMatch ),
+                        array( "$namespace.$groupName.$paramName", $groupMatch ),
+                        array( "$namespace.$scope.$paramName", $scopeMatch ),
+                        array( "$namespace.global.$paramName", $globalMatch ),
+                    )
                 )
-            )
-            ->will( $this->onConsecutiveCalls( $defaultMatch, $scopeMatch, $globalMatch ) );
+            );
 
-        $this->assertSame( $expectedResult, $this->getResolver()->hasParameter( $paramName, $namespace, $scope ) );
+        $this->assertSame( $expectedResult, $configResolver->hasParameter( $paramName, $namespace, $scope ) );
+    }
+
+    public function testGetSetDefaultScope()
+    {
+        $newDefaultScope = 'bar';
+        $configResolver = $this->getResolver();
+        $this->assertSame( $this->siteAccess->name, $configResolver->getDefaultScope() );
+        $configResolver->setDefaultScope( $newDefaultScope );
+        $this->assertSame( $newDefaultScope, $configResolver->getDefaultScope() );
     }
 }

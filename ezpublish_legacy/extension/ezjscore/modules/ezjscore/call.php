@@ -3,17 +3,17 @@
 // Created on: <16-Jun-2008 00:00:00 ar>
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
-// SOFTWARE NAME: eZ Publish Community Project
-// SOFTWARE RELEASE:  2012.3
-// COPYRIGHT NOTICE: Copyright (C) 1999-2012 eZ Systems AS
-// SOFTWARE LICENSE: GNU General Public License v2
+// SOFTWARE NAME: eZ JSCore extension for eZ Publish
+// SOFTWARE RELEASE: 1.x
+// COPYRIGHT NOTICE: Copyright (C) 1999-2014 eZ Systems AS
+// SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of version 2.0  of the GNU General
 //   Public License as published by the Free Software Foundation.
 // 
 //   This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
 //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //   GNU General Public License for more details.
 // 
@@ -21,6 +21,8 @@
 //   Public License along with this program; if not, write to the Free
 //   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 //   MA 02110-1301, USA.
+// 
+// 
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
@@ -32,23 +34,15 @@
 $http           = eZHTTPTool::instance();
 $callType       = isset($Params['type']) ? $Params['type'] : 'call';
 $callFnList     = array();
-$debugOutput    = isset($Params['debug']) ? $Params['debug'] : false;
+$debugOutput    = isset($Params['debug']) ? (bool)$Params['debug'] : false;
+$callSeparator = '@SEPARATOR$';
+$streamSeparator = '@END$';
 
-// prefere post parameters, as they are more encoding safe
-if ( $http->hasPostVariable( 'ezjscServer_call_seperator' ) )
-    $callSeperator = $http->postVariable( 'ezjscServer_call_seperator' );
-else
-    $callSeperator = '@SEPERATOR$';
-
-if ( $http->hasPostVariable( 'ezjscServer_stream_seperator' ) )
-    $streamSeperator = $http->postVariable( 'ezjscServer_stream_seperator' );
-else
-    $streamSeperator = '@END$';
-
+// prefer post parameters, as they are more encoding safe
 if ( $http->hasPostVariable( 'ezjscServer_function_arguments' ) )
-    $callList = explode( $callSeperator, strip_tags( $http->postVariable( 'ezjscServer_function_arguments' ) ) );
+    $callList = explode( $callSeparator, strip_tags( $http->postVariable( 'ezjscServer_function_arguments' ) ) );
 else if ( isset( $Params['function_arguments'] ) )
-    $callList = explode( $callSeperator, strip_tags( $Params['function_arguments'] ) );
+    $callList = explode( $callSeparator, strip_tags( $Params['function_arguments'] ) );
 else
     $callList = array();
 
@@ -76,6 +70,19 @@ else if ( $contentType === 'javascript' )
 else if ( $contentType === 'json' )
 {
     header('Content-Type: application/json; charset=utf-8');
+}
+else if ( $contentType === 'html' )
+{
+    header('Content-Type: text/html; charset=utf-8');
+}
+else if ( $contentType === 'xhtml' )
+{
+    header('Content-Type: application/xhtml+xml; charset=utf-8');
+}
+else
+{
+    $contentType = 'text';
+    header('Content-Type: text/plain; charset=utf-8');
 }
 
 // abort if no calls where found
@@ -128,21 +135,21 @@ if ( $callType === 'stream' )
     // set_time_limit(65);
     while( time() < $endTime )
     {
-        echo $streamSeperator . implode( $callSeperator, multipleezjscServerCalls( $callFnList, $contentType ) );
+        echo $streamSeparator . implode( $callSeparator, multipleezjscServerCalls( $callFnList, $contentType ) );
         flush();
         usleep( $callInterval );
     }
 }
 else
 {
-    echo implode( $callSeperator, multipleezjscServerCalls( $callFnList, $contentType ) );
+    echo implode( $callSeparator, multipleezjscServerCalls( $callFnList, $contentType ) );
 }
 
 
 function multipleezjscServerCalls( $calls, $contentType = 'json' )
 {
     $r = array();
-    foreach( $calls as $key => $call )
+    foreach( $calls as $call )
     {
         $response = array( 'error_text' => '', 'content' => '' );
         if( $call instanceOf ezjscServerRouter )
@@ -167,7 +174,7 @@ function multipleezjscServerCalls( $calls, $contentType = 'json' )
 
 
 
-if ( $debugOutput && ( $contentType === 'xml' || $contentType === 'xhtml' ) )
+if ( $debugOutput && ( $contentType === 'xml' || $contentType === 'xhtml' || $contentType === 'html' ) )
 {
     echo "<!--\r\n";
     eZDebug::printReport( false, false );

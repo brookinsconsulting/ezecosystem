@@ -2,14 +2,13 @@
 /**
  * File containing the image AliasGenerator class.
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\MVC\Legacy\Image;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Variation\VariationHandler;
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
@@ -32,7 +31,7 @@ class AliasGenerator implements VariationHandler
     private $aliasHandlers;
 
     /**
-     * Image variant objects, indexed by <fieldId>-<versionNo>-<variantName>.
+     * Image variation objects, indexed by <fieldId>-<versionNo>-<variationName>.
      * Storing them avoids to run the legacy kernel each time if there are similar images variations required.
      *
      * @var \eZ\Publish\SPI\Variation\Values\ImageVariation[]
@@ -54,7 +53,7 @@ class AliasGenerator implements VariationHandler
     }
 
     /**
-     * Returns an image variant object.
+     * Returns an image variation object.
      * Variation creation will be done through the legacy eZImageAliasHandler, using the legacy kernel.
      *
      * @param \eZ\Publish\API\Repository\Values\Content\Field $field
@@ -104,6 +103,7 @@ class AliasGenerator implements VariationHandler
                         'uri'          => $aliasArray['url'],
                         'width'        => $aliasArray['width'],
                         'height'       => $aliasArray['height'],
+                        'imageId'      => sprintf( '%d-%d', $versionInfo->contentInfo->id, $field->id )
                     )
                 );
 

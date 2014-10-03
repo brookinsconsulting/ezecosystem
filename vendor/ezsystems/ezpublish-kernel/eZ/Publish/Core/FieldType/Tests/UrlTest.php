@@ -2,16 +2,15 @@
 /**
  * File containing the UrlTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
 
 use eZ\Publish\Core\FieldType\Url\Type as UrlType;
 use eZ\Publish\Core\FieldType\Url\Value as UrlValue;
-use ReflectionObject;
 
 /**
  * @group fieldType
@@ -32,7 +31,10 @@ class UrlTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new UrlType();
+        $fieldType = new UrlType();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -188,7 +190,7 @@ class UrlTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new UrlValue,
                 null
             ),
             array(
@@ -248,7 +250,7 @@ class UrlTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null
+                new UrlValue,
             ),
             array(
                 array(
@@ -264,6 +266,19 @@ class UrlTest extends FieldTypeTest
                 ),
                 new UrlValue( 'http://example.com/sindelfingen', 'Sindelfingen!' ),
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezurl';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array( $this->getEmptyValueExpectation(), '' ),
+            array( new UrlValue( '', 'Url text' ), 'Url text' )
         );
     }
 }

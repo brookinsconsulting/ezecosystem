@@ -2,9 +2,9 @@
 /**
  * File containing the TimeTest class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\FieldType\Tests;
@@ -33,7 +33,10 @@ class DateTest extends FieldTypeTest
      */
     protected function createFieldTypeUnderTest()
     {
-        return new Date();
+        $fieldType = new Date();
+        $fieldType->setTransformationProcessor( $this->getTransformationProcessorMock() );
+
+        return $fieldType;
     }
 
     /**
@@ -202,7 +205,7 @@ class DateTest extends FieldTypeTest
     {
         return array(
             array(
-                null,
+                new DateValue(),
                 null,
             ),
             array(
@@ -257,7 +260,7 @@ class DateTest extends FieldTypeTest
         return array(
             array(
                 null,
-                null,
+                new DateValue(),
             ),
             array(
                 array(
@@ -359,6 +362,25 @@ class DateTest extends FieldTypeTest
                     'defaultType' => 42,
                 )
             ),
+        );
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'ezdate';
+    }
+
+    public function provideDataForGetName()
+    {
+        return array(
+            array(
+                $this->getEmptyValueExpectation(),
+                ''
+            ),
+            array(
+                new DateValue( new DateTime( '11/24/1983' ) ),
+                'Thursday 24 November 1983'
+            )
         );
     }
 }

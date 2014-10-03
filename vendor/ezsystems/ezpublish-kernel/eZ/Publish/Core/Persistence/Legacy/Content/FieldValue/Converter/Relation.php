@@ -2,9 +2,9 @@
 /**
  * File containing the Relation converter
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
@@ -14,7 +14,6 @@ use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
-use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
 
 class Relation implements Converter
 {
@@ -38,9 +37,10 @@ class Relation implements Converter
      */
     public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
     {
-        $storageFieldValue->dataInt = isset( $value->data['destinationContentId'] )
+        $storageFieldValue->dataInt = !empty( $value->data['destinationContentId'] )
             ? $value->data['destinationContentId']
             : null;
+        $storageFieldValue->sortKeyInt = (int)$value->sortKey;
     }
 
     /**
@@ -52,9 +52,9 @@ class Relation implements Converter
     public function toFieldValue( StorageFieldValue $value, FieldValue $fieldValue )
     {
         $fieldValue->data = array(
-            "destinationContentId" => $value->dataInt,
+            "destinationContentId" => $value->dataInt ?: null,
         );
-        $fieldValue->sortKey = false;
+        $fieldValue->sortKey = (int)$value->sortKeyInt;
     }
 
     /**

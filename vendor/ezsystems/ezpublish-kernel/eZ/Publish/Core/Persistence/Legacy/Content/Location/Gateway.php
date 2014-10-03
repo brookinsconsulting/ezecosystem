@@ -2,9 +2,9 @@
 /**
  * File containing the Location Gateway class
  *
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/gnu_gpl GNU General Public License v2.0
- * @version 
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  */
 
 namespace eZ\Publish\Core\Persistence\Legacy\Content\Location;
@@ -78,10 +78,11 @@ abstract class Gateway
      * Find all content in the given subtree
      *
      * @param mixed $sourceId
+     * @param bool $onlyIds
      *
      * @return array
      */
-    abstract public function getSubtreeContent( $sourceId );
+    abstract public function getSubtreeContent( $sourceId, $onlyIds = false );
 
     /**
      * Returns data for the first level children of the location identified by given $locationId
@@ -212,10 +213,12 @@ abstract class Gateway
     /**
      * Updates an existing location.
      *
+     * @throws \eZ\Publish\Core\Base\Exceptions\NotFoundException
+     *
      * @param \eZ\Publish\SPI\Persistence\Content\Location\UpdateStruct $location
      * @param int $locationId
      *
-     * @return boolean
+     * @return void
      */
     abstract public function update( UpdateStruct $location, $locationId );
 

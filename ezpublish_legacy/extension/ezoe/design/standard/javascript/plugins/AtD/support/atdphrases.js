@@ -14,7 +14,7 @@ function AtD_SetCookie( name, value, expires)
 
    document.cookie = name + "=" + escape( value ) + ( ( expires ) ? ";expires=" + expires_date.toGMTString() : "" );
 }
-                        
+			
 /* taken from the public domain, source unknown */
 function AtD_GetCookie( check_name ) 
 {
@@ -33,9 +33,9 @@ function AtD_GetCookie( check_name )
       {
          b_cookie_found = true;
          if ( a_temp_cookie.length > 1 )
-         {
+	 {
             cookie_value = unescape( a_temp_cookie[1].replace(/^\s+|\s+$/g, '') );
-         }
+	 }
          return cookie_value;
          break;
       }

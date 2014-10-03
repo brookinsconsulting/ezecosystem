@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (C) 1999-2013 eZ Systems AS. All rights reserved.
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
- * @version  2013.5
+ * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ * @version 2014.07.0
  * @package kernel
  */
 
@@ -14,9 +14,13 @@ $Offset = $Params['Offset'];
 if ( !is_numeric( $Offset ) )
     $Offset = 0;
 
+/** @var eZCollaborationItem $collabItem */
 $collabItem = eZCollaborationItem::fetch( $ItemID );
-if ( $collabItem === null )
-    return $Module->handleError( eZError::KERNEL_NOT_AVAILABLE, 'kernel' );
+
+if ( !$collabItem->userIsParticipant( eZUser::currentUser() ) )
+{
+    return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel', array() );
+}
 
 $collabHandler = $collabItem->handler();
 $collabItem->handleView( $ViewMode );
