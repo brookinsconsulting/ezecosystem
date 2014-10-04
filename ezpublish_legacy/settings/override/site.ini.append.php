@@ -31,7 +31,7 @@ ActiveExtensions[]
 ActiveExtensions[]=ezecosystem
 ActiveExtensions[]=ezchangeclass
 ActiveExtensions[]=ezsh
-ActiveExtensions[]=swark
+#ActiveExtensions[]=swark
 ActiveExtensions[]=bcupdatecache
 ActiveExtensions[]=bcgeneratestaticcache
 ActiveExtensions[]=git_manager
@@ -41,15 +41,19 @@ ActiveExtensions[]=OWSimpleOperator
 ActiveExtensions[]=bcgooglesitemaps
 ActiveExtensions[]=ezs3upload
 ActiveExtensions[]=sqliimport
-ActiveExtensions[]=ezmultiupload
-ActiveExtensions[]=ezautosave
 ActiveExtensions[]=ezjscore
+ActiveExtensions[]=ezoe
+##ActiveExtensions[]=ezformtoken
 ActiveExtensions[]=ezwt
 ActiveExtensions[]=ezstarrating
 ActiveExtensions[]=ezgmaplocation
 ActiveExtensions[]=ezwebin
 ActiveExtensions[]=ezie
-ActiveExtensions[]=ezoe
+ActiveExtensions[]=ezodf
+##ActiveExtensions[]=ezprestapiprovider
+ActiveExtensions[]=ezmultiupload
+ActiveExtensions[]=eztags
+ActiveExtensions[]=ezautosave
 
 [Session]
 RememberMeTimeout=864000
@@ -58,6 +62,7 @@ SessionTimeout=2592000
 ActivityTimeout=2592000
 ForceStart=disabled
 SessionNameHandler=default
+#SessionNameHandler=custom
 SessionNamePerSiteAccess=enabled
 
 [SiteSettings]
