@@ -8,6 +8,7 @@ CSSFileList[]
 #FrontendCSSFileList[]=override.css
 
 [JavaScriptSettings]
+JavaScriptList[]=ezjsc::jquery
 JavaScriptList[]=insertmedia.js
 
 */ ?>
