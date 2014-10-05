@@ -1,4 +1,4 @@
-<? /* #?ini charset="utf-8"?
+<?php /* #?ini charset="utf-8"?
 
 [WordToImageSettings]
 IconRoot=/share/icons
