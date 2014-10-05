@@ -52,7 +52,7 @@ ActiveExtensions[]=ezie
 ActiveExtensions[]=ezodf
 ##ActiveExtensions[]=ezprestapiprovider
 ActiveExtensions[]=ezmultiupload
-ActiveExtensions[]=eztags
+##ActiveExtensions[]=eztags
 ActiveExtensions[]=ezautosave
 
 [Session]
