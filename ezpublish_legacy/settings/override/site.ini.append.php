@@ -31,7 +31,7 @@ ActiveExtensions[]
 ActiveExtensions[]=ezecosystem
 ActiveExtensions[]=ezchangeclass
 ActiveExtensions[]=ezsh
-#ActiveExtensions[]=swark
+ActiveExtensions[]=swark
 ActiveExtensions[]=bcupdatecache
 ActiveExtensions[]=bcgeneratestaticcache
 ActiveExtensions[]=git_manager

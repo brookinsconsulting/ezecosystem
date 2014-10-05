@@ -1,7 +1,7 @@
 <?php /* #?ini charset="utf-8"?
 
-[ExtensionSettings]
-ActiveAccessExtensions[]=swark
+#[ExtensionSettings]
+#ActiveAccessExtensions[]=swark
 
 [ContentSettings]
 StaticCache=disabled
