@@ -21,6 +21,9 @@ Scripts[]=ezefetchsyndicatedcontent.php
 [CronjobPart-ezefetchatomcontent]
 Scripts[]=ezefetchatomcontent.php
 
+[CronjobPart-ezerefreshforumstaticcache]
+Scripts[]=ezerefreshforumstaticcache.php
+
 [CronjobPart-ezerefreshhomepagestaticcache]
 Scripts[]=ezerefreshhomepagestaticcache.php
 
@@ -34,6 +37,7 @@ Scripts[]=updateviewcount.php
 Scripts[]=indexcontent.php
 Scripts[]=rssimport.php
 Scripts[]=ezefetchatomcontent.php
+Scripts[]=ezerefreshforumstaticcache.php
 Scripts[]=ezerefreshhomepagestaticcache.php
 Scripts[]=ezeregenerateautoloads.php
 Scripts[]=ezerssimport.php
