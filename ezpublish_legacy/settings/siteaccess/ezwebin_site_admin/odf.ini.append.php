@@ -1,4 +1,4 @@
-<?php /* #?ini charset="utf8"?
+<?php /* #?ini charset="utf-8"?
 
 [article]
 Attribute[caption]=caption

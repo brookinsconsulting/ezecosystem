@@ -1,4 +1,4 @@
-<?php /* #?ini charset="utf8"?
+<?php /* #?ini charset="utf-8"?
 
 [CustomAttribute_table_summary]
 Name=Summary (WAI)
