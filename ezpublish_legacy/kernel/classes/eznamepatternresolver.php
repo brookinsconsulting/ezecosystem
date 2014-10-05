@@ -4,7 +4,7 @@
  *
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
- * @version 2014.07.0
+ * @version //autogentag//
  * @package kernel
  *
  */
@@ -33,7 +33,7 @@
  * edit-interface.
  *
  * @package kernel
- * @version 2014.07.0
+ * @version //autogentag//
  */
 class eZNamePatternResolver
 {
