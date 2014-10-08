@@ -7,8 +7,6 @@ Disallow: /content/tipafriend/
 Disallow: /Content/Tipafriend/
 Disallow: /layout/set/print/
 Disallow: /Layout/Set/Print/
-Disallow: /rss/
-Disallow: /Rss/
 Disallow: /media/
 Disallow: /Media/
 Disallow: /ezinfo/
