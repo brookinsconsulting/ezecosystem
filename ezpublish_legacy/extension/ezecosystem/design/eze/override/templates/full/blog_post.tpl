@@ -19,7 +19,7 @@
                             <div class="class-blog-post float-break">
 
                                 <div class="attribute-header">
-                                    <h1>{$node.data_map.title.content|html_entity_decode|wash}</h1>
+                                    <h1>{$node.data_map.title.content|html_entity_decode}</h1>
                                 </div>
 
                                 <div class="attribute-byline">

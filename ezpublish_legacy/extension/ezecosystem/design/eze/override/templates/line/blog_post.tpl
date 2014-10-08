@@ -12,8 +12,8 @@
         <h1><a href={$node.parent.url_alias|ezurl}>{$node.parent.name}</a></h1>
      </div>
     <div class="attribute-header">
-        {def $title = $node.data_map.title.content|html_entity_decode|wash}
-        <h2>> <a href="{$node.data_map.blog_post_url.content}" title="{$title}">{if $title|count_chars|gt( 70 )}{$title|extract( 0, 66 )|append(' ...' )|wash}{else}{$title}{/if}</a></h2>
+        {def $title = $node.data_map.title.content|html_entity_decode}
+        <h2>> <a href="{$node.data_map.blog_post_url.content}" title="{$title}">{if $title|count_chars|gt( 71 )}{$title|extract( 0, 67 )|append(' ...' )}{else}{$title}{/if}</a></h2>
      </div>
 
     <div class="attribute-byline">
