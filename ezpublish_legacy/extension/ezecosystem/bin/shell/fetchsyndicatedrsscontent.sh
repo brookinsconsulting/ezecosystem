@@ -6,7 +6,13 @@ else
 siteaccess="$1";
 fi
 
-php ./runcronjobs.php --siteaccess $siteaccess ezerssimport;
+if [[ -z "$2" ]]; then
+timelimitseconds="240";
+else
+timelimitseconds="$2";
+fi
+
+./extension/ezecosystem/bin/shell/timeout.sh $timelimitseconds php ./runcronjobs.php --siteaccess $siteaccess ezerssimport;
 
 # Test to determin if script is not being used on production siteacess
 if [[ $siteaccess != "ezwebin_site_user" ]]; then
