@@ -17,7 +17,7 @@
      </div>
 
     <div class="attribute-byline">
-        {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id )|not )}<p class="author">{$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
+        {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id )|not )}<p class="author">By: {$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
 
 	{if $node.data_map.tags.has_content}
         <p class="tags"> {"Tags:"|i18n("design/ezwebin/line/blog_post")} {foreach $node.data_map.tags.content.keywords as $keyword} <a href={concat( $node.parent.url_alias, "/(tag)/", $keyword|rawurlencode )|ezurl} title="{$keyword}">{$keyword}</a>{delimiter},{/delimiter}{/foreach}
