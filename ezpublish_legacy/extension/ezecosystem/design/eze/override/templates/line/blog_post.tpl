@@ -3,7 +3,8 @@
 {def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
      $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')
      $blogs_ids_with_iframe_problems=ezini('NodeIDSettings','BlogsWithIframeProblemsNodeIDs','ezecosystem.ini')
-     $exclude_author_parent_node_ids=ezini('HomePageFetchSettings','ExcludeAuthorParentIDs','ezecosystem.ini')}
+     $exclude_author_parent_node_ids=ezini('HomePageFetchSettings','ExcludeAuthorParentIDs','ezecosystem.ini')
+     $projects_commits_node_id=ezini('NodeIDSettings','ProjectsCommitsNodeID','ezecosystem.ini')}
 
 <div class="content-view-line">
     <div class="class-blog-post float-break">
@@ -17,12 +18,16 @@
      </div>
 
     <div class="attribute-byline">
+    {if $node.parent.node_id|eq( $projects_commits_node_id )}
+        {if $node.data_map.blog_post_url.content|contains('://projects.ez.no')}<p class="author">Project: <a href="{concat( 'http://projects.ez.no/', $node.data_map.blog_post_url.content|explode('://projects.ez.no/')[1]|explode('/')[0], '/' )}">{$node.data_map.blog_post_url.content|explode('://projects.ez.no/')[1]|explode('/')[0]}</a></p>{/if}</p>
+    {else}
         {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id )|not )}<p class="author">By: {$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
+    {/if}
 
-	{if $node.data_map.tags.has_content}
+    {if $node.data_map.tags.has_content}
         <p class="tags"> {"Tags:"|i18n("design/ezwebin/line/blog_post")} {foreach $node.data_map.tags.content.keywords as $keyword} <a href={concat( $node.parent.url_alias, "/(tag)/", $keyword|rawurlencode )|ezurl} title="{$keyword}">{$keyword}</a>{delimiter},{/delimiter}{/foreach}
         </p>
-	{/if}
+    {/if}
     </div>
 
     {*

@@ -11,6 +11,7 @@ eZPublishIssuesNodeID=4198
 CommunityIssuesNodeID=9181
 ProjectsForumNodeID=14584
 ProjectsNewNodeID=230
+ProjectsCommitsNodeID=4258
 GitHubNodeID=17294
 NotificationNodeID=14353
 SidebarCommunityNodeID=969
