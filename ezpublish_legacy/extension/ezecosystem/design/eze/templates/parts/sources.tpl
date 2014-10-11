@@ -9,7 +9,7 @@
 {def $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
                                                             'class_filter_type', 'include',
                                                             'class_filter_array', $sources_list_fetch_classes,
-                                                            'attribute_filter', array( array( 'section', '=', '7' ) ),
+                                                            'attribute_filter', array( 'or', array( 'section', '=', '7' ), array( 'section', '=', '10' ) ),
                                                             'sort_by', array( 'published', false() ),
                                                             'depth', 4,
                                                             'limit', $sources_list_github_fetch_limit ) )}
