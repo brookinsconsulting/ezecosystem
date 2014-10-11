@@ -15,6 +15,9 @@ Scripts[]=staticcache_cleanup.php
 [CronjobPart-indexcontent]
 Scripts[]=indexcontent.php
 
+[CronjobPart-internal_drafts_cleanup]
+Scripts[]=internal_drafts_cleanup.php
+
 [CronjobPart-ezefetchsyndicatedcontent]
 Scripts[]=ezefetchsyndicatedcontent.php
 
