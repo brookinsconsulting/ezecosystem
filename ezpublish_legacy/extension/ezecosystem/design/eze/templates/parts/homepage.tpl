@@ -88,7 +88,7 @@
             {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $mirror_node_id,
                                                                         'class_filter_type', 'include',
                                                                         'class_filter_array', $home_page_fetch_classes,
-                                                                        'attribute_filter', array( array( 'section', '=', '7' ) ),
+                                                                        'attribute_filter', array( 'or', array( 'section', '=', '7' ), array( 'section', '=', '10' ) ),
                                                                         'language', $home_page_post_fetch_language,
                                                                         'ignore_visibility', false(),
 							                'depth', $home_page_fetch_depth ) )}
@@ -98,7 +98,7 @@
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
-                                                             'attribute_filter', array( array( 'section', '=', '7' ) ),
+                                                             'attribute_filter', array( 'or', array( 'section', '=', '7' ), array( 'section', '=', '10' ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
                                                              'ignore_visibility', false(),
