@@ -21,7 +21,7 @@ LeftIdentifierList[]=documentation_page
 LeftIdentifierList[]=forums
 LeftIdentifierList[]=event_calendar
 LeftIdentifierList[]=multicalendar
-LeftIdentifierList[]=link
+#LeftIdentifierList[]=link
 LeftIdentifierList[]=blog
 LeftIdentifierList[]=frontpage
 

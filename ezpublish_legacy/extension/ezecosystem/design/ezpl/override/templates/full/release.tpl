@@ -110,7 +110,7 @@
     {/if}
 
     {if $node.object.content_class.is_container}
-        {if and( is_unset( $versionview_mode ), is_set( $node.data_map.enable_comments ), $node.data_map.enable_comments.data_int )}
+        {* if and( is_unset( $versionview_mode ), is_set( $node.data_map.enable_comments ), $node.data_map.enable_comments.data_int )}
             <h1>{"Comments"|i18n("design/ezwebin/full/article")}</h1>
                 <div class="content-view-children">
                     {foreach fetch_alias( comments, hash( parent_node_id, $node.node_id ) ) as $comment}
@@ -133,8 +133,8 @@
                     {else}
                         <p>{'%login_link_startLog in%login_link_end to comment.'|i18n( 'design/ezwebin/article/comments', , hash( '%login_link_start', concat( '<a href="', '/user/login'|ezurl(no), '">' ), '%login_link_end', '</a>' ) )}</p>
                     {/if}
-                {/if}
-        {elseif and( is_set( $node.data_map.show_children ), $node.data_map.show_children.data_int )}
+                {/if *}
+        {if and( $node.parent.node_id|eq( ezini( 'NodeIDSettings', 'DownloadsNodeID', 'ezpublishlegacy.ini' ) ), is_set( $node.data_map.show_children ), $node.data_map.show_children.data_int )}
                 {def $page_limit = first_set($node.data_map.show_children_pr_page.data_int, 10)
                      $classes = ezini( 'MenuContentSettings', 'ExtraIdentifierList', 'menu.ini' )
                      $children_count = ''}
@@ -148,6 +148,7 @@
 
                 <div class="content-view-children">
                     {if $children_count}
+                    <div><h2>Releases</h2></div>
                         {foreach fetch_alias( 'children', hash( 'parent_node_id', $node.node_id,
                                                                 'offset', $view_parameters.offset,
                                                                 'sort_by', $node.sort_array,
@@ -169,7 +170,7 @@
         {/if}
     {/if}
 
-    {if and( is_unset( $versionview_mode ), is_set( $node.data_map.enable_tipafriend ), $node.data_map.enable_tipafriend.data_int )}
+    {* if and( is_unset( $versionview_mode ), is_set( $node.data_map.enable_tipafriend ), $node.data_map.enable_tipafriend.data_int )}
         {def $tipafriend_access=fetch( 'user', 'has_access_to', hash( 'module', 'content',
                                                                       'function', 'tipafriend' ) )}
         {if and( ezmodule( 'content/tipafriend' ), $tipafriend_access )}
@@ -177,7 +178,7 @@
             <p><a href={concat( "/content/tipafriend/", $node.node_id )|ezurl} title="{'Tip a friend'|i18n( 'design/ezwebin/full/article' )}">{'Tip a friend'|i18n( 'design/ezwebin/full/article' )}</a></p>
         </div>
         {/if}
-    {/if}
+    {/if *}
 
     </div>
 </div>

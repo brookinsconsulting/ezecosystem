@@ -34,11 +34,12 @@
 
         {if $node.object.data_map.show_children.data_int}
             {def $page_limit = 45
-                 $classes = ezini( 'MenuContentSettings', 'ExtraIdentifierList', 'menu.ini' )
+                 $classesDefault = ezini( 'MenuContentSettings', 'ExtraIdentifierList', 'menu.ini' )
+                 $classes = array( 'link' )
                  $children = array()
                  $children_count = ''}
                  
-            {if le( $node.depth, '3')}
+            {if and( le( $node.depth, '3'), $node.node_id|ne( ezini( 'NodeSettings', 'RootNode', 'content.ini' ) ) )}
                 {set $classes = $classes|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
             {/if}
 
@@ -54,7 +55,7 @@
                                                             'class_filter_type', 'exclude',
                                                             'class_filter_array', $classes,
                                                             'limit', $page_limit ) ) as $child }
-                        {node_view_gui view='line' content_node=$child}
+                        {if $child.node_id|ne( ezini( 'NodeIDSettings', 'NotificationsNodeID', 'ezpublishlegacy.ini' ) )}{node_view_gui view='line' content_node=$child}{/if}
                     {/foreach}
                 {/if}
             </div>

@@ -1,0 +1,7 @@
+/* eZPublishLegacy.com Styles */
+
+/* HomePage Folder Column Width Supression */
+div#columns.homepage {
+    padding-left: 0px;
+}
+
