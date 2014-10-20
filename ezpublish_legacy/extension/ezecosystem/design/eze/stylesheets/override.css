@@ -469,7 +469,14 @@ div.class-blog div.attribute-byline p.tags {
 display: block;
 }
 
-
+/* Damien's blog does uses figure tag which negatively affects max-width display */
+div.class-blog-post div.attribute-body.float-break figure {
+display: block;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}
 
 /* derick's blog does not constrain picture img sizes with html */
 
