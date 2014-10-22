@@ -8,6 +8,7 @@ AvailableSourceHandlers[]=ezcommunitygithubatomimporthandler
 AvailableSourceHandlers[]=ezsystemsgithubatomimporthandler
 AvailableSourceHandlers[]=brookinsconsultinggithubatomimporthandler
 AvailableSourceHandlers[]=brookinsconsultinggistgithubatomimporthandler
+AvailableSourceHandlers[]=ezpublishlegacygithubatomimporthandler
 AvailableSourceHandlers[]=gggeekgithubatomimporthandler
 AvailableSourceHandlers[]=jdespatisgithubatomimporthandler
 AvailableSourceHandlers[]=crevillogithubatomimporthandler
@@ -135,6 +136,22 @@ DefaultParentNodeID=4440
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://gist.github.com/brookinsconsulting.atom
+
+[ezpublishlegacygithubatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=GitHub eZPublishLegacy Activity Log Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIGitHubATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=21259
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://github.com/ezpublishlegacy.atom
 
 [gggeekgithubatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
