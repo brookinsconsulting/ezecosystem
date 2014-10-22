@@ -1,0 +1,1 @@
+../ezwebin_site_user/ezjscore.ini.append.php
