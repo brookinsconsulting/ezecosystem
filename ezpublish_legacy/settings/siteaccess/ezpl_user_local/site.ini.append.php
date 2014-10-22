@@ -1,7 +1,7 @@
 <?php /* #?ini charset="utf-8"?
 
 [ContentSettings]
-StaticCache=enabled
+StaticCache=disabled
 
 [DebugSettings]
 DebugOutput=enabled

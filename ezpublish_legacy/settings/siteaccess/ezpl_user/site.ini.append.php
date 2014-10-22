@@ -4,7 +4,7 @@
 #ActiveAccessExtensions[]=swark
 
 [ContentSettings]
-StaticCache=enabled
+StaticCache=disabled
 
 [DebugSettings]
 DebugOutput=disabled
