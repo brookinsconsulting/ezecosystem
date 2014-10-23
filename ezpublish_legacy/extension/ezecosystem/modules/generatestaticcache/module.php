@@ -17,7 +17,7 @@ $ViewList = array();
 // Define cache module view and parameters
 $ViewList['cache'] = array(
                            'script' => 'cache.php',
-                           'default_navigation_part' => 'generatestaticcachepart',
+                           'default_navigation_part' => 'ezsetupnavigationpart',
                            'params' => array() );
 
 ?>

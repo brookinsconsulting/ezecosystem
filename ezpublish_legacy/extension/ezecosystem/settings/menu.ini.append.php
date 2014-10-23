@@ -50,12 +50,12 @@ AlwaysAvailable=false
 Part[generatestaticcachepart]=Static Cache
 
 [TopAdminMenu]
-Tabs[]=generate_static_cache
+Tabs[]=generatestaticcache
 
-[Topmenu_generate_static_cache]
+[Topmenu_generatestaticcache]
 NavigationPartIdentifier=generatestaticcachepart
 Name=Static Cache
-Tooltip=Regenerate static cache for uris
+Tooltip=Regenerate static cache
 URL[]
 URL[default]=generatestaticcache/cache
 Enabled[]
@@ -67,5 +67,10 @@ Shown[default]=true
 Shown[edit]=true
 Shown[navigation]=true
 Shown[browse]=true
+PolicyList[]=generatestaticcache/cache
+
+[Leftmenu_setup]
+Links[generatestaticcache]=generatestaticcache/cache
+LinkNames[generatestaticcache]=Static Cache
 
 */ ?>

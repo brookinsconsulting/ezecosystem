@@ -25,7 +25,7 @@ $http = eZHTTPTool::instance();
 $tpl = eZTemplate::factory();
 
 /**
- * Fetch site.ini settings for Site url
+ * Fetch site.ini settings
  */
 $ini = eZINI::instance();
 $siteAccessList = $ini->variable( 'SiteAccessSettings', 'RelatedSiteAccessList' );
@@ -33,7 +33,7 @@ $siteAccessList = $ini->variable( 'SiteAccessSettings', 'RelatedSiteAccessList' 
 /**
  * Validate request to update cache
  */
-if ( $http->hasPostVariable( 'GenerateButton' ) )
+if( $http->hasPostVariable( 'GenerateButton' ) )
 {
     /**
      * Test for existance of post variable, 'Uri'
@@ -48,7 +48,7 @@ if ( $http->hasPostVariable( 'GenerateButton' ) )
     }
 
     /**
-     * Test for existance of post variable, 'Recursive'
+     * Test for existance of post variable, 'recursive'
      */
     if ( $http->hasPostVariable( 'recursive' ) )
     {
@@ -60,7 +60,7 @@ if ( $http->hasPostVariable( 'GenerateButton' ) )
     }
 
     /**
-     * Test for existance of post variable, 'Siteaccess'
+     * Test for existance of post variable, 'siteaccess'
      */
     if ( $http->hasPostVariable( 'siteaccess' ) )
     {
@@ -68,7 +68,7 @@ if ( $http->hasPostVariable( 'GenerateButton' ) )
     }
     else
     {
-        $siteaccess = "ezwebin_site_user";
+        $siteaccess = $siteAccessList[0];
     }
 
     /**
@@ -76,7 +76,7 @@ if ( $http->hasPostVariable( 'GenerateButton' ) )
      */
      // General cronjob part options
      $generatorWorkerScript = './extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh';
-     $options = "$siteaccess $uri $recursive"; //$currentSiteAccess;
+     $options = "$siteaccess $uri $recursive";
      $result = '';
 
      $result = shell_exec( "$generatorWorkerScript $options;");
@@ -104,6 +104,11 @@ if ( $http->hasPostVariable( 'GenerateButton' ) )
 /**
  * Prepare module view content results for display to user
  */
+$tpl->setVariable( 'output', false );
+$tpl->setVariable( 'uri', '/' );
+$tpl->setVariable( 'recursive', false  );
+$tpl->setVariable( 'siteaccess_list', $siteAccessList );
+$tpl->setVariable( 'current_siteaccess', $siteAccessList[0] );
 $Result['content'] = $tpl->fetch( 'design:generatestaticcache/cache.tpl' );
 $Result['path'] = array( array( 'url' => false,
                                 'text' => 'Generate Static Cache' ) );
