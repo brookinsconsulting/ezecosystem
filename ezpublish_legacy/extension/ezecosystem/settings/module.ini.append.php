@@ -2,6 +2,7 @@
 
 [ModuleSettings]
 ModuleList[]=content2
+ModuleList[]=generatestaticcache
 ExtensionRepositories[]=ezecosystem
 
 */?>

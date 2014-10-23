@@ -46,4 +46,26 @@ HideLeftMenuClasses[]=blog_post
 # true or false, while set to false menus can be hide in certain cases
 AlwaysAvailable=false
 
+[NavigationPart]
+Part[generatestaticcachepart]=Static Cache
+
+[TopAdminMenu]
+Tabs[]=generate_static_cache
+
+[Topmenu_generate_static_cache]
+NavigationPartIdentifier=generatestaticcachepart
+Name=Static Cache
+Tooltip=Regenerate static cache for uris
+URL[]
+URL[default]=generatestaticcache/cache
+Enabled[]
+Enabled[default]=true
+Enabled[browse]=false
+Enabled[edit]=false
+Shown[]
+Shown[default]=true
+Shown[edit]=true
+Shown[navigation]=true
+Shown[browse]=true
+
 */ ?>
