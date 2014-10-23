@@ -59,7 +59,7 @@
                             </ul>
                         </div>
 
-                        {include uri='design:parts/blog/calendar.tpl'}
+                        {* include uri='design:parts/blog/calendar.tpl' *}
 
                         {*
                         Dissabled due to extream production performance requirements
