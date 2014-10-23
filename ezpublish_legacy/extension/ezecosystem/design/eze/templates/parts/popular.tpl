@@ -12,6 +12,7 @@
 {* set $popular_nodes_combined_sorted=$popular_nodes_combined_sorted|popular_sidebar_fetch( $class_ids ) *}
 {* $popular_nodes_combined_sorted|attribute(show,2) *}
 
+{* Fetch popular content *}
 {def $popular_nodes_combined_sorted=popular_sidebar_fetch( $class_ids )}
 
 {* Display popular node list *}

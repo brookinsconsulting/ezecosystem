@@ -119,7 +119,9 @@
 
 {/cache-block}
 
+{cache-block expiry=14400}
 {include uri="design:parts/popular.tpl" class_ids=$popular_class_ids}
+{/cache-block}
 
 {cache-block expiry=172800}
 {include uri="design:parts/twitter.tpl"}
