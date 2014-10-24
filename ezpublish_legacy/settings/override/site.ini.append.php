@@ -76,7 +76,6 @@ SiteList[]=eze_user_local_nocache
 SiteList[]=eze_user_admin
 SiteList[]=ezpl_user
 SiteList[]=ezpl_user_local
-SiteList[]=eng
 RootNodeDepth=1
 
 [UserSettings]
@@ -91,7 +90,6 @@ AvailableSiteAccessList[]=eze_user_local
 AvailableSiteAccessList[]=eze_admin_local
 AvailableSiteAccessList[]=eze_user_nocache
 AvailableSiteAccessList[]=eze_user_local_nocache
-AvailableSiteAccessList[]=eng
 AvailableSiteAccessList[]=ezpl_user
 AvailableSiteAccessList[]=ezpl_user_local
 MatchOrder=host
@@ -120,7 +118,7 @@ DesignLocationCache=enabled
 
 [RegionalSettings]
 TranslationSA[]
-TranslationSA[eng]=Eng
+#TranslationSA[eng]=Eng
 
 [FileSettings]
 VarDir=var/ezwebin_site
