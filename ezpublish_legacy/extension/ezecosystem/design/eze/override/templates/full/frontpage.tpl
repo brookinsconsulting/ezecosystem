@@ -2,7 +2,7 @@
      $mirror_node_id=ezini('NodeIDSettings','MirrorNodeID','ezecosystem.ini')
      $blogs_planetarium_id=ezini('NodeIDSettings','SidebarPlanetariumNodeID','ezecosystem.ini')
      $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')
-     $popular_class_ids=ezini('PopularSidebarSettings','ClassIDs','ezecosystem.ini')
+     $popular_view_count_parameters=ezini('PopularSidebarSettings','ViewCountParameters','ezecosystem.ini')
      $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )
      $issues_node_id=ezini( 'NodeIDSettings', 'IssuesNodeID', 'ezecosystem.ini' )}
 
@@ -120,7 +120,7 @@
 {/cache-block}
 
 {cache-block expiry=14400}
-{include uri="design:parts/popular.tpl" class_ids=$popular_class_ids}
+{include uri="design:parts/popular.tpl" view_count_parameters=$popular_view_count_parameters view_count_limit=8}
 {/cache-block}
 
 {cache-block expiry=172800}

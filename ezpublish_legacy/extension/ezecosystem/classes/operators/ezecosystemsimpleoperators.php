@@ -14,13 +14,16 @@ class eZecosystemSimpleOperators extends OWSimpleOperator
         return $result;
     }
 
-    static function popular_sidebar_fetch( $classIDs )
+    static function popular_sidebar_fetch( $viewCountParameters, $limit = 8, $offset = 0 )
     {
         $count = array();
         $results = array();
-        foreach( $classIDs as $classID )
+        foreach( $viewCountParameters as $viewCountParameter )
         {
-            $results[] = eZContentFunctionCollection::fetchMostViewedTopList( $classID, 1, 0, 7 );
+            $viewCountParameter = explode( ';', $viewCountParameter );
+            $classID = $viewCountParameter[0];
+            $sectionID = $viewCountParameter[1];
+            $results[] = eZContentFunctionCollection::fetchMostViewedTopList( $classID, $sectionID, $offset, $limit );
         }
         foreach( $results as $result )
         {

@@ -13,7 +13,7 @@
 {* $popular_nodes_combined_sorted|attribute(show,2) *}
 
 {* Fetch popular content *}
-{def $popular_nodes_combined_sorted=popular_sidebar_fetch( $class_ids )}
+{def $popular_nodes_combined_sorted=popular_sidebar_fetch( $view_count_parameters, $view_count_limit, 0 )}
 
 {* Display popular node list *}
 {if $popular_nodes_combined_sorted|count|gt( 0 )}

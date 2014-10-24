@@ -53,9 +53,9 @@ ShareForumNodeIDs[]=15224
 ShareForumNodeIDs[]=15226
 
 [PopularSidebarSettings]
-ClassIDs[]
-ClassIDs[]=20
-ClassIDs[]=45
+ViewCountParameters[]
+ViewCountParameters[]=20;1
+ViewCountParameters[]=45;11
 
 [HomePageFetchSettings]
 ClassIdentifiers[]
