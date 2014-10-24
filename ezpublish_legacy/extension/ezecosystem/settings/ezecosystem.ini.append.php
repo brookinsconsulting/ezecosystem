@@ -39,6 +39,7 @@ GitHubFetchLimit=2000
 ClassIdentifiers[]
 ClassIdentifiers[]=forum_topic
 ClassIdentifiers[]=blog_post
+ClassIdentifiers[]=issue_post
 ShareForumNodeIDs[]
 ShareForumNodeIDs[]=15228
 ShareForumNodeIDs[]=15227
