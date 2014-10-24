@@ -24,6 +24,8 @@
 .settings/
 
 ### eZp related //start
+ezpublish_legacy/settings/override/site.ini
+ezpublish_legacy/settings/override/s3.ini
 ezpublish_legacy/downloads
 ezpublish_legacy/var
 ezpublish_legacy/extension/ezfind/java/logs
