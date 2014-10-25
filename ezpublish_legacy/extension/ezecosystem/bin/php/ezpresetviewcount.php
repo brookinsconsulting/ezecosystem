@@ -238,7 +238,7 @@ if( $test )
 }
 else
 {
-    $cli->warning( "\n\nTotal nodes view counter reset: $viewCountChangeCount");
+    $cli->warning( "\n\nTotal node's view counter reset: $viewCountChangeCount");
 }
 
 /** Call for display of execution time **/
