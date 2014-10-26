@@ -34,7 +34,7 @@
                                     {else}
                                     {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id )|not )}<p class="author">By: {$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
                                     {/if}
-                                    {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
+                                    {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="javascript:;" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
 
 				    {if $$node.data_map.tags.has_content}
                                     <p class="tags"> {"Tags:"|i18n("design/ezwebin/full/blog_post")}

@@ -35,7 +35,7 @@
                                     <p class="author">By: {if $node.parent.node_id|eq( $projects_forum_node_id )}{$node.data_map.forum_topic_author.content|explode('community@ez.no (')|implode('')|explode(')')|implode('')|autolink}{else}{$node.data_map.forum_topic_author.content|autolink}{/if}</p>
                                 </div>
 
-                                    {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="#" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
+                                    {if and( $view_count_enabled, $node.view_count|gt( $view_count_threshold ) )}<p class="views"><a href="javascript:;" style="text-decoration:none;" title="View count @ {$node.view_count}">Views: {$node.view_count}</a></p>{/if}
 
 				    {* if $$node.data_map.tags.has_content}
                                     <p class="tags"> {"Tags:"|i18n("design/ezwebin/full/blog_post")}
