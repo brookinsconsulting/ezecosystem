@@ -8,4 +8,7 @@ DesignExtensions[]=ezecosystem
 [JavaScriptSettings]
 JavaScriptFooterList[]
 
+[StylesheetSettings]
+BackendCSSFileList[]=generatestaticcache.css
+
 */ ?>

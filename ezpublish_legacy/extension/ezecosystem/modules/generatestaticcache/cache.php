@@ -79,7 +79,7 @@ if( $http->hasPostVariable( 'GenerateButton' ) )
      $options = "$siteaccess $uri $recursive";
      $result = '';
 
-     $result = shell_exec( "$generatorWorkerScript $options;");
+     $result = shell_exec( "$generatorWorkerScript $options > var/log/process_output.log 2> var/log/process_error.log &");
 
     /**
      * Calculate update cache request result on status page
@@ -109,7 +109,10 @@ $tpl->setVariable( 'uri', '/' );
 $tpl->setVariable( 'recursive', false  );
 $tpl->setVariable( 'siteaccess_list', $siteAccessList );
 $tpl->setVariable( 'current_siteaccess', $siteAccessList[0] );
+
+$Result = array();
 $Result['content'] = $tpl->fetch( 'design:generatestaticcache/cache.tpl' );
+$Result['left_menu'] = "design:generatestaticcache/backoffice_leftmenu.tpl";
 $Result['path'] = array( array( 'url' => false,
                                 'text' => 'Generate Static Cache' ) );
 

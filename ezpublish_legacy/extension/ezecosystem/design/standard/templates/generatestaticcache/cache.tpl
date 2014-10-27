@@ -1,3 +1,5 @@
+<div class="generatestaticcache">
+<div class="left-column">
 <form name="generatestaticcache" action={"generatestaticcache/cache"|ezurl} method="post">
 
 <div class="context-block">
@@ -66,3 +68,12 @@
 </div>
 
 </form>
+
+</div>
+
+<div class="right-column">
+    <div id="results"></div>
+    <iframe name="process-log" src={"/layout/set/blank/cronjobs/logs"|ezurl}></iframe>
+</div>
+
+</div>
