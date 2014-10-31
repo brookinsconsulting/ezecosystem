@@ -29,6 +29,7 @@ AvailableSourceHandlers[]=glyegithubatomimporthandler
 AvailableSourceHandlers[]=pspanjagithubatomimporthandler
 AvailableSourceHandlers[]=xinyuexrowgithubatomimporthandler
 AvailableSourceHandlers[]=xrowkristinagithubatomimporthandler
+AvailableSourceHandlers[]=emodricgithubatomimporthandler
 
 [ezpublishjiraatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
@@ -477,5 +478,21 @@ DefaultParentNodeID=23682
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://github.com/xrowkristina.atom
+
+[emodricgithubatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=Edi Modrić GitHub Activity Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIGitHubATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=23776
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://github.com/emodric.atom
 
 */ ?>
