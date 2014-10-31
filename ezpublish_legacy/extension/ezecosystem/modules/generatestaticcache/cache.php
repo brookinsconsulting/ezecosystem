@@ -52,11 +52,11 @@ if( $http->hasPostVariable( 'GenerateButton' ) )
      */
     if ( $http->hasPostVariable( 'recursive' ) )
     {
-        $recursive = '';
+        $recursive = ' --children';
     }
     else
     {
-        $recursive = "' '";
+        $recursive = '';
     }
 
     /**
@@ -75,11 +75,11 @@ if( $http->hasPostVariable( 'GenerateButton' ) )
      * Perform update cache requests
      */
      // General cronjob part options
-     $generatorWorkerScript = './extension/ezecosystem/bin/shell/generatestaticcacheindexes.sh';
-     $options = "$siteaccess $uri $recursive";
+     $generatorWorkerScript = 'php ./extension/bcgeneratestaticcache/bin/php/bcgeneratestaticcache.php';
+     $options = "--subtree=$uri$recursive --force -s $siteaccess";
      $result = '';
 
-     $result = shell_exec( "$generatorWorkerScript $options > var/log/process_output.log 2> var/log/process_error.log &");
+     $result = shell_exec( "$generatorWorkerScript $options >> var/log/process_output.log 2>> var/log/process_error.log &");
 
     /**
      * Calculate update cache request result on status page
