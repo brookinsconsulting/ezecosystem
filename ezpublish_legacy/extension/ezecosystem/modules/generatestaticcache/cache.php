@@ -52,11 +52,11 @@ if( $http->hasPostVariable( 'GenerateButton' ) )
      */
     if ( $http->hasPostVariable( 'recursive' ) )
     {
-        $recursive = ' --children';
+        $recursive = ' --children --max-level=7';
     }
     else
     {
-        $recursive = '';
+        $recursive = '  --max-level=4';
     }
 
     /**
