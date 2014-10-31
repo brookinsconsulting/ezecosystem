@@ -26,6 +26,9 @@ AvailableSourceHandlers[]=xrowgithubatomimporthandler
 AvailableSourceHandlers[]=thiagocamposvianagithubatomimporthandler
 AvailableSourceHandlers[]=joaoinaciogithubatomimporthandler
 AvailableSourceHandlers[]=glyegithubatomimporthandler
+AvailableSourceHandlers[]=pspanjagithubatomimporthandler
+AvailableSourceHandlers[]=xinyuexrowgithubatomimporthandler
+AvailableSourceHandlers[]=xrowkristinagithubatomimporthandler
 
 [ezpublishjiraatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
@@ -426,5 +429,53 @@ DefaultParentNodeID=23646
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://github.com/glye.atom
+
+[pspanjagithubatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=Petar Španja GitHub Activity Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIGitHubATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=23681
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://github.com/pspanja.atom
+
+[xinyuexrowgithubatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=xinyuexrow GitHub Activity Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIGitHubATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=23683
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://github.com/xinyuexrow.atom
+
+[xrowkristinagithubatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=xrowkristina GitHub Activity Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIGitHubATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=23682
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://github.com/xrowkristina.atom
 
 */ ?>
