@@ -20,7 +20,7 @@
                                                             'limit', $sources_list_github_fetch_limit ) )}
 {else}
 {def $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
-                                                            'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'section', '!=', '11' ) ),
+                                                            'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'section', '!=', '11' ), array( 'section', '!=', '12' ) ),
                                                             'sort_by', array( 'published', false() ),
                                                             'depth', 4,
                                                             'limit', $sources_list_fetch_limit ) )}

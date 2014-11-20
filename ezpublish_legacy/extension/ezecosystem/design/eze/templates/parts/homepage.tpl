@@ -89,7 +89,7 @@
 
             {if $home_page_root_node_id|eq( $forums_node_id )}
             {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $mirror_node_id,
-                                                                       'attribute_filter', array( array( 'section', '=', 12 ) ),
+                                                                       'attribute_filter', array( array( 'section', '=', '12' ) ),
                                                                        'depth', $home_page_fetch_depth ) )}
 
             {def $home_page_fetch_sort_array_published = array( 'published', false() )
@@ -156,7 +156,7 @@
 
 *}
             {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $current_node.node_id,
-                                                                        'attribute_filter', array( 'or', array( 'section', '!=', '7' ), array( 'section', '!=', '9' ), array( 'section', '!=', '11' ) ),
+                                                                        'attribute_filter', array( 'or', array( 'section', '!=', '7' ), array( 'section', '!=', '9' ), array( 'section', '!=', '11' ), array( 'section', '!=', '12' ) ),
 							                'depth', $home_page_fetch_depth
                                                                          ) )}
 
@@ -173,7 +173,7 @@
 		 $home_page_fetch_sort_array_published = array( 'published', false() )
 		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
-                                                             'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'section', '!=', '9' ), array( 'section', '!=', '11' ) ),
+                                                             'attribute_filter', array( 'and', array( 'section', '!=', '7' ), array( 'section', '!=', '9' ), array( 'section', '!=', '11' ), array( 'section', '!=', '12' ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
 						             'depth', $home_page_fetch_depth,
