@@ -4,7 +4,8 @@
      $blogs_community_id=ezini('NodeIDSettings','SidebarCommunityNodeID','ezecosystem.ini')
      $popular_view_count_parameters=ezini('PopularSidebarSettings','ViewCountParameters','ezecosystem.ini')
      $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )
-     $issues_node_id=ezini( 'NodeIDSettings', 'IssuesNodeID', 'ezecosystem.ini' )}
+     $issues_node_id=ezini( 'NodeIDSettings', 'IssuesNodeID', 'ezecosystem.ini' )
+     $forums_node_id=ezini( 'NodeIDSettings', 'ForumsNodeID', 'ezecosystem.ini' )}
 
 {set scope=global persistent_variable=hash('left_menu', false(),
                                            'extra_menu', false(),
@@ -78,7 +79,11 @@
             <div class="left-column">
             <!-- Content: START -->
 
-{if $node.node_id|eq( $github_node_id )}
+{if $node.node_id|eq( $forums_node_id )}
+{def $home_page_fetch_classes=array( 'forum_topic' )
+     $home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini')}
+{include uri="design:parts/homepage.tpl" home_page_root_node_id=$forums_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=$home_page_exclude_parent_content current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}
+{elseif $node.node_id|eq( $github_node_id )}
 {def $home_page_fetch_classes=ezini('GitHomePageFetchSettings','ClassIdentifiers','ezecosystem.ini')
      $home_page_exclude_parent_content=ezini('HomePageFetchSettings','ExcludeParentPathString','ezecosystem.ini')}
 {include uri="design:parts/homepage.tpl" home_page_root_node_id=$github_node_id home_page_fetch_classes=$home_page_fetch_classes home_page_exclude_parent_content=$home_page_exclude_parent_content current_node_id=$node.node_id blogs_planetarium_id=$blogs_planetarium_id blogs_community_id=$blogs_community_id}

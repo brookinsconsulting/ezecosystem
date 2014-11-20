@@ -104,6 +104,13 @@ Match[node]=17566
 #Match[class_identifier]=folder
 #Match[node]=17386
 
+[full_folder_forums_frontpage]
+Source=node/view/full.tpl
+MatchFile=full/frontpage.tpl
+Subdir=templates
+Match[class_identifier]=folder
+Match[node]=23166
+
 [full_folder_github_frontpage]
 Source=node/view/full.tpl
 MatchFile=full/frontpage.tpl

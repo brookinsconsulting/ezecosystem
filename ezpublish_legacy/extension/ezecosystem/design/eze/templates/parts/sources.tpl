@@ -6,7 +6,13 @@
      $sources_list_fetch_limit=ezini('SourcesSidebarSettings','FetchLimit','ezecosystem.ini')
      $sources_list_github_fetch_limit=ezini('SourcesSidebarSettings','GitHubFetchLimit','ezecosystem.ini')}
 
-{if $current_node_id|eq( $github_node_id )}
+{if $current_node_id|eq( $forums_node_id )}
+{def $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                                                            'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                            'sort_by', array( 'published', false() ),
+                                                            'depth', 4,
+                                                            'limit', $sources_list_github_fetch_limit ) )}
+{elseif $current_node_id|eq( $github_node_id )}
 {def $source_post_objects = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
                                                             'attribute_filter', array( 'or', array( 'section', '=', '7' ), array( 'section', '=', '10' ) ),
                                                             'sort_by', array( 'published', false() ),

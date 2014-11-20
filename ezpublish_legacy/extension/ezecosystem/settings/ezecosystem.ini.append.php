@@ -7,6 +7,7 @@ ViewCountThreshold=2
 [NodeIDSettings]
 MirrorNodeID=216
 IssuesNodeID=17566
+ForumsNodeID=23166
 eZPublishIssuesNodeID=4198
 CommunityIssuesNodeID=9181
 ProjectsForumNodeID=14584

@@ -6,6 +6,9 @@
 {if $github_node_id|is_set|not}
 {def $github_node_id=ezini( 'NodeIDSettings', 'GitHubNodeID', 'ezecosystem.ini' )}
 {/if}
+{if $forums_node_id|is_set|not}
+{def $forums_node_id=ezini( 'NodeIDSettings', 'ForumsNodeID', 'ezecosystem.ini' )}
+{/if}
 {def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
      $home_page_fetch_depth=ezini('HomePageFetchSettings','FetchDepth','ezecosystem.ini')
@@ -84,7 +87,23 @@
                 {set $home_page_fetch_classes = $home_page_fetch_classes|merge( ezini( 'ChildrenNodeList', 'ExcludedClasses', 'content.ini' ) )}
             {/if *}
 
-            {if $home_page_root_node_id|eq( $github_node_id )}
+            {if $home_page_root_node_id|eq( $forums_node_id )}
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $mirror_node_id,
+                                                                       'attribute_filter', array( array( 'section', '=', 12 ) ),
+                                                                       'depth', $home_page_fetch_depth ) )}
+
+            {def $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                                                             'class_filter_type', 'include',
+                                                             'class_filter_array', $home_page_fetch_classes,
+                                                             'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                             'offset', $view_parameters.offset,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
+                                                             'limit', $page_limit ) )}
+            {elseif $home_page_root_node_id|eq( $github_node_id )}
 {* Deprecated fetch conditions
                                                                         'class_filter_type', 'include',
                                                                         'class_filter_array', $home_page_fetch_classes,
