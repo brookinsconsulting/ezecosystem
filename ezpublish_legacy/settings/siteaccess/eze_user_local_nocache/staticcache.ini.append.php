@@ -22,6 +22,7 @@ MaxCacheDepth=8
 CachedURLArray[]
 CachedURLArray[]=/
 CachedURLArray[]=/Mirror*
+CachedURLArray[]=/Forums
 CachedURLArray[]=/GitHub
 CachedURLArray[]=/Issues
 CachedURLArray[]=/About*
