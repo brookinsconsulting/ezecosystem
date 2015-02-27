@@ -41,17 +41,24 @@ Scripts[]=ezeresetviewcount.php
 
 [CronjobSettings]
 ExtensionDirectories[]=ezecosystem
-Scripts[]=staticcache_cleanup.php
-Scripts[]=updateviewcount.php
+Scripts[]
+Scripts[]=unpublish.php
+#Scripts[]=rssimport.php
 Scripts[]=indexcontent.php
-Scripts[]=rssimport.php
-Scripts[]=ezefetchatomcontent.php
-Scripts[]=ezerefreshforumstaticcache.php
-Scripts[]=ezerefreshhomepagestaticcache.php
-Scripts[]=ezeregenerateautoloads.php
-Scripts[]=ezerssimport.php
-Scripts[]=ezefetchsyndicatedcontent.php
-Scripts[]=ezeremoveviewcountformissingnodes
-Scripts[]=ezeresetviewcount
+Scripts[]=hide.php
+Scripts[]=internal_drafts_cleanup.php
+
+#Scripts[]=staticcache_cleanup.php
+#Scripts[]=updateviewcount.php
+#Scripts[]=indexcontent.php
+#Scripts[]=rssimport.php
+#Scripts[]=ezefetchatomcontent.php
+#Scripts[]=ezerefreshforumstaticcache.php
+#Scripts[]=ezerefreshhomepagestaticcache.php
+#Scripts[]=ezeregenerateautoloads.php
+#Scripts[]=ezerssimport.php
+#Scripts[]=ezefetchsyndicatedcontent.php
+#Scripts[]=ezeremoveviewcountformissingnodes
+#Scripts[]=ezeresetviewcount
 
 */ ?>
