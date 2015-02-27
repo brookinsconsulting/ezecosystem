@@ -23,6 +23,9 @@ do
 php ./extension/sqliimport/bin/php/sqlidoimport.php --siteaccess=$siteaccess --source-handlers=$source;
 done
 
+# Clear the sqliimport ezsite_data status entry / row
+php ./extension/ezecosystem/bin/php/ezesqliimportstatusreset.php;
+
 # Clear view cache for all importated content
 php -d memory_limit=-1 ./runcronjobs.php --siteaccess $siteaccess sqliimport_cleanup;
 
