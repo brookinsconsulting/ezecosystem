@@ -7,7 +7,9 @@ siteaccess="$1";
 fi
 
 if [[ -z "$2" ]]; then
-timelimitseconds="240";
+# This timeout default worked fine until, 2015-04-16 when server performance (execution slowdowns?) or other unknowns caused it to no longer be long enough to complete it's normal execution. So I am leaving this historical note (for me) and increasing the timeout (for further testing)
+# timelimitseconds="240";
+timelimitseconds="380";
 else
 timelimitseconds="$2";
 fi
