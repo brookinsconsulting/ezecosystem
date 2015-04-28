@@ -14,6 +14,8 @@ ProjectsForumNodeID=14584
 ProjectsNewNodeID=230
 ProjectsCommitsNodeID=4258
 GitHubNodeID=17294
+StackOverflowTagEzPublishNodeID=44628
+StackOverflowTagEzPlatformNodeID=44630
 NotificationNodeID=14353
 SidebarCommunityNodeID=969
 SidebarPlanetariumNodeID=970
@@ -52,6 +54,10 @@ ShareForumNodeIDs[]=15220
 ShareForumNodeIDs[]=15218
 ShareForumNodeIDs[]=15224
 ShareForumNodeIDs[]=15226
+#StackOverflowTagEzPublish
+ShareForumNodeIDs[]=44628
+#StackOverflowTagEzPlatform
+ShareForumNodeIDs[]=44630
 
 [PopularSidebarSettings]
 ViewCountParameters[]

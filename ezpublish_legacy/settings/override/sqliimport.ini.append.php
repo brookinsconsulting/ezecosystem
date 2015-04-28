@@ -6,6 +6,8 @@ AvailableSourceHandlers[]=ezcommunityjiraatomimporthandler
 AvailableSourceHandlers[]=ezpublish-legacygithubatomimporthandler
 AvailableSourceHandlers[]=ezcommunitygithubatomimporthandler
 AvailableSourceHandlers[]=ezsystemsgithubatomimporthandler
+AvailableSourceHandlers[]=stackoverflowtagezpublishatomimporthandler
+AvailableSourceHandlers[]=stackoverflowtagezplatformatomimporthandler
 AvailableSourceHandlers[]=brookinsconsultinggithubatomimporthandler
 AvailableSourceHandlers[]=brookinsconsultinggistgithubatomimporthandler
 AvailableSourceHandlers[]=ezpublishlegacygithubatomimporthandler
@@ -30,6 +32,7 @@ AvailableSourceHandlers[]=pspanjagithubatomimporthandler
 AvailableSourceHandlers[]=xinyuexrowgithubatomimporthandler
 AvailableSourceHandlers[]=xrowkristinagithubatomimporthandler
 AvailableSourceHandlers[]=emodricgithubatomimporthandler
+AvailableSourceHandlers[]=partialcontentatomimporthandler
 
 [ezpublishjiraatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
@@ -110,6 +113,38 @@ DefaultParentNodeID=19087
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://github.com/ezsystems.atom
+
+[stackoverflowtagezpublishatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=StackOverflow Tag ezpublish New Questions Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIStackOverflowTagATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=44628
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=http://stackoverflow.com/feeds/tag/ezpublish
+
+[stackoverflowtagezplatformatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=false
+# Intelligible name
+Name=StackOverflow Tag ezplatform New Questions Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIStackOverflowTagATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=44630
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=http://stackoverflow.com/feeds/tag/ezplatform
 
 [brookinsconsultinggithubatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
@@ -494,5 +529,21 @@ DefaultParentNodeID=23776
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://github.com/emodric.atom
+
+[partialcontentatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=Partial Content Blog Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIPartialContentATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=44631
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=http://partialcontent.com/feed/pc
 
 */ ?>

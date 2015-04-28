@@ -2,7 +2,11 @@
 
 # Define import source handler arrays
 atom_jira_sources=( ezpublishjiraatomimporthandler ezcommunityjiraatomimporthandler )
-atom_github_sources=( ezpublish-legacygithubatomimporthandler ezpublish-communitygithubatomimporthandler ezpublish-kernelgithubatomimporthandler ezcommunitygithubatomimporthandler ezsystemsgithubatomimporthandler brookinsconsultinggithubatomimporthandler brookinsconsultinggistgithubatomimporthandler ezpublishlegacygithubatomimporthandler gggeekgithubatomimporthandler jdespatisgithubatomimporthandler crevillogithubatomimporthandler andreromgithubatomimporthandler dpobelgithubatomimporthandler bdunogiergithubatomimporthandler pedroresendegithubatomimporthandler fabienpotencieratomimporthandler yannickrogergithubatomimporthandler lolautruchegithubatomimporthandler peterkeunggithubatomimporthandler xrowgithubatomimporthandler thiagocamposvianagithubatomimporthandler joaoinaciogithubatomimporthandler glyegithubatomimporthandler pspanjagithubatomimporthandler xinyuexrowgithubatomimporthandler xrowkristinagithubatomimporthandler emodricgithubatomimporthandler )
+atom_alt_sources=( stackoverflowtagezpublishatomimporthandler partialcontentatomimporthandler fabienpotencieratomimporthandler )
+atom_github_sources=( ezpublish-legacygithubatomimporthandler ezpublish-communitygithubatomimporthandler ezpublish-kernelgithubatomimporthandler ezcommunitygithubatomimporthandler ezsystemsgithubatomimporthandler brookinsconsultinggithubatomimporthandler brookinsconsultinggistgithubatomimporthandler ezpublishlegacygithubatomimporthandler gggeekgithubatomimporthandler jdespatisgithubatomimporthandler crevillogithubatomimporthandler andreromgithubatomimporthandler dpobelgithubatomimporthandler bdunogiergithubatomimporthandler pedroresendegithubatomimporthandler yannickrogergithubatomimporthandler lolautruchegithubatomimporthandler peterkeunggithubatomimporthandler xrowgithubatomimporthandler thiagocamposvianagithubatomimporthandler joaoinaciogithubatomimporthandler glyegithubatomimporthandler pspanjagithubatomimporthandler xinyuexrowgithubatomimporthandler xrowkristinagithubatomimporthandler emodricgithubatomimporthandler )
+
+# Combine source arrays in order
+all_atom_sources=( "${atom_jira_sources[@]}" "${atom_alt_sources[@]}" "${atom_github_sources[@]}" )
 
 # Test for optional siteacecss shell argument
 if [[ -z "$1" ]]; then
@@ -11,14 +15,8 @@ else
 siteaccess="$1";
 fi
 
-# Iterate throug jira sources and run atom content import
-for source in "${atom_jira_sources[@]}"
-do
-php ./extension/sqliimport/bin/php/sqlidoimport.php --siteaccess=$siteaccess --source-handlers=$source;
-done
-
-# Iterate throug github sources and run atom content import
-for source in "${atom_github_sources[@]}"
+# Iterate throug jira, github and alt sources and run atom content import
+for source in "${all_atom_sources[@]}"
 do
 php ./extension/sqliimport/bin/php/sqlidoimport.php --siteaccess=$siteaccess --source-handlers=$source;
 done
