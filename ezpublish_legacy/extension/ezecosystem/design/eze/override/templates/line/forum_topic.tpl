@@ -50,7 +50,9 @@
     <p>{$node.data_map.title.content}</p>
 
     {if $node.data_map.message.has_content|eq(true() )}
-        {if $sources_list_share_ez_no_forum_node_ids|contains( $node.parent.node_id )}
+        {if or( $node.parent.node_id|eq( $stackoverflow_ezpublish_forum_node_id ), $node.parent.node_id|eq( $stackoverflow_ezplatform_forum_node_id ) )}
+          {$node.data_map.message.content}
+        {elseif $sources_list_share_ez_no_forum_node_ids|contains( $node.parent.node_id )}
           {$node.data_map.message.content|autolink}
         {else}
           {$node.data_map.message.content|simpletags|autolink}

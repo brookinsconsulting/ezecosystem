@@ -92,11 +92,15 @@
 
             {if $home_page_root_node_id|eq( $forums_node_id )}
             {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $mirror_node_id,
+                                                                       'class_filter_type', 'exclude',
+                                                                       'class_filter_array', array( 'forum', 'forums' ),
                                                                        'attribute_filter', array( array( 'section', '=', '12' ) ),
                                                                        'depth', $home_page_fetch_depth ) )}
             {def $home_page_fetch_sort_array_published = array( 'published', false() )
 		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                                                             'class_filter_type', 'exclude',
+                                                             'class_filter_array', array( 'forum', 'forums' ),
                                                              'attribute_filter', array( array( 'section', '=', '12' ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
