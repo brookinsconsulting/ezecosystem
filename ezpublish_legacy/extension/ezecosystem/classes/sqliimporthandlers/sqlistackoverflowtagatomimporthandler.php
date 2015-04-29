@@ -124,7 +124,7 @@ class SQLIStackOverflowTagATOMImportHandler extends SQLIImportAbstractHandler im
 
         $title = (string)$row->title;
         $content->fields->subject = $title;
-        $content->fields->forum_topic_author = (string)$row->author->name;
+        $content->fields->forum_topic_author = '<a href="' . (string)$row->author->uri . '" title="' . (string)$row->author->uri . '">' . (string)$row->author->name . '</a>';
 
         $content->fields->link = (string)$row->link["href"];
         $content->fields->publication_date = strtotime( (string)$row->updated );
