@@ -3,7 +3,9 @@
 {def $view_count_enabled=cond( ezini('eZecosystemSettings','ViewCountDisplay','ezecosystem.ini')|eq('enabled'), true() )
      $view_count_threshold=ezini('eZecosystemSettings','ViewCountThreshold','ezecosystem.ini')
      $sources_list_share_ez_no_forum_node_ids=ezini('SourcesSidebarSettings','ShareForumNodeIDs','ezecosystem.ini')
-     $projects_forum_node_id=ezini('NodeIDSettings', 'ProjectsForumNodeID', 'ezecosystem.ini')}
+     $projects_forum_node_id=ezini('NodeIDSettings', 'ProjectsForumNodeID', 'ezecosystem.ini')
+     $stackoverflow_ezpublish_forum_node_id=ezini('NodeIDSettings', 'StackOverflowTagEzPublishNodeID', 'ezecosystem.ini')
+     $stackoverflow_ezplatform_forum_node_id=ezini('NodeIDSettings', 'StackOverflowTagEzPlatformNodeID', 'ezecosystem.ini')}
 
 <div class="content-view-line">
     <div class="class-blog-post float-break">
@@ -21,7 +23,7 @@
     
     <div class="attribute-byline">
 	{if $node.data_map.forum_topic_author.has_content}
-        <p class="author">By: {if $node.parent.node_id|eq( $projects_forum_node_id )}{$node.data_map.forum_topic_author.content|explode('community@ez.no (')|implode('')|explode(')')|implode('')|autolink}{else}{$node.data_map.forum_topic_author.content|autolink}{/if}</p>
+        <p class="author">By: {if $node.parent.node_id|eq( $projects_forum_node_id )}{$node.data_map.forum_topic_author.content|explode('community@ez.no (')|implode('')|explode(')')|implode('')|autolink}{elseif or( $node.parent.node_id|eq( $stackoverflow_ezpublish_forum_node_id ), $node.parent.node_id|eq( $stackoverflow_ezplatform_forum_node_id ) )}{$node.data_map.forum_topic_author.content}{else}{$node.data_map.forum_topic_author.content|autolink}{/if}</p>
 	{/if}
     </div>
     {* <div class="attribute-byline">

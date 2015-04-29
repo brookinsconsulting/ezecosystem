@@ -8,6 +8,9 @@
 {/if}
 {if $forums_node_id|is_set|not}
 {def $forums_node_id=ezini( 'NodeIDSettings', 'ForumsNodeID', 'ezecosystem.ini' )}
+{def $forums_node_ids=ezini( 'SourcesSidebarSettings', 'ShareForumNodeIDs', 'ezecosystem.ini' )}
+{def $share_forums_node_id=ezini( 'NodeIDSettings', 'ShareForumsNodeID', 'ezecosystem.ini' )}
+{def $projects_forum_node_id=ezini( 'NodeIDSettings', 'ProjectsForumNodeID', 'ezecosystem.ini' )}
 {/if}
 {def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
@@ -91,10 +94,50 @@
             {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $mirror_node_id,
                                                                        'attribute_filter', array( array( 'section', '=', '12' ) ),
                                                                        'depth', $home_page_fetch_depth ) )}
-
             {def $home_page_fetch_sort_array_published = array( 'published', false() )
 		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
                  $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                                                             'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                             'offset', $view_parameters.offset,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
+                                                             'limit', $page_limit ) )}
+            {elseif $home_page_root_node_id|eq( $share_forums_node_id )}
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $mirror_node_id,
+                                                                       'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                                       'depth', $home_page_fetch_depth ) )}
+            {def $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                                                             'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                             'offset', $view_parameters.offset,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
+                                                             'limit', $page_limit ) )}
+            {elseif $forums_node_ids|contains( $home_page_root_node_id )}
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $home_page_root_node_id,
+                                                                       'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                                       'depth', $home_page_fetch_depth ) )}
+            {def $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
+                                                             'class_filter_type', 'include',
+                                                             'class_filter_array', $home_page_fetch_classes,
+                                                             'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                             'offset', $view_parameters.offset,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
+                                                             'limit', $page_limit ) )}
+            {elseif $home_page_root_node_id|eq( $projects_forum_node_id )}
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $home_page_root_node_id,
+                                                                       'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                                       'depth', $home_page_fetch_depth ) )}
+            {def $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
                                                              'attribute_filter', array( array( 'section', '=', '12' ) ),

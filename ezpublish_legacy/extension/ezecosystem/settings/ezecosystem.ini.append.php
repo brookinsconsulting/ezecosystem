@@ -10,6 +10,7 @@ IssuesNodeID=17566
 ForumsNodeID=23166
 eZPublishIssuesNodeID=4198
 CommunityIssuesNodeID=9181
+ShareForumsNodeID=15219
 ProjectsForumNodeID=14584
 ProjectsNewNodeID=230
 ProjectsCommitsNodeID=4258
