@@ -11,6 +11,7 @@
 {def $forums_node_ids=ezini( 'SourcesSidebarSettings', 'ShareForumNodeIDs', 'ezecosystem.ini' )}
 {def $share_forums_node_id=ezini( 'NodeIDSettings', 'ShareForumsNodeID', 'ezecosystem.ini' )}
 {def $projects_forum_node_id=ezini( 'NodeIDSettings', 'ProjectsForumNodeID', 'ezecosystem.ini' )}
+{def $stackoverflow_forums_node_id=ezini( 'NodeIDSettings', 'StackOverflowForumsNodeID', 'ezecosystem.ini' )}
 {/if}
 {def $home_page_forum_topic_publication_date=ezini('AttributeIdentifierSettings','forumTopicPublicationDate','ezecosystem.ini')
      $home_page_blog_post_publication_date_attribute_name=ezini('AttributeIdentifierSettings','blogPostPublicationDate','ezecosystem.ini')
@@ -108,12 +109,33 @@
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
             {elseif $home_page_root_node_id|eq( $share_forums_node_id )}
-            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $mirror_node_id,
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $share_forums_node_id,
+                                                                       'class_filter_type', 'exclude',
+                                                                       'class_filter_array', array( 'forum', 'forums' ),
                                                                        'attribute_filter', array( array( 'section', '=', '12' ) ),
                                                                        'depth', $home_page_fetch_depth ) )}
             {def $home_page_fetch_sort_array_published = array( 'published', false() )
 		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
-                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $mirror_node_id,
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $share_forums_node_id,
+                                                             'class_filter_type', 'exclude',
+                                                             'class_filter_array', array( 'forum', 'forums' ),
+                                                             'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                             'offset', $view_parameters.offset,
+                                                             'sort_by', $home_page_fetch_sort_array,
+                                                             'ignore_visibility', false(),
+						             'depth', $home_page_fetch_depth,
+                                                             'limit', $page_limit ) )}
+            {elseif $home_page_root_node_id|eq( $stackoverflow_forums_node_id )}
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $home_page_root_node_id,
+                                                                       'class_filter_type', 'exclude',
+                                                                       'class_filter_array', array( 'forum', 'forums' ),
+                                                                       'attribute_filter', array( array( 'section', '=', '12' ) ),
+                                                                       'depth', $home_page_fetch_depth ) )}
+            {def $home_page_fetch_sort_array_published = array( 'published', false() )
+		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
+                                                             'class_filter_type', 'exclude',
+                                                             'class_filter_array', array( 'forum', 'forums' ),
                                                              'attribute_filter', array( array( 'section', '=', '12' ) ),
                                                              'offset', $view_parameters.offset,
                                                              'sort_by', $home_page_fetch_sort_array,
@@ -136,12 +158,14 @@
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
             {elseif $home_page_root_node_id|eq( $projects_forum_node_id )}
-            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $home_page_root_node_id,
+            {def $children_count=fetch( 'content', 'list_count', hash( 'parent_node_id', $projects_forum_node_id,
+                                                                       'class_filter_type', 'include',
+                                                                       'class_filter_array', $home_page_fetch_classes,
                                                                        'attribute_filter', array( array( 'section', '=', '12' ) ),
                                                                        'depth', $home_page_fetch_depth ) )}
             {def $home_page_fetch_sort_array_published = array( 'published', false() )
 		 $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
-                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
+                 $children = fetch( 'content', 'list', hash( 'parent_node_id', $projects_forum_node_id,
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,
                                                              'attribute_filter', array( array( 'section', '=', '12' ) ),
@@ -194,25 +218,24 @@
 						             'depth', $home_page_fetch_depth,
                                                              'limit', $page_limit ) )}
             {else}
-{* Deprecated fetch conditions
+                {* Deprecated fetch conditions
                                                                         'class_filter_type', 'include',
                                                                         'class_filter_array', array( $home_page_fetch_classes[0] ),
                                                                         'language', $home_page_post_fetch_language,
 							                'depth', $home_page_fetch_depth,
                                                                         'ignore_visibility', false()
-
-*}
-            {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $current_node.node_id,
+                *}
+                {def $children_count=fetch( 'content2', 'list_count', hash( 'parent_node_id', $current_node.node_id,
                                                                         'attribute_filter', array( 'or', array( 'section', '!=', '7' ), array( 'section', '!=', '9' ), array( 'section', '!=', '11' ), array( 'section', '!=', '12' ) ),
 							                'depth', $home_page_fetch_depth
                                                                          ) )}
 
-{* Deprecated fetch conditions
+                {* Deprecated fetch conditions
 
                                                              'class_filter_type', 'include',
                                                              'class_filter_array', $home_page_fetch_classes,,
                                                              'ignore_visibility', false(),
-*}
+                *}
 
             {def $home_page_fetch_sort_array_attribute_ext = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'attribute', false(), $home_page_forum_topic_publication_date ) )
 		 $home_page_fetch_sort_array_attribute_blog_only = array( array( 'attribute', false(), $home_page_blog_post_publication_date_attribute_name ), array( 'published', false() ) )
@@ -258,6 +281,8 @@
                     {foreach $children as $child}
                         {node_view_gui view='line' content_node=$child}
                     {/foreach}
+                {else}
+                    Sorry, this category currently has no content. Please try again later.
                 {/if}
             </div>
 {/if}

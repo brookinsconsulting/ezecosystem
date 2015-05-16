@@ -15,6 +15,7 @@ ProjectsForumNodeID=14584
 ProjectsNewNodeID=230
 ProjectsCommitsNodeID=4258
 GitHubNodeID=17294
+StackOverflowForumsNodeID=44627
 StackOverflowTagEzPublishNodeID=44628
 StackOverflowTagEzPlatformNodeID=44630
 NotificationNodeID=14353
