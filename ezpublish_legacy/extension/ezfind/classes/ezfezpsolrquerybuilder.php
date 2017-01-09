@@ -1,8 +1,8 @@
 <?php
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
- * @license For full copyright and license information view LICENSE file distributed with this source code.
- * @version 2014.07.0
+ * @license http://ez.no/eZPublish/Licenses/eZ-Trial-and-Test-License-Agreement-eZ-TTL-v2.0 eZ Trial and Test License Agreement Version 2.0
+ * @version 5.4.0
  */
 
 class ezfeZPSolrQueryBuilder
@@ -312,7 +312,10 @@ class ezfeZPSolrQueryBuilder
         if ( !$contentClassAttributeID )
         {
             $queryFields[] = eZSolr::getMetaFieldName( 'name' );
-            $queryFields[] = eZSolr::getMetaFieldName( 'owner_name' );
+            if ( !self::$FindINI->hasVariable( 'SearchFilters', 'ExcludeOwnerName' ) || self::$FindINI->variable( 'SearchFilters', 'ExcludeOwnerName' ) !== 'enabled' )
+            {
+                $queryFields[] = eZSolr::getMetaFieldName( 'owner_name' );
+            }
         }
 
 
@@ -422,12 +425,16 @@ class ezfeZPSolrQueryBuilder
             $filterQuery = array( $fqString );
         }
 
+        // Document transformer fields since eZ Find 5.4
+        $docTransformerFields = array( '[elevated]' );
+
         $fieldsToReturnString = eZSolr::getMetaFieldName( 'guid' ) . ' ' . eZSolr::getMetaFieldName( 'installation_id' ) . ' ' .
                 eZSolr::getMetaFieldName( 'main_url_alias' ) . ' ' . eZSolr::getMetaFieldName( 'installation_url' ) . ' ' .
                 eZSolr::getMetaFieldName( 'id' ) . ' ' . eZSolr::getMetaFieldName( 'main_node_id' ) . ' ' .
                 eZSolr::getMetaFieldName( 'language_code' ) . ' ' . eZSolr::getMetaFieldName( 'name' ) .
                 ' score ' . eZSolr::getMetaFieldName( 'published' ) . ' ' . eZSolr::getMetaFieldName( 'path_string' ) . ' ' .
                 eZSolr::getMetaFieldName( 'main_path_string' ) . ' ' . eZSolr::getMetaFieldName( 'is_invisible' ) . ' ' .
+                implode( ' ', $docTransformerFields) . ' ' .
                 implode( ' ', $extraFieldsToReturn );
 
         if ( ! $asObjects )

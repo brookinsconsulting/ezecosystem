@@ -1,8 +1,8 @@
 <?php
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
- * @license For full copyright and license information view LICENSE file distributed with this source code.
- * @version 2014.07.0
+ * @license http://ez.no/eZPublish/Licenses/eZ-Trial-and-Test-License-Agreement-eZ-TTL-v2.0 eZ Trial and Test License Agreement Version 2.0
+ * @version 5.4.0
  */
 
 /**
@@ -216,6 +216,11 @@ class eZSolr implements ezpSearchEngine
                 return null;
             }
             $contentClassAttribute = eZContentClassAttribute::fetch( $contentClassAttributeID );
+            if ( ! $contentClassAttribute instanceof eZContentClassAttribute )
+            {
+                eZDebug::writeNotice( "Can not find field name for classattribute, id: $contentClassAttributeID, basename: $baseName", __METHOD__ );
+                return null;
+            }
             $fieldName = ezfSolrDocumentFieldBase::getFieldName( $contentClassAttribute, $subattribute, $context );
 
             if ( $includingClassID )
@@ -521,6 +526,15 @@ class eZSolr implements ezpSearchEngine
         //  Create the list of available languages for this version :
         $availableLanguages = $currentVersion->translationList( false, false );
 
+        // Check if the content in a given language has been deleted
+        $indexedTranslations = $this->getLanguagesForObject( $contentObject );
+        $translationsToRemove = array_diff( $indexedTranslations, $availableLanguages );
+
+        if ( !empty( $translationsToRemove ) )
+        {
+            $this->removeObjectById( $contentObject->attribute( 'id' ), null, 0, $translationsToRemove );
+        }
+
         // Loop over each language version and create an eZSolrDoc for it
         foreach ( $availableLanguages as $languageCode )
         {
@@ -593,7 +607,7 @@ class eZSolr implements ezpSearchEngine
             $urlAlias = eZFunctionHandler::execute( 'switchlanguage', 'url_alias', array( 'node_id' => $mainNodeID, 'locale' => $languageCode ) );
             // Add main url_alias
             $doc->addField( ezfSolrDocumentFieldBase::generateMetaFieldName( 'main_url_alias' ), $urlAlias );
-            
+
             // Add main path_string
             $doc->addField( ezfSolrDocumentFieldBase::generateMetaFieldName( 'main_path_string' ), $mainNode->attribute( 'path_string' ) );
 
@@ -839,9 +853,10 @@ class eZSolr implements ezpSearchEngine
      * @param int $contentObjectId The content object to remove by id
      * @param bool $commit Whether to commit after removing the object
      * @param integer $commitWithin specifies within how many milliseconds a commit should occur if no other commit
+     * @param array $languages (of strings) in which the content will be removed. null will remove all translations
      * @return bool True if the operation succeed.
      */
-    public function removeObjectById( $contentObjectId, $commit = null, $commitWithin = 0 )
+    public function removeObjectById( $contentObjectId, $commit = null, $commitWithin = 0, array $languages = null )
     {
         /*
          * @since eZFind 2.2: allow delayed commits if explicitely set as configuration setting and
@@ -874,10 +889,22 @@ class eZSolr implements ezpSearchEngine
         }
 
         // 2: create a delete array with all the required infos, groupable by language
-        $languages = eZContentLanguage::fetchList();
+        if ( $languages === null )
+        {
+            $languages = eZContentLanguage::fetchList();
+        }
+
         foreach ( $languages as $language )
         {
-            $languageCode = $language->attribute( 'locale' );
+            if ( $language instanceof eZContentLanguage )
+            {
+                $languageCode = $language->attribute( 'locale' );
+            }
+            else
+            {
+                $languageCode = $language;
+            }
+
             $docs[$languageCode] = $this->guid( $contentObjectId, $languageCode );
         }
         if ( $this->UseMultiLanguageCores === true )
@@ -1176,6 +1203,68 @@ class eZSolr implements ezpSearchEngine
     }
 
     /**
+     * Provides all languages an object is indexed in
+     * @param eZContentObject $contentObject
+     *
+     * @return array of languages (as strings)
+     */
+    public function getLanguagesForObject( eZContentObject $contentObject)
+    {
+        $languages = array();
+
+        $params = array(
+            'fl' => 'meta_language_code_ms',
+            'fq' => 'meta_id_si:' . $contentObject->attribute( 'id' )
+        );
+
+        if ( $this->UseMultiLanguageCores === true )
+        {
+            foreach ( $this->SolrLanguageShards as $shard )
+            {
+                /** @var eZSolrBase $shard */
+                $languages = array_merge(
+                    $languages,
+                    $this->extractLanguageCodesFromSolrResult( $shard->rawSearch( $params ) )
+                );
+            }
+        }
+        else
+        {
+            $languages = array_merge(
+                $languages,
+                $this->extractLanguageCodesFromSolrResult( $this->Solr->rawSearch( $params ) )
+            );
+        }
+
+        return $languages;
+    }
+
+    /**
+     * Extracts the list of 'meta_language_code_ms' from a solrResult array.
+     *
+     * @param $solrResults
+     *
+     * @return array of languages (as strings)
+     */
+    private function extractLanguageCodesFromSolrResult( $solrResults )
+    {
+        $languages = array();
+
+        if ( isset( $solrResults['response']['docs'] ) )
+        {
+            foreach ( $solrResults['response']['docs'] as $doc )
+            {
+                if ( isset( $doc['meta_language_code_ms'] ) )
+                {
+                    $languages[] = $doc['meta_language_code_ms'];
+                }
+            }
+        }
+
+        return $languages;
+    }
+
+    /**
      * Clean up search index for current installation.
      * @return bool true if cleanup was successful
      * @todo:  handle multicore configs (need a parameter for it) for return values
@@ -1302,7 +1391,7 @@ class eZSolr implements ezpSearchEngine
     public function updateNodeSection( $nodeID, $sectionID )
     {
         $contentObject = eZContentObject::fetchByNodeID( $nodeID );
-        $this->addObject( $contentObject );
+        eZContentOperationCollection::registerSearchObject( $contentObject->ID );
     }
 
     /**
@@ -1322,7 +1411,7 @@ class eZSolr implements ezpSearchEngine
             // section id or the content object may come from the memory cache
             // make sure the section_id is the right one
             $object->setAttribute( 'section_id', $sectionID );
-            $this->addObject( $object );
+            eZContentOperationCollection::registerSearchObject( $id );
         }
     }
 
@@ -1342,7 +1431,14 @@ class eZSolr implements ezpSearchEngine
     {
         $node = eZContentObjectTreeNode::fetch( $nodeID );
         $this->addObject( $node->attribute( 'object' ) );
-        if ( $node->childrenCount( false ) )
+
+        $params = array(
+            'Depth'             => 1,
+            'DepthOperator'     => 'eq',
+            'Limitation'        => array(),
+            'IgnoreVisibility'  => true,
+        );
+        if ( $node->subTreeCount( $params ) > 0 )
         {
             $pendingAction = new eZPendingActions(
                 array(
@@ -1572,6 +1668,7 @@ class eZSolr implements ezpSearchEngine
                     }
                     $emit['highlight'] = isset( $highLights[$doc[ezfSolrDocumentFieldBase::generateMetaFieldName( 'guid' )]] ) ?
                                          $highLights[$doc[ezfSolrDocumentFieldBase::generateMetaFieldName( 'guid' )]] : null;
+                    $emit['elevated'] = ( isset($doc['[elevated]']) ? $doc['[elevated]'] === true : false );
                     $objectRes[] = $emit;
                     unset( $emit );
                     continue;
@@ -1655,6 +1752,7 @@ class eZSolr implements ezpSearchEngine
                  */
                 $maxScore != 0 ? $resultTree->setAttribute( 'score_percent', (int) ( ( $doc['score'] / $maxScore ) * 100 ) ) : $resultTree->setAttribute( 'score_percent', 100 );
                 $resultTree->setAttribute( 'language_code', $doc[ezfSolrDocumentFieldBase::generateMetaFieldName( 'language_code' )] );
+                $resultTree->setAttribute( 'elevated', ( isset($doc['[elevated]']) ? $doc['[elevated]'] === true : false ) );
                 $objectRes[] = $resultTree;
             }
         }

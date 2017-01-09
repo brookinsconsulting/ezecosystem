@@ -1,8 +1,8 @@
 <?php
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
- * @license For full copyright and license information view LICENSE file distributed with this source code.
- * @version 2014.07.0
+ * @license http://ez.no/eZPublish/Licenses/eZ-Trial-and-Test-License-Agreement-eZ-TTL-v2.0 eZ Trial and Test License Agreement Version 2.0
+ * @version 5.4.0
  */
 
 /**
@@ -51,7 +51,8 @@ class ezfSearchResultInfo
                       // spellcheck dictionary/index -- Solr php response writer "bug"
                       'spellcheck_collation',
                       'interestingTerms',
-                      'clusters'
+                      'clusters',
+                      'highlighting'
             );
     }
 
@@ -321,6 +322,17 @@ class ezfSearchResultInfo
                 if ( isset( $this->ResultArray['clusters'] ) )
                 {
                     return $this->ResultArray['clusters'];
+                }
+                else
+                {
+                    return false;
+                }
+            } break;
+            case 'highlighting':
+            {
+                if ( isset( $this->ResultArray['highlighting'] ) )
+                {
+                    return $this->ResultArray['highlighting'];
                 }
                 else
                 {

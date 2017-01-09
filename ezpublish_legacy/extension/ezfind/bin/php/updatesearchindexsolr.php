@@ -2,8 +2,8 @@
 <?php
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
- * @license For full copyright and license information view LICENSE file distributed with this source code.
- * @version 2014.07.0
+ * @license http://ez.no/eZPublish/Licenses/eZ-Trial-and-Test-License-Agreement-eZ-TTL-v2.0 eZ Trial and Test License Agreement Version 2.0
+ * @version 5.4.0
  */
 
 require 'autoload.php';
@@ -96,6 +96,13 @@ class ezfUpdateSearchIndexSolr
             )
         );
         $this->Script->initialize();
+
+        // check if ezfind is enabled and exit if not
+        if ( ! in_array( 'ezfind', eZExtension::activeExtensions() ) )
+        {
+            $this->CLI->error( 'eZ Find extension is not enabled and because of that index process will fail. Please enable it and run this script again.' );
+            $this->Script->shutdown( 0 );
+        }
 
         // Fix siteaccess
         $siteAccess = $this->Options['siteaccess'] ? $this->Options['siteaccess'] : false;
@@ -352,6 +359,9 @@ class ezfUpdateSearchIndexSolr
     protected function forkAndExecute( $nodeID, $offset, $limit )
     {
         eZDB::setInstance( null );
+
+        // Prepare DB-based cluster handler for fork (it will re-connect DB automatically).
+        eZClusterFileHandler::preFork();
 
         $pid = pcntl_fork();
 

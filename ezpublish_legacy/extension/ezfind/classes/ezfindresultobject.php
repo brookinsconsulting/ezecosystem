@@ -1,8 +1,8 @@
 <?php
 /**
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
- * @license For full copyright and license information view LICENSE file distributed with this source code.
- * @version 2014.07.0
+ * @license http://ez.no/eZPublish/Licenses/eZ-Trial-and-Test-License-Agreement-eZ-TTL-v2.0 eZ Trial and Test License Agreement Version 2.0
+ * @version 5.4.0
  */
 
 class eZFindResultObject extends eZContentObject
@@ -26,19 +26,8 @@ class eZFindResultObject extends eZContentObject
     */
     function attribute( $attr, $noFunction = false )
     {
-        $retVal = null;
-        switch ( $attr )
-        {
-            default:
-            {
-                if ( in_array( $attr, $this->LocalAttributeNameList ) )
-                {
-                    $retVal = isset( $this->LocalAttributeValueList[$attr] ) ?
-                        $this->LocalAttributeValueList[$attr] : null;
-                }
-            } break;
-        }
-        return $retVal;
+        return isset( $this->LocalAttributeValueList[$attr] ) ?
+                $this->LocalAttributeValueList[$attr] : null;
     }
 
     /*!
