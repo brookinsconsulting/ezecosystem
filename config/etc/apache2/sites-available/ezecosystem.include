@@ -1,4 +1,4 @@
-<VirtualHost :8090>
+<VirtualHost *:8090>
 
     DocumentRoot /srv/www/ezecosystem/ezpublish_legacy
 
@@ -12,11 +12,6 @@
     ServerAdmin root@thinkcreative.com
 
     Include /etc/apache2/common/filesmatch.conf
-
-    php_value max_execution_time 200
-    php_value upload_max_filesize 150M
-    php_value post_max_size 150M
-    php_value memory_limit 512M
 
     RewriteEngine On
 
