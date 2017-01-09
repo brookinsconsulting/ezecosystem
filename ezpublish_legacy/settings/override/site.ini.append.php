@@ -4,12 +4,16 @@
 StaticCacheHandler=eZecosystemStaticCache
 
 [DatabaseSettings]
-DatabaseImplementation=ezmysqli
+## DatabaseImplementation=ezmysql
+#DatabaseImplementation=ezmysqli
 Database=ezecosystem
 Charset=
-QueryAnalysisOutput=disabled
-SQLOutput=disabled
-SlowQueriesOutput=40
+Socket=disabled
+Port=
+# Disabled pending further sql performance analysis
+#QueryAnalysisOutput=disabled
+#SQLOutput=disabled
+#SlowQueriesOutput=40
 
 [DebugSettings]
 #DebugOutput=enabled
@@ -54,6 +58,7 @@ ActiveExtensions[]=ezodf
 ActiveExtensions[]=ezmultiupload
 ##ActiveExtensions[]=eztags
 ActiveExtensions[]=ezautosave
+ActiveExtensions[]=ezfind
 
 [Session]
 RememberMeTimeout=864000
@@ -103,6 +108,7 @@ HostMatchMapItems[]=ezecosystem;eze_user_local
 HostMatchMapItems[]=admin.ezecosystem;eze_admin_local
 HostMatchMapItems[]=cache.ezecosystem;eze_user_local
 HostMatchMapItems[]=nocache.ezecosystem;eze_user_local_nocache
+HostMatchMapItems[]=ezecosystem.ccplatform.net;ezwebin_site_user
 HostMatchMapItems[]=ezecosystem.ssd.thinkcreativeinternal.net;ezwebin_site_user
 HostMatchMapItems[]=admin.ezecosystem.ssd.thinkcreativeinternal.net;ezwebin_site_admin
 HostMatchMapItems[]=ezpublishlegacy.com;ezpl_user
