@@ -13,11 +13,11 @@
 class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIImportHandler
 {
     protected $rowIndex = 0;
-    
+
     protected $rowCount;
-    
+
     protected $currentGUID;
-    
+
     /**
      * Constructor
      */
@@ -27,7 +27,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         $this->remoteIDPrefix = $this->getHandlerIdentifier().'-';
         $this->currentRemoteIDPrefix = $this->remoteIDPrefix;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::initialize()
@@ -42,7 +42,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         $xmlParser = new SQLIXMLParser( $xmlOptions );
         $this->dataSource = $xmlParser->parse();
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getProcessLength()
@@ -55,7 +55,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         }
         return $this->rowCount;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getNextRow()
@@ -71,10 +71,10 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         {
             $row = false; // We must return false if we already processed all rows
         }
-        
+
         return $row;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::process()
@@ -127,24 +127,31 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         $content->fields->blog_post_description_text_block = (string)$row->content; // Proxy method to SQLIContentUtils::getRichContent()
 
         /*
-        if( preg_match( '/1624060/', $row->id[0] ) )
-        {
-        echo "\n\n\n"; 
+        echo "\n\n\n";
         print_r( $row->id[0] );
         echo "\n\n\n";
-        // print_r( (string)$row->content );
 
-        print_r( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
+        if( preg_match( '/1618124/', $row->id[0] ) )
+        {
+        echo "\n\n\n";
+        print_r( $row->id[0] );
+        //print_r( (string)$row->title );
+        echo "\n\n\n";
+        //print_r( (string)$row->content );
+        print_r( $content->fields );
+
+        //print_r( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
         echo "\n\n\n";
         }
         */
+
 
         // Now publish content
         $content->addLocation( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
 
         $publisher = SQLIContentPublisher::getInstance();
         $publisher->publish( $content );
-        
+
         // Clear cache
         $defaultParentNodeID = $this->handlerConfArray['DefaultParentNodeID'];
         $parentNode = eZContentObjectTreeNode::fetch( $defaultParentNodeID, 'eng-US' );
@@ -159,7 +166,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         // @see SQLIContent::__destruct()
         unset( $content );
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::cleanup()
@@ -169,7 +176,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
         // Nothing to clean up
         return;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getHandlerName()
@@ -178,7 +185,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
     {
         return 'GitHub Gist ATOM Import Handler';
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getHandlerIdentifier()
@@ -187,7 +194,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
     {
         return 'gistgithubatomimporthandler';
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getProgressionNotes()
