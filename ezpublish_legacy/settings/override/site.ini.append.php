@@ -13,6 +13,7 @@ Port=
 # Disabled pending further sql performance analysis
 #QueryAnalysisOutput=disabled
 #SQLOutput=disabled
+#SQLOutput=enabled
 #SlowQueriesOutput=40
 
 [DebugSettings]
@@ -38,6 +39,8 @@ ActiveExtensions[]=ezsh
 ActiveExtensions[]=swark
 ActiveExtensions[]=bcupdatecache
 ActiveExtensions[]=bcgeneratestaticcache
+ActiveExtensions[]=bcdatetimefilter
+ActiveExtensions[]=hfpfetchrandom
 ActiveExtensions[]=git_manager
 ActiveExtensions[]=nl_cronjobs
 ActiveExtensions[]=ggsysinfo
