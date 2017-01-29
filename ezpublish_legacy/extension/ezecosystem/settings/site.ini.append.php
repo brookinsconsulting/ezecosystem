@@ -14,4 +14,7 @@ FeedObjectAttributeMap[title]=title
 FeedObjectAttributeMap[description]=intro
 FeedObjectAttributeMap[category]=tags
 
+[SearchSettings]
+LogSearchStats=disabled
+
 */ ?>
