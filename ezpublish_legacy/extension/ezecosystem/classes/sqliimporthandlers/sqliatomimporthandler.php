@@ -13,11 +13,11 @@
 class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIImportHandler
 {
     protected $rowIndex = 0;
-    
+
     protected $rowCount;
-    
+
     protected $currentGUID;
-    
+
     /**
      * Constructor
      */
@@ -27,7 +27,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
         $this->remoteIDPrefix = $this->getHandlerIdentifier().'-';
         $this->currentRemoteIDPrefix = $this->remoteIDPrefix;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::initialize()
@@ -42,7 +42,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
         $xmlParser = new SQLIXMLParser( $xmlOptions );
         $this->dataSource = $xmlParser->parse();
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getProcessLength()
@@ -55,7 +55,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
         }
         return $this->rowCount;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getNextRow()
@@ -71,10 +71,10 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
         {
             $row = false; // We must return false if we already processed all rows
         }
-        
+
         return $row;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::process()
@@ -82,13 +82,18 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
     public function process( $row )
     {
         // $row is a SimpleXMLElement object
-        $this->currentGUID = $row->id;
+        $this->currentGUID = str_replace( 'http://fabien.potencier.org/', '', (string)$row->id );
+
+        /* echo "\n";echo "\n";echo "\n";echo "\n";
+        print_r( $this->currentGUID );
+        echo "\n";echo "\n";echo "\n";echo "\n";
+         */
+
         $contentOptions = new SQLIContentOptions( array(
             'class_identifier'      => 'blog_post',
-            'remote_id'             => (string)$row->id
+            'remote_id'             => $this->currentGUID
         ) );
         $content = SQLIContent::create( $contentOptions );
-
         $published = (string)$row->published;
         $updated = (string)$row->updated;
         $skipUpdated = false;
@@ -125,7 +130,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
 
         // Handle HTML content
         $content->fields->blog_post_description_text_block = (string)$row->content; // Proxy method to SQLIContentUtils::getRichContent()
-        
+
         // Now publish content
         $content->addLocation( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
 
@@ -141,12 +146,12 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
             $objectID = $parentNode->attribute( 'object' )->attribute( 'id' );
             eZContentCacheManager::clearContentCacheIfNeeded( $objectID );
         }
-        
+
         // Free some memory. Internal methods eZContentObject::clearCache() and eZContentObject::resetDataMap() will be called
         // @see SQLIContent::__destruct()
         unset( $content );
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::cleanup()
@@ -156,7 +161,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
         // Nothing to clean up
         return;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getHandlerName()
@@ -165,7 +170,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
     {
         return 'ATOM Import Handler';
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getHandlerIdentifier()
@@ -174,7 +179,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
     {
         return 'atomimporthandler';
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see extension/sqliimport/classes/sourcehandlers/ISQLIImportHandler::getProgressionNotes()
