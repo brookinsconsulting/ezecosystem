@@ -197,7 +197,7 @@ $FunctionList['calendar'] = array( 'name' => 'calendar',
 
 $FunctionList['list'] = array( 'name' => 'list',
                                'operation_types' => array( 'read' ),
-                               'call_method' => array( 'class' => 'eZContentFunctionCollection',
+                               'call_method' => array( 'class' => 'eZContentFunctionCollectionNoLanguage',
                                                        'method' => 'fetchObjectTree' ),
                                'parameter_type' => 'standard',
                                'parameters' => array( array( 'name' => 'parent_node_id',

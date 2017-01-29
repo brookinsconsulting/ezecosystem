@@ -263,7 +263,7 @@
                      $home_page_fetch_sort_array_attribute_forum_only = array( array( 'attribute', false(), $home_page_forum_topic_publication_date ), array( 'published', false() ) )
                      $home_page_fetch_sort_array_published = array( 'published', false() )
                      $home_page_fetch_sort_array = $home_page_fetch_sort_array_published
-                     $children = fetch( 'content', 'list', hash( 'parent_node_id', $home_page_root_node_id,
+                     $children = fetch( 'content2', 'list', hash( 'parent_node_id', $home_page_root_node_id,
                                                                  'attribute_filter', array( 'and', array( 'section', '!=', $home_page_section_github ), array( 'section', '!=', $home_page_section_planet ), array( 'section', '!=', $home_page_section_issues ), array( 'section', '!=', $home_page_section_forums ) ),
                                                                  'extended_attribute_filter', hash( 'id', 'BcDateTimeExtendedFilter', 'params', hash( 'published', makedate( 1, 1, currentdate()|datetime( 'custom', '%Y' ) ) ) ),
                                                                  'offset', $view_parameters.offset,

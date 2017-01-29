@@ -1341,6 +1341,9 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
                 {
                     if ( $justFilterCount > 0 )
                         $filterSQL['where'] .= "                            ( " . $attibuteFilterJoinSQL . " ) AND ";
+                        // EZE - KERNEL HACK TO REMOVE PERFORMANCE PROBLEMS WITH LANGUAGES. THIS CHANGE REMOVES SECTION ATTRIBUTE FILTER TRAILING AND STRING IN QUERY.
+                        // $filterSQL['where'] .= "                            ( " . $attibuteFilterJoinSQL . " ) ";
+
                 }
             } // end of 'if ( is_array( $filterArray ) )'
         }
@@ -1831,7 +1834,8 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
             $showInvisible = eZContentObjectTreeNodeNoLanguage::showInvisibleNodes();
 
         if ( !$showInvisible )
-            $showInvisibleNodesCond = 'AND ezcontentobject_tree.is_invisible = 0';
+            $showInvisibleNodesCond = ' ezcontentobject_tree.is_invisible = 0';
+            //$showInvisibleNodesCond = 'AND ezcontentobject_tree.is_invisible = 0';
 
         return $showInvisibleNodesCond;
     }
@@ -1865,7 +1869,7 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
         {
             return $limitation;
         }
-        
+
         $currentUser = eZUser::currentUser();
         $currentUserID = $currentUser->attribute( 'contentobject_id' );
         $limitationList = array();
@@ -1963,6 +1967,7 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
         }
 
         $attributeFilter         = eZContentObjectTreeNodeNoLanguage::createAttributeFilterSQLStrings( $params['AttributeFilter'], $sortingInfo, $language );
+
         if ( $attributeFilter === false )
         {
             return null;
@@ -2001,7 +2006,12 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
         }
 
         $languageFilter = eZContentLanguage::languagesSQLFilter( 'ezcontentobject' );
-        $objectNameLanguageFilter = eZContentLanguage::sqlFilter( 'ezcontentobject_name', 'ezcontentobject' );
+
+        // EZE -KERNEL HACK - Disabled per content2 module fetch function is lang removed for db performance
+        // $languageFilter = eZContentLanguage::languagesSQLFilter( 'ezcontentobject' );
+        $languageFilter = '';
+        // $objectNameLanguageFilter = eZContentLanguage::sqlFilter( 'ezcontentobject_name', 'ezcontentobject' );
+        $objectNameLanguageFilter = '';
 
         if ( $language )
         {
@@ -2045,7 +2055,8 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
             "$objectNameLanguageFilter " .
             "$showInvisibleNodesCond " .
             "$sqlPermissionChecking[where] " .
-            "$objectNameFilterSQL AND " .
+            // "$objectNameFilterSQL AND " .
+            "$objectNameFilterSQL " .
             "$languageFilter " .
             $groupBySQL;
 
@@ -2055,7 +2066,7 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
         $db = eZDB::instance();
 
         $server = count( $sqlPermissionChecking['temp_tables'] ) > 0 ? eZDBInterface::SERVER_SLAVE : false;
-
+//print_r( $query ); die();
         $nodeListArray = $db->arrayQuery( $query, array( 'offset' => $offset,
                                                          'limit'  => $limit ),
                                                   $server );
@@ -2438,8 +2449,12 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
             $mainNodeOnlyCond = 'ezcontentobject_tree.node_id = ezcontentobject_tree.main_node_id AND';
         }
 
-        $languageFilter = ' AND '.eZContentLanguage::languagesSQLFilter( 'ezcontentobject' );
-        $objectNameLanguageFilter = eZContentLanguage::sqlFilter( 'ezcontentobject_name', 'ezcontentobject' );
+        // EZE - KERNEL PATCH - Disabled to prevent language usage query slowdown
+        //$languageFilter = ' AND '.eZContentLanguage::languagesSQLFilter( 'ezcontentobject' );
+        $languageFilter = '';
+
+        // $objectNameLanguageFilter = eZContentLanguage::sqlFilter( 'ezcontentobject_name', 'ezcontentobject' );
+        $objectNameLanguageFilter = '';
 
         if ( $language )
         {
@@ -2450,6 +2465,15 @@ class eZContentObjectTreeNodeNoLanguage extends eZPersistentObject
         $attributeFilterParam = isset( $params['AttributeFilter'] ) ? $params['AttributeFilter'] : false;
         $sortingInfo = array( 'sortCount' => 0, 'attributeJoinCount' => 0 );
         $attributeFilter = eZContentObjectTreeNodeNoLanguage::createAttributeFilterSQLStrings( $attributeFilterParam, $sortingInfo, $language );
+
+        // EZE - KERNEL PATCH - Disabled to prevent language usage query slowdown
+        $replaceStringAnd = ' AND';
+        $replaceStringAndPos = strrpos( $attributeFilter['where'], $replaceStringAnd );
+        if( $replaceStringAndPos !== false )
+        {
+            $$attributeFilter['where'] = substr_replace( $attributeFilter['where'], '', $replaceStringAndPos, strlen( $replaceStringAnd ) );
+        }
+
         if ( $attributeFilter === false )
         {
             return null;
