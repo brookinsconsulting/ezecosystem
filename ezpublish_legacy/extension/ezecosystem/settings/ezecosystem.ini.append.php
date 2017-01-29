@@ -106,9 +106,16 @@ TagCloudExcludeTagStrings[]
 TagCloudExcludeTagStrings[]=EZP-
 TagCloudExcludeTagStrings[]=COM-
 
+[HomePageSectionSettings]
+ForumsSectionID=12
+IssuesSectionID=11
+HomePageAndGitHubSectionID=10
+GitHubSectionID=7
+PlanetSectionID=9
+
 [TwitterSidebarSettings]
-TwitterSearchUrl=https://twitter.com/search?q=ezpublish+OR+ezcommunity+OR+ezfind+OR+ezsystems+OR+ezsummer+OR+ezconf
-TwitterSearchTitle=Tweets about "ezpublish OR ezcommunity OR ezfind OR ezsystems OR ezsummer OR ezconf"
+TwitterSearchUrl=https://twitter.com/search?q=ezpublish+OR+ezplatform+OR+ezcommunity+OR+ezfind+OR+ezsystems+OR+ezsummer+OR+ezconf
+TwitterSearchTitle=Tweets about "ezpublish OR ezplatform OR ezcommunity OR ezfind OR ezsystems OR ezsummer OR ezconf"
 
 [FeedSidebarSettings]
 MainRssUrl=/rss/feed/rss
