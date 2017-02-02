@@ -18,6 +18,8 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
 
     protected $currentGUID;
 
+    protected $getHandlerFeedName;
+
     /**
      * Constructor
      */
@@ -35,6 +37,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
     public function initialize()
     {
         $atomFeedUrl = $this->handlerConfArray['ATOMFeed'];
+        $this->getHandlerFeedName = $this->handlerConfArray['Name'];
         $xmlOptions = new SQLIXMLOptions( array(
             'xml_path'      => $atomFeedUrl,
             'xml_parser'    => 'simplexml'
@@ -168,7 +171,7 @@ class SQLIATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIIm
      */
     public function getHandlerName()
     {
-        return 'ATOM Import Handler';
+        return $this->getHandlerFeedName . ' : ' . 'ATOM Import Handler';
     }
 
     /**

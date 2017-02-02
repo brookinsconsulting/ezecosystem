@@ -17,6 +17,8 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
     protected $rowCount;
     
     protected $currentGUID;
+
+    protected $getHandlerFeedName;
     
     /**
      * Constructor
@@ -35,6 +37,7 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
     public function initialize()
     {
         $atomFeedUrl = $this->handlerConfArray['ATOMFeed'];
+        $this->getHandlerFeedName = $this->handlerConfArray['Name'];
         $xmlOptions = new SQLIXMLOptions( array(
             'xml_path'      => $atomFeedUrl,
             'xml_parser'    => 'simplexml'
@@ -175,7 +178,7 @@ class SQLIGitHubATOMImportHandler extends SQLIImportAbstractHandler implements I
      */
     public function getHandlerName()
     {
-        return 'GitHub ATOM Import Handler';
+        return $this->getHandlerFeedName . ' : ' . 'GitHub ATOM Import Handler';
     }
     
     /**

@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Define import source handler arrays
+atom_youtube_source=( ezpublishyoutubeplaylistezsystemsofficialatomimporthandler ezpublishyoutubeplaylistezsessionsatomimporthandler ezpublishyoutubeplaylisttheezpublishshowatomimporthandler ezpublishyoutubeplaylistezpublishdynamicatomimporthandler )
 atom_jira_sources=( ezpublishjiraatomimporthandler ezcommunityjiraatomimporthandler )
 atom_alt_sources=( stackoverflowtagezpublishatomimporthandler stackoverflowtagezplatformatomimporthandler partialcontentatomimporthandler fabienpotencieratomimporthandler )
 atom_github_sources=( ezecosystemgithubatomimporthandler ezpublish-legacygithubatomimporthandler ezpublish-communitygithubatomimporthandler ezpublish-kernelgithubatomimporthandler ezcommunitygithubatomimporthandler ezsystemsgithubatomimporthandler brookinsconsultinggithubatomimporthandler brookinsconsultinggistgithubatomimporthandler ezpublishlegacygithubatomimporthandler gggeekgithubatomimporthandler jdespatisgithubatomimporthandler crevillogithubatomimporthandler andreromgithubatomimporthandler dpobelgithubatomimporthandler bdunogiergithubatomimporthandler pedroresendegithubatomimporthandler yannickrogergithubatomimporthandler lolautruchegithubatomimporthandler peterkeunggithubatomimporthandler xrowgithubatomimporthandler thiagocamposvianagithubatomimporthandler joaoinaciogithubatomimporthandler glyegithubatomimporthandler pspanjagithubatomimporthandler xinyuexrowgithubatomimporthandler xrowkristinagithubatomimporthandler emodricgithubatomimporthandler )
 
 # Combine source arrays in order
-all_atom_sources=( "${atom_jira_sources[@]}" "${atom_alt_sources[@]}" "${atom_github_sources[@]}" )
+all_atom_sources=( "${atom_jira_sources[@]}" "${atom_alt_sources[@]}" "${atom_github_sources[@]}" "${atom_youtube_source[@]}" )
 
 # Test for optional siteacecss shell argument
 if [[ -z "$1" ]]; then

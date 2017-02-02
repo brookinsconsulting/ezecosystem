@@ -18,6 +18,8 @@ class SQLIJiraATOMImportHandler extends SQLIImportAbstractHandler implements ISQ
     
     protected $currentGUID;
     
+    protected $getHandlerFeedName;
+
     /**
      * Constructor
      */
@@ -35,6 +37,7 @@ class SQLIJiraATOMImportHandler extends SQLIImportAbstractHandler implements ISQ
     public function initialize()
     {
         $atomFeedUrl = $this->handlerConfArray['ATOMFeed'];
+        $this->getHandlerFeedName = $this->handlerConfArray['Name'];
         $xmlOptions = new SQLIXMLOptions( array(
             'xml_path'      => $atomFeedUrl,
             'xml_parser'    => 'simplexml',
@@ -269,7 +272,7 @@ class SQLIJiraATOMImportHandler extends SQLIImportAbstractHandler implements ISQ
      */
     public function getHandlerName()
     {
-        return 'Jira ATOM Import Handler';
+        return $this->getHandlerFeedName . ' : ' . 'Jira ATOM Import Handler';
     }
     
     /**

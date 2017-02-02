@@ -1,7 +1,7 @@
 <?php
 /**
- * File containing demo import handler SQLIGistGitHubATOMImportHandler
- * @copyright Copyright (C) 1999 - 2014 - Brookins Consulting. All rights reserved
+ * File containing demo import handler SQLIATOMImportHandler
+ * @copyright Copyright (C) 1999 - 2017 - Brookins Consulting. All rights reserved
  * @copyright Copyright (C) 2010 - SQLi Agency. All rights reserved
  * @licence http://www.gnu.org/licenses/gpl-2.0.txt GNU GPLv2
  * @author Brookins Consulting
@@ -10,7 +10,7 @@
  * @subpackage sourcehandlers
  */
 
-class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIImportHandler
+class SQLIYoutubeATOMImportHandler extends SQLIImportAbstractHandler implements ISQLIImportHandler
 {
     protected $rowIndex = 0;
 
@@ -85,13 +85,19 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
     public function process( $row )
     {
         // $row is a SimpleXMLElement object
-        $this->currentGUID = $row->id;
+        //$this->currentGUID = str_replace( 'http://fabien.potencier.org/', '', (string)$row->id );
+        $this->currentGUID = (string)$row->id;
+
+        /* echo "\n";echo "\n";echo "\n";echo "\n";
+        print_r( $this->currentGUID );
+        echo "\n";echo "\n";echo "\n";echo "\n";
+         */
+
         $contentOptions = new SQLIContentOptions( array(
             'class_identifier'      => 'blog_post',
-            'remote_id'             => (string)$row->id
+            'remote_id'             => $this->currentGUID
         ) );
         $content = SQLIContent::create( $contentOptions );
-
         $published = (string)$row->published;
         $updated = (string)$row->updated;
         $skipUpdated = false;
@@ -120,34 +126,19 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
             $content->store();
         }
 
-        $content->fields->title = 'Gist: ' . (string)$row->title;
+        $content->fields->title = (string)$row->title;
         $content->fields->blog_post_author = (string)$row->author->name;
 
         $content->fields->blog_post_url = (string)$row->link["href"];
         $content->fields->publication_date = strtotime( (string)$row->updated );
 
+        $videoID = (string) implode( array_slice( array_reverse( explode( ':', $row->id ) ), 0, 1 ) );
+        $videoEmbedHtml = '<embed name="plugin" src="https://www.youtube.com/v/' . (string)$videoID . '?version=3" type="application/x-shockwave-flash" width="100%" height="100%">';
+
         // Handle HTML content
-        $content->fields->blog_post_description_text_block = (string)$row->content; // Proxy method to SQLIContentUtils::getRichContent()
+        $content->fields->blog_post_description_text_block = $videoEmbedHtml;
 
-        /*
-        echo "\n\n\n";
-        print_r( $row->id[0] );
-        echo "\n\n\n";
-
-        if( preg_match( '/1618124/', $row->id[0] ) )
-        {
-        echo "\n\n\n";
-        print_r( $row->id[0] );
-        //print_r( (string)$row->title );
-        echo "\n\n\n";
-        //print_r( (string)$row->content );
-        print_r( $content->fields );
-
-        //print_r( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
-        echo "\n\n\n";
-        }
-        */
-
+        // Above (was) .. Proxy method to SQLIContentUtils::getRichContent()
 
         // Now publish content
         $content->addLocation( SQLILocation::fromNodeID( $this->handlerConfArray['DefaultParentNodeID'] ) );
@@ -186,7 +177,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
      */
     public function getHandlerName()
     {
-        return $this->getHandlerFeedName . ' : ' . 'GitHub Gist ATOM Import Handler';
+        return $this->getHandlerFeedName . ' : ' . 'ATOM Import Handler';
     }
 
     /**
@@ -195,7 +186,7 @@ class SQLIGistGitHubATOMImportHandler extends SQLIImportAbstractHandler implemen
      */
     public function getHandlerIdentifier()
     {
-        return 'gistgithubatomimporthandler';
+        return 'atomimporthandler';
     }
 
     /**

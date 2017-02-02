@@ -18,6 +18,8 @@ class SQLIStackOverflowTagATOMImportHandler extends SQLIImportAbstractHandler im
     
     protected $currentGUID;
     
+    protected $getHandlerFeedName;
+
     /**
      * Constructor
      */
@@ -35,6 +37,7 @@ class SQLIStackOverflowTagATOMImportHandler extends SQLIImportAbstractHandler im
     public function initialize()
     {
         $atomFeedUrl = $this->handlerConfArray['ATOMFeed'];
+        $this->getHandlerFeedName = $this->handlerConfArray['Name'];
         $xmlOptions = new SQLIXMLOptions( array(
             'xml_path'      => $atomFeedUrl,
             'xml_parser'    => 'simplexml'
@@ -174,7 +177,7 @@ class SQLIStackOverflowTagATOMImportHandler extends SQLIImportAbstractHandler im
      */
     public function getHandlerName()
     {
-        return 'StackOverflow Tag ATOM Import Handler';
+        return $this->getHandlerFeedName . ' : ' . 'StackOverflow Tag ATOM Import Handler';
     }
     
     /**
