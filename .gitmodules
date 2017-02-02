@@ -40,3 +40,6 @@
 [submodule "ezpublish_legacy/extension/bcdatetimefilter"]
 	path = ezpublish_legacy/extension/bcdatetimefilter
 	url = git@github.com:brookinsconsulting/bcdatetimefilter.git
+[submodule "ezpublish_legacy/extension/bcmixedcontentpreventionfilter"]
+	path = ezpublish_legacy/extension/bcmixedcontentpreventionfilter
+	url = git@github.com:brookinsconsulting/bcmixedcontentpreventionfilter.git

@@ -40,6 +40,7 @@ ActiveExtensions[]=swark
 ActiveExtensions[]=bcupdatecache
 ActiveExtensions[]=bcgeneratestaticcache
 ActiveExtensions[]=bcdatetimefilter
+ActiveExtensions[]=bcmixedcontentpreventionfilter
 ActiveExtensions[]=hfpfetchrandom
 ActiveExtensions[]=git_manager
 ActiveExtensions[]=nl_cronjobs
