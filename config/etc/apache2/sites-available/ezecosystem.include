@@ -1,3 +1,4 @@
+
 <VirtualHost *:8090>
 
     DocumentRoot /srv/www/ezecosystem/ezpublish_legacy
@@ -17,18 +18,15 @@
 
     ## eZecosystem Default Static Cache Configuration
 
-    RewriteCond %{HTTP_HOST} ^www.(.*)?$
-    RewriteRule ^(.*)$ http://%1$1 [L,R=301]
-
     RewriteCond %{HTTP_HOST} ezecosystem.com
-    RewriteRule ^(.*)$ http://ezecosystem.org$1 [L,R=301]
+    RewriteRule ^(.*)$ http://www.ezecosystem.org$1 [L,R=301]
 
     # Static cache in eZ Publish
 
     # Redirect home page requests to static default siteaccess cache
 
     # Only cache specific hostname request
-    RewriteCond %{HTTP_HOST} ^(ezecosystem.org)$
+    RewriteCond %{HTTP_HOST} ^(www.ezecosystem.org)$
     # No cache for http posts
     RewriteCond %{REQUEST_METHOD} !^POST$
     # Do not cache vhost admin
@@ -44,7 +42,7 @@
     RewriteRule ^/?$ %{DOCUMENT_ROOT}/var/ezwebin_site/static/ezecosystem.org/index\.html [L]
 
     # Only cache specific hostname request
-    RewriteCond %{HTTP_HOST} ^(ezecosystem.org)$
+    RewriteCond %{HTTP_HOST} ^(www.ezecosystem.org)$
     # No cache for http posts
     RewriteCond %{REQUEST_METHOD} !^POST$
     # Do not cache vhost admin
@@ -64,7 +62,7 @@
     RewriteRule ^/sitemap\.xml - [L]
 
     # Only give good robots access to main site and not other vhost aliases
-    RewriteCond %{HTTP_HOST} ^ezecosytem.org$
+    RewriteCond %{HTTP_HOST} ^www.ezecosytem.org$
     RewriteRule ^/robots\.txt - [L]
     RewriteCond %{HTTP_HOST} ccplatform.net|ssd.thinkcreativeinternal.net|admin|nocache|cache
     RewriteRule ^/robots\.txt %{DOCUMENT_ROOT}/extension/ezecosystem/design/eze/root/robots_disallow.txt [L]
@@ -108,5 +106,36 @@
     RewriteRule /(.*)? %{DOCUMENT_ROOT}/var%{ENV:eze_static_matches}/$1/index.html [L]
 
     Include /etc/apache2/common/rewrite.conf
+    
+</VirtualHost>
+
+<VirtualHost *:443>
+
+	DocumentRoot /ezecosystem/ezpublish_legacy
+
+    ServerName www.ezecosystem.org
+    ServerAlias admin.ezecosystem.org ezecosystem.org dev.ezecosystem.org ezecosystem.ccplatform.net ezecosystem.health.ccplatform.net ezecosystem.flux.ccplatform.net
+    ServerAlias ezecosystem.org *.ezecosystem.com *.ezecosystem.org ezecosystem.com
+    ServerAlias ezpublishlegacy.com *.ezpublishlegacy.com
+    ServerAdmin root@thinkcreative.com
+
+	RequestHeader set X-Forwarded-Proto "https"
+
+	CustomLog /var/log/apache2/ezecosystem_access.log forwarded
+	ErrorLog /var/log/apache2/ezecosystem_error.log
+
+	ProxyPreserveHost On
+	ProxyRequests Off
+
+	ProxyPreserveHost On
+
+	ProxyPass / http://127.0.0.1:80/
+	ProxyPassReverse / http://127.0.0.1:80/
+
+    <IfModule mod_ssl.c>
+        SSLCertificateFile /etc/letsencrypt/live/www.ezecosystem.org/cert.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/www.ezecosystem.org/privkey.pem
+        SSLCACertificateFile /etc/letsencrypt/live/www.ezecosystem.org/chain.pem
+    </IfModule>
 
 </VirtualHost>
