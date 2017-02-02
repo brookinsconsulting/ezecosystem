@@ -34,6 +34,10 @@ AvailableSourceHandlers[]=xinyuexrowgithubatomimporthandler
 AvailableSourceHandlers[]=xrowkristinagithubatomimporthandler
 AvailableSourceHandlers[]=emodricgithubatomimporthandler
 AvailableSourceHandlers[]=partialcontentatomimporthandler
+AvailableSourceHandlers[]=ezpublishyoutubeplaylistezsessionsatomimporthandler
+AvailableSourceHandlers[]=ezpublishyoutubeplaylisttheezpublishshowatomimporthandler
+AvailableSourceHandlers[]=ezpublishyoutubeplaylistezpublishdynamicatomimporthandler
+AvailableSourceHandlers[]=ezpublishyoutubeplaylistezsystemsofficialatomimporthandler
 
 [ezpublishjiraatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
@@ -562,5 +566,69 @@ DefaultParentNodeID=44631
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=http://partialcontent.com/feed/pc
+
+[ezpublishyoutubeplaylistezsessionsatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=eZ Publish Youtube Playlist : eZ Sessions : Youtube Playlist Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIYoutubeATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=3613
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://www.youtube.com/feeds/videos.xml?playlist_id=PLhAm6LZExXQf0_bCvI55p3Pn-92nm9qSX
+
+[ezpublishyoutubeplaylisttheezpublishshowatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=eZ Publish Youtube Playlist : The eZ Publish Show : Youtube Playlist Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIYoutubeATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=3613
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://www.youtube.com/feeds/videos.xml?playlist_id=PLhAm6LZExXQfooxxWYLRcFluyMfTuE5Pf
+
+[ezpublishyoutubeplaylistezpublishdynamicatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=eZ Publish Youtube Playlist : eZ Publish Dynamic : Youtube Playlist Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIYoutubeATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=3613
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://www.youtube.com/feeds/videos.xml?playlist_id=PLhAm6LZExXQdzCoXTxYmfUldaC467LWL1
+
+[ezpublishyoutubeplaylistezsystemsofficialatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=eZ Publish Youtube Playlist : eZ Systems (Official): Youtube Channel Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIYoutubeATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=3613
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://www.youtube.com/feeds/videos.xml?channel_id=UC6h8ElA2FBQu0CwsF613fxQ
 
 */ ?>
