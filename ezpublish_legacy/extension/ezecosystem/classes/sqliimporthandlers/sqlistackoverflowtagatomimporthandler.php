@@ -37,12 +37,14 @@ class SQLIStackOverflowTagATOMImportHandler extends SQLIImportAbstractHandler im
     public function initialize()
     {
         $atomFeedUrl = $this->handlerConfArray['ATOMFeed'];
+print_r( $atomFeedUrl ); print_r( "\n\n" );
         $this->getHandlerFeedName = $this->handlerConfArray['Name'];
         $xmlOptions = new SQLIXMLOptions( array(
             'xml_path'      => $atomFeedUrl,
             'xml_parser'    => 'simplexml'
         ) );
         $xmlParser = new SQLIXMLParser( $xmlOptions );
+print_r( $xmlParser );
         $this->dataSource = $xmlParser->parse();
     }
     
@@ -93,7 +95,7 @@ class SQLIStackOverflowTagATOMImportHandler extends SQLIImportAbstractHandler im
 
         $content = SQLIContent::create( $contentOptions );
 
-        // print_r( $row ); die();
+print_r( $row ); die();
 
         $published = (string)$row->published;
         $updated = (string)$row->updated;
