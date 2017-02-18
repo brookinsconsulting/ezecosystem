@@ -138,7 +138,7 @@ ATOMFeed=http://stackoverflow.com/feeds/tag/ezpublish
 
 [stackoverflowtagezplatformatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
-Enabled=false
+Enabled=true
 # Intelligible name
 Name=StackOverflow Tag ezplatform New Questions Feed
 # Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
