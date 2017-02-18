@@ -2,6 +2,7 @@
 
 [ImageMagick]
 IsEnabled=true
-ExecutablePath=/opt/local/bin
+ExecutablePath=/usr/local/bin
 Executable=convert
+
 */ ?>
