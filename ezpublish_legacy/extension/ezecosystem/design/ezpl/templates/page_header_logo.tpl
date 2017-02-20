@@ -1,7 +1,7 @@
 {def $slug = 'An eZ Publish Download Archive'}
 <div id="logo">
-    <a href={"/"|ezurl} title="{ezini('SiteSettings','SiteName')|wash}"><img src="{'ezpublishlegacy-icon.png'|ezimage('no')}" title="{ezini('SiteSettings','SiteName')|wash} : {$slug}" alt="{ezini('SiteSettings','SiteName')|wash} : {$slug}" width="105" height="127"></a>
-    <div id="logo-text"><h1><a href={"/"|ezurl} title="{ezini('SiteSettings','SiteName')|wash}">{ezini('SiteSettings','SiteName')|wash}</a> - {$slug}</h1></div>
+    <a href={"/"|ezurl} title="{ezini('SiteSettings','SiteName')|wash}"><img src="{'ezpublishlegacy.png'|ezimage('no')}" title="{ezini('SiteSettings','SiteName')|wash} : {$slug}" alt="{ezini('SiteSettings','SiteName')|wash} : {$slug}" width="417" height="127"></a>
+    {* <div id="logo-text"><h1><a href={"/"|ezurl} title="{ezini('SiteSettings','SiteName')|wash}">{ezini('SiteSettings','SiteName')|wash}</a> - {$slug}</h1></div> *}
 
 {* if $pagedesign.data_map.image.content.is_valid|not()}
     <h1><a href={"/"|ezurl} title="{ezini('SiteSettings','SiteName')|wash}">{ezini('SiteSettings','SiteName')|wash}</a></h1>
