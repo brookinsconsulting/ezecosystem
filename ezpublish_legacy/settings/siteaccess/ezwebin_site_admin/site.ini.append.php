@@ -43,7 +43,7 @@ Locale=eng-US
 ContentObjectLocale=eng-US
 ShowUntranslatedObjects=enabled
 SiteLanguageList[]=eng-US
-SiteLanguageList[]=eng-GB
+# SiteLanguageList[]=eng-GB
 TextTranslation=disabled
 
 [FileSettings]
