@@ -11,7 +11,7 @@
         {$pagedesign.data_map.footer_text.content} 
     {/if}
     
-    <div class="hosting-sponsor">Proudly hosted by <br /><a href="http://thinkcreative.com" title="Think Creative">Think Creative</a> <br /> <a href="http://thinkcreative.com"><img src={'tc/tc-icon.png'|ezimage} border="0" {*width="37" height="27"*} style="position:relative;top:3px;padding-right:1px;" /></a></div>
+    <div class="hosting-sponsor">Proudly hosted by <br /><a href="http://contextualcode.com" title="Contextual Code">Contextual Code</a> <br /> <a href="http://contextualcode.com"><img src={'cc/cc-icon.png'|ezimage} border="0" {*width="37" height="27"*} style="position:relative;top:3px;padding-right:1px;" /></a></div>
     </address>
   </div>
   <!-- Footer area: END -->
