@@ -103,11 +103,11 @@ AvailableSiteAccessList[]=ezpl_user
 AvailableSiteAccessList[]=ezpl_user_local
 MatchOrder=host
 HostMatchMapItems[]
-HostMatchMapItems[]=ezecosystem.org;ezwebin_site_user
 HostMatchMapItems[]=www.ezecosystem.org;ezwebin_site_user
 HostMatchMapItems[]=admin.ezecosystem.org;ezwebin_site_admin
 HostMatchMapItems[]=cache.ezecosystem.org;ezwebin_site_admin
 HostMatchMapItems[]=nocache.ezecosystem.org;eze_user_nocache
+HostMatchMapItems[]=ezecosystem.org;ezwebin_site_user
 HostMatchMapItems[]=ezecosystem;eze_user_local
 HostMatchMapItems[]=admin.ezecosystem;eze_admin_local
 HostMatchMapItems[]=cache.ezecosystem;eze_user_local
