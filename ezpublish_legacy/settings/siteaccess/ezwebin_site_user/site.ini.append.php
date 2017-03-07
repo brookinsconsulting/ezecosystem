@@ -41,7 +41,7 @@ SessionNamePerSiteAccess=disabled
 
 [SiteSettings]
 SiteName=eZecosystem
-SiteURL=ezecosystem.org
+SiteURL=www.ezecosystem.org
 LoginPage=embedded
 AdditionalLoginFormActionURL=http://admin.ezecosystem.org/user/login
 MetaDataArray[author]=eZecosystem
