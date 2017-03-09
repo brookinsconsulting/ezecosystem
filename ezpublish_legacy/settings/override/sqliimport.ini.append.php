@@ -39,6 +39,8 @@ AvailableSourceHandlers[]=ezpublishyoutubeplaylistezsessionsatomimporthandler
 AvailableSourceHandlers[]=ezpublishyoutubeplaylisttheezpublishshowatomimporthandler
 AvailableSourceHandlers[]=ezpublishyoutubeplaylistezpublishdynamicatomimporthandler
 AvailableSourceHandlers[]=ezpublishyoutubeplaylistezsystemsofficialatomimporthandler
+AvailableSourceHandlers[]=docdotezdotnospaceuseratomimporthandler
+AvailableSourceHandlers[]=docdotezdotnospacedeveloperatomimporthandler
 
 [ezpublishjiraatomimporthandler-HandlerSettings]
 # Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
@@ -647,5 +649,37 @@ DefaultParentNodeID=3613
 StreamTimeout=
 # Below you can add your own settings for your source handler
 ATOMFeed=https://www.youtube.com/feeds/videos.xml?channel_id=UC6h8ElA2FBQu0CwsF613fxQ
+
+[docdotezdotnospaceuseratomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=doc.ez.no User Space Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIConfluenceATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=69294
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://doc.ez.no/spaces/createrssfeed.action?types=page&types=comment&types=blogpost&types=mail&types=attachment&spaces=USER&maxResults=15&title=[User]+All+Content+Feed&amp;publicFeed=false&amp;os_authType=basic
+
+[docdotezdotnospacedeveloperatomimporthandler-HandlerSettings]
+# Indicates if handler is enabled or not. Mandatory. Must be "true" or "false"
+Enabled=true
+# Intelligible name
+Name=doc.ez.no Developer Space Feed
+# Class for source handler. Must implement ISQLIImportSourceHandler and extend SQLIImportAbstractSourceHandler
+ClassName=SQLIConfluenceATOMImportHandler
+# Facultative. Indicates whether debug is enabled or not
+Debug=enabled
+# Same as [ImportSettings]/DefaultParentNodeID, but source handler specific
+DefaultParentNodeID=69295
+# StreamTimeout, handler specific. If empty, will take [ImportSettings]/StreamTimeout
+StreamTimeout=
+# Below you can add your own settings for your source handler
+ATOMFeed=https://doc.ez.no/spaces/createrssfeed.action?types=page&types=comment&types=blogpost&types=mail&types=attachment&spaces=DEVELOPER&maxResults=15&title=[Developer]+All+Content+Feed&amp;publicFeed=false&amp;os_authType=basic
 
 */ ?>

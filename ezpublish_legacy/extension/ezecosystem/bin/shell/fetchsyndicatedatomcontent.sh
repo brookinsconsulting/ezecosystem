@@ -5,9 +5,10 @@ atom_youtube_source=( ezpublishyoutubeplaylistezsystemsofficialatomimporthandler
 atom_jira_sources=( ezpublishjiraatomimporthandler ezcommunityjiraatomimporthandler )
 atom_alt_sources=( stackoverflowtagezpublishatomimporthandler stackoverflowtagezplatformatomimporthandler partialcontentatomimporthandler fabienpotencieratomimporthandler granitehorizonatomimporthandler )
 atom_github_sources=( ezecosystemgithubatomimporthandler ezpublish-legacygithubatomimporthandler ezpublish-communitygithubatomimporthandler ezpublish-kernelgithubatomimporthandler ezcommunitygithubatomimporthandler ezsystemsgithubatomimporthandler brookinsconsultinggithubatomimporthandler brookinsconsultinggistgithubatomimporthandler ezpublishlegacygithubatomimporthandler gggeekgithubatomimporthandler jdespatisgithubatomimporthandler crevillogithubatomimporthandler andreromgithubatomimporthandler dpobelgithubatomimporthandler bdunogiergithubatomimporthandler pedroresendegithubatomimporthandler yannickrogergithubatomimporthandler lolautruchegithubatomimporthandler peterkeunggithubatomimporthandler xrowgithubatomimporthandler thiagocamposvianagithubatomimporthandler joaoinaciogithubatomimporthandler glyegithubatomimporthandler pspanjagithubatomimporthandler xinyuexrowgithubatomimporthandler xrowkristinagithubatomimporthandler emodricgithubatomimporthandler )
+atom_docdotezdotno_sources=( docdotezdotnospaceuseratomimporthandler docdotezdotnospacedeveloperatomimporthandler )
 
 # Combine source arrays in order
-all_atom_sources=( "${atom_jira_sources[@]}" "${atom_alt_sources[@]}" "${atom_github_sources[@]}" "${atom_youtube_source[@]}" )
+all_atom_sources=( "${atom_jira_sources[@]}" "${atom_alt_sources[@]}" "${atom_github_sources[@]}" "${atom_youtube_source[@]}" "${atom_docdotezdotno_sources[@]}" )
 
 # Test for optional siteacecss shell argument
 if [[ -z "$1" ]]; then
