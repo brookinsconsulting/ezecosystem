@@ -56,6 +56,7 @@ ShareForumNodeIDs[]=15220
 ShareForumNodeIDs[]=15218
 ShareForumNodeIDs[]=15224
 ShareForumNodeIDs[]=15226
+ShareForumNodeIDs[]=66042
 #StackOverflowTagEzPublish
 ShareForumNodeIDs[]=44628
 #StackOverflowTagEzPlatform
