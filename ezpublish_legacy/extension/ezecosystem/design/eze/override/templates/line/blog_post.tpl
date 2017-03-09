@@ -21,7 +21,7 @@
     {if $node.parent.node_id|eq( $projects_commits_node_id )}
         {if $node.data_map.blog_post_url.content|contains('://projects.ez.no')}<p class="author">Project: <a href="{concat( 'http://projects.ez.no/', $node.data_map.blog_post_url.content|explode('://projects.ez.no/')[1]|explode('/')[0], '/' )}">{$node.data_map.blog_post_url.content|explode('://projects.ez.no/')[1]|explode('/')[0]}</a></p>{/if}</p>
     {else}
-        {if and( $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id )|not )}<p class="author">By: {$node.object.data_map.blog_post_author.content|autolink}</p>{/if}
+        {if and( $node.object.data_map.blog_post_author.content|contains( 'href' )|not, $node.object.data_map.blog_post_author.content|ne( '' ), $exclude_author_parent_node_ids|contains( $node.parent.node_id )|not )}<p class="author">By: {$node.object.data_map.blog_post_author.content|autolink}</p>{elseif $node.object.data_map.blog_post_author.content|contains( 'href' )}<p class="author">By: {$node.object.data_map.blog_post_author.content}</p>{/if}
     {/if}
 
     {if $node.data_map.tags.has_content}
