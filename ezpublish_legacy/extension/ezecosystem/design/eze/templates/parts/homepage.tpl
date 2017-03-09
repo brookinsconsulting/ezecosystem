@@ -254,7 +254,7 @@
                 {* Deprecated fetch conditions
 
                                                              'class_filter_type', 'include',
-                                                             'class_filter_array', $home_page_fetch_classes,,
+                                                             'class_filter_array', $home_page_fetch_classes,
                                                              'ignore_visibility', false(),
                 *}
 
@@ -266,6 +266,8 @@
                      $children = fetch( 'content2', 'list', hash( 'parent_node_id', $home_page_root_node_id,
                                                                  'attribute_filter', array( 'and', array( 'section', '!=', $home_page_section_github ), array( 'section', '!=', $home_page_section_planet ), array( 'section', '!=', $home_page_section_issues ), array( 'section', '!=', $home_page_section_forums ) ),
                                                                  'extended_attribute_filter', hash( 'id', 'BcDateTimeExtendedFilter', 'params', hash( 'published', makedate( 1, 1, currentdate()|datetime( 'custom', '%Y' ) ) ) ),
+                                                                 'class_filter_type', 'include',
+                                                                 'class_filter_array', $home_page_fetch_classes,
                                                                  'offset', $view_parameters.offset,
                                                                  'sort_by', $home_page_fetch_sort_array,
                                                                  'depth', $home_page_fetch_depth,
