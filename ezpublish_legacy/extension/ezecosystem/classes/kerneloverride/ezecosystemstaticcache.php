@@ -423,14 +423,14 @@ class eZecosystemStaticCache implements ezpStaticCache
                     if ( !$skipUnlink || !file_exists( $file ) )
                     {
                         // Deprecated since 4.4, will be removed in future version
-                        $fileName = "http://{$this->hostName}{$dir}{$url}";
+                        $fileName = "https://{$this->hostName}{$dir}{$url}";
 
                         // staticcache.ini.[CacheSettings].HostName has been deprecated since version 4.4
                         // hostname is read from site.ini.[SiteSettings].SiteURL per siteaccess
                         // defined in staticcache.ini.[CacheSettings].CachedSiteAccesses
                         if ( !$this->hostName )
                         {
-                            $fileName = "http://{$siteURL}{$url}";
+                            $fileName = "https://{$siteURL}{$url}";
                         }
 
                         if ( $delay )
