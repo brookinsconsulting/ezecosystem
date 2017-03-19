@@ -30,6 +30,9 @@ Scripts[]=ezerefreshforumstaticcache.php
 [CronjobPart-ezerefreshhomepagestaticcache]
 Scripts[]=ezerefreshhomepagestaticcache.php
 
+[CronjobPart-ezeremovestaticcachehomepages]
+Scripts[]=ezeremovestaticcachehomepages.php
+
 [CronjobPart-ezeregenerateautoloads]
 Scripts[]=ezeregenerateautoloads.php
 
