@@ -85,6 +85,8 @@
     RewriteCond %{THE_REQUEST} !site_admin
     RewriteCond %{HTTP_COOKIE} !is_logged_in [NC]
     RewriteCond %{REQUEST_METHOD} !POST
+    # Do not cache server based request
+    RewriteCond %{HTTP_USER_AGENT} !^eZ\ Publish\ static\ cache\ generator$
     RewriteCond %{QUERY_STRING} ^$
     RewriteCond %{DOCUMENT_ROOT}/var%{ENV:eze_static_matches}/index.html -f
     RewriteRule ^/?$ %{DOCUMENT_ROOT}/var%{ENV:eze_static_matches}/index.html [L]
@@ -100,6 +102,8 @@
     RewriteCond %{REQUEST_URI} !^/users
     RewriteCond %{REQUEST_URI} !^/mobile
     RewriteCond %{REQUEST_METHOD} !POST
+    # Do not cache server based request
+    RewriteCond %{HTTP_USER_AGENT} !^eZ\ Publish\ static\ cache\ generator$
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-f
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-d
     RewriteCond %{DOCUMENT_ROOT}/var%{ENV:eze_static_matches}/%{REQUEST_URI}/index.html -f
