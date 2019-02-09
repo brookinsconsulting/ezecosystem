@@ -93,6 +93,7 @@ define( 'EZP_INI_FILEMTIME_CHECK', false );
          needs to be explicitly informed to eZ Systems on support requests.
 */
 //define( 'EZP_AUTOLOAD_ALLOW_KERNEL_OVERRIDE', false );
+define( 'EZP_AUTOLOAD_ALLOW_KERNEL_OVERRIDE', true );
 
 
 /*
