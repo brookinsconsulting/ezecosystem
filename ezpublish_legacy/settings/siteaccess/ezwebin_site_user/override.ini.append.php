@@ -90,12 +90,19 @@ MatchFile=full/flash.tpl
 Subdir=templates
 Match[class_identifier]=flash
 
-[full_folder_issues_blog]
-Source=node/view/full.tpl
-MatchFile=full/blog.tpl
+[full_folder_pagelayout_video]
+Source=pagelayout.tpl
+MatchFile=pagelayout_video.tpl
 Subdir=templates
 Match[class_identifier]=folder
-Match[node]=17566
+Match[node]=126915
+
+[full_folder_video]
+Source=node/view/full.tpl
+MatchFile=full/video.tpl
+Subdir=templates
+Match[class_identifier]=folder
+Match[node]=126915
 
 #[full_folder_issues_frontpage]
 #Source=node/view/full.tpl
