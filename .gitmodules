@@ -43,3 +43,6 @@
 [submodule "ezpublish_legacy/extension/bcmixedcontentpreventionfilter"]
 	path = ezpublish_legacy/extension/bcmixedcontentpreventionfilter
 	url = git@github.com:brookinsconsulting/bcmixedcontentpreventionfilter.git
+[submodule "ezpublish_legacy/extension/bcezadmindesignoverride"]
+	path = ezpublish_legacy/extension/bcezadmindesignoverride
+	url = git@github.com:brookinsconsulting/bcezadmindesignoverride.git
