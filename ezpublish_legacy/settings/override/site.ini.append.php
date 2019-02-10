@@ -3,13 +3,13 @@
 [ContentSettings]
 StaticCacheHandler=eZecosystemStaticCache
 
-[DatabaseSettings]
+#[DatabaseSettings]
 ## DatabaseImplementation=ezmysql
 #DatabaseImplementation=ezmysqli
-Database=ezecosystem
-Charset=
-Socket=disabled
-Port=
+#Database=ezecosystem
+##Charset=
+##Socket=disabled
+##Port=
 # Disabled pending further sql performance analysis
 #QueryAnalysisOutput=disabled
 #SQLOutput=disabled
@@ -34,6 +34,7 @@ DebugIPList[]=::1/32
 [ExtensionSettings]
 ActiveExtensions[]
 ActiveExtensions[]=ezecosystem
+ActiveExtensions[]=bcezadmindesignoverride
 ActiveExtensions[]=ezchangeclass
 ActiveExtensions[]=ezsh
 ActiveExtensions[]=swark
