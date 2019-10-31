@@ -104,6 +104,9 @@ AvailableSiteAccessList[]=ezpl_user
 AvailableSiteAccessList[]=ezpl_user_local
 MatchOrder=host
 HostMatchMapItems[]
+HostMatchMapItems[]=ezecosystem.se7enx.com;ezwebin_site_user
+HostMatchMapItems[]=admin.ezecosystem.se7enx.com;ezwebin_site_admin
+HostMatchMapItems[]=ezpublishlegacy.se7enx.com;ezpl_user
 HostMatchMapItems[]=www.ezecosystem.org;ezwebin_site_user
 HostMatchMapItems[]=admin.ezecosystem.org;ezwebin_site_admin
 HostMatchMapItems[]=cache.ezecosystem.org;ezwebin_site_admin
